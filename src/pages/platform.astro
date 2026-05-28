@@ -1,5 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Screenshot from '../components/Screenshot.astro';
+import aiVisibility from '../assets/screenshots/anonymised/ai-visibility-dashboard.png';
+import brandSentiment from '../assets/screenshots/anonymised/brand-sentiment.png';
+import citationOverview from '../assets/screenshots/anonymised/citation-analysis-overview.png';
+import actionCenter from '../assets/screenshots/anonymised/action-center.png';
 import { SITE } from '../data/site';
 
 const title = 'Zicy Platform — the truth layer for AI visibility';
@@ -25,11 +30,30 @@ const loop = [
   { k: '04 · Prove', name: 'Site Traffic', desc: 'AI-referred sessions and downstream engagement, tied to the work.' },
 ];
 
+// Per brief §3 Platform — the 4 placeholders in order.
+// Brand Intelligence module screenshot is a gap (no upload exists); using brand-sentiment as
+// the brief's stated fallback until a clean Brand Intelligence capture is available.
 const screenshots = [
-  'AI Visibility dashboard — radar + 5-week trend',
-  'Brand Intelligence — AI Reality Score + entity graph',
-  'Citation Analysis — owned / earned / hijacked split',
-  'Action Center — schema & llms.txt generators',
+  {
+    src: aiVisibility,
+    alt: 'Zicy AI Visibility dashboard with mention coverage, citation rate, share of voice and average ranking, plus a five-week performance trend.',
+    caption: 'AI Visibility — coverage, share of voice, ranking, radar across every engine.',
+  },
+  {
+    src: brandSentiment,
+    alt: 'Zicy Brand Intelligence report showing how AI perceives the brand, an AI Reality Score fact-check, and the entity graph.',
+    caption: 'Brand Intelligence — perception, AI Reality Score, and the entity graph.',
+  },
+  {
+    src: citationOverview,
+    alt: 'Zicy Citation Analysis showing narrative control, hijack rate and leaked rate, with a breakdown of owned, earned, competitor and uncited sources.',
+    caption: 'Citation Analysis — narrative control, hijack and leaked rates.',
+  },
+  {
+    src: actionCenter,
+    alt: 'Zicy Action Center with the llms.txt generator, schema generator and content optimisation tools.',
+    caption: 'Action Center — llms.txt + schema generators, content tooling.',
+  },
 ];
 
 const moduleGroups = [
@@ -101,7 +125,7 @@ const differentiators = [
       </div>
       <div class="grid-2" style="margin-top:36px">
         {screenshots.map((s) => (
-          <div class="shot"><span>[ SCREENSHOT ]<br />{s}</span></div>
+          <Screenshot src={s.src} alt={s.alt} caption={s.caption} />
         ))}
       </div>
     </div>

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Screenshot from '../components/Screenshot.astro';
+import heroDashboard from '../assets/screenshots/anonymised/ai-visibility-dashboard.png';
 import { PROOF_ENGINES, PROOF_TAG, SOLUTIONS } from '../data/site';
 
 const title = 'Zicy — Be the brand AI gets right.';
@@ -67,6 +69,16 @@ const audiences = [
       <div class="proofbar">
         <span class="engines">{PROOF_ENGINES}</span>
         <span class="tag">{PROOF_TAG}</span>
+      </div>
+
+      <!-- Hero product shot — the highest-impact image on the site. Eager-loaded per brief §4. -->
+      <div style="margin-top:48px">
+        <Screenshot
+          src={heroDashboard}
+          alt="Zicy AI Visibility dashboard showing brand mention coverage, share of voice, average AI ranking, and a per-platform radar across ChatGPT, Gemini, Perplexity and Google AI."
+          caption="The AI Visibility dashboard — your four primary KPIs across every engine."
+          priority="eager"
+        />
       </div>
     </div>
   </section>
