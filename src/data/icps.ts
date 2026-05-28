@@ -1,5 +1,10 @@
 // ICP solution-page data. One template (solutions/[icp].astro) renders all four.
 // Copy is the source of truth from the copy deck §3–6.
+import type { ImageMetadata } from 'astro';
+// Explicit imports — only screenshots cleared by the privacy gate (§1.1 of the brief).
+// Un-anonymised images live in src/assets/screenshots/ for future use but are NOT imported here,
+// so they cannot reach the production build.
+import citationUrls from '../assets/screenshots/citation-analysis-urls.png';
 
 export interface Module {
   name: string;
@@ -15,7 +20,7 @@ export interface WhyItem {
  */
 export interface ScreenshotRef {
   desc: string;
-  src?: string;
+  src?: ImageMetadata;
   alt?: string;
   caption?: string;
 }
@@ -161,7 +166,7 @@ export const ICPS: Icp[] = [
       // #9 citation-analysis-urls.png — verified safe (third-party domains only, no Prudential).
       {
         desc: 'Citation Analysis — domain / URL drill-down',
-        src: 'citation-analysis-urls.png',
+        src: citationUrls,
         alt: 'Zicy Citation Analysis drilling into the domains and individual URLs AI cites, classified as owned, earned or competitor.',
         caption: 'Citation Analysis — drill down to the exact URLs AI is citing.',
       },
