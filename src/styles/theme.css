@@ -34,8 +34,13 @@ section{padding:88px 0}
 
 header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.86);backdrop-filter:blur(10px);border-bottom:0.5px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:66px;max-width:var(--max);margin:0 auto;padding:0 32px}
-.logo{display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:23px;color:var(--indigo);letter-spacing:-0.03em}
-.logo .dot{width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.logo{display:inline-flex;align-items:center}
+/* Header logo: bolt + Zicy wordmark, cropped to hide the pronunciation tag.
+   Source image is 2501x1266; the wordmark sits in the top ~72% of the canvas. */
+.logo .logo-img{display:block;width:108px;height:38px;background:url('/zicy-logo.png') no-repeat 0 0;background-size:108px auto}
+/* Footer logo: full image, pronunciation tag visible. */
+.flogo{display:inline-block;margin-bottom:14px}
+.flogo img{display:block;width:160px;height:auto}
 .navlinks{display:flex;gap:28px;align-items:center}
 .navlinks a{font-size:14.5px;color:#3a3950;font-weight:500;transition:color .15s}
 .navlinks a:hover,.navlinks a.active{color:var(--indigo)}
