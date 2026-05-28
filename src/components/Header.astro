@@ -5,13 +5,16 @@ import { SOLUTIONS, FREE_TOOLS } from '../data/site';
 const path = Astro.url.pathname;
 const isActive = (href: string) => path === href || path.startsWith(href + '/');
 const inSection = (items: readonly { href: string }[]) => items.some((i) => isActive(i.href));
+// Home gets its own match — exact path '/' only, not a prefix.
+const homeActive = path === '/';
 ---
 <header>
   <nav class="nav" aria-label="Primary">
     <a class="logo" href="/" aria-label="Zicy home"><img src="/zicy-wordmark.png" alt="Zicy" width="110" height="42" /></a>
 
     <div class="navlinks">
-      <a href="/platform" class={isActive('/platform') ? 'active' : ''}>Platform</a>
+      <a href="/" class={homeActive ? 'active' : ''}>Home</a>
+      <a href="/about" class={isActive('/about') ? 'active' : ''}>About</a>
 
       <div class="has-dropdown">
         <span tabindex="0" class:list={['trigger', { active: inSection(SOLUTIONS) }]}>
@@ -22,6 +25,9 @@ const inSection = (items: readonly { href: string }[]) => items.some((i) => isAc
         </div>
       </div>
 
+      <a href="/pricing" class={isActive('/pricing') ? 'active' : ''}>Pricing</a>
+      <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>Case studies</a>
+
       <div class="has-dropdown">
         <a href="/free-tools" class:list={['trigger', { active: inSection(FREE_TOOLS) || isActive('/free-tools') }]}>
           Free tools <span class="car" aria-hidden="true">▾</span>
@@ -30,11 +36,6 @@ const inSection = (items: readonly { href: string }[]) => items.some((i) => isAc
           {FREE_TOOLS.map((t) => <a href={t.href} class={isActive(t.href) ? 'active' : ''}>{t.label}</a>)}
         </div>
       </div>
-
-      <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>Case studies</a>
-      <a href="/pricing" class={isActive('/pricing') ? 'active' : ''}>Pricing</a>
-      <a href="/done-for-you" class={isActive('/done-for-you') ? 'active' : ''}>Done-for-you</a>
-      <a href="/about" class={isActive('/about') ? 'active' : ''}>About</a>
     </div>
 
     <a class="btn btn-primary navcta" href="/audit">Run a free audit</a>
@@ -47,17 +48,18 @@ const inSection = (items: readonly { href: string }[]) => items.some((i) => isAc
         <svg class="i-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
       </summary>
       <div class="mnav-panel">
-        <a href="/platform" class={isActive('/platform') ? 'active' : ''}>Platform</a>
+        <a href="/" class={homeActive ? 'active' : ''}>Home</a>
+        <a href="/about" class={isActive('/about') ? 'active' : ''}>About</a>
         <p class="mnav-group">Solutions</p>
         {SOLUTIONS.map((s) => <a href={s.href} class={isActive(s.href) ? 'active' : ''}>{s.label}</a>)}
+        <a href="/pricing" class={isActive('/pricing') ? 'active' : ''}>Pricing</a>
+        <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>Case studies</a>
         <p class="mnav-group">Free tools</p>
         <a href="/free-tools" class={isActive('/free-tools') ? 'active' : ''}>Free tools hub</a>
         {FREE_TOOLS.map((t) => <a href={t.href} class={isActive(t.href) ? 'active' : ''}>{t.label}</a>)}
         <p class="mnav-group">More</p>
-        <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>Case studies</a>
-        <a href="/pricing" class={isActive('/pricing') ? 'active' : ''}>Pricing</a>
+        <a href="/platform" class={isActive('/platform') ? 'active' : ''}>Platform</a>
         <a href="/done-for-you" class={isActive('/done-for-you') ? 'active' : ''}>Done-for-you</a>
-        <a href="/about" class={isActive('/about') ? 'active' : ''}>About</a>
         <a class="btn btn-primary" href="/audit">Run a free audit</a>
       </div>
     </details>
