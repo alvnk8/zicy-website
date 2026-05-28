@@ -35,12 +35,10 @@ section{padding:88px 0}
 header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.86);backdrop-filter:blur(10px);border-bottom:0.5px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:66px;max-width:var(--max);margin:0 auto;padding:0 32px}
 .logo{display:inline-flex;align-items:center}
-/* Header logo: bolt + Zicy wordmark, cropped to hide the pronunciation tag.
-   Source image is 2501x1266; the wordmark sits in the top ~72% of the canvas. */
-.logo .logo-img{display:block;width:108px;height:38px;background:url('/zicy-logo.png') no-repeat 0 0;background-size:108px auto}
-/* Footer logo: full image, pronunciation tag visible. */
+.logo img{display:block;height:42px;width:auto}
+/* Footer logo on dark indigo: full white-wordmark image with pronunciation tag visible. */
 .flogo{display:inline-block;margin-bottom:14px}
-.flogo img{display:block;width:160px;height:auto}
+.flogo img{display:block;width:170px;height:auto}
 .navlinks{display:flex;gap:28px;align-items:center}
 .navlinks a{font-size:14.5px;color:#3a3950;font-weight:500;transition:color .15s}
 .navlinks a:hover,.navlinks a.active{color:var(--indigo)}
@@ -119,10 +117,11 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.86);backdr
 .shot{border:1.5px dashed var(--line-2);border-radius:12px;background:repeating-linear-gradient(135deg,#fafaff,#fafaff 11px,#f4f4fb 11px,#f4f4fb 22px);min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
 .shot span{font-family:var(--mono);font-size:12.5px;color:#8a89a0;letter-spacing:.02em;line-height:1.7}
 
-.band{background:var(--indigo);color:#e9e8fb}
-.band h2{color:#fff;font-size:36px}
-.band .lead{color:#c7c5f0}
-.band .eyebrow{color:#ffb27d}
+/* CTA band: soft lavender section that holds gentle attention without dominating the page. */
+.band{background:var(--lavender);color:var(--ink)}
+.band h2{color:var(--indigo);font-size:36px}
+.band .lead{color:#4a4960}
+.band .eyebrow{color:var(--orange)}
 
 .diverge{display:grid;grid-template-columns:1fr 1fr;gap:0;border:0.5px solid var(--line);border-radius:14px;overflow:hidden}
 .diverge>div{padding:30px 28px}
@@ -150,14 +149,16 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.86);backdr
 .caserow .big{font-family:var(--mono);font-size:28px;color:var(--indigo)}
 .disclosure{font-size:12px;color:#9a99a8;font-style:italic;margin-top:18px;max-width:680px}
 
-footer{border-top:0.5px solid var(--line);padding:54px 0 40px;background:#fbfbff}
+/* Footer on indigo: light type, peachy section headings, white hovers. */
+footer{padding:54px 0 40px;background:var(--indigo);color:#c7c5f0}
 .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:30px}
-.fgrid h2{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:600}
-.fgrid a{display:block;font-size:14px;color:#4a4960;padding:5px 0}
-.fgrid a:hover{color:var(--indigo)}
-.fbottom{margin-top:40px;padding-top:22px;border-top:0.5px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--muted)}
-.flegal a{color:var(--muted)}
-.flegal a:hover{color:var(--indigo)}
+.fgrid h2{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#ffb27d;margin-bottom:14px;font-weight:600}
+.fgrid a{display:block;font-size:14px;color:#c7c5f0;padding:5px 0}
+.fgrid a:hover{color:#fff}
+.ftagline{color:#a8a6d4;font-size:13.5px;max-width:280px}
+.fbottom{margin-top:40px;padding-top:22px;border-top:0.5px solid rgba(255,255,255,0.14);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;color:#9a99b8}
+.flegal a{color:#9a99b8}
+.flegal a:hover{color:#fff}
 
 /* Inner-page hero (matches the wireframe's 48px inner h1) */
 .hero.inner h1{font-size:48px}
