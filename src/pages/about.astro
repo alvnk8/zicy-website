@@ -1,188 +1,277 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../data/site';
+import alvinPhoto from '../assets/team/alvin-koay.png';
+import aprilPhoto from '../assets/team/april-cheong.png';
+import rituPhoto from '../assets/team/ritu-khanna.png';
+import peterPhoto from '../assets/team/peter-kua.jpg';
 
-const title = 'About Zicy — the story of Growth.pro, reborn as AI';
+const title = 'About Zicy — the truth layer for AI visibility';
 const description =
-  "Zicy is the AI growth co-pilot built by Growth.pro — an AEO/GEO/SEO assistant that scales agency-grade expertise to every business, from solopreneur to enterprise.";
+  "Zicy is the AI visibility platform built by Growth.pro. Meet the team and the mission: measure how AI describes your brand, fix what's wrong, and prove it.";
 
-// 'That decision gave birth to Zicy' — the four components described in the founder story.
-const components = [
+const beliefs = [
   {
-    h: 'A DIY AI Growth Co-Pilot',
-    p: 'Powered by a highly-intelligent AEO/GEO/SEO chat-based bot.',
+    h: 'Truth over noise.',
+    p: 'Knowing whether AI is right about you matters more than knowing you were mentioned.',
   },
   {
-    h: 'A butler service for digital growth',
-    p: 'Talk to it in plain human language and get expert consultations instantly.',
+    h: 'Earned, not gamed.',
+    p: 'Visibility that lasts comes from genuine expertise made easy for AI to find, not from working against the system.',
   },
   {
-    h: 'AI citations & rankings, engineered',
-    p: 'A system that does more than SEO tasks — it engineers AI citations and rankings for the new era of search.',
-  },
-  {
-    h: 'For everyone — from solopreneur to enterprise',
-    p: 'Solopreneur, small ecommerce shop, in-house marketing team, or enterprise — Zicy was designed to serve them all, with the same values Growth.pro has always stood for.',
+    h: 'Proof, not vanity.',
+    p: "The work has to connect to real demand, or it doesn't count.",
   },
 ];
 
+// Team — bios verbatim from the live site (zicy.com/about) where they exist.
+// Alvin's bio is condensed from the founder narrative for parity with the other three cards.
 const team = [
   {
     name: 'Alvin Koay',
-    role: 'Founder',
-    bio: "Started Growth.pro before the pandemic and saw an SEO industry riddled with broken promises. Built Zicy to clone Growth.pro's ethos — empathy, trust, accountability, transparency, and integrity — into AI, so even the smallest businesses get fair access to world-class strategies.",
+    role: 'Founder & CEO',
+    photo: alvinPhoto,
+    alt: 'Alvin Koay, Founder and CEO of Zicy',
+    bio: "Started Growth.pro before the pandemic and saw an SEO industry riddled with broken promises. Built Zicy to clone Growth.pro's ethos — empathy, trust, accountability, transparency and integrity — into AI, so even the smallest businesses get fair access to world-class strategies.",
   },
   {
     name: 'April Cheong',
     role: 'Co-founder',
-    bio: "April excels at the intersection of data, strategy, and artificial intelligence — translating complex analytics into actionable business insights. At Zicy, April's expertise in Big Data architecture, AI-powered product ideation, and workflow automation shapes our intelligent, user-focused approach to Answer Engine Optimisation.",
+    photo: aprilPhoto,
+    alt: 'April Cheong, Co-founder of Zicy',
+    bio: 'April excels at the intersection of data, strategy and artificial intelligence — translating complex analytics into actionable business insights. At Zicy, April\'s expertise in Big Data architecture, AI-powered product ideation and workflow automation shapes our intelligent, user-focused approach to Answer Engine Optimisation.',
   },
   {
     name: 'Ritu Khanna',
     role: 'Co-founder',
+    photo: rituPhoto,
+    alt: 'Ritu Khanna, Co-founder of Zicy',
     bio: 'Over 15 years in the corporate sector leading environmental-industry projects, plus a decade in SEO strategy and content planning. At Zicy, Ritu applies that experience to develop practical AI-first optimisation methods that help businesses become visible in AI-generated answers.',
   },
   {
     name: 'Peter Kua',
     role: 'Chief Data Officer',
+    photo: peterPhoto,
+    alt: 'Peter Kua, Chief Data Officer of Zicy',
     bio: "A distinguished data science strategist who led Data Science & Analytics at REV Media Group and drove Malaysia's National Big Data Analytics Initiative under MDEC — developing the country's first National BDA Framework. Has trained senior teams at Citibank, Intel, Dell, NTT Data, Maxis and Johnson & Johnson.",
   },
 ];
+
+// JSON-LD: Organization + Person nodes, all keyed under stable @ids so AI engines
+// can link the entities together (Zicy → founder Alvin, employees April/Ritu/Peter).
+const orgId = `${SITE.url}/#org`;
+const personIds = {
+  alvin: `${SITE.url}/about#alvin-koay`,
+  april: `${SITE.url}/about#april-cheong`,
+  ritu: `${SITE.url}/about#ritu-khanna`,
+  peter: `${SITE.url}/about#peter-kua`,
+};
+const aboutGraph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': orgId,
+      name: SITE.name,
+      legalName: SITE.legalName,
+      url: `${SITE.url}/`,
+      description: 'AI visibility intelligence platform — measure, diagnose, act, prove.',
+      founder: { '@id': personIds.alvin },
+      employee: [
+        { '@id': personIds.alvin },
+        { '@id': personIds.april },
+        { '@id': personIds.ritu },
+        { '@id': personIds.peter },
+      ],
+      sameAs: [SITE.linkedin],
+    },
+    {
+      '@type': 'Person',
+      '@id': personIds.alvin,
+      name: 'Alvin Koay',
+      jobTitle: 'Founder & CEO',
+      worksFor: { '@id': orgId },
+    },
+    {
+      '@type': 'Person',
+      '@id': personIds.april,
+      name: 'April Cheong',
+      jobTitle: 'Co-founder',
+      worksFor: { '@id': orgId },
+    },
+    {
+      '@type': 'Person',
+      '@id': personIds.ritu,
+      name: 'Ritu Khanna',
+      jobTitle: 'Co-founder',
+      worksFor: { '@id': orgId },
+    },
+    {
+      '@type': 'Person',
+      '@id': personIds.peter,
+      name: 'Peter Kua',
+      jobTitle: 'Chief Data Officer',
+      worksFor: { '@id': orgId },
+    },
+  ],
+};
 ---
 <BaseLayout title={title} description={description}>
-  <!-- Hero -->
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(aboutGraph)} />
+
+  <!-- Hero (white) -->
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">About</span>
-      <h1>The story behind Zicy.</h1>
+      <h1>We built the truth layer for AI visibility.</h1>
       <p class="lead">
-        From an SEO agency built on broken promises to an AI co-pilot built on Growth.pro's values —
-        empathy, trust, accountability, transparency, and integrity. This is how it started, and why
-        it exists.
+        Zicy exists because brands are being described by AI every day — and most have no idea what
+        it's saying. We measure it, help fix it, and prove the fix worked.
       </p>
     </div>
   </section>
 
-  <!-- The founder narrative -->
-  <section>
+  <!-- Where Zicy came from (lavender) -->
+  <section style="background:var(--lavender)">
     <div class="wrap">
-      <div class="prose">
+      <div class="shead"><span class="eyebrow">Where Zicy came from</span><h2>An agency story, scaled into AI.</h2></div>
+      <div class="prose" style="max-width:760px">
         <p>
-          Before the COVID-19 pandemic, our founder <b>Alvin Koay</b> started Growth.pro: a
-          full-blown SEO agency. The agency quickly grew into a trusted partner for international
-          brands, but Alvin couldn't shake what he had long observed: the SEO industry was riddled
-          with broken promises.
+          Before the pandemic, founder <b>Alvin Koay</b> started Growth.pro — a full SEO agency that
+          grew into a trusted partner for international brands. But he couldn't shake what he'd long
+          observed: too many small businesses tied down by contracts, misled with jargon and handed
+          reports that looked impressive yet delivered no real outcomes. Agencies maximised their
+          retainers while the clients stayed invisible online.
         </p>
         <p>
-          He saw too many small businesses — mom-and-pop shops, solopreneurs, ecommerce founders —
-          being tied down by contracts, misled with jargon, and handed reports that looked
-          impressive but delivered no real outcomes. Agencies often maximised their retainers while
-          their clients stayed invisible online. Alvin himself had felt the sting of being an
-          underdog in business, and this struck a nerve.
-        </p>
-        <p>
-          The challenge was clear: how could Growth.pro's values — empathy, trust, accountability,
-          transparency, and integrity — be scaled beyond a service agency, so even the smallest
-          businesses could access world-class strategies without being exploited?
-        </p>
-        <p>
-          Alvin's desire was simple yet ambitious: to create a solution that democratised SEO, AEO,
-          and GEO. A solution that anyone — regardless of company size or budget — could use to
-          compete fairly against giants.
-        </p>
-        <p>
-          Instead of building more human-heavy agency layers, Alvin and his team decided to clone
-          Growth.pro's ethos and expertise into AI itself. The idea was not to build another agency
-          tool, but a highly intelligent co-pilot that worked as a conversational "butler" for
-          digital growth.
+          So instead of building more human-heavy agency layers, Alvin and his team cloned
+          Growth.pro's ethos — empathy, trust, accountability, transparency and integrity — into AI
+          itself. The result is Zicy: a measurement and remediation platform that scales agency-grade
+          AI visibility to anyone, from solopreneur to enterprise, with the same values the
+          consultancy has always stood for.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- That decision gave birth to Zicy -->
+  <!-- Zicy & Growth.pro (white). §A2 — Growth.pro IP named, attributed, never described as engineering. -->
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Zicy &amp; Growth.pro</span><h2>The platform, and the consultancy that built it.</h2></div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">
+          Zicy is the platform. Growth.pro is the consultancy that built it and uses it to run
+          done-for-you programmes for enterprise brands. The platform is open to everyone; the
+          managed service is selective. The frameworks behind that service — the
+          <b>AI Visibility Operating System</b>, the <b>PAVA Framework</b> and the
+          <b>AI Citation Enablement</b> practice — are Growth.pro's.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APAC-native, globally capable (lavender) -->
   <section style="background:var(--lavender)">
     <div class="wrap">
-      <div class="shead">
-        <span class="eyebrow">That decision gave birth to Zicy</span>
-        <h2>One co-pilot, built for everyone.</h2>
+      <div class="shead"><span class="eyebrow">APAC-native, globally capable</span><h2>Built in Penang. Covering every engine, every language.</h2></div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px;margin-bottom:14px">
+          Built in Penang, covering every engine and every language. The multi-language,
+          multi-market coverage that US-built tools treat as an afterthought is our starting point.
+        </p>
+        <p class="mono" style="font-size:13px;color:var(--muted);letter-spacing:.04em">
+          Growth Pro Sdn. Bhd. operates under <b>Malaysia Digital (MD)</b> status — Malaysia's
+          national designation for digital-economy companies.
+        </p>
       </div>
-      <div class="grid-2">
-        {components.map((c) => (
-          <div class="card"><h3>{c.h}</h3><p>{c.p}</p></div>
+    </div>
+  </section>
+
+  <!-- What we believe (white) -->
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">What we believe</span><h2>Three commitments.</h2></div>
+      <div class="grid-3">
+        {beliefs.map((b) => (
+          <div class="card"><h3>{b.h}</h3><p>{b.p}</p></div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Epiphany pull-quote + closing narrative -->
-  <section>
-    <div class="wrap">
-      <div style="max-width:720px">
-        <span class="eyebrow">Epiphany</span>
-        <p class="pullquote" style="font-size:26px;margin:18px 0 30px">
-          In the AI era, businesses no longer need to gamble on agencies or contracts. With Zicy,
-          their growth partner can live inside AI itself — empathetic, transparent, and on their
-          side.
-        </p>
-        <p style="font-size:17px;color:#3a3950;margin-bottom:20px">
-          Zicy is the true personification of Growth.pro: Alvin Koay's heart, beliefs, and
-          relentless fight for fairness, coded into AI. It exists so that the underdogs — those
-          who have always been overlooked — finally have a co-pilot to help them get seen, trusted,
-          and chosen in the age of AI-driven search.
-        </p>
-        <p style="font-size:19px;font-weight:600;color:var(--indigo);font-family:var(--display);line-height:1.35;margin-top:14px">
-          Zicy isn't just software. It's Growth.pro's story of resilience, empathy, and integrity —
-          reborn as AI.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Team -->
+  <!-- Meet the team (lavender). 2-up on desktop, 1-up on mobile. -->
   <section style="background:var(--lavender)">
     <div class="wrap">
-      <div class="shead">
-        <span class="eyebrow">Team</span>
-        <h2>Meet our team.</h2>
-        <p>APAC-native, globally capable — built in Penang, Malaysia.</p>
-      </div>
-      <div class="grid-2">
+      <div class="shead"><span class="eyebrow">Meet the team</span><h2>The people behind Zicy.</h2></div>
+      <div class="team-grid">
         {team.map((m) => (
-          <div class="card">
-            <h3 style="margin-bottom:4px">{m.name}</h3>
-            <p class="mono" style="font-size:12.5px;color:var(--orange);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px">{m.role}</p>
-            <p>{m.bio}</p>
-          </div>
+          <article class="team-card">
+            <Image
+              src={m.photo}
+              alt={m.alt}
+              widths={[200, 320, 480]}
+              sizes="(max-width: 860px) 140px, 180px"
+              class="team-photo"
+              loading="lazy"
+            />
+            <div class="team-text">
+              <h3>{m.name}</h3>
+              <p class="team-role">{m.role}</p>
+              <p class="team-bio">{m.bio}</p>
+            </div>
+          </article>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Our Promise -->
+  <!-- Our promise + CTAs (white) -->
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Our promise</span><h2>Clarity, speed, outcomes.</h2></div>
       <div style="max-width:720px">
-        <p class="lead" style="font-size:18px;margin-bottom:18px">
-          Whether you're a solo marketer or a global marketing team, Zicy is designed to fit into
-          your workflow and give you one clear answer to the question:
+        <p class="lead" style="font-size:18px;margin-bottom:28px">
+          Whether you're a solo marketer or a global marketing team, Zicy is designed to give you
+          one clear answer to one clear question:
+          <i>"What's stopping us from being the answer — and how do we fix it?"</i>
         </p>
-        <p class="pullquote" style="font-size:24px;margin:0 0 26px">
-          "What's stopping us from being the answer — and how do we fix it?"
-        </p>
-        <p style="font-size:17px;color:#3a3950">We're not just building a product.</p>
-        <p style="font-size:21px;font-weight:600;color:var(--indigo);font-family:var(--display);margin-top:6px">
-          We're building the future of search strategy.
-        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="/audit">Run a free audit</a>
+          <a class="btn btn-ghost btn-lg" href="/platform">See the platform</a>
+        </div>
       </div>
     </div>
   </section>
-
-  <CtaBand
-    eyebrow="Ready to see what AI says about you?"
-    heading="See your brand the way AI describes it."
-    ctaLabel="Run a free audit"
-    ctaHref="/audit"
-  />
 </BaseLayout>
+
+<style>
+  /* Team grid — 2-up on desktop, 1-up on mobile. */
+  .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .team-card{
+    display:flex;gap:22px;align-items:flex-start;
+    background:#fff;border:0.5px solid var(--line);border-radius:14px;padding:24px;
+  }
+  .team-photo{
+    flex:0 0 auto;
+    width:140px;height:140px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid var(--line-2);
+    background:#fafaff;
+  }
+  .team-text{flex:1 1 auto;min-width:0}
+  .team-text h3{font-family:var(--display);font-size:22px;color:var(--indigo);margin-bottom:2px;letter-spacing:-0.01em}
+  .team-role{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--orange);margin-bottom:12px;font-weight:500;
+  }
+  .team-bio{font-size:14.5px;color:#4a4960;line-height:1.6}
+
+  @media (max-width: 860px){
+    .team-grid{grid-template-columns:1fr;gap:18px}
+    .team-card{flex-direction:column;align-items:center;text-align:center;padding:26px 22px}
+    .team-photo{width:120px;height:120px}
+  }
+</style>
