@@ -1,0 +1,456 @@
+---
+// Floating chat widget — bottom-right, all pages.
+// Talks to https://chatapi.zicy.com/chat/stream (SSE).
+// Anonymous session ID, generated client-side, persists until reload.
+---
+<aside id="zicy-chat" class="zw" aria-live="polite">
+  <button
+    class="zw-bubble"
+    id="zw-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="zw-panel"
+    aria-label="Open Zicy chat"
+  >
+    <svg class="zw-i-chat" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+    </svg>
+    <svg class="zw-i-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+      <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+    </svg>
+  </button>
+
+  <div class="zw-panel" id="zw-panel" role="dialog" aria-label="Chat with Zicy">
+    <header class="zw-head">
+      <div class="zw-head-l">
+        <img class="zw-avatar" src="/alvin.png" alt="Alvin" width="36" height="36" />
+        <div>
+          <p class="zw-title">Alvin <span class="zw-status" aria-hidden="true"></span></p>
+          <p class="zw-sub">AEO/GEO consultant · available 24/7</p>
+        </div>
+      </div>
+      <button class="zw-x" id="zw-close" type="button" aria-label="Close chat">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+    </header>
+
+    <div class="zw-body" id="zw-body"></div>
+
+    <form class="zw-form" id="zw-form" autocomplete="off">
+      <textarea
+        id="zw-input"
+        class="zw-input"
+        placeholder="Ask about AEO/GEO..."
+        rows="1"
+        aria-label="Message"
+        required
+      ></textarea>
+      <button class="zw-send" id="zw-send" type="submit" aria-label="Send">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M3 11.5L21 3l-8.5 18L11 13.5z"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+</aside>
+
+<style is:global>
+  .zw{position:fixed;right:24px;bottom:24px;z-index:9999;font-family:var(--body);-webkit-font-smoothing:antialiased}
+  .zw-bubble{
+    width:58px;height:58px;border-radius:50%;border:none;cursor:pointer;
+    background:var(--indigo);color:#fff;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px rgba(49,46,129,0.32),0 2px 6px rgba(26,26,46,0.10);
+    transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s,background .2s;
+  }
+  .zw-bubble:hover{background:#3a37a3;transform:translateY(-2px) scale(1.03);box-shadow:0 12px 30px rgba(49,46,129,0.4)}
+  .zw-bubble:active{transform:scale(.95)}
+  .zw-i-close{display:none}
+  .zw[data-open="true"] .zw-i-chat{display:none}
+  .zw[data-open="true"] .zw-i-close{display:block}
+  .zw[data-open="true"] .zw-bubble{background:#1f1c5c}
+
+  .zw-panel{
+    position:absolute;right:0;bottom:78px;width:min(420px,calc(100vw - 44px));
+    height:min(720px,calc(100vh - 120px));display:none;flex-direction:column;
+    background:rgba(255,255,255,0.96);backdrop-filter:saturate(180%) blur(20px);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    border:1px solid rgba(255,255,255,0.6);border-radius:22px;
+    box-shadow:0 30px 80px rgba(26,26,46,0.22),0 8px 24px rgba(26,26,46,0.10),0 0 0 0.5px rgba(26,26,46,0.06);
+    overflow:hidden;
+    transform-origin:bottom right;
+  }
+  .zw[data-open="true"] .zw-panel{display:flex;animation:zwIn .26s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes zwIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+
+  .zw-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 18px;background:rgba(255,255,255,0.7);backdrop-filter:saturate(180%) blur(20px);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    border-bottom:0.5px solid rgba(26,26,46,0.08);color:var(--ink);
+  }
+  .zw-head-l{display:flex;align-items:center;gap:12px}
+  .zw-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;border:none;background:#f0f0f5;flex-shrink:0;display:block;box-shadow:0 1px 3px rgba(26,26,46,0.08)}
+  .zw-status{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-left:7px;vertical-align:middle;box-shadow:0 0 0 2.5px rgba(22,163,74,0.22)}
+  .zw-title{font-family:var(--display);font-weight:600;font-size:15.5px;color:var(--ink);line-height:1.15;letter-spacing:-0.01em}
+  .zw-sub{font-size:12px;color:var(--muted);margin-top:2px;font-family:var(--body);letter-spacing:0;font-weight:400}
+  .zw-x{background:transparent;border:none;color:var(--muted);cursor:pointer;padding:8px;border-radius:8px;display:flex;transition:background .15s,color .15s}
+  .zw-x:hover{color:var(--ink);background:rgba(26,26,46,0.06)}
+
+  .zw-body{flex:1;overflow-y:auto;padding:20px 18px;display:block;background:transparent}
+  .zw-body::-webkit-scrollbar{width:6px}
+  .zw-body::-webkit-scrollbar-thumb{background:rgba(26,26,46,0.18);border-radius:3px}
+  .zw-body::-webkit-scrollbar-track{background:transparent}
+  .zw-msg{display:block;width:auto;padding:13px 16px;border-radius:18px;font-size:14.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;margin:0 0 10px;text-align:left;vertical-align:top}
+  .zw-msg:last-child{margin-bottom:0}
+  .zw-msg-ai{background:#f0f0f5;color:var(--ink);border:none;border-bottom-left-radius:6px}
+  .zw-msg-user{background:var(--indigo);color:#fff;border-bottom-right-radius:6px;margin-left:auto;max-width:85%;width:fit-content}
+  .zw-msg-typing{display:inline-block;width:auto;padding:14px 18px;background:#f0f0f5}
+
+  .zw-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .zw-chip{
+    font-family:var(--body);font-size:13.5px;font-weight:500;color:var(--indigo);
+    background:rgba(255,255,255,0.8);border:1px solid rgba(49,46,129,0.18);border-radius:999px;
+    padding:8px 14px;cursor:pointer;transition:background .18s,border-color .18s,color .18s,transform .15s cubic-bezier(.34,1.56,.64,1);
+    text-align:left;line-height:1.3;backdrop-filter:blur(10px);
+  }
+  .zw-chip:hover{background:var(--indigo);color:#fff;border-color:var(--indigo);transform:translateY(-1px)}
+  .zw-chip:active{transform:scale(.96)}
+  .zw-msg-ai a{color:var(--indigo-bright);text-decoration:underline;word-break:break-word}
+  .zw-msg-ai p{margin:0 0 10px;font-size:14px;line-height:1.55}
+  .zw-msg-ai p:last-child{margin-bottom:0}
+  .zw-msg-ai h1,.zw-msg-ai h2,.zw-msg-ai h3{font-family:var(--display);color:var(--indigo);margin:14px 0 8px;line-height:1.2}
+  .zw-msg-ai h1:first-child,.zw-msg-ai h2:first-child,.zw-msg-ai h3:first-child{margin-top:0}
+  .zw-msg-ai h1{font-size:18px}
+  .zw-msg-ai h2{font-size:16px}
+  .zw-msg-ai h3{font-size:15px}
+  .zw-msg-ai ul,.zw-msg-ai ol{margin:0 0 10px;padding-left:20px}
+  .zw-msg-ai li{margin:3px 0;font-size:14px;line-height:1.5}
+  .zw-msg-ai strong{font-weight:600;color:var(--indigo)}
+  .zw-msg-ai em{font-style:italic}
+  .zw-msg-ai code{font-family:var(--mono);font-size:12.5px;background:var(--lavender);padding:1px 5px;border-radius:4px;color:var(--indigo)}
+  .zw-typing{display:inline-flex;gap:5px;align-items:flex-end;padding:0;height:14px}
+  .zw-typing span{width:6.5px;height:6.5px;border-radius:50%;background:var(--muted);animation:zwBounce 1.1s infinite ease-in-out;display:inline-block}
+  .zw-typing span:nth-child(1){animation-delay:0s}
+  .zw-typing span:nth-child(2){animation-delay:.18s}
+  .zw-typing span:nth-child(3){animation-delay:.36s}
+  @keyframes zwBounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-6px);opacity:.9}}
+
+  .zw-form{
+    display:flex;gap:8px;padding:14px 16px;background:rgba(255,255,255,0.7);
+    backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+    border-top:0.5px solid rgba(26,26,46,0.08);align-items:center;
+  }
+  .zw-input{
+    flex:1;resize:none;border:1px solid rgba(26,26,46,0.10);border-radius:20px;
+    padding:11px 16px;font-family:var(--body);font-size:14.5px;color:var(--ink);
+    background:#fff;line-height:1.4;max-height:120px;outline:none;
+    transition:border-color .15s,box-shadow .15s;
+  }
+  .zw-input:focus{border-color:var(--indigo-bright);box-shadow:0 0 0 3px rgba(79,70,229,0.12)}
+  .zw-input::placeholder{color:var(--muted)}
+  .zw-send{
+    width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;
+    background:var(--indigo);color:#fff;display:flex;align-items:center;justify-content:center;
+    transition:background .15s,transform .15s cubic-bezier(.34,1.56,.64,1);flex-shrink:0;
+  }
+  .zw-send:hover:not(:disabled){background:#3a37a3;transform:scale(1.05)}
+  .zw-send:active{transform:scale(.92)}
+  .zw-send:disabled{background:rgba(26,26,46,0.18);cursor:not-allowed}
+
+  @media(max-width:480px){
+    .zw{right:16px;bottom:16px}
+    .zw-panel{width:calc(100vw - 32px);height:calc(100vh - 100px);right:0;bottom:74px;border-radius:20px}
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var API = 'https://chatapi.zicy.com/chat/stream';
+    var sessionId = 'zicy-' + Date.now() + '-' + Math.random().toString(36).substring(2, 15);
+
+    var root = document.getElementById('zicy-chat');
+    var toggle = document.getElementById('zw-toggle');
+    var panel = document.getElementById('zw-panel');
+    var closeBtn = document.getElementById('zw-close');
+    var body = document.getElementById('zw-body');
+    var form = document.getElementById('zw-form');
+    var input = document.getElementById('zw-input');
+    var sendBtn = document.getElementById('zw-send');
+    var busy = false;
+    var welcomeShown = false;
+    var WELCOME = "Hey, I'm Alvin — ask me anything about AEO or GEO (Answer/Generative Engine Optimization).\n\nI can audit your webpage or share tactics to get your brand cited in ChatGPT, Google Gemini, Perplexity and other answer engines.";
+    var QUICK = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO strategies'];
+
+    function addQuickChips() {
+      var wrap = document.createElement('div');
+      wrap.className = 'zw-chips';
+      QUICK.forEach(function (q) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'zw-chip';
+        b.textContent = q;
+        b.addEventListener('click', function () {
+          wrap.remove();
+          send(q);
+        });
+        wrap.appendChild(b);
+      });
+      body.appendChild(wrap);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function showWelcome() {
+      if (welcomeShown) return;
+      welcomeShown = true;
+      var el = addTyping();
+      setTimeout(function () {
+        el.classList.remove('zw-msg-typing');
+        el.innerHTML = renderAI(WELCOME);
+        addQuickChips();
+        body.scrollTop = body.scrollHeight;
+      }, 1100);
+    }
+
+    function setOpen(open) {
+      root.dataset.open = open ? 'true' : 'false';
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close Zicy chat' : 'Open Zicy chat');
+      if (open) {
+        showWelcome();
+        setTimeout(function () { input.focus(); }, 50);
+      }
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(root.dataset.open !== 'true');
+    });
+    closeBtn.addEventListener('click', function () { setOpen(false); });
+
+    input.addEventListener('input', function () {
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+    });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        form.requestSubmit();
+      }
+    });
+
+    function escape(s) {
+      return s.replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function linkify(s) {
+      return s.replace(/(https?:\/\/[^\s<]+)/g, function (m) {
+        return '<a href="' + m + '" target="_blank" rel="noopener">' + m + '</a>';
+      });
+    }
+
+    // Pre-process API response (matches Zicy landing page formatAPIResponse).
+    function formatAPIResponse(text) {
+      if (!text) return text;
+      var f = text;
+      f = f.replace(/^([^>\n]+)\s*>>\s*(.+)$/gm, function (m, h, c) {
+        h = h.trim(); c = c.trim();
+        if (!h.startsWith('#')) h = '## ' + h;
+        return h + '\n\n' + c;
+      });
+      f = f.replace(/^>>\s*/gm, '');
+      f = f.replace(/>>/g, '');
+      f = f.replace(/\s*<p>\s*/gi, '\n\n');
+      f = f.replace(/<\/p>\s*/gi, '');
+      f = f.replace(/^[\s]*[-◦○▪▫–—]\s+(?=\S)/gm, '• ');
+      f = f.replace(/^[\s]*(\d+)[\)\.]\s+/gm, '$1. ');
+      f = f.replace(/^(#{1,3})\s*(.+)$/gm, '$1 $2');
+      f = f.replace(/([^\n])\n([•\d][\.\s])/g, '$1\n\n$2');
+      f = f.replace(/([•\d][\.\s][^\n]+)\n([^\n•\d])/g, '$1\n\n$2');
+      f = f.replace(/\n{3,}/g, '\n\n');
+      return f.trim();
+    }
+
+    // Markdown → HTML (matches Zicy landing page parseMarkdown).
+    function parseMarkdown(text) {
+      if (!text) return '';
+      var html = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$2</a>');
+      html = html.split(/(<a\s+[^>]*>.*?<\/a>)/gi).map(function (part, idx) {
+        if (idx % 2 === 1) return part;
+        return part.replace(/(^|[\s\n>])((?:https?:\/\/|www\.)[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=%]+)/gi, function (m, pre, url) {
+          var finalUrl = url.startsWith('www.') ? 'https://' + url : url;
+          return pre + '<a href="' + finalUrl + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
+        });
+      }).join('');
+      html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      html = html.replace(/([^*]|^)\*([^*]+?)\*([^*]|$)/g, '$1<em>$2</em>$3');
+      html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+      html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+      html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+      var blocks = html.split(/\n\n+/);
+      var merged = [];
+      var i = 0;
+      while (i < blocks.length) {
+        var block = blocks[i].trim();
+        if (!block) { i++; continue; }
+        var lines = block.split('\n');
+        var hasList = lines.some(function (l) { return /^[•\-\*]\s/.test(l.trim()) || /^\d+[\.\)]\s/.test(l.trim()); });
+        if (hasList) {
+          var firstLine = lines.find(function (l) { return /^[•\-\*]\s/.test(l.trim()) || /^\d+[\.\)]\s/.test(l.trim()); });
+          var isNum = /^\d+[\.\)]\s/.test(firstLine.trim());
+          var mergedList = block;
+          var j = i + 1;
+          while (j < blocks.length) {
+            var nb = blocks[j].trim();
+            if (!nb) { j++; continue; }
+            var nl = nb.split('\n');
+            var nHas = nl.some(function (l) { return /^[•\-\*]\s/.test(l.trim()) || /^\d+[\.\)]\s/.test(l.trim()); });
+            if (!nHas) break;
+            var nFirst = nl.find(function (l) { return /^[•\-\*]\s/.test(l.trim()) || /^\d+[\.\)]\s/.test(l.trim()); });
+            var nIsNum = /^\d+[\.\)]\s/.test(nFirst.trim());
+            if (nIsNum !== isNum) break;
+            mergedList += '\n' + nb;
+            j++;
+          }
+          merged.push(mergedList);
+          i = j;
+        } else {
+          merged.push(block);
+          i++;
+        }
+      }
+      html = merged.map(function (block) {
+        block = block.trim();
+        if (!block) return '';
+        if (block.startsWith('<h1') || block.startsWith('<h2') || block.startsWith('<h3')) return block;
+        var lines = block.split('\n');
+        var hasList = lines.some(function (l) { return /^[•\-\*]\s/.test(l.trim()) || /^\d+[\.\)]\s/.test(l.trim()); });
+        if (hasList) {
+          var firstLine = lines.find(function (l) { return /^[•\-\*]\s/.test(l.trim()) || /^\d+[\.\)]\s/.test(l.trim()); });
+          var isNum = /^\d+[\.\)]\s/.test(firstLine.trim());
+          var tag = isNum ? 'ol' : 'ul';
+          var items = lines.map(function (l) {
+            l = l.trim(); if (!l) return '';
+            var c = l.replace(/^[•\-\*]\s+/, '').replace(/^\d+[\.\)]\s+/, '');
+            return c ? '<li>' + c + '</li>' : '';
+          }).filter(Boolean).join('');
+          return '<' + tag + '>' + items + '</' + tag + '>';
+        }
+        return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
+      }).filter(Boolean).join('');
+      return html;
+    }
+
+    function renderAI(text) { return parseMarkdown(formatAPIResponse(text)); }
+
+    function addMsg(role, text) {
+      var el = document.createElement('div');
+      el.className = 'zw-msg zw-msg-' + role;
+      el.innerHTML = linkify(escape(text));
+      body.appendChild(el);
+      body.scrollTop = body.scrollHeight;
+      return el;
+    }
+
+    function addTyping() {
+      var el = document.createElement('div');
+      el.className = 'zw-msg zw-msg-ai zw-msg-typing';
+      el.innerHTML = '<span class="zw-typing"><span></span><span></span><span></span></span>';
+      body.appendChild(el);
+      body.scrollTop = body.scrollHeight;
+      return el;
+    }
+
+    async function send(message) {
+      if (busy) return;
+      busy = true;
+      sendBtn.disabled = true;
+      addMsg('user', message);
+      var aiEl = addTyping();
+      var full = '';
+      var started = false;
+
+      try {
+        var controller = new AbortController();
+        var timeout = setTimeout(function () { controller.abort(); }, 300000);
+
+        var res = await fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: message,
+            sessionId: sessionId,
+            source: 'zicy_website_widget',
+            mode: 'consultant',
+            temperature: 0.5,
+            use_cache: false,
+            similarity_threshold: 0.85,
+          }),
+          signal: controller.signal,
+        });
+        clearTimeout(timeout);
+
+        if (!res.ok) throw new Error('API ' + res.status);
+
+        var reader = res.body.getReader();
+        var dec = new TextDecoder();
+        var buf = '';
+
+        while (true) {
+          var chunk = await reader.read();
+          if (chunk.done) break;
+          buf += dec.decode(chunk.value, { stream: true });
+          var lines = buf.split('\n');
+          buf = lines.pop() || '';
+          for (var i = 0; i < lines.length; i++) {
+            var line = lines[i];
+            if (!line.startsWith('data: ')) continue;
+            try {
+              var data = JSON.parse(line.substring(6));
+              if (data.type === 'content' && data.content) {
+                if (!started) { aiEl.classList.remove('zw-msg-typing'); aiEl.innerHTML = ''; started = true; }
+                full += data.content;
+                aiEl.innerHTML = renderAI(full);
+                body.scrollTop = body.scrollHeight;
+              }
+            } catch (e) { /* skip malformed */ }
+          }
+        }
+
+        if (!full) {
+          aiEl.classList.remove('zw-msg-typing');
+          aiEl.innerHTML = renderAI('Empty response. Try rephrasing.');
+        }
+      } catch (err) {
+        aiEl.classList.remove('zw-msg-typing');
+        console.error('[ZicyChat] Error:', err);
+        var msg;
+        if (err.name === 'AbortError') {
+          msg = 'Request timed out after 5 min. Try again.';
+        } else if (err.message && err.message.indexOf('Failed to fetch') !== -1) {
+          msg = 'Cannot reach chat server. Likely CORS block from ' + location.origin + ' — chatapi.zicy.com must allow this origin. Check browser console (F12 → Network) for details.';
+        } else if (err.message && err.message.indexOf('API ') === 0) {
+          msg = 'Server returned ' + err.message.replace('API ', 'HTTP ') + '. Try again or check API status.';
+        } else {
+          msg = 'Error: ' + (err.message || err.name || 'unknown') + '. See browser console.';
+        }
+        aiEl.innerHTML = renderAI(msg);
+      } finally {
+        busy = false;
+        sendBtn.disabled = false;
+        input.focus();
+      }
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = input.value.trim();
+      if (!v || busy) return;
+      input.value = '';
+      input.style.height = 'auto';
+      send(v);
+    });
+  })();
+</script>

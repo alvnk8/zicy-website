@@ -2,6 +2,7 @@
 import '../styles/theme.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ChatWidget from '../components/ChatWidget.astro';
 import { SITE } from '../data/site';
 
 interface Props {
@@ -82,5 +83,6 @@ const siteGraph = {
       <slot />
     </main>
     <Footer />
+    <ChatWidget />
   </body>
 </html>
