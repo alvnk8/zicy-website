@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import Screenshot from '../../components/Screenshot.astro';
 import { ICPS } from '../../data/icps';
 
 export function getStaticPaths() {
@@ -41,7 +42,9 @@ const { icp } = Astro.props;
       </div>
       <div class="grid-2" style="margin-top:24px">
         {icp.screenshots.map((s) => (
-          <div class="shot"><span>[ SCREENSHOT ]<br />{s}</span></div>
+          s.src
+            ? <Screenshot src={s.src} alt={s.alt!} caption={s.caption} />
+            : <div class="shot"><span>[ SCREENSHOT ]<br />{s.desc}</span></div>
         ))}
       </div>
     </div>

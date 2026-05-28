@@ -117,6 +117,13 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.86);backdr
 .shot{border:1.5px dashed var(--line-2);border-radius:12px;background:repeating-linear-gradient(135deg,#fafaff,#fafaff 11px,#f4f4fb 11px,#f4f4fb 22px);min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
 .shot span{font-family:var(--mono);font-size:12.5px;color:#8a89a0;letter-spacing:.02em;line-height:1.7}
 
+/* Real product screenshots — framed like an app window. */
+.screenshot{margin:0;border:1px solid var(--line-2);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 12px 38px rgba(26,26,46,0.10)}
+.screenshot .chrome{display:flex;align-items:center;gap:7px;height:30px;padding:0 14px;border-bottom:0.5px solid var(--line);background:#fafafa}
+.screenshot .chrome span{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
+.screenshot img{display:block;width:100%;height:auto}
+.screenshot figcaption{padding:14px 18px;font-size:13px;color:var(--muted);border-top:0.5px solid var(--line);font-family:var(--mono);letter-spacing:.01em}
+
 /* CTA band: soft lavender section that holds gentle attention without dominating the page. */
 .band{background:var(--lavender);color:var(--ink)}
 .band h2{color:var(--indigo);font-size:36px}

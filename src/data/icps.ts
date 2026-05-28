@@ -9,6 +9,17 @@ export interface WhyItem {
   lead: string;
   desc: string;
 }
+/**
+ * A screenshot slot — either a real embed (when src is set) or a placeholder labelled by desc.
+ * Real embeds require alt text (AEO/AI-crawler signal per the brief Part 4).
+ */
+export interface ScreenshotRef {
+  desc: string;
+  src?: string;
+  alt?: string;
+  caption?: string;
+}
+
 export interface Icp {
   slug: 'brands' | 'pr' | 'agencies' | 'publishers';
   eyebrow: string;
@@ -21,7 +32,7 @@ export interface Icp {
   sectionH2: string;
   sectionSub: string;
   modules: Module[];
-  screenshots: string[];
+  screenshots: ScreenshotRef[];
   whyHeading: string;
   why: WhyItem[];
   band: { heading: string; ctaLabel: string; ctaHref: string };
@@ -48,8 +59,10 @@ export const ICPS: Icp[] = [
       { name: 'Brand Sentiment', desc: 'The language AI attaches to your brand, and the sources moving it.' },
     ],
     screenshots: [
-      'Brand Intelligence report — perception + AI Reality Score',
-      'Competitive AI Performance — vs. named rivals',
+      // Needs Brand Intelligence module capture (gap in brief Part 2) — placeholder for now.
+      { desc: 'Brand Intelligence report — perception + AI Reality Score' },
+      // #2 competitive-ai-performance.png — needs de-brand + mask rivals before embedding.
+      { desc: 'Competitive AI Performance — vs. named rivals' },
     ],
     whyHeading: 'Why brands choose Zicy',
     why: [
@@ -79,8 +92,10 @@ export const ICPS: Icp[] = [
       { name: 'AI Visibility', desc: 'Mention coverage and share of voice, so you can show movement after a campaign lands.' },
     ],
     screenshots: [
-      'Citation Analysis — owned / earned / hijacked split',
-      'Competitor Sentiment Profiles',
+      // #7 citation-analysis-overview.png — needs de-brand before embedding.
+      { desc: 'Citation Analysis — owned / earned / hijacked split' },
+      // #3 competitor-sentiment-profiles.png — needs de-brand + mask rivals.
+      { desc: 'Competitor Sentiment Profiles' },
     ],
     whyHeading: 'Why PR teams choose Zicy',
     why: [
@@ -110,8 +125,10 @@ export const ICPS: Icp[] = [
       { name: 'White-label reporting', desc: 'Your brand on the dashboard and the deliverables.' },
     ],
     screenshots: [
-      'AI Visibility dashboard',
-      'Visibility Gaps + Action Center',
+      // #1 ai-visibility-dashboard.png — needs de-brand before embedding.
+      { desc: 'AI Visibility dashboard' },
+      // #16 visibility-gaps.png — needs crop URLs + de-brand.
+      { desc: 'Visibility Gaps + Action Center' },
     ],
     whyHeading: 'Why agencies choose Zicy',
     why: [
@@ -141,8 +158,15 @@ export const ICPS: Icp[] = [
       { name: 'Site Audit', desc: 'Whether your site is technically readable by AI crawlers: llms.txt, bot access, schema.' },
     ],
     screenshots: [
-      'Citation Analysis — domain / URL drill-down',
-      'Key Topics — Leaders / Battlegrounds / Blind Spots',
+      // #9 citation-analysis-urls.png — verified safe (third-party domains only, no Prudential).
+      {
+        desc: 'Citation Analysis — domain / URL drill-down',
+        src: 'citation-analysis-urls.png',
+        alt: 'Zicy Citation Analysis drilling into the domains and individual URLs AI cites, classified as owned, earned or competitor.',
+        caption: 'Citation Analysis — drill down to the exact URLs AI is citing.',
+      },
+      // #6 key-topics-leaders.png — needs de-brand + mask rivals.
+      { desc: 'Key Topics — Leaders / Battlegrounds / Blind Spots' },
     ],
     whyHeading: 'Why publishers choose Zicy',
     why: [

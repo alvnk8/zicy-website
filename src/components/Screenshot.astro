@@ -1,0 +1,51 @@
+---
+// Reusable wrapper around astro:assets Image: optimised WebP/AVIF + responsive srcset,
+// rounded frame, soft shadow, optional browser-chrome bar, and a <figcaption>.
+// Per the brief (Part 4): images supplement the text — selling copy stays in real HTML.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  /** Filename inside src/assets/screenshots/ (e.g. 'citation-analysis-urls.png') */
+  src: string;
+  /** Alt text — read by AI crawlers, not optional. */
+  alt: string;
+  /** Optional figcaption text below the image. */
+  caption?: string;
+  /** 'eager' for above-the-fold hero shots, 'lazy' for everything else. */
+  priority?: 'eager' | 'lazy';
+  /** Render a faux browser-chrome bar above the image. */
+  chrome?: boolean;
+}
+
+const { src, alt, caption, priority = 'lazy', chrome = true } = Astro.props;
+
+// Glob-import every screenshot at build time so we can resolve by filename.
+const all = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/screenshots/*.png',
+  { eager: true }
+);
+const entry = all[`../assets/screenshots/${src}`];
+if (!entry) {
+  throw new Error(
+    `Screenshot not found: ${src}. Available: ${Object.keys(all).map((k) => k.split('/').pop()).join(', ')}`
+  );
+}
+const img = entry.default;
+---
+<figure class="screenshot">
+  {chrome && (
+    <div class="chrome" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+  )}
+  <Image
+    src={img}
+    alt={alt}
+    loading={priority === 'eager' ? 'eager' : 'lazy'}
+    {...(priority === 'eager' ? { fetchpriority: 'high' } : {})}
+    widths={[640, 960, 1280, 1600]}
+    sizes="(max-width: 860px) 100vw, 1080px"
+  />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
