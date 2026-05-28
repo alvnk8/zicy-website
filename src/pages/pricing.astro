@@ -1,53 +1,192 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
 import { SITE } from '../data/site';
 
-const title = 'Zicy pricing — start free, scale when it’s working';
+const title = "Zicy pricing — flexible plans for AI search, AEO & GEO growth";
 const description =
-  'Self-serve AI visibility intelligence from $25/mo, or done-for-you when you want the outcome handed to you.';
+  "Let's make your brand the one AI cites. Starter $129/mo, Growth $349/mo, Enterprise custom — plus flexible add-ons. 7-day free trial. 1 month free on the annual plan.";
+
+const REGISTER_URL = 'https://app.zicy.com/register';
+const ENTERPRISE_URL = 'https://www.zicy.com/enterprise-inquiry';
 
 const tiers = [
   {
     badge: 'Starter',
-    price: '$25',
+    price: '$129',
     per: '/mo',
     feat: false,
-    blurb: 'Track one brand across the major engines.',
-    features: ['Core AI visibility metrics', 'Brand intelligence report', 'Weekly tracking'],
-    cta: { label: 'Start free', href: '/audit', primary: false },
+    blurb: 'For solopreneurs and small teams getting cited in AI answers.',
+    features: [
+      '50 tracked prompts',
+      '7 action credits (content) / month',
+      '1k site audit pages',
+      '300 AI consultant chats / month',
+      'Tracks the Big-5 AI answer engines',
+      'Weekly tracking frequency',
+      'Unlimited projects / brands',
+      'Opportunities hub',
+      'Action Center',
+      'GSC / GA4 integration',
+    ],
+    cta: { label: 'Start your 7-day free trial', href: REGISTER_URL, primary: false, external: true },
   },
   {
-    badge: 'Growth · popular',
-    price: '$70',
+    badge: 'Growth · most popular',
+    price: '$349',
     per: '/mo',
     feat: true,
-    blurb: 'Competitive intelligence + remediation tooling.',
-    features: ['Everything in Starter', 'Competitor & citation analysis', 'Action Center tooling'],
-    cta: { label: 'Start free', href: '/audit', primary: true },
+    blurb: 'For in-house marketing teams and agencies scaling AI visibility.',
+    features: [
+      '150 tracked prompts',
+      '25 action credits (content) / month',
+      '3k site audit pages',
+      '1k AI consultant chats / month',
+      'Tracks the Big-5 AI answer engines',
+      'Weekly tracking frequency',
+      'Unlimited projects / brands',
+      'Opportunities hub',
+      'Action Center',
+      'GSC / GA4 integration',
+    ],
+    cta: { label: 'Start your 7-day free trial', href: REGISTER_URL, primary: true, external: true },
   },
   {
-    badge: 'Scale',
-    price: 'Custom',
+    badge: 'Enterprise',
+    price: "Let's talk",
     per: '',
     feat: false,
-    blurb: 'Multi-brand, multi-market, white-label for agencies.',
-    features: ['Everything in Growth', 'Multi-brand & white-label', 'API & priority support'],
-    cta: { label: 'Talk to us', href: '/done-for-you', primary: false },
+    blurb: 'For multi-brand, multi-market programmes with daily tracking and any LLM.',
+    features: [
+      'Custom (300+) tracked prompts',
+      'Custom (100+) action credits / month',
+      'Custom site audit pages — unlimited available',
+      'Custom AI consultant chats / month',
+      'Tracks any / all available LLMs',
+      'Daily tracking frequency',
+      'Unlimited projects / brands',
+      'Opportunities hub',
+      'Action Center',
+      'GSC / GA4 integration',
+    ],
+    cta: { label: 'Contact us', href: ENTERPRISE_URL, primary: false, external: true },
   },
 ];
 
-const faqs = [
+const addOns = [
+  { name: 'Additional Tracked Prompts', detail: '+10 prompts', price: '$25 / month' },
+  { name: 'Extra LLM add-on', detail: 'Add Grok, DeepSeek and more', price: '$0.50 / prompt / LLM ($25 Starter, $75 Growth)' },
+  { name: 'Content Pack', detail: '+5 action credits — do not expire', price: '$50 / pack' },
+  { name: 'Audit Boost', detail: '+2,000 crawl pages — do not expire', price: '$10 / pack' },
+  { name: 'AI Chat Booster', detail: '+200 AI consultant messages — do not expire', price: '$50 / pack' },
+];
+
+// FAQ body uses an array of blocks: string = paragraph, string[] = bullet list, {bold:''} = bold lead-in.
+type Block = string | string[] | { bold: string };
+interface Faq { q: string; body: Block[] }
+
+const faqs: Faq[] = [
   {
-    q: 'Do you cover all AI engines?',
-    a: 'Yes — ChatGPT, Gemini, Perplexity, Google AI Overviews and more, across languages and markets.',
+    q: 'Why does the Starter Plan cost $129?',
+    body: [
+      "Zicy is not a tracking or reporting tool. It's an optimisation and execution platform. Most tools stop at telling you what's wrong — rank drops, missing citations, blocked bots, broken schema. Zicy goes further by giving you 7 Action Credits every month to actually fix those issues.",
+      { bold: 'Each Action Credit lets Zicy:' },
+      [
+        'Optimise or rewrite content for AEO/GEO and AI Overviews',
+        'Repair or generate schema and structured data',
+        'Resolve technical blockers that stop ChatGPT, Google AI and answer engines from accessing your site',
+        'Turn underperforming pages into citation-ready assets',
+      ],
+      { bold: 'Think of it this way — you’re not just paying for software. You’re getting:' },
+      [
+        'A diagnostic system that knows what to fix',
+        'An execution engine that knows how to fix it',
+        'And the equivalent of an SEO/AEO specialist working on your site every month — without hiring, onboarding or managing anyone',
+      ],
+      "If you had to do this manually, you'd need multiple tools for analysis, a freelancer or in-house hire for implementation, and weeks of back-and-forth to ship anything. Zicy compresses all of that into one platform — detect, decide, deploy fixes. It's not a cost for data. It's an investment in measurable execution and ranking impact.",
+    ],
   },
-  { q: 'Can I cancel anytime?', a: 'Yes. Self-serve plans are month-to-month.' },
   {
-    q: 'What’s the difference between Zicy and done-for-you?',
-    a: 'Zicy is the platform you run yourself. Done-for-you is Growth.pro running the whole programme for you, using Zicy as its engine.',
+    q: 'Why is Zicy tracking "Weekly" instead of "Daily"?',
+    body: [
+      "Daily tracking makes sense for the stock market — but it's noise for AI search.",
+      "Answer engines and LLMs don't update their knowledge in real time the way news indexes do. Their retrieval layers, embeddings and citation behaviour evolve gradually, not day by day. Tracking daily fluctuations creates false signals, unnecessary alerts and reactive decision-making.",
+      { bold: 'Zicy tracks weekly by design to surface what actually matters:' },
+      [
+        'Meaningful shifts in citations and visibility',
+        'Sustained changes in AI answer behaviour',
+        'Trends that are worth acting on — not temporary blips',
+      ],
+      "This approach filters out volatility and focuses on signal over noise. More importantly, it lets us allocate processing power where it creates real value — not on vanity graphs, but on optimisation and execution. Daily tracking = activity. Weekly tracking = insight + action. Zicy is built for long-term citation wins, not short-term distraction.",
+    ],
+  },
+  {
+    q: 'Do my credits roll over to the next month?',
+    body: [
+      [
+        'Monthly plan credits — No. Your base allowance (e.g. 7 for Starter, 25 for Growth) resets every month. We encourage you to use them to keep your site fresh.',
+        'Add-on credits — Yes. If you purchase a Content Pack or Audit Boost add-on, those credits do not expire and stay in your wallet until you use them.',
+      ],
+    ],
+  },
+  {
+    q: 'Can I manage multiple websites or clients on one plan?',
+    body: [
+      'Yes. All Zicy plans come with unlimited projects/brands. You can split your tracked prompts and action credits across as many websites as you like — perfect for portfolio owners and agencies.',
+    ],
+  },
+  {
+    q: 'What counts as a "Tracked Prompt"?',
+    body: [
+      'A "prompt" is a key customer question you want Zicy to monitor for you (e.g. "Best CRM for small business").',
+      'When you track 1 prompt, Zicy actually runs that query across 5 different AI engines (ChatGPT, Perplexity, Gemini, Google AI Mode and AI Overview). You get 5 AI responses for every single prompt you track.',
+    ],
+  },
+  {
+    q: 'Which AI engines do you track?',
+    body: [
+      'By default, the Starter and Growth plans track the "Big 5" most important engines for traffic:',
+      ['ChatGPT', 'Perplexity', 'Google AI Overview', 'Google AI Mode', 'Gemini'],
+    ],
+  },
+  {
+    q: 'How does the "Extra LLM" pricing work?',
+    body: [
+      'If you want to track additional engines (like DeepSeek, Grok, etc.), the price is dynamic based on your tracked prompts. We charge $0.50 per tracked prompt for each extra engine.',
+      [
+        'Starter (50 prompts) + Grok = $25 / month (50 × $0.50)',
+        'Growth (150 prompts) + DeepSeek = $75 / month (150 × $0.50)',
+        'Starter (50 prompts) + 10 extra prompts + 1 extra LLM = $30 / month ((50 + 10) × $0.50)',
+      ],
+    ],
+  },
+  {
+    q: 'What happens if I run out of credits or prompts mid-month?',
+    body: [
+      "You never have to upgrade your full plan if you don't want to. You can simply buy a flexible add-on.",
+      [
+        'Need to scan a huge new client site? Buy an Audit Boost ($10).',
+        'Need to write a batch of blog posts? Buy a Content Pack ($50).',
+        'Need to track 10 more keywords? Buy additional prompts ($25).',
+      ],
+    ],
+  },
+  {
+    q: 'Is there a discount for paying annually?',
+    body: [
+      'Yes — we reward long-term strategy. On the annual plan you effectively get 1 month free (you pay for 12 months and get 13). This lowers your effective monthly cost and ensures your optimisation strategy runs uninterrupted all year.',
+    ],
+  },
+  {
+    q: 'Can I change my plan later?',
+    body: [
+      'Absolutely. You can upgrade or downgrade your plan at any time from your dashboard.',
+      'Pro tip: you might not even need to change your plan. If you just have a busy month and need a few extra credits or keywords, you can purchase flexible add-ons (like a Content Pack or extra prompts) without forcing a full subscription upgrade. We designed Zicy to grow with you, however you need it.',
+    ],
   },
 ];
 
+// Schema.org SoftwareApplication with the real prices.
 const softwareApp = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -57,18 +196,28 @@ const softwareApp = {
   description: 'AI visibility intelligence platform — measure, diagnose, act, prove.',
   url: `${SITE.url}/pricing`,
   offers: [
-    { '@type': 'Offer', name: 'Starter', price: '25', priceCurrency: 'USD' },
-    { '@type': 'Offer', name: 'Growth', price: '70', priceCurrency: 'USD' },
+    { '@type': 'Offer', name: 'Starter', price: '129', priceCurrency: 'USD' },
+    { '@type': 'Offer', name: 'Growth', price: '349', priceCurrency: 'USD' },
   ],
 };
 
+// FAQ schema — flatten the structured body back to plain text for crawlers.
+function flatten(blocks: Block[]): string {
+  return blocks
+    .map((b) => {
+      if (typeof b === 'string') return b;
+      if (Array.isArray(b)) return b.map((i) => '• ' + i).join(' ');
+      return b.bold;
+    })
+    .join(' ');
+}
 const faqPage = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: faqs.map((f) => ({
     '@type': 'Question',
     name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
+    acceptedAnswer: { '@type': 'Answer', text: flatten(f.body) },
   })),
 };
 ---
@@ -78,47 +227,98 @@ const faqPage = {
     <script type="application/ld+json" set:html={JSON.stringify(faqPage)} />
   </Fragment>
 
+  <!-- Hero -->
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Pricing</span>
-      <h1>Start free. Scale when it’s working.</h1>
-      <p class="lead">Self-serve intelligence, or done-for-you when you want the outcome handed to you.</p>
+      <h1>Let's make your brand the one AI cites.</h1>
+      <p class="lead">Flexible plans that grow your authority across answer engines.</p>
+      <p class="note" style="display:inline-block;margin-top:24px">
+        <b>Annual plan:</b> 1 month free — 13 months for the price of 12.
+      </p>
     </div>
   </section>
 
+  <!-- Plans -->
   <section>
     <div class="wrap">
-      <div class="shead"><span class="eyebrow">Plans</span><h2>Self-serve, or done-for-you.</h2></div>
+      <div class="shead"><span class="eyebrow">Plans</span><h2>Three plans. One platform.</h2></div>
       <div class="tiers">
         {tiers.map((t) => (
           <div class:list={['tier', { feat: t.feat }]}>
             <div class="badge">{t.badge}</div>
-            <div class="price">{t.price}{t.per && <span style="font-size:15px;color:var(--muted)">{t.per}</span>}</div>
-            <p class="muted" style="font-size:14px">{t.blurb}</p>
+            <div class="price">
+              {t.price}
+              {t.per && <span style="font-size:15px;color:var(--muted);font-family:var(--body)">{t.per}</span>}
+            </div>
+            <p class="muted" style="font-size:14px;margin-bottom:6px">{t.blurb}</p>
             <ul>{t.features.map((f) => <li>{f}</li>)}</ul>
-            <a class:list={['btn', t.cta.primary ? 'btn-primary' : 'btn-ghost']} style="width:100%;justify-content:center" href={t.cta.href}>{t.cta.label}</a>
+            <a
+              class:list={['btn', t.cta.primary ? 'btn-primary' : 'btn-ghost']}
+              style="width:100%;justify-content:center"
+              href={t.cta.href}
+              rel={t.cta.external ? 'noopener' : undefined}
+              target={t.cta.external ? '_blank' : undefined}
+            >{t.cta.label}</a>
           </div>
         ))}
       </div>
+      <p class="muted" style="font-size:13px;margin-top:18px;text-align:center">
+        Starter and Growth include a 7-day free trial — no credit card needed.
+      </p>
+    </div>
+  </section>
 
-      <div class="card" style="margin-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
-        <div>
-          <h3 style="margin-bottom:6px">Prefer it managed?</h3>
-          <p>Growth.pro operates the entire programme for you.</p>
-        </div>
-        <a class="btn btn-primary" href="/done-for-you">Explore done-for-you →</a>
+  <!-- Add-ons -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">Add-ons</span>
+        <h2>Unlock deeper insights with flexible add-ons.</h2>
+        <p>Buy what you need, when you need it. Pack credits don't expire.</p>
+      </div>
+      <div class="grid-2">
+        {addOns.map((a) => (
+          <div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap">
+            <div style="flex:1 1 220px">
+              <h3 style="font-size:18px;margin-bottom:4px">{a.name}</h3>
+              <p class="muted" style="font-size:14px">{a.detail}</p>
+            </div>
+            <div class="mono" style="font-size:15px;color:var(--indigo);font-weight:600">{a.price}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <section style="background:var(--lavender)">
+  <!-- FAQ -->
+  <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">FAQ</span><h2>Pricing questions.</h2></div>
       <div style="max-width:760px">
         {faqs.map((f) => (
-          <div class="faq-item"><h3>{f.q}</h3><p>{f.a}</p></div>
+          <div class="faq-item">
+            <h3>{f.q}</h3>
+            {f.body.map((block) => {
+              if (typeof block === 'string') return <p>{block}</p>;
+              if (Array.isArray(block)) return (
+                <ul style="margin:6px 0 12px 22px;padding:0">
+                  {block.map((item) => <li style="font-size:15px;color:#4a4960;padding:3px 0">{item}</li>)}
+                </ul>
+              );
+              return <p style="font-weight:600;color:var(--indigo);margin-top:4px">{block.bold}</p>;
+            })}
+          </div>
         ))}
       </div>
     </div>
   </section>
+
+  <CtaBand
+    eyebrow="Ready to start?"
+    heading="Be the brand AI cites."
+    sub="Start your 7-day free trial — or talk to us about an enterprise programme."
+    ctaLabel="Start your free trial"
+    ctaHref={REGISTER_URL}
+  />
 </BaseLayout>
