@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'About Zicy — the truth layer for AI visibility';
+const description =
+  'Zicy is the AI visibility platform built by Growth.pro. APAC-native, globally capable — covering every engine and language.';
+
+const beliefs = [
+  { h: 'Truth over noise', p: 'Knowing whether AI is right about you matters more than knowing you were mentioned.' },
+  { h: 'Earned, not gamed', p: 'Visibility that lasts comes from genuine expertise made easy for AI to find, not from working against the system.' },
+  { h: 'Proof, not vanity', p: 'The work has to connect to real demand, or it doesn’t count.' },
+];
+---
+<BaseLayout title={title} description={description}>
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">About</span>
+      <h1>We built the truth layer for AI visibility.</h1>
+      <p class="lead">
+        Zicy exists because brands are being described by AI every day — and most have no idea what
+        it’s saying. We measure it, help fix it, and prove the fix worked.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap grid-2">
+      <div>
+        <h2 style="font-size:30px;margin-bottom:14px">Zicy &amp; Growth.pro</h2>
+        <p class="lead" style="font-size:17px">
+          Zicy is the platform. Growth.pro is the consultancy that built it and uses it to run
+          done-for-you programmes for enterprise brands. The platform is open to everyone; the
+          managed service is selective. The frameworks behind that service — the AI Visibility
+          Operating System, the PAVA Framework and the AI Citation Enablement practice — are
+          Growth.pro’s.
+        </p>
+      </div>
+      <div>
+        <h2 style="font-size:30px;margin-bottom:14px">APAC-native, globally capable</h2>
+        <p class="lead" style="font-size:17px">
+          Built in Penang, covering every engine and every language. The multi-language,
+          multi-market coverage that US-built tools treat as an afterthought is our starting point.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">What we believe</span><h2>Three commitments.</h2></div>
+      <div class="grid-3">
+        {beliefs.map((b) => (
+          <div class="card"><h3>{b.h}</h3><p>{b.p}</p></div>
+        ))}
+      </div>
+      <div style="margin-top:34px"><a class="btn btn-primary btn-lg" href="/audit">Run a free audit</a></div>
+    </div>
+  </section>
+</BaseLayout>

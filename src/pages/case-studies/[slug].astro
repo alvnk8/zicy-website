@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import { CASES } from '../../data/cases';
+
+export function getStaticPaths() {
+  return CASES.map((c) => ({ params: { slug: c.slug }, props: { c } }));
+}
+
+const { c } = Astro.props;
+const url = `${SITE.url}/case-studies/${c.slug}`;
+
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: c.h1,
+  description: c.metaDescription,
+  author: { '@type': 'Organization', name: SITE.name, '@id': `${SITE.url}/#org` },
+  publisher: { '@id': `${SITE.url}/#org` },
+  mainEntityOfPage: url,
+  datePublished: '2026-05-27',
+  dateModified: '2026-05-27',
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Case studies', item: `${SITE.url}/case-studies` },
+    { '@type': 'ListItem', position: 3, name: c.h1, item: url },
+  ],
+};
+---
+<BaseLayout title={c.metaTitle} description={c.metaDescription}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(article)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  </Fragment>
+
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">{c.eyebrow}</span>
+      <h1>{c.h1}</h1>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <article class="prose">
+        <h2>The challenge</h2>
+        <p>{c.challenge}</p>
+        <h2>The approach</h2>
+        <p>{c.approach}</p>
+      </article>
+
+      <h2 style="font-size:24px;margin:40px 0 16px">The result</h2>
+      <div class="grid-3">
+        {c.results.map((r) => (
+          <div class="metric"><div class="n">{r.n}</div><div class="l">{r.l}</div></div>
+        ))}
+      </div>
+
+      <p class="pullquote">{c.pullQuote}</p>
+
+      <p class="disclosure">
+        Measurement: AI brand mention and citation rates across tracked category queries on ChatGPT, Gemini, and Perplexity, via Zicy’s measurement infrastructure. Client anonymised pending naming permission.
+      </p>
+
+      <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="/audit">Run a free audit</a>
+        <a class="btn btn-ghost" href="/case-studies">← All case studies</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

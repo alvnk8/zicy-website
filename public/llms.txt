@@ -1,0 +1,43 @@
+# Zicy
+
+> Zicy is the truth layer for AI visibility. It measures how every AI engine describes a brand, diagnoses what's wrong (including hallucinations and hijacked citations), helps fix it, and proves the work moved demand. All engines. All languages. All markets. Built by Growth.pro.
+
+Zicy follows a closed loop — measure, diagnose, act, prove — across ChatGPT, Gemini, Perplexity, Google AI Overviews and more. The platform is self-serve; Growth.pro also offers a done-for-you managed service built on its proprietary PAVA framework.
+
+## Core
+- [Home](https://www.zicy.com/): Be the brand AI gets right — the truth layer for AI visibility.
+- [Platform](https://www.zicy.com/platform): The closed loop (measure, diagnose, act, prove) and the full module set — AI Visibility, Brand Intelligence, Citation Analysis, Site Traffic and more.
+- [Pricing](https://www.zicy.com/pricing): Self-serve plans from $25/mo, plus done-for-you.
+- [About](https://www.zicy.com/about): Built by Growth.pro; APAC-native, globally capable.
+
+## Solutions
+- [For brands](https://www.zicy.com/solutions/brands): See how AI describes your brand, whether it's true, and how to fix it.
+- [For PR agencies](https://www.zicy.com/solutions/pr): Measure reputation inside AI answers; prove earned media moved the answer.
+- [For marketing & creative agencies](https://www.zicy.com/solutions/agencies): White-label AI visibility — audited, fixed and proven.
+- [For publishers](https://www.zicy.com/solutions/publishers): See whether AI attributes your content or strips the credit.
+
+## Free tools
+- [Free tools hub](https://www.zicy.com/free-tools): Three free ways to see how AI reads your brand.
+- [Free AI visibility audit](https://www.zicy.com/audit): Complimentary baseline of how AI describes your brand across every engine, benchmarked against rivals.
+- [AEO/GEO Consultant](https://www.zicy.com/aeo-geo-consultant): A free AI consultant — audit a page or ask any AEO/GEO question. Powered by Growth.pro's proprietary framework.
+- [Chrome extension](https://www.zicy.com/chrome-extension): On-page AI-readiness audit (0–100 score), AI bot-access checker (40+ crawlers), and one-click schema generator. Available in 12 languages.
+
+## Case studies
+- [Case studies](https://www.zicy.com/case-studies): Measured AI visibility results across ChatGPT, Gemini and Perplexity (clients anonymised pending naming permission).
+- [B2B services — invisible to AI-cited in 90 days](https://www.zicy.com/case-studies/b2b-services): 56.67% mention rate, 2,971 AI-referred sessions.
+- [Professional services — authority from near-zero](https://www.zicy.com/case-studies/professional-services): 90.61% mention rate, 55.92% citation rate.
+- [Multi-category — content-led AI visibility](https://www.zicy.com/case-studies/multi-category-content): 290% more clicks, 18.11% share of voice.
+- [Healthcare / aesthetics — local category leadership](https://www.zicy.com/case-studies/healthcare-aesthetics): #1 AI mention position.
+- [Retail / home decor — cross-platform citation growth](https://www.zicy.com/case-studies/retail-home-decor): 66% mention rate, 47% citation rate.
+
+## Managed service
+- [Done-for-you (by Growth.pro)](https://www.zicy.com/done-for-you): Growth.pro operates the entire AI visibility programme for you, using Zicy as its delivery engine. Selective roster, no lock-in, category exclusivity.
+
+## Resources
+- [Guides & research](https://www.zicy.com/resources): Practical AEO/GEO guides, original research, and updates on how AI search is changing brand discovery.
+
+## Legal
+- [Terms of Service](https://www.zicy.com/legal/terms)
+- [Privacy Policy](https://www.zicy.com/legal/privacy)
+- [Data Processing Addendum](https://www.zicy.com/legal/dpa)
+- [Cookie Policy](https://www.zicy.com/legal/cookies)

@@ -1,0 +1,204 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PROOF_ENGINES, PROOF_TAG, SOLUTIONS } from '../data/site';
+
+const title = 'Zicy — Be the brand AI gets right.';
+const description =
+  "See how every AI engine describes your brand, whether it's true, and exactly how to fix it. Zicy is the truth layer for AI visibility — measure, diagnose, act, prove.";
+
+// Page-level structured data (build brief §5: SoftwareApplication on the product pages).
+const softwareApp = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Zicy',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description:
+    'AI visibility intelligence platform — measure, diagnose, act, and prove across every AI engine.',
+  offers: { '@type': 'Offer', price: '25', priceCurrency: 'USD' },
+};
+
+// The four homepage "who it's for" cards, mapped to the ICP routes.
+const audiences = [
+  {
+    eyebrow: 'For brands',
+    h: 'AI is your brand’s new first impression.',
+    p: 'Is it the brand you built? See how AI describes you, catch what’s wrong, and fix it.',
+    link: 'For brands →',
+  },
+  {
+    eyebrow: 'For PR agencies',
+    h: 'Reputation is decided inside AI answers.',
+    p: 'Measure it, move it, and prove the coverage you earned changed the answer.',
+    link: 'For PR →',
+  },
+  {
+    eyebrow: 'For marketing & creative agencies',
+    h: 'AI visibility — audited, fixed, proven.',
+    p: 'White-label intelligence and remediation you can run as a service line.',
+    link: 'For agencies →',
+  },
+  {
+    eyebrow: 'For publishers',
+    h: 'If AI doesn’t recognise your content, neither will your audience.',
+    p: 'See whether AI attributes your work — or strips the credit.',
+    link: 'For publishers →',
+  },
+];
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(softwareApp)} />
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">AI visibility intelligence</span>
+      <h1>Be the brand AI gets right.</h1>
+      <p class="lead">
+        Zicy shows how every AI engine describes your brand, whether it’s true, and exactly how to
+        fix it — across every language and every market. Competitors measure mentions. Zicy
+        measures, fixes, and proves.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="/audit">Run a free AI visibility audit</a>
+        <a class="btn btn-ghost btn-lg" href="/platform">See the platform</a>
+      </div>
+      <p class="provenance">Built by <b>Growth.pro</b> — the consultancy behind the PAVA framework for AI visibility.</p>
+      <div class="proofbar">
+        <span class="engines">{PROOF_ENGINES}</span>
+        <span class="tag">{PROOF_TAG}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metric strip -->
+  <section>
+    <div class="wrap">
+      <div class="metrics">
+        <div class="metric"><div class="n">90.07<span style="font-size:18px">%</span></div><div class="l">Brand mention coverage</div></div>
+        <div class="metric"><div class="n g">22.81<span style="font-size:18px">%</span></div><div class="l">AI share of voice</div></div>
+        <div class="metric"><div class="n">#2.67</div><div class="l">Average AI ranking</div></div>
+        <div class="metric"><div class="n r">22.1<span style="font-size:18px">%</span></div><div class="l">Narrative hijack rate</div></div>
+      </div>
+      <p class="muted" style="font-size:13px;margin-top:14px">
+        Sample metrics from the Zicy dashboard — the four primary KPIs plus risk signals, every number set in mono.
+      </p>
+    </div>
+  </section>
+
+  <!-- The divergence -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">The divergence</span>
+        <h2>Google rankings no longer predict AI visibility.</h2>
+        <p>Two systems run in parallel. Most brands actively manage only one.</p>
+      </div>
+      <div class="diverge">
+        <div class="old">
+          <h3>Traditional SEO</h3>
+          <ul>
+            <li>Backlinks, keywords, SERP rank</li>
+            <li>Optimised for one ranking algorithm</li>
+            <li>Surfaces blue links — not answers</li>
+            <li>Brands compete for clicks</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="color:var(--indigo)">AI search</h3>
+          <ul>
+            <li>Entity, authority, citation</li>
+            <li>Trained on independent editorial standing</li>
+            <li>Synthesises an answer — names brands</li>
+            <li>Brands compete to be cited</li>
+          </ul>
+        </div>
+      </div>
+      <p class="muted" style="font-size:13px;margin-top:16px">
+        65% of AI Overview citations come from pages outside Google’s top 10 results. — Ahrefs, 75,000+ queries, 2025
+      </p>
+    </div>
+  </section>
+
+  <!-- The closed loop -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">The closed loop</span>
+        <h2>Measure. Diagnose. Act. Prove.</h2>
+        <p>Most tools stop at measurement. Zicy closes the loop — and proves the work moved real demand.</p>
+      </div>
+      <div class="loop">
+        <div class="step"><div class="k">01</div><h3>Measure</h3><p>Mention coverage, citation rate, share of voice, ranking — across every engine.</p></div>
+        <div class="step"><div class="k">02</div><h3>Diagnose</h3><p>Hallucinations, gaps, hijacked citations, sentiment drift — with the cause.</p></div>
+        <div class="step"><div class="k">03</div><h3>Act</h3><p>Schema, llms.txt, content fixes and new content — built to current best practice.</p></div>
+        <div class="step"><div class="k">04</div><h3>Prove</h3><p>AI-referred traffic and demand movement tied back to the work.</p></div>
+      </div>
+      <div style="text-align:center;margin-top:34px"><a class="btn btn-ghost" href="/platform">Explore the platform →</a></div>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">Who it’s for</span>
+        <h2>One platform, four reasons to buy.</h2>
+        <p>Each audience buys for a different outcome. Each gets its own solution page.</p>
+      </div>
+      <div class="grid-2">
+        {audiences.map((a, i) => (
+          <div class="card">
+            <span class="eyebrow">{a.eyebrow}</span>
+            <h3>{a.h}</h3>
+            <p>{a.p}</p>
+            <a class="link" href={SOLUTIONS[i].href}>{a.link}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Proof</span><h2>What it looks like when it works.</h2></div>
+      <div class="metrics">
+        <div class="metric"><div class="n">56.67<span style="font-size:18px">%</span></div><div class="l">AI mention rate · B2B services · 90 days</div></div>
+        <div class="metric"><div class="n">90.61<span style="font-size:18px">%</span></div><div class="l">Mention rate · professional services</div></div>
+        <div class="metric"><div class="n">290<span style="font-size:18px">%</span></div><div class="l">More AI-search clicks · multi-category</div></div>
+        <div class="metric"><div class="n">66<span style="font-size:18px">%</span></div><div class="l">Mention rate · retail / home decor</div></div>
+      </div>
+      <p class="disclosure">
+        Measurement: AI brand mention and citation rates across tracked category queries on ChatGPT, Gemini, and Perplexity, via Zicy’s measurement infrastructure. Clients anonymised pending naming permission.
+      </p>
+      <div style="text-align:center;margin-top:28px"><a class="btn btn-ghost" href="/case-studies">See the case studies →</a></div>
+    </div>
+  </section>
+
+  <!-- Free tools -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">Free tools</span>
+        <h2>Try Zicy before you commit.</h2>
+        <p>Three free ways to see how AI reads your brand.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card"><span class="eyebrow">Audit</span><h3>Free AI visibility audit</h3><p>A complimentary baseline across every engine, benchmarked against your rivals.</p><a class="link" href="/audit">Run the audit →</a></div>
+        <div class="card"><span class="eyebrow">AI consultant</span><h3>AEO/GEO Consultant</h3><p>Ask anything about AEO/GEO, or audit a page on the spot.</p><a class="link" href="/aeo-geo-consultant">Open the consultant →</a></div>
+        <div class="card"><span class="eyebrow">Chrome extension</span><h3>Audit in your browser</h3><p>Instant AI-readiness score, bot-access check, schema generator.</p><a class="link" href="/chrome-extension">See the extension →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Done-for-you band -->
+  <section class="band">
+    <div class="wrap" style="text-align:center">
+      <span class="eyebrow">Done-for-you</span>
+      <h2 style="margin:14px auto 16px;max-width:640px">Want the outcome, not the dashboard?</h2>
+      <p class="lead" style="margin:0 auto 28px">Growth.pro operates the whole programme for you — found, fixed, and proven. Selective roster, no lock-in.</p>
+      <a class="btn btn-primary btn-lg" href="/done-for-you">Explore done-for-you</a>
+    </div>
+  </section>
+</BaseLayout>

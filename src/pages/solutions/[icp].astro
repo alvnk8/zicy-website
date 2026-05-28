@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { ICPS } from '../../data/icps';
+
+export function getStaticPaths() {
+  return ICPS.map((icp) => ({ params: { icp: icp.slug }, props: { icp } }));
+}
+
+const { icp } = Astro.props;
+---
+<BaseLayout title={icp.metaTitle} description={icp.metaDescription}>
+  <!-- Hero -->
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">{icp.eyebrow}</span>
+      <h1>{icp.h1}</h1>
+      <p class="lead">{icp.heroSub}</p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href={icp.heroCta.href}>{icp.heroCta.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- The risk / opportunity + hero modules + screenshots -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">{icp.sectionEyebrow}</span>
+        <h2>{icp.sectionH2}</h2>
+        <p>{icp.sectionSub}</p>
+      </div>
+      <div class="grid-3">
+        {icp.modules.map((m) => (
+          <div class="card">
+            <span class="eyebrow">Module</span>
+            <h3>{m.name}</h3>
+            <p>{m.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="grid-2" style="margin-top:24px">
+        {icp.screenshots.map((s) => (
+          <div class="shot"><span>[ SCREENSHOT ]<br />{s}</span></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why this ICP chooses Zicy -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><h2>{icp.whyHeading}.</h2></div>
+      <div class="grid-3">
+        {icp.why.map((w) => (
+          <div class="card">
+            <h3>{w.lead}</h3>
+            <p>{w.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading={icp.band.heading} ctaLabel={icp.band.ctaLabel} ctaHref={icp.band.ctaHref} />
+</BaseLayout>

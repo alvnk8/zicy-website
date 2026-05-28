@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Zicy Chrome extension — AEO/GEO audit & AI consultant in your browser';
+const description =
+  'Analyse any webpage’s readiness to be cited by AI answer engines like ChatGPT, Perplexity and Gemini. Free Chrome extension — AI readiness score, bot-access checker, schema generator.';
+
+// Build note: deep-link to the actual Chrome Web Store listing (placeholder for now).
+const STORE_URL = 'https://chromewebstore.google.com/';
+
+const features = [
+  { h: 'AI readiness audit', p: 'An instant 0–100 score across seven metrics: answer density, query-fanout coverage, semantic freshness, heading hierarchy, citation quality, author expertise, schema presence.' },
+  { h: 'AI access checker', p: 'Detects 40+ AI crawlers (ChatGPT, Claude, Gemini, Perplexity and more) and flags whether they can reach your page — with fixes.' },
+  { h: 'Schema checker & generator', p: 'Finds existing JSON-LD, Microdata and RDFa, suggests the right schema, and generates copy-ready markup in one click.' },
+  { h: 'Built-in AI assistant', p: 'Personalised, actionable recommendations based on your scores. Available in 12 languages.' },
+];
+
+const softwareApp = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Zicy Chrome extension',
+  applicationCategory: 'BrowserApplication',
+  operatingSystem: 'Chrome',
+  description:
+    'Analyse any webpage’s readiness to be cited by AI answer engines — AI readiness score, bot-access checker, schema generator.',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.5', ratingCount: '427' },
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(softwareApp)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Free tool · Chrome extension</span>
+      <h1>Audit any page for AI — right in your browser.</h1>
+      <p class="lead">
+        Analyse any webpage’s readiness to be cited by AI answer engines like ChatGPT, Perplexity and
+        Gemini. Install once, click the Zicy icon on any page, get an instant read.
+      </p>
+      <div class="cta-row"><a class="btn btn-primary btn-lg" href={STORE_URL} rel="noopener">Add to Chrome — free</a></div>
+      <div class="proofbar">
+        <span class="engines">4.5★ · ~427 users · 12 languages</span>
+        <span class="tag">Updated regularly</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">What it does</span><h2>Four checks, instantly.</h2></div>
+      <div class="grid-2">
+        {features.map((f) => (
+          <div class="card"><h3>{f.h}</h3><p>{f.p}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--lavender)">
+    <div class="wrap grid-2" style="gap:48px">
+      <div>
+        <h2 style="font-size:24px;margin-bottom:12px">Who it’s for</h2>
+        <p class="lead" style="font-size:16px">
+          Content creators making articles more citable · SEO and AEO professionals running on-page
+          audits · marketers validating structured data · website owners checking schema · publishers
+          optimising for AI visibility.
+        </p>
+      </div>
+      <div>
+        <h2 style="font-size:24px;margin-bottom:12px">Privacy</h2>
+        <p class="lead" style="font-size:16px">
+          Analyses a page only when you ask it to. No browsing-history tracking, no third-party data
+          sharing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="text-align:center">
+      <a class="btn btn-primary btn-lg" href={STORE_URL} rel="noopener">Add to Chrome — free</a>
+    </div>
+  </section>
+</BaseLayout>

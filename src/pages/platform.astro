@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+
+const title = 'Zicy Platform — the truth layer for AI visibility';
+const description =
+  'Eleven modules across one closed loop — measure, diagnose, act, prove. See how AI describes your brand, fix what’s wrong, and prove the work moved demand.';
+
+const softwareApp = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Zicy',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description:
+    'AI visibility intelligence platform — eleven modules across one closed loop: measure, diagnose, act, prove.',
+  url: `${SITE.url}/platform`,
+  offers: { '@type': 'Offer', price: '25', priceCurrency: 'USD' },
+};
+
+const loop = [
+  { k: '01 · Measure', name: 'AI Visibility', desc: 'Coverage, citation rate, share of voice, average ranking — per engine, over time.' },
+  { k: '02 · Diagnose', name: 'Brand Intelligence', desc: 'Perception, fact-check / hallucination, entity graph, gap analysis.' },
+  { k: '03 · Act', name: 'Action Center', desc: 'llms.txt & schema generators, content optimisation, new content.' },
+  { k: '04 · Prove', name: 'Site Traffic', desc: 'AI-referred sessions and downstream engagement, tied to the work.' },
+];
+
+const screenshots = [
+  'AI Visibility dashboard — radar + 5-week trend',
+  'Brand Intelligence — AI Reality Score + entity graph',
+  'Citation Analysis — owned / earned / hijacked split',
+  'Action Center — schema & llms.txt generators',
+];
+
+const moduleGroups = [
+  {
+    stage: 'Measure',
+    modules: [
+      { name: 'AI Visibility', desc: 'The core scoreboard: coverage, citation rate, share of voice, average ranking, per-platform radar and trend.' },
+      { name: 'Competitive AI Performance', desc: 'Your standing against named competitors, side by side.' },
+    ],
+  },
+  {
+    stage: 'Diagnose',
+    modules: [
+      { name: 'Brand Intelligence', desc: 'Perception, fact-check / hallucination (AI Reality Score), entity graph, prioritised action plan.' },
+      { name: 'Brand Sentiment', desc: 'The language AI attaches to you, and the descriptors driving it.' },
+      { name: 'Competitor Sentiment Profiles', desc: 'How AI frames each rival, positive to negative.' },
+      { name: 'Key Topics Analysis', desc: 'Where you lead, where you’re in a fight, and where you’re invisible.' },
+      { name: 'Citation Analysis', desc: 'Narrative control vs. hijack: which sources AI cites about you, owned vs. earned vs. competitor.' },
+      { name: 'Site Audit', desc: 'Technical readiness: llms.txt, AI-bot access, schema, page health.' },
+      { name: 'Visibility Gaps', desc: 'The prioritised list of what to fix and what to publish.' },
+    ],
+  },
+  {
+    stage: 'Act',
+    modules: [
+      { name: 'Action Center', desc: 'llms.txt generator, schema generator, content optimisation, new-content writing.' },
+    ],
+  },
+  {
+    stage: 'Prove',
+    modules: [
+      { name: 'Site Traffic', desc: 'GA4 / Search Console / AI bot logs, answer-intent and brand queries, and the link between AI visibility and demand.' },
+    ],
+  },
+];
+
+const differentiators = [
+  { h: 'Truth, not just mentions', p: 'The AI Reality Score catches hallucinations and outdated facts before your buyers see them.' },
+  { h: 'Every engine, every language', p: 'APAC-native coverage most US-built tools can’t match.' },
+  { h: 'Act inside the tool', p: 'Remediation and content tooling built to current best practice, with no hand-off gap.' },
+];
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(softwareApp)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Platform</span>
+      <h1>The truth layer for AI visibility.</h1>
+      <p class="lead">
+        Eleven modules across one closed loop — measure, diagnose, act, prove. Built to current
+        AEO/GEO best practice and aligned to Google’s latest spam policies.
+      </p>
+    </div>
+  </section>
+
+  <!-- The loop, by module -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">The closed loop</span>
+        <h2>One loop: measure, diagnose, act, prove.</h2>
+        <p>The lead module at each stage — the full set is below.</p>
+      </div>
+      <div class="loop">
+        {loop.map((s) => (
+          <div class="step"><div class="k">{s.k}</div><h3>{s.name}</h3><p>{s.desc}</p></div>
+        ))}
+      </div>
+      <div class="grid-2" style="margin-top:36px">
+        {screenshots.map((s) => (
+          <div class="shot"><span>[ SCREENSHOT ]<br />{s}</span></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The full module set -->
+  <section id="modules" style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">The module set</span>
+        <h2>Eleven modules, grouped by loop stage.</h2>
+        <p>The whole platform, organised the way the work actually runs.</p>
+      </div>
+      <div class="grid-2">
+        {moduleGroups.map((g) => (
+          <div class="card">
+            <span class="eyebrow">{g.stage}</span>
+            <ul class="modlist" style="margin-top:12px">
+              {g.modules.map((m) => (
+                <li><b>{m.name}</b>{m.desc}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The differentiator -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">The differentiator</span>
+        <h2>Competitors measure. Zicy proves.</h2>
+        <p>The truth layer isn’t another metric — it’s the fact-check. Zicy flags where AI is wrong about you, not just whether you’re mentioned.</p>
+      </div>
+      <div class="grid-3">
+        {differentiators.map((d) => (
+          <div class="card"><h3>{d.h}</h3><p>{d.p}</p></div>
+        ))}
+      </div>
+      <div style="text-align:center;margin-top:34px"><a class="btn btn-primary btn-lg" href="/audit">Run a free audit</a></div>
+    </div>
+  </section>
+</BaseLayout>

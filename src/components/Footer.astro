@@ -1,0 +1,46 @@
+---
+import { SITE, SOLUTIONS, FREE_TOOLS } from '../data/site';
+---
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="logo" href="/" style="margin-bottom:12px" aria-label="Zicy home"><span>Zicy</span><span class="dot"></span></a>
+        <p class="muted" style="font-size:13.5px;max-width:280px">The truth layer for AI visibility. All engines. All languages. All markets.</p>
+      </div>
+
+      <nav aria-label="Platform">
+        <h2>Platform</h2>
+        <a href="/platform">How it works</a>
+        <a href="/platform#modules">Modules</a>
+        <a href="/pricing">Pricing</a>
+      </nav>
+
+      <nav aria-label="Solutions">
+        <h2>Solutions</h2>
+        {SOLUTIONS.map((s) => <a href={s.href}>{s.label.replace(/^For /, '')}</a>)}
+      </nav>
+
+      <nav aria-label="Free tools">
+        <h2>Free tools</h2>
+        {FREE_TOOLS.map((t) => <a href={t.href}>{t.label}</a>)}
+      </nav>
+
+      <nav aria-label="Company">
+        <h2>Company</h2>
+        <a href="/about">About</a>
+        <a href="/case-studies">Case studies</a>
+        <a href="/done-for-you">Done-for-you</a>
+      </nav>
+    </div>
+
+    <div class="fbottom">
+      <span class="mono">{SITE.legalName} · Penang, Malaysia</span>
+      <span class="flegal">
+        <a href="/legal/terms">Terms</a> · <a href="/legal/privacy">Privacy</a> ·
+        <a href="/legal/dpa">DPA</a> · <a href="/legal/cookies">Cookies</a>
+      </span>
+      <span>Content tooling aligned to Google's latest spam policies.</span>
+    </div>
+  </div>
+</footer>

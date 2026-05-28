@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Placeholder legal pages — final text to be supplied by Zicy's legal team
+// (copy deck §20). Built as real, indexable routes so the sitemap/llms references
+// resolve (no 404s). Data lives inside getStaticPaths (it's hoisted above the
+// frontmatter) and is passed to the component via props.
+export function getStaticPaths() {
+  const DOCS: Record<string, string> = {
+    terms: 'Terms of Service',
+    privacy: 'Privacy Policy',
+    dpa: 'Data Processing Addendum',
+    cookies: 'Cookie Policy',
+  };
+  return Object.entries(DOCS).map(([doc, h1]) => ({ params: { doc }, props: { h1 } }));
+}
+
+const { h1 } = Astro.props;
+const title = `${h1} — Zicy`;
+const description = `${h1} for Zicy, the truth layer for AI visibility, operated by Growth Pro Sdn. Bhd.`;
+---
+<BaseLayout title={title} description={description}>
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Legal</span>
+      <h1>{h1}</h1>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <article class="prose">
+        <p>This is placeholder copy. The final {h1} will be published here by Zicy’s legal team before launch.</p>
+        <p>For questions in the meantime, contact Growth Pro Sdn. Bhd., Penang, Malaysia.</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

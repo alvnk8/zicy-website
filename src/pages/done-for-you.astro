@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Done-for-you AI visibility — operated by Growth.pro';
+const description =
+  'When you want the outcome rather than the dashboard, Growth.pro operates your AI visibility programme end to end, using Zicy as its delivery engine. Selective roster, no lock-in.';
+
+// §A2 — this is one of the three pages where Growth.pro's IP appears, always
+// attributed to Growth.pro and never presented as Zicy's own framework.
+const ip = [
+  { eyebrow: 'The offer', name: 'AI Visibility Operating System', desc: 'Growth.pro builds and operates the full system for your brand.' },
+  { eyebrow: 'The methodology', name: 'PAVA Framework', desc: 'Presence · Authority · Visibility · Amplification — Growth.pro’s proprietary method.' },
+  { eyebrow: 'The practice', name: 'AI Citation Enablement', desc: 'Making your expertise easy for AI to find, verify, and attribute — on your merits.' },
+];
+
+const how = [
+  { h: 'A capped roster', p: 'A limited number of managed clients at any time. Scarcity is the standard.' },
+  { h: 'No lock-in', p: '30-day engagement, cancel anytime. The work earns the renewal.' },
+  { h: 'Category exclusivity', p: 'Never two competing clients in the same industry and market at once.' },
+];
+---
+<BaseLayout title={title} description={description}>
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Done-for-you · by Growth.pro</span>
+      <h1>Found, fixed and proven — without lifting a finger.</h1>
+      <p class="lead">
+        When you want the outcome rather than the dashboard, Growth.pro operates your AI visibility
+        programme end to end, using Zicy as its delivery engine.
+      </p>
+      <div class="cta-row"><a class="btn btn-primary btn-lg" href="/audit">Talk to us</a></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">The Growth.pro difference</span><h2>A methodology Zicy’s data feeds.</h2></div>
+      <div class="grid-3">
+        {ip.map((i) => (
+          <div class="card"><span class="eyebrow">{i.eyebrow}</span><h3>{i.name}</h3><p>{i.desc}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">How we work</span><h2>Selective by design.</h2></div>
+      <div class="grid-3">
+        {how.map((h) => (
+          <div class="card"><h3>{h.h}</h3><p>{h.p}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Endorsed, not exploited</span><h2 style="font-size:28px">Built on the principles Google endorsed.</h2></div>
+      <p class="lead" style="font-size:17px">
+        Growth.pro’s methodology is anchored to clarity, accuracy and demonstrable expertise — the
+        principles Google formally endorsed in its 2026 generative-search policy update. We work on
+        the brand side of the equation, and contractually exclude tactics now classified as spam.
+      </p>
+      <div style="margin-top:30px"><a class="btn btn-primary btn-lg" href="/audit">Talk to us</a></div>
+    </div>
+  </section>
+</BaseLayout>

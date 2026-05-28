@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+
+const title = 'Zicy pricing — start free, scale when it’s working';
+const description =
+  'Self-serve AI visibility intelligence from $25/mo, or done-for-you when you want the outcome handed to you.';
+
+const tiers = [
+  {
+    badge: 'Starter',
+    price: '$25',
+    per: '/mo',
+    feat: false,
+    blurb: 'Track one brand across the major engines.',
+    features: ['Core AI visibility metrics', 'Brand intelligence report', 'Weekly tracking'],
+    cta: { label: 'Start free', href: '/audit', primary: false },
+  },
+  {
+    badge: 'Growth · popular',
+    price: '$70',
+    per: '/mo',
+    feat: true,
+    blurb: 'Competitive intelligence + remediation tooling.',
+    features: ['Everything in Starter', 'Competitor & citation analysis', 'Action Center tooling'],
+    cta: { label: 'Start free', href: '/audit', primary: true },
+  },
+  {
+    badge: 'Scale',
+    price: 'Custom',
+    per: '',
+    feat: false,
+    blurb: 'Multi-brand, multi-market, white-label for agencies.',
+    features: ['Everything in Growth', 'Multi-brand & white-label', 'API & priority support'],
+    cta: { label: 'Talk to us', href: '/done-for-you', primary: false },
+  },
+];
+
+const faqs = [
+  {
+    q: 'Do you cover all AI engines?',
+    a: 'Yes — ChatGPT, Gemini, Perplexity, Google AI Overviews and more, across languages and markets.',
+  },
+  { q: 'Can I cancel anytime?', a: 'Yes. Self-serve plans are month-to-month.' },
+  {
+    q: 'What’s the difference between Zicy and done-for-you?',
+    a: 'Zicy is the platform you run yourself. Done-for-you is Growth.pro running the whole programme for you, using Zicy as its engine.',
+  },
+];
+
+const softwareApp = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Zicy',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'AI visibility intelligence platform — measure, diagnose, act, prove.',
+  url: `${SITE.url}/pricing`,
+  offers: [
+    { '@type': 'Offer', name: 'Starter', price: '25', priceCurrency: 'USD' },
+    { '@type': 'Offer', name: 'Growth', price: '70', priceCurrency: 'USD' },
+  ],
+};
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+<BaseLayout title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(softwareApp)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqPage)} />
+  </Fragment>
+
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Pricing</span>
+      <h1>Start free. Scale when it’s working.</h1>
+      <p class="lead">Self-serve intelligence, or done-for-you when you want the outcome handed to you.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Plans</span><h2>Self-serve, or done-for-you.</h2></div>
+      <div class="tiers">
+        {tiers.map((t) => (
+          <div class:list={['tier', { feat: t.feat }]}>
+            <div class="badge">{t.badge}</div>
+            <div class="price">{t.price}{t.per && <span style="font-size:15px;color:var(--muted)">{t.per}</span>}</div>
+            <p class="muted" style="font-size:14px">{t.blurb}</p>
+            <ul>{t.features.map((f) => <li>{f}</li>)}</ul>
+            <a class:list={['btn', t.cta.primary ? 'btn-primary' : 'btn-ghost']} style="width:100%;justify-content:center" href={t.cta.href}>{t.cta.label}</a>
+          </div>
+        ))}
+      </div>
+
+      <div class="card" style="margin-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+        <div>
+          <h3 style="margin-bottom:6px">Prefer it managed?</h3>
+          <p>Growth.pro operates the entire programme for you.</p>
+        </div>
+        <a class="btn btn-primary" href="/done-for-you">Explore done-for-you →</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Pricing questions.</h2></div>
+      <div style="max-width:760px">
+        {faqs.map((f) => (
+          <div class="faq-item"><h3>{f.q}</h3><p>{f.a}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

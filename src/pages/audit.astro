@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Free AI visibility audit — see how AI describes your brand';
+const description =
+  'A complimentary audit of how your brand appears across ChatGPT, Gemini, Perplexity and Google AI — with a competitive benchmark and the highest-priority gaps.';
+
+const getList = [
+  'Your current AI mention rate across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode',
+  'A side-by-side benchmark against your top three category rivals',
+  'The five highest-priority query clusters where your brand is currently absent',
+  'A prioritised list of what to fix first',
+  'A short summary you can take to your team',
+];
+
+const steps = [
+  { k: '01', p: 'Tell us your brand and category.' },
+  { k: '02', p: 'We run it across the engines and benchmark your rivals.' },
+  { k: '03', p: 'You get the results — and a clear picture of where you stand.' },
+];
+---
+<BaseLayout title={title} description={description}>
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Free audit</span>
+      <h1>See how AI describes your brand — free.</h1>
+      <p class="lead">A complimentary baseline across the engines your buyers actually use. No commitment.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap grid-2" style="align-items:start;gap:48px">
+      <div>
+        <div class="shead" style="margin-bottom:20px"><span class="eyebrow">What you get</span><h2 style="font-size:28px">A real baseline, in minutes.</h2></div>
+        <ul class="checklist">
+          {getList.map((g) => <li>{g}</li>)}
+        </ul>
+      </div>
+
+      <!-- Lead-capture form. Build note: action is a placeholder — wire to the
+           real audit flow (a flagged human task in the launch checklist). -->
+      <form class="formcard" method="post" action="#" aria-label="Request a free AI visibility audit">
+        <label class="fld" for="brand">Brand name</label>
+        <input class="input" id="brand" name="brand" type="text" placeholder="Your brand" required />
+        <label class="fld" for="category">Category</label>
+        <input class="input" id="category" name="category" type="text" placeholder="e.g. B2B SaaS, aesthetics, retail" required />
+        <label class="fld" for="email">Work email</label>
+        <input class="input" id="email" name="email" type="email" placeholder="you@company.com" required />
+        <button class="btn btn-primary btn-lg" type="submit" style="width:100%;justify-content:center">Run my free audit</button>
+      </form>
+    </div>
+  </section>
+
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">How it works</span><h2>Three steps.</h2></div>
+      <div class="loop">
+        {steps.map((s) => (
+          <div class="step"><div class="k">{s.k}</div><p style="margin-top:10px">{s.p}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

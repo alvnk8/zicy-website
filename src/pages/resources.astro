@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+
+const title = 'Zicy resources — AI visibility guides, research and updates';
+const description =
+  'Practical guides to AEO/GEO, original research, and updates on how AI search is changing brand discovery.';
+
+const blog = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': `${SITE.url}/resources`,
+  name: 'Zicy resources',
+  description,
+  url: `${SITE.url}/resources`,
+  publisher: { '@id': `${SITE.url}/#org` },
+};
+
+const pillars = [
+  { eyebrow: 'Guides', h: 'AEO/GEO fundamentals', p: 'llms.txt, schema for AI, citation strategy — the practical playbooks.' },
+  { eyebrow: 'Research', h: 'Original data', p: 'Zicy’s own data on how AI cites brands across engines and markets.' },
+  { eyebrow: 'Updates', h: 'What changed, and why it matters', p: 'Platform changes, policy shifts, and what they mean for your brand.' },
+];
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(blog)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Resources</span>
+      <h1>How AI search is changing brand discovery.</h1>
+      <p class="lead">Practical guides, original research, and plain-English explainers for marketing, PR and publishing teams.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Three pillars</span><h2>Guides, research and updates.</h2></div>
+      <div class="grid-3">
+        {pillars.map((p) => (
+          <div class="card"><span class="eyebrow">{p.eyebrow}</span><h3>{p.h}</h3><p>{p.p}</p></div>
+        ))}
+      </div>
+      <p class="muted" style="font-size:14px;margin-top:24px">New guides, research and updates are published here regularly.</p>
+    </div>
+  </section>
+</BaseLayout>

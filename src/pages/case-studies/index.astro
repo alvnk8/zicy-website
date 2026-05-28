@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CASES } from '../../data/cases';
+
+const title = 'Zicy case studies — from invisible to AI-cited';
+const description =
+  'Real AI visibility programmes, measured across ChatGPT, Gemini and Perplexity. Mention rates, citation rates and share of voice — anonymised pending naming permission.';
+---
+<BaseLayout title={title} description={description}>
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Case studies</span>
+      <h1>From invisible to AI-cited.</h1>
+      <p class="lead">Real programmes, measured across ChatGPT, Gemini and Perplexity.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      {CASES.map((c) => (
+        <a class="caserow" href={`/case-studies/${c.slug}`}>
+          <div>
+            <div class="meta">{c.indexMeta}</div>
+            <div style="font-weight:600;color:var(--indigo);margin-top:6px">{c.indexTitle}</div>
+          </div>
+          <div style="text-align:right">
+            <div class="big">{c.big}</div>
+            <div class="muted" style="font-size:13px">{c.indexSub}</div>
+          </div>
+        </a>
+      ))}
+      <p class="disclosure">
+        Measurement: AI brand mention and citation rates across tracked category queries on ChatGPT, Gemini, and Perplexity, via Zicy’s measurement infrastructure. Clients anonymised pending naming permission.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
