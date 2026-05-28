@@ -12,3 +12,5 @@ npm-debug.log*
 # os
 .DS_Store
 Thumbs.db
+# local planning / build docs (not part of the site)
+_planning/
