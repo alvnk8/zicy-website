@@ -5,7 +5,11 @@ import Screenshot from '../../components/Screenshot.astro';
 import { ICPS } from '../../data/icps';
 
 export function getStaticPaths() {
-  return ICPS.map((icp) => ({ params: { icp: icp.slug }, props: { icp } }));
+  // 'brands' has its own richer static page at src/pages/solutions/brands.astro —
+  // exclude it here so the build does not generate two routes for /solutions/brands.
+  return ICPS
+    .filter((icp) => icp.slug !== 'brands')
+    .map((icp) => ({ params: { icp: icp.slug }, props: { icp } }));
 }
 
 const { icp } = Astro.props;
@@ -41,11 +45,9 @@ const { icp } = Astro.props;
         ))}
       </div>
       <div class="grid-2" style="margin-top:24px">
-        {icp.screenshots.map((s) => (
-          s.src
-            ? <Screenshot src={s.src} alt={s.alt!} caption={s.caption} />
-            : <div class="shot"><span>[ SCREENSHOT ]<br />{s.desc}</span></div>
-        ))}
+        {icp.screenshots
+          .filter((s) => s.src)
+          .map((s) => <Screenshot src={s.src!} alt={s.alt!} caption={s.caption} />)}
       </div>
     </div>
   </section>
