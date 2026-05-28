@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Screenshot from '../../components/Screenshot.astro';
+// Anonymised screenshots cleared per the privacy gate (brief §1.1).
+// Brand Intelligence / AI Reality Score capture is a known gap; brand-sentiment is the brief's stated fallback.
+import brandSentimentShot from '../../assets/screenshots/anonymised/brand-sentiment.png';
+import competitiveShot from '../../assets/screenshots/anonymised/competitive-ai-performance.png';
+
+const title = "Zicy for brands — AI is your brand's new first impression";
+const description =
+  "Every day, buyers, partners and journalists ask AI about your category — and act on the answer before reaching your site. Zicy shows what AI says about your brand across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, whether it's accurate, and how to fix what's wrong.";
+
+// Sourced stats — every figure carries publisher + sample + year inline. Do not alter.
+const stakeStats = [
+  {
+    n: '65%',
+    label: 'of AI Overview citations come from pages outside Google’s top 10 results.',
+    source: 'Ahrefs, 75,000+ queries, 2025',
+  },
+  {
+    n: '62%',
+    label: 'of consumers trust AI tools to guide their brand decisions.',
+    source: 'Yext / Researchscape, n=2,237, 2025',
+  },
+];
+
+const usps = [
+  {
+    h: 'Truth, not just mentions.',
+    p: 'Most trackers tell you whether you were named. Zicy tells you whether what AI said was true — the AI Reality Score flags hallucinations, outdated claims and wrong facts before a buyer ever sees them.',
+  },
+  {
+    h: 'Every engine, every language.',
+    p: 'APAC-native coverage across all five major engines and the languages your buyers actually use — not English-first with everything else treated as an afterthought.',
+  },
+  {
+    h: 'The whole loop, not just the scoreboard.',
+    p: 'Measure, then diagnose the cause, then act — schema, llms.txt, content — then prove it moved demand. Other tools hand you a dashboard and stop. Zicy closes the loop.',
+  },
+];
+
+const wiifm = [
+  'Catch a hallucination or an outdated claim before it costs you a deal.',
+  'Know exactly where a competitor is winning the answer, and why.',
+  'One board-ready number: your AI share of voice, tracked over time.',
+  'Start every quarter knowing what AI says about you — not hoping.',
+];
+
+const modules = [
+  {
+    name: 'Brand Intelligence',
+    desc: 'How AI describes you across engines, the AI Reality Score, the entity gaps behind low confidence, and a prioritised action plan.',
+  },
+  {
+    name: 'AI Visibility',
+    desc: 'Mention coverage, citation rate, share of voice and average ranking, against the competitors you actually worry about.',
+  },
+  {
+    name: 'Brand Sentiment',
+    desc: 'The language AI attaches to your brand, and the sources moving it.',
+  },
+  {
+    name: 'Action Center',
+    desc: 'Schema and llms.txt generators, content fixes, built to current best practice.',
+  },
+  {
+    name: 'Site Traffic',
+    desc: 'AI-referred sessions and downstream engagement, tied back to the work.',
+  },
+];
+---
+<BaseLayout title={title} description={description}>
+  <!-- 1. Hero (white) -->
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">For brands</span>
+      <h1>AI is your brand&rsquo;s new first impression. Make it the one you built.</h1>
+      <p class="lead">
+        Every day, buyers, partners and journalists ask AI about your category — and act on the
+        answer before they ever reach your site. Zicy shows you exactly what AI says about your
+        brand across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, whether
+        it&rsquo;s accurate, and how to fix what&rsquo;s wrong.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="/audit">Run a free audit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. The stakes (white) — two sourced stats -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">The risk</span>
+        <h2>You can&rsquo;t manage what you can&rsquo;t see.</h2>
+        <p>
+          When AI misdescribes you, or names a competitor in your place, the decision is shaped
+          before anyone reaches your site. You won&rsquo;t catch it in your analytics, because the
+          conversation never touched them.
+        </p>
+      </div>
+      <div class="grid-2">
+        {stakeStats.map((s) => (
+          <div class="metric">
+            <div class="n">{s.n}</div>
+            <div class="l">{s.label}</div>
+            <div class="mono" style="font-size:12px;color:var(--muted);margin-top:10px;letter-spacing:.02em">
+              Source: {s.source}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Why Zicy (lavender) — three USP cards -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><h2>Why brands choose Zicy.</h2></div>
+      <div class="grid-3">
+        {usps.map((u) => (
+          <div class="card"><h3>{u.h}</h3><p>{u.p}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. What you get (white) — four-item benefit list -->
+  <section>
+    <div class="wrap">
+      <div class="shead"><h2>What you get.</h2></div>
+      <ul class="checklist">
+        {wiifm.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. Inside the platform (lavender) — five module cards + two product shots -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><h2>Inside the platform.</h2></div>
+      <div class="grid-3">
+        {modules.map((m) => (
+          <div class="card">
+            <span class="eyebrow">Module</span>
+            <h3>{m.name}</h3>
+            <p>{m.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="grid-2" style="margin-top:28px">
+        <Screenshot
+          src={brandSentimentShot}
+          alt="Zicy Brand Intelligence report showing AI perception of the brand and an AI Reality Score fact-check."
+          caption="Brand Intelligence — perception, AI Reality Score and the descriptors moving the answer."
+        />
+        <Screenshot
+          src={competitiveShot}
+          alt="Zicy Competitive AI Performance table comparing the brand against rivals on mention coverage, ranking, citations, share of voice and sentiment."
+          caption="Competitive AI Performance — your standing against the rivals you actually worry about."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Proof (white) — headline metric + measurement disclosure -->
+  <section>
+    <div class="wrap">
+      <div class="shead"><h2>What it looks like when it works.</h2></div>
+      <div style="max-width:760px">
+        <div class="metric" style="padding:32px 34px">
+          <div class="n g" style="font-size:48px">90.61<span style="font-size:24px">%</span></div>
+          <div class="l" style="margin-top:14px;font-size:14px">
+            AI mention rate &middot; professional services &middot; from a near-zero baseline
+          </div>
+        </div>
+        <p class="disclosure">
+          Measurement: AI brand mention and citation rates across tracked category queries on
+          ChatGPT, Gemini, and Perplexity, via Zicy&rsquo;s measurement infrastructure. Client
+          anonymised pending naming permission.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Closing CTA band -->
+  <CtaBand heading="See your brand the way AI describes it." ctaLabel="Run a free audit" ctaHref="/audit" />
+</BaseLayout>
