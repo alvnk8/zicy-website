@@ -149,8 +149,17 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.86);backdr
 .caserow .big{font-family:var(--mono);font-size:28px;color:var(--indigo)}
 .disclosure{font-size:12px;color:#9a99a8;font-style:italic;margin-top:18px;max-width:680px}
 
-/* Footer on indigo: light type, peachy section headings, white hovers. */
-footer{padding:54px 0 40px;background:var(--indigo);color:#c7c5f0}
+/* Footer on indigo with constellation mesh background.
+   Indigo fallback color shows if the image fails or while it loads. */
+footer{
+  padding:54px 0 40px;
+  color:#c7c5f0;
+  background-color:var(--indigo);
+  background-image:url('/footer-bg.jpg');
+  background-repeat:no-repeat;
+  background-position:bottom center;
+  background-size:cover;
+}
 .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:30px}
 .fgrid h2{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#ffb27d;margin-bottom:14px;font-weight:600}
 .fgrid a{display:block;font-size:14px;color:#c7c5f0;padding:5px 0}
@@ -201,6 +210,7 @@ label.fld{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-b
   .metrics,.loop,.grid-3,.tiers{grid-template-columns:1fr}
   .grid-2,.diverge{grid-template-columns:1fr}
   .fgrid{grid-template-columns:1fr 1fr}
+  footer{background-image:url('/footer-bg-mobile.jpg')}
 }
 @media(max-width:480px){
   .fgrid{grid-template-columns:1fr}
