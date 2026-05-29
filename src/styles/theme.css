@@ -14,7 +14,7 @@
   --green:#16A34A; --red:#E24B4A; --amber:#F59E0B; --muted:#6B7280;
   --line:rgba(26,26,46,0.10); --line-2:rgba(26,26,46,0.18);
   --display:'Schibsted Grotesk',sans-serif; --body:'Inter',sans-serif; --mono:'Space Mono',monospace;
-  --max:1080px;
+  --max:1200px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -23,7 +23,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;letter-spacing:-0.02em;li
 a{color:inherit;text-decoration:none}
 .mono{font-family:var(--mono)}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);font-weight:500}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
 .muted{color:var(--muted)}
 section{padding:88px 0}
 .lead{font-size:19px;color:#403e52;max-width:620px}
@@ -33,9 +33,10 @@ section{padding:88px 0}
 .skip-link:focus{left:0}
 
 header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.86);backdrop-filter:blur(10px);border-bottom:0.5px solid var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:66px;max-width:var(--max);margin:0 auto;padding:0 32px}
-.logo{display:inline-flex;align-items:center}
-.logo img{display:block;height:42px;width:auto}
+header{overflow:visible}
+.nav{display:flex;align-items:center;justify-content:space-between;height:88px;max-width:var(--max);margin:0 auto;padding:0 20px;overflow:visible}
+.logo{display:inline-flex;align-items:center;line-height:0}
+.logo img{display:block;height:48px;width:auto;max-width:none;object-fit:contain}
 /* Footer logo on dark indigo: full white-wordmark image with pronunciation tag visible. */
 .flogo{display:inline-block;margin-bottom:14px}
 .flogo img{display:block;width:170px;height:auto}
@@ -222,6 +223,6 @@ label.fld{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-b
 @media(max-width:480px){
   .fgrid{grid-template-columns:1fr}
   .hero h1,.hero.inner h1{font-size:32px}
-  .wrap{padding:0 20px}
-  .nav{padding:0 20px}
+  .wrap{padding:0 16px}
+  .nav{padding:0 16px}
 }
