@@ -929,27 +929,60 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
       var decoder = new TextDecoder();
       var fullContent = '';
       var buffer = '';
+      var raw = '';
+
+      var pushPiece = function (p) {
+        if (p && typeof p === 'string') {
+          fullContent += p;
+          if (onChunk && typeof onChunk === 'function') onChunk(p);
+        }
+      };
+      // Accept the streaming delta shape {type:"content", content} AND a single
+      // whole payload like {message, suggest_mode} / {text} (some answers arrive
+      // un-tokenised). metadata/done/error events carry no text.
+      var handleEvent = function (jsonStr) {
+        try {
+          var data = JSON.parse(jsonStr);
+          if (data.type === 'metadata' || data.type === 'done' || data.type === 'error') return;
+          var piece = typeof data.content === 'string' ? data.content
+                    : typeof data.message === 'string' ? data.message
+                    : typeof data.text === 'string' ? data.text : '';
+          pushPiece(piece);
+        } catch (e) { /* not a JSON event */ }
+      };
+
       while (true) {
         var chunk = await reader.read();
         if (chunk.done) break;
-        buffer += decoder.decode(chunk.value, { stream: true });
+        var decoded = decoder.decode(chunk.value, { stream: true });
+        raw += decoded;
+        buffer += decoded;
         var lines = buffer.split('\n');
         buffer = lines.pop() || '';
         for (var k = 0; k < lines.length; k++) {
-          var line = lines[k];
-          if (line.startsWith('data: ')) {
-            var dataStr = line.substring(6);
-            try {
-              var data = JSON.parse(dataStr);
-              if (data.type === 'metadata') continue;
-              if (data.type === 'content' && data.content) {
-                fullContent += data.content;
-                if (onChunk && typeof onChunk === 'function') onChunk(data.content);
-              }
-            } catch (parseError) { /* skip malformed SSE line */ }
-          }
+          var line = lines[k].trim();
+          if (line.indexOf('data:') === 0) handleEvent(line.slice(5).trim());
         }
       }
+      // flush a trailing SSE line with no final newline
+      var lastLine = buffer.trim();
+      if (lastLine.indexOf('data:') === 0) handleEvent(lastLine.slice(5).trim());
+
+      // Fallback: the whole body was a plain JSON object (not SSE), e.g.
+      // {"message":"...","suggest_mode":null} — extract message so the raw JSON
+      // never leaks into the bubble.
+      if (!fullContent) {
+        var body = raw.trim();
+        if (body.indexOf('data:') === 0) body = body.slice(body.indexOf('data:') + 5).trim();
+        try {
+          var obj = JSON.parse(body);
+          var msg = typeof obj.message === 'string' ? obj.message
+                  : typeof obj.content === 'string' ? obj.content
+                  : typeof obj.text === 'string' ? obj.text : '';
+          if (msg) fullContent = msg;
+        } catch (e) { /* leave empty -> friendly error below */ }
+      }
+
       activeController = null;
       return formatAPIResponse(fullContent || 'The AI service returned an empty response. Please try again or rephrase your question.');
     } catch (error) {
