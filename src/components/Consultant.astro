@@ -319,14 +319,9 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
   #zicy-consultant .progress-bar-fill { height: 100%; width: 0; border-radius: 3px; background: linear-gradient(90deg, var(--indigo), var(--indigo-bright)); transition: width .5s ease-out; }
   #zicy-consultant .progress-percentage { font-size: 12px; color: var(--muted); text-align: right; font-family: var(--mono); }
 
-  /* URL audits take a while — float the progress card in the middle of the chat area. */
-  #zicy-consultant .messages-container.active .message.zc-loading-center {
-    position: fixed; top: var(--zc-hh, 88px); left: 0; right: 0; bottom: 0;
-    max-width: none; margin: 0; padding: 24px;
-    display: flex; align-items: center; justify-content: center;
-    pointer-events: none; z-index: 41;
-  }
-  #zicy-consultant .message.zc-loading-center .progress-container { pointer-events: auto; width: min(92%, 600px); max-width: 600px; }
+  /* URL audits: horizontally-centered progress card, in normal flow (not pinned to screen). */
+  #zicy-consultant .messages-container.active .message.zc-loading-center { justify-content: center; }
+  #zicy-consultant .message.zc-loading-center .progress-container { width: min(92%, 600px); max-width: 600px; }
 
   @keyframes zcSlideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes zcSpin { to { transform: rotate(360deg); } }
@@ -917,7 +912,7 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
       var apiUrl = 'https://chatapi.zicy.com/chat/stream';
       var controller = new AbortController();
       activeController = controller;
-      var timeoutId = setTimeout(function () { controller.abort(); }, 300000);
+      var timeoutId = setTimeout(function () { controller.abort(); }, 600000);
       var response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
