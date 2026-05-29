@@ -5,9 +5,11 @@ import Screenshot from '../../components/Screenshot.astro';
 import { ICPS } from '../../data/icps';
 
 export function getStaticPaths() {
-  // 'brands', 'pr' and 'agencies' have their own richer static pages at sibling .astro files —
-  // exclude them here so the build does not generate duplicate routes.
-  const STATIC_OVERRIDES = new Set(['brands', 'pr', 'agencies']);
+  // Every ICP now has its own richer static page at a sibling .astro file —
+  // exclude all four here so the build does not generate duplicate routes.
+  // The dynamic [icp].astro template currently has no consumers; it is kept as a
+  // scaffold in case a future ICP slug is added before its dedicated page exists.
+  const STATIC_OVERRIDES = new Set(['brands', 'pr', 'agencies', 'publishers']);
   return ICPS
     .filter((icp) => !STATIC_OVERRIDES.has(icp.slug))
     .map((icp) => ({ params: { icp: icp.slug }, props: { icp } }));

@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Screenshot from '../../components/Screenshot.astro';
+// citation-analysis-urls.png is the SAFE original — third-party domains only (no Prudential),
+// verified per the privacy-gate brief §1.1. No anonymised variant needed.
+import citationUrlsShot from '../../assets/screenshots/citation-analysis-urls.png';
+// key-topics-leaders.png is anonymised (banner + masked competitor names).
+import keyTopicsShot from '../../assets/screenshots/anonymised/key-topics-leaders.png';
+
+const title = "Zicy for publishers — does AI give your journalism the credit?";
+const description =
+  "AI answers are built on content — often yours. See whether AI attributes your work, paraphrases it without credit, or ignores it entirely across the five major engines.";
+
+// Three sourced stats — every figure carries publisher + year inline. Do not alter.
+const stats = [
+  {
+    n: '43%',
+    label:
+      'the search referral traffic news executives expect to lose within three years; a fifth expect losses above 75%.',
+    source: 'Reuters Institute, Journalism, Media & Technology Trends and Predictions 2026',
+  },
+  {
+    n: '~60% / 47% / 22%',
+    label:
+      'the fall in Google referral traffic over the past year for small / medium / large publishers.',
+    source: 'Chartbeat, via Axios, 2026',
+  },
+  {
+    n: '~1%',
+    label:
+      "the click-through to an AI Overview’s own citation links when one is present.",
+    source: 'Pew Research, 2025',
+  },
+];
+
+const usps = [
+  {
+    h: 'Defend your attribution.',
+    p: 'See exactly where AI cites you, paraphrases you without credit, or strips it entirely — by source and by topic.',
+  },
+  {
+    h: 'Own your topics.',
+    p: "Know where you lead the answer, where you're in a fight, and where you've lost it — across the topics that define your title.",
+  },
+  {
+    h: 'Be machine-readable.',
+    p: "The Site Audit checks whether AI crawlers can actually read and attribute you — llms.txt, bot access, schema — so the credit isn't lost to a technical gap.",
+  },
+];
+
+const wiifm = [
+  'Put a number on uncredited use — evidence for strategy, licensing conversations, or the boardroom.',
+  'Reclaim authority on the topics that matter most to your audience.',
+  'Make sure AI can find and attribute you, not just scrape you.',
+  'Track attribution as a metric, the way you already track traffic.',
+];
+
+const modules = [
+  {
+    name: 'Citation Analysis',
+    desc: 'Where your content is cited, paraphrased or stripped of credit, with domain and URL drill-down.',
+  },
+  {
+    name: 'Key Topics Analysis',
+    desc: "Leaders / Battlegrounds / Blind Spots: where you own the answer and where you don't.",
+  },
+  {
+    name: 'Site Audit',
+    desc: 'Technical AI-readiness: llms.txt, AI-bot access, schema, page health.',
+  },
+  {
+    name: 'AI Visibility',
+    desc: 'Your standing in the answers across the five engines, over time.',
+  },
+];
+---
+<BaseLayout title={title} description={description}>
+  <!-- 1. Hero (white) -->
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">For publishers</span>
+      <h1>If AI doesn&rsquo;t recognise your content, neither will your audience.</h1>
+      <p class="lead">
+        AI answers are built on content &mdash; often yours. Zicy shows whether AI attributes your
+        work, paraphrases it without credit, or ignores it entirely across the five major engines
+        &mdash; and what to do about it.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="/audit">Run a free audit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. The stakes (white) — three sourced stats in a row that wraps cleanly on mobile -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">The risk</span>
+        <h2>Your work is in the answer. Your name might not be.</h2>
+        <p>
+          The click economy that funded publishing is contracting. Attribution inside the answer is
+          the new currency &mdash; and you can&rsquo;t fix what you can&rsquo;t see.
+        </p>
+      </div>
+      <div class="grid-3">
+        {stats.map((s) => (
+          <div class="metric">
+            <div class="n">{s.n}</div>
+            <div class="l" style="margin-top:8px;font-size:14px">{s.label}</div>
+            <div class="mono" style="font-size:12px;color:var(--muted);margin-top:12px;letter-spacing:.02em">
+              Source: {s.source}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Why Zicy (lavender) — three USP cards -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><h2>Why publishers choose Zicy.</h2></div>
+      <div class="grid-3">
+        {usps.map((u) => (
+          <div class="card"><h3>{u.h}</h3><p>{u.p}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. What you get (white) — four-item benefit list -->
+  <section>
+    <div class="wrap">
+      <div class="shead"><h2>What you get.</h2></div>
+      <ul class="checklist">
+        {wiifm.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. Inside the platform (lavender) — four module cards + two product shots -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><h2>Inside the platform.</h2></div>
+      <div class="grid-2">
+        {modules.map((m) => (
+          <div class="card">
+            <span class="eyebrow">Module</span>
+            <h3>{m.name}</h3>
+            <p>{m.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="grid-2" style="margin-top:28px">
+        <Screenshot
+          src={citationUrlsShot}
+          alt="Zicy Citation Analysis drilling into the domains and individual URLs AI cites, classified as owned, earned or competitor."
+          caption="Citation Analysis &mdash; domain and URL drill-down."
+        />
+        <Screenshot
+          src={keyTopicsShot}
+          alt="Zicy Key Topics Analysis showing topics where the publisher leads, contests, or is absent versus competitors."
+          caption="Key Topics &mdash; Leaders, Battlegrounds and Blind Spots."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Closing CTA band (no Proof section by design — no publisher-specific case study yet) -->
+  <CtaBand heading="See whether AI gives you the credit." ctaLabel="Run a free audit" ctaHref="/audit" />
+</BaseLayout>
