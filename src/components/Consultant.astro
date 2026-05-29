@@ -1,0 +1,1247 @@
+---
+// The AEO/GEO Consultant — a full-page streaming chat.
+// Ported from the live zicy.com/aeo-geo-consultant page and re-skinned to the
+// site's design system (theme.css tokens: Schibsted Grotesk / Inter / Space Mono,
+// indigo + orange + lavender). The shell (heading, subtitle, suggestions, tagline)
+// is server-rendered and crawlable; the chat hydrates client-side and streams from
+// https://chatapi.zicy.com/chat/stream (SSE, mode "consultant").
+//
+// On first message the wrapper expands to an immersive fullscreen overlay that sits
+// below the sticky site header (footer is hidden via body.fullscreen).
+
+const AI_ENGINES = [
+  { src: '/ai-icons/Gemini_icon.png', alt: 'Google Gemini' },
+  { src: '/ai-icons/Grok_icon.png', alt: 'Grok' },
+  { src: '/ai-icons/Perplexity_icon.png', alt: 'Perplexity' },
+  { src: '/ai-icons/Bing_icon.png', alt: 'Bing' },
+  { src: '/ai-icons/Deepseek_icon.png', alt: 'DeepSeek' },
+  { src: '/ai-icons/Qwen_icon.png', alt: 'Qwen' },
+  { src: '/ai-icons/Openai_icon.png', alt: 'OpenAI' },
+];
+
+const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strategies'];
+---
+
+<section id="zicy-consultant">
+  <div class="consultant-wrapper">
+    <span class="eyebrow zc-eyebrow">Free tool · AI consultant</span>
+    <h1 class="main-heading">Your AEO/GEO Consultant</h1>
+
+    <p class="subtitle">
+      Ask Zicy anything <strong>AEO or GEO!</strong> <em>(Answer/Generative Engine Optimization)</em><br />
+      Audit your webpage or ask for tactics to get cited/mentioned in<br />
+      <strong>ChatGPT, Google Gemini, Perplexity</strong> and other answer engines.
+    </p>
+
+    <div class="ai-icons">
+      {AI_ENGINES.map((e) => <img src={e.src} alt={e.alt} class="ai-icon" width="54" height="54" />)}
+    </div>
+
+    <div class="suggestions" id="suggestions">
+      {SUGGESTIONS.map((s) => <button class="suggestion-button" type="button">{s}</button>)}
+    </div>
+
+    <div class="chat-container">
+      <div class="messages-container" id="messagesContainer"></div>
+
+      <div class="input-wrapper">
+        <div class="expanded-suggestions" id="expandedSuggestions"></div>
+
+        <div class="input-controls-wrapper">
+          <div style="position:relative">
+            <button class="chat-menu-button" id="menuButton" type="button" title="Menu" disabled aria-label="Conversation menu">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="5" r="2"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+                <circle cx="12" cy="19" r="2"></circle>
+              </svg>
+            </button>
+            <div class="chat-menu-dropdown" id="menuDropdown">
+              <button class="chat-menu-item restart" type="button" onclick="restartConversation()">
+                <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                  <path d="M21 3v5h-5"></path>
+                  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                  <path d="M3 21v-5h5"></path>
+                </svg>
+                Restart conversation
+              </button>
+              <button class="chat-menu-item share" type="button" onclick="shareConversation()">
+                <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="18" cy="5" r="3"></circle>
+                  <circle cx="6" cy="12" r="3"></circle>
+                  <circle cx="18" cy="19" r="3"></circle>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                </svg>
+                Share conversation
+              </button>
+              <button class="chat-menu-item download" type="button" onclick="downloadTranscript()">
+                <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download transcript
+              </button>
+            </div>
+          </div>
+
+          <div class="input-container">
+            <textarea class="chat-input" placeholder="Ask Zicy about AEO..." rows="1" aria-label="Message"></textarea>
+            <button class="send-button" type="button" title="Send" aria-label="Send">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="bottom-tagline">
+      Exclusively trained on the proprietary strategy framework of
+      <a href="https://growth.pro/" target="_blank" rel="noopener">Growth.pro</a>
+    </p>
+  </div>
+</section>
+
+<style is:global>
+  #zicy-consultant { --zc-hh: 88px; width: 100%; padding: 0; }
+
+  /* ---- collapsed (intro) state ---- */
+  #zicy-consultant .consultant-wrapper {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 56px 24px;
+    min-height: calc(100vh - var(--zc-hh, 88px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #zicy-consultant .zc-eyebrow { display: block; margin-bottom: 16px; }
+  #zicy-consultant .main-heading {
+    font-family: var(--display);
+    font-weight: 700;
+    color: var(--indigo);
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+  #zicy-consultant .subtitle {
+    font-size: 17px;
+    color: #4a4960;
+    line-height: 1.6;
+    max-width: 620px;
+    margin: 0 auto 22px;
+  }
+  #zicy-consultant .subtitle strong { color: var(--indigo); font-weight: 600; }
+  #zicy-consultant .subtitle em { font-style: italic; }
+
+  #zicy-consultant .ai-icons {
+    display: flex; justify-content: center; align-items: center;
+    gap: 18px; margin: 22px 0; flex-wrap: wrap;
+  }
+  #zicy-consultant .ai-icon {
+    height: 54px; width: auto; object-fit: contain;
+    opacity: 0.78; filter: grayscale(0.12);
+  }
+
+  #zicy-consultant .suggestions {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px;
+  }
+  #zicy-consultant .suggestion-button {
+    font-family: var(--body); font-size: 14px; font-weight: 500; color: var(--indigo);
+    background: #fff; border: 1.5px solid var(--line-2); border-radius: 999px;
+    padding: 9px 18px; cursor: pointer;
+    transition: background .18s, border-color .18s, color .18s, transform .12s cubic-bezier(.34,1.56,.64,1);
+  }
+  #zicy-consultant .suggestion-button:hover:not(:disabled) {
+    background: var(--indigo); color: #fff; border-color: var(--indigo); transform: translateY(-1px);
+  }
+  #zicy-consultant .suggestion-button:active:not(:disabled) { transform: scale(.97); }
+  #zicy-consultant .suggestion-button:disabled { opacity: .5; cursor: not-allowed; }
+
+  #zicy-consultant .chat-container { width: 100%; }
+  #zicy-consultant .messages-container { display: none; }
+  #zicy-consultant .messages-container.active { display: flex; flex-direction: column; }
+  #zicy-consultant .zc-scroll-spacer { flex-shrink: 0; width: 100%; }
+
+  #zicy-consultant .input-wrapper {
+    display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%;
+  }
+  #zicy-consultant .input-controls-wrapper {
+    display: flex; align-items: flex-end; gap: 10px; width: 100%; max-width: 700px; margin: 0 auto;
+  }
+  #zicy-consultant .input-container { position: relative; flex: 1; }
+  #zicy-consultant .chat-input {
+    width: 100%; height: 52px; max-height: 120px;
+    padding: 14px 52px 14px 18px;
+    border: 1.5px solid var(--line-2); border-radius: 26px;
+    font-family: var(--body); font-size: 15px; color: var(--ink);
+    resize: none; background: #fff; line-height: 1.4;
+    box-shadow: 0 4px 16px rgba(26,26,46,.06);
+    outline: none; transition: border-color .15s, box-shadow .15s;
+  }
+  #zicy-consultant .chat-input:focus { border-color: var(--indigo-bright); box-shadow: 0 0 0 3px rgba(79,70,229,.12); }
+  #zicy-consultant .chat-input::placeholder { color: var(--muted); }
+
+  #zicy-consultant .send-button {
+    position: absolute; right: 6px; bottom: 6px;
+    width: 40px; height: 40px; border-radius: 50%; border: none;
+    background: var(--indigo); color: #fff; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; line-height: 0;
+    box-shadow: 0 2px 8px rgba(49,46,129,.3);
+    transition: background .15s, transform .12s cubic-bezier(.34,1.56,.64,1);
+  }
+  #zicy-consultant .send-button:hover:not(:disabled) { background: var(--indigo-bright); transform: scale(1.06); }
+  #zicy-consultant .send-button:active:not(:disabled) { transform: scale(.92); }
+  #zicy-consultant .send-button:disabled { background: var(--line-2); cursor: not-allowed; box-shadow: none; }
+  #zicy-consultant .send-button svg { display: block; margin-left: 1px; }
+
+  /* triple-dot menu */
+  #zicy-consultant .chat-menu-button {
+    display: none; width: 40px; height: 40px; margin-bottom: 6px; border-radius: 50%; border: none;
+    background: transparent; cursor: pointer; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: background .15s;
+  }
+  #zicy-consultant .consultant-wrapper.expanded .chat-menu-button { display: flex; }
+  #zicy-consultant .chat-menu-button:hover:not(:disabled) { background: var(--lavender); }
+  #zicy-consultant .chat-menu-button:disabled { opacity: .3; cursor: not-allowed; }
+  #zicy-consultant .chat-menu-button svg { width: 22px; height: 22px; fill: var(--muted); }
+
+  #zicy-consultant .chat-menu-dropdown {
+    position: absolute; bottom: 52px; left: 0; background: #fff;
+    border: 0.5px solid var(--line); border-radius: 12px;
+    box-shadow: 0 12px 34px rgba(26,26,46,.16); padding: 8px; min-width: 214px;
+    display: none; z-index: 60;
+  }
+  #zicy-consultant .chat-menu-dropdown.active { display: block; }
+  #zicy-consultant .chat-menu-item {
+    display: flex; align-items: center; gap: 11px; padding: 10px 12px; width: 100%;
+    border: none; background: transparent; border-radius: 8px; cursor: pointer;
+    font-family: var(--body); font-size: 14px; color: var(--ink); text-align: left;
+    transition: background .15s;
+  }
+  #zicy-consultant .chat-menu-item:hover { background: var(--lavender); }
+  #zicy-consultant .chat-menu-item svg { width: 18px; height: 18px; flex-shrink: 0; fill: none; }
+  #zicy-consultant .chat-menu-item.restart svg { stroke: var(--indigo); }
+  #zicy-consultant .chat-menu-item.share svg { stroke: var(--indigo-bright); }
+  #zicy-consultant .chat-menu-item.download svg { stroke: var(--green); }
+
+  #zicy-consultant .bottom-tagline { font-size: 13.5px; color: var(--muted); margin-top: 22px; line-height: 1.6; }
+  #zicy-consultant .bottom-tagline a { color: var(--indigo-bright); font-weight: 500; }
+  #zicy-consultant .bottom-tagline a:hover { text-decoration: underline; }
+
+  /* ---- messages ---- */
+  #zicy-consultant .message { display: flex; width: 100%; margin-bottom: 14px; }
+  #zicy-consultant .message.user { justify-content: flex-end; }
+  #zicy-consultant .message.ai { justify-content: flex-start; }
+  #zicy-consultant .messages-container.active .message { max-width: 860px; margin-left: auto; margin-right: auto; }
+
+  #zicy-consultant .message-content {
+    padding: 13px 17px; border-radius: 18px; font-size: 15px; line-height: 1.6;
+    text-align: left; word-wrap: break-word; overflow-wrap: anywhere;
+  }
+  #zicy-consultant .message.user .message-content {
+    max-width: 80%; background: var(--indigo); color: #fff; border-bottom-right-radius: 5px;
+  }
+  #zicy-consultant .message.ai .message-content {
+    max-width: 100%; background: var(--lavender); color: var(--ink);
+    border: 0.5px solid var(--line); border-bottom-left-radius: 5px;
+  }
+  #zicy-consultant .message-content-wrapper { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  #zicy-consultant .message-content-wrapper .message-content { margin-bottom: 0; }
+
+  #zicy-consultant .message-content h1,
+  #zicy-consultant .message-content h2,
+  #zicy-consultant .message-content h3 { font-family: var(--display); color: var(--indigo); margin: 10px 0 6px; line-height: 1.25; }
+  #zicy-consultant .message-content h1:first-child,
+  #zicy-consultant .message-content h2:first-child,
+  #zicy-consultant .message-content h3:first-child { margin-top: 0; }
+  #zicy-consultant .message-content h1 { font-size: 20px; }
+  #zicy-consultant .message-content h2 { font-size: 18px; }
+  #zicy-consultant .message-content h3 { font-size: 16px; }
+  #zicy-consultant .message-content p { margin: 0 0 8px; }
+  #zicy-consultant .message-content p:last-child { margin-bottom: 0; }
+  #zicy-consultant .message-content strong { font-weight: 700; }
+  #zicy-consultant .message-content em { font-style: italic; }
+  #zicy-consultant .message-content code {
+    font-family: var(--mono); font-size: 13px; background: rgba(49,46,129,.08);
+    padding: 1px 5px; border-radius: 4px; color: var(--indigo);
+  }
+  #zicy-consultant .message-content ul,
+  #zicy-consultant .message-content ol { margin: 8px 0; padding-left: 22px; }
+  #zicy-consultant .message-content li { margin: 3px 0; }
+  #zicy-consultant .message-content ul li { list-style-type: disc; }
+  #zicy-consultant .message-content ol li { list-style-type: decimal; }
+  #zicy-consultant .message-content a { color: var(--indigo-bright); text-decoration: underline; word-break: break-word; }
+  #zicy-consultant .message.user .message-content a { color: #fff; }
+
+  /* message action buttons */
+  #zicy-consultant .message-actions { display: flex; gap: 6px; margin-top: 2px; align-items: center; }
+  #zicy-consultant .action-button {
+    background: transparent; border: none; padding: 6px; cursor: pointer; border-radius: 7px;
+    color: var(--muted); display: flex; align-items: center; justify-content: center; transition: background .15s, color .15s;
+  }
+  #zicy-consultant .action-button:hover { background: var(--lavender); color: var(--ink); }
+  #zicy-consultant .action-button.active { color: var(--orange); background: #fff5f0; }
+  #zicy-consultant .action-button.copied { color: var(--green); }
+  #zicy-consultant .action-button.hidden { display: none; }
+  #zicy-consultant .action-button svg { width: 17px; height: 17px; }
+  #zicy-consultant .action-button .checkmark { display: none; }
+  #zicy-consultant .action-button.copied .copy-icon { display: none; }
+  #zicy-consultant .action-button.copied .checkmark { display: block; }
+
+  /* loading + progress */
+  #zicy-consultant .loading-indicator {
+    display: inline-flex; align-items: center; gap: 10px; padding: 13px 17px;
+    background: var(--lavender); border: 0.5px solid var(--line); border-radius: 18px;
+  }
+  #zicy-consultant .spinner-icon { width: 16px; height: 16px; color: var(--indigo); animation: zcSpin 1s linear infinite; }
+  #zicy-consultant .loading-text { font-size: 14.5px; color: var(--ink); line-height: 1.5; }
+  #zicy-consultant .loading-dots { display: inline-block; margin-left: 2px; }
+  #zicy-consultant .loading-dots span { animation: zcDotFade 1.4s infinite; opacity: 0; }
+  #zicy-consultant .loading-dots span:nth-child(1) { animation-delay: 0s; }
+  #zicy-consultant .loading-dots span:nth-child(2) { animation-delay: .2s; }
+  #zicy-consultant .loading-dots span:nth-child(3) { animation-delay: .4s; }
+
+  #zicy-consultant .progress-container {
+    display: flex; flex-direction: column; gap: 7px; padding: 12px 16px;
+    background: var(--lavender); border: 0.5px solid var(--line); border-radius: 18px;
+    width: min(80%, 420px);
+  }
+  #zicy-consultant .progress-text { font-size: 14px; color: var(--ink); line-height: 1.4; font-weight: 500; }
+  #zicy-consultant .progress-bar-wrapper { width: 100%; height: 6px; background: #e6e6f0; border-radius: 3px; overflow: hidden; }
+  #zicy-consultant .progress-bar-fill { height: 100%; width: 0; border-radius: 3px; background: linear-gradient(90deg, var(--indigo), var(--indigo-bright)); transition: width .5s ease-out; }
+  #zicy-consultant .progress-percentage { font-size: 12px; color: var(--muted); text-align: right; font-family: var(--mono); }
+
+  @keyframes zcSlideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes zcSpin { to { transform: rotate(360deg); } }
+  @keyframes zcDotFade { 0%, 60%, 100% { opacity: 0; } 30% { opacity: 1; } }
+
+  /* expanded suggestions above input */
+  #zicy-consultant .expanded-suggestions { display: none; gap: 8px; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 860px; }
+  #zicy-consultant .consultant-wrapper.expanded .expanded-suggestions { display: flex; }
+  #zicy-consultant .expanded-suggestions .suggestion-button { font-size: 13px; padding: 7px 14px; transition: opacity .3s ease, transform .3s ease; }
+
+  /* ---- expanded (fullscreen overlay) state ---- */
+  #zicy-consultant .consultant-wrapper.expanded .zc-eyebrow,
+  #zicy-consultant .consultant-wrapper.expanded .main-heading,
+  #zicy-consultant .consultant-wrapper.expanded .subtitle,
+  #zicy-consultant .consultant-wrapper.expanded .ai-icons,
+  #zicy-consultant .consultant-wrapper.expanded .suggestions,
+  #zicy-consultant .consultant-wrapper.expanded .bottom-tagline { display: none; }
+
+  #zicy-consultant .consultant-wrapper.expanded {
+    position: fixed; top: var(--zc-hh, 88px); left: 0; right: 0; bottom: var(--zc-kb, 0px);
+    max-width: none; width: 100%; min-height: 0; padding: 0; margin: 0;
+    display: flex; flex-direction: column; background: var(--white); z-index: 40;
+  }
+  #zicy-consultant .consultant-wrapper.expanded .chat-container {
+    flex: 1; display: flex; flex-direction: column; min-height: 0; width: 100%;
+  }
+  #zicy-consultant .consultant-wrapper.expanded .messages-container.active {
+    position: relative; flex: 1; overflow-y: auto; overflow-x: hidden; scroll-behavior: auto;
+    padding: 28px 20px 20px; gap: 0; background: #fbfbff; -webkit-overflow-scrolling: touch;
+  }
+  #zicy-consultant .consultant-wrapper.expanded .input-wrapper {
+    flex-shrink: 0; background: #fff; border-top: 0.5px solid var(--line);
+    padding: 14px 20px 18px; box-shadow: 0 -2px 16px rgba(26,26,46,.05);
+  }
+  #zicy-consultant .consultant-wrapper.expanded .input-controls-wrapper { max-width: 860px; }
+
+  /* hide the site footer + lock body scroll while the chat owns the viewport */
+  body.fullscreen { overflow: hidden; }
+  body.fullscreen footer { display: none; }
+
+  @media (max-width: 768px) {
+    #zicy-consultant .consultant-wrapper { padding: 36px 18px; }
+    #zicy-consultant .main-heading { font-size: 30px; }
+    #zicy-consultant .subtitle { font-size: 14.5px; }
+    #zicy-consultant .ai-icons { gap: 12px; }
+    #zicy-consultant .ai-icon { height: 42px; }
+    #zicy-consultant .suggestions .suggestion-button { width: 100%; }
+    #zicy-consultant .consultant-wrapper.expanded .messages-container.active { padding: 16px 14px 16px; }
+    #zicy-consultant .message-content { font-size: 14px; padding: 12px 14px; }
+    #zicy-consultant .message.user .message-content { max-width: 88%; }
+    #zicy-consultant .chat-input { font-size: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #zicy-consultant *, #zicy-consultant *::before, #zicy-consultant *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
+</style>
+
+<script is:inline>
+  // ---- session ----
+  var sessionId = 'zicy-' + Date.now() + '-' + Math.random().toString(36).substring(2, 15);
+
+  var messagesContainer = document.getElementById('messagesContainer');
+  var chatInput = document.querySelector('#zicy-consultant .chat-input');
+  var sendButton = document.querySelector('#zicy-consultant .send-button');
+  var suggestionsContainer = document.getElementById('suggestions');
+  var expandedSuggestionsContainer = document.getElementById('expandedSuggestions');
+  var chatMenuButton = document.getElementById('menuButton');
+  var chatMenuDropdown = document.getElementById('menuDropdown');
+
+  var isProcessing = false;
+  var usedSuggestions = new Set();
+  var allSuggestions = [];
+  var convGeneration = 0;   // bumped on restart to invalidate in-flight requests
+  var activeController = null;
+
+  var progressInterval = null;
+  var progressStartTime = null;
+  var isProgressBarActive = false;
+
+  // ---- layout helpers ----
+  function updateHeaderHeight() {
+    var header = document.querySelector('header');
+    var h = header ? header.offsetHeight : 88;
+    // Set on the section itself: an inline style beats the stylesheet's
+    // `#zicy-consultant { --zc-hh: 88px }` default and inherits to the overlay.
+    var root = document.getElementById('zicy-consultant');
+    if (root) root.style.setProperty('--zc-hh', h + 'px');
+  }
+  updateHeaderHeight();
+  window.addEventListener('resize', updateHeaderHeight);
+
+  // Keep the fixed chat overlay above the on-screen keyboard on mobile.
+  if (window.visualViewport) {
+    var vv = window.visualViewport;
+    var syncKeyboardInset = function () {
+      var root = document.getElementById('zicy-consultant');
+      if (!root) return;
+      if (!document.body.classList.contains('fullscreen')) { root.style.setProperty('--zc-kb', '0px'); return; }
+      var kb = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+      root.style.setProperty('--zc-kb', kb + 'px');
+    };
+    vv.addEventListener('resize', syncKeyboardInset);
+    vv.addEventListener('scroll', syncKeyboardInset);
+  }
+
+  function isMobileDevice() { return window.innerWidth <= 768; }
+
+  // ChatGPT-style scroll: pin each new user message to the top of the scroll area,
+  // with a bottom spacer reserving room so the previous turn scrolls out of view.
+  var scrollSpacer = document.createElement('div');
+  scrollSpacer.className = 'zc-scroll-spacer';
+  scrollSpacer.setAttribute('aria-hidden', 'true');
+
+  function ensureSpacerLast() {
+    if (!messagesContainer.classList.contains('active')) return;
+    messagesContainer.appendChild(scrollSpacer); // appendChild moves it to the end if already present
+  }
+  function raf2(fn) { requestAnimationFrame(function () { requestAnimationFrame(fn); }); }
+
+  // Eased, fixed-duration scroll. Native smooth scroll runs at an uncontrolled speed
+  // (too fast on big jumps) and re-targeting it mid-flight looks jittery. CSS
+  // scroll-behavior is 'auto', so each per-frame scrollTop write lands instantly and
+  // this easeOutCubic curve is the only animation.
+  var activeScrollRaf = null;
+  function smoothScrollTo(target, duration) {
+    if (activeScrollRaf) { cancelAnimationFrame(activeScrollRaf); activeScrollRaf = null; }
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      messagesContainer.scrollTop = target;
+      return;
+    }
+    var start = messagesContainer.scrollTop;
+    var dist = target - start;
+    if (Math.abs(dist) < 2) { messagesContainer.scrollTop = target; return; }
+    var startTs = null;
+    function step(ts) {
+      if (startTs === null) startTs = ts;
+      var t = Math.min(1, (ts - startTs) / duration);
+      var eased = 1 - Math.pow(1 - t, 3);
+      messagesContainer.scrollTop = start + dist * eased;
+      if (t < 1) { activeScrollRaf = requestAnimationFrame(step); } else { activeScrollRaf = null; }
+    }
+    activeScrollRaf = requestAnimationFrame(step);
+  }
+
+  function pinUserMessageTop(el) {
+    if (!el || !messagesContainer.classList.contains('active')) return;
+    ensureSpacerLast();
+    raf2(function () {
+      // Reserve a full viewport of room below so the message can reach the top,
+      // then run a single controlled scroll. Nothing is added above the message,
+      // so its offsetTop is stable for the whole animation.
+      scrollSpacer.style.height = messagesContainer.clientHeight + 'px';
+      smoothScrollTo(Math.max(0, el.offsetTop - 12), 450);
+    });
+  }
+  function settleSpacer(el) {
+    if (!el || !messagesContainer.classList.contains('active')) return;
+    ensureSpacerLast();
+    raf2(function () {
+      // Trim the reserved space WITHOUT re-scrolling — the pin already placed the
+      // message at the top, and this height keeps maxScroll >= current scrollTop so
+      // the position is preserved (no snap).
+      var turnHeight = scrollSpacer.offsetTop - el.offsetTop;
+      var room = messagesContainer.clientHeight - turnHeight;
+      scrollSpacer.style.height = Math.max(20, room) + 'px';
+    });
+  }
+
+  // ---- markdown (verbatim from the live consultant) ----
+  function parseMarkdown(text) {
+    if (!text) return '';
+    var html = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$2</a>');
+    html = html.split(/(<a\s+[^>]*>.*?<\/a>)/gi).map(function (part, index) {
+      if (index % 2 === 1) return part;
+      return part.replace(/(^|[\s\n>])((?:https?:\/\/|www\.)[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=%]+)/gi, function (match, prefix, url) {
+        var finalUrl = url.startsWith('www.') ? 'https://' + url : url;
+        return prefix + '<a href="' + finalUrl + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
+      });
+    }).join('');
+    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/([^*]|^)\*([^*]+?)\*([^*]|$)/g, '$1<em>$2</em>$3');
+    html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+    html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+    html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+    var blocks = html.split(/\n\n+/);
+    var mergedBlocks = [];
+    var i = 0;
+    while (i < blocks.length) {
+      var block = blocks[i].trim();
+      if (!block) { i++; continue; }
+      var lines = block.split('\n');
+      var hasListItems = lines.some(function (line) { return /^[•\-\*]\s/.test(line.trim()) || /^\d+[\.\)]\s/.test(line.trim()); });
+      if (hasListItems) {
+        var firstListLine = lines.find(function (line) { return /^[•\-\*]\s/.test(line.trim()) || /^\d+[\.\)]\s/.test(line.trim()); });
+        var isNumbered = /^\d+[\.\)]\s/.test(firstListLine.trim());
+        var mergedList = block;
+        var j = i + 1;
+        while (j < blocks.length) {
+          var nextBlock = blocks[j].trim();
+          if (!nextBlock) { j++; continue; }
+          var nextLines = nextBlock.split('\n');
+          var nextHasListItems = nextLines.some(function (line) { return /^[•\-\*]\s/.test(line.trim()) || /^\d+[\.\)]\s/.test(line.trim()); });
+          if (nextHasListItems) {
+            var nextFirstListLine = nextLines.find(function (line) { return /^[•\-\*]\s/.test(line.trim()) || /^\d+[\.\)]\s/.test(line.trim()); });
+            var nextIsNumbered = /^\d+[\.\)]\s/.test(nextFirstListLine.trim());
+            if (nextIsNumbered === isNumbered) { mergedList += '\n' + nextBlock; j++; } else { break; }
+          } else { break; }
+        }
+        mergedBlocks.push(mergedList);
+        i = j;
+      } else { mergedBlocks.push(block); i++; }
+    }
+    html = mergedBlocks.map(function (block) {
+      block = block.trim();
+      if (!block) return '';
+      if (block.startsWith('<h1') || block.startsWith('<h2') || block.startsWith('<h3')) return block;
+      var lines = block.split('\n');
+      var hasListItems = lines.some(function (line) { return /^[•\-\*]\s/.test(line.trim()) || /^\d+[\.\)]\s/.test(line.trim()); });
+      if (hasListItems) {
+        var firstListLine = lines.find(function (line) { return /^[•\-\*]\s/.test(line.trim()) || /^\d+[\.\)]\s/.test(line.trim()); });
+        var isNumbered = /^\d+[\.\)]\s/.test(firstListLine.trim());
+        var tag = isNumbered ? 'ol' : 'ul';
+        var items = lines.map(function (line) {
+          line = line.trim();
+          if (!line) return '';
+          var cleaned = line.replace(/^[•\-\*]\s+/, '').replace(/^\d+[\.\)]\s+/, '');
+          return cleaned ? '<li>' + cleaned + '</li>' : '';
+        }).filter(function (item) { return item; }).join('');
+        return '<' + tag + '>' + items + '</' + tag + '>';
+      }
+      return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
+    }).filter(function (block) { return block; }).join('');
+    return html;
+  }
+
+  function formatAPIResponse(text) {
+    if (!text) return text;
+    var formatted = text;
+    formatted = formatted.replace(/^([^>\n]+)\s*>>\s*(.+)$/gm, function (match, header, content) {
+      header = header.trim(); content = content.trim();
+      if (!header.startsWith('#')) header = '## ' + header;
+      return header + '\n\n' + content;
+    });
+    formatted = formatted.replace(/^>>\s*/gm, '');
+    formatted = formatted.replace(/>>/g, '');
+    formatted = formatted.replace(/\s*<p>\s*/gi, '\n\n');
+    formatted = formatted.replace(/<\/p>\s*/gi, '');
+    formatted = formatted.replace(/^[\s]*[-◦○▪▫–—]\s+(?=\S)/gm, '• ');
+    formatted = formatted.replace(/^[\s]*(\d+)[\)\.]\s+/gm, '$1. ');
+    formatted = formatted.replace(/^(#{1,3})\s*(.+)$/gm, '$1 $2');
+    formatted = formatted.replace(/([^\n])\n([•\d][\.\s])/g, '$1\n\n$2');
+    formatted = formatted.replace(/([•\d][\.\s][^\n]+)\n([^\n•\d])/g, '$1\n\n$2');
+    formatted = formatted.replace(/\n{3,}/g, '\n\n');
+    return formatted.trim();
+  }
+
+  // ---- URL detection (drives progress bar vs spinner) ----
+  function containsURL(message) {
+    // Generic detector: explicit http(s)://, www., or any domain.tld token
+    // (2+ letter TLD). Broader and simpler than the source's enumerated TLD list,
+    // so no valid domain is missed when choosing the progress-bar vs spinner UI.
+    var urlPattern = /(https?:\/\/[^\s]+)|(\bwww\.[^\s]+)|(\b[a-z0-9][a-z0-9-]*\.[a-z]{2,24}\b)/i;
+    return urlPattern.test(message);
+  }
+
+  // ---- message rendering ----
+  function actionsMarkup(messageId) {
+    return '' +
+      '<button class="action-button copy-button" type="button" title="Copy" aria-label="Copy message" onclick="copyMessage(\'' + messageId + '\')">' +
+        '<svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>' +
+        '<svg class="checkmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>' +
+      '</button>' +
+      '<button class="action-button like-button" type="button" title="Thumbs up" aria-label="Helpful" onclick="likeMessage(\'' + messageId + '\')">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>' +
+      '</button>' +
+      '<button class="action-button dislike-button" type="button" title="Thumbs down" aria-label="Not helpful" onclick="dislikeMessage(\'' + messageId + '\')">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg>' +
+      '</button>';
+  }
+
+  function newMessageId() { return 'msg-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9); }
+
+  function addMessage(content, type) {
+    var messageDiv = document.createElement('div');
+    messageDiv.className = 'message ' + type;
+    var messageId = newMessageId();
+    messageDiv.id = messageId;
+
+    var messageContent = document.createElement('div');
+    messageContent.className = 'message-content';
+    messageContent.innerHTML = parseMarkdown(content);
+    messageContent.setAttribute('data-original-content', content);
+
+    if (type === 'ai') {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'message-content-wrapper';
+      wrapper.appendChild(messageContent);
+      var actionsDiv = document.createElement('div');
+      actionsDiv.className = 'message-actions';
+      actionsDiv.innerHTML = actionsMarkup(messageId);
+      wrapper.appendChild(actionsDiv);
+      messageDiv.appendChild(wrapper);
+    } else {
+      messageDiv.appendChild(messageContent);
+    }
+    messagesContainer.appendChild(messageDiv);
+    ensureSpacerLast();
+    return messageId;
+  }
+
+  async function addSplitMessages(fullResponse, delay) {
+    delay = delay || 300;
+    fullResponse = fullResponse.replace(/---+/g, '--');
+    var bubbles = fullResponse.split(/\s+--\s+(?=##)|\n\s*--\s*\n/).map(function (b) { return b.trim(); }).filter(function (b) { return b.length > 0; });
+
+    if (bubbles.length <= 1) { addMessage(fullResponse, 'ai'); return; }
+
+    var messageDiv = document.createElement('div');
+    messageDiv.className = 'message ai';
+    var messageId = newMessageId();
+    messageDiv.id = messageId;
+    var contentWrapper = document.createElement('div');
+    contentWrapper.className = 'message-content-wrapper';
+    messageDiv.appendChild(contentWrapper);
+    messagesContainer.appendChild(messageDiv);
+    ensureSpacerLast();
+
+    for (var i = 0; i < bubbles.length; i++) {
+      var messageContent = document.createElement('div');
+      messageContent.className = 'message-content';
+      messageContent.innerHTML = parseMarkdown(bubbles[i]);
+      messageContent.setAttribute('data-original-content', bubbles[i]);
+      messageContent.style.opacity = '0';
+      messageContent.style.transform = 'translateY(10px)';
+      contentWrapper.appendChild(messageContent);
+      (function (el) {
+        setTimeout(function () {
+          el.style.transition = 'opacity .35s ease-out, transform .35s ease-out';
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, 50);
+      })(messageContent);
+      ensureSpacerLast();
+      if (i < bubbles.length - 1) { await new Promise(function (r) { setTimeout(r, delay); }); }
+    }
+
+    contentWrapper.setAttribute('data-full-content', bubbles.join('\n\n--\n\n'));
+    var actionsDiv = document.createElement('div');
+    actionsDiv.className = 'message-actions';
+    actionsDiv.innerHTML = actionsMarkup(messageId);
+    contentWrapper.appendChild(actionsDiv);
+    ensureSpacerLast();
+  }
+
+  function createStreamingMessage(isSubsequent) {
+    var messageDiv = document.createElement('div');
+    messageDiv.className = 'message ai';
+    var messageId = newMessageId();
+    messageDiv.id = messageId;
+    var contentWrapper = document.createElement('div');
+    contentWrapper.className = 'message-content-wrapper';
+    var messageContent = document.createElement('div');
+    messageContent.className = 'message-content';
+    messageContent.textContent = '';
+    contentWrapper.appendChild(messageContent);
+    messageDiv.appendChild(contentWrapper);
+    if (isSubsequent) {
+      messageContent.style.opacity = '0';
+      messageContent.style.transform = 'translateY(10px)';
+    }
+    messagesContainer.appendChild(messageDiv);
+    ensureSpacerLast();
+    if (isSubsequent) {
+      setTimeout(function () {
+        messageContent.style.transition = 'opacity .35s ease-out, transform .35s ease-out';
+        messageContent.style.opacity = '1';
+        messageContent.style.transform = 'translateY(0)';
+      }, 50);
+    }
+    return messageId;
+  }
+
+  function finalizeStreamingMessage(messageId, fullContent) {
+    var messageDiv = document.getElementById(messageId);
+    if (!messageDiv) return;
+    var contentWrapper = messageDiv.querySelector('.message-content-wrapper');
+    if (!contentWrapper) return;
+    if (fullContent) contentWrapper.setAttribute('data-full-content', fullContent);
+    var actionsDiv = document.createElement('div');
+    actionsDiv.className = 'message-actions';
+    actionsDiv.innerHTML = actionsMarkup(messageId);
+    contentWrapper.appendChild(actionsDiv);
+  }
+
+  // ---- loading + progress ----
+  function addLoadingIndicator() {
+    var messageDiv = document.createElement('div');
+    messageDiv.className = 'message ai';
+    messageDiv.id = 'loading-message';
+    var loadingDiv = document.createElement('div');
+    loadingDiv.className = 'loading-indicator';
+    loadingDiv.innerHTML =
+      '<svg class="spinner-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">' +
+        '<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" opacity="0.25"></circle>' +
+        '<path fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" opacity="0.75"></path>' +
+      '</svg>' +
+      '<span class="loading-text">Zicy is thinking<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span></span>';
+    messageDiv.appendChild(loadingDiv);
+    messagesContainer.appendChild(messageDiv);
+    ensureSpacerLast();
+  }
+
+  function removeLoadingIndicator() {
+    var loadingMessage = document.getElementById('loading-message');
+    if (loadingMessage) loadingMessage.remove();
+    if (progressInterval) { clearInterval(progressInterval); progressInterval = null; }
+    isProgressBarActive = false;
+  }
+
+  function addProgressBarIndicator(isUrlQuery) {
+    var messageDiv = document.createElement('div');
+    messageDiv.className = 'message ai';
+    messageDiv.id = 'loading-message';
+    var initialText = isUrlQuery ? 'Examining content' : 'Zicy is thinking';
+    var progressContainer = document.createElement('div');
+    progressContainer.className = 'progress-container';
+    progressContainer.innerHTML =
+      '<span class="progress-text" id="progressText">' + initialText + '<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span></span>' +
+      '<div class="progress-bar-wrapper"><div class="progress-bar-fill" id="progressBarFill"></div></div>' +
+      '<span class="progress-percentage" id="progressPercentage">0%</span>';
+    messageDiv.appendChild(progressContainer);
+    messagesContainer.appendChild(messageDiv);
+    ensureSpacerLast();
+    isProgressBarActive = true;
+    progressStartTime = Date.now();
+    startProgressAnimation(isUrlQuery);
+  }
+
+  function setProgressText(text, includeDots) {
+    var progressText = document.getElementById('progressText');
+    if (!progressText) return;
+    if (includeDots) {
+      progressText.innerHTML = text + '<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>';
+    } else {
+      progressText.textContent = text;
+    }
+  }
+
+  var urlProgressStages = [
+    { text: 'Examining content', minProgress: 0, maxProgress: 25, duration: function () { return 5000 + Math.random() * 15000; } },
+    { text: 'Gathering insights', minProgress: 25, maxProgress: 60, duration: function () { return 15000 + Math.random() * 10000; } },
+    { text: 'Compiling recommendations', minProgress: 60, maxProgress: 95, duration: function () { return 10000 + Math.random() * 5000; } },
+    { text: 'Compiling recommendations', minProgress: 95, maxProgress: 99, duration: function () { return 999999; } }
+  ];
+  var generalProgressStages = [
+    { text: 'Zicy is thinking', minProgress: 0, maxProgress: 30, duration: function () { return 5000 + Math.random() * 10000; } },
+    { text: 'Analyzing your query', minProgress: 30, maxProgress: 65, duration: function () { return 10000 + Math.random() * 10000; } },
+    { text: 'Preparing response', minProgress: 65, maxProgress: 95, duration: function () { return 8000 + Math.random() * 7000; } },
+    { text: 'Preparing response', minProgress: 95, maxProgress: 99, duration: function () { return 999999; } }
+  ];
+  var extraStage = { text: 'Almost there, finalizing', minProgress: 99, maxProgress: 99, duration: function () { return 999999; } };
+
+  function startProgressAnimation(isUrlQuery) {
+    var progressBarFill = document.getElementById('progressBarFill');
+    var progressPercentage = document.getElementById('progressPercentage');
+    if (!progressBarFill || !progressPercentage) return;
+    var progressStages = isUrlQuery ? urlProgressStages : generalProgressStages;
+    var currentProgress = 0, maxProgressReached = 0, currentStage = 0, stageStartTime = Date.now();
+    setProgressText(progressStages[currentStage].text, true);
+    progressInterval = setInterval(function () {
+      if (!isProgressBarActive) { clearInterval(progressInterval); return; }
+      var elapsedTime = Date.now() - stageStartTime;
+      var totalElapsedTime = Date.now() - progressStartTime;
+      var stage = progressStages[currentStage];
+      if (totalElapsedTime > 120000 && currentStage < progressStages.length - 1) {
+        currentStage = progressStages.length - 1;
+        stageStartTime = Date.now();
+        setProgressText(extraStage.text, true);
+      }
+      var stageDuration = stage.duration();
+      var stageProgress = Math.min(elapsedTime / stageDuration, 1);
+      var progressRange = stage.maxProgress - stage.minProgress;
+      var calculatedProgress = stage.minProgress + (stageProgress * progressRange);
+      currentProgress = Math.max(calculatedProgress, maxProgressReached);
+      maxProgressReached = currentProgress;
+      progressBarFill.style.width = currentProgress + '%';
+      progressPercentage.textContent = Math.floor(currentProgress) + '%';
+      if (stageProgress >= 1 && currentStage < progressStages.length - 1) {
+        currentStage++;
+        stageStartTime = Date.now();
+        setProgressText(progressStages[currentStage].text, true);
+      }
+    }, 100);
+  }
+
+  function completeProgressBar(callback) {
+    if (!isProgressBarActive) { if (callback) callback(); return; }
+    var progressBarFill = document.getElementById('progressBarFill');
+    var progressPercentage = document.getElementById('progressPercentage');
+    if (!progressBarFill || !progressPercentage) { if (callback) callback(); return; }
+    setProgressText('Complete!', false);
+    progressBarFill.style.width = '100%';
+    progressPercentage.textContent = '100%';
+    setTimeout(function () { if (callback) callback(); }, 350);
+    if (progressInterval) { clearInterval(progressInterval); progressInterval = null; }
+  }
+
+  // ---- clipboard / feedback ----
+  function flagCopied(messageDiv) {
+    var copyButton = messageDiv.querySelector('.copy-button');
+    if (copyButton) {
+      copyButton.classList.add('copied');
+      setTimeout(function () { copyButton.classList.remove('copied'); }, 2000);
+    }
+  }
+
+  function copyMessage(messageId) {
+    var messageDiv = document.getElementById(messageId);
+    if (!messageDiv) return;
+    var contentWrapper = messageDiv.querySelector('.message-content-wrapper');
+    var fullContent = contentWrapper ? contentWrapper.getAttribute('data-full-content') : null;
+
+    var htmlContent, plainContent;
+    if (fullContent) {
+      plainContent = fullContent;
+      htmlContent = parseMarkdown(formatAPIResponse(fullContent));
+    } else {
+      var messageContent = messageDiv.querySelector('.message-content');
+      if (!messageContent) return;
+      htmlContent = messageContent.innerHTML;
+      plainContent = messageContent.getAttribute('data-original-content') || messageContent.textContent;
+    }
+
+    // Write rich HTML + plain text so pasting into docs/email keeps formatting; fall back to plain.
+    if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+      try {
+        var item = new ClipboardItem({
+          'text/html': new Blob([htmlContent], { type: 'text/html' }),
+          'text/plain': new Blob([plainContent], { type: 'text/plain' })
+        });
+        navigator.clipboard.write([item]).then(function () { flagCopied(messageDiv); }).catch(function () {
+          navigator.clipboard.writeText(plainContent).then(function () { flagCopied(messageDiv); }).catch(function () {});
+        });
+        return;
+      } catch (e) { /* fall through to plain text */ }
+    }
+    navigator.clipboard.writeText(plainContent).then(function () { flagCopied(messageDiv); }).catch(function (err) { console.error('Copy failed:', err); });
+  }
+
+  function copyGroupMessage(messageId) { copyMessage(messageId); }
+
+  function likeMessage(messageId) {
+    var messageDiv = document.getElementById(messageId);
+    if (!messageDiv) return;
+    var likeButton = messageDiv.querySelector('.like-button');
+    var dislikeButton = messageDiv.querySelector('.dislike-button');
+    if (!likeButton) return;
+    if (likeButton.classList.contains('active')) {
+      likeButton.classList.remove('active');
+      if (dislikeButton) dislikeButton.classList.remove('hidden');
+    } else {
+      likeButton.classList.add('active');
+      if (dislikeButton) { dislikeButton.classList.remove('active'); dislikeButton.classList.add('hidden'); }
+    }
+  }
+
+  function dislikeMessage(messageId) {
+    var messageDiv = document.getElementById(messageId);
+    if (!messageDiv) return;
+    var likeButton = messageDiv.querySelector('.like-button');
+    var dislikeButton = messageDiv.querySelector('.dislike-button');
+    if (!dislikeButton) return;
+    if (dislikeButton.classList.contains('active')) {
+      dislikeButton.classList.remove('active');
+      if (likeButton) likeButton.classList.remove('hidden');
+    } else {
+      dislikeButton.classList.add('active');
+      if (likeButton) { likeButton.classList.remove('active'); likeButton.classList.add('hidden'); }
+    }
+  }
+
+  // ---- API (SSE stream) ----
+  async function sendMessageToAPI(message, onChunk) {
+    try {
+      var apiUrl = 'https://chatapi.zicy.com/chat/stream';
+      var controller = new AbortController();
+      activeController = controller;
+      var timeoutId = setTimeout(function () { controller.abort(); }, 300000);
+      var response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: message,
+          sessionId: sessionId,
+          source: 'zicy_landing_page',
+          mode: 'consultant',
+          temperature: 0.5,
+          use_cache: false,
+          similarity_threshold: 0.85
+        }),
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      if (!response.ok) throw new Error('API returned status ' + response.status);
+      var reader = response.body.getReader();
+      var decoder = new TextDecoder();
+      var fullContent = '';
+      var buffer = '';
+      while (true) {
+        var chunk = await reader.read();
+        if (chunk.done) break;
+        buffer += decoder.decode(chunk.value, { stream: true });
+        var lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+        for (var k = 0; k < lines.length; k++) {
+          var line = lines[k];
+          if (line.startsWith('data: ')) {
+            var dataStr = line.substring(6);
+            try {
+              var data = JSON.parse(dataStr);
+              if (data.type === 'metadata') continue;
+              if (data.type === 'content' && data.content) {
+                fullContent += data.content;
+                if (onChunk && typeof onChunk === 'function') onChunk(data.content);
+              }
+            } catch (parseError) { /* skip malformed SSE line */ }
+          }
+        }
+      }
+      activeController = null;
+      return formatAPIResponse(fullContent || 'The AI service returned an empty response. Please try again or rephrase your question.');
+    } catch (error) {
+      activeController = null;
+      if (error.name === 'AbortError') return 'The request took longer than expected. Please try again or contact support if this persists.';
+      if (error.message && error.message.indexOf('Failed to fetch') !== -1) return 'Network error: unable to reach the chat service. Please check your connection or try again later.';
+      console.error('API Error:', error);
+      return 'Sorry, I encountered an error processing your request. Please try again.';
+    }
+  }
+
+  // ---- send flow ----
+  async function handleSend() {
+    if (isProcessing) return;
+    var message = chatInput.value.trim();
+    if (!message) return;
+
+    var myGen = convGeneration;
+    isProcessing = true;
+    sendButton.disabled = true;
+    updateSuggestionsState();
+
+    var chatContainer = document.querySelector('#zicy-consultant .chat-container');
+    var consultantWrapper = document.querySelector('#zicy-consultant .consultant-wrapper');
+    var isFirstMessage = !messagesContainer.classList.contains('active');
+
+    if (isFirstMessage) {
+      updateHeaderHeight();
+      chatContainer.classList.add('expanded');
+      messagesContainer.classList.add('active');
+      consultantWrapper.classList.add('expanded');
+      document.body.classList.add('fullscreen');
+      chatMenuButton.disabled = false;
+      populateExpandedSuggestions();
+    }
+
+    var userMsgId = addMessage(message, 'user');
+    var userMsgEl = document.getElementById(userMsgId);
+    pinUserMessageTop(userMsgEl);
+    chatInput.value = '';
+    chatInput.style.height = '52px';
+
+    var hasURL = containsURL(message);
+    if (hasURL) { addProgressBarIndicator(true); } else { addLoadingIndicator(); }
+
+    var aiMessageId = null;
+    var aiMessageContent = null;
+    var streamedText = '';
+    var isFirstChunk = true;
+    var isFirstBubble = true;
+    var allMessageIds = [];
+    var isBuffering = true;
+
+    var response = await sendMessageToAPI(message, function (chunk) {
+      if (isFirstChunk) {
+        isFirstChunk = false;
+        if (isProgressBarActive) {
+          completeProgressBar(function () { removeLoadingIndicator(); });
+        } else {
+          removeLoadingIndicator();
+        }
+        aiMessageId = createStreamingMessage(false);
+        aiMessageContent = document.querySelector('#' + aiMessageId + ' .message-content');
+        allMessageIds.push(aiMessageId);
+      }
+
+      streamedText += chunk;
+      streamedText = streamedText.replace(/---+/g, '--');
+
+      if (isFirstBubble) {
+        if (streamedText.indexOf('#') !== -1 || streamedText.indexOf('>>') !== -1) {
+          isFirstBubble = false;
+        } else if (streamedText.trim().length > 10) {
+          streamedText = '>> ' + streamedText;
+          isFirstBubble = false;
+        }
+      }
+
+      var splitMarkerRegex = /\s+--\s+(?=##)|\n\s*--\s*\n/;
+      var splitMatch;
+      while ((splitMatch = streamedText.match(splitMarkerRegex)) !== null) {
+        isFirstBubble = false;
+        var textBeforeMarker = streamedText.substring(0, splitMatch.index);
+        var textAfterMarker = streamedText.substring(splitMatch.index + splitMatch[0].length);
+        if (aiMessageContent && textBeforeMarker.trim()) {
+          var finalText = textBeforeMarker.trim();
+          aiMessageContent.innerHTML = parseMarkdown(formatAPIResponse(finalText));
+          aiMessageContent.setAttribute('data-original-content', finalText);
+        }
+        aiMessageId = createStreamingMessage(true);
+        aiMessageContent = document.querySelector('#' + aiMessageId + ' .message-content');
+        allMessageIds.push(aiMessageId);
+        streamedText = textAfterMarker.trim();
+        isBuffering = true;
+      }
+
+      if (isBuffering && streamedText.indexOf('>>') !== -1) { isBuffering = false; }
+
+      if (!isBuffering && aiMessageContent) {
+        aiMessageContent.innerHTML = parseMarkdown(formatAPIResponse(streamedText));
+        aiMessageContent.setAttribute('data-original-content', streamedText);
+      }
+    });
+
+    if (myGen !== convGeneration) {
+      // Conversation was restarted mid-stream — discard this late response.
+      return;
+    }
+
+    if (isFirstChunk) {
+      if (isProgressBarActive) {
+        await new Promise(function (resolve) { completeProgressBar(function () { removeLoadingIndicator(); resolve(); }); });
+      } else {
+        removeLoadingIndicator();
+      }
+      await addSplitMessages(response);
+    } else if (aiMessageId) {
+      var messageDiv = document.getElementById(aiMessageId);
+      var hasActions = messageDiv && messageDiv.querySelector('.message-actions');
+      if (!hasActions) {
+        var fullContent = '';
+        if (allMessageIds.length > 1) {
+          allMessageIds.forEach(function (msgId) {
+            var msg = document.getElementById(msgId);
+            if (msg) {
+              var content = msg.querySelector('.message-content');
+              if (content) {
+                var oc = content.getAttribute('data-original-content');
+                if (oc) { if (fullContent) fullContent += '\n\n--\n\n'; fullContent += oc; }
+              }
+            }
+          });
+        }
+        finalizeStreamingMessage(aiMessageId, fullContent);
+      }
+    }
+
+    settleSpacer(userMsgEl);
+    isProcessing = false;
+    sendButton.disabled = false;
+    updateSuggestionsState();
+    if (!isMobileDevice()) chatInput.focus();
+  }
+
+  // ---- suggestions ----
+  function updateSuggestionsState() {
+    var buttons = document.querySelectorAll('#suggestions .suggestion-button, #expandedSuggestions .suggestion-button');
+    buttons.forEach(function (button) { button.disabled = sendButton.disabled; });
+  }
+
+  function populateExpandedSuggestions() {
+    expandedSuggestionsContainer.innerHTML = '';
+    allSuggestions.forEach(function (suggestion) {
+      if (!usedSuggestions.has(suggestion)) {
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'suggestion-button';
+        button.textContent = suggestion;
+        button.addEventListener('click', function () {
+          if (!button.disabled) handleExpandedSuggestionClick(suggestion, button);
+        });
+        expandedSuggestionsContainer.appendChild(button);
+      }
+    });
+    updateSuggestionsState();
+  }
+
+  function handleExpandedSuggestionClick(question, buttonElement) {
+    usedSuggestions.add(question);
+    buttonElement.style.opacity = '0';
+    buttonElement.style.transform = 'scale(0.8)';
+    setTimeout(function () { buttonElement.remove(); }, 300);
+    chatInput.value = question;
+    if (isMobileDevice()) { chatInput.blur(); } else { chatInput.focus(); }
+    handleSend();
+  }
+
+  function handleSuggestion(question) {
+    usedSuggestions.add(question);
+    chatInput.value = question;
+    if (isMobileDevice()) { chatInput.blur(); } else { chatInput.focus(); }
+    handleSend();
+  }
+
+  // ---- conversation menu ----
+  function restartConversation() {
+    chatMenuDropdown.classList.remove('active');
+    if (!confirm('Restart the conversation? All messages will be cleared.')) return;
+
+    // Invalidate + abort any in-flight request so a late response can't inject a ghost message.
+    convGeneration++;
+    if (activeController) { try { activeController.abort(); } catch (e) {} activeController = null; }
+    if (progressInterval) { clearInterval(progressInterval); progressInterval = null; }
+    isProgressBarActive = false;
+    isProcessing = false;
+    sendButton.disabled = false;
+
+    messagesContainer.querySelectorAll('.message').forEach(function (msg) { msg.remove(); });
+    scrollSpacer.style.height = '0px';
+    usedSuggestions.clear();
+    var chatContainer = document.querySelector('#zicy-consultant .chat-container');
+    var consultantWrapper = document.querySelector('#zicy-consultant .consultant-wrapper');
+    chatContainer.classList.remove('expanded');
+    messagesContainer.classList.remove('active');
+    consultantWrapper.classList.remove('expanded');
+    document.body.classList.remove('fullscreen');
+    var rootEl = document.getElementById('zicy-consultant');
+    if (rootEl) rootEl.style.setProperty('--zc-kb', '0px');
+    chatMenuButton.disabled = true;
+    expandedSuggestionsContainer.innerHTML = '';
+    chatInput.value = '';
+    chatInput.style.height = '52px';
+    updateSuggestionsState();
+  }
+
+  function collectTranscript() {
+    var out = [];
+    messagesContainer.querySelectorAll('.message:not(#loading-message)').forEach(function (msg) {
+      var isUser = msg.classList.contains('user');
+      var contentWrapper = msg.querySelector('.message-content-wrapper');
+      if (contentWrapper) {
+        var fullContent = contentWrapper.getAttribute('data-full-content');
+        if (fullContent) { out.push({ who: 'Zicy', text: fullContent }); return; }
+      }
+      var content = msg.querySelector('.message-content');
+      if (!content) return;
+      var text = content.getAttribute('data-original-content') || content.textContent;
+      out.push({ who: isUser ? 'You' : 'Zicy', text: text });
+    });
+    return out;
+  }
+
+  function shareConversation() {
+    chatMenuDropdown.classList.remove('active');
+    var entries = collectTranscript();
+    if (entries.length === 0) { alert('No conversation to share yet.'); return; }
+    var conversationText = 'This advice is from Zicy (https://www.zicy.com/) - Your AEO/GEO AI Consultant. Try it yourself here: https://www.zicy.com/consultant\n\n---\n\n';
+    entries.forEach(function (e) { conversationText += e.who + ': ' + e.text + '\n\n'; });
+    if (navigator.share) {
+      navigator.share({ title: 'Zicy AI Conversation', text: conversationText }).catch(function () { copyToClipboardFallback(conversationText); });
+    } else {
+      copyToClipboardFallback(conversationText);
+    }
+  }
+
+  function downloadTranscript() {
+    chatMenuDropdown.classList.remove('active');
+    var entries = collectTranscript();
+    if (entries.length === 0) { alert('No conversation to download yet.'); return; }
+    var transcript = 'Zicy AI Conversation Transcript\n================================\nDate: ' + new Date().toLocaleString() + '\n\n';
+    entries.forEach(function (e) { transcript += e.who + ':\n' + e.text + '\n\n---\n\n'; });
+    var blob = new Blob([transcript], { type: 'text/plain' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'zicy-conversation-' + Date.now() + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function copyToClipboardFallback(text) {
+    navigator.clipboard.writeText(text).then(function () { alert('Conversation copied to clipboard!'); }).catch(function () { alert('Failed to copy conversation. Please try again.'); });
+  }
+
+  // ---- wiring ----
+  sendButton.addEventListener('click', handleSend);
+
+  chatInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
+  });
+
+  chatInput.addEventListener('input', function () {
+    this.style.height = '52px';
+    if (this.scrollHeight > 52) this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+  });
+
+  suggestionsContainer.querySelectorAll('.suggestion-button').forEach(function (button) {
+    var suggestionText = button.textContent;
+    allSuggestions.push(suggestionText);
+    button.addEventListener('click', function () { if (!button.disabled) handleSuggestion(suggestionText); });
+  });
+  updateSuggestionsState();
+
+  chatMenuButton.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (!chatMenuButton.disabled) chatMenuDropdown.classList.toggle('active');
+  });
+  document.addEventListener('click', function (e) {
+    if (!chatMenuButton.contains(e.target) && !chatMenuDropdown.contains(e.target)) {
+      chatMenuDropdown.classList.remove('active');
+    }
+  });
+</script>
