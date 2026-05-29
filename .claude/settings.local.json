@@ -5,7 +5,8 @@
       "mcp__Claude_Preview__preview_start",
       "Bash(ls -lt \"C:\\\\Users\\\\Test\\\\Downloads\" | head -30)",
       "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"C:\\\\Users\\\\Test\\\\Downloads\\\\ChatGPT Image May 28, 2026, 11_16_30 AM.png\"\\); \"$\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\))",
-      "mcp__207b71ed-0449-4a19-b32f-77900aefb08b__get_file_metadata"
+      "mcp__207b71ed-0449-4a19-b32f-77900aefb08b__get_file_metadata",
+      "Bash(npm run *)"
     ]
   }
 }
