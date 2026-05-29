@@ -174,7 +174,7 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
     display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%;
   }
   #zicy-consultant .input-controls-wrapper {
-    display: flex; align-items: flex-end; gap: 10px; width: 100%; max-width: 700px; margin: 0 auto;
+    display: flex; align-items: center; gap: 10px; width: 100%; max-width: 700px; margin: 0 auto;
   }
   #zicy-consultant .input-container { position: relative; flex: 1; }
   #zicy-consultant .chat-input {
@@ -190,21 +190,21 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
   #zicy-consultant .chat-input::placeholder { color: var(--muted); }
 
   #zicy-consultant .send-button {
-    position: absolute; right: 6px; bottom: 6px;
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
     width: 40px; height: 40px; border-radius: 50%; border: none;
     background: var(--indigo); color: #fff; cursor: pointer;
     display: flex; align-items: center; justify-content: center; line-height: 0;
     box-shadow: 0 2px 8px rgba(49,46,129,.3);
     transition: background .15s, transform .12s cubic-bezier(.34,1.56,.64,1);
   }
-  #zicy-consultant .send-button:hover:not(:disabled) { background: var(--indigo-bright); transform: scale(1.06); }
-  #zicy-consultant .send-button:active:not(:disabled) { transform: scale(.92); }
-  #zicy-consultant .send-button:disabled { background: var(--line-2); cursor: not-allowed; box-shadow: none; }
+  #zicy-consultant .send-button:hover:not(:disabled) { background: var(--indigo-bright); transform: translateY(-50%) scale(1.06); }
+  #zicy-consultant .send-button:active:not(:disabled) { transform: translateY(-50%) scale(.92); }
+  #zicy-consultant .send-button:disabled { background: var(--line-2); cursor: not-allowed; box-shadow: none; transform: translateY(-50%); }
   #zicy-consultant .send-button svg { display: block; margin-left: 1px; }
 
   /* triple-dot menu */
   #zicy-consultant .chat-menu-button {
-    display: none; width: 40px; height: 40px; margin-bottom: 6px; border-radius: 50%; border: none;
+    display: none; width: 44px; height: 44px; border-radius: 50%; border: none;
     background: transparent; cursor: pointer; align-items: center; justify-content: center;
     flex-shrink: 0; transition: background .15s;
   }
@@ -318,6 +318,15 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
   #zicy-consultant .progress-bar-wrapper { width: 100%; height: 6px; background: #e6e6f0; border-radius: 3px; overflow: hidden; }
   #zicy-consultant .progress-bar-fill { height: 100%; width: 0; border-radius: 3px; background: linear-gradient(90deg, var(--indigo), var(--indigo-bright)); transition: width .5s ease-out; }
   #zicy-consultant .progress-percentage { font-size: 12px; color: var(--muted); text-align: right; font-family: var(--mono); }
+
+  /* URL audits take a while — float the progress card in the middle of the chat area. */
+  #zicy-consultant .messages-container.active .message.zc-loading-center {
+    position: fixed; top: var(--zc-hh, 88px); left: 0; right: 0; bottom: 0;
+    max-width: none; margin: 0; padding: 24px;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none; z-index: 41;
+  }
+  #zicy-consultant .message.zc-loading-center .progress-container { pointer-events: auto; width: min(92%, 600px); max-width: 600px; }
 
   @keyframes zcSlideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes zcSpin { to { transform: rotate(360deg); } }
@@ -742,7 +751,7 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
 
   function addProgressBarIndicator(isUrlQuery) {
     var messageDiv = document.createElement('div');
-    messageDiv.className = 'message ai';
+    messageDiv.className = 'message ai' + (isUrlQuery ? ' zc-loading-center' : '');
     messageDiv.id = 'loading-message';
     var initialText = isUrlQuery ? 'Examining content' : 'Zicy is thinking';
     var progressContainer = document.createElement('div');
@@ -1028,30 +1037,39 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
     var hasURL = containsURL(message);
     if (hasURL) { addProgressBarIndicator(true); } else { addLoadingIndicator(); }
 
+    // ---- streaming display state ----
     var aiMessageId = null;
     var aiMessageContent = null;
     var streamedText = '';
-    var isFirstChunk = true;
     var isFirstBubble = true;
-    var allMessageIds = [];
     var isBuffering = true;
+    var allMessageIds = [];
+    var started = false;
 
-    var response = await sendMessageToAPI(message, function (chunk) {
-      if (isFirstChunk) {
-        isFirstChunk = false;
-        if (isProgressBarActive) {
-          completeProgressBar(function () { removeLoadingIndicator(); });
-        } else {
-          removeLoadingIndicator();
-        }
+    // Follow the streaming answer: once the turn is taller than the viewport, keep its
+    // growing edge in view (scrolling the question up, ChatGPT-style). Until then leave
+    // the smooth pin alone so the question rests at the top.
+    function followStream() {
+      var followTop = scrollSpacer.offsetTop - messagesContainer.clientHeight + 24;
+      var qTop = userMsgEl ? Math.max(0, userMsgEl.offsetTop - 12) : 0;
+      if (followTop > qTop) {
+        if (activeScrollRaf) { cancelAnimationFrame(activeScrollRaf); activeScrollRaf = null; }
+        messagesContainer.scrollTop = followTop;
+      }
+    }
+
+    // Render a revealed slice exactly like a streamed chunk (>> header buffering + -- bubble splits).
+    function feed(text) {
+      if (!started) {
+        started = true;
+        if (isProgressBarActive) { completeProgressBar(function () { removeLoadingIndicator(); }); }
+        else { removeLoadingIndicator(); }
         aiMessageId = createStreamingMessage(false);
         aiMessageContent = document.querySelector('#' + aiMessageId + ' .message-content');
         allMessageIds.push(aiMessageId);
       }
-
-      streamedText += chunk;
+      streamedText += text;
       streamedText = streamedText.replace(/---+/g, '--');
-
       if (isFirstBubble) {
         if (streamedText.indexOf('#') !== -1 || streamedText.indexOf('>>') !== -1) {
           isFirstBubble = false;
@@ -1060,7 +1078,6 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
           isFirstBubble = false;
         }
       }
-
       var splitMarkerRegex = /\s+--\s+(?=##)|\n\s*--\s*\n/;
       var splitMatch;
       while ((splitMatch = streamedText.match(splitMarkerRegex)) !== null) {
@@ -1078,21 +1095,50 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
         streamedText = textAfterMarker.trim();
         isBuffering = true;
       }
-
       if (isBuffering && streamedText.indexOf('>>') !== -1) { isBuffering = false; }
-
       if (!isBuffering && aiMessageContent) {
         aiMessageContent.innerHTML = parseMarkdown(formatAPIResponse(streamedText));
         aiMessageContent.setAttribute('data-original-content', streamedText);
+        followStream();
       }
-    });
+    }
+
+    // ---- typewriter reveal ----
+    // The endpoint usually returns the whole answer in a SINGLE SSE event, so reveal
+    // the accumulated text letter-by-letter for a true streaming feel. Works the same
+    // if the backend does send small deltas — we just reveal them as they land.
+    var target = '';
+    var revealed = 0;
+    var netDone = false;
+    var revealResolve;
+    var revealDone = new Promise(function (res) { revealResolve = res; });
+
+    function tick() {
+      if (myGen !== convGeneration) { revealResolve(); return; } // restarted — stop revealing
+      if (revealed < target.length) {
+        var remaining = target.length - revealed;
+        var step = Math.max(3, Math.ceil(remaining / 40)); // adaptive: smooth, fast, never stalls
+        var slice = target.substr(revealed, step);
+        revealed += slice.length;
+        feed(slice);
+      }
+      if (netDone && revealed >= target.length) { revealResolve(); return; }
+      if (revealed < target.length) { requestAnimationFrame(tick); }
+      else { setTimeout(tick, 60); } // idle while waiting for more network data
+    }
+    requestAnimationFrame(tick);
+
+    var response = await sendMessageToAPI(message, function (chunk) { target += chunk; });
+    netDone = true;
+    await revealDone;
 
     if (myGen !== convGeneration) {
       // Conversation was restarted mid-stream — discard this late response.
       return;
     }
 
-    if (isFirstChunk) {
+    if (!started) {
+      // No streamed content (e.g. an error/empty string) — render it as a normal message.
       if (isProgressBarActive) {
         await new Promise(function (resolve) { completeProgressBar(function () { removeLoadingIndicator(); resolve(); }); });
       } else {
