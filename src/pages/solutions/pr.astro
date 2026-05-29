@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Screenshot from '../../components/Screenshot.astro';
+// Anonymised screenshots cleared per the privacy gate (§1.1 of the screenshots brief).
+// Caption + alt for citationShot use 'owned / earned / competitor' phrasing only (PR-page canon).
+import citationShot from '../../assets/screenshots/anonymised/citation-analysis-overview.png';
+import competitorSentimentShot from '../../assets/screenshots/anonymised/competitor-sentiment-profiles.png';
+
+const title = 'Zicy for PR — reputation is now decided inside AI answers';
+const description =
+  'Measure how AI describes your client, prove the coverage you earned moved the answer, and report a defensible reputation metric. Zicy for PR and communications teams.';
+
+// Single sourced stat — brief explicitly forbids padding with a second invented stat.
+const stat = {
+  n: '1B+',
+  label:
+    'people use generative AI tools every month — reputation is increasingly formed inside the answer, not the article.',
+  source: 'Meltwater, Digital 2026 Global Overview',
+};
+
+const usps = [
+  {
+    h: 'Close the loop from placement to answer.',
+    p: 'Citation Analysis shows which sources AI cites about your client — owned, earned, or competitor — so you can connect the coverage you landed to movement in the answer.',
+  },
+  {
+    h: 'A reputation metric, not a clippings book.',
+    p: 'Mention coverage, citation rate, share of voice and sentiment, tracked weekly across five engines — the report that finally replaces AVE.',
+  },
+  {
+    h: 'See a rival owning the answer early.',
+    p: "Know when a competitor or a hostile source is shaping how AI frames your client, while there's still time to respond.",
+  },
+];
+
+const wiifm = [
+  'Prove earned media works — tie the coverage you land to measurable movement in AI answers.',
+  'Win and defend retainers with a metric the C-suite already cares about: share of voice.',
+  'Spot a reputation risk inside the answer before it spreads.',
+  'Report with confidence — a defensible number, not a vanity metric.',
+];
+
+const modules = [
+  {
+    name: 'Citation Analysis',
+    desc: 'Which sources AI cites about your client, owned vs. earned vs. competitor, by topic.',
+  },
+  {
+    name: 'Brand & Competitor Sentiment',
+    desc: 'How AI frames your client and their rivals, tracked over time.',
+  },
+  {
+    name: 'AI Visibility',
+    desc: 'Mention coverage and share of voice, so you can show movement after a campaign lands.',
+  },
+  {
+    name: 'Competitor Sentiment Profiles',
+    desc: 'The framing each rival is earning, positive to negative.',
+  },
+];
+---
+<BaseLayout title={title} description={description}>
+  <!-- 1. Hero (white) -->
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">For PR agencies</span>
+      <h1>Reputation is now decided inside AI answers. Prove your work changed them.</h1>
+      <p class="lead">
+        When a buyer asks AI about your client, the answer is built from the coverage and the
+        sources AI trusts. Zicy shows you what that answer is across all five engines, whether the
+        media you earned moved it, and gives you a reputation metric you can put in front of a board.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="/audit">Run a free audit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. The new PR math (white) — one sourced stat -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">The new PR math</span>
+        <h2>Coverage you can&rsquo;t connect to an answer is coverage you can&rsquo;t defend.</h2>
+        <p>
+          Clippings, impressions and AVE no longer answer the only question clients now ask:
+          <i>did it change what AI says about us?</i>
+        </p>
+      </div>
+      <div style="max-width:680px;margin:0 auto">
+        <div class="metric" style="padding:30px 32px">
+          <div class="n">{stat.n}</div>
+          <div class="l" style="margin-top:10px;font-size:14.5px">{stat.label}</div>
+          <div class="mono" style="font-size:12px;color:var(--muted);margin-top:12px;letter-spacing:.02em">
+            Source: {stat.source}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Why Zicy (lavender) — three USP cards -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><h2>Why PR teams choose Zicy.</h2></div>
+      <div class="grid-3">
+        {usps.map((u) => (
+          <div class="card"><h3>{u.h}</h3><p>{u.p}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. What you get (white) — four-item benefit list -->
+  <section>
+    <div class="wrap">
+      <div class="shead"><h2>What you get.</h2></div>
+      <ul class="checklist">
+        {wiifm.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. Inside the platform (lavender) — four module cards + two product shots -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><h2>Inside the platform.</h2></div>
+      <div class="grid-2">
+        {modules.map((m) => (
+          <div class="card">
+            <span class="eyebrow">Module</span>
+            <h3>{m.name}</h3>
+            <p>{m.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="grid-2" style="margin-top:28px">
+        <Screenshot
+          src={citationShot}
+          alt="Zicy Citation Analysis showing which sources AI cites about your client — classified as owned, earned or competitor — with narrative-control percentages by source category."
+          caption="Citation Analysis — owned / earned / competitor split, by topic."
+        />
+        <Screenshot
+          src={competitorSentimentShot}
+          alt="Zicy Competitor Sentiment Profiles showing the positive, neutral and negative associations AI attaches to each rival brand."
+          caption="Competitor Sentiment Profiles — the framing each rival is earning."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Brand-side callout (white) — reinforces stance: Zicy measures, does not place coverage -->
+  <section>
+    <div class="wrap">
+      <p class="pullquote" style="font-size:22px;max-width:720px">
+        Zicy measures and proves; it does not place coverage. Your team earns the media on its
+        merits — Zicy shows whether it moved the answer.
+      </p>
+    </div>
+  </section>
+
+  <!-- 7. Proof (lavender) — headline metric + measurement disclosure (3 engines per canon) -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><h2>What it looks like when it works.</h2></div>
+      <div style="max-width:760px">
+        <div class="metric" style="padding:32px 34px;background:#fff;border:0.5px solid var(--line)">
+          <div class="n g" style="font-size:44px">
+            90.61<span style="font-size:22px">%</span>
+            <span style="display:inline-block;width:18px"></span>
+            <span style="color:var(--indigo)">55.92<span style="font-size:22px">%</span></span>
+          </div>
+          <div class="l" style="margin-top:14px;font-size:14px">
+            <b style="color:var(--green)">90.61%</b> mention &middot;
+            <b style="color:var(--indigo)">55.92%</b> citation &middot;
+            professional services &middot; from a near-zero baseline
+          </div>
+        </div>
+        <p class="disclosure">
+          Measurement: AI brand mention and citation rates across tracked category queries on
+          ChatGPT, Gemini, and Perplexity, via Zicy&rsquo;s measurement infrastructure. Client
+          anonymised pending naming permission.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Closing CTA band -->
+  <CtaBand heading="Show the coverage moved the answer." ctaLabel="Run a free audit" ctaHref="/audit" />
+</BaseLayout>
