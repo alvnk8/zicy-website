@@ -5,10 +5,11 @@ import Screenshot from '../../components/Screenshot.astro';
 import { ICPS } from '../../data/icps';
 
 export function getStaticPaths() {
-  // 'brands' has its own richer static page at src/pages/solutions/brands.astro —
-  // exclude it here so the build does not generate two routes for /solutions/brands.
+  // 'brands' and 'pr' have their own richer static pages at sibling .astro files —
+  // exclude them here so the build does not generate duplicate routes.
+  const STATIC_OVERRIDES = new Set(['brands', 'pr']);
   return ICPS
-    .filter((icp) => icp.slug !== 'brands')
+    .filter((icp) => !STATIC_OVERRIDES.has(icp.slug))
     .map((icp) => ({ params: { icp: icp.slug }, props: { icp } }));
 }
 
