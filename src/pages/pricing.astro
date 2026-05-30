@@ -32,7 +32,7 @@ const tiers = [
     cta: { label: 'Start your 7-day free trial', href: REGISTER_URL, primary: false, external: true },
   },
   {
-    badge: 'Growth · most popular',
+    badge: 'Growth',
     price: '$349',
     per: '/mo',
     feat: true,
@@ -245,7 +245,10 @@ const faqPage = {
       <div class="shead"><span class="eyebrow">Plans</span><h2>Three Plans. One Platform.</h2></div>
       <div class="tiers">
         {tiers.map((t) => (
-          <div class:list={['tier', { feat: t.feat }]}>
+          <div class:list={['tier', { feat: t.feat }]} style={t.feat ? 'position:relative' : ''}>
+            {t.feat && (
+              <span class="badge" style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--violet);color:#fff;white-space:nowrap">Most popular</span>
+            )}
             <div class="badge">{t.badge}</div>
             <div class="price">
               {t.price}

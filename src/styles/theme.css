@@ -338,3 +338,111 @@ label.fld{display:block;font-size:13px;font-weight:500;color:var(--ink);margin-b
   .wrap{padding:0 16px}
   .nav{padding:0 16px}
 }
+
+/* =====================================================================
+   PHASE 2 — interior components, screenshot system, mock app frame.
+   Builds on Phase 1 tokens. Where these share a class name with
+   Phase 1 interior components (.card, .shot), this later block wins
+   by source-order specificity and replaces the earlier definition.
+   ===================================================================== */
+
+/* ----- §2 section eyebrow indices (editorial spine) ----- */
+.eyebrow .ix{color:var(--violet);font-family:var(--fm);font-weight:500;margin-right:2px}
+
+/* ----- §3 interior components ----- */
+
+/* generic card (Phase 2 spec) — overrides Phase 1 .card */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 24px;transition:border-color .2s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease)}
+.card:hover{border-color:var(--violet-300);transform:translateY(-3px);box-shadow:var(--shadow)}
+.card .k{font-family:var(--fm);font-size:13px;color:var(--violet-700);font-weight:500;letter-spacing:0;text-transform:none;display:block}
+.card h3{font-family:var(--fd);font-weight:500;font-size:21px;margin:14px 0 10px;letter-spacing:-.01em;color:var(--ink)}
+.card p{font-size:14.5px;color:var(--ink-2)}
+.card .arrow{margin-top:18px;display:inline-block;font-size:14px;font-weight:500;color:var(--violet-700)}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+
+/* stat block */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:34px 32px}
+.stat .n{font-family:var(--fm);font-variant-numeric:tabular-nums slashed-zero;font-weight:500;font-size:clamp(44px,6vw,64px);letter-spacing:-.03em;line-height:1;color:var(--ink)}
+.stat .t{margin-top:14px;font-size:16px;color:var(--ink-2);max-width:34ch}
+.stat .s{margin-top:16px;font-family:var(--fm);font-size:11.5px;color:var(--muted);line-height:1.5}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:680px){.stats{grid-template-columns:1fr}}
+
+/* truth band (white surface) */
+.truth{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px;margin-top:44px}
+.three .bar{width:36px;height:4px;border-radius:2px;background:var(--grad);margin-bottom:18px}
+.three h3{font-family:var(--fd);font-weight:500;font-size:20px;margin-bottom:10px;color:var(--ink);letter-spacing:-.01em}
+.three p{font-size:15px;color:var(--ink-2)}
+
+/* proof band (deep iris canvas) */
+.proof{background:var(--canvas);color:#EDEAF6;text-align:center}
+.proof .n{font-family:var(--fm);font-variant-numeric:tabular-nums slashed-zero;font-weight:500;font-size:clamp(56px,11vw,118px);letter-spacing:-.04em;line-height:.95;color:#fff}
+.proof .gbar{width:200px;height:6px;border-radius:3px;background:var(--grad);margin:26px auto 22px}
+.proof .lab{font-family:var(--fm);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#9C92C4}
+.proof .pnote{max-width:60ch;margin:22px auto 0;font-size:14px;color:#9C92C4;line-height:1.55}
+
+/* final CTA */
+.final{text-align:center}
+.final h2{font-size:clamp(32px,5vw,52px);color:var(--ink)}
+.final p{margin:16px auto 30px;color:var(--ink-2);font-size:18px;max-width:46ch}
+.final .hcta{justify-content:center}
+
+/* pricing card featured state */
+.card.featured{border:2px solid var(--violet-300);position:relative}
+.badge{display:inline-block;background:var(--violet-50);color:var(--violet-700);font-family:var(--fm);font-size:12px;padding:4px 12px;border-radius:var(--r-pill);font-weight:500;letter-spacing:.02em}
+
+/* ----- §4 screenshot / product-UI system ----- */
+
+/* Real product frame — Phase 2 replaces the Phase 1 dashed placeholder. */
+.shot{position:relative;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+.shot img{display:block;width:100%;height:auto}
+.shot-cap{font-size:13px;color:var(--muted);margin-top:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.shot-cap .mono{color:var(--violet-700)}
+.callout{position:absolute;font-family:var(--fm);font-size:11px;padding:5px 11px;border-radius:var(--r-pill);box-shadow:var(--shadow);z-index:3}
+.callout.ok{background:var(--ok-bg);color:var(--ok-text)}
+.callout.flag{background:var(--flag-bg);color:var(--flag-text)}
+
+/* Embed placeholder — preserves the dashed-frame pattern the Phase 1
+   .shot used to provide (for the consultant page's "[ EMBED ]" block). */
+.embed-frame{border:1.5px dashed rgba(21,21,31,0.16);border-radius:var(--r-md);background:repeating-linear-gradient(135deg,#fafaff,#fafaff 11px,#f4f4fb 11px,#f4f4fb 22px);min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.embed-frame span{font-family:var(--fm);font-size:12.5px;color:#8a89a0;letter-spacing:.02em;line-height:1.7}
+
+/* Layout patterns — rotate across screenshot-heavy pages */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feature-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+@media(max-width:760px){.bento{grid-template-columns:1fr}.feature-split{grid-template-columns:1fr;gap:28px}}
+
+/* Mock app frame (placeholders only — for the homepage showcase) */
+.app-bar{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line);background:var(--paper)}
+.app-bar .mk{width:22px;height:22px;border-radius:6px;background:var(--grad);flex:none}
+.app-bar .wm{font-family:var(--fd);font-weight:500;letter-spacing:-.01em;font-size:15px;color:var(--ink)}
+.app-bar .tabs{margin-left:20px;display:flex;gap:18px;color:var(--muted);font-size:12.5px;flex-wrap:wrap}
+.app-bar .tabs .on{color:var(--ink);font-weight:500}
+.app-bar .me{margin-left:auto;width:24px;height:24px;border-radius:50%;background:var(--violet-100);flex:none}
+.app-body{display:grid;grid-template-columns:176px 1fr}
+.app-side{border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:3px;background:var(--paper)}
+.app-side .ni{padding:8px 11px;border-radius:8px;color:var(--ink-2);font-size:13px}
+.app-side .ni.on{background:var(--violet-100);color:var(--violet-700);font-weight:500}
+.app-main{padding:22px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+.kpi .l{font-size:10.5px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;font-family:var(--fm)}
+.kpi .v{font-family:var(--fm);font-variant-numeric:tabular-nums slashed-zero;font-size:23px;font-weight:500;letter-spacing:-.02em;margin-top:7px;color:var(--ink)}
+.kpi .dlt{font-size:11px;margin-top:4px;color:var(--ok-text);font-family:var(--fm)}
+.two{display:grid;grid-template-columns:1.45fr 1fr;gap:12px}
+.panel{border:1px solid var(--line);border-radius:12px;padding:15px;background:var(--paper)}
+.panel h5{font-size:12.5px;font-weight:500;color:var(--ink)}
+.panel .sx{font-size:11px;color:var(--muted);margin:2px 0 12px;font-family:var(--fm)}
+.bars{display:flex;flex-direction:column;gap:10px}
+.br-r{display:flex;align-items:center;gap:10px;font-size:12px}
+.br-r .nm{width:88px;color:var(--ink-2);font-family:var(--fs)}
+.br-r .tk{flex:1;height:7px;border-radius:4px;background:var(--mist);overflow:hidden}
+.br-r .tk i{display:block;height:100%;border-radius:4px;background:var(--violet)}
+.br-r .pc{font-family:var(--fm);font-size:11px;color:var(--ink-2);width:34px;text-align:right;font-variant-numeric:tabular-nums slashed-zero}
+@media(max-width:760px){.app-body{grid-template-columns:1fr}.app-side{display:none}.kpis{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}}
+
+/* Section sub-row of truth-signal pills (reused in homepage bento card) */
+.signals{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.signals .row{display:flex;align-items:center;gap:10px;font-size:13px}
+.signals .row .lab{color:var(--ink-2)}

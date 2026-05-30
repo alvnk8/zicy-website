@@ -10,27 +10,26 @@ const description =
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Case studies</span>
-      <h1>From Invisible to AI-Cited.</h1>
+      <h1>From invisible to AI-cited.</h1>
       <p class="lead">Real programmes, measured across ChatGPT, Gemini and Perplexity.</p>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      {CASES.map((c) => (
-        <a class="caserow" href={`/case-studies/${c.slug}`}>
-          <div>
-            <div class="meta">{c.indexMeta}</div>
-            <div style="font-weight:600;color:var(--indigo);margin-top:6px">{c.indexTitle}</div>
-          </div>
-          <div style="text-align:right">
-            <div class="big">{c.big}</div>
-            <div class="muted" style="font-size:13px">{c.indexSub}</div>
-          </div>
-        </a>
-      ))}
+      <div class="grid4">
+        {CASES.map((c) => (
+          <a class="card" href={`/case-studies/${c.slug}`}>
+            <span class="k">{c.indexMeta}</span>
+            <h3>{c.indexTitle}</h3>
+            <div class="mono" style="font-size:36px;color:var(--violet-700);margin-top:14px;font-variant-numeric:tabular-nums slashed-zero;font-weight:500;letter-spacing:-.02em">{c.big}</div>
+            <p style="font-size:13px;color:var(--muted);margin-top:4px">{c.indexSub}</p>
+            <span class="arrow">Read the case study →</span>
+          </a>
+        ))}
+      </div>
       <p class="disclosure">
-        Measurement: AI brand mention and citation rates across tracked category queries on ChatGPT, Gemini, and Perplexity, via Zicy’s measurement infrastructure. Clients anonymised pending naming permission.
+        Measurement: AI brand mention and citation rates across tracked category queries on ChatGPT, Gemini, and Perplexity, via Zicy&rsquo;s measurement infrastructure. Clients anonymised pending naming permission.
       </p>
     </div>
   </section>

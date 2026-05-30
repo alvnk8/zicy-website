@@ -48,28 +48,31 @@ const breadcrumb = {
   <section>
     <div class="wrap">
       <article class="prose">
-        <h2>The Challenge</h2>
+        <h2>The challenge</h2>
         <p>{c.challenge}</p>
-        <h2>The Approach</h2>
+        <h2>The approach</h2>
         <p>{c.approach}</p>
       </article>
 
-      <h2 style="font-size:24px;margin:40px 0 16px">The Result</h2>
-      <div class="grid-3">
+      <h2 style="font-size:24px;margin:40px 0 16px">The result</h2>
+      <div class="stats" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
         {c.results.map((r) => (
-          <div class="metric"><div class="n">{r.n}</div><div class="l">{r.l}</div></div>
+          <div class="stat">
+            <div class="n">{r.n}</div>
+            <div class="t">{r.l}</div>
+          </div>
         ))}
       </div>
 
       <p class="pullquote">{c.pullQuote}</p>
 
       <p class="disclosure">
-        Measurement: AI brand mention and citation rates across tracked category queries on ChatGPT, Gemini, and Perplexity, via Zicy’s measurement infrastructure. Client anonymised pending naming permission.
+        Measurement: AI brand mention and citation rates across tracked category queries on ChatGPT, Gemini, and Perplexity, via Zicy&rsquo;s measurement infrastructure. Client anonymised pending naming permission.
       </p>
 
       <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap">
-        <a class="btn btn-primary" href="/audit">Run a free audit</a>
-        <a class="btn btn-ghost" href="/case-studies">← All case studies</a>
+        <a class="btn btn-p" href="/audit">Run a free audit</a>
+        <a class="btn btn-t" href="/case-studies">← All case studies</a>
       </div>
     </div>
   </section>
