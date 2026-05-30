@@ -107,16 +107,16 @@ export const ICPS: Icp[] = [
     sectionSub:
       'Clippings and impressions no longer tell the story. The question clients now ask is simpler and harder: did it change what AI says about us?',
     modules: [
-      { name: 'Citation Analysis', desc: 'Which sources AI cites about your client, owned vs. earned vs. competitor — and where the narrative is being hijacked.' },
+      { name: 'Citation Analysis', desc: 'Which sources AI cites about your client, owned vs. earned vs. competitor vs. uncited — narrative control and competitor share.' },
       { name: 'Brand & Competitor Sentiment', desc: 'The language AI attaches to your client and their rivals, tracked over time.' },
       { name: 'AI Visibility', desc: 'Mention coverage and share of voice, so you can show movement after a campaign lands.' },
     ],
     screenshots: [
       {
-        desc: 'Citation Analysis — owned / earned / hijacked split',
+        desc: 'Citation Analysis — owned / earned / competitor / uncited split',
         src: citationOverviewAnonymised,
-        alt: "Zicy Citation Analysis showing how often AI cites the client's own sources versus competitors, with hijack and leaked rates.",
-        caption: 'Citation Analysis — narrative control, hijack and leaked rates.',
+        alt: "Zicy Citation Analysis showing how often AI cites the client's own sources versus competitors, with competitor share and uncited rate.",
+        caption: 'Citation Analysis — narrative control, competitor share and uncited rate.',
       },
       {
         desc: 'Competitor Sentiment Profiles',
@@ -128,7 +128,7 @@ export const ICPS: Icp[] = [
     whyHeading: 'Why PR teams choose Zicy',
     why: [
       { lead: 'Prove earned media works', desc: 'Connect the coverage you land to movement in AI answers.' },
-      { lead: 'Catch a hijack early', desc: 'See when a competitor or a hostile source is owning your client’s narrative.' },
+      { lead: 'Catch a narrative shift early', desc: 'See when a competitor or a hostile source is owning your client’s narrative.' },
       { lead: 'Report with confidence', desc: 'A measurable reputation metric, not a clippings book.' },
     ],
     band: { heading: 'Show the coverage moved the answer.', ctaLabel: 'Run a free audit', ctaHref: '/audit' },
