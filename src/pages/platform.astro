@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Screenshot from '../components/Screenshot.astro';
-import aiVisibility from '../assets/screenshots/anonymised/ai-visibility-dashboard.png';
-import brandSentiment from '../assets/screenshots/anonymised/brand-sentiment.png';
-import citationOverview from '../assets/screenshots/anonymised/citation-analysis-overview.png';
-import actionCenter from '../assets/screenshots/anonymised/action-center.png';
+// No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
+// Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
+import aiVisibility from '../assets/screenshots/ai-visibility-dashboard.png';
+import brandIntelligenceReport from '../assets/screenshots/brand-intelligence-report.png';
+import citationOverview from '../assets/screenshots/citation-analysis-overview.png';
+import actionCenter from '../assets/screenshots/action-center.png';
 import { SITE } from '../data/site';
 
 const title = 'Zicy Platform — the truth layer for AI visibility';
@@ -30,9 +32,13 @@ const loop = [
   { k: '04 · Prove', name: 'Site Traffic', desc: 'AI-referred sessions and downstream engagement, tied to the work.' },
 ];
 
-// Per brief §3 Platform — the 4 placeholders in order.
-// Brand Intelligence module screenshot is a gap (no upload exists); using brand-sentiment as
-// the brief's stated fallback until a clean Brand Intelligence capture is available.
+// The four "closed loop" screenshots, in document order: Measure → Diagnose → Act.
+// Alt + caption strings are AEO assets and match the supplied brief verbatim.
+//
+// Citation Analysis vocab — this caption deliberately uses "hijack rate" / "leaked rate"
+// because the product UI in the screenshot still shows those exact tile labels. The
+// earlier Phase 2 vocab sweep (commit 2c65432) sanitised website body copy only; the
+// product hadn't moved off these terms yet, and alt text must describe what's visible.
 const screenshots = [
   {
     src: aiVisibility,
@@ -40,14 +46,14 @@ const screenshots = [
     caption: 'AI Visibility — coverage, share of voice, ranking, radar across every engine.',
   },
   {
-    src: brandSentiment,
+    src: brandIntelligenceReport,
     alt: 'Zicy Brand Intelligence report showing how AI perceives the brand, an AI Reality Score fact-check, and the entity graph.',
     caption: 'Brand Intelligence — perception, AI Reality Score, and the entity graph.',
   },
   {
     src: citationOverview,
-    alt: 'Zicy Citation Analysis showing narrative control, competitor share and uncited rate, with a breakdown of owned, earned, competitor and uncited sources.',
-    caption: 'Citation Analysis — narrative control, competitor share and uncited rate.',
+    alt: 'Zicy Citation Analysis showing narrative control, hijack rate and leaked rate, with a breakdown of owned, earned, competitor and uncited sources.',
+    caption: 'Citation Analysis — narrative control, hijack and leaked rates.',
   },
   {
     src: actionCenter,
