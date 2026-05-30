@@ -118,7 +118,7 @@ section{padding:clamp(64px,9vw,112px) 0}
 header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);overflow:visible}
 .nav{display:flex;align-items:center;justify-content:space-between;height:88px;max-width:1200px;margin:0 auto;padding:0 28px;overflow:visible}
 .logo{display:inline-flex;align-items:center;line-height:0}
-.nav img,.logo img{height:72px;width:auto;display:block}
+.nav img,.logo img,.logo svg{height:72px;width:auto;display:block}
 
 .links{display:flex;align-items:center;gap:28px}
 .links a:not(.cta){font-size:15px;color:var(--ink-2);transition:color .15s;position:relative;font-family:var(--fs);font-weight:500}
@@ -197,7 +197,7 @@ footer{background:var(--canvas);color:#C9C3DE;position:relative;overflow:hidden;
 footer .gtop{height:3px;background:var(--grad);width:100%}
 .fgrid{position:relative;z-index:2;display:grid;grid-template-columns:1.7fr repeat(4,1fr);gap:36px;padding:64px 28px 40px;max-width:1200px;margin:0 auto}
 footer .flogo{display:inline-block;margin-bottom:16px}
-footer .flogo img{display:block;height:72px;width:auto}
+footer .flogo img,footer .flogo svg{display:block;height:72px;width:auto}
 footer .ftagline{font-size:14px;color:#9C92C4;max-width:30ch;margin-bottom:18px;line-height:1.55}
 footer h4{font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#7E78A0;margin-bottom:16px;font-weight:500}
 footer ul{list-style:none;margin:0;padding:0}

@@ -10,7 +10,27 @@ const homeActive = path === '/';
 ---
 <header>
   <nav class="nav" aria-label="Primary">
-    <a class="logo" href="/" aria-label="Zicy home"><img src="/zicy-logo.svg" alt="Zicy — pronounced Ziki" width="135" height="72" /></a>
+    <a class="logo" href="/" aria-label="Zicy home">
+      <!-- Inline SVG so the page-loaded Fraunces font renders in the pronunciation tag.
+           <img src=".svg"> would sandbox the SVG and fall back to a system serif. -->
+      <svg viewBox="650 380 610 325" width="135" height="72" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zicy — pronounced Ziki">
+        <text x="826.2" y="681.8" fill="#808184" font-size="43.38" font-style="italic" font-family="Fraunces, Georgia, serif">&#123; pronounced ~ Ziki &#125;</text>
+        <path fill="#231f20" d="M863.2,562.28l59.69-89.74h-75.87l16.17-32.08h107.41v22.94l-59.69,90.35h75.32v32.08h-123.04v-23.55Z"/>
+        <path fill="#231f20" d="M1036.57,452.03c0,11.17-8.53,19.09-19.9,19.09s-19.9-7.92-19.9-19.09,8.32-19.29,19.9-19.29,19.9,8.12,19.9,19.29ZM997.79,481.07h37.56v104.77h-37.56v-104.77Z"/>
+        <path fill="#231f20" d="M1135.64,517.41c-5.89-4.06-14.01-6.5-21.93-6.5-13.4,0-23.76,8.12-23.76,22.54s10.15,22.54,23.76,22.54c8.12,0,16.24-2.44,22.13-6.7v33.3c-7.31,3.65-18.48,5.48-28.02,5.48-32.28,0-56.04-23.35-56.04-54.62s23.76-54.82,56.04-54.82c9.54,0,20.71,2.03,27.82,5.69v33.09Z"/>
+        <path fill="#231f20" d="M1146.6,594.16c5.48,2.23,11.37,3.25,15.84,3.25,10.96,0,17.06-5.08,20.1-16.85l-40.41-99.49h38.37l20.91,63.55,20.1-63.55h37.56l-42.84,108.02c-10.76,27.41-24.77,39.8-48.73,39.8-6.9,0-15.23-1.42-20.91-4.06v-30.66Z"/>
+        <polygon fill="#231f20" points="863.2 562.28 847.03 585.83 863.2 585.83 863.2 562.28"/>
+        <polygon fill="#231f20" points="970.61 463.4 986.24 440.46 970.61 440.46 970.61 463.4"/>
+        <polygon fill="#cfebf1" points="749.08 389.17 753.96 434.54 818.37 389.28 749.08 389.17"/>
+        <polygon fill="#80c4e9" points="749.94 389.17 661.48 548.1 705.17 528.27 753.96 434.54 749.94 389.17"/>
+        <polygon fill="#7064ab" points="758.18 502.91 705.17 528.27 753.96 434.54 819.33 388.53 758.18 502.91"/>
+        <polygon fill="#cfebf1" points="826.2 502.27 757.47 532.99 705.17 528.27 760.78 501.7 826.2 502.27"/>
+        <polygon fill="#588bc8" points="673.49 680.34 758.55 532.58 705.17 528.27 660.91 548.36 725.12 548.36 674.47 680.88 673.49 680.34"/>
+        <polygon fill="#bd83b9" points="673.49 682.02 825.48 504.66 826.2 501.85 758.55 532.58 673.06 680.93 673.49 682.02"/>
+        <polygon fill="#aa5ea4" points="758.67 532.58 725.54 547.68 674.6 680.88 674.6 680.88 674.6 680.88 758.67 532.58"/>
+        <polygon fill="none" stroke="#231f20" stroke-miterlimit="10" stroke-width="2.95" points="749.08 389.17 818.94 389.17 759.9 501.85 826.2 501.85 674.98 679.87 725.12 548.36 661.67 548.36 749.08 389.17"/>
+      </svg>
+    </a>
 
     <div class="links">
       <a href="/" class={homeActive ? 'active' : ''}>Home</a>
