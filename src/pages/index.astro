@@ -105,30 +105,48 @@ const solutionCards = [
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(softwareApp)} />
 
-  <!-- 1. Hero (white) — H1, subhead, two CTAs, five-engine strip + caption -->
+  <!-- 1. Hero (Phase 1 design system) — asymmetric grid, measurement-grid atmosphere,
+       staggered load + product card with truth-signal pills and Reality Score ring.
+       Sentence case H1 per Phase 1 rule 8. -->
   <section class="hero">
-    <div class="wrap">
-      <span class="eyebrow">AI visibility</span>
-      <h1>Be the Brand AI Gets Right.</h1>
-      <p class="lead">
-        Buyers, partners and journalists are asking AI about your category every day. Zicy shows
-        you what it says, whether it&rsquo;s accurate, and how to fix what&rsquo;s wrong &mdash;
-        across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-primary btn-lg" href="/audit">Run a free audit</a>
-        <a class="btn btn-ghost btn-lg" href="/platform">See the platform</a>
+    <div class="grid-field" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="hcol">
+        <span class="eyebrow rise d1">AI visibility</span>
+        <h1 class="rise d2">Be the brand AI gets right.</h1>
+        <p class="sub rise d3">
+          Buyers, partners and journalists ask AI about your category every day. Zicy shows you
+          what it says, whether it&rsquo;s accurate, and how to fix what&rsquo;s wrong &mdash;
+          across every major answer engine.
+        </p>
+        <div class="hcta rise d4">
+          <a class="btn btn-p" href="/audit">Run a free audit</a>
+          <a class="btn btn-o" href="/platform">See the platform</a>
+        </div>
+        <div class="engines rise d5">
+          <b>ChatGPT</b> &middot; <b>Gemini</b> &middot; <b>Perplexity</b> &middot;
+          <b>Google AI Overviews</b> &middot; <b>Google AI Mode</b>
+          <span class="cap">Coverage across the five engines that decide the answer.</span>
+        </div>
       </div>
 
-      <!-- Engine strip — text-only, matching the .proofbar pattern used sitewide.
-           No engine-logo assets exist in /public; the rest of the site uses the same text
-           treatment for consistency. -->
-      <div class="proofbar" aria-label="Engines covered">
-        <span class="engines">{engines}</span>
-      </div>
-      <p style="margin-top:10px;font-size:13px;color:var(--muted)">
-        Coverage across the five engines that decide the answer.
-      </p>
+      <aside class="hcard rise d4" aria-label="Example of what AI says about a brand">
+        <div class="hc-top">
+          <span class="hc-q">&ldquo;Who are the top firms in [your category]?&rdquo;</span>
+        </div>
+        <div class="hc-rows">
+          <div class="hc-row"><span class="dot ok" aria-hidden="true"></span><span class="eng">ChatGPT</span><span class="hc-tag ok">names you</span></div>
+          <div class="hc-row"><span class="dot warn" aria-hidden="true"></span><span class="eng">Gemini</span><span class="hc-tag warn">outdated claim</span></div>
+          <div class="hc-row"><span class="dot flag" aria-hidden="true"></span><span class="eng">Perplexity</span><span class="hc-tag flag">names a rival</span></div>
+        </div>
+        <div class="hc-score">
+          <div>
+            <div class="hc-lab">AI Reality Score</div>
+            <div class="hc-num">92<span>/100</span></div>
+          </div>
+          <div class="hc-ring" aria-hidden="true"></div>
+        </div>
+      </aside>
     </div>
   </section>
 

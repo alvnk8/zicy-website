@@ -10,9 +10,9 @@ const homeActive = path === '/';
 ---
 <header>
   <nav class="nav" aria-label="Primary">
-    <a class="logo" href="/" aria-label="Zicy home"><img src="/zicy-wordmark.png" alt="Zicy" width="125" height="48" /></a>
+    <a class="logo" href="/" aria-label="Zicy home"><img src="/zicy-wordmark.png" alt="Zicy" width="125" height="34" /></a>
 
-    <div class="navlinks">
+    <div class="links">
       <a href="/" class={homeActive ? 'active' : ''}>Home</a>
       <a href="/about" class={isActive('/about') ? 'active' : ''}>About</a>
       <a href="/platform" class={isActive('/platform') ? 'active' : ''}>Platform</a>
@@ -37,9 +37,9 @@ const homeActive = path === '/';
           {FREE_TOOLS.map((t) => <a href={t.href} class={isActive(t.href) ? 'active' : ''}>{t.label}</a>)}
         </div>
       </div>
-    </div>
 
-    <a class="btn btn-primary navcta" href="/audit">Run a free audit</a>
+      <a class="cta" href="/audit">Run a free audit</a>
+    </div>
 
     <!-- Mobile menu: native <details> disclosure — no JS, works with JS disabled,
          all links present in the initial HTML for crawlers. -->
@@ -61,7 +61,7 @@ const homeActive = path === '/';
         {FREE_TOOLS.map((t) => <a href={t.href} class={isActive(t.href) ? 'active' : ''}>{t.label}</a>)}
         <p class="mnav-group">More</p>
         <a href="/done-for-you" class={isActive('/done-for-you') ? 'active' : ''}>Done-for-You</a>
-        <a class="btn btn-primary" href="/audit">Run a free audit</a>
+        <a class="btn btn-p" href="/audit">Run a free audit</a>
       </div>
     </details>
   </nav>
