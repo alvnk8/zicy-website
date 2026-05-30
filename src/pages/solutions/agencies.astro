@@ -2,9 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import Screenshot from '../../components/Screenshot.astro';
-// Anonymised screenshots cleared per the privacy gate (§1.1 of the screenshots brief).
-import aiVisibilityShot from '../../assets/screenshots/anonymised/ai-visibility-dashboard.png';
-import visibilityGapsShot from '../../assets/screenshots/anonymised/visibility-gaps.png';
+// No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
+// Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
+// ai-visibility-dashboard.png is the same canonical source already used on /platform,
+// /solutions/brands and the homepage showcase.
+import aiVisibilityShot from '../../assets/screenshots/ai-visibility-dashboard.png';
+import visibilityGapsShot from '../../assets/screenshots/visibility-gaps.png';
 
 // White-label CTA destination — preserved from the existing icps.ts agencies.band.ctaHref.
 const WHITELABEL_HREF = '/pricing';
