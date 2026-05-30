@@ -127,7 +127,19 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
 .links a:not(.cta):hover::after,.links a:not(.cta).active::after{transform:scaleX(1)}
 .links .cta{background:var(--violet);color:#fff;padding:9px 18px;border-radius:9px;font-size:15px;font-weight:500;transition:background .15s var(--ease)}
 .links .cta:hover{background:var(--violet-700)}
-@media(max-width:860px){.links a:not(.cta){display:none}}
+/* Mobile (<=860px): the <details> hamburger handles all primary navigation.
+   - Hide direct anchor children of .links (Home / About / Platform / Pricing / Case Studies).
+   - Hide the .has-dropdown wrappers (Solutions / Free tools triggers) so their
+     <span class="trigger"> children don't leak past the right viewport edge.
+   - Belt-and-braces: force .dropdown panels to display:none. They were hidden via
+     opacity:0;visibility:hidden, but visibility:hidden keeps the position:absolute
+     panel in the layout, contributing min-width:260px to document.scrollWidth and
+     causing a 138 px horizontal overflow at 375 px viewport. */
+@media(max-width:860px){
+  .links > a:not(.cta),
+  .links .has-dropdown,
+  .dropdown{display:none}
+}
 
 /* dropdown — crawlable links live in the DOM; CSS toggles open state */
 .has-dropdown{position:relative}
@@ -325,10 +337,11 @@ label.fld{display:block;font-size:13px;font-weight:500;color:var(--ink);margin-b
 .prose p{font-size:16.5px;color:var(--ink);margin-bottom:16px}
 .pullquote{font-family:var(--fd);font-size:24px;color:var(--ink);font-weight:500;line-height:1.25;border-left:3px solid var(--violet);padding:6px 0 6px 22px;margin:30px 0;max-width:680px}
 
-/* Responsive breakpoints (mobile) */
+/* Responsive breakpoints (mobile).
+   Removed dead .navlinks / .navcta rules (those classes don't exist in the Phase 1
+   nav — the actual mobile-hide rules for the current .links nav live in the
+   header CSS above). */
 @media(max-width:860px){
-  .navlinks{display:none}
-  .navcta{display:none}
   .mnav{display:block}
   .shead h2{font-size:30px}
   .metrics,.loop,.grid-3,.tiers{grid-template-columns:1fr}
