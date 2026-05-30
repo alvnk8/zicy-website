@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Screenshot from '../components/Screenshot.astro';
+import aiVisibility from '../assets/screenshots/ai-visibility-dashboard.png';
 import { SITE } from '../data/site';
 
 const title = 'Zicy — be the brand AI gets right';
@@ -135,23 +137,16 @@ const solutionCards = [
         </div>
       </div>
 
-      <aside class="hcard rise d4" aria-label="Example of what AI says about a brand">
-        <div class="hc-top">
-          <span class="hc-q">&ldquo;Who are the top firms in [your category]?&rdquo;</span>
-        </div>
-        <div class="hc-rows">
-          <div class="hc-row"><span class="dot ok" aria-hidden="true"></span><span class="eng">ChatGPT</span><span class="hc-tag ok">names you</span></div>
-          <div class="hc-row"><span class="dot warn" aria-hidden="true"></span><span class="eng">Gemini</span><span class="hc-tag warn">outdated claim</span></div>
-          <div class="hc-row"><span class="dot flag" aria-hidden="true"></span><span class="eng">Perplexity</span><span class="hc-tag flag">names a rival</span></div>
-        </div>
-        <div class="hc-score">
-          <div>
-            <div class="hc-lab">AI Reality Score</div>
-            <div class="hc-num">92<span>/100</span></div>
-          </div>
-          <div class="hc-ring" aria-hidden="true"></div>
-        </div>
-      </aside>
+      <!-- Real product screenshot — the first one on the site. LCP image.
+           Brand shown ("Acme Pickleball Fashion") is a demo brand, not a real client. -->
+      <div class="hshot rise d4">
+        <Screenshot
+          src={aiVisibility}
+          alt="Zicy AI Visibility dashboard showing brand mention coverage, share of voice, average AI ranking, and a per-platform radar across ChatGPT, Gemini, Perplexity and Google AI."
+          caption="The AI Visibility dashboard — your four primary KPIs across every engine."
+          priority="eager"
+        />
+      </div>
     </div>
   </section>
 
