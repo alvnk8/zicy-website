@@ -27,7 +27,7 @@ const homeActive = path === '/';
       </div>
 
       <a href="/pricing" class={isActive('/pricing') ? 'active' : ''}>Pricing</a>
-      <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>Case studies</a>
+      <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>Case Studies</a>
 
       <div class="has-dropdown">
         <a href="/free-tools" class:list={['trigger', { active: inSection(FREE_TOOLS) || isActive('/free-tools') }]}>
@@ -55,12 +55,12 @@ const homeActive = path === '/';
         <p class="mnav-group">Solutions</p>
         {SOLUTIONS.map((s) => <a href={s.href} class={isActive(s.href) ? 'active' : ''}>{s.label}</a>)}
         <a href="/pricing" class={isActive('/pricing') ? 'active' : ''}>Pricing</a>
-        <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>Case studies</a>
+        <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>Case Studies</a>
         <p class="mnav-group">Free tools</p>
         <a href="/free-tools" class={isActive('/free-tools') ? 'active' : ''}>Free tools hub</a>
         {FREE_TOOLS.map((t) => <a href={t.href} class={isActive(t.href) ? 'active' : ''}>{t.label}</a>)}
         <p class="mnav-group">More</p>
-        <a href="/done-for-you" class={isActive('/done-for-you') ? 'active' : ''}>Done-for-you</a>
+        <a href="/done-for-you" class={isActive('/done-for-you') ? 'active' : ''}>Done-for-You</a>
         <a class="btn btn-primary" href="/audit">Run a free audit</a>
       </div>
     </details>

@@ -27,5 +27,5 @@ export const SOLUTIONS = [
 export const FREE_TOOLS = [
   { label: 'Free AI Visibility Audit', href: '/audit' },
   { label: 'AEO/GEO Consultant', href: '/consultant' },
-  { label: 'Chrome extension', href: '/chrome-extension' },
+  { label: 'Chrome Extension', href: '/chrome-extension' },
 ] as const;
