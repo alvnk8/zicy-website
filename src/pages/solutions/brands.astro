@@ -2,10 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import Screenshot from '../../components/Screenshot.astro';
-// Anonymised screenshots cleared per the privacy gate (brief §1.1).
-// Brand Intelligence / AI Reality Score capture is a known gap; brand-sentiment is the brief's stated fallback.
-import brandSentimentShot from '../../assets/screenshots/anonymised/brand-sentiment.png';
-import competitiveShot from '../../assets/screenshots/anonymised/competitive-ai-performance.png';
+// No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
+// Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
+// brand-intelligence-report.png supersedes the brand-sentiment stand-in this slot used to
+// reference. The brand-sentiment file is untouched in anonymised/ for any other consumers.
+import brandIntelligenceShot from '../../assets/screenshots/brand-intelligence-report.png';
+import competitiveShot from '../../assets/screenshots/competitive-ai-performance.png';
 
 const title = "Zicy for brands — AI is your brand's new first impression";
 const description =
@@ -151,7 +153,7 @@ const modules = [
       </div>
       <div class="grid-2" style="margin-top:28px">
         <Screenshot
-          src={brandSentimentShot}
+          src={brandIntelligenceShot}
           alt="Zicy Brand Intelligence report showing AI perception of the brand and an AI Reality Score fact-check."
           caption="Brand Intelligence — perception, AI Reality Score and the descriptors moving the answer."
         />
