@@ -137,16 +137,23 @@ const solutionCards = [
         </div>
       </div>
 
-      <!-- Real product screenshot — the first one on the site. LCP image.
-           Brand shown ("Acme Pickleball Fashion") is a demo brand, not a real client. -->
-      <div class="hshot rise d4">
-        <Screenshot
-          src={aiVisibility}
-          alt="Zicy AI Visibility dashboard showing brand mention coverage, share of voice, average AI ranking, and a per-platform radar across ChatGPT, Gemini, Perplexity and Google AI."
-          caption="The AI Visibility dashboard — your four primary KPIs across every engine."
-          priority="eager"
-        />
-      </div>
+      <aside class="hcard rise d4" aria-label="Example of what AI says about a brand">
+        <div class="hc-top">
+          <span class="hc-q">&ldquo;Who are the top firms in [your category]?&rdquo;</span>
+        </div>
+        <div class="hc-rows">
+          <div class="hc-row"><span class="dot ok" aria-hidden="true"></span><span class="eng">ChatGPT</span><span class="hc-tag ok">names you</span></div>
+          <div class="hc-row"><span class="dot warn" aria-hidden="true"></span><span class="eng">Gemini</span><span class="hc-tag warn">outdated claim</span></div>
+          <div class="hc-row"><span class="dot flag" aria-hidden="true"></span><span class="eng">Perplexity</span><span class="hc-tag flag">names a rival</span></div>
+        </div>
+        <div class="hc-score">
+          <div>
+            <div class="hc-lab">AI Reality Score</div>
+            <div class="hc-num">92<span>/100</span></div>
+          </div>
+          <div class="hc-ring" aria-hidden="true"></div>
+        </div>
+      </aside>
     </div>
   </section>
 
@@ -251,71 +258,14 @@ const solutionCards = [
         <p>A working view of how AI describes your brand &mdash; across every engine, every week.</p>
       </div>
 
-      <div class="shot">
-        <div class="app-bar">
-          <div class="mk" aria-hidden="true"></div>
-          <span class="wm">Zicy</span>
-          <div class="tabs" aria-hidden="true">
-            <span class="on">Visibility</span>
-            <span>Brand</span>
-            <span>Citations</span>
-            <span>Action</span>
-            <span>Traffic</span>
-          </div>
-          <div class="me" aria-hidden="true"></div>
-        </div>
-        <div class="app-body">
-          <aside class="app-side" aria-label="Module navigation">
-            <div class="ni on">AI Visibility</div>
-            <div class="ni">Brand Intelligence</div>
-            <div class="ni">Brand Sentiment</div>
-            <div class="ni">Competitor Sentiment</div>
-            <div class="ni">Key Topics</div>
-            <div class="ni">Citation Analysis</div>
-            <div class="ni">Site Audit</div>
-            <div class="ni">Visibility Gaps</div>
-            <div class="ni">Action Center</div>
-            <div class="ni">Site Traffic</div>
-          </aside>
-          <div class="app-main">
-            <div class="kpis">
-              <div class="kpi"><div class="l">Mention coverage</div><div class="v">90.07%</div><div class="dlt">+4.2 vs last week</div></div>
-              <div class="kpi"><div class="l">Citation rate</div><div class="v">55.92%</div><div class="dlt">+2.8 vs last week</div></div>
-              <div class="kpi"><div class="l">Share of voice</div><div class="v">22.81%</div><div class="dlt">+1.4 vs last week</div></div>
-              <div class="kpi"><div class="l">Avg AI ranking</div><div class="v">#2.67</div><div class="dlt">↑ from #3.1</div></div>
-            </div>
-            <div class="two">
-              <div class="panel">
-                <h5>Mention coverage trend</h5>
-                <p class="sx">Past 8 weeks &middot; all engines</p>
-                <svg viewBox="0 0 320 100" width="100%" height="100" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="cfill" x1="0" x2="0" y1="0" y2="1">
-                      <stop offset="0%" stop-color="rgba(110,99,172,.18)" />
-                      <stop offset="100%" stop-color="rgba(110,99,172,0)" />
-                    </linearGradient>
-                  </defs>
-                  <path d="M0,70 L40,65 L80,58 L120,52 L160,42 L200,38 L240,28 L280,22 L320,18 L320,100 L0,100 Z" fill="url(#cfill)" />
-                  <path d="M0,70 L40,65 L80,58 L120,52 L160,42 L200,38 L240,28 L280,22 L320,18" stroke="#6E63AC" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </div>
-              <div class="panel">
-                <h5>By engine</h5>
-                <p class="sx">This week</p>
-                <div class="bars">
-                  <div class="br-r"><span class="nm">ChatGPT</span><span class="tk"><i style="width:94%"></i></span><span class="pc">94%</span></div>
-                  <div class="br-r"><span class="nm">Gemini</span><span class="tk"><i style="width:91%"></i></span><span class="pc">91%</span></div>
-                  <div class="br-r"><span class="nm">Perplexity</span><span class="tk"><i style="width:88%"></i></span><span class="pc">88%</span></div>
-                  <div class="br-r"><span class="nm">AI Overviews</span><span class="tk"><i style="width:86%"></i></span><span class="pc">86%</span></div>
-                  <div class="br-r"><span class="nm">AI Mode</span><span class="tk"><i style="width:81%"></i></span><span class="pc">81%</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <span class="callout ok" style="top:18px;right:18px">+4.2 this week</span>
-      </div>
-      <p class="shot-cap"><span class="mono">AI Visibility</span> &mdash; the four primary KPIs across every engine.</p>
+      <!-- Real product screenshot — replaces the Phase 2 mock app frame.
+           Brand shown ("Acme Pickleball Fashion") is a demo brand, not a real client.
+           Below-the-fold so priority defaults to "lazy". -->
+      <Screenshot
+        src={aiVisibility}
+        alt="Zicy AI Visibility dashboard showing brand mention coverage, share of voice, average AI ranking, and a per-platform radar across ChatGPT, Gemini, Perplexity and Google AI."
+        caption="The AI Visibility dashboard — your four primary KPIs across every engine."
+      />
 
       <div class="bento" style="margin-top:36px">
         <div class="card">
