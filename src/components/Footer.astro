@@ -1,5 +1,5 @@
 ---
-import { SITE, SOLUTIONS, FREE_TOOLS } from '../data/site';
+import { SITE, FREE_TOOLS } from '../data/site';
 ---
 <footer>
   <div class="wrap">
@@ -18,7 +18,10 @@ import { SITE, SOLUTIONS, FREE_TOOLS } from '../data/site';
 
       <nav aria-label="Solutions">
         <h2>Solutions</h2>
-        {SOLUTIONS.map((s) => <a href={s.href}>{s.label.replace(/^For /, '')}</a>)}
+        <a href="/solutions/brands">Brands</a>
+        <a href="/solutions/pr">PR Agencies</a>
+        <a href="/solutions/agencies">Marketing &amp; Creative Agencies</a>
+        <a href="/solutions/publishers">Publishers</a>
       </nav>
 
       <nav aria-label="Free tools">
