@@ -9,10 +9,10 @@ const description =
 const STORE_URL = 'https://chromewebstore.google.com/detail/zicy-%E2%80%93-on-page-website-au/bbgmbofeglplaaamnfgmiejbeacokfbn';
 
 const features = [
-  { h: 'AI Readiness Audit', p: 'An instant 0–100 score across seven metrics: answer density, query-fanout coverage, semantic freshness, heading hierarchy, citation quality, author expertise, schema presence.' },
-  { h: 'AI Access Checker', p: 'Detects 40+ AI crawlers (ChatGPT, Claude, Gemini, Perplexity and more) and flags whether they can reach your page — with fixes.' },
-  { h: 'Schema Checker & Generator', p: 'Finds existing JSON-LD, Microdata and RDFa, suggests the right schema, and generates copy-ready markup in one click.' },
-  { h: 'Built-In AI Assistant', p: 'Personalised, actionable recommendations based on your scores. Available in 12 languages.' },
+  { h: 'AI readiness audit', p: 'An instant 0–100 score across seven metrics: answer density, query-fanout coverage, semantic freshness, heading hierarchy, citation quality, author expertise, schema presence.' },
+  { h: 'AI access checker', p: 'Detects 40+ AI crawlers (ChatGPT, Claude, Gemini, Perplexity and more) and flags whether they can reach your page — with fixes.' },
+  { h: 'Schema checker & generator', p: 'Finds existing JSON-LD, Microdata and RDFa, suggests the right schema, and generates copy-ready markup in one click.' },
+  { h: 'Built-in AI assistant', p: 'Personalised, actionable recommendations based on your scores. Available in 12 languages.' },
 ];
 
 const softwareApp = {
@@ -33,7 +33,7 @@ const softwareApp = {
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Free tool · Chrome extension</span>
-      <h1>Audit Any Page for AI — Right in Your Browser.</h1>
+      <h1>Audit any page for AI — right in your browser.</h1>
       <p class="lead">
         Analyse any webpage’s readiness to be cited by AI answer engines like ChatGPT, Perplexity and
         Gemini. Install once, click the Zicy icon on any page, get an instant read.
@@ -48,7 +48,7 @@ const softwareApp = {
 
   <section>
     <div class="wrap">
-      <div class="shead"><span class="eyebrow">What it does</span><h2>Four Checks, Instantly.</h2></div>
+      <div class="shead"><span class="eyebrow"><span class="ix">01</span> What it does</span><h2>Four checks, instantly.</h2></div>
       <div class="grid-2">
         {features.map((f) => (
           <div class="card"><h3>{f.h}</h3><p>{f.p}</p></div>
@@ -60,7 +60,7 @@ const softwareApp = {
   <section style="background:var(--lavender)">
     <div class="wrap grid-2" style="gap:48px">
       <div>
-        <h2 style="font-size:24px;margin-bottom:12px">Who It’s For</h2>
+        <h2 style="font-size:24px;margin-bottom:12px">Who it’s for</h2>
         <p class="lead" style="font-size:16px">
           Content creators making articles more citable · SEO and AEO professionals running on-page
           audits · marketers validating structured data · website owners checking schema · publishers

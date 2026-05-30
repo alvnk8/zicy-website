@@ -36,15 +36,15 @@ const stats = [
 
 const usps = [
   {
-    h: 'Defend Your Attribution.',
+    h: 'Defend your attribution.',
     p: 'See exactly where AI cites you, paraphrases you without credit, or strips it entirely — by source and by topic.',
   },
   {
-    h: 'Own Your Topics.',
+    h: 'Own your topics.',
     p: "Know where you lead the answer, where you're in a fight, and where you've lost it — across the topics that define your title.",
   },
   {
-    h: 'Be Machine-Readable.',
+    h: 'Be machine-readable.',
     p: "The Site Audit checks whether AI crawlers can actually read and attribute you — llms.txt, bot access, schema — so the credit isn't lost to a technical gap.",
   },
 ];
@@ -80,7 +80,7 @@ const modules = [
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">For publishers</span>
-      <h1>If AI Doesn&rsquo;t Recognise Your Content, Neither Will Your Audience.</h1>
+      <h1>If AI doesn&rsquo;t recognise your content, neither will your audience.</h1>
       <p class="lead">
         AI answers are built on content &mdash; often yours. Zicy shows whether AI attributes your
         work, paraphrases it without credit, or ignores it entirely across the five major engines
@@ -97,7 +97,7 @@ const modules = [
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow">The risk</span>
-        <h2>Your Work Is in the Answer. Your Name Might Not Be.</h2>
+        <h2>Your work is in the answer. Your name might not be.</h2>
         <p>
           The click economy that funded publishing is contracting. Attribution inside the answer is
           the new currency &mdash; and you can&rsquo;t fix what you can&rsquo;t see.
@@ -120,7 +120,7 @@ const modules = [
   <!-- 3. Why Zicy (lavender) — three USP cards -->
   <section style="background:var(--lavender)">
     <div class="wrap">
-      <div class="shead"><h2>Why Publishers Choose Zicy.</h2></div>
+      <div class="shead"><h2>Why publishers choose Zicy.</h2></div>
       <div class="grid-3">
         {usps.map((u) => (
           <div class="card"><h3>{u.h}</h3><p>{u.p}</p></div>
@@ -132,7 +132,7 @@ const modules = [
   <!-- 4. What you get (white) — four-item benefit list -->
   <section>
     <div class="wrap">
-      <div class="shead"><h2>What You Get.</h2></div>
+      <div class="shead"><h2>What you get.</h2></div>
       <ul class="checklist">
         {wiifm.map((item) => <li>{item}</li>)}
       </ul>
@@ -142,7 +142,7 @@ const modules = [
   <!-- 5. Inside the platform (lavender) — four module cards + two product shots -->
   <section style="background:var(--lavender)">
     <div class="wrap">
-      <div class="shead"><h2>Inside the Platform.</h2></div>
+      <div class="shead"><h2>Inside the platform.</h2></div>
       <div class="grid-2">
         {modules.map((m) => (
           <div class="card">
@@ -168,5 +168,5 @@ const modules = [
   </section>
 
   <!-- 6. Closing CTA band (no Proof section by design — no publisher-specific case study yet) -->
-  <CtaBand heading="See Whether AI Gives You the Credit." ctaLabel="Run a free audit" ctaHref="/audit" />
+  <CtaBand heading="See whether AI gives you the credit." ctaLabel="Run a free audit" ctaHref="/audit" />
 </BaseLayout>

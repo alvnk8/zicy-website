@@ -75,7 +75,7 @@ const tiers = [
 
 const addOns = [
   { name: 'Additional Tracked Prompts', detail: '+10 prompts', price: '$25 / month' },
-  { name: 'Extra LLM Add-On', detail: 'Add Grok, DeepSeek and more', price: '$0.50 / prompt / LLM ($25 Starter, $75 Growth)' },
+  { name: 'Extra LLM add-on', detail: 'Add Grok, DeepSeek and more', price: '$0.50 / prompt / LLM ($25 Starter, $75 Growth)' },
   { name: 'Content Pack', detail: '+5 action credits — do not expire', price: '$50 / pack' },
   { name: 'Audit Boost', detail: '+2,000 crawl pages — do not expire', price: '$10 / pack' },
   { name: 'AI Chat Booster', detail: '+200 AI consultant messages — do not expire', price: '$50 / pack' },
@@ -87,7 +87,7 @@ interface Faq { q: string; body: Block[] }
 
 const faqs: Faq[] = [
   {
-    q: 'Why Does the Starter Plan Cost $129?',
+    q: 'Why does the Starter plan cost $129?',
     body: [
       "Zicy is not a tracking or reporting tool. It's an optimisation and execution platform. Most tools stop at telling you what's wrong — rank drops, missing citations, blocked bots, broken schema. Zicy goes further by giving you 7 Action Credits every month to actually fix those issues.",
       { bold: 'Each Action Credit lets Zicy:' },
@@ -107,7 +107,7 @@ const faqs: Faq[] = [
     ],
   },
   {
-    q: 'Why Is Zicy Tracking "Weekly" Instead of "Daily"?',
+    q: 'Why is Zicy tracking "Weekly" instead of "Daily"?',
     body: [
       "Daily tracking makes sense for the stock market — but it's noise for AI search.",
       "Answer engines and LLMs don't update their knowledge in real time the way news indexes do. Their retrieval layers, embeddings and citation behaviour evolve gradually, not day by day. Tracking daily fluctuations creates false signals, unnecessary alerts and reactive decision-making.",
@@ -121,7 +121,7 @@ const faqs: Faq[] = [
     ],
   },
   {
-    q: 'Do My Credits Roll Over to the Next Month?',
+    q: 'Do my credits roll over to the next month?',
     body: [
       [
         'Monthly plan credits — No. Your base allowance (e.g. 7 for Starter, 25 for Growth) resets every month. We encourage you to use them to keep your site fresh.',
@@ -130,27 +130,27 @@ const faqs: Faq[] = [
     ],
   },
   {
-    q: 'Can I Manage Multiple Websites or Clients on One Plan?',
+    q: 'Can I manage multiple websites or clients on one plan?',
     body: [
       'Yes. All Zicy plans come with unlimited projects/brands. You can split your tracked prompts and action credits across as many websites as you like — perfect for portfolio owners and agencies.',
     ],
   },
   {
-    q: 'What Counts as a "Tracked Prompt"?',
+    q: 'What counts as a "Tracked Prompt"?',
     body: [
       'A "prompt" is a key customer question you want Zicy to monitor for you (e.g. "Best CRM for small business").',
       'When you track 1 prompt, Zicy actually runs that query across 5 different AI engines (ChatGPT, Perplexity, Gemini, Google AI Mode and AI Overview). You get 5 AI responses for every single prompt you track.',
     ],
   },
   {
-    q: 'Which AI Engines Do You Track?',
+    q: 'Which AI engines do you track?',
     body: [
       'By default, the Starter and Growth plans track the "Big 5" most important engines for traffic:',
       ['ChatGPT', 'Perplexity', 'Google AI Overview', 'Google AI Mode', 'Gemini'],
     ],
   },
   {
-    q: 'How Does the "Extra LLM" Pricing Work?',
+    q: 'How does the "Extra LLM" pricing work?',
     body: [
       'If you want to track additional engines (like DeepSeek, Grok, etc.), the price is dynamic based on your tracked prompts. We charge $0.50 per tracked prompt for each extra engine.',
       [
@@ -161,7 +161,7 @@ const faqs: Faq[] = [
     ],
   },
   {
-    q: 'What Happens If I Run Out of Credits or Prompts Mid-Month?',
+    q: 'What happens if I run out of credits or prompts mid-month?',
     body: [
       "You never have to upgrade your full plan if you don't want to. You can simply buy a flexible add-on.",
       [
@@ -172,13 +172,13 @@ const faqs: Faq[] = [
     ],
   },
   {
-    q: 'Is There a Discount for Paying Annually?',
+    q: 'Is there a discount for paying annually?',
     body: [
       'Yes — we reward long-term strategy. On the annual plan you effectively get 1 month free (you pay for 12 months and get 13). This lowers your effective monthly cost and ensures your optimisation strategy runs uninterrupted all year.',
     ],
   },
   {
-    q: 'Can I Change My Plan Later?',
+    q: 'Can I change my plan later?',
     body: [
       'Absolutely. You can upgrade or downgrade your plan at any time from your dashboard.',
       'Pro tip: you might not even need to change your plan. If you just have a busy month and need a few extra credits or keywords, you can purchase flexible add-ons (like a Content Pack or extra prompts) without forcing a full subscription upgrade. We designed Zicy to grow with you, however you need it.',
@@ -231,7 +231,7 @@ const faqPage = {
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Pricing</span>
-      <h1>Let's Make Your Brand the One AI Cites.</h1>
+      <h1>Let's make your brand the one AI cites.</h1>
       <p class="lead">Flexible plans that grow your authority across answer engines.</p>
       <p class="note" style="display:inline-block;margin-top:24px">
         <b>Annual plan:</b> 1 month free — 13 months for the price of 12.
@@ -242,7 +242,7 @@ const faqPage = {
   <!-- Plans -->
   <section>
     <div class="wrap">
-      <div class="shead"><span class="eyebrow">Plans</span><h2>Three Plans. One Platform.</h2></div>
+      <div class="shead"><span class="eyebrow"><span class="ix">01</span> Plans</span><h2>Three plans. One platform.</h2></div>
       <div class="tiers">
         {tiers.map((t) => (
           <div class:list={['tier', { feat: t.feat }]} style={t.feat ? 'position:relative' : ''}>
@@ -276,8 +276,8 @@ const faqPage = {
   <section style="background:var(--lavender)">
     <div class="wrap">
       <div class="shead">
-        <span class="eyebrow">Add-ons</span>
-        <h2>Unlock Deeper Insights With Flexible Add-Ons.</h2>
+        <span class="eyebrow"><span class="ix">02</span> Add-ons</span>
+        <h2>Unlock deeper insights with flexible add-ons.</h2>
         <p>Buy what you need, when you need it. Pack credits don't expire.</p>
       </div>
       <div class="grid-2">
@@ -297,7 +297,7 @@ const faqPage = {
   <!-- FAQ -->
   <section>
     <div class="wrap">
-      <div class="shead"><span class="eyebrow">FAQ</span><h2>Pricing Questions.</h2></div>
+      <div class="shead"><span class="eyebrow"><span class="ix">03</span> FAQ</span><h2>Pricing questions.</h2></div>
       <div style="max-width:760px">
         {faqs.map((f) => (
           <div class="faq-item">
@@ -319,7 +319,7 @@ const faqPage = {
 
   <CtaBand
     eyebrow="Ready to start?"
-    heading="Be the Brand AI Cites."
+    heading="Be the brand AI cites."
     sub="Start your 7-day free trial — or talk to us about an enterprise programme."
     ctaLabel="Start your free trial"
     ctaHref={REGISTER_URL}

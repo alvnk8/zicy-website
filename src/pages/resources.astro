@@ -17,9 +17,9 @@ const blog = {
 };
 
 const pillars = [
-  { eyebrow: 'Guides', h: 'AEO/GEO Fundamentals', p: 'llms.txt, schema for AI, citation strategy — the practical playbooks.' },
-  { eyebrow: 'Research', h: 'Original Data', p: 'Zicy’s own data on how AI cites brands across engines and markets.' },
-  { eyebrow: 'Updates', h: 'What Changed, and Why It Matters', p: 'Platform changes, policy shifts, and what they mean for your brand.' },
+  { eyebrow: 'Guides', h: 'AEO/GEO fundamentals', p: 'llms.txt, schema for AI, citation strategy — the practical playbooks.' },
+  { eyebrow: 'Research', h: 'Original data', p: 'Zicy’s own data on how AI cites brands across engines and markets.' },
+  { eyebrow: 'Updates', h: 'What changed, and why it matters', p: 'Platform changes, policy shifts, and what they mean for your brand.' },
 ];
 ---
 <BaseLayout title={title} description={description}>
@@ -28,14 +28,14 @@ const pillars = [
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Resources</span>
-      <h1>How AI Search Is Changing Brand Discovery.</h1>
+      <h1>How AI search is changing brand discovery.</h1>
       <p class="lead">Practical guides, original research, and plain-English explainers for marketing, PR and publishing teams.</p>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <div class="shead"><span class="eyebrow">Three pillars</span><h2>Guides, Research and Updates.</h2></div>
+      <div class="shead"><span class="eyebrow"><span class="ix">01</span> Three pillars</span><h2>Guides, research and updates.</h2></div>
       <div class="grid-3">
         {pillars.map((p) => (
           <div class="card"><span class="eyebrow">{p.eyebrow}</span><h3>{p.h}</h3><p>{p.p}</p></div>

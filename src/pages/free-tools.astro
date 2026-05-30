@@ -6,23 +6,23 @@ const description =
   'Three free ways to see how AI reads your brand: an instant AI visibility audit, the AEO/GEO Consultant, and a browser extension.';
 
 const tools = [
-  { eyebrow: 'Audit', h: 'Free AI Visibility Audit', p: 'A complimentary baseline of how AI describes your brand across every engine, benchmarked against your rivals.', link: 'Run the audit →', href: '/audit' },
+  { eyebrow: 'Audit', h: 'Free AI visibility audit', p: 'A complimentary baseline of how AI describes your brand across every engine, benchmarked against your rivals.', link: 'Run the audit →', href: '/audit' },
   { eyebrow: 'AI consultant', h: 'AEO/GEO Consultant', p: 'Ask anything about AEO or GEO, or audit a page on the spot. Powered by Growth.pro’s proprietary framework.', link: 'Open the consultant →', href: '/aeo-geo-consultant' },
-  { eyebrow: 'Chrome extension', h: 'Audit Any Page in Your Browser', p: 'Instant AI-readiness score, AI bot-access checker, and one-click schema generator. Free.', link: 'See the extension →', href: '/chrome-extension' },
+  { eyebrow: 'Chrome extension', h: 'Audit any page in your browser', p: 'Instant AI-readiness score, AI bot-access checker, and one-click schema generator. Free.', link: 'See the extension →', href: '/chrome-extension' },
 ];
 ---
 <BaseLayout title={title} description={description}>
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Free tools</span>
-      <h1>Try Zicy Before You Commit.</h1>
+      <h1>Try Zicy before you commit.</h1>
       <p class="lead">Three free ways to see how AI reads your brand — an instant audit, an AI consultant, and a browser extension.</p>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <div class="shead"><span class="eyebrow">Pick a tool</span><h2>Three Ways In.</h2></div>
+      <div class="shead"><span class="eyebrow"><span class="ix">01</span> Pick a tool</span><h2>Three ways in.</h2></div>
       <div class="grid-3">
         {tools.map((t) => (
           <div class="card">

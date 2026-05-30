@@ -30,7 +30,7 @@ export const CASES: CaseStudy[] = [
     indexTitle: 'Full programme, no prior AI strategy',
     big: '56.67%',
     indexSub: 'mention rate · 2,971 AI sessions',
-    h1: 'From Invisible to AI-Cited in 90 Days.',
+    h1: 'From invisible to AI-cited in 90 days.',
     metaTitle: 'Case study — B2B services: from invisible to AI-cited in 90 days',
     metaDescription:
       'A B2B services brand with no prior AI visibility strategy reached a 56.67% AI mention rate and 2,971 AI-referred sessions in 90 days.',
@@ -53,7 +53,7 @@ export const CASES: CaseStudy[] = [
     indexTitle: 'Authority earned from a near-zero baseline',
     big: '90.61%',
     indexSub: 'mention · 55.92% citation',
-    h1: 'Authority Earned From a Near-Zero Baseline.',
+    h1: 'Authority earned from a near-zero baseline.',
     metaTitle: 'Case study — professional services: authority earned from near-zero',
     metaDescription:
       'A professional-services brand reached a 90.61% AI mention rate and 55.92% citation rate from a near-zero baseline.',
@@ -74,7 +74,7 @@ export const CASES: CaseStudy[] = [
     indexTitle: 'Content-led AI visibility',
     big: '290%',
     indexSub: 'more clicks · 18.11% SOV',
-    h1: 'Content-Led AI Visibility.',
+    h1: 'Content-led AI visibility.',
     metaTitle: 'Case study — content-led AI visibility: 290% more clicks',
     metaDescription:
       'A content-led AI visibility programme delivered 290% more clicks, 457% more impressions and 18.11% share of voice in a competitive category.',
@@ -96,7 +96,7 @@ export const CASES: CaseStudy[] = [
     indexTitle: 'Local category leadership',
     big: '#1',
     indexSub: 'AI mention position',
-    h1: 'Local Category Leadership.',
+    h1: 'Local category leadership.',
     metaTitle: 'Case study — healthcare / aesthetics: local category leadership',
     metaDescription:
       'An aesthetic clinic brand reached the #1 AI mention position across its primary category queries, with a dominant share of voice and new enquiries from AI referrals.',
@@ -118,7 +118,7 @@ export const CASES: CaseStudy[] = [
     indexTitle: 'Cross-platform citation growth',
     big: '66%',
     indexSub: 'mention · 47% citation',
-    h1: 'Cross-Platform Citation Growth.',
+    h1: 'Cross-platform citation growth.',
     metaTitle: 'Case study — retail / home decor: cross-platform citation growth',
     metaDescription:
       'A retail / home-decor brand reached a 66% AI mention rate and 47% citation rate across multiple AI platforms.',

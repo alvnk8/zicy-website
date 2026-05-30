@@ -27,15 +27,15 @@ const framing =
 
 const usps = [
   {
-    h: 'A New Revenue Line, No Build Cost.',
+    h: 'A new revenue line, no build cost.',
     p: 'The platform and the methodology already exist. Productise AI visibility as a retainer or a one-off audit under your own brand.',
   },
   {
-    h: 'Measure and Remediate in One Place.',
+    h: 'Measure and remediate in one place.',
     p: 'The audit, the prioritised fix list, and the schema / llms.txt / content tooling to close it — so you deliver outcomes, not observations.',
   },
   {
-    h: 'Win the Pitch With Truth.',
+    h: 'Win the pitch with truth.',
     p: "Show a prospect exactly how AI describes them today, where it's wrong, and your plan to fix it — before you've signed anything.",
   },
 ];
@@ -57,11 +57,11 @@ const modules = [
     desc: 'The prioritised fix list, plus the schema, llms.txt and content tooling to close it.',
   },
   {
-    name: 'White-Label Reporting',
+    name: 'White-label reporting',
     desc: 'Your brand on the dashboard and the deliverables.',
   },
   {
-    name: 'Multi-Brand Management',
+    name: 'Multi-brand management',
     desc: 'Run your whole client roster from one place (Scale plan).',
   },
 ];
@@ -71,7 +71,7 @@ const modules = [
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">For marketing &amp; creative agencies</span>
-      <h1>AI Visibility &mdash; Audited, Fixed and Proven. Under Your Brand.</h1>
+      <h1>AI visibility &mdash; audited, fixed and proven. Under your brand.</h1>
       <p class="lead">
         AEO/GEO is the brief no one on the roster owns yet. Add a new, defensible service line:
         audit a client&rsquo;s AI visibility, fix what&rsquo;s broken, and prove the result &mdash;
@@ -88,7 +88,7 @@ const modules = [
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow">The opportunity</span>
-        <h2>Your Clients Are Already Asking About AI Search. Have the Answer.</h2>
+        <h2>Your clients are already asking about AI search. Have the answer.</h2>
         <p>Your clients are already asking about AI search. The agency that answers first owns the budget.</p>
       </div>
       <div style="max-width:680px;margin:0 auto 18px">
@@ -107,7 +107,7 @@ const modules = [
   <!-- 3. Why Zicy (lavender) — three USP cards -->
   <section style="background:var(--lavender)">
     <div class="wrap">
-      <div class="shead"><h2>Why Agencies Choose Zicy.</h2></div>
+      <div class="shead"><h2>Why agencies choose Zicy.</h2></div>
       <div class="grid-3">
         {usps.map((u) => (
           <div class="card"><h3>{u.h}</h3><p>{u.p}</p></div>
@@ -119,7 +119,7 @@ const modules = [
   <!-- 4. What you get (white) — four-item benefit list -->
   <section>
     <div class="wrap">
-      <div class="shead"><h2>What You Get.</h2></div>
+      <div class="shead"><h2>What you get.</h2></div>
       <ul class="checklist">
         {wiifm.map((item) => <li>{item}</li>)}
       </ul>
@@ -129,7 +129,7 @@ const modules = [
   <!-- 5. Inside the platform (lavender) — four module cards + two product shots -->
   <section style="background:var(--lavender)">
     <div class="wrap">
-      <div class="shead"><h2>Inside the Platform.</h2></div>
+      <div class="shead"><h2>Inside the platform.</h2></div>
       <div class="grid-2">
         {modules.map((m) => (
           <div class="card">
@@ -157,7 +157,7 @@ const modules = [
   <!-- 6. Proof (white) — two numbers + measurement disclosure (3 engines per canon) -->
   <section>
     <div class="wrap">
-      <div class="shead"><h2>What It Looks Like When It Works.</h2></div>
+      <div class="shead"><h2>What it looks like when it works.</h2></div>
       <div style="max-width:760px">
         <div class="metric" style="padding:32px 34px">
           <div class="n g" style="font-size:44px">
@@ -181,5 +181,5 @@ const modules = [
   </section>
 
   <!-- 7. Closing CTA — same white-label destination as the hero CTA -->
-  <CtaBand heading="Make AI Visibility Your Next Service Line." ctaLabel={WHITELABEL_LABEL} ctaHref={WHITELABEL_HREF} />
+  <CtaBand heading="Make AI visibility your next service line." ctaLabel={WHITELABEL_LABEL} ctaHref={WHITELABEL_HREF} />
 </BaseLayout>
