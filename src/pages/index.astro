@@ -3,6 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Screenshot from '../components/Screenshot.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 import aiVisibility from '../assets/screenshots/ai-visibility-dashboard.png';
+// Proof-layer screenshot — Site Traffic, Search Console view. Demo brand
+// "Acme Pickleball Fashion" (illustrative, not a real client). Chosen over the GA4
+// "AEO overview" variant because it shows answer-intent queries + branded-search
+// behaviour (exactly the proof-layer copy) and displays no uplift %/correlation figure.
+import siteTraffic from '../assets/screenshots/site-traffic-search-console.png';
 import { SITE } from '../data/site';
 
 const title = 'Zicy — be the brand AI gets right';
@@ -304,20 +309,11 @@ const solutionCards = [
         <ul class="checklist">
           {proofBullets.map((b) => <li>{b}</li>)}
         </ul>
-        <figure class="screenshot">
-          <div class="chrome" aria-hidden="true"><span></span><span></span><span></span></div>
-          {/* TODO(asset): replace /site-traffic-prove.svg with the real 2x Prove / Site Traffic
-              product export when supplied. The SVG is a clean on-brand placeholder (no fabricated
-              data) so the live page never shows a broken-image icon. */}
-          <img
-            src="/site-traffic-prove.svg"
-            alt="Zicy Site Traffic — AI-referred sessions, answer-intent queries and branded-search behaviour from GA4 and Search Console, connected to the AI visibility work."
-            loading="lazy"
-            width="1080"
-            height="680"
-          />
-          <figcaption>Site Traffic — AI-referred demand, connected to the visibility work.</figcaption>
-        </figure>
+        <Screenshot
+          src={siteTraffic}
+          alt="Zicy Site Traffic, Search Console view — answer-intent queries, question impressions and clicks, and branded-search performance (impressions, clicks, average CTR and average position) connected to the AI visibility work."
+          caption="Site Traffic — answer-intent queries and branded-search behaviour, connected to the visibility work."
+        />
       </div>
     </div>
   </section>
