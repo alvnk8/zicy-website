@@ -48,6 +48,7 @@ const homeActive = path === '/';
 
       <a href="/pricing" class={isActive('/pricing') ? 'active' : ''}>Pricing</a>
       <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>Case Studies</a>
+      <a href="/done-for-you" class={isActive('/done-for-you') ? 'active' : ''}>Done-for-You</a>
 
       <div class="has-dropdown">
         <a href="/free-tools" class:list={['trigger', { active: inSection(FREE_TOOLS) || isActive('/free-tools') }]}>
@@ -58,7 +59,7 @@ const homeActive = path === '/';
         </div>
       </div>
 
-      <a class="cta" href="/audit">Run a free audit</a>
+      <a class="cta" href="https://app.zicy.com/register">Try for free</a>
     </div>
 
     <!-- Mobile menu: native <details> disclosure — no JS, works with JS disabled,
@@ -76,12 +77,11 @@ const homeActive = path === '/';
         {SOLUTIONS.map((s) => <a href={s.href} class={isActive(s.href) ? 'active' : ''}>{s.label}</a>)}
         <a href="/pricing" class={isActive('/pricing') ? 'active' : ''}>Pricing</a>
         <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>Case Studies</a>
+        <a href="/done-for-you" class={isActive('/done-for-you') ? 'active' : ''}>Done-for-You</a>
         <p class="mnav-group">Free tools</p>
         <a href="/free-tools" class={isActive('/free-tools') ? 'active' : ''}>Free tools hub</a>
         {FREE_TOOLS.map((t) => <a href={t.href} class={isActive(t.href) ? 'active' : ''}>{t.label}</a>)}
-        <p class="mnav-group">More</p>
-        <a href="/done-for-you" class={isActive('/done-for-you') ? 'active' : ''}>Done-for-You</a>
-        <a class="btn btn-p" href="/audit">Run a free audit</a>
+        <a class="btn btn-p" href="https://app.zicy.com/register">Try for free</a>
       </div>
     </details>
   </nav>

@@ -123,7 +123,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
 .logo{display:inline-flex;align-items:center;line-height:0}
 .nav img,.logo img,.logo svg{height:72px;width:auto;display:block}
 
-.links{display:flex;align-items:center;gap:28px}
+.links{display:flex;align-items:center;gap:22px}
 .links a:not(.cta){font-size:15px;color:var(--ink-2);transition:color .15s;position:relative;font-family:var(--fs);font-weight:500}
 .links a:not(.cta)::after{content:'';position:absolute;left:0;right:0;bottom:-7px;height:1.5px;background:var(--violet);transform:scaleX(0);transform-origin:left;transition:transform .22s var(--ease)}
 .links a:not(.cta):hover,.links a:not(.cta).active{color:var(--ink)}
@@ -138,10 +138,14 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
      opacity:0;visibility:hidden, but visibility:hidden keeps the position:absolute
      panel in the layout, contributing min-width:260px to document.scrollWidth and
      causing a 138 px horizontal overflow at 375 px viewport. */
-@media(max-width:860px){
+/* Collapse the desktop nav to the hamburger at <=1024px. With eight top-level items plus two
+   dropdowns and the CTA, the full row no longer fits below ~1025px and would wrap / overflow,
+   so the <details> menu takes over earlier. (Page-content grids still collapse at 860px below.) */
+@media(max-width:1024px){
   .links > a:not(.cta),
   .links .has-dropdown,
   .dropdown{display:none}
+  .mnav{display:block}
 }
 
 /* dropdown — crawlable links live in the DOM; CSS toggles open state */
@@ -345,7 +349,6 @@ label.fld{display:block;font-size:13px;font-weight:500;color:var(--ink);margin-b
    nav — the actual mobile-hide rules for the current .links nav live in the
    header CSS above). */
 @media(max-width:860px){
-  .mnav{display:block}
   .shead h2{font-size:30px}
   .metrics,.loop,.grid-3,.tiers{grid-template-columns:1fr}
   .grid-2,.diverge{grid-template-columns:1fr}

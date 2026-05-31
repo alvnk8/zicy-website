@@ -59,7 +59,7 @@ export const ICPS: Icp[] = [
     h1: 'AI is your brand’s new first impression.',
     heroSub:
       'Is it the brand you built? Every day, buyers, partners and journalists ask AI about your category. Zicy shows what it says about you, whether it’s accurate, and how to fix what’s wrong.',
-    heroCta: { label: 'Run a free audit', href: '/audit' },
+    heroCta: { label: 'Try for free', href: 'https://app.zicy.com/register' },
     sectionEyebrow: 'The risk',
     sectionH2: 'You can’t manage what you can’t see.',
     sectionSub:
@@ -90,7 +90,7 @@ export const ICPS: Icp[] = [
       { lead: 'Defend the category', desc: 'Know exactly where a competitor is winning the answer, and why.' },
       { lead: 'One number for the board', desc: 'Share of voice in AI search, tracked over time.' },
     ],
-    band: { heading: 'See your brand the way AI describes it.', ctaLabel: 'Run a free audit', ctaHref: '/audit' },
+    band: { heading: 'See your brand the way AI describes it.', ctaLabel: 'Try for free', ctaHref: 'https://app.zicy.com/register' },
   },
   {
     slug: 'pr',
@@ -101,7 +101,7 @@ export const ICPS: Icp[] = [
     h1: 'Reputation is now decided inside AI answers.',
     heroSub:
       'Measure it. Move it. Prove it. When a buyer asks AI about your client, the answer is built from the coverage and sources AI trusts. Zicy shows you what that answer is — and whether the work you do is changing it.',
-    heroCta: { label: 'Run a free audit', href: '/audit' },
+    heroCta: { label: 'Try for free', href: 'https://app.zicy.com/register' },
     sectionEyebrow: 'The risk',
     sectionH2: 'Coverage you can’t connect to an outcome is coverage you can’t defend.',
     sectionSub:
@@ -131,7 +131,7 @@ export const ICPS: Icp[] = [
       { lead: 'Catch a narrative shift early', desc: 'See when a competitor or a hostile source is owning your client’s narrative.' },
       { lead: 'Report with confidence', desc: 'A measurable reputation metric, not a clippings book.' },
     ],
-    band: { heading: 'Show the coverage moved the answer.', ctaLabel: 'Run a free audit', ctaHref: '/audit' },
+    band: { heading: 'Show the coverage moved the answer.', ctaLabel: 'Try for free', ctaHref: 'https://app.zicy.com/register' },
   },
   {
     slug: 'agencies',
@@ -142,7 +142,7 @@ export const ICPS: Icp[] = [
     h1: 'AI visibility — audited, fixed and proven.',
     heroSub:
       'White-label it. Add a new, defensible service line to your agency: audit a client’s AI visibility, fix what’s broken, and prove the result — all under your brand.',
-    heroCta: { label: 'Run a free audit', href: '/audit' },
+    heroCta: { label: 'Try for free', href: 'https://app.zicy.com/register' },
     sectionEyebrow: 'The opportunity',
     sectionH2: 'Your clients are already asking about AI search. Have the answer.',
     sectionSub:
@@ -183,7 +183,7 @@ export const ICPS: Icp[] = [
     h1: 'If AI doesn’t recognise your content, your audience won’t either.',
     heroSub:
       'AI answers are built on content — often yours. Zicy shows whether AI attributes your work, paraphrases it without credit, or ignores it entirely — and what to do about it.',
-    heroCta: { label: 'Run a free audit', href: '/audit' },
+    heroCta: { label: 'Try for free', href: 'https://app.zicy.com/register' },
     sectionEyebrow: 'The risk',
     sectionH2: 'Your work is in the answer. Your name might not be.',
     sectionSub:
@@ -214,6 +214,6 @@ export const ICPS: Icp[] = [
       { lead: 'Own your topics', desc: 'Know where you lead the answer and where you’ve been displaced.' },
       { lead: 'Be machine-readable', desc: 'Make sure AI can actually find and attribute you.' },
     ],
-    band: { heading: 'See whether AI gives you the credit.', ctaLabel: 'Run a free audit', ctaHref: '/audit' },
+    band: { heading: 'See whether AI gives you the credit.', ctaLabel: 'Try for free', ctaHref: 'https://app.zicy.com/register' },
   },
 ];
