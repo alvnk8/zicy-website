@@ -1,0 +1,30 @@
+---
+// FAQ accordion — native <details>/<summary>. Zero-JS, keyboard operable, screen-reader
+// friendly. The full answer text is server-rendered inside each <details>, so it is
+// present in the static HTML regardless of open/closed state (never injected on click).
+// The same `items` array also feeds the FAQPage JSON-LD on the homepage, keeping the
+// rendered answer and the structured-data answer identical.
+interface FaqItem {
+  q: string;
+  a: string;
+}
+interface Props {
+  items: FaqItem[];
+  /** Index of the item open by default (first item per brief). Pass -1 for all closed. */
+  defaultOpen?: number;
+}
+const { items, defaultOpen = 0 } = Astro.props;
+---
+<div class="faq">
+  {items.map((item, i) => (
+    <details class="faq-q" open={i === defaultOpen}>
+      <summary>
+        <span class="faq-qt">{item.q}</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </summary>
+      <div class="faq-a">
+        <p>{item.a}</p>
+      </div>
+    </details>
+  ))}
+</div>

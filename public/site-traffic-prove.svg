@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PLACEHOLDER — Zicy Site Traffic / Prove view.
+     Renders as a clean on-brand frame (no fabricated data) until the real
+     2x product export is supplied, at which point it is replaced by a WebP/PNG.
+     Shows no numbers, charts or metrics by design. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 680" role="img"
+     aria-label="Placeholder for the Zicy Site Traffic Prove view — product screenshot to be added.">
+  <rect width="1080" height="680" fill="#F7F8FB"/>
+  <rect x="0" y="0" width="1080" height="3" fill="#6E63AC"/>
+  <g text-anchor="middle">
+    <text x="540" y="326" font-family="ui-monospace, 'JetBrains Mono', monospace"
+          font-size="20" letter-spacing="4" fill="#6E63AC">SITE TRAFFIC</text>
+    <text x="540" y="364" font-family="system-ui, 'Inter Tight', sans-serif"
+          font-size="16" fill="#6A6F7E">Prove view — product screenshot to be added</text>
+  </g>
+</svg>
