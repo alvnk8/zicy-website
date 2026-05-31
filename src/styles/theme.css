@@ -426,7 +426,9 @@ label.fld{display:block;font-size:13px;font-weight:500;color:var(--ink);margin-b
 
 /* Layout patterns — rotate across screenshot-heavy pages */
 .bento{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.feature-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+/* align-items:start so a screenshot in the right column tops-aligns with the section header
+   in the left column (the proof layer puts header + intro + bullets on the left). */
+.feature-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
 @media(max-width:760px){.bento{grid-template-columns:1fr}.feature-split{grid-template-columns:1fr;gap:28px}}
 
 /* Mock app frame (placeholders only — for the homepage showcase) */

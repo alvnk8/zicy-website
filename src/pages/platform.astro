@@ -262,20 +262,25 @@ const roleCards = [
   <!-- 5. 04 · The proof layer (NEW) — capability copy + bullets + Site Traffic screenshot -->
   <section style="background:var(--mist)">
     <div class="wrap">
-      <div class="shead">
-        <span class="eyebrow"><span class="ix">04</span> The proof layer</span>
-        <h2>Most tools end at the scoreboard. Zicy answers the question your CFO actually asks.</h2>
-        <p>
-          Does winning the AI answer move demand? Zicy connects AI-referred sessions, answer-intent
-          queries and branded-search behaviour from GA4 and Search Console to the visibility work
-          &mdash; so AI visibility stops being a vanity metric and becomes a line you can defend in
-          a budget review.
-        </p>
-      </div>
+      <!-- Two-column split: header + intro + bullets in the left column, screenshot in the
+           right, both top-aligned (.feature-split is align-items:start) so the image rises to
+           the top of the section header rather than sitting below a full-width header. -->
       <div class="feature-split">
-        <ul class="checklist">
-          {proofBullets.map((b) => <li>{b}</li>)}
-        </ul>
+        <div>
+          <div class="shead" style="margin-bottom:28px">
+            <span class="eyebrow"><span class="ix">04</span> The proof layer</span>
+            <h2>Most tools end at the scoreboard. Zicy answers the question your CFO actually asks.</h2>
+            <p>
+              Does winning the AI answer move demand? Zicy connects AI-referred sessions,
+              answer-intent queries and branded-search behaviour from GA4 and Search Console to the
+              visibility work &mdash; so AI visibility stops being a vanity metric and becomes a
+              line you can defend in a budget review.
+            </p>
+          </div>
+          <ul class="checklist">
+            {proofBullets.map((b) => <li>{b}</li>)}
+          </ul>
+        </div>
         <Screenshot
           src={siteTraffic}
           alt="Zicy Site Traffic, Search Console view — answer-intent queries, question impressions and clicks, and branded-search performance (impressions, clicks, average CTR and average position) connected to the AI visibility work."
