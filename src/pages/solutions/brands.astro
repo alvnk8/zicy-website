@@ -1,17 +1,18 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CtaBand from '../../components/CtaBand.astro';
 import Screenshot from '../../components/Screenshot.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
-// brand-intelligence-report.png supersedes the brand-sentiment stand-in this slot used to
-// reference. The brand-sentiment file is untouched in anonymised/ for any other consumers.
 import brandIntelligenceShot from '../../assets/screenshots/brand-intelligence-report.png';
 import competitiveShot from '../../assets/screenshots/competitive-ai-performance.png';
+// Proof-layer screenshot — Site Traffic, Search Console view (shared with /platform and the
+// homepage). Canon-clean: shows answer-intent queries + branded-search behaviour, no uplift %.
+import siteTraffic from '../../assets/screenshots/site-traffic-search-console.png';
 
-const title = "Zicy for brands — AI is your brand's new first impression";
+const title = "Zicy for brands — what AI says about your brand, whether it's accurate, and how to fix it";
 const description =
-  "Every day, buyers, partners and journalists ask AI about your category — and act on the answer before reaching your site. Zicy shows what AI says about your brand across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, whether it's accurate, and how to fix what's wrong.";
+  "See what AI says about your brand across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode — whether it's accurate, how to fix what's wrong, and how the fix ties back to demand. Run a free audit.";
 
 // Sourced stats — every figure carries publisher + sample + year inline. Do not alter.
 const stakeStats = [
@@ -25,6 +26,11 @@ const stakeStats = [
     label: 'of consumers trust AI tools to guide their brand decisions.',
     source: 'Yext / Researchscape, n=2,237, 2025',
   },
+  {
+    n: '12%',
+    label: 'of AI-cited links also rank in Google’s top 10 — SEO is not AI visibility.',
+    source: 'Ahrefs, 15,000 prompts, 2025',
+  },
 ];
 
 const usps = [
@@ -34,25 +40,25 @@ const usps = [
   },
   {
     h: 'Every engine, every language.',
-    p: 'APAC-native coverage across all five major engines and the languages your buyers actually use — not English-first with everything else treated as an afterthought.',
+    p: 'APAC-native coverage across all five engines and the languages your buyers use — not English-first with everything else an afterthought.',
   },
   {
     h: 'The whole loop, not just the scoreboard.',
-    p: 'Measure, then diagnose the cause, then act — schema, llms.txt, content — then prove it moved demand. Other tools hand you a dashboard and stop. Zicy closes the loop.',
+    p: 'Measure, then diagnose the cause, then act — schema, llms.txt, content — then prove it moved demand. Other tools hand you a dashboard and stop.',
   },
 ];
 
 const wiifm = [
   'Catch a hallucination or an outdated claim before it costs you a deal.',
   'Know exactly where a competitor is winning the answer, and why.',
-  'One board-ready number: your AI share of voice, tracked over time.',
-  'Start every quarter knowing what AI says about you — not hoping.',
+  'One board-ready number — your AI share of voice, tracked over time.',
+  'Start every quarter knowing what AI says about you, not hoping.',
 ];
 
 const modules = [
   {
     name: 'Brand Intelligence',
-    desc: 'How AI describes you across engines, the AI Reality Score, the entity gaps behind low confidence, and a prioritised action plan.',
+    desc: 'How AI describes you, the AI Reality Score, the entity gaps behind low confidence, and a prioritised action plan.',
   },
   {
     name: 'AI Visibility',
@@ -71,55 +77,95 @@ const modules = [
     desc: 'AI-referred sessions and downstream engagement, tied back to the work.',
   },
 ];
+
+const faqs = [
+  {
+    q: 'How do I know what AI says about us right now?',
+    a: "You run a free audit and see it in minutes — where you're named, cited, described inaccurately, or replaced by a rival, across all five engines. It surfaces the conversation that never touches your analytics, because it happens before the buyer reaches your site.",
+  },
+  {
+    q: "Isn't our SEO team already handling this?",
+    a: "No, and that's the common trap. Only 12% of AI-cited links also rank in Google's top 10 (Ahrefs, 15,000 prompts, 2025), and 65% of AI Overview citations come from pages outside the top 10 (Ahrefs, 75,000+ queries, 2025); AI visibility runs on different signals.",
+  },
+  {
+    q: 'What if the AI is simply wrong about us?',
+    a: "That's the problem Zicy was built for. The AI Reality Score flags hallucinations, outdated claims and wrong facts before a buyer sees them, because a mention is worth little if the claim attached to it is false.",
+  },
+  {
+    q: 'Could doing this get us penalised by Google?',
+    a: "No — the approach is the opposite of manipulation. Zicy's content tooling is built to current best practice and aligned with Google's May 2026 spam-policy update covering AI Overviews and AI Mode.",
+  },
+  {
+    q: 'What does it cost, and what are we locked into?',
+    a: 'Plans run from $129 a month (Starter) to $349 (Growth), with custom Enterprise; Starter and Growth include a 7-day trial, and you can start with a free audit. The platform is self-serve with no lock-in.',
+  },
+  {
+    q: 'How do I justify this to my CFO?',
+    a: 'You give them one board-ready number — your AI share of voice over time — and the proof layer connecting AI-referred sessions and branded-search behaviour back to the work.',
+  },
+];
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 <BaseLayout title={title} description={description}>
-  <!-- 1. Hero (white) -->
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
+
+  <!-- 1. Hero -->
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">For brands</span>
       <h1>AI is your brand&rsquo;s new first impression. Make it the one you built.</h1>
       <p class="lead">
-        Every day, buyers, partners and journalists ask AI about your category — and act on the
-        answer before they ever reach your site. Zicy shows you exactly what AI says about your
-        brand across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, whether
-        it&rsquo;s accurate, and how to fix what&rsquo;s wrong.
+        Every day, buyers, partners and journalists ask AI about your category and act on the
+        answer before they ever reach your site. Zicy shows you what AI says about you across all
+        five major engines, whether it&rsquo;s accurate, and how to fix what&rsquo;s wrong &mdash;
+        then ties the fix back to demand.
       </p>
       <div class="cta-row">
-        <a class="btn btn-primary btn-lg" href="/audit">Run a free audit</a>
+        <a class="btn btn-p btn-lg" href="/audit">Run a free audit</a>
+        <a class="btn btn-o btn-lg" href="/platform">See the platform</a>
       </div>
     </div>
   </section>
 
-  <!-- 2. The stakes (white) — two sourced stats -->
+  <!-- 2. 01 · The risk — three sourced stats -->
   <section>
     <div class="wrap">
       <div class="shead">
-        <span class="eyebrow">The risk</span>
-        <h2>You can&rsquo;t manage what you can&rsquo;t see.</h2>
+        <span class="eyebrow"><span class="ix">01</span> The risk</span>
+        <h2>You can&rsquo;t manage what you can&rsquo;t see — and you can&rsquo;t see this in your analytics.</h2>
         <p>
           When AI misdescribes you, or names a competitor in your place, the decision is shaped
-          before anyone reaches your site. You won&rsquo;t catch it in your analytics, because the
-          conversation never touched them.
+          before anyone reaches your site. It never shows up in your funnel, because the
+          conversation never touched it.
         </p>
       </div>
-      <div class="grid-2">
+      <div class="grid-3">
         {stakeStats.map((s) => (
-          <div class="metric">
+          <div class="stat">
             <div class="n">{s.n}</div>
-            <div class="l">{s.label}</div>
-            <div class="mono" style="font-size:12px;color:var(--muted);margin-top:10px;letter-spacing:.02em">
-              Source: {s.source}
-            </div>
+            <div class="t">{s.label}</div>
+            <div class="s">Source: {s.source}</div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- 3. Why Zicy (lavender) — three USP cards -->
-  <section style="background:var(--lavender)">
+  <!-- 3. 02 · Why brands choose Zicy — three differentiator cards -->
+  <section style="background:var(--mist)">
     <div class="wrap">
-      <div class="shead"><h2>Why brands choose Zicy.</h2></div>
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">02</span> Why brands choose Zicy</span>
+        <h2>Competitors measure. Zicy proves.</h2>
+      </div>
       <div class="grid-3">
         {usps.map((u) => (
           <div class="card"><h3>{u.h}</h3><p>{u.p}</p></div>
@@ -128,20 +174,49 @@ const modules = [
     </div>
   </section>
 
-  <!-- 4. What you get (white) — four-item benefit list -->
+  <!-- 4. 03 · What you get — outcome bullets -->
   <section>
     <div class="wrap">
-      <div class="shead"><h2>What you get.</h2></div>
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">03</span> What you get</span>
+        <h2>What changes on Monday.</h2>
+      </div>
       <ul class="checklist">
         {wiifm.map((item) => <li>{item}</li>)}
       </ul>
     </div>
   </section>
 
-  <!-- 5. Inside the platform (lavender) — five module cards + two product shots -->
-  <section style="background:var(--lavender)">
+  <!-- 5. 04 · The proof layer (NEW) — capability copy + Site Traffic screenshot, top-aligned -->
+  <section style="background:var(--mist)">
     <div class="wrap">
-      <div class="shead"><h2>Inside the platform.</h2></div>
+      <div class="feature-split">
+        <div class="shead" style="margin-bottom:0">
+          <span class="eyebrow"><span class="ix">04</span> The proof layer</span>
+          <h2>One number your CFO will accept.</h2>
+          <p>
+            Does winning the AI answer move demand? Zicy connects AI-referred sessions and
+            branded-search behaviour from GA4 and Search Console to the visibility work, so AI
+            share of voice stops being a vanity metric and becomes a line you can defend in a
+            budget review.
+          </p>
+        </div>
+        <Screenshot
+          src={siteTraffic}
+          alt="Zicy Site Traffic, Search Console view — answer-intent queries, question impressions and clicks, and branded-search performance (impressions, clicks, average CTR and average position) connected to the AI visibility work."
+          caption="Site Traffic — branded-search behaviour and AI-referred demand, connected to the visibility work."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 05 · Inside the platform — five module cards + two product shots -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">05</span> Inside the platform</span>
+        <h2>The modules that do the work.</h2>
+      </div>
       <div class="grid-3">
         {modules.map((m) => (
           <div class="card">
@@ -166,26 +241,49 @@ const modules = [
     </div>
   </section>
 
-  <!-- 6. Proof (white) — headline metric + measurement disclosure -->
-  <section>
+  <!-- 7. 06 · What it looks like when it works — anonymised case + locked disclosure -->
+  <section style="background:var(--mist)">
     <div class="wrap">
-      <div class="shead"><h2>What it looks like when it works.</h2></div>
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">06</span> What it looks like when it works</span>
+        <h2>From a near-zero baseline to nine in ten AI answers.</h2>
+      </div>
       <div style="max-width:760px">
-        <div class="metric" style="padding:32px 34px">
-          <div class="n g" style="font-size:48px">90.61<span style="font-size:24px">%</span></div>
-          <div class="l" style="margin-top:14px;font-size:14px">
+        <div class="stat" style="padding:32px 34px">
+          <div class="n" style="color:var(--ok)">90.61%</div>
+          <div class="t" style="margin-top:12px">
             AI mention rate &middot; professional services &middot; from a near-zero baseline
           </div>
         </div>
         <p class="disclosure">
           Measurement: AI brand mention and citation rates across tracked category queries on
-          ChatGPT, Gemini, and Perplexity, via Zicy&rsquo;s measurement infrastructure. Client
+          ChatGPT, Gemini and Perplexity, via Zicy&rsquo;s measurement infrastructure. Client
           anonymised pending naming permission.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- 7. Closing CTA band -->
-  <CtaBand heading="See your brand the way AI describes it." ctaLabel="Run a free audit" ctaHref="/audit" />
+  <!-- 8. FAQ — native <details> accordion; answers in static HTML + FAQPage schema -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions brands ask.</h2>
+      </div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
+    </div>
+  </section>
+
+  <!-- 9. Final CTA -->
+  <section class="final">
+    <div class="wrap">
+      <h2>See your brand the way AI describes it.</h2>
+      <p>A complimentary audit across five engines. No commitment. Run it in minutes.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/audit">Run a free audit</a>
+        <a class="btn btn-o" href="/pricing">See pricing</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
