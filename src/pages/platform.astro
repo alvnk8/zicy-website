@@ -4,8 +4,10 @@ import Screenshot from '../components/Screenshot.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
+import promptManager from '../assets/screenshots/prompt-manager-prompts.png';
 import aiVisibility from '../assets/screenshots/ai-visibility-dashboard.png';
 import brandIntelligenceReport from '../assets/screenshots/brand-intelligence-report.png';
+import citationOverview from '../assets/screenshots/citation-analysis-overview.png';
 import actionCenter from '../assets/screenshots/action-center.png';
 import siteTraffic from '../assets/screenshots/site-traffic-search-console.png';
 import { SITE } from '../data/site';
@@ -181,7 +183,16 @@ const roleCards = [
           <div class="step"><div class="k">{s.k}</div><h3>{s.name}</h3><p>{s.desc}</p></div>
         ))}
       </div>
-      <div class="grid-2" style="margin-top:36px">
+      <!-- Prompt Manager — the entry point to Measure: you choose the questions AI is judged on,
+           before any number is read. Full-width above the four stage views. -->
+      <div style="margin-top:36px">
+        <Screenshot
+          src={promptManager}
+          alt="Zicy Prompt Manager showing a tagged set of category questions — generated and custom prompts across topics, tagged by theme — built to run across all five engines."
+          caption="Prompt Manager — choose and tag the questions AI is judged on, run across all five engines."
+        />
+      </div>
+      <div class="grid-2" style="margin-top:20px">
         <Screenshot
           src={aiVisibility}
           alt="Zicy AI Visibility dashboard with brand mention coverage, citation rate, AI share of voice and average ranking, plus a multi-week performance trend across the five engines."
@@ -192,21 +203,11 @@ const roleCards = [
           alt="Zicy Brand Intelligence report showing how AI perceives the brand, an AI Reality Score fact-check, and the entity graph."
           caption="Brand Intelligence — perception, AI Reality Score, and the entity graph."
         />
-        <figure class="screenshot">
-          <div class="chrome" aria-hidden="true"><span></span><span></span><span></span></div>
-          {/* TODO(asset): replace /citation-analysis-clean.svg with a regenerated Citation
-              Analysis export carrying clean labels (narrative control / competitor share /
-              uncited rate). The current raster export shows legacy out-of-canon tile labels,
-              so it is intentionally NOT shipped; this clean placeholder stands in meanwhile. */}
-          <img
-            src="/citation-analysis-clean.svg"
-            alt="Zicy Citation Analysis showing which sources AI cites about your brand — owned, earned, competitor and uncited — with narrative control and competitor share, down to the URL."
-            loading="lazy"
-            width="1080"
-            height="557"
-          />
-          <figcaption>Citation Analysis — narrative control, competitor share, and uncited rate.</figcaption>
-        </figure>
+        <Screenshot
+          src={citationOverview}
+          alt="Zicy Citation Analysis showing which sources AI cites about your brand — owned, earned, competitor and uncited — with narrative control and competitor share, down to the URL."
+          caption="Citation Analysis — narrative control, competitor share, and uncited rate."
+        />
         <Screenshot
           src={actionCenter}
           alt="Zicy Action Center with the llms.txt generator, schema generator and content optimisation tools."
