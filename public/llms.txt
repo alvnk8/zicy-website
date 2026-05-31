@@ -6,7 +6,7 @@ Zicy follows a closed loop — measure, diagnose, act, prove. The platform is se
 
 ## Core
 - [Home](https://www.zicy.com/): Be the brand AI gets right — the AI visibility platform that measures, diagnoses, fixes and proves across every major answer engine.
-- [Platform](https://www.zicy.com/platform): The closed loop (measure, diagnose, act, prove) and the full module set — AI Visibility, Brand Intelligence, Citation Analysis, Site Traffic and more.
+- [Platform](https://www.zicy.com/platform): Twelve modules across one closed loop (measure, diagnose, act, prove) — Prompt Manager, AI Visibility, Competitive AI Performance, Brand Intelligence, Brand Sentiment, Competitor Sentiment Profiles, Key Topics Analysis, Citation Analysis, Site Audit, Visibility Gaps, Action Center and Site Traffic. Every engine, every language.
 - [Pricing](https://www.zicy.com/pricing): Self-serve plans — Starter $129/mo, Growth $349/mo, custom Enterprise. 7-day free trial; annual plan gives 13 months for the price of 12.
 - [About](https://www.zicy.com/about): Built by Growth.pro; APAC-native, globally capable, under Malaysia Digital (MD) status.
 - [Case studies](https://www.zicy.com/case-studies): Measured AI visibility results across ChatGPT, Gemini and Perplexity (clients anonymised pending naming permission).

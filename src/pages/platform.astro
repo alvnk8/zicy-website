@@ -1,123 +1,175 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Screenshot from '../components/Screenshot.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
 import aiVisibility from '../assets/screenshots/ai-visibility-dashboard.png';
 import brandIntelligenceReport from '../assets/screenshots/brand-intelligence-report.png';
-import citationOverview from '../assets/screenshots/citation-analysis-overview.png';
 import actionCenter from '../assets/screenshots/action-center.png';
+import siteTraffic from '../assets/screenshots/site-traffic-search-console.png';
 import { SITE } from '../data/site';
 
-const title = 'Zicy Platform — the truth layer for AI visibility';
+const title = 'Zicy Platform — twelve modules across one loop: measure, diagnose, act, prove';
 const description =
-  'Eleven modules across one closed loop — measure, diagnose, act, prove. See how AI describes your brand, fix what’s wrong, and prove the work moved demand.';
+  'Zicy is the truth layer for AI visibility — twelve modules across one loop (measure, diagnose, act, prove) that show what AI says about your brand, why, how to fix it, and whether it moved demand. Every engine, every language; built to current AEO/GEO best practice.';
 
+// Module set — single source of truth. Drives the rendered module set AND the ItemList schema.
+const moduleGroups = [
+  {
+    stage: 'Measure',
+    modules: [
+      { name: 'Prompt Manager', desc: 'Choose and own the exact questions AI is judged on; build and tag a prompt set across segments, topics and languages, run across all five engines.' },
+      { name: 'AI Visibility', desc: 'The core scoreboard: brand mention coverage, citation rate, AI share of voice and average ranking, per engine, over time.' },
+      { name: 'Competitive AI Performance', desc: 'Your standing against named competitors, side by side, on coverage, ranking, citations, share of voice and sentiment.' },
+    ],
+  },
+  {
+    stage: 'Diagnose',
+    modules: [
+      { name: 'Brand Intelligence', desc: 'Perception, the AI Reality Score (fact-check / hallucination), the entity graph, and a prioritised action plan.' },
+      { name: 'Brand Sentiment', desc: 'The language AI attaches to your brand, and the sources driving it.' },
+      { name: 'Competitor Sentiment Profiles', desc: 'How AI frames each rival, from positive to negative.' },
+      { name: 'Key Topics Analysis', desc: 'Where you lead the answer, where you are in a fight, and where you are invisible, by topic.' },
+      { name: 'Citation Analysis', desc: 'Which sources AI cites about you, owned vs. earned vs. competitor vs. uncited, with narrative control and competitor share, down to the URL.' },
+      { name: 'Site Audit', desc: 'Technical AI-readiness: llms.txt, AI-bot access, schema and page health.' },
+      { name: 'Visibility Gaps', desc: 'The prioritised list of what to fix and what to publish, ranked by impact.' },
+    ],
+  },
+  {
+    stage: 'Act',
+    modules: [
+      { name: 'Action Center', desc: 'The do-it-now toolbox: llms.txt and schema generators, content optimisation, and new citation-ready content.' },
+    ],
+  },
+  {
+    stage: 'Prove',
+    modules: [
+      { name: 'Site Traffic', desc: 'AI-referred sessions and downstream engagement from GA4 and Search Console, connected to the visibility work: the line from AI visibility to demand.' },
+    ],
+  },
+];
+const allModules = moduleGroups.flatMap((g) => g.modules);
+
+// Page-level structured data. Organization + WebSite are sitewide via BaseLayout.
 const softwareApp = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   name: 'Zicy',
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
-  description:
-    'AI visibility intelligence platform — eleven modules across one closed loop: measure, diagnose, act, prove.',
   url: `${SITE.url}/platform`,
-  offers: { '@type': 'Offer', price: '25', priceCurrency: 'USD' },
+  description:
+    'AI visibility platform — twelve modules across one closed loop (measure, diagnose, act, prove) across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.',
+  offers: { '@type': 'Offer', price: '129', priceCurrency: 'USD' },
 };
 
+const moduleList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Zicy platform modules',
+  numberOfItems: allModules.length,
+  itemListElement: allModules.map((m, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: m.name,
+    description: m.desc,
+  })),
+};
+
+const faqs = [
+  {
+    q: 'How many AI engines does Zicy track?',
+    a: 'Zicy tracks five engines by default — ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. Enterprise plans can add others, such as Grok and DeepSeek. Every tracked prompt runs across each engine.',
+  },
+  {
+    q: 'What is the difference between the loop and the modules?',
+    a: 'The loop — measure, diagnose, act, prove — is the workflow; the modules are the tools that deliver each stage. You move around one loop using twelve modules.',
+  },
+  {
+    q: 'Does Zicy change my site, or only report on it?',
+    a: 'Zicy both reports and remediates. It measures and diagnoses, then the Action Center generates schema, llms.txt and citation-ready content so you can fix what it finds — without a hand-off to another tool.',
+  },
+  {
+    q: 'How often does Zicy update?',
+    a: 'Zicy tracks weekly by design. Answer engines evolve gradually rather than by the hour, so weekly tracking surfaces meaningful shifts and filters out noise; Enterprise plans offer daily tracking.',
+  },
+  {
+    q: 'Can agencies white-label the platform?',
+    a: 'Yes. Agencies can run AI visibility under their own brand, with white-label dashboards and deliverables, and manage multiple brands from one place. See the agencies solution page.',
+  },
+];
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+// Loop lead modules (four cards).
 const loop = [
-  { k: '01 · Measure', name: 'AI Visibility', desc: 'Coverage, citation rate, share of voice, average ranking — per engine, over time.' },
-  { k: '02 · Diagnose', name: 'Brand Intelligence', desc: 'Perception, fact-check / hallucination, entity graph, gap analysis.' },
-  { k: '03 · Act', name: 'Action Center', desc: 'llms.txt & schema generators, content optimisation, new content.' },
-  { k: '04 · Prove', name: 'Site Traffic', desc: 'AI-referred sessions and downstream engagement, tied to the work.' },
+  { k: '01 · Measure', name: 'AI Visibility', desc: 'The core scoreboard — brand mention coverage, citation rate, AI share of voice and average ranking, per engine, over time.' },
+  { k: '02 · Diagnose', name: 'Brand Intelligence', desc: 'Perception, the AI Reality Score (fact-check / hallucination), the entity graph, and a prioritised action plan.' },
+  { k: '03 · Act', name: 'Action Center', desc: 'llms.txt and schema generators, content optimisation, and new citation-ready content.' },
+  { k: '04 · Prove', name: 'Site Traffic', desc: 'AI-referred sessions and downstream engagement from GA4 and Search Console, connected to the work.' },
 ];
 
-// The four "closed loop" screenshots, in document order: Measure → Diagnose → Act.
-// Alt + caption strings are AEO assets and match the supplied brief verbatim.
-//
-// Citation Analysis vocab — this caption deliberately uses "hijack rate" / "leaked rate"
-// because the product UI in the screenshot still shows those exact tile labels. The
-// earlier Phase 2 vocab sweep (commit 2c65432) sanitised website body copy only; the
-// product hadn't moved off these terms yet, and alt text must describe what's visible.
-const screenshots = [
-  {
-    src: aiVisibility,
-    alt: 'Zicy AI Visibility dashboard with mention coverage, citation rate, share of voice and average ranking, plus a five-week performance trend.',
-    caption: 'AI Visibility — coverage, share of voice, ranking, radar across every engine.',
-  },
-  {
-    src: brandIntelligenceReport,
-    alt: 'Zicy Brand Intelligence report showing how AI perceives the brand, an AI Reality Score fact-check, and the entity graph.',
-    caption: 'Brand Intelligence — perception, AI Reality Score, and the entity graph.',
-  },
-  {
-    src: citationOverview,
-    alt: 'Zicy Citation Analysis showing narrative control, hijack rate and leaked rate, with a breakdown of owned, earned, competitor and uncited sources.',
-    caption: 'Citation Analysis — narrative control, hijack and leaked rates.',
-  },
-  {
-    src: actionCenter,
-    alt: 'Zicy Action Center with the llms.txt generator, schema generator and content optimisation tools.',
-    caption: 'Action Center — llms.txt + schema generators, content tooling.',
-  },
-];
-
-const moduleGroups = [
-  {
-    stage: 'Measure',
-    modules: [
-      { name: 'AI Visibility', desc: 'The core scoreboard: coverage, citation rate, share of voice, average ranking, per-platform radar and trend.' },
-      { name: 'Competitive AI Performance', desc: 'Your standing against named competitors, side by side.' },
-    ],
-  },
-  {
-    stage: 'Diagnose',
-    modules: [
-      { name: 'Brand Intelligence', desc: 'Perception, fact-check / hallucination (AI Reality Score), entity graph, prioritised action plan.' },
-      { name: 'Brand Sentiment', desc: 'The language AI attaches to you, and the descriptors driving it.' },
-      { name: 'Competitor Sentiment Profiles', desc: 'How AI frames each rival, positive to negative.' },
-      { name: 'Key Topics Analysis', desc: 'Where you lead, where you’re in a fight, and where you’re invisible.' },
-      { name: 'Citation Analysis', desc: 'Narrative control and competitor share: which sources AI cites about you, owned vs. earned vs. competitor vs. uncited.' },
-      { name: 'Site Audit', desc: 'Technical readiness: llms.txt, AI-bot access, schema, page health.' },
-      { name: 'Visibility Gaps', desc: 'The prioritised list of what to fix and what to publish.' },
-    ],
-  },
-  {
-    stage: 'Act',
-    modules: [
-      { name: 'Action Center', desc: 'llms.txt generator, schema generator, content optimisation, new-content writing.' },
-    ],
-  },
-  {
-    stage: 'Prove',
-    modules: [
-      { name: 'Site Traffic', desc: 'GA4 / Search Console / AI bot logs, answer-intent and brand queries, and the link between AI visibility and demand.' },
-    ],
-  },
+// The four primary KPIs (NEW "four numbers" section).
+const numbers = [
+  { name: 'Brand Mention Coverage', desc: 'How often your brand is named in the answer.' },
+  { name: 'Citation Rate', desc: 'How often your brand is explicitly cited or linked.' },
+  { name: 'AI Share of Voice', desc: 'Your share of category mentions versus tracked rivals.' },
+  { name: 'Average AI Ranking', desc: 'Where you appear within the answer.' },
 ];
 
 const differentiators = [
-  { h: 'Truth, not just mentions', p: 'The AI Reality Score catches hallucinations and outdated facts before your buyers see them.' },
-  { h: 'Every engine, every language', p: 'APAC-native coverage most US-built tools can’t match.' },
-  { h: 'Act inside the tool', p: 'Remediation and content tooling built to current best practice, with no hand-off gap.' },
+  { h: 'Truth, not just mentions.', p: 'The AI Reality Score catches hallucinations and outdated facts before buyers see them.' },
+  { h: 'Every engine, every language.', p: 'APAC-native coverage across the five engines and the languages buyers use.' },
+  { h: 'Act inside the tool.', p: 'Remediation and content tooling built to current best practice, no hand-off gap.' },
+];
+
+const proofBullets = [
+  'AI-referred sessions, tied back to the visibility work.',
+  'Answer-intent queries and branded-search behaviour, from GA4 and Search Console.',
+  'The link between winning the answer and movement in demand — defensible in a budget review.',
+];
+
+const roleCards = [
+  { eyebrow: 'For brands', p: 'See whether AI gets your brand right — and fix what is wrong.', href: '/solutions/brands', link: 'For brands →' },
+  { eyebrow: 'For PR & communications', p: 'Prove earned media moved the answer, not just the clip count.', href: '/solutions/pr', link: 'For PR →' },
+  { eyebrow: 'For marketing & creative agencies', p: 'Run AI visibility as a white-label service line.', href: '/solutions/agencies', link: 'For agencies →' },
+  { eyebrow: 'For publishers', p: 'See whether AI attributes your work — or strips the credit.', href: '/solutions/publishers', link: 'For publishers →' },
 ];
 ---
 <BaseLayout title={title} description={description}>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(softwareApp)} />
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(softwareApp)} />
+    <script type="application/ld+json" set:html={JSON.stringify(moduleList)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqPage)} />
+  </Fragment>
 
+  <!-- 1. Hero -->
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Platform</span>
       <h1>The truth layer for AI visibility.</h1>
       <p class="lead">
-        Eleven modules across one closed loop — measure, diagnose, act, prove. Built to current
-        AEO/GEO best practice and aligned to Google’s latest spam policies.
+        One platform across the whole loop &mdash; measure what AI says about your brand, diagnose
+        why, act to fix it, and prove it moved demand. Twelve modules, five engines, built to
+        current AEO/GEO best practice and aligned with Google&rsquo;s latest spam policies.
       </p>
+      <div class="cta-row">
+        <a class="btn btn-p btn-lg" href="/audit">Run a free audit</a>
+        <a class="btn btn-o btn-lg" href="/pricing">See pricing</a>
+      </div>
     </div>
   </section>
 
-  <!-- The loop, by module -->
-  <section>
+  <!-- 2. 01 · The closed loop (#loop anchor) — four lead-module cards + four screenshots -->
+  <section id="loop">
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow"><span class="ix">01</span> The closed loop</span>
@@ -130,19 +182,65 @@ const differentiators = [
         ))}
       </div>
       <div class="grid-2" style="margin-top:36px">
-        {screenshots.map((s) => (
-          <Screenshot src={s.src} alt={s.alt} caption={s.caption} />
+        <Screenshot
+          src={aiVisibility}
+          alt="Zicy AI Visibility dashboard with brand mention coverage, citation rate, AI share of voice and average ranking, plus a multi-week performance trend across the five engines."
+          caption="AI Visibility — coverage, share of voice, ranking, radar across every engine."
+        />
+        <Screenshot
+          src={brandIntelligenceReport}
+          alt="Zicy Brand Intelligence report showing how AI perceives the brand, an AI Reality Score fact-check, and the entity graph."
+          caption="Brand Intelligence — perception, AI Reality Score, and the entity graph."
+        />
+        <figure class="screenshot">
+          <div class="chrome" aria-hidden="true"><span></span><span></span><span></span></div>
+          {/* TODO(asset): replace /citation-analysis-clean.svg with a regenerated Citation
+              Analysis export carrying clean labels (narrative control / competitor share /
+              uncited rate). The current raster export shows legacy out-of-canon tile labels,
+              so it is intentionally NOT shipped; this clean placeholder stands in meanwhile. */}
+          <img
+            src="/citation-analysis-clean.svg"
+            alt="Zicy Citation Analysis showing which sources AI cites about your brand — owned, earned, competitor and uncited — with narrative control and competitor share, down to the URL."
+            loading="lazy"
+            width="1080"
+            height="557"
+          />
+          <figcaption>Citation Analysis — narrative control, competitor share, and uncited rate.</figcaption>
+        </figure>
+        <Screenshot
+          src={actionCenter}
+          alt="Zicy Action Center with the llms.txt generator, schema generator and content optimisation tools."
+          caption="Action Center — llms.txt + schema generators, content tooling."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 02 · The four numbers (NEW) — primary KPIs -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">02</span> The four numbers</span>
+        <h2>Four numbers, every engine, every week.</h2>
+        <p>Tracked continuously, reported board-ready.</p>
+      </div>
+      <div class="grid4">
+        {numbers.map((n) => (
+          <div class="card">
+            <h3>{n.name}</h3>
+            <p>{n.desc}</p>
+          </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- The full module set -->
-  <section id="modules" style="background:var(--lavender)">
+  <!-- 4. 03 · The module set — twelve modules, grouped by loop stage -->
+  <section id="modules">
     <div class="wrap">
       <div class="shead">
-        <span class="eyebrow"><span class="ix">02</span> The module set</span>
-        <h2>Eleven modules, grouped by loop stage.</h2>
+        <span class="eyebrow"><span class="ix">03</span> The module set</span>
+        <h2>Twelve modules, grouped by loop stage.</h2>
         <p>The whole platform, organised the way the work actually runs.</p>
       </div>
       <div class="grid-2">
@@ -160,20 +258,92 @@ const differentiators = [
     </div>
   </section>
 
-  <!-- The differentiator -->
+  <!-- 5. 04 · The proof layer (NEW) — capability copy + bullets + Site Traffic screenshot -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">04</span> The proof layer</span>
+        <h2>Most tools end at the scoreboard. Zicy answers the question your CFO actually asks.</h2>
+        <p>
+          Does winning the AI answer move demand? Zicy connects AI-referred sessions, answer-intent
+          queries and branded-search behaviour from GA4 and Search Console to the visibility work
+          &mdash; so AI visibility stops being a vanity metric and becomes a line you can defend in
+          a budget review.
+        </p>
+      </div>
+      <div class="feature-split">
+        <ul class="checklist">
+          {proofBullets.map((b) => <li>{b}</li>)}
+        </ul>
+        <Screenshot
+          src={siteTraffic}
+          alt="Zicy Site Traffic, Search Console view — answer-intent queries, question impressions and clicks, and branded-search performance (impressions, clicks, average CTR and average position) connected to the AI visibility work."
+          caption="Site Traffic — answer-intent queries and branded-search behaviour, connected to the visibility work."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 05 · The differentiator — three cards + closing line + CTA -->
   <section>
     <div class="wrap">
       <div class="shead">
-        <span class="eyebrow"><span class="ix">03</span> The differentiator</span>
+        <span class="eyebrow"><span class="ix">05</span> The differentiator</span>
         <h2>Competitors measure. Zicy proves.</h2>
-        <p>The truth layer isn’t another metric — it’s the fact-check. Zicy flags where AI is wrong about you, not just whether you’re mentioned.</p>
+        <p>The truth layer isn&rsquo;t another metric — it&rsquo;s the fact-check. Zicy flags where AI is wrong about you, not just whether you&rsquo;re mentioned.</p>
       </div>
       <div class="grid-3">
         {differentiators.map((d) => (
           <div class="card"><h3>{d.h}</h3><p>{d.p}</p></div>
         ))}
       </div>
-      <div style="text-align:center;margin-top:34px"><a class="btn btn-primary btn-lg" href="/audit">Run a free audit</a></div>
+      <p class="sub" style="max-width:62ch;margin:32px auto 0;text-align:center">
+        We win AI answers the same way we help you win them &mdash; by being genuinely easier to
+        find, verify and trust.
+      </p>
+      <div style="text-align:center;margin-top:28px"><a class="btn btn-p btn-lg" href="/audit">Run a free audit</a></div>
+    </div>
+  </section>
+
+  <!-- 7. 06 · Built for your role (NEW, light) — four solution links -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">06</span> Built for your role</span>
+        <h2>Built for the people who own the answer.</h2>
+      </div>
+      <div class="grid4">
+        {roleCards.map((c) => (
+          <a class="card" href={c.href}>
+            <span class="k">{c.eyebrow}</span>
+            <p>{c.p}</p>
+            <span class="arrow">{c.link}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FAQ — native <details> accordion; answers in static HTML + FAQPage schema -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">FAQ</span>
+        <h2>Platform questions.</h2>
+      </div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
+    </div>
+  </section>
+
+  <!-- 9. Final CTA -->
+  <section class="final">
+    <div class="wrap">
+      <h2>See your brand the way AI describes it.</h2>
+      <p>A complimentary audit across five engines. No commitment. Run it in minutes.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/audit">Run a free audit</a>
+        <a class="btn btn-o" href="/pricing">See pricing</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
