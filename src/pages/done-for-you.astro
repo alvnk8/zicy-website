@@ -1,68 +1,259 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import { SITE } from '../data/site';
 
-const title = 'Done-for-you AI visibility — operated by Growth.pro';
+const title = 'Done-for-you AI visibility — run for you by Growth.pro, the consultancy that built Zicy';
 const description =
-  'When you want the outcome rather than the dashboard, Growth.pro operates your AI visibility programme end to end, using Zicy as its delivery engine. Selective roster, no lock-in.';
+  "Prefer not to run it in-house? Growth.pro — the AI visibility consultancy that built Zicy — operates the whole programme for you: strategy, execution and proof, on the Zicy platform. Start with a free audit.";
 
-// §A2 — this is one of the three pages where Growth.pro's IP appears, always
-// attributed to Growth.pro and never presented as Zicy's own framework.
-const ip = [
-  { eyebrow: 'The offer', name: 'AI Visibility Operating System', desc: 'Growth.pro builds and operates the full system for your brand.' },
-  { eyebrow: 'The methodology', name: 'PAVA Framework', desc: 'Presence · Authority · Visibility · Amplification — Growth.pro’s proprietary method.' },
-  { eyebrow: 'The practice', name: 'AI Citation Enablement', desc: 'Making your expertise easy for AI to find, verify, and attribute — on your merits.' },
+// CRITICAL ROUTING: the primary CTA hands off to Growth.pro in the SAME tab with the agreed
+// referral UTM string. This page does NOT capture the lead — Growth.pro converts. The free
+// audit (/audit) is the shared entry point and appears only as the SECONDARY CTA.
+const GROWTH_URL = 'https://www.growth.pro/?utm_source=zicy&utm_medium=referral&utm_campaign=dfy';
+
+// What Growth.pro runs for you — outcome-shaped, not a price list.
+const runsForYou = [
+  {
+    h: 'Strategy',
+    p: 'The prompt universe, citation-source mapping and the plan — the questions your category is judged on, and how to win them.',
+  },
+  {
+    h: 'Execution',
+    p: 'Entity, schema, content and the owned-side work, done for you; expert guidance to your PR and partner agencies on the earned side.',
+  },
+  {
+    h: 'Proof',
+    p: 'The four primary metrics — brand mention coverage, citation rate, AI share of voice and average AI ranking — reported board-ready.',
+  },
 ];
 
-const how = [
-  { h: 'A capped roster', p: 'A limited number of managed clients at any time. Scarcity is the standard.' },
-  { h: 'No lock-in', p: '30-day engagement, cancel anytime. The work earns the renewal.' },
-  { h: 'Category exclusivity', p: 'Never two competing clients in the same industry and market at once.' },
+// How the engagement works — kept deliberately light; detail lives on growth.pro. No figures.
+const engagement = [
+  {
+    h: 'No lock-in',
+    p: 'Engagements are month-to-month — renewed because the work earns it, not because of a multi-year lock.',
+  },
+  {
+    h: 'Category exclusivity',
+    p: 'Growth.pro will not take on a direct competitor in a market where you operate, for the duration of the engagement.',
+  },
+  {
+    h: 'Starts with a free audit',
+    p: 'The same audit anyone can run, used to scope the programme.',
+  },
 ];
+
+const faqs = [
+  {
+    q: 'What is the difference between Zicy and the done-for-you service?',
+    a: 'Zicy is the self-serve platform any team can run. The done-for-you service is a managed programme run by Growth.pro — the consultancy that built Zicy — on the same platform, for brands that would rather have it operated for them.',
+  },
+  {
+    q: 'Who runs the done-for-you programme?',
+    a: "Growth.pro's specialists run it end to end — strategy, the owned-side execution, expert guidance to your PR and partner agencies, and board-ready reporting. You get the outcomes without staffing the work in-house.",
+  },
+  {
+    q: 'Is the managed service available outside Malaysia?',
+    a: 'Yes. Growth.pro works with brands internationally, with a Malaysia-first focus; engagements outside Malaysia are quoted in US dollars.',
+  },
+  {
+    q: 'Are there lock-in contracts?',
+    a: 'No. Done-for-you engagements are month-to-month — the engagement renews because the work earns it, not because of a multi-year lock.',
+  },
+  {
+    q: 'Will you work with my competitor?',
+    a: 'Growth.pro offers category exclusivity: for the duration of your engagement it will not take on a direct competitor in a market where you operate.',
+  },
+  {
+    q: 'How do we get started?',
+    a: 'Start with a free AI visibility audit across five engines. From there, Growth.pro scopes the programme with you.',
+  },
+];
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+// Service schema for the managed offering. Provider is Growth.pro (the consultancy that built
+// Zicy); the service is delivered on the Zicy platform.
+const service = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Done-for-you AI visibility',
+  serviceType: 'Managed AI visibility programme',
+  description:
+    'A managed AI visibility programme run by Growth.pro on the Zicy platform — strategy, execution and proof, operated for enterprise brands.',
+  url: `${SITE.url}/done-for-you`,
+  provider: {
+    '@type': 'Organization',
+    name: 'Growth.pro',
+    url: 'https://www.growth.pro/',
+  },
+  areaServed: 'Worldwide',
+};
 ---
 <BaseLayout title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(service)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqPage)} />
+  </Fragment>
+
+  <!-- 1. Hero — handoff to Growth.pro (primary), free audit (secondary) -->
   <section class="hero inner">
     <div class="wrap">
-      <span class="eyebrow">Done-for-you · by Growth.pro</span>
-      <h1>Found, fixed and proven — without lifting a finger.</h1>
+      <span class="eyebrow">Done-for-you</span>
+      <h1>AI visibility, run for you.</h1>
       <p class="lead">
-        When you want the outcome rather than the dashboard, Growth.pro operates your AI visibility
-        programme end to end, using Zicy as its delivery engine.
+        Zicy is open to everyone. When you would rather not run it in-house, Growth.pro &mdash; the
+        AI visibility consultancy that built Zicy &mdash; operates the whole programme for you:
+        strategy, execution and proof, on the same platform.
       </p>
-      <div class="cta-row"><a class="btn btn-primary btn-lg" href="https://growth.pro/audit?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Talk to Growth.pro</a></div>
+      <div class="cta-row">
+        <a class="btn btn-p btn-lg" href={GROWTH_URL}>Talk to Growth.pro</a>
+        <a class="btn btn-o btn-lg" href="/audit">Run a free audit</a>
+      </div>
     </div>
   </section>
 
+  <!-- 2. 01 · The choice — comparison table -->
   <section>
     <div class="wrap">
-      <div class="shead"><span class="eyebrow"><span class="ix">01</span> The Growth.pro difference</span><h2>A methodology Zicy’s data feeds.</h2></div>
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">01</span> The choice</span>
+        <h2>Two ways to be the answer.</h2>
+        <p>
+          Both routes run on the same platform and start from the same free audit. The difference is
+          who operates the programme.
+        </p>
+      </div>
+      <table class="ctable" aria-label="The Zicy self-serve platform compared with the Growth.pro done-for-you service">
+        <thead>
+          <tr>
+            <th scope="col"><span class="vh">Attribute</span></th>
+            <th scope="col">Zicy platform (self-serve)</th>
+            <th scope="col" class="col-feat">Done-for-you (Growth.pro)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Who runs it</th>
+            <td data-col="Zicy platform">Your team</td>
+            <td data-col="Done-for-you" class="col-feat">Growth.pro&rsquo;s specialists</td>
+          </tr>
+          <tr>
+            <th scope="row">Built for</th>
+            <td data-col="Zicy platform">In-house teams and agencies</td>
+            <td data-col="Done-for-you" class="col-feat">Enterprise brands that want it run for them</td>
+          </tr>
+          <tr>
+            <th scope="row">Scope</th>
+            <td data-col="Zicy platform">The full self-serve platform, every module</td>
+            <td data-col="Done-for-you" class="col-feat">Strategy, execution and proof, managed for you on the platform</td>
+          </tr>
+          <tr>
+            <th scope="row">Commercials</th>
+            <td data-col="Zicy platform">From $129/mo, self-serve</td>
+            <td data-col="Done-for-you" class="col-feat">Custom retainer, month-to-month</td>
+          </tr>
+          <tr>
+            <th scope="row">Both start with</th>
+            <td data-col="Zicy platform">A free AI visibility audit</td>
+            <td data-col="Done-for-you" class="col-feat">A free AI visibility audit</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row"><span class="vh">Next step</span></th>
+            <td data-col="Zicy platform"><a class="ct-cta" href="/pricing">See pricing →</a></td>
+            <td data-col="Done-for-you" class="col-feat"><a class="ct-cta" href={GROWTH_URL}>Talk to Growth.pro →</a></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3. 02 · What Growth.pro runs for you — three outcome cards -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">02</span> What Growth.pro runs for you</span>
+        <h2>Strategy, execution and proof — operated for you.</h2>
+        <p>
+          Growth.pro builds and operates your AI Visibility Operating System using its PAVA
+          Framework and the AI Citation Enablement practice, on the Zicy platform.
+        </p>
+      </div>
       <div class="grid-3">
-        {ip.map((i) => (
-          <div class="card"><span class="eyebrow">{i.eyebrow}</span><h3>{i.name}</h3><p>{i.desc}</p></div>
+        {runsForYou.map((c) => (
+          <div class="card"><h3>{c.h}</h3><p>{c.p}</p></div>
         ))}
       </div>
     </div>
   </section>
 
-  <section style="background:var(--lavender)">
+  <!-- 4. 03 · The consultancy that built Zicy — credibility -->
+  <section>
     <div class="wrap">
-      <div class="shead"><span class="eyebrow"><span class="ix">02</span> How we work</span><h2>Selective by design.</h2></div>
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">03</span> The consultancy that built Zicy</span>
+        <h2>The team behind the platform runs the programme.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="sub" style="font-size:18px">
+          Growth.pro is the AI visibility consultancy that built Zicy. Built in Penang under
+          Malaysia Digital (MD) status, its methodology is aligned with Google&rsquo;s May 2026
+          spam-policy guidance &mdash; clarity, accuracy and demonstrable expertise, not
+          manipulation. We work on the brand side of the equation, not against the system.
+        </p>
+        <div style="margin-top:24px">
+          <a class="btn btn-t" href="/about">About Zicy →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 04 · How the engagement works — three light points, no figures -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">04</span> How the engagement works</span>
+        <h2>Selective by design.</h2>
+        <p>The terms in brief — the detail is scoped with Growth.pro.</p>
+      </div>
       <div class="grid-3">
-        {how.map((h) => (
-          <div class="card"><h3>{h.h}</h3><p>{h.p}</p></div>
+        {engagement.map((c) => (
+          <div class="card"><h3>{c.h}</h3><p>{c.p}</p></div>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- 6. FAQ — native <details> accordion; answers in static HTML + FAQPage schema -->
   <section>
     <div class="wrap">
-      <div class="shead"><span class="eyebrow"><span class="ix">03</span> Endorsed, not exploited</span><h2 style="font-size:28px">Built on the principles Google endorsed.</h2></div>
-      <p class="lead" style="font-size:17px">
-        Growth.pro’s methodology is anchored to clarity, accuracy and demonstrable expertise — the
-        principles Google formally endorsed in its 2026 generative-search policy update. We work on
-        the brand side of the equation, and contractually exclude tactics now classified as spam.
-      </p>
-      <div style="margin-top:30px"><a class="btn btn-primary btn-lg" href="https://growth.pro/audit?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Talk to Growth.pro</a></div>
+      <div class="shead">
+        <span class="eyebrow">FAQ</span>
+        <h2>Done-for-you questions.</h2>
+      </div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
+    </div>
+  </section>
+
+  <!-- 7. Final CTA — handoff (primary) + free audit (secondary) -->
+  <section class="final">
+    <div class="wrap">
+      <h2>Have it run for you.</h2>
+      <p>Start with a free audit, or talk to the team that built Zicy.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href={GROWTH_URL}>Talk to Growth.pro</a>
+        <a class="btn btn-o" href="/audit">Run a free audit</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
