@@ -177,8 +177,11 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
    clears the iOS home indicator. The ~104px subtracted ≈ the panel's top offset (header + gap)
    plus a bottom breathing margin. The vh line is a fallback for browsers without dvh. */
 .mnav-panel{position:absolute;right:0;top:calc(100% + 12px);background:var(--surface);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow);padding:10px 10px 14px;width:min(86vw,320px);max-height:calc(100vh - 104px);max-height:calc(100dvh - 104px - env(safe-area-inset-bottom, 0px));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:2px}
-.mnav-panel a{padding:11px 12px;border-radius:8px;font-size:15px;color:var(--ink-2);font-weight:500}
-.mnav-panel a:hover,.mnav-panel a.active{background:var(--violet-50);color:var(--violet-700)}
+/* :not(.btn) so the generic nav-link colour does NOT override the .btn-p / .btn-o button
+   styles — without it, .mnav-panel a (specificity 0-1-1) beat .btn-p (0-1-0) and the
+   "Try for free" button rendered dark --ink-2 text on violet instead of white. */
+.mnav-panel a:not(.btn){padding:11px 12px;border-radius:8px;font-size:15px;color:var(--ink-2);font-weight:500}
+.mnav-panel a:not(.btn):hover,.mnav-panel a:not(.btn).active{background:var(--violet-50);color:var(--violet-700)}
 .mnav-panel .mnav-group{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:14px 12px 4px}
 .mnav-panel .btn{margin-top:12px;justify-content:center}
 /* Show the hamburger at <=1080px. MUST come after the base ".mnav{display:none}" rule above —
