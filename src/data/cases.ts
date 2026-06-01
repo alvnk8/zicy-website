@@ -402,8 +402,7 @@ export const CASES: CaseStudy[] = [
 <h2>The Bigger Shift This Case Study Reveals</h2>
 <p>This brand didn’t “chase AI traffic.” They <strong>measured how AI understood them- and corrected it</strong>.</p>
 <p>As discovery shifts from rankings to recommendations, the winners won’t be the loudest brands. They’ll be the ones AI systems trust enough to cite.</p>
-<p><strong>Track it. Understand it. Optimise for it—with Zicy.</strong></p>
-<p><em>For more AEO/GEO case studies, visit us at <a href="/case-studies">https://www.zicy.com/case-studies</a> </em></p>`,
+<p><strong>Track it. Understand it. Optimise for it—with Zicy.</strong></p>`,
   },
   {
     slug: "aeo-case-study-brand-mentions-website-citation-coverage-in-ai-results",
@@ -494,9 +493,7 @@ export const CASES: CaseStudy[] = [
 <p>This brand didn’t overhaul its entire site. They simply answered one question clearly: <strong>“How does AI see us compared to everyone else?”</strong></p>
 <p>Once that was visible, improvement became inevitable.</p>
 <p>As eCommerce discovery shifts from search results to AI answers, brands that measure AI visibility early won’t just compete better, but will be recommended more often.</p>
-<p><strong>By tracking AI visibility with tools such as Zicy, brands can replace assumptions with evidence as discovery models change.</strong></p>
-<p><em>For more AEO/GEO case studies, visit us at </em><br />
-<a href="/case-studies"><em>https://www.zicy.com/case-studies</em></a></p>`,
+<p><strong>By tracking AI visibility with tools such as Zicy, brands can replace assumptions with evidence as discovery models change.</strong></p>`,
   },
   {
     slug: "aeo-case-study-brand-mentions-ai-citations-share-of-voice",
@@ -586,8 +583,7 @@ export const CASES: CaseStudy[] = [
 </li>
 </ul>
 <p>This organisation didn’t focus on chasing rankings alone. They focused on understanding how AI systems surface, compare, and reference brands in their category.</p>
-<p>Platforms like <a href="/">Zicy</a> help make this layer observable, so organisations can adapt as discovery models continue to evolve.</p>
-<p><em>For more AEO/GEO case studies, visit us at </em><a href="/case-studies"><em>https://www.zicy.com/case-studies</em></a></p>`,
+<p>Platforms like <a href="/">Zicy</a> help make this layer observable, so organisations can adapt as discovery models continue to evolve.</p>`,
   },
   {
     slug: "aeo-geo-case-study-ai-visibility-ecommerce-growth",
@@ -682,8 +678,7 @@ export const CASES: CaseStudy[] = [
 <p>AI visibility is not a vanity metric. It is increasingly tied to traffic quality and acquisition shifts.</p>
 <p>This eCommerce brand did not rely solely on SEO rankings. They measured how AI systems referenced them, and adjusted accordingly.</p>
 <p>As discovery continues shifting toward AI-generated answers, understanding where and how a brand appears in those answers becomes a competitive necessity.</p>
-<p>Platforms like <a href="/"><strong>Zicy</strong></a> make that visibility observable, so brands can respond as AI-driven discovery evolves.</p>
-<p><em>For more AEO/GEO case studies, visit us at </em><a href="/case-studies"><em>https://www.zicy.com/case-studies</em></a></p>`,
+<p>Platforms like <a href="/"><strong>Zicy</strong></a> make that visibility observable, so brands can respond as AI-driven discovery evolves.</p>`,
   },
   {
     slug: "aeo-case-study-aesthetic-clinic-ai-visibility",
@@ -767,8 +762,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>This clinic did not chase traffic alone.</p>
 <p>They focused on understanding how AI systems interpret credibility, treatment relevance, and brand authority.</p>
 <p>As healthcare and aesthetic discovery increasingly shifts toward AI-generated answers, visibility is not about being searchable, but about being referenced and recommended.</p>
-<p>Platforms like <a href="/"><em><strong>Zicy</strong></em></a> make this visibility measurable, enabling brands to adapt as AI-driven discovery continues to evolve.</p>
-<p><em>For more AEO/GEO case studies, visit us at <strong><a href="/case-studies">https://www.zicy.com/case-studies</a></strong></em></p>`,
+<p>Platforms like <a href="/"><em><strong>Zicy</strong></em></a> make this visibility measurable, enabling brands to adapt as AI-driven discovery continues to evolve.</p>`,
   },
   {
     slug: "aeo-geo-case-study-b2b",
@@ -846,8 +840,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <h2>The broader signal….</h2>
 <p>In high-trust industries, visibility is about being referenced when AI systems summarise, compare, and recommend.</p>
 <p>As discovery models evolve, the brands that understand how they are surfaced inside AI answers will adapt faster than those relying solely on traditional search metrics.</p>
-<p>Platforms like <a href="/"><strong>Zicy</strong></a> make this layer observable, so organisations can respond to how AI-driven discovery is actually unfolding.</p>
-<p><em>For more AEO/GEO case studies, visit us at </em><a href="/case-studies"><em>https://www.zicy.com/case-studies</em></a></p>`,
+<p>Platforms like <a href="/"><strong>Zicy</strong></a> make this layer observable, so organisations can respond to how AI-driven discovery is actually unfolding.</p>`,
   },
   {
     slug: "aeo-geo-case-study-elevated-b2b-visibility",
@@ -940,9 +933,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>B2B discovery is evolving quietly.</p>
 <p>Buyers are asking AI to compare, recommend, summarise, and shortlist before visiting a website.</p>
 <p>The brands that understand how they appear inside those AI responses will adapt faster than those measuring search rankings alone.</p>
-<p>Tools like <a href="/">Zicy</a> exist to surface that layer, so visibility inside AI answers becomes something you can track and improve.</p>
-<p><em>For more AEO/GEO case studies, visit us at</em> <a href="/case-studies"><em>https://www.zicy.com/case-studies</em><br />
-</a></p>`,
+<p>Tools like <a href="/">Zicy</a> exist to surface that layer, so visibility inside AI answers becomes something you can track and improve.</p>`,
   },
   {
     slug: "aeo-geo-case-study-education-brand",
@@ -1041,8 +1032,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <li><strong>Influence Gaps:</strong> You can’t identify which specific prompts are driving market influence.</li>
 <li><strong>Competitive Risk:</strong> You can’t defend your brand against competitors actively shaping AI narratives.</li>
 </ul>
-<p>Winning here is not about writing longer blogs; it’s about <strong>structured, extractable authority.</strong> If your institution has a visibility gap, it is measurable—and once it’s measurable, it’s optimisable.</p>
-<p><em>For more AEO/GEO case studies, visit us at: </em><a href="/case-studies">https://www.zicy.com/case-studies</a></p>`,
+<p>Winning here is not about writing longer blogs; it’s about <strong>structured, extractable authority.</strong> If your institution has a visibility gap, it is measurable—and once it’s measurable, it’s optimisable.</p>`,
   },
   {
     slug: "aeo-case-study-b2b-brand-mentions-ai-sessions-growth",
@@ -1162,8 +1152,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>The shift isn’t coming.</p>
 <p>It’s already here.</p>
 <p>If you don’t know how often AI mentions your brand, someone else is shaping that narrative.</p>
-<p>Platforms like <a href="/">Zicy</a> help you see it, track it, and optimise it.</p>
-<p><em>For more AEO/GEO case studies, visit us at: </em><a href="/case-studies">https://www.zicy.com/case-studies</a></p>`,
+<p>Platforms like <a href="/">Zicy</a> help you see it, track it, and optimise it.</p>`,
   },
   {
     slug: "aeo-geo-case-study-interior-decor",
@@ -1263,8 +1252,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 </ul>
 <p>You lose influence before the RFQ stage.</p>
 <p>Traditional SEO metrics don’t reveal this layer. AI visibility requires its own tracking system.</p>
-<p>Tools like <a href="/">Zicy</a> make that visibility measurable and actionable.</p>
-<p><em>For more AEO/GEO case studies, visit us at </em><a href="/case-studies"><em>https://www.zicy.com/case-studies</em></a></p>`,
+<p>Tools like <a href="/">Zicy</a> make that visibility measurable and actionable.</p>`,
   },
   {
     slug: "aeo-geo-case-study-b2b-electronics",
@@ -1363,7 +1351,6 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <li>Early-stage buyer trust</li>
 </ul>
 <p>The brands that understand how AI mentions, cites, and ranks them will shape the next wave of B2B discovery.</p>
-<p><a href="/">Zicy</a> makes that visibility measurable and optimisable.</p>
-<p><em>For more AEO/GEO case studies, visit us at <a href="/case-studies">https://www.zicy.com/case-studies</a> </em></p>`,
+<p><a href="/">Zicy</a> makes that visibility measurable and optimisable.</p>`,
   },
 ];
