@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
+import FaqUniversal from '../../components/FaqUniversal.astro';
+import { brandsFaqs, faqPageJsonLd } from '../../data/faqs';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
 import brandIntelligenceShot from '../../assets/screenshots/brand-intelligence-report.png';
@@ -78,41 +80,9 @@ const modules = [
   },
 ];
 
-const faqs = [
-  {
-    q: 'How do I know what AI says about us right now?',
-    a: "You run a free audit and see it in minutes — where you're named, cited, described inaccurately, or replaced by a rival, across all five engines. It surfaces the conversation that never touches your analytics, because it happens before the buyer reaches your site.",
-  },
-  {
-    q: "Isn't our SEO team already handling this?",
-    a: "No, and that's the common trap. Only 12% of AI-cited links also rank in Google's top 10 (Ahrefs, 15,000 prompts, 2025), and just 38% of AI Overview citations now come from pages ranking in the top 10 — down from 76% a year earlier (Ahrefs, 863,000 keywords, 2026); AI visibility runs on different signals.",
-  },
-  {
-    q: 'What if the AI is simply wrong about us?',
-    a: "That's the problem Zicy was built for. The AI Reality Score flags hallucinations, outdated claims and wrong facts before a buyer sees them, because a mention is worth little if the claim attached to it is false.",
-  },
-  {
-    q: 'Could doing this get us penalised by Google?',
-    a: "No — the approach is the opposite of manipulation. Zicy's content tooling is built to current best practice and aligned with Google's May 2026 spam-policy update covering AI Overviews and AI Mode.",
-  },
-  {
-    q: 'What does it cost, and what are we locked into?',
-    a: 'Plans run from $129 a month (Starter) to $349 (Growth), with custom Enterprise; Starter and Growth include a 7-day trial, and you can start with a free audit. The platform is self-serve with no lock-in.',
-  },
-  {
-    q: 'How do I justify this to my CFO?',
-    a: 'You give them one board-ready number — your AI share of voice over time — and the proof layer connecting AI-referred sessions and branded-search behaviour back to the work. Branded search is also a leading signal in its own right: independent research finds brand search volume is a stronger predictor of AI citation than backlinks (Growth Memo, Kevin Indig, 2025). So the metric you are defending is one outside research ties to visibility, not a number we invented.',
-  },
-];
-const faqPage = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
+// FAQ — page-specific block (6) from src/data/faqs.ts; the universal block renders beneath it
+// via <FaqUniversal />. JSON-LD = brands specific + universal, matching the visible answers.
+const faqPage = faqPageJsonLd(brandsFaqs);
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
@@ -272,7 +242,8 @@ const faqPage = {
         <span class="eyebrow">FAQ</span>
         <h2>Questions brands ask.</h2>
       </div>
-      <FaqAccordion items={faqs} defaultOpen={0} />
+      <FaqAccordion items={brandsFaqs} defaultOpen={0} />
+      <FaqUniversal />
     </div>
   </section>
 

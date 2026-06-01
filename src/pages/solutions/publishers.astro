@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
+import FaqUniversal from '../../components/FaqUniversal.astro';
+import { publishersFaqs, faqPageJsonLd } from '../../data/faqs';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
 // citation-analysis-urls.png carries CLEAN labels (owned / earned / competitor / uncited;
@@ -85,44 +87,16 @@ const modules = [
   },
 ];
 
-// §06 — FAQ. Q1 and Q2 are NEW (media-sales motion) and are flagged below to be added to the
-// canonical Zicy ICP FAQ doc; Q3–Q5 are from the canonical doc. The same array renders the
-// accordion AND the FAQPage JSON-LD, so the structured data matches the visible answers.
+// §06 — FAQ. Page-specific block (14, media-sales motion leading then attribution/licensing)
+// from src/data/faqs.ts; the universal block renders beneath it via <FaqUniversal />. JSON-LD =
+// publishers specific + universal, matching the visible answers. The rel="sponsored"/nofollow +
+// disclosure language and the "measured correlation, not a guaranteed citation" line live in
+// publishersFaqs Q4 and are load-bearing — do not soften.
 //
-// TODO(faq-doc): add Q1 ("We sell advertising — how does Zicy help us sell more of it?") and
-// Q2 ("Are we promising advertisers that paying us gets them cited by AI?") to the canonical
-// Zicy ICP FAQ doc — they originate here on the publishers v2 (media-sales) page.
-const faqs = [
-  {
-    q: 'We sell advertising — how does Zicy help us sell more of it?',
-    a: 'It lets you sell advertising as measurable AI-visibility uplift, not just impressions. Zicy tracks an advertiser’s visibility across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, and their branded-search movement from public search data, so your sales team can show the lift a campaign produced — the demand signals independent research ties to AI citation (Growth Memo, Kevin Indig, 2025).',
-  },
-  {
-    q: 'Are we promising advertisers that paying us gets them cited by AI?',
-    a: "No, and that distinction is the whole point. AI engines don't read the ad — they read the branded search and web mentions it creates (Brafton, 2026), and those signals are stronger predictors of AI citation than backlinks (Growth Memo, Kevin Indig, 2025; Digital Bloom, 2026); Zicy measures the movement. It is a measured correlation, not a guaranteed citation, and it stays on the endorsed side of Google's May 2026 spam-policy guidance — no paid links passing signal, no engineered citations.",
-  },
-  {
-    q: 'Is AI actually using our journalism — and can we put a number on it?',
-    a: "Yes, and that's precisely what Citation Analysis does. It shows whether AI attributes your work, paraphrases it without credit, or ignores it entirely across five engines, down to the domain and URL — so you can track attribution the way you already track traffic.",
-  },
-  {
-    q: 'Referral traffic is collapsing — why does attribution matter if the clicks are gone?',
-    a: "Because attribution is the new referral. News leaders expect to lose significant search-referral traffic within three years (Reuters Institute, Journalism, Media & Technology Trends and Predictions 2026), and the click-through to an AI Overview's own citation links sits around 1% when present (Pew Research, 2025); the publishers who measure attribution now are the ones positioned to license and defend it later.",
-  },
-  {
-    q: 'Can this support our AI-licensing negotiations?',
-    a: 'Yes — this is one of its strongest uses. A documented uncited rate and source-level attribution data give your commercial team an evidence base for licensing conversations and the boardroom, rather than an anecdote, at a moment when publishers from the Associated Press to USA Today are signing AI content deals (Digiday; Press Gazette, 2025–26).',
-  },
-];
-const faqPage = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
+// TODO(faq-doc): the media-sales Q&As ("We sell advertising — how does Zicy help us sell more of
+// it?" and "Are we promising advertisers that paying us gets them cited by AI?") originate on
+// this page; add them to the canonical Zicy ICP FAQ doc.
+const faqPage = faqPageJsonLd(publishersFaqs);
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
@@ -292,7 +266,8 @@ const faqPage = {
         <span class="eyebrow">FAQ</span>
         <h2>Questions publishers ask.</h2>
       </div>
-      <FaqAccordion items={faqs} defaultOpen={0} />
+      <FaqAccordion items={publishersFaqs} defaultOpen={0} />
+      <FaqUniversal />
     </div>
   </section>
 

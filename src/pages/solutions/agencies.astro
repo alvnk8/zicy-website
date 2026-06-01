@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
+import FaqUniversal from '../../components/FaqUniversal.astro';
+import { agenciesFaqs, faqPageJsonLd } from '../../data/faqs';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
 import aiVisibilityShot from '../../assets/screenshots/ai-visibility-dashboard.png';
@@ -81,39 +83,9 @@ const modules = [
   },
 ];
 
-// §05 — FAQ, canonical Zicy agencies ICP copy, verbatim. The same array renders the accordion
-// AND the FAQPage JSON-LD, so the structured data always matches the visible answers.
-const faqs = [
-  {
-    q: "Clients are raising AI search in reviews and we're improvising — how do we have the answer?",
-    a: "You walk into the room with the client's live AI visibility, not a generic deck — run a free audit on a prospect and show them exactly how AI describes them today, where it's wrong, and your plan to fix it, before anything is signed. The agency that answers first takes the budget.",
-  },
-  {
-    q: 'Is there genuine budget in this, or is it noise?',
-    a: "The category is funding and forming now: more than US$300M was raised across AI-visibility tools between mid-2025 and spring 2026 (Surmado, 2026), and the GEO services market was valued at US$886M in 2024, projected to reach US$7.3B by 2031 (Valuates Reports, 2025). The service line is open before it's crowded.",
-  },
-  {
-    q: 'Do we have to build a platform or hire specialists?',
-    a: 'No — the platform and the methodology already exist, so you productise AI visibility as a retainer or a one-off audit under your own brand, with no build cost and no specialist hire.',
-  },
-  {
-    q: 'Most AI tools only measure — what do we actually deliver?',
-    a: "Zicy measures and remediates in one place: the audit, the prioritised fix list, and the schema, llms.txt and content tooling to close it. That's the category's weakness and your opening — you sell the fix and show the result, not just the problem.",
-  },
-  {
-    q: "If we put our name on this, is the methodology safe under Google's policies?",
-    a: "Yes, and that protects your agency, not just the client. The tooling is aligned with Google's May 2026 spam-policy guidance, so you're reselling the endorsed side — clarity, accuracy and demonstrable expertise — rather than tactics that could later be flagged.",
-  },
-];
-const faqPage = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
+// §05 — FAQ, page-specific block (11) from src/data/faqs.ts; the universal block renders beneath
+// it via <FaqUniversal />. JSON-LD = agencies specific + universal, matching the visible answers.
+const faqPage = faqPageJsonLd(agenciesFaqs);
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
@@ -225,7 +197,8 @@ const faqPage = {
         <span class="eyebrow">FAQ</span>
         <h2>Questions agencies ask.</h2>
       </div>
-      <FaqAccordion items={faqs} defaultOpen={0} />
+      <FaqAccordion items={agenciesFaqs} defaultOpen={0} />
+      <FaqUniversal />
     </div>
   </section>
 

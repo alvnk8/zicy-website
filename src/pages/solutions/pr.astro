@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
+import FaqUniversal from '../../components/FaqUniversal.astro';
+import { prFaqs, faqPageJsonLd } from '../../data/faqs';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
 // Citation Analysis uses the URL drill-down export (citation-analysis-urls.png), which carries
@@ -73,39 +75,9 @@ const modules = [
   },
 ];
 
-// FAQ — canonical Zicy PR ICP copy, verbatim. The same array renders the accordion AND the
-// FAQPage JSON-LD, so the structured-data answers always match the server-rendered answers.
-const faqs = [
-  {
-    q: 'Reputation is formed in coverage — why does the AI answer matter so much?',
-    a: 'Because the coverage is increasingly read by a machine, then summarised to the buyer. More than 1 billion people use standalone generative AI tools every month (Meltwater & We Are Social, Digital 2026, via Similarweb), and the framing AI repeats is the framing that reaches the decision, not the original article.',
-  },
-  {
-    q: 'My client has stopped caring about clippings and AVE. What do I report instead?',
-    a: "A reputation metric the C-suite already respects: AI Share of Voice, mention coverage, citation rate and sentiment, tracked weekly across five engines. It's defensible, comparable to competitors, and tied to the answers buyers act on.",
-  },
-  {
-    q: 'Can I actually prove the coverage I earned moved the answer?',
-    a: "Yes — that's what Citation Analysis is for. It shows which sources AI cites about your client, classified as owned, earned or competitor, so you connect the placement you landed to movement in the answer rather than asserting a link.",
-  },
-  {
-    q: 'Does Zicy do the PR — and does that threaten my role?',
-    a: 'No. Zicy measures and proves; it does not place coverage. Your team earns the media on its merits, and Zicy shows whether it moved the answer — it makes your work measurable, not redundant.',
-  },
-  {
-    q: 'If AI hallucinates something damaging about my client, what can we actually do?',
-    a: "First you see it early through the Reality Score and sentiment surveillance; then you act through legitimate channels — if the framing is inaccurate, you guide a correction with the publication or platform; if it's accurate criticism, it goes back to the client as an operational issue. The one thing Zicy will not do is manufacture or suppress sentiment.",
-  },
-];
-const faqPage = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
+// FAQ — page-specific block (8) from src/data/faqs.ts; the universal block renders beneath it
+// via <FaqUniversal />. JSON-LD = PR specific + universal, matching the visible answers.
+const faqPage = faqPageJsonLd(prFaqs);
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
@@ -212,7 +184,8 @@ const faqPage = {
         <span class="eyebrow">FAQ</span>
         <h2>Questions PR teams ask.</h2>
       </div>
-      <FaqAccordion items={faqs} defaultOpen={0} />
+      <FaqAccordion items={prFaqs} defaultOpen={0} />
+      <FaqUniversal />
     </div>
   </section>
 

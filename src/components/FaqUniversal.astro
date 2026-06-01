@@ -1,0 +1,13 @@
+---
+// Universal FAQ block — rendered on every /solutions ICP page BENEATH that page's specific FAQ
+// block. Heading + accordion are defined once here; the data lives once in src/data/faqs.ts.
+// Reuses the shared FaqAccordion (no second accordion pattern). All items render closed by
+// default so only the page-specific block's first item is open on load.
+import FaqAccordion from './FaqAccordion.astro';
+import { universalFaqs } from '../data/faqs';
+---
+<div class="shead" style="margin-top:60px">
+  <span class="eyebrow">General questions</span>
+  <h2>General questions about Zicy and AI visibility.</h2>
+</div>
+<FaqAccordion items={universalFaqs} defaultOpen={-1} />
