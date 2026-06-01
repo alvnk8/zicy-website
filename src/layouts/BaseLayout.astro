@@ -2,6 +2,7 @@
 import '../styles/theme.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 import { SITE } from '../data/site';
 
 interface Props {
@@ -43,6 +44,27 @@ const siteGraph = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
+    <!-- Google Consent Mode v2 default — MUST run before GTM. Ad/analytics signals start denied
+         so no measurement cookie is written until the visitor accepts (see CookieConsent.astro).
+         A returning visitor's stored choice is read back here so granted tags fire with no flash. -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      var __zc;
+      try { __zc = localStorage.getItem('zicy-consent'); } catch (e) {}
+      var __ok = __zc === 'granted';
+      gtag('consent', 'default', {
+        ad_storage: __ok ? 'granted' : 'denied',
+        ad_user_data: __ok ? 'granted' : 'denied',
+        ad_personalization: __ok ? 'granted' : 'denied',
+        analytics_storage: __ok ? 'granted' : 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500
+      });
+      gtag('set', 'ads_data_redaction', true);
+      gtag('set', 'url_passthrough', true);
+    </script>
     <!-- Google Tag Manager — is:inline keeps it verbatim and as high in <head> as possible
          (Astro would otherwise bundle/hoist it and break early firing). -->
     <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -96,6 +118,7 @@ const siteGraph = {
       <slot />
     </main>
     <Footer />
+    <CookieConsent />
     <!-- Reveal-on-scroll: single observer, sitewide. Honours prefers-reduced-motion via CSS. -->
     <script>
       const io = new IntersectionObserver(
