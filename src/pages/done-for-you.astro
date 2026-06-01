@@ -5,11 +5,11 @@ import { SITE } from '../data/site';
 
 const title = 'Done-for-you AI visibility — run for you by Growth.pro, the consultancy that built Zicy';
 const description =
-  "Prefer not to run it in-house? Growth.pro — the AI visibility consultancy that built Zicy — operates the whole programme for you: strategy, execution and proof, on the Zicy platform. Start with a free audit.";
+  "Prefer not to run it in-house? Growth.pro — the AI visibility consultancy that built Zicy — operates the whole programme for you: strategy, execution and proof, on the Zicy platform. Start with a free trial.";
 
 // CRITICAL ROUTING: the primary CTA hands off to Growth.pro in the SAME tab with the agreed
 // referral UTM string. This page does NOT capture the lead — Growth.pro converts. The free
-// audit (/audit) is the shared entry point and appears only as the SECONDARY CTA.
+// trial (app.zicy.com/register) appears only as the SECONDARY CTA.
 const GROWTH_URL = 'https://www.growth.pro/?utm_source=zicy&utm_medium=referral&utm_campaign=dfy';
 
 // What Growth.pro runs for you — outcome-shaped, not a price list.
@@ -39,8 +39,8 @@ const engagement = [
     p: 'Growth.pro will not take on a direct competitor in a market where you operate, for the duration of the engagement.',
   },
   {
-    h: 'Starts with a free audit',
-    p: 'The same audit anyone can run, used to scope the programme.',
+    h: 'Starts with a free trial',
+    p: 'The same platform anyone can try, used to scope the programme.',
   },
 ];
 
@@ -67,7 +67,7 @@ const faqs = [
   },
   {
     q: 'How do we get started?',
-    a: 'Start with a free AI visibility audit across five engines. From there, Growth.pro scopes the programme with you.',
+    a: 'You start a free trial on the platform to see where you stand across all five engines, then Growth.pro scopes the programme with you.',
   },
 ];
 const faqPage = {
@@ -104,7 +104,7 @@ const service = {
     <script type="application/ld+json" set:html={JSON.stringify(faqPage)} />
   </Fragment>
 
-  <!-- 1. Hero — handoff to Growth.pro (primary), free audit (secondary) -->
+  <!-- 1. Hero — handoff to Growth.pro (primary), free trial (secondary) -->
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Done-for-you</span>
@@ -128,7 +128,7 @@ const service = {
         <span class="eyebrow"><span class="ix">01</span> The choice</span>
         <h2>Two ways to be the answer.</h2>
         <p>
-          Both routes run on the same platform and start from the same free audit. The difference is
+          Both routes run on the same platform. The difference is
           who operates the programme.
         </p>
       </div>
@@ -163,8 +163,8 @@ const service = {
           </tr>
           <tr>
             <th scope="row">Both start with</th>
-            <td data-col="Zicy platform">A free AI visibility audit</td>
-            <td data-col="Done-for-you" class="col-feat">A free AI visibility audit</td>
+            <td data-col="Zicy platform">A free trial</td>
+            <td data-col="Done-for-you" class="col-feat">A free trial</td>
           </tr>
         </tbody>
         <tfoot>
@@ -245,11 +245,11 @@ const service = {
     </div>
   </section>
 
-  <!-- 7. Final CTA — handoff (primary) + free audit (secondary) -->
+  <!-- 7. Final CTA — handoff (primary) + free trial (secondary) -->
   <section class="final">
     <div class="wrap">
       <h2>Have it run for you.</h2>
-      <p>Start with a free audit, or talk to the team that built Zicy.</p>
+      <p>Start with a free trial, or talk to the team that built Zicy.</p>
       <div class="hcta">
         <a class="btn btn-p" href={GROWTH_URL}>Talk to Growth.pro</a>
         <a class="btn btn-o" href="https://app.zicy.com/register">Try for free</a>

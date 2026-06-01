@@ -65,7 +65,7 @@ export const universalFaqs: Faq[] = [
   },
   {
     q: `What does it cost, and what are we locked into?`,
-    a: `Plans run from $129 a month (Starter) to $349 (Growth), with custom Enterprise; Starter and Growth include a 7-day trial, the annual plan gives thirteen months for twelve, and you can start with a free audit. The platform is self-serve with no lock-in.`,
+    a: `Plans run from $129 a month (Starter) to $349 (Growth), with custom Enterprise; Starter and Growth include a 7-day trial, the annual plan gives thirteen months for twelve. The platform is self-serve with no lock-in.`,
   },
   {
     q: `Why a tool built in Penang rather than a US platform?`,
@@ -90,7 +90,7 @@ export const universalFaqs: Faq[] = [
 export const brandsFaqs: Faq[] = [
   {
     q: `How do I know what AI is saying about us right now?`,
-    a: `You run a free audit and see it in minutes — where you're named, cited, described inaccurately, or replaced by a rival, across all five engines. It surfaces the conversation that never touches your analytics, because it happens before the buyer reaches your site.`,
+    a: `You start a free trial and see it in minutes — where you're named, cited, described inaccurately, or replaced by a rival, across all five engines. It surfaces the conversation that never touches your analytics, because it happens before the buyer reaches your site.`,
   },
   {
     q: `Do our buyers really choose this way, or is this overstated?`,
@@ -162,7 +162,7 @@ export const agenciesFaqs: Faq[] = [
   },
   {
     q: `Clients are raising AI search in reviews and we're improvising — how do we have the answer?`,
-    a: `You walk into the room with the client's live AI visibility, not a generic deck — run a free audit on a prospect and show them exactly how AI describes them today, where it's wrong, and your plan to fix it, before anything is signed. The agency that answers first takes the budget.`,
+    a: `You walk into the room with the client's live AI visibility, not a generic deck — show a prospect exactly how AI describes them today, where it's wrong, and your plan to fix it, before anything is signed. The agency that answers first takes the budget.`,
   },
   {
     q: `Is there genuine budget in this, or is it noise?`,
@@ -170,7 +170,7 @@ export const agenciesFaqs: Faq[] = [
   },
   {
     q: `How do we explain AI visibility to a client who has never heard of it?`,
-    a: `You show them rather than explain it — run a free audit and present how AI describes them today across five engines, where it is wrong, and which rivals appear in their place. A live result lands faster than a definition, and it reframes the conversation from "what is this" to "how do we fix it".`,
+    a: `You show them rather than explain it — present how AI describes them today across five engines, where it is wrong, and which rivals appear in their place. A live result lands faster than a definition, and it reframes the conversation from "what is this" to "how do we fix it".`,
   },
   {
     q: `Do we have to build a platform or hire specialists?`,
@@ -182,7 +182,7 @@ export const agenciesFaqs: Faq[] = [
   },
   {
     q: `How do agencies usually package this for clients?`,
-    a: `Agencies typically package it three ways: a free audit as a new-business wedge, a monthly retainer reporting AI Share of Voice and the fixes shipped against it, or a one-off audit-and-remediation engagement. The same Zicy loop — measure, diagnose, act, prove — supports all three without separate tooling.`,
+    a: `Agencies typically package it three ways: a quick AI visibility baseline as a new-business wedge, a monthly retainer reporting AI Share of Voice and the fixes shipped against it, or a one-off audit-and-remediation engagement. The same Zicy loop — measure, diagnose, act, prove — supports all three without separate tooling.`,
   },
   {
     q: `How do we run our whole client roster from one place?`,
