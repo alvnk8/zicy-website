@@ -59,6 +59,7 @@ const homeActive = path === '/';
         </div>
       </div>
 
+      <a class="login" href="https://app.zicy.com/">Log in</a>
       <a class="cta" href="https://app.zicy.com/register">Try for free</a>
     </div>
 
@@ -81,6 +82,7 @@ const homeActive = path === '/';
         <p class="mnav-group">Free tools</p>
         <a href="/free-tools" class={isActive('/free-tools') ? 'active' : ''}>Free tools hub</a>
         {FREE_TOOLS.map((t) => <a href={t.href} class={isActive(t.href) ? 'active' : ''}>{t.label}</a>)}
+        <a class="btn btn-o" href="https://app.zicy.com/">Log in</a>
         <a class="btn btn-p" href="https://app.zicy.com/register">Try for free</a>
       </div>
     </details>

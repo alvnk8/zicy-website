@@ -138,10 +138,11 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
      opacity:0;visibility:hidden, but visibility:hidden keeps the position:absolute
      panel in the layout, contributing min-width:260px to document.scrollWidth and
      causing a 138 px horizontal overflow at 375 px viewport. */
-/* Collapse the desktop nav to the hamburger at <=1024px. With eight top-level items plus two
-   dropdowns and the CTA, the full row no longer fits below ~1025px and would wrap / overflow,
-   so the <details> menu takes over earlier. (Page-content grids still collapse at 860px below.) */
-@media(max-width:1024px){
+/* Collapse the desktop nav to the hamburger at <=1080px. With eight top-level items, two
+   dropdowns, the Log in link and the CTA, the full row no longer fits below ~1080px and would
+   wrap / overflow, so the <details> menu takes over earlier. (Page-content grids still
+   collapse at 860px below.) */
+@media(max-width:1080px){
   .links > a:not(.cta),
   .links .has-dropdown,
   .dropdown{display:none}
@@ -175,10 +176,10 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
 .mnav-panel a:hover,.mnav-panel a.active{background:var(--violet-50);color:var(--violet-700)}
 .mnav-panel .mnav-group{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:14px 12px 4px}
 .mnav-panel .btn{margin-top:12px;justify-content:center}
-/* Show the hamburger at <=1024px. MUST come after the base ".mnav{display:none}" rule above —
+/* Show the hamburger at <=1080px. MUST come after the base ".mnav{display:none}" rule above —
    equal specificity, so source order decides; placing it earlier let the base rule win and the
    menu disappeared. */
-@media(max-width:1024px){.mnav{display:block}}
+@media(max-width:1080px){.mnav{display:block}}
 
 /* ===== HOMEPAGE HERO (asymmetric, measurement grid atmosphere) ===== */
 .hero{position:relative;overflow:hidden;padding:clamp(72px,11vw,128px) 0 clamp(64px,8vw,104px);background:radial-gradient(120% 80% at 82% -10%,#EAEEF8 0%,var(--paper) 58%)}
