@@ -1,139 +1,200 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CtaBand from '../../components/CtaBand.astro';
 import Screenshot from '../../components/Screenshot.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
-// ai-visibility-dashboard.png is the same canonical source already used on /platform,
-// /solutions/brands and the homepage showcase.
 import aiVisibilityShot from '../../assets/screenshots/ai-visibility-dashboard.png';
-import visibilityGapsShot from '../../assets/screenshots/visibility-gaps.png';
+import competitiveShot from '../../assets/screenshots/competitive-ai-performance.png';
 
-// White-label CTA destination — preserved from the existing icps.ts agencies.band.ctaHref.
-const WHITELABEL_HREF = '/pricing';
-const WHITELABEL_LABEL = 'Talk to us about white-label';
+// White-label / agencies-plan destination. The Scale (white-label, multi-brand) tier lives on
+// /pricing; there is no dedicated agency-partner signup route in the repo. Per the brief guard,
+// these CTAs route to the agencies plan, NOT the generic /audit.
+const PARTNER_HREF = '/pricing';
+const PARTNER_LABEL = 'Become a Zicy agency partner';
 
-const title = "Zicy for agencies — white-label AI visibility, audited, fixed and proven";
+const title = 'Zicy for marketing and creative agencies — productise AI visibility under your brand';
 const description =
-  "Add AI visibility to your service line. Audit a client, fix what's broken, and prove the result — white-labelled under your brand. Zicy for marketing, creative and media agencies.";
+  "Walk into the room with a client's live AI visibility, not a generic deck. Measure, remediate and report AI visibility across all five engines — white-labelled, with no platform to build. Zicy for agencies.";
 
-// Single sourced stat — brief explicitly forbids fabricating a second.
-const stat = {
-  n: '$300M+',
-  label:
-    'raised by the AI-visibility tools market between mid-2025 and spring 2026 — the category is forming now; the service line is open now.',
-  source: 'Surmado, 2026',
-};
-// Framing line displayed below the stat (NOT a stat — no number, no source).
-const framing =
-  "The category's weakness is your opening: most tools measure but never act. Walk into the room with the client's real AI visibility and the fixes — not a generic deck.";
-
-const usps = [
+// §01 — the opportunity. Every figure carries publisher + year inline, verbatim. Do not alter.
+const oppStats = [
   {
-    h: 'A new revenue line, no build cost.',
-    p: 'The platform and the methodology already exist. Productise AI visibility as a retainer or a one-off audit under your own brand.',
+    n: '>US$300M',
+    nStyle: '',
+    label: 'raised across AI-visibility tools between mid-2025 and spring 2026.',
+    source: 'Surmado, 2026',
   },
   {
-    h: 'Measure and remediate in one place.',
-    p: 'The audit, the prioritised fix list, and the schema / llms.txt / content tooling to close it — so you deliver outcomes, not observations.',
-  },
-  {
-    h: 'Win the pitch with truth.',
-    p: "Show a prospect exactly how AI describes them today, where it's wrong, and your plan to fix it — before you've signed anything.",
+    n: 'US$886M → US$7.3B',
+    nStyle: 'font-size:clamp(28px,4.2vw,40px)',
+    label: 'the GEO services market, 2024 to 2031 (a 34% CAGR).',
+    source: 'Valuates Reports, 2025',
   },
 ];
 
-const wiifm = [
-  'Open a high-margin service line without hiring a specialist team or building tech.',
-  'Walk into pitches with a live, client-specific AI visibility read.',
-  'White-label dashboards and deliverables — your brand on every screen.',
-  "Retain clients with a recurring metric they’ll want reported every month.",
+// §02 — why agencies choose Zicy (three pillars).
+const pillars = [
+  {
+    h: 'Sell the fix, not just the problem.',
+    p: 'Most AI tools only measure. Zicy delivers the audit, the prioritised fix list, and the schema, llms.txt and content tooling to close it — so you bill for outcomes, not diagnoses.',
+  },
+  {
+    h: 'Your brand on every screen.',
+    p: 'Unlimited projects and brands on every plan; the Scale tier adds multi-brand management built for a portfolio, with white-label dashboards under your own name.',
+  },
+  {
+    h: 'The endorsed side of the line.',
+    p: "The tooling is aligned with Google's May 2026 spam-policy guidance — clarity, accuracy, demonstrable expertise — so what you resell protects your agency's reputation, not just the client's.",
+  },
 ];
 
+// §03 — what you productise (outcome bullets).
+const productise = [
+  'A new-business wedge: a live AI visibility audit you run on a prospect before anything is signed.',
+  'A monthly retainer: AI share of voice and the fixes shipped against it, reported per client.',
+  'A one-off engagement: audit, prioritised fix list, remediation.',
+  'A portfolio operation: the whole roster run from one place, your brand on every report.',
+];
+
+// §04 — module touchpoints.
 const modules = [
   {
-    name: 'AI Visibility + Competitive AI Performance',
-    desc: 'A clear scoreboard you can put in front of any client.',
+    name: 'AI Visibility',
+    desc: 'Mention coverage, citation rate, AI Share of Voice and average ranking, per client, against the competitors that client worries about.',
   },
   {
-    name: 'Visibility Gaps + Action Center',
-    desc: 'The prioritised fix list, plus the schema, llms.txt and content tooling to close it.',
+    name: 'Brand Intelligence',
+    desc: 'How AI describes each client, the AI Reality Score, the entity gaps, and a prioritised action plan you can present.',
   },
   {
-    name: 'White-label reporting',
-    desc: 'Your brand on the dashboard and the deliverables.',
+    name: 'Action Center',
+    desc: 'Schema, llms.txt and content tooling built to current best practice — the remediation you bill for.',
   },
   {
-    name: 'Multi-brand management',
-    desc: 'Run your whole client roster from one place (Scale plan).',
+    name: 'Competitive AI Performance',
+    desc: "Each client's standing against rivals, the table that wins the pitch.",
+  },
+  {
+    name: 'Multi-brand management (Scale)',
+    desc: 'The roster from one place, white-labelled.',
   },
 ];
+
+// §05 — FAQ, canonical Zicy agencies ICP copy, verbatim. The same array renders the accordion
+// AND the FAQPage JSON-LD, so the structured data always matches the visible answers.
+const faqs = [
+  {
+    q: "Clients are raising AI search in reviews and we're improvising — how do we have the answer?",
+    a: "You walk into the room with the client's live AI visibility, not a generic deck — run a free audit on a prospect and show them exactly how AI describes them today, where it's wrong, and your plan to fix it, before anything is signed. The agency that answers first takes the budget.",
+  },
+  {
+    q: 'Is there genuine budget in this, or is it noise?',
+    a: "The category is funding and forming now: more than US$300M was raised across AI-visibility tools between mid-2025 and spring 2026 (Surmado, 2026), and the GEO services market was valued at US$886M in 2024, projected to reach US$7.3B by 2031 (Valuates Reports, 2025). The service line is open before it's crowded.",
+  },
+  {
+    q: 'Do we have to build a platform or hire specialists?',
+    a: 'No — the platform and the methodology already exist, so you productise AI visibility as a retainer or a one-off audit under your own brand, with no build cost and no specialist hire.',
+  },
+  {
+    q: 'Most AI tools only measure — what do we actually deliver?',
+    a: "Zicy measures and remediates in one place: the audit, the prioritised fix list, and the schema, llms.txt and content tooling to close it. That's the category's weakness and your opening — you sell the fix and show the result, not just the problem.",
+  },
+  {
+    q: "If we put our name on this, is the methodology safe under Google's policies?",
+    a: "Yes, and that protects your agency, not just the client. The tooling is aligned with Google's May 2026 spam-policy guidance, so you're reselling the endorsed side — clarity, accuracy and demonstrable expertise — rather than tactics that could later be flagged.",
+  },
+];
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 <BaseLayout title={title} description={description}>
-  <!-- 1. Hero (white) -->
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
+
+  <!-- 1. Hero -->
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">For marketing &amp; creative agencies</span>
-      <h1>AI visibility &mdash; audited, fixed and proven. Under your brand.</h1>
+      <h1>Walk into the room with the client&rsquo;s live AI visibility, not a generic deck.</h1>
       <p class="lead">
-        AEO/GEO is the brief no one on the roster owns yet. Add a new, defensible service line:
-        audit a client&rsquo;s AI visibility, fix what&rsquo;s broken, and prove the result &mdash;
-        white-labelled, with no platform to build.
+        Clients are raising AI search in reviews and pitches. Zicy lets you answer first &mdash;
+        show a prospect exactly how AI describes them today across all five engines (ChatGPT,
+        Gemini, Perplexity, Google AI Overviews and Google AI Mode), where it&rsquo;s wrong, and
+        your plan to fix it, all under your own brand.
       </p>
       <div class="cta-row">
-        <a class="btn btn-primary btn-lg" href={WHITELABEL_HREF}>{WHITELABEL_LABEL}</a>
+        <a class="btn btn-p btn-lg" href={PARTNER_HREF}>{PARTNER_LABEL}</a>
+        <a class="btn btn-o btn-lg" href="/platform">See the platform</a>
       </div>
     </div>
   </section>
 
-  <!-- 2. The opportunity (white) — one sourced stat + one framing line -->
+  <!-- 2. 01 · The opportunity — two sourced market stats -->
   <section>
     <div class="wrap">
       <div class="shead">
-        <span class="eyebrow">The opportunity</span>
-        <h2>Your clients are already asking about AI search. Have the answer.</h2>
-        <p>Your clients are already asking about AI search. The agency that answers first owns the budget.</p>
+        <span class="eyebrow"><span class="ix">01</span> The opportunity</span>
+        <h2>A service line that&rsquo;s funding and forming now.</h2>
+        <p>
+          AI visibility is a budget line clients are already moving money toward, and the agencies
+          that productise it first take the category before it crowds.
+        </p>
       </div>
-      <div style="max-width:680px;margin:0 auto 18px">
-        <div class="metric" style="padding:30px 32px">
-          <div class="n">{stat.n}</div>
-          <div class="l" style="margin-top:10px;font-size:14.5px">{stat.label}</div>
-          <div class="mono" style="font-size:12px;color:var(--muted);margin-top:12px;letter-spacing:.02em">
-            Source: {stat.source}
+      <div class="grid-2">
+        {oppStats.map((s) => (
+          <div class="stat">
+            <div class="n" style={s.nStyle}>{s.n}</div>
+            <div class="t">{s.label}</div>
+            <div class="s">Source: {s.source}</div>
           </div>
-        </div>
-      </div>
-      <p class="lead" style="font-size:17px;max-width:760px;margin:18px auto 0">{framing}</p>
-    </div>
-  </section>
-
-  <!-- 3. Why Zicy (lavender) — three USP cards -->
-  <section style="background:var(--lavender)">
-    <div class="wrap">
-      <div class="shead"><h2>Why agencies choose Zicy.</h2></div>
-      <div class="grid-3">
-        {usps.map((u) => (
-          <div class="card"><h3>{u.h}</h3><p>{u.p}</p></div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- 4. What you get (white) — four-item benefit list -->
+  <!-- 3. 02 · Why agencies choose Zicy — three pillars -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">02</span> Why agencies choose Zicy</span>
+        <h2>Measure and remediate in one place.</h2>
+      </div>
+      <div class="grid-3">
+        {pillars.map((p) => (
+          <div class="card"><h3>{p.h}</h3><p>{p.p}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 03 · What you productise — outcome bullets -->
   <section>
     <div class="wrap">
-      <div class="shead"><h2>What you get.</h2></div>
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">03</span> What you productise</span>
+        <h2>A repeatable service from one workflow.</h2>
+      </div>
       <ul class="checklist">
-        {wiifm.map((item) => <li>{item}</li>)}
+        {productise.map((item) => <li>{item}</li>)}
       </ul>
     </div>
   </section>
 
-  <!-- 5. Inside the platform (lavender) — four module cards + two product shots -->
-  <section style="background:var(--lavender)">
+  <!-- 5. 04 · Inside the platform — five module cards + two product shots -->
+  <section style="background:var(--mist)">
     <div class="wrap">
-      <div class="shead"><h2>Inside the platform.</h2></div>
-      <div class="grid-2">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">04</span> Inside the platform</span>
+        <h2>The modules you resell.</h2>
+      </div>
+      <div class="grid-3">
         {modules.map((m) => (
           <div class="card">
             <span class="eyebrow">Module</span>
@@ -145,44 +206,38 @@ const modules = [
       <div class="grid-2" style="margin-top:28px">
         <Screenshot
           src={aiVisibilityShot}
-          alt="Zicy AI Visibility dashboard a client can be shown — coverage, share of voice and ranking across AI engines."
-          caption="AI Visibility &mdash; the scoreboard you put in front of any client."
+          alt="Zicy AI Visibility dashboard a client can be shown — mention coverage, AI share of voice and average ranking across the engines."
+          caption="AI Visibility — the scoreboard you put in front of any client."
         />
         <Screenshot
-          src={visibilityGapsShot}
-          alt="Zicy Visibility Gaps showing prioritised technical fixes, content optimisation and new-content opportunities."
-          caption="Visibility Gaps + Action Center &mdash; the prioritised fix list, ready to ship."
+          src={competitiveShot}
+          alt="Zicy Competitive AI Performance table comparing a client against rivals on mention coverage, ranking, citations, share of voice and sentiment."
+          caption="Competitive AI Performance — the table that wins the pitch."
         />
       </div>
     </div>
   </section>
 
-  <!-- 6. Proof (white) — two numbers + measurement disclosure (3 engines per canon) -->
+  <!-- 6. FAQ — native <details> accordion; answers in static HTML + FAQPage schema -->
   <section>
     <div class="wrap">
-      <div class="shead"><h2>What it looks like when it works.</h2></div>
-      <div style="max-width:760px">
-        <div class="metric" style="padding:32px 34px">
-          <div class="n g" style="font-size:44px">
-            290<span style="font-size:22px">%</span>
-            <span style="display:inline-block;width:18px"></span>
-            <span style="color:var(--indigo)">18.11<span style="font-size:22px">%</span></span>
-          </div>
-          <div class="l" style="margin-top:14px;font-size:14px">
-            <b style="color:var(--green)">290%</b> more AI-search clicks &middot;
-            <b style="color:var(--indigo)">18.11%</b> AI share of voice &middot;
-            multi-category, content-led
-          </div>
-        </div>
-        <p class="disclosure">
-          Measurement: AI brand mention and citation rates across tracked category queries on
-          ChatGPT, Gemini, and Perplexity, via Zicy&rsquo;s measurement infrastructure. Client
-          anonymised pending naming permission.
-        </p>
+      <div class="shead">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions agencies ask.</h2>
       </div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 
-  <!-- 7. Closing CTA — same white-label destination as the hero CTA -->
-  <CtaBand heading="Make AI visibility your next service line." ctaLabel={WHITELABEL_LABEL} ctaHref={WHITELABEL_HREF} />
+  <!-- 7. Closing band -->
+  <section class="final">
+    <div class="wrap">
+      <h2>Productise the answer before your competitors do.</h2>
+      <p>Add AI visibility as a white-label service line — the platform and methodology already exist.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href={PARTNER_HREF}>{PARTNER_LABEL}</a>
+        <a class="btn btn-o" href="/platform">See the platform</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
