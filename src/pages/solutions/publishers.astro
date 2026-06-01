@@ -1,153 +1,270 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CtaBand from '../../components/CtaBand.astro';
 import Screenshot from '../../components/Screenshot.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
-// citation-analysis-urls.png is the URL/domain drill-down — a distinct file from
-// citation-analysis-overview.png (used on /platform and /solutions/pr).
+// citation-analysis-urls.png carries CLEAN labels (owned / earned / competitor / uncited;
+// "paraphrased, no credit") — NOT the overview export, whose tiles bake in banned terms.
+import aiVisibilityShot from '../../assets/screenshots/ai-visibility-dashboard.png';
 import citationUrlsShot from '../../assets/screenshots/citation-analysis-urls.png';
-import keyTopicsShot from '../../assets/screenshots/key-topics-leaders.png';
+import siteTrafficShot from '../../assets/screenshots/site-traffic-search-console.png';
 
-const title = "Zicy for publishers — does AI give your journalism the credit?";
+const title = 'Zicy for publishers — sell advertising as measurable AI-visibility uplift';
 const description =
-  "AI answers are built on content — often yours. See whether AI attributes your work, paraphrases it without credit, or ignores it entirely across the five major engines.";
+  "Sell media to brands as measurable AI-visibility uplift, not just impressions: prove a campaign lifted an advertiser's branded search and their visibility across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode — and see whether AI credits your own journalism.";
 
-// Three sourced stats — every figure carries publisher + year inline. Do not alter.
-const stats = [
+// §01 — the commercial shift. Every figure carries publisher + year inline, verbatim. Do not alter.
+const shiftStats = [
   {
-    n: '43%',
+    n: '≈0.66',
     label:
-      'the search referral traffic news executives expect to lose within three years; a fifth expect losses above 75%.',
-    source: 'Reuters Institute, Journalism, Media & Technology Trends and Predictions 2026',
+      "web mentions are the single strongest predictor of a brand's AI citation, roughly three times backlinks — and advertising and editorial are how they get created.",
+    source: 'Digital Bloom, 2026',
   },
   {
-    n: '~60% / 47% / 22%',
-    label:
-      'the fall in Google referral traffic over the past year for small / medium / large publishers.',
-    source: 'Chartbeat, via Axios, 2026',
+    n: '~83%',
+    label: "of a brand's market share is reflected in its share of search, the metric advertising moves.",
+    source: 'Binet & Field / IPA, 2020',
   },
+];
+
+// §03 — what you can prove (capability framing only; no delivered-uplift numbers).
+const proofBullets = [
+  "A pre-campaign baseline of the advertiser's AI Share of Voice and branded search.",
+  'Continuous tracking across the campaign window.',
+  'A post-campaign read your sales team can put in a renewal conversation.',
+];
+
+// §04 — defend your journalism (attribution stakes).
+const attributionStats = [
   {
     n: '~1%',
-    label:
-      "the click-through to an AI Overview’s own citation links when one is present.",
+    label: "click-through to an AI Overview's own citation links when present.",
     source: 'Pew Research, 2025',
   },
-];
-
-const usps = [
   {
-    h: 'Defend your attribution.',
-    p: 'See exactly where AI cites you, paraphrases you without credit, or strips it entirely — by source and by topic.',
-  },
-  {
-    h: 'Own your topics.',
-    p: "Know where you lead the answer, where you're in a fight, and where you've lost it — across the topics that define your title.",
-  },
-  {
-    h: 'Be machine-readable.',
-    p: "The Site Audit checks whether AI crawlers can actually read and attribute you — llms.txt, bot access, schema — so the credit isn't lost to a technical gap.",
+    n: 'Three years',
+    nStyle: 'font-size:clamp(34px,4.5vw,48px)',
+    label: 'the horizon over which news leaders expect to lose significant search-referral traffic.',
+    source: 'Reuters Institute, Trends and Predictions 2026',
   },
 ];
 
-const wiifm = [
-  'Put a number on uncredited use — evidence for strategy, licensing conversations, or the boardroom.',
-  'Reclaim authority on the topics that matter most to your audience.',
-  'Make sure AI can find and attribute you, not just scrape you.',
-  'Track attribution as a metric, the way you already track traffic.',
-];
-
+// §05 — module touchpoints, grouped by the two motions (group used as the card eyebrow).
 const modules = [
   {
-    name: 'Citation Analysis',
-    desc: 'Where your content is cited, paraphrased or stripped of credit, with domain and URL drill-down.',
-  },
-  {
-    name: 'Key Topics Analysis',
-    desc: "Leaders / Battlegrounds / Blind Spots: where you own the answer and where you don't.",
-  },
-  {
-    name: 'Site Audit',
-    desc: 'Technical AI-readiness: llms.txt, AI-bot access, schema, page health.',
-  },
-  {
+    group: 'Media sales',
     name: 'AI Visibility',
-    desc: 'Your standing in the answers across the five engines, over time.',
+    desc: "An advertiser's mention coverage, citation rate, AI Share of Voice and average ranking across five engines, baselined and tracked across a campaign.",
+  },
+  {
+    group: 'Media sales',
+    name: 'Competitive AI Performance',
+    desc: "The advertiser's standing vs rivals, the before-and-after your sales team shows.",
+  },
+  {
+    group: 'Media sales',
+    name: 'Site Traffic / share of search',
+    desc: 'Branded-search movement from public search data, the first link in the chain made visible.',
+  },
+  {
+    group: 'Your journalism',
+    name: 'Citation Analysis',
+    desc: 'Attribution, paraphrase-without-credit and the uncited rate, down to domain and URL.',
+  },
+  {
+    group: 'Your journalism',
+    name: 'Site Audit',
+    desc: 'llms.txt, bot access, schema and page health; scales to large archives via audit-boost add-ons.',
+  },
+  {
+    group: 'Your journalism',
+    name: 'Key Topics Analysis',
+    desc: 'Leaders, Battlegrounds and Blind Spots against competing outlets.',
   },
 ];
+
+// §06 — FAQ. Q1 and Q2 are NEW (media-sales motion) and are flagged below to be added to the
+// canonical Zicy ICP FAQ doc; Q3–Q5 are from the canonical doc. The same array renders the
+// accordion AND the FAQPage JSON-LD, so the structured data matches the visible answers.
+//
+// TODO(faq-doc): add Q1 ("We sell advertising — how does Zicy help us sell more of it?") and
+// Q2 ("Are we promising advertisers that paying us gets them cited by AI?") to the canonical
+// Zicy ICP FAQ doc — they originate here on the publishers v2 (media-sales) page.
+const faqs = [
+  {
+    q: 'We sell advertising — how does Zicy help us sell more of it?',
+    a: 'It lets you sell advertising as measurable AI-visibility uplift, not just impressions. Zicy tracks an advertiser’s visibility across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, and their branded-search movement from public search data, so your sales team can show the lift a campaign produced — the demand signals independent research ties to AI citation (Growth Memo, Kevin Indig, 2025).',
+  },
+  {
+    q: 'Are we promising advertisers that paying us gets them cited by AI?',
+    a: "No, and that distinction is the whole point. AI engines don't read the ad — they read the branded search and web mentions it creates (Brafton, 2026), and those signals are stronger predictors of AI citation than backlinks (Growth Memo, Kevin Indig, 2025; Digital Bloom, 2026); Zicy measures the movement. It is a measured correlation, not a guaranteed citation, and it stays on the endorsed side of Google's May 2026 spam-policy guidance — no paid links passing signal, no engineered citations.",
+  },
+  {
+    q: 'Is AI actually using our journalism — and can we put a number on it?',
+    a: "Yes, and that's precisely what Citation Analysis does. It shows whether AI attributes your work, paraphrases it without credit, or ignores it entirely across five engines, down to the domain and URL — so you can track attribution the way you already track traffic.",
+  },
+  {
+    q: 'Referral traffic is collapsing — why does attribution matter if the clicks are gone?',
+    a: "Because attribution is the new referral. News leaders expect to lose significant search-referral traffic within three years (Reuters Institute, Journalism, Media & Technology Trends and Predictions 2026), and the click-through to an AI Overview's own citation links sits around 1% when present (Pew Research, 2025); the publishers who measure attribution now are the ones positioned to license and defend it later.",
+  },
+  {
+    q: 'Can this support our AI-licensing negotiations?',
+    a: 'Yes — this is one of its strongest uses. A documented uncited rate and source-level attribution data give your commercial team an evidence base for licensing conversations and the boardroom, rather than an anecdote, at a moment when publishers from the Associated Press to USA Today are signing AI content deals (Digiday; Press Gazette, 2025–26).',
+  },
+];
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 <BaseLayout title={title} description={description}>
-  <!-- 1. Hero (white) -->
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
+
+  <!-- 1. Hero — leads with the media-sales motion -->
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">For publishers</span>
-      <h1>If AI doesn&rsquo;t recognise your content, neither will your audience.</h1>
+      <h1>Sell advertising as measurable AI-visibility uplift, not just impressions.</h1>
       <p class="lead">
-        AI answers are built on content &mdash; often yours. Zicy shows whether AI attributes your
-        work, paraphrases it without credit, or ignores it entirely across the five major engines
-        &mdash; and what to do about it.
+        Publishers sell media to brands. Zicy lets you sell it as something an advertiser
+        can&rsquo;t get from a rate card alone &mdash; proof that a campaign with you lifted their
+        branded search and their visibility across ChatGPT, Gemini, Perplexity, Google AI Overviews
+        and Google AI Mode. And it shows whether AI credits your own journalism, too.
       </p>
       <div class="cta-row">
-        <a class="btn btn-primary btn-lg" href="https://app.zicy.com/register">Try for free</a>
+        <a class="btn btn-p btn-lg" href="https://app.zicy.com/register">Try for free</a>
+        <a class="btn btn-o btn-lg" href="/platform">See the platform</a>
       </div>
     </div>
   </section>
 
-  <!-- 2. The stakes (white) — three sourced stats in a row that wraps cleanly on mobile -->
+  <!-- 2. 01 · The commercial shift — two sourced stats -->
   <section>
     <div class="wrap">
       <div class="shead">
-        <span class="eyebrow">The risk</span>
-        <h2>Your work is in the answer. Your name might not be.</h2>
+        <span class="eyebrow"><span class="ix">01</span> The commercial shift</span>
+        <h2>Two things changed for your business at once.</h2>
         <p>
-          The click economy that funded publishing is contracting. Attribution inside the answer is
-          the new currency &mdash; and you can&rsquo;t fix what you can&rsquo;t see.
+          Advertisers want outcomes beyond impressions, and AI answers increasingly decide which
+          brands buyers consider. That makes AI visibility a thing you can now sell &mdash; and
+          prove &mdash; on top of the inventory you already have.
         </p>
       </div>
-      <div class="grid-3">
-        {stats.map((s) => (
-          <div class="metric">
+      <div class="grid-2">
+        {shiftStats.map((s) => (
+          <div class="stat">
             <div class="n">{s.n}</div>
-            <div class="l" style="margin-top:8px;font-size:14px">{s.label}</div>
-            <div class="mono" style="font-size:12px;color:var(--muted);margin-top:12px;letter-spacing:.02em">
-              Source: {s.source}
-            </div>
+            <div class="t">{s.label}</div>
+            <div class="s">Source: {s.source}</div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- 3. Why Zicy (lavender) — three USP cards -->
-  <section style="background:var(--lavender)">
+  <!-- 3. 02 · The mechanism — sourced and honest; the policy-guard line is verbatim -->
+  <section style="background:var(--mist)">
     <div class="wrap">
-      <div class="shead"><h2>Why publishers choose Zicy.</h2></div>
-      <div class="grid-3">
-        {usps.map((u) => (
-          <div class="card"><h3>{u.h}</h3><p>{u.p}</p></div>
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">02</span> Why advertising with you lifts AI visibility</span>
+        <h2>The chain, stated plainly.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="sub" style="font-size:17px">
+          The advertising you sell builds an advertiser&rsquo;s brand demand, and that shows up
+          first as branded search &mdash; advertising share of voice is a primary driver of share
+          of search (Binet &amp; Field / IPA, 2020), confirmed by controlled lift studies that
+          measure incremental branded search from ad exposure (Google Search Lift). Here is the
+          part that matters for AI: the engines don&rsquo;t read the ad &mdash; they read the
+          behavioural signals it creates. Branded search correlates with AI visibility at roughly
+          0.33&ndash;0.39 (Growth Memo, Kevin Indig, 2025), and web mentions are the single
+          strongest predictor at about 0.66, roughly three times backlinks (Digital Bloom, 2026);
+          display advertising has been shown to influence generative-search citations through
+          exactly these signals rather than the ad itself (Brafton, 2026). So a campaign with you
+          is not just impressions; it moves the signals AI weights when it names brands &mdash; and
+          your editorial is the stronger lever than display, because it creates the web mentions AI
+          weights most.
+        </p>
+        <p class="pullquote">
+          This is a measured correlation, not a guaranteed citation &mdash; and that is exactly why
+          it is defensible.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 03 · What you can prove — proof/measurement section + Site Traffic screenshot -->
+  <section>
+    <div class="wrap">
+      <div class="feature-split">
+        <div class="shead" style="margin-bottom:0">
+          <span class="eyebrow"><span class="ix">03</span> What you can prove</span>
+          <h2>Bring the proof to the rate-card conversation.</h2>
+          <p>
+            Zicy tracks any advertiser&rsquo;s AI visibility across all five engines and their share
+            of search from public search data &mdash; no access to the advertiser&rsquo;s analytics
+            required &mdash; so your sales team can show a before-and-after around a campaign window.
+            You sell the inventory; Zicy gives you the evidence that it moved the advertiser&rsquo;s
+            position in the answer.
+          </p>
+          <ul class="checklist" style="margin-top:20px">
+            {proofBullets.map((b) => <li>{b}</li>)}
+          </ul>
+        </div>
+        <Screenshot
+          src={siteTrafficShot}
+          alt="Zicy Site Traffic, Search Console view — an advertiser's share of search and branded-search behaviour from public search data, tracked across a campaign window."
+          caption="Site Traffic — branded-search movement from public search data, baselined and tracked."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 04 · Defend your own journalism — secondary, condensed + two attribution stats -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">04</span> Defend your own journalism</span>
+        <h2>And know whether AI credits your work.</h2>
+        <p>
+          The same platform shows whether AI attributes your journalism, paraphrases it without
+          credit, or ignores it &mdash; across five engines, down to the URL. A documented uncited
+          rate and source-level attribution give your commercial team an evidence base for
+          AI-licensing conversations, at a moment when publishers from the Associated Press to USA
+          Today are signing AI content deals while others litigate over uncited use (Digiday; Press
+          Gazette, 2025&ndash;26).
+        </p>
+      </div>
+      <div class="grid-2">
+        {attributionStats.map((s) => (
+          <div class="stat">
+            <div class="n" style={s.nStyle ?? ''}>{s.n}</div>
+            <div class="t">{s.label}</div>
+            <div class="s">Source: {s.source}</div>
+          </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- 4. What you get (white) — four-item benefit list -->
+  <!-- 6. 05 · Inside the platform — six module cards (grouped by motion) + two product shots -->
   <section>
     <div class="wrap">
-      <div class="shead"><h2>What you get.</h2></div>
-      <ul class="checklist">
-        {wiifm.map((item) => <li>{item}</li>)}
-      </ul>
-    </div>
-  </section>
-
-  <!-- 5. Inside the platform (lavender) — four module cards + two product shots -->
-  <section style="background:var(--lavender)">
-    <div class="wrap">
-      <div class="shead"><h2>Inside the platform.</h2></div>
-      <div class="grid-2">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">05</span> Inside the platform</span>
+        <h2>The modules behind both motions.</h2>
+      </div>
+      <div class="grid-3">
         {modules.map((m) => (
           <div class="card">
-            <span class="eyebrow">Module</span>
+            <span class="eyebrow">{m.group}</span>
             <h3>{m.name}</h3>
             <p>{m.desc}</p>
           </div>
@@ -155,19 +272,39 @@ const modules = [
       </div>
       <div class="grid-2" style="margin-top:28px">
         <Screenshot
-          src={citationUrlsShot}
-          alt="Zicy Citation Analysis drilling into the domains and individual URLs AI cites, classified as owned, earned or competitor."
-          caption="Citation Analysis &mdash; domain and URL drill-down."
+          src={aiVisibilityShot}
+          alt="Zicy AI Visibility dashboard — an advertiser's mention coverage, citation rate, AI share of voice and average ranking across the engines, ready to baseline against a campaign."
+          caption="AI Visibility — baseline an advertiser, track the campaign window."
         />
         <Screenshot
-          src={keyTopicsShot}
-          alt="Zicy Key Topics Analysis showing topics where the publisher leads, contests, or is absent versus competitors."
-          caption="Key Topics &mdash; Leaders, Battlegrounds and Blind Spots."
+          src={citationUrlsShot}
+          alt="Zicy Citation Analysis — the domains and individual URLs AI cites, classified owned, earned, competitor or uncited, for your own journalism."
+          caption="Citation Analysis — attribution and the uncited rate, down to the URL."
         />
       </div>
     </div>
   </section>
 
-  <!-- 6. Closing CTA band (no Proof section by design — no publisher-specific case study yet) -->
-  <CtaBand heading="See whether AI gives you the credit." ctaLabel="Try for free" ctaHref="https://app.zicy.com/register" />
+  <!-- 7. FAQ — native <details> accordion; answers in static HTML + FAQPage schema -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions publishers ask.</h2>
+      </div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
+    </div>
+  </section>
+
+  <!-- 8. Closing band -->
+  <section class="final">
+    <div class="wrap">
+      <h2>Sell the answer, and prove you moved it.</h2>
+      <p>Run a free audit across five engines — baseline an advertiser, or see whether AI credits your journalism.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="https://app.zicy.com/register">Try for free</a>
+        <a class="btn btn-o" href="/platform">See the platform</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
