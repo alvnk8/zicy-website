@@ -145,7 +145,6 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
   .links > a:not(.cta),
   .links .has-dropdown,
   .dropdown{display:none}
-  .mnav{display:block}
 }
 
 /* dropdown — crawlable links live in the DOM; CSS toggles open state */
@@ -176,6 +175,10 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
 .mnav-panel a:hover,.mnav-panel a.active{background:var(--violet-50);color:var(--violet-700)}
 .mnav-panel .mnav-group{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:14px 12px 4px}
 .mnav-panel .btn{margin-top:12px;justify-content:center}
+/* Show the hamburger at <=1024px. MUST come after the base ".mnav{display:none}" rule above —
+   equal specificity, so source order decides; placing it earlier let the base rule win and the
+   menu disappeared. */
+@media(max-width:1024px){.mnav{display:block}}
 
 /* ===== HOMEPAGE HERO (asymmetric, measurement grid atmosphere) ===== */
 .hero{position:relative;overflow:hidden;padding:clamp(72px,11vw,128px) 0 clamp(64px,8vw,104px);background:radial-gradient(120% 80% at 82% -10%,#EAEEF8 0%,var(--paper) 58%)}
