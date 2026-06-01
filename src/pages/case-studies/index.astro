@@ -6,7 +6,7 @@ import { CASES } from '../../data/cases';
 
 const title = 'Zicy case studies — from invisible to AI-cited';
 const description =
-  'Real AI visibility programmes, measured across ChatGPT, Gemini and Perplexity. Mention rates, citation rates and share of voice — anonymised pending naming permission.';
+  'Real AI visibility programmes, measured across major AI platforms. Mention rates, citation rates and share of voice — anonymised pending naming permission.';
 
 // Hero screenshot per tile. The migration left the case-study images in /public (referenced as
 // raw <img> in each entry's bodyHtml) and there is no content collection / heroImage field, so we
@@ -29,13 +29,13 @@ for (const [path, mod] of Object.entries(heroModules)) {
     <div class="wrap">
       <span class="eyebrow">Case studies</span>
       <h1>From invisible to AI-cited.</h1>
-      <p class="lead">Real programmes, measured across ChatGPT, Gemini and Perplexity.</p>
+      <p class="lead">Real programmes, measured across major AI platforms.</p>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <div class="grid4">
+      <div class="cs-grid">
         {CASES.map((c) => (
           <a class="card cs-card" href={`/case-studies/${c.slug}`}>
             {heroBySlug[c.slug] && (
@@ -43,8 +43,8 @@ for (const [path, mod] of Object.entries(heroModules)) {
                 <Picture
                   src={heroBySlug[c.slug]}
                   formats={['avif', 'webp']}
-                  widths={[260, 400, 560, 800]}
-                  sizes="(max-width: 760px) 92vw, (max-width: 1100px) 30vw, 280px"
+                  widths={[300, 420, 560, 760]}
+                  sizes="(max-width: 620px) 92vw, (max-width: 980px) 46vw, 360px"
                   alt={`Zicy AI visibility dashboard — ${c.indexTitle}`}
                   loading="lazy"
                 />
@@ -66,6 +66,26 @@ for (const [path, mod] of Object.entries(heroModules)) {
 </BaseLayout>
 
 <style>
+  /* Case-study grid — exactly three tiles per row on desktop, stepping to two then one.
+     Brand 8pt spacing (24px desktop/tablet, 20px mobile); wider columns than the old auto-fit
+     grid give each card a roomier hero image. */
+  .cs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 980px) {
+    .cs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 620px) {
+    .cs-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
   /* Hero screenshot, flush to the card's top edges with the card radius. Negative margins cancel
      the card padding (26px 24px); top corners nest just inside the 1px card border. Fixed 16/10
      box + object-fit:cover anchored top so mixed-orientation screenshots crop uniformly. The
