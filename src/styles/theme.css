@@ -171,7 +171,12 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
 .mnav[open] summary{border-color:var(--violet)}
 .mnav[open] .i-open{display:none}
 .mnav[open] .i-close{display:inline}
-.mnav-panel{position:absolute;right:0;top:calc(100% + 12px);background:var(--surface);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow);padding:10px;width:min(86vw,320px);max-height:calc(100vh - 96px);overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+/* max-height is capped to the VISIBLE viewport so the last items (Log in / Try for free) are
+   never cut off behind the mobile browser toolbar. 100dvh tracks the dynamic viewport (vh is the
+   LARGE viewport on mobile, which hides content behind the toolbar); env(safe-area-inset-bottom)
+   clears the iOS home indicator. The ~104px subtracted ≈ the panel's top offset (header + gap)
+   plus a bottom breathing margin. The vh line is a fallback for browsers without dvh. */
+.mnav-panel{position:absolute;right:0;top:calc(100% + 12px);background:var(--surface);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow);padding:10px 10px 14px;width:min(86vw,320px);max-height:calc(100vh - 104px);max-height:calc(100dvh - 104px - env(safe-area-inset-bottom, 0px));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:2px}
 .mnav-panel a{padding:11px 12px;border-radius:8px;font-size:15px;color:var(--ink-2);font-weight:500}
 .mnav-panel a:hover,.mnav-panel a.active{background:var(--violet-50);color:var(--violet-700)}
 .mnav-panel .mnav-group{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:14px 12px 4px}
