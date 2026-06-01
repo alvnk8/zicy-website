@@ -1079,7 +1079,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <li>Gemini</li>
 <li>Perplexity</li>
 <li>Google AI Mode</li>
-<li>AI Overviews.</li>
+<li>AI Overview.</li>
 </ul>
 </li>
 </ul>
@@ -1293,7 +1293,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p><img src="/case-studies/2026/05/Key-topics.png" alt="Key topics" loading="lazy" decoding="async" /></p>
 <p><strong>Platform Breakdown:</strong></p>
 <ul>
-<li>AI Overviews (72.2%)</li>
+<li>AI Overview (72.2%)</li>
 <li>Google AI (58.3%)</li>
 <li>Perplexity (47.2%)</li>
 </ul>

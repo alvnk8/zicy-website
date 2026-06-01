@@ -13,7 +13,7 @@
 //
 // House rules enforced here: sentence case, no exclamation marks, every statistic carries
 // publisher + sample + year inline verbatim, five engines named consistently (ChatGPT, Gemini,
-// Perplexity, Google AI Overviews, Google AI Mode), no banned vocabulary (hijack / hijack rate /
+// Perplexity, Google AI Overview, Google AI Mode), no banned vocabulary (hijack / hijack rate /
 // leaked rate / Answer Share / AI Butler / co-pilot / AEO Specialist / Citation Velocity /
 // real-time), no Growth.pro IP names (PAVA, AICE, AI Visibility Operating System).
 
@@ -33,11 +33,11 @@ export interface Faq {
 export const universalFaqs: Faq[] = [
   {
     q: `What is AI visibility?`,
-    a: `AI visibility is how often, how accurately, and how prominently a name appears in the answers AI engines give when people ask about its category — across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. It is distinct from search rankings: something can rank on Google's first page and still be absent from the AI answer.`,
+    a: `AI visibility is how often, how accurately, and how prominently a name appears in the answers AI engines give when people ask about its category — across ChatGPT, Gemini, Perplexity, Google AI Overview and Google AI Mode. It is distinct from search rankings: something can rank on Google's first page and still be absent from the AI answer.`,
   },
   {
     q: `What is AEO or GEO?`,
-    a: `AEO (answer engine optimisation) and GEO (generative engine optimisation) are the practices of making a name accurately findable and citable in AI-generated answers, rather than ranked in a list of links. They address AI engines — ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode — where SEO addresses traditional search results.`,
+    a: `AEO (answer engine optimisation) and GEO (generative engine optimisation) are the practices of making a name accurately findable and citable in AI-generated answers, rather than ranked in a list of links. They address AI engines — ChatGPT, Gemini, Perplexity, Google AI Overview and Google AI Mode — where SEO addresses traditional search results.`,
   },
   {
     q: `How is AI visibility different from SEO?`,
@@ -49,7 +49,7 @@ export const universalFaqs: Faq[] = [
   },
   {
     q: `Which AI engines does Zicy track?`,
-    a: `Zicy tracks five engines: ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. Each weights sources differently, so coverage across all five — rather than any single one — is what gives a defensible picture.`,
+    a: `Zicy tracks five engines: ChatGPT, Gemini, Perplexity, Google AI Overview and Google AI Mode. Each weights sources differently, so coverage across all five — rather than any single one — is what gives a defensible picture.`,
   },
   {
     q: `How does Zicy know what the AI said — does it scrape, and is it reliable week to week?`,
@@ -61,7 +61,7 @@ export const universalFaqs: Faq[] = [
   },
   {
     q: `Could using this get us penalised by Google?`,
-    a: `No — the approach is the opposite of manipulation. Zicy's tooling is built to current best practice and aligned with Google's May 2026 spam-policy update covering AI Overviews and AI Mode; the work is to make genuine expertise easier for AI to find, verify and trust, not to game it.`,
+    a: `No — the approach is the opposite of manipulation. Zicy's tooling is built to current best practice and aligned with Google's May 2026 spam-policy update covering AI Overview and AI Mode; the work is to make genuine expertise easier for AI to find, verify and trust, not to game it.`,
   },
   {
     q: `What does it cost, and what are we locked into?`,
