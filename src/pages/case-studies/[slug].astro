@@ -18,8 +18,8 @@ const article = {
   author: { '@type': 'Organization', name: SITE.name, '@id': `${SITE.url}/#org` },
   publisher: { '@id': `${SITE.url}/#org` },
   mainEntityOfPage: url,
-  datePublished: '2026-05-27',
-  dateModified: '2026-05-27',
+  datePublished: c.datePublished,
+  dateModified: c.dateModified,
 };
 
 const breadcrumb = {
@@ -47,24 +47,7 @@ const breadcrumb = {
 
   <section>
     <div class="wrap">
-      <article class="prose">
-        <h2>The challenge</h2>
-        <p>{c.challenge}</p>
-        <h2>The approach</h2>
-        <p>{c.approach}</p>
-      </article>
-
-      <h2 style="font-size:24px;margin:40px 0 16px">The result</h2>
-      <div class="stats" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
-        {c.results.map((r) => (
-          <div class="stat">
-            <div class="n">{r.n}</div>
-            <div class="t">{r.l}</div>
-          </div>
-        ))}
-      </div>
-
-      <p class="pullquote">{c.pullQuote}</p>
+      <article class="prose cs-body" set:html={c.bodyHtml} />
 
       <p class="disclosure">
         Measurement: AI brand mention and citation rates across tracked category queries on ChatGPT, Gemini, and Perplexity, via Zicy&rsquo;s measurement infrastructure. Client anonymised pending naming permission.
