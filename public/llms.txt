@@ -24,11 +24,21 @@ Zicy follows a closed loop — measure, diagnose, act, prove. The platform is se
 - [Chrome extension](https://www.zicy.com/chrome-extension): On-page AI-readiness audit (0–100 score), AI bot-access checker (40+ crawlers), and one-click schema generator. Available in 12 languages.
 
 ## Case studies
-- [B2B services — invisible to AI-cited in 90 days](https://www.zicy.com/case-studies/b2b-services): 56.67% mention rate, 2,971 AI-referred sessions.
-- [Professional services — authority from near-zero](https://www.zicy.com/case-studies/professional-services): 90.61% mention rate, 55.92% citation rate.
-- [Multi-category — content-led AI visibility](https://www.zicy.com/case-studies/multi-category-content): 290% more clicks, 18.11% share of voice.
-- [Healthcare / aesthetics — local category leadership](https://www.zicy.com/case-studies/healthcare-aesthetics): #1 AI mention position.
-- [Retail / home decor — cross-platform citation growth](https://www.zicy.com/case-studies/retail-home-decor): 66% mention rate, 47% citation rate.
+- [eCommerce — 531 more AI citations in 4 months](https://www.zicy.com/case-studies/531-ai-citations-ecommerce): 531 additional AI citations, 53.6% ChatGPT share of voice.
+- [eCommerce — AI traffic that converts](https://www.zicy.com/case-studies/increased-ai-users-and-events): 785 ChatGPT users driving 1,816 events (+406%).
+- [eCommerce — content-led AI visibility](https://www.zicy.com/case-studies/ai-optimised-content): 290% more clicks, 457% more impressions.
+- [Multi-category — from zero to 99 AI citations](https://www.zicy.com/case-studies/increasing-ai-citations): 0 → 99 AI citations, 12,800% more traffic.
+- [eCommerce — AI-cited product pages](https://www.zicy.com/case-studies/aeo-case-study-brand-mentions-ai-cited-product-pages): 1,186% faster growth, 74.6% brand mention coverage.
+- [eCommerce — mentions where competitors led on search](https://www.zicy.com/case-studies/aeo-case-study-brand-mentions-website-citation-coverage-in-ai-results): 82.9% brand mentions, 37.14% citation coverage.
+- [Education — knowledge-led authority in AI answers](https://www.zicy.com/case-studies/aeo-case-study-brand-mentions-ai-citations-share-of-voice): 62.96% mentions, 36.51% citations, 23.04% share of voice.
+- [eCommerce — AI visibility rebuilt for growth](https://www.zicy.com/case-studies/aeo-geo-case-study-ai-visibility-ecommerce-growth): 1,119% AI traffic growth, 68.97% brand mentions.
+- [Healthcare / aesthetics — local category leadership](https://www.zicy.com/case-studies/aeo-case-study-aesthetic-clinic-ai-visibility): 52% mentions, 29.75% citations, share of voice 5.4% → 9.4%.
+- [B2B — authority from a near-zero baseline](https://www.zicy.com/case-studies/aeo-geo-case-study-b2b): 90.61% mentions, 55.92% citations, 18.11% share of voice.
+- [B2B — consistent presence across five engines](https://www.zicy.com/case-studies/aeo-geo-case-study-elevated-b2b-visibility): 54.17% mentions, 36.11% citations across 5 AI platforms.
+- [Education — cited across every major engine](https://www.zicy.com/case-studies/aeo-geo-case-study-education-brand): 56.32% mentions, 51.05% citations across 5 AI platforms.
+- [B2B services — invisible to AI-cited in 90 days](https://www.zicy.com/case-studies/aeo-case-study-b2b-brand-mentions-ai-sessions-growth): 56.67% mention rate, 2,971 AI-referred sessions.
+- [Interior décor — cross-platform citation growth](https://www.zicy.com/case-studies/aeo-geo-case-study-interior-decor): 66% mentions, 47% citations, 19% share of voice.
+- [B2B electronics — sessions and coverage together](https://www.zicy.com/case-studies/aeo-geo-case-study-b2b-electronics): 157% AI sessions growth, 40.57% brand mentions, 34.44% citations.
 
 ## Managed service
 - [Done-for-you (by Growth.pro)](https://www.growth.pro/): Growth.pro operates the entire AI visibility programme for you, using Zicy as its delivery engine. Selective roster, no lock-in, category exclusivity.
