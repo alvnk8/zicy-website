@@ -3,9 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { SITE } from '../data/site';
 
-const title = "Zicy pricing — flexible plans for AI search, AEO & GEO growth";
+const title = "Zicy pricing, flexible plans for AI search, AEO & GEO growth";
 const description =
-  "Let's make your brand the one AI cites. Starter $129/mo, Growth $349/mo, Enterprise custom — plus flexible add-ons. 7-day free trial. 1 month free on the annual plan.";
+  "Let's make your brand the one AI cites. Starter $129/mo, Growth $349/mo, Enterprise custom, plus flexible add-ons. 7-day free trial. 1 month free on the annual plan.";
 
 const REGISTER_URL = 'https://app.zicy.com/register';
 const ENTERPRISE_URL = 'https://www.zicy.com/enterprise-inquiry';
@@ -60,7 +60,7 @@ const tiers = [
     features: [
       'Custom (300+) tracked prompts',
       'Custom (100+) action credits / month',
-      'Custom site audit pages — unlimited available',
+      'Custom site audit pages, unlimited available',
       'Custom AI consultant chats / month',
       'Tracks any / all available LLMs',
       'Daily tracking frequency',
@@ -76,9 +76,9 @@ const tiers = [
 const addOns = [
   { name: 'Additional Tracked Prompts', detail: '+10 prompts', price: '$25 / month' },
   { name: 'Extra LLM add-on', detail: 'Add Grok, DeepSeek and more', price: '$0.50 / prompt / LLM ($25 Starter, $75 Growth)' },
-  { name: 'Content Pack', detail: '+5 action credits — do not expire', price: '$50 / pack' },
-  { name: 'Audit Boost', detail: '+2,000 crawl pages — do not expire', price: '$10 / pack' },
-  { name: 'AI Chat Booster', detail: '+200 AI consultant messages — do not expire', price: '$50 / pack' },
+  { name: 'Content Pack', detail: '+5 action credits, do not expire', price: '$50 / pack' },
+  { name: 'Audit Boost', detail: '+2,000 crawl pages, do not expire', price: '$10 / pack' },
+  { name: 'AI Chat Booster', detail: '+200 AI consultant messages, do not expire', price: '$50 / pack' },
 ];
 
 // FAQ body uses an array of blocks: string = paragraph, string[] = bullet list, {bold:''} = bold lead-in.
@@ -89,7 +89,7 @@ const faqs: Faq[] = [
   {
     q: 'Why does the Starter plan cost $129?',
     body: [
-      "Zicy is not a tracking or reporting tool. It's an optimisation and execution platform. Most tools stop at telling you what's wrong — rank drops, missing citations, blocked bots, broken schema. Zicy goes further by giving you 7 Action Credits every month to actually fix those issues.",
+      "Zicy is not a tracking or reporting tool. It's an optimisation and execution platform. Most tools stop at telling you what's wrong: rank drops, missing citations, blocked bots, broken schema. Zicy goes further by giving you 7 Action Credits every month to actually fix those issues.",
       { bold: 'Each Action Credit lets Zicy:' },
       [
         'Optimise or rewrite content for AEO/GEO and AI Overview',
@@ -97,42 +97,42 @@ const faqs: Faq[] = [
         'Resolve technical blockers that stop ChatGPT, Google AI and answer engines from accessing your site',
         'Turn underperforming pages into citation-ready assets',
       ],
-      { bold: 'Think of it this way — you’re not just paying for software. You’re getting:' },
+      { bold: 'Think of it this way. You’re not just paying for software. You’re getting:' },
       [
         'A diagnostic system that knows what to fix',
         'An execution engine that knows how to fix it',
-        'And the equivalent of an SEO/AEO specialist working on your site every month — without hiring, onboarding or managing anyone',
+        'And the equivalent of an SEO/AEO specialist working on your site every month, without hiring, onboarding or managing anyone',
       ],
-      "If you had to do this manually, you'd need multiple tools for analysis, a freelancer or in-house hire for implementation, and weeks of back-and-forth to ship anything. Zicy compresses all of that into one platform — detect, decide, deploy fixes. It's not a cost for data. It's an investment in measurable execution and ranking impact.",
+      "If you had to do this manually, you'd need multiple tools for analysis, a freelancer or in-house hire for implementation, and weeks of back-and-forth to ship anything. Zicy compresses all of that into one platform: detect, decide, deploy fixes. It's not a cost for data. It's an investment in measurable execution and ranking impact.",
     ],
   },
   {
     q: 'Why is Zicy tracking "Weekly" instead of "Daily"?',
     body: [
-      "Daily tracking makes sense for the stock market — but it's noise for AI search.",
+      "Daily tracking makes sense for the stock market, but it's noise for AI search.",
       "Answer engines and LLMs don't update their knowledge in real time the way news indexes do. Their retrieval layers, embeddings and citation behaviour evolve gradually, not day by day. Tracking daily fluctuations creates false signals, unnecessary alerts and reactive decision-making.",
       { bold: 'Zicy tracks weekly by design to surface what actually matters:' },
       [
         'Meaningful shifts in citations and visibility',
         'Sustained changes in AI answer behaviour',
-        'Trends that are worth acting on — not temporary blips',
+        'Trends that are worth acting on, not temporary blips',
       ],
-      "This approach filters out volatility and focuses on signal over noise. More importantly, it lets us allocate processing power where it creates real value — not on vanity graphs, but on optimisation and execution. Daily tracking = activity. Weekly tracking = insight + action. Zicy is built for long-term citation wins, not short-term distraction.",
+      "This approach filters out volatility and focuses on signal over noise. More importantly, it lets us allocate processing power where it creates real value, not on vanity graphs, but on optimisation and execution. Daily tracking = activity. Weekly tracking = insight + action. Zicy is built for long-term citation wins, not short-term distraction.",
     ],
   },
   {
     q: 'Do my credits roll over to the next month?',
     body: [
       [
-        'Monthly plan credits — No. Your base allowance (e.g. 7 for Starter, 25 for Growth) resets every month. We encourage you to use them to keep your site fresh.',
-        'Add-on credits — Yes. If you purchase a Content Pack or Audit Boost add-on, those credits do not expire and stay in your wallet until you use them.',
+        'Monthly plan credits, No. Your base allowance (e.g. 7 for Starter, 25 for Growth) resets every month. We encourage you to use them to keep your site fresh.',
+        'Add-on credits, Yes. If you purchase a Content Pack or Audit Boost add-on, those credits do not expire and stay in your wallet until you use them.',
       ],
     ],
   },
   {
     q: 'Can I manage multiple websites or clients on one plan?',
     body: [
-      'Yes. All Zicy plans come with unlimited projects/brands. You can split your tracked prompts and action credits across as many websites as you like — perfect for portfolio owners and agencies.',
+      'Yes. All Zicy plans come with unlimited projects/brands. You can split your tracked prompts and action credits across as many websites as you like, perfect for portfolio owners and agencies.',
     ],
   },
   {
@@ -174,7 +174,7 @@ const faqs: Faq[] = [
   {
     q: 'Is there a discount for paying annually?',
     body: [
-      'Yes — we reward long-term strategy. On the annual plan you effectively get 1 month free (you pay for 12 months and get 13). This lowers your effective monthly cost and ensures your optimisation strategy runs uninterrupted all year.',
+      'Yes. We reward long-term strategy. On the annual plan you effectively get 1 month free (you pay for 12 months and get 13). This lowers your effective monthly cost and ensures your optimisation strategy runs uninterrupted all year.',
     ],
   },
   {
@@ -193,7 +193,7 @@ const softwareApp = {
   name: 'Zicy',
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
-  description: 'AI visibility intelligence platform — measure, diagnose, act, prove.',
+  description: 'AI visibility intelligence platform: measure, diagnose, act, prove.',
   url: `${SITE.url}/pricing`,
   offers: [
     { '@type': 'Offer', name: 'Starter', price: '129', priceCurrency: 'USD' },
@@ -234,13 +234,13 @@ const faqPage = {
       <h1>Let's make your brand the one AI cites.</h1>
       <p class="lead">
         Flexible plans that grow your authority across answer engines. Every plan starts with a
-        7-day free trial — no credit card needed.
+        7-day free trial, no credit card needed.
       </p>
       <div class="cta-row">
         <a class="btn btn-p btn-lg" href="https://app.zicy.com/register">Try for free</a>
       </div>
       <p class="note" style="display:inline-block;margin-top:24px">
-        <b>Annual plan:</b> 1 month free — 13 months for the price of 12.
+        <b>Annual plan:</b> 1 month free, 13 months for the price of 12.
       </p>
     </div>
   </section>
@@ -273,7 +273,7 @@ const faqPage = {
         ))}
       </div>
       <p class="muted" style="font-size:13px;margin-top:18px;text-align:center">
-        Starter and Growth include a 7-day free trial — no credit card needed.
+        Starter and Growth include a 7-day free trial, no credit card needed.
       </p>
     </div>
   </section>
@@ -326,7 +326,7 @@ const faqPage = {
   <CtaBand
     eyebrow="Ready to start?"
     heading="Be the brand AI cites."
-    sub="Start your 7-day free trial — or talk to us about an enterprise programme."
+    sub="Start your 7-day free trial, or talk to us about an enterprise programme."
     ctaLabel="Start your free trial"
     ctaHref={REGISTER_URL}
   />

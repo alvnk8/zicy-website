@@ -27,15 +27,15 @@ export const CASES: CaseStudy[] = [
     big: "531",
     indexSub: "more AI citations · 53.6% ChatGPT SOV",
     h1: "How One eCommerce Brand Boosted Visibility With 531 More AI Citations in 4 Months",
-    metaTitle: "531 New AI Citations in 4 Months: eCommerce GEO Case Study — Zicy",
+    metaTitle: "531 New AI Citations in 4 Months: eCommerce GEO Case Study, Zicy",
     metaDescription: "Product discovery is shifting from Google to ChatGPT. See how one eCommerce brand earned 531 additional AI citations in just 4 months with a targeted generative engine optimization strategy.",
     datePublished: "2025-08-29",
     dateModified: "2026-05-06",
     bodyHtml: `<p>What if product discovery no longer begins with Google… but with ChatGPT?</p>
-<p>Today’s consumers are skipping search engines and going straight to conversational platforms—asking questions like “<em>Which is the best product for X?</em>” or “<em>What’s a good alternative to Y?</em>”</p>
-<p>That shift opened a new frontier for an eCommerce brand. We realised that to win online, they had to become the <strong>answer</strong> itself—not just appear near it.</p>
+<p>Today’s consumers are skipping search engines and going straight to conversational platforms, asking questions like “<em>Which is the best product for X?</em>” or “<em>What’s a good alternative to Y?</em>”</p>
+<p>That shift opened a new frontier for an eCommerce brand. We realised that to win online, they had to become the <strong>answer</strong> itself, not just appear near it.</p>
 <p>And so they did.</p>
-<p>Through a focused AI visibility strategy, we went beyond traditional SEO. We restructured content to be cited by platforms like ChatGPT, Perplexity, and Gemini—and saw a measurable lift in both <strong>visibility and conversions</strong>.</p>
+<p>Through a focused AI visibility strategy, we went beyond traditional SEO. We restructured content to be cited by platforms like ChatGPT, Perplexity, and Gemini, and saw a measurable lift in both <strong>visibility and conversions</strong>.</p>
 <h2>This is what results looked like..</h2>
 <p>Within 4 months, this is what we managed to achieve:</p>
 <p><img src="/case-studies/2025/08/How-One-eCommerce-Brand-Boosted-Visibility-With-531-More-AI-Citations-in-4-Months.png" alt="How One eCommerce Brand Boosted Visibility With 531 More AI Citations in 4 Months" loading="lazy" decoding="async" /></p>
@@ -49,7 +49,7 @@ export const CASES: CaseStudy[] = [
 <li><strong>Copilot (Microsoft)</strong>: 37 citations (↑32), across 27 pages</li>
 </ul>
 <p><strong>Share of Voice: Beating the Competition on ChatGPT</strong></p>
-<p>Brand visibility wasn’t just rising—it was dominating:</p>
+<p>Brand visibility wasn’t just rising, it was dominating:</p>
 <ul>
 <li>Their brand secured <strong>53.6% of ChatGPT brand mentions</strong></li>
 <li>Top competitor trailed with only <strong>24.2% share</strong></li>
@@ -93,7 +93,7 @@ export const CASES: CaseStudy[] = [
 <p>While others are still optimising for search rankings, this brand bet on a different game:</p>
 <p><strong>→ Be the source AI platforms trust and recommend.</strong><br />
 <strong> → Make your product the answer.</strong></p>
-<p>And that shift in strategy paid off—in both visibility and bottom-line growth.</p>`,
+<p>And that shift in strategy paid off, in both visibility and bottom-line growth.</p>`,
   },
   {
     slug: "increased-ai-users-and-events",
@@ -103,12 +103,12 @@ export const CASES: CaseStudy[] = [
     big: "+406%",
     indexSub: "785 ChatGPT users · 1,816 events",
     h1: "AI Traffic That Converts: 785 ChatGPT Users Driving 1,816 Events (+406%)",
-    metaTitle: "785 ChatGPT Users, 1,816 Conversions & 406% Event Growth — Zicy",
-    metaDescription: "What happens when customers find you through ChatGPT instead of Google? See how one brand converted 785 AI-referred users into 1,816 tracked events — a 406% increase.",
+    metaTitle: "785 ChatGPT Users, 1,816 Conversions & 406% Event Growth, Zicy",
+    metaDescription: "What happens when customers find you through ChatGPT instead of Google? See how one brand converted 785 AI-referred users into 1,816 tracked events, a 406% increase.",
     datePublished: "2025-09-02",
     dateModified: "2026-05-06",
-    bodyHtml: `<p>What if your future customers never Google you—yet still find you?</p>
-<p>That’s the new reality of discovery. Platforms like ChatGPT, Gemini, and Perplexity are increasingly where people ask their most urgent questions—and where buying decisions quietly begin.</p>
+    bodyHtml: `<p>What if your future customers never Google you, yet still find you?</p>
+<p>That’s the new reality of discovery. Platforms like ChatGPT, Gemini, and Perplexity are increasingly where people ask their most urgent questions, and where buying decisions quietly begin.</p>
 <p>For our client, the challenge was clear: could they harness these AI-driven moments to generate real users and measurable conversions?</p>
 <p>The answer: absolutely.</p>
 <p>By aligning content, structure, and tracking for AI-first discoverability, this brand turned experimental AI traffic into a consistent growth engine.</p>
@@ -124,7 +124,7 @@ export const CASES: CaseStudy[] = [
 <li><strong>21 users from Edge (Bing AI),</strong> delivering a 52.4% increase</li>
 <li><strong>19 users from Copilot (Microsoft)</strong>, with 19.5% growth</li>
 </ul>
-<p>And the most important metric—conversion-driving activity:</p>
+<p>And the most important metric, conversion-driving activity:</p>
 <ul>
 <li><strong>1,966 tracked key events</strong> (from ChatGPT, Perplexity, Gemini, Perpplexity.ai, Edge, Copilot), with a 406.4% jump in key events from ChatGPT alone!</li>
 <li>Significant event growth across platforms, including:
@@ -144,7 +144,7 @@ export const CASES: CaseStudy[] = [
 <ul>
 <li>Pinpointed <strong>customer pain points</strong> and USP-led messaging.</li>
 <li>Built <strong>topic clusters</strong> around high-intent themes.</li>
-<li><strong>Analysed competitor mentions</strong> inside AI responses—not just SERPs.</li>
+<li><strong>Analysed competitor mentions</strong> inside AI responses, not just SERPs.</li>
 <li>Focused efforts on <strong>bottom-funnel content</strong> to drive leads, not vanity clicks.</li>
 </ul>
 <ol start="2">
@@ -187,12 +187,12 @@ export const CASES: CaseStudy[] = [
     big: "290%",
     indexSub: "more clicks · 457% more impressions",
     h1: "How AI-Optimised Content Drove 290% More Clicks and 457% More Impressions for an eCommerce Brand",
-    metaTitle: "AI-Optimised Content: 290% More Clicks & 457% More Impressions — Zicy",
+    metaTitle: "AI-Optimised Content: 290% More Clicks & 457% More Impressions, Zicy",
     metaDescription: "Precision over volume. Discover how AI-optimised content drove 290% more clicks and 457% more impressions for an eCommerce brand without increasing publishing frequency.",
     datePublished: "2025-09-02",
     dateModified: "2026-05-06",
     bodyHtml: `<p>Most brands publish more content when they want more traffic.</p>
-<p>But what if the real growth lever isn’t quantity—it's precision?</p>
+<p>But what if the real growth lever isn’t quantity, it's precision?</p>
 <p>For our client, an eCommerce brand, the turning point came when we shifted the focus from producing endless blogs to restructuring and enriching existing pages. By aligning with how AI tools and Google interpret user intent, we uncovered hidden opportunities sitting in plain sight.</p>
 <p>The outcome? Not incremental change, but a step-level jump in performance.</p>
 <h2>The results (June 1 – June 30, 2025 vs June 1 – June 30, 2024)</h2>
@@ -224,7 +224,7 @@ export const CASES: CaseStudy[] = [
 <ol start="4">
 <li><strong> Continuous Optimisation Loop</strong></li>
 </ol>
-<p>Every 30 days, we applied micro-adjustments informed by weekly AI performance tracking—ensuring content evolved with user behaviour and SERP shifts.</p>
+<p>Every 30 days, we applied micro-adjustments informed by weekly AI performance tracking, ensuring content evolved with user behaviour and SERP shifts.</p>
 <ol start="5">
 <li><strong> Entity-Level Authority Signals</strong></li>
 </ol>
@@ -232,7 +232,7 @@ export const CASES: CaseStudy[] = [
 <h2>The big lesson..</h2>
 <p>This case study wasn’t about writing more. It was about writing smarter.</p>
 <p>AI became the lens through which we refined strategy: surfacing content gaps, aligning with buyer intent, and structuring pages so they were easy for both users and algorithms to understand.</p>
-<p>The takeaway? Brands that combine human strategy with AI precision don’t just compete in search—they leap ahead.</p>
+<p>The takeaway? Brands that combine human strategy with AI precision don’t just compete in search, they leap ahead.</p>
 <p>If your pages aren’t yet AI-optimised, your competitors may already be one step closer to capturing your audience.</p>`,
   },
   {
@@ -243,13 +243,13 @@ export const CASES: CaseStudy[] = [
     big: "12,800%",
     indexSub: "more traffic · 0 → 99 citations",
     h1: "From Zero to 99 AI Citations: How This Brand Captured 12,800% More Traffic",
-    metaTitle: "From Zero to 99 AI Citations: 12,800% More Traffic With GEO — Zicy",
-    metaDescription: "Find out how one brand went from zero AI citations to 99 — generating 12,800% more traffic by becoming the source AI platforms reference in generative search results.",
+    metaTitle: "From Zero to 99 AI Citations: 12,800% More Traffic With GEO, Zicy",
+    metaDescription: "Find out how one brand went from zero AI citations to 99, generating 12,800% more traffic by becoming the source AI platforms reference in generative search results.",
     datePublished: "2025-09-08",
     dateModified: "2026-05-06",
-    bodyHtml: `<p>In today’s AI-first search landscape, the biggest win isn’t ranking on page one—it’s becoming the source AI platforms cite.</p>
+    bodyHtml: `<p>In today’s AI-first search landscape, the biggest win isn’t ranking on page one, it’s becoming the source AI platforms cite.</p>
 <p>That’s exactly the transformation we engineered for a client in architectural services.</p>
-<p>Starting with zero AI mentions, they quickly built a reputation as a trusted authority across ChatGPT, Gemini, Perplexity, and Copilot—all without a single paid ad.</p>
+<p>Starting with zero AI mentions, they quickly built a reputation as a trusted authority across ChatGPT, Gemini, Perplexity, and Copilot, all without a single paid ad.</p>
 <p>The project began in <strong>December 2024</strong> with one clear goal: <strong>turn the brand into an answer</strong>, <strong>not just a search result</strong>.</p>
 <h2>The Results (as of August 2025)</h2>
 <p><img src="/case-studies/2025/09/From-Zero-to-99-AI-Citations.png" alt="From Zero to 99 AI Citations" loading="lazy" decoding="async" /></p>
@@ -326,7 +326,7 @@ export const CASES: CaseStudy[] = [
     big: "1,186%",
     indexSub: "faster growth · 74.6% mention coverage",
     h1: "1,186% Faster Growth, 74.6% Brand Mention Coverage & AI-Cited Product Pages (Answer/Generative Engine Optimization)",
-    metaTitle: "1,186% Faster Growth & 74.6% AI Brand Mention Coverage — Zicy",
+    metaTitle: "1,186% Faster Growth & 74.6% AI Brand Mention Coverage, Zicy",
     metaDescription: "See how one brand used answer engine and generative engine optimization to achieve 1,186% faster growth and have its product pages cited by ChatGPT, Gemini, and Perplexity.",
     datePublished: "2026-01-21",
     dateModified: "2026-05-06",
@@ -402,7 +402,7 @@ export const CASES: CaseStudy[] = [
 <h2>The Bigger Shift This Case Study Reveals</h2>
 <p>This brand didn’t “chase AI traffic.” They <strong>measured how AI understood them- and corrected it</strong>.</p>
 <p>As discovery shifts from rankings to recommendations, the winners won’t be the loudest brands. They’ll be the ones AI systems trust enough to cite.</p>
-<p><strong>Track it. Understand it. Optimise for it—with Zicy.</strong></p>`,
+<p><strong>Track it. Understand it. Optimise for it, with Zicy.</strong></p>`,
   },
   {
     slug: "aeo-case-study-brand-mentions-website-citation-coverage-in-ai-results",
@@ -412,8 +412,8 @@ export const CASES: CaseStudy[] = [
     big: "82.9%",
     indexSub: "brand mentions · 37.14% citations",
     h1: "How an eCommerce Client Achieved 82.9% Brand Mentions and 37.14% Website Citation Coverage in AI Results",
-    metaTitle: "82.9% Brand Mentions & 37.14% AI Citation Coverage for eCommerce — Zicy",
-    metaDescription: "Learn how an eCommerce brand achieved 82.9% brand mention coverage and 37.14% website citation coverage in AI results — even while competitors led on traditional search.",
+    metaTitle: "82.9% Brand Mentions & 37.14% AI Citation Coverage for eCommerce, Zicy",
+    metaDescription: "Learn how an eCommerce brand achieved 82.9% brand mention coverage and 37.14% website citation coverage in AI results, even while competitors led on traditional search.",
     datePublished: "2026-01-27",
     dateModified: "2026-05-06",
     bodyHtml: `<p><strong>What if your eCommerce competitors aren’t outranking you on Google, but AI systems are still recommending them more often?</strong></p>
@@ -503,7 +503,7 @@ export const CASES: CaseStudy[] = [
     big: "62.96%",
     indexSub: "mentions · 23.04% share of voice",
     h1: "How an Education Brand Achieved 62.96% Mentions, 36.51% Citation Coverage & 23.04% AI Share of Voice",
-    metaTitle: "How an Education Brand Got 62.96% AI Mentions & 23% Share of Voice — Zicy",
+    metaTitle: "How an Education Brand Got 62.96% AI Mentions & 23% Share of Voice, Zicy",
     metaDescription: "Discover how a knowledge-led education brand achieved 62.96% AI mention coverage, 36.51% citation coverage, and 23.04% AI share of voice using GEO and AEO strategies.",
     datePublished: "2026-02-04",
     dateModified: "2026-05-06",
@@ -593,7 +593,7 @@ export const CASES: CaseStudy[] = [
     big: "1,119%",
     indexSub: "AI traffic growth · 68.97% mentions",
     h1: "How 1,119% AI Growth and 68.97% Brand Mentions Changed eCommerce Visibility",
-    metaTitle: "AI Traffic Growth & More Brand Mentions for eCommerce Brand — Zicy",
+    metaTitle: "AI Traffic Growth & More Brand Mentions for eCommerce Brand, Zicy",
     metaDescription: "Discover how an eCommerce brand achieved 1,119% AI traffic growth + 68.97% brand mentions by optimising visibility across AI platforms like ChatGPT and Gemini.",
     datePublished: "2026-03-05",
     dateModified: "2026-05-06",
@@ -688,7 +688,7 @@ export const CASES: CaseStudy[] = [
     big: "52%",
     indexSub: "mentions · SOV 5.4% → 9.4%",
     h1: "How an Aesthetic Clinic Drove 52% Mentions, 29.75% Citations & Increased AI Share of Voice from 5.4% to 9.4%",
-    metaTitle: "Aesthetic Clinic Increased AI Mentions & Share of Voice — Zicy",
+    metaTitle: "Aesthetic Clinic Increased AI Mentions & Share of Voice, Zicy",
     metaDescription: "Discover the AEO/GEO strategy that drove 52% brand mentions, 29.75% citations, and boosted AI share of voice from 5.4% to 9.4% for a Malaysian Aethetic Clinic!",
     datePublished: "2026-02-24",
     dateModified: "2026-05-06",
@@ -772,7 +772,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
     big: "90.61%",
     indexSub: "mentions · 55.92% citations",
     h1: "How a B2B Brand Achieved 90.61% AI Brand Mentions, 55.92% Citations &18.11% Share of Voice",
-    metaTitle: "AI Brand Mentions + Citations Growth for B2B Brand — Zicy",
+    metaTitle: "AI Brand Mentions + Citations Growth for B2B Brand, Zicy",
     metaDescription: "Discover how a B2B brand achieved 90.61% Brand Mentions, 55.92% Citations and increased Share of Voice by optimising visibility across AI platforms!",
     datePublished: "2026-03-11",
     dateModified: "2026-05-06",
@@ -850,7 +850,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
     big: "54.17%",
     indexSub: "mentions · 36.11% citations",
     h1: "How 54.17% Mentions & 36.11% Citations Across 5 AI Platforms Elevated B2B Visibility",
-    metaTitle: "AI Brand Mentions + Citations Growth for B2B Across 5 platforms — Zicy",
+    metaTitle: "AI Brand Mentions + Citations Growth for B2B Across 5 platforms, Zicy",
     metaDescription: "Learn how this B2B brand achieved 54.17% Brand Mentions, 36.11% Citations & 8.31% Share of Voice by optimising visibility across AI platforms!",
     datePublished: "2026-03-16",
     dateModified: "2026-05-06",
@@ -943,7 +943,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
     big: "56.32%",
     indexSub: "mentions · 51.05% citations",
     h1: "How an Education Brand Reached 56.32% AI Mentions, 51.05% Citations Across 5 AI Platforms",
-    metaTitle: "AI Brand Mentions + Citations Growth for Education Brand — Zicy",
+    metaTitle: "AI Brand Mentions + Citations Growth for Education Brand, Zicy",
     metaDescription: "Discover how a popular education sector client achieved 56.32% AI Mentions, 51.05% Citations  across five AI platforms!",
     datePublished: "2026-04-01",
     dateModified: "2026-05-06",
@@ -1032,7 +1032,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <li><strong>Influence Gaps:</strong> You can’t identify which specific prompts are driving market influence.</li>
 <li><strong>Competitive Risk:</strong> You can’t defend your brand against competitors actively shaping AI narratives.</li>
 </ul>
-<p>Winning here is not about writing longer blogs; it’s about <strong>structured, extractable authority.</strong> If your institution has a visibility gap, it is measurable—and once it’s measurable, it’s optimisable.</p>`,
+<p>Winning here is not about writing longer blogs; it’s about <strong>structured, extractable authority.</strong> If your institution has a visibility gap, it is measurable, and once it’s measurable, it’s optimisable.</p>`,
   },
   {
     slug: "aeo-case-study-b2b-brand-mentions-ai-sessions-growth",
@@ -1042,7 +1042,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
     big: "56.67%",
     indexSub: "mentions · 2,971 AI sessions",
     h1: "How a B2B Brand Captured 56.67% AI Mentions and Generated 2,971 AI Sessions in 90 Days",
-    metaTitle: "AEO/GEO Case Study: B2B Brand Mentions + AI Sessions — Zicy",
+    metaTitle: "AEO/GEO Case Study: B2B Brand Mentions + AI Sessions, Zicy",
     metaDescription: "Learn how this B2B brand increased their AI brand mentions to 56.67%, with 2971 total AI sessions, 40% citations & more in just 90 days!",
     datePublished: "2026-04-07",
     dateModified: "2026-05-06",
@@ -1162,7 +1162,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
     big: "66%",
     indexSub: "mentions · 47% citations · 19% SOV",
     h1: "How an Interior Décor Brand Captured 66% AI Mentions, 47% Citations & 19% Share of Voice",
-    metaTitle: "AI Brand Mentions + Citations Growth for Interior Decor Brand — Zicy",
+    metaTitle: "AI Brand Mentions + Citations Growth for Interior Decor Brand, Zicy",
     metaDescription: "See how a commercial interior brand hit 66.67% Mentions, 47.13% Citations & 19% Share of Voice by optimising for AI visibility. Learn the strategy here!",
     datePublished: "2026-04-21",
     dateModified: "2026-05-06",
@@ -1262,7 +1262,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
     big: "157%",
     indexSub: "AI sessions growth · 40.56% mentions",
     h1: "How a B2B Electronics Brand Increased AI Sessions by 157% & Strengthened 40.57% Brand Mention Coverage",
-    metaTitle: "AI Sessions + Brand Mention Growth for B2B Brand — Zicy",
+    metaTitle: "AI Sessions + Brand Mention Growth for B2B Brand, Zicy",
     metaDescription: "Discover how a B2B electronics client achieved 40.56% Brand Mentions, 34.44% Citations, and 157.77% AI sessions growth!",
     datePublished: "2026-05-06",
     dateModified: "2026-05-06",

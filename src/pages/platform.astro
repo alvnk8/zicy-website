@@ -12,9 +12,9 @@ import actionCenter from '../assets/screenshots/action-center.png';
 import siteTraffic from '../assets/screenshots/site-traffic-search-console.png';
 import { SITE } from '../data/site';
 
-const title = 'Zicy Platform — twelve modules across one loop: measure, diagnose, act, prove';
+const title = 'Zicy Platform, twelve modules across one loop: measure, diagnose, act, prove';
 const description =
-  'Zicy is the truth layer for AI visibility — twelve modules across one loop (measure, diagnose, act, prove) that show what AI says about your brand, why, how to fix it, and whether it moved demand. Every engine, every language; built to current AEO/GEO best practice.';
+  'Zicy is the truth layer for AI visibility, twelve modules across one loop (measure, diagnose, act, prove) that show what AI says about your brand, why, how to fix it, and whether it moved demand. Every engine, every language; built to current AEO/GEO best practice.';
 
 // Module set — single source of truth. Drives the rendered module set AND the ItemList schema.
 const moduleGroups = [
@@ -62,7 +62,7 @@ const softwareApp = {
   operatingSystem: 'Web',
   url: `${SITE.url}/platform`,
   description:
-    'AI visibility platform — twelve modules across one closed loop (measure, diagnose, act, prove) across ChatGPT, Gemini, Perplexity, Google AI Overview and Google AI Mode.',
+    'AI visibility platform, twelve modules across one closed loop (measure, diagnose, act, prove) across ChatGPT, Gemini, Perplexity, Google AI Overview and Google AI Mode.',
   offers: { '@type': 'Offer', price: '129', priceCurrency: 'USD' },
 };
 
@@ -82,15 +82,15 @@ const moduleList = {
 const faqs = [
   {
     q: 'How many AI engines does Zicy track?',
-    a: 'Zicy tracks five engines by default — ChatGPT, Gemini, Perplexity, Google AI Overview and Google AI Mode. Enterprise plans can add others, such as Grok and DeepSeek. Every tracked prompt runs across each engine.',
+    a: 'Zicy tracks five engines by default, ChatGPT, Gemini, Perplexity, Google AI Overview and Google AI Mode. Enterprise plans can add others, such as Grok and DeepSeek. Every tracked prompt runs across each engine.',
   },
   {
     q: 'What is the difference between the loop and the modules?',
-    a: 'The loop — measure, diagnose, act, prove — is the workflow; the modules are the tools that deliver each stage. You move around one loop using twelve modules.',
+    a: 'The loop (measure, diagnose, act, prove) is the workflow; the modules are the tools that deliver each stage. You move around one loop using twelve modules.',
   },
   {
     q: 'Does Zicy change my site, or only report on it?',
-    a: 'Zicy both reports and remediates. It measures and diagnoses, then the Action Center generates schema, llms.txt and citation-ready content so you can fix what it finds — without a hand-off to another tool.',
+    a: 'Zicy both reports and remediates. It measures and diagnoses, then the Action Center generates schema, llms.txt and citation-ready content so you can fix what it finds, without a hand-off to another tool.',
   },
   {
     q: 'How often does Zicy update?',
@@ -113,7 +113,7 @@ const faqPage = {
 
 // Loop lead modules (four cards).
 const loop = [
-  { k: '01 · Measure', name: 'AI Visibility', desc: 'The core scoreboard — brand mention coverage, citation rate, AI share of voice and average ranking, per engine, over time.' },
+  { k: '01 · Measure', name: 'AI Visibility', desc: 'The core scoreboard, brand mention coverage, citation rate, AI share of voice and average ranking, per engine, over time.' },
   { k: '02 · Diagnose', name: 'Brand Intelligence', desc: 'Perception, the AI Reality Score (fact-check / hallucination), the entity graph, and a prioritised action plan.' },
   { k: '03 · Act', name: 'Action Center', desc: 'llms.txt and schema generators, content optimisation, and new citation-ready content.' },
   { k: '04 · Prove', name: 'Site Traffic', desc: 'AI-referred sessions and downstream engagement from GA4 and Search Console, connected to the work.' },
@@ -136,14 +136,14 @@ const differentiators = [
 const proofBullets = [
   'AI-referred sessions, tied back to the visibility work.',
   'Answer-intent queries and branded-search behaviour, from GA4 and Search Console.',
-  'The link between winning the answer and movement in demand — defensible in a budget review.',
+  'The link between winning the answer and movement in demand, defensible in a budget review.',
 ];
 
 const roleCards = [
-  { eyebrow: 'For brands', p: 'See whether AI gets your brand right — and fix what is wrong.', href: '/solutions/brands', link: 'For brands →' },
+  { eyebrow: 'For brands', p: 'See whether AI gets your brand right, and fix what is wrong.', href: '/solutions/brands', link: 'For brands →' },
   { eyebrow: 'For PR & communications', p: 'Prove earned media moved the answer, not just the clip count.', href: '/solutions/pr', link: 'For PR →' },
   { eyebrow: 'For marketing & creative agencies', p: 'Run AI visibility as a white-label service line.', href: '/solutions/agencies', link: 'For agencies →' },
-  { eyebrow: 'For publishers', p: 'See whether AI attributes your work — or strips the credit.', href: '/solutions/publishers', link: 'For publishers →' },
+  { eyebrow: 'For publishers', p: 'See whether AI attributes your work, or strips the credit.', href: '/solutions/publishers', link: 'For publishers →' },
 ];
 ---
 <BaseLayout title={title} description={description}>
@@ -159,7 +159,7 @@ const roleCards = [
       <span class="eyebrow">Platform</span>
       <h1>The truth layer for AI visibility.</h1>
       <p class="lead">
-        One platform across the whole loop &mdash; measure what AI says about your brand, diagnose
+        One platform across the whole loop, measure what AI says about your brand, diagnose
         why, act to fix it, and prove it moved demand. Twelve modules, five engines, built to
         current AEO/GEO best practice and aligned with Google&rsquo;s latest spam policies.
       </p>
@@ -176,7 +176,7 @@ const roleCards = [
       <div class="shead">
         <span class="eyebrow"><span class="ix">01</span> The closed loop</span>
         <h2>One loop: measure, diagnose, act, prove.</h2>
-        <p>The lead module at each stage — the full set is below.</p>
+        <p>The lead module at each stage, the full set is below.</p>
       </div>
       <div class="loop">
         {loop.map((s) => (
@@ -188,30 +188,30 @@ const roleCards = [
       <div style="margin-top:36px">
         <Screenshot
           src={promptManager}
-          alt="Zicy Prompt Manager showing a tagged set of category questions — generated and custom prompts across topics, tagged by theme — built to run across all five engines."
-          caption="Prompt Manager — choose and tag the questions AI is judged on, run across all five engines."
+          alt="Zicy Prompt Manager showing a tagged set of category questions, generated and custom prompts across topics, tagged by theme, built to run across all five engines."
+          caption="Prompt Manager: choose and tag the questions AI is judged on, run across all five engines."
         />
       </div>
       <div class="grid-2" style="margin-top:20px">
         <Screenshot
           src={aiVisibility}
           alt="Zicy AI Visibility dashboard with brand mention coverage, citation rate, AI share of voice and average ranking, plus a multi-week performance trend across the five engines."
-          caption="AI Visibility — coverage, share of voice, ranking, radar across every engine."
+          caption="AI Visibility: coverage, share of voice, ranking, radar across every engine."
         />
         <Screenshot
           src={brandIntelligenceReport}
           alt="Zicy Brand Intelligence report showing how AI perceives the brand, an AI Reality Score fact-check, and the entity graph."
-          caption="Brand Intelligence — perception, AI Reality Score, and the entity graph."
+          caption="Brand Intelligence: perception, AI Reality Score, and the entity graph."
         />
         <Screenshot
           src={citationOverview}
-          alt="Zicy Citation Analysis showing which sources AI cites about your brand — owned, earned, competitor and uncited — with narrative control and competitor share, down to the URL."
-          caption="Citation Analysis — narrative control, competitor share, and uncited rate."
+          alt="Zicy Citation Analysis showing which sources AI cites about your brand, owned, earned, competitor and uncited, with narrative control and competitor share, down to the URL."
+          caption="Citation Analysis: narrative control, competitor share, and uncited rate."
         />
         <Screenshot
           src={actionCenter}
           alt="Zicy Action Center with the llms.txt generator, schema generator and content optimisation tools."
-          caption="Action Center — llms.txt + schema generators, content tooling."
+          caption="Action Center: llms.txt + schema generators, content tooling."
         />
       </div>
     </div>
@@ -273,7 +273,7 @@ const roleCards = [
             <p>
               Does winning the AI answer move demand? Zicy connects AI-referred sessions,
               answer-intent queries and branded-search behaviour from GA4 and Search Console to the
-              visibility work &mdash; so AI visibility stops being a vanity metric and becomes a
+              visibility work, so AI visibility stops being a vanity metric and becomes a
               line you can defend in a budget review.
             </p>
           </div>
@@ -283,8 +283,8 @@ const roleCards = [
         </div>
         <Screenshot
           src={siteTraffic}
-          alt="Zicy Site Traffic, Search Console view — answer-intent queries, question impressions and clicks, and branded-search performance (impressions, clicks, average CTR and average position) connected to the AI visibility work."
-          caption="Site Traffic — answer-intent queries and branded-search behaviour, connected to the visibility work."
+          alt="Zicy Site Traffic, Search Console view, answer-intent queries, question impressions and clicks, and branded-search performance (impressions, clicks, average CTR and average position) connected to the AI visibility work."
+          caption="Site Traffic: answer-intent queries and branded-search behaviour, connected to the visibility work."
         />
       </div>
     </div>
@@ -296,7 +296,7 @@ const roleCards = [
       <div class="shead">
         <span class="eyebrow"><span class="ix">05</span> The differentiator</span>
         <h2>Competitors measure. Zicy proves.</h2>
-        <p>The truth layer isn&rsquo;t another metric — it&rsquo;s the fact-check. Zicy flags where AI is wrong about you, not just whether you&rsquo;re mentioned.</p>
+        <p>The truth layer isn&rsquo;t another metric. It&rsquo;s the fact-check. Zicy flags where AI is wrong about you, not just whether you&rsquo;re mentioned.</p>
       </div>
       <div class="grid-3">
         {differentiators.map((d) => (
@@ -304,7 +304,7 @@ const roleCards = [
         ))}
       </div>
       <p class="sub" style="max-width:62ch;margin:32px auto 0;text-align:center">
-        We win AI answers the same way we help you win them &mdash; by being genuinely easier to
+        We win AI answers the same way we help you win them, by being genuinely easier to
         find, verify and trust.
       </p>
       <div style="text-align:center;margin-top:28px"><a class="btn btn-p btn-lg" href="https://app.zicy.com/register">Try for free</a></div>

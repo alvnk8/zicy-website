@@ -7,12 +7,12 @@ export const SITE = {
   tagline: 'The truth layer for AI visibility.',
   legalName: 'Growth Pro Sdn. Bhd.',
   description:
-    "Zicy is the truth layer for AI visibility — see how every AI engine describes your brand, whether it's true, and how to fix it. All engines. All languages. All markets.",
+    "Zicy is the truth layer for AI visibility, see how every AI engine describes your brand, whether it's true, and how to fix it. All engines. All languages. All markets.",
   linkedin: 'https://www.linkedin.com/company/zicy',
 } as const;
 
 export const PROVENANCE =
-  'Built by Growth.pro — the consultancy behind the PAVA framework for AI visibility.';
+  'Built by Growth.pro, the consultancy behind the PAVA framework for AI visibility.';
 
 export const PROOF_ENGINES = 'ChatGPT · Gemini · Perplexity · Google AI Overview · Copilot';
 export const PROOF_TAG = 'All engines. All languages. All markets.';

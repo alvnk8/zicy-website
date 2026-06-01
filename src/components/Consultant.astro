@@ -572,7 +572,7 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
     formatted = formatted.replace(/>>/g, '');
     formatted = formatted.replace(/\s*<p>\s*/gi, '\n\n');
     formatted = formatted.replace(/<\/p>\s*/gi, '');
-    formatted = formatted.replace(/^[\s]*[-◦○▪▫–—]\s+(?=\S)/gm, '• ');
+    formatted = formatted.replace(/^[\s]*[-◦○▪▫–, ]\s+(?=\S)/gm, '• ');
     formatted = formatted.replace(/^[\s]*(\d+)[\)\.]\s+/gm, '$1. ');
     formatted = formatted.replace(/^(#{1,3})\s*(.+)$/gm, '$1 $2');
     formatted = formatted.replace(/([^\n])\n([•\d][\.\s])/g, '$1\n\n$2');
@@ -1109,7 +1109,7 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
     var revealDone = new Promise(function (res) { revealResolve = res; });
 
     function tick() {
-      if (myGen !== convGeneration) { revealResolve(); return; } // restarted — stop revealing
+      if (myGen !== convGeneration) { revealResolve(); return; } // restarted, stop revealing
       if (revealed < target.length) {
         var remaining = target.length - revealed;
         var step = Math.max(3, Math.ceil(remaining / 40)); // adaptive: smooth, fast, never stalls

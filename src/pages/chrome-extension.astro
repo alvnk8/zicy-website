@@ -1,16 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const title = 'Zicy Chrome extension — AEO/GEO audit & AI consultant in your browser';
+const title = 'Zicy Chrome extension, AEO/GEO audit & AI consultant in your browser';
 const description =
-  'Analyse any webpage’s readiness to be cited by AI answer engines like ChatGPT, Perplexity and Gemini. Free Chrome extension — AI readiness score, bot-access checker, schema generator.';
+  'Analyse any webpage’s readiness to be cited by AI answer engines like ChatGPT, Perplexity and Gemini. Free Chrome extension, AI readiness score, bot-access checker, schema generator.';
 
 // Deep-link to the actual Chrome Web Store listing.
 const STORE_URL = 'https://chromewebstore.google.com/detail/zicy-%E2%80%93-on-page-website-au/bbgmbofeglplaaamnfgmiejbeacokfbn';
 
 const features = [
   { h: 'AI readiness audit', p: 'An instant 0–100 score across seven metrics: answer density, query-fanout coverage, semantic freshness, heading hierarchy, citation quality, author expertise, schema presence.' },
-  { h: 'AI access checker', p: 'Detects 40+ AI crawlers (ChatGPT, Claude, Gemini, Perplexity and more) and flags whether they can reach your page — with fixes.' },
+  { h: 'AI access checker', p: 'Detects 40+ AI crawlers (ChatGPT, Claude, Gemini, Perplexity and more) and flags whether they can reach your page, with fixes.' },
   { h: 'Schema checker & generator', p: 'Finds existing JSON-LD, Microdata and RDFa, suggests the right schema, and generates copy-ready markup in one click.' },
   { h: 'Built-in AI assistant', p: 'Personalised, actionable recommendations based on your scores. Available in 12 languages.' },
 ];
@@ -22,7 +22,7 @@ const softwareApp = {
   applicationCategory: 'BrowserApplication',
   operatingSystem: 'Chrome',
   description:
-    'Analyse any webpage’s readiness to be cited by AI answer engines — AI readiness score, bot-access checker, schema generator.',
+    'Analyse any webpage’s readiness to be cited by AI answer engines, AI readiness score, bot-access checker, schema generator.',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.5', ratingCount: '427' },
 };
@@ -33,12 +33,12 @@ const softwareApp = {
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Free tool · Chrome extension</span>
-      <h1>Audit any page for AI — right in your browser.</h1>
+      <h1>Audit any page for AI, right in your browser.</h1>
       <p class="lead">
         Analyse any webpage’s readiness to be cited by AI answer engines like ChatGPT, Perplexity and
         Gemini. Install once, click the Zicy icon on any page, get an instant read.
       </p>
-      <div class="cta-row"><a class="btn btn-primary btn-lg" href={STORE_URL} rel="noopener">Add to Chrome — free</a></div>
+      <div class="cta-row"><a class="btn btn-primary btn-lg" href={STORE_URL} rel="noopener">Add to Chrome, free</a></div>
       <div class="proofbar">
         <span class="engines">4.5★ · ~427 users · 12 languages</span>
         <span class="tag">Updated regularly</span>
@@ -79,7 +79,7 @@ const softwareApp = {
 
   <section>
     <div class="wrap" style="text-align:center">
-      <a class="btn btn-primary btn-lg" href={STORE_URL} rel="noopener">Add to Chrome — free</a>
+      <a class="btn btn-primary btn-lg" href={STORE_URL} rel="noopener">Add to Chrome, free</a>
     </div>
   </section>
 </BaseLayout>
