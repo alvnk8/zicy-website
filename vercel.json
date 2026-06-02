@@ -1,0 +1,25 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "headers": [
+    {
+      "source": "/_astro/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/((?!_astro/).*\\.(png|jpg|jpeg|webp|avif|gif|svg|ico|css|js|mjs|woff|woff2|ttf|otf|eot|mp4|webm))",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }]
+    },
+    {
+      "source": "/((?!_astro/)[^.]*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "zicy.com" }],
+      "destination": "https://www.zicy.com/$1",
+      "permanent": true
+    }
+  ]
+}
