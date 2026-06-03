@@ -177,14 +177,15 @@ const solutionCards = [
         <span class="eyebrow rise d1">AI visibility</span>
         <h1 class="rise d2">Be the brand AI gets right.</h1>
         <p class="sub rise d3">
-          Buyers, partners and journalists ask AI about your category every day. Zicy shows you
-          what it says, whether it&rsquo;s true, and how to fix what&rsquo;s wrong, then
-          proves the fix moved demand. Across every major answer engine, in every language.
+          Buyers ask AI about your category every day. Zicy shows you what it says, whether
+          it&rsquo;s true, how to fix what&rsquo;s wrong, and proves the fix moved demand &mdash;
+          across every engine, every language.
         </p>
         <div class="hcta rise d4">
           <a class="btn btn-p" href="https://app.zicy.com/register">Try for free</a>
           <a class="btn btn-o" href="/platform">See the platform</a>
         </div>
+        <p class="hero-price rise d4">From <span class="mono">$129/mo</span> &middot; 7-day free trial &middot; no card required</p>
         <div class="engines rise d5">
           <b>ChatGPT</b> &middot; <b>Gemini</b> &middot; <b>Perplexity</b> &middot;
           <b>Google AI Overview</b> &middot; <b>Google AI Mode</b>
@@ -208,6 +209,7 @@ const solutionCards = [
           </div>
           <div class="hc-ring" aria-hidden="true"></div>
         </div>
+        <p class="hc-legend">How accurately AI describes you across engines. Flagged issues pull it down.</p>
       </aside>
     </div>
   </section>
@@ -234,7 +236,7 @@ const solutionCards = [
       </div>
       <p class="mono" style="margin-top:24px;font-size:13px;color:var(--muted);letter-spacing:.01em">
         And SEO is not AI visibility: just 12% of AI citations overlap with a brand&rsquo;s Google
-        top-10 results., Ahrefs, 15,000 prompts, 2025
+        top-10 results. (Ahrefs, 15,000 prompts, 2025)
       </p>
     </div>
   </section>
@@ -427,7 +429,7 @@ const solutionCards = [
         </p>
         <div class="hcta" style="margin-top:24px">
           <a class="btn btn-t" href="/about">Read the story →</a>
-          <a class="btn btn-t" href="https://www.growth.pro/" rel="noopener">Explore done-for-you →</a>
+          <a class="btn btn-t" href="https://www.growth.pro/" target="_blank" rel="noopener noreferrer">Explore done-for-you →</a>
         </div>
       </div>
     </div>
@@ -456,3 +458,16 @@ const solutionCards = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* FIX 1 — hero price/trial micro-line. ~12px below the CTAs; "$129/mo" renders in JetBrains
+     Mono via the global .mono class. Colour is --ink-2 (secondary text): measured >=6:1 on the
+     hero gradient (#F7F8FB -> #EAEEF8); --muted would fall to ~4.3:1 on the darker stop and fail
+     WCAG AA, so it is not used here. Scoped to .hcol so only the hero CTA row is affected. */
+  .hcol .hcta { margin-bottom: 12px; }
+  .hero-price { margin: 0 0 24px; font-family: var(--fs); font-size: 13px; line-height: 1.5; color: var(--ink-2); }
+  .hero-price .mono { font-size: 13px; }
+
+  /* FIX 2 — AI Reality Score legend inside the (white) hero demo card. --ink-2 ~6.8:1 on white. */
+  .hc-legend { margin-top: 10px; font-size: 12px; line-height: 1.45; color: var(--ink-2); }
+</style>
