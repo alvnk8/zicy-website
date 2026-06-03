@@ -2,6 +2,29 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
   "redirects": [
+    { "source": "/aeo-geo-consultant", "destination": "/consultant", "statusCode": 301 },
+    { "source": "/agency", "destination": "/solutions/agencies", "statusCode": 301 },
+    { "source": "/join-list", "destination": "/pricing", "statusCode": 301 },
+    { "source": "/book-a-demo", "destination": "/pricing", "statusCode": 301 },
+
+    { "source": "/case-studies/531-ai-citations-ecommerce", "destination": "/case-studies/ecommerce-531-ai-citations", "statusCode": 301 },
+    { "source": "/case-studies/increased-ai-users-and-events", "destination": "/case-studies/ecommerce-ai-referred-traffic", "statusCode": 301 },
+    { "source": "/case-studies/ai-optimised-content", "destination": "/case-studies/ecommerce-ai-ready-content", "statusCode": 301 },
+    { "source": "/case-studies/increasing-ai-citations", "destination": "/case-studies/architectural-services-ai-citations", "statusCode": 301 },
+    { "source": "/case-studies/aeo-case-study-brand-mentions-ai-cited-product-pages", "destination": "/case-studies/ecommerce-product-pages-ai-visibility", "statusCode": 301 },
+    { "source": "/case-studies/aeo-case-study-brand-mentions-website-citation-coverage-in-ai-results", "destination": "/case-studies/ecommerce-ai-mention-coverage", "statusCode": 301 },
+    { "source": "/case-studies/aeo-case-study-brand-mentions-ai-citations-share-of-voice", "destination": "/case-studies/education-ai-share-of-voice", "statusCode": 301 },
+    { "source": "/case-studies/aeo-geo-case-study-ai-visibility-ecommerce-growth", "destination": "/case-studies/ecommerce-ai-visibility-growth", "statusCode": 301 },
+    { "source": "/case-studies/aeo-case-study-aesthetic-clinic-ai-visibility", "destination": "/case-studies/aesthetic-clinic-ai-visibility", "statusCode": 301 },
+    { "source": "/case-studies/aeo-geo-case-study-b2b", "destination": "/case-studies/b2b-advisory-ai-visibility", "statusCode": 301 },
+    { "source": "/case-studies/aeo-geo-case-study-elevated-b2b-visibility", "destination": "/case-studies/b2b-services-prompt-level-visibility", "statusCode": 301 },
+    { "source": "/case-studies/aeo-geo-case-study-education-brand", "destination": "/case-studies/education-owned-earned-citations", "statusCode": 301 },
+    { "source": "/case-studies/aeo-case-study-b2b-brand-mentions-ai-sessions-growth", "destination": "/case-studies/b2b-services-90-day-ai-visibility", "statusCode": 301 },
+    { "source": "/case-studies/aeo-geo-case-study-interior-decor", "destination": "/case-studies/commercial-interiors-ai-visibility", "statusCode": 301 },
+    { "source": "/case-studies/aeo-geo-case-study-b2b-electronics", "destination": "/case-studies/b2b-electronics-ai-visibility", "statusCode": 301 },
+
+    { "source": "/case-studies/page/:n*", "destination": "/case-studies", "statusCode": 301 },
+
     { "source": "/about-us", "destination": "/about", "statusCode": 301 },
     { "source": "/media", "destination": "/about", "statusCode": 301 },
     { "source": "/jobs", "destination": "/about", "statusCode": 301 },
@@ -26,6 +49,7 @@
     { "source": "/seo-case-study/:path*", "destination": "/case-studies", "statusCode": 301 },
 
     { "source": "/privacy-policy", "destination": "/legal/privacy", "statusCode": 301 },
+    { "source": "/terms-and-conditions", "destination": "/legal/terms", "statusCode": 301 },
 
     { "source": "/feed", "destination": "/", "statusCode": 301 },
     { "source": "/comments/feed", "destination": "/", "statusCode": 301 },

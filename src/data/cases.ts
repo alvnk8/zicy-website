@@ -20,7 +20,7 @@ export interface CaseStudy {
 
 export const CASES: CaseStudy[] = [
   {
-    slug: "531-ai-citations-ecommerce",
+    slug: "ecommerce-531-ai-citations",
     indexMeta: "eCommerce · 4 months",
     eyebrow: "eCommerce · 4 months",
     indexTitle: "AI citations earned from the ground up",
@@ -96,7 +96,7 @@ export const CASES: CaseStudy[] = [
 <p>And that shift in strategy paid off, in both visibility and bottom-line growth.</p>`,
   },
   {
-    slug: "increased-ai-users-and-events",
+    slug: "ecommerce-ai-referred-traffic",
     indexMeta: "eCommerce · AI traffic",
     eyebrow: "eCommerce · AI traffic",
     indexTitle: "AI traffic that converts",
@@ -180,7 +180,7 @@ export const CASES: CaseStudy[] = [
 <p>By adapting both content and technical infrastructure to this new search environment, the brand positioned itself not just to be found, but to be trusted and chosen.</p>`,
   },
   {
-    slug: "ai-optimised-content",
+    slug: "ecommerce-ai-ready-content",
     indexMeta: "eCommerce · content",
     eyebrow: "eCommerce · content",
     indexTitle: "Precision over volume",
@@ -236,7 +236,7 @@ export const CASES: CaseStudy[] = [
 <p>If your pages aren’t yet AI-optimised, your competitors may already be one step closer to capturing your audience.</p>`,
   },
   {
-    slug: "increasing-ai-citations",
+    slug: "architectural-services-ai-citations",
     indexMeta: "Multi-category · GEO",
     eyebrow: "Multi-category · GEO",
     indexTitle: "From zero to 99 AI citations",
@@ -319,7 +319,7 @@ export const CASES: CaseStudy[] = [
 <p>This client’s journey proves that with the right AEO + GEO framework, even a brand starting from zero can achieve authority inside AI ecosystems, translating into visibility, traffic, and meaningful conversions.</p>`,
   },
   {
-    slug: "aeo-case-study-brand-mentions-ai-cited-product-pages",
+    slug: "ecommerce-product-pages-ai-visibility",
     indexMeta: "eCommerce · AEO/GEO",
     eyebrow: "eCommerce · AEO/GEO",
     indexTitle: "AI-cited product pages",
@@ -405,7 +405,7 @@ export const CASES: CaseStudy[] = [
 <p><strong>Track it. Understand it. Optimise for it, with Zicy.</strong></p>`,
   },
   {
-    slug: "aeo-case-study-brand-mentions-website-citation-coverage-in-ai-results",
+    slug: "ecommerce-ai-mention-coverage",
     indexMeta: "eCommerce · AEO/GEO",
     eyebrow: "eCommerce · AEO/GEO",
     indexTitle: "Mentions where competitors led on search",
@@ -496,7 +496,7 @@ export const CASES: CaseStudy[] = [
 <p><strong>By tracking AI visibility with tools such as Zicy, brands can replace assumptions with evidence as discovery models change.</strong></p>`,
   },
   {
-    slug: "aeo-case-study-brand-mentions-ai-citations-share-of-voice",
+    slug: "education-ai-share-of-voice",
     indexMeta: "Education · AEO/GEO",
     eyebrow: "Education · AEO/GEO",
     indexTitle: "Knowledge-led authority in AI answers",
@@ -586,7 +586,7 @@ export const CASES: CaseStudy[] = [
 <p>Platforms like <a href="/">Zicy</a> help make this layer observable, so organisations can adapt as discovery models continue to evolve.</p>`,
   },
   {
-    slug: "aeo-geo-case-study-ai-visibility-ecommerce-growth",
+    slug: "ecommerce-ai-visibility-growth",
     indexMeta: "eCommerce · AEO/GEO",
     eyebrow: "eCommerce · AEO/GEO",
     indexTitle: "AI visibility, rebuilt for growth",
@@ -681,7 +681,7 @@ export const CASES: CaseStudy[] = [
 <p>Platforms like <a href="/"><strong>Zicy</strong></a> make that visibility observable, so brands can respond as AI-driven discovery evolves.</p>`,
   },
   {
-    slug: "aeo-case-study-aesthetic-clinic-ai-visibility",
+    slug: "aesthetic-clinic-ai-visibility",
     indexMeta: "Healthcare / aesthetics",
     eyebrow: "Healthcare / aesthetics",
     indexTitle: "Local category leadership",
@@ -765,7 +765,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>Platforms like <a href="/"><em><strong>Zicy</strong></em></a> make this visibility measurable, enabling brands to adapt as AI-driven discovery continues to evolve.</p>`,
   },
   {
-    slug: "aeo-geo-case-study-b2b",
+    slug: "b2b-advisory-ai-visibility",
     indexMeta: "B2B · AEO/GEO",
     eyebrow: "B2B · AEO/GEO",
     indexTitle: "Authority earned from a near-zero baseline",
@@ -843,7 +843,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>Platforms like <a href="/"><strong>Zicy</strong></a> make this layer observable, so organisations can respond to how AI-driven discovery is actually unfolding.</p>`,
   },
   {
-    slug: "aeo-geo-case-study-elevated-b2b-visibility",
+    slug: "b2b-services-prompt-level-visibility",
     indexMeta: "B2B · 5 AI platforms",
     eyebrow: "B2B · 5 AI platforms",
     indexTitle: "Consistent presence across five engines",
@@ -936,7 +936,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>Tools like <a href="/">Zicy</a> exist to surface that layer, so visibility inside AI answers becomes something you can track and improve.</p>`,
   },
   {
-    slug: "aeo-geo-case-study-education-brand",
+    slug: "education-owned-earned-citations",
     indexMeta: "Education · 5 AI platforms",
     eyebrow: "Education · 5 AI platforms",
     indexTitle: "Cited across every major engine",
@@ -1035,7 +1035,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>Winning here is not about writing longer blogs; it’s about <strong>structured, extractable authority.</strong> If your institution has a visibility gap, it is measurable, and once it’s measurable, it’s optimisable.</p>`,
   },
   {
-    slug: "aeo-case-study-b2b-brand-mentions-ai-sessions-growth",
+    slug: "b2b-services-90-day-ai-visibility",
     indexMeta: "B2B services · 90 days",
     eyebrow: "B2B services · 90 days",
     indexTitle: "Full programme, no prior AI strategy",
@@ -1155,7 +1155,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>Platforms like <a href="/">Zicy</a> help you see it, track it, and optimise it.</p>`,
   },
   {
-    slug: "aeo-geo-case-study-interior-decor",
+    slug: "commercial-interiors-ai-visibility",
     indexMeta: "Interior décor · AEO/GEO",
     eyebrow: "Interior décor · AEO/GEO",
     indexTitle: "Cross-platform citation growth",
@@ -1255,7 +1255,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>Tools like <a href="/">Zicy</a> make that visibility measurable and actionable.</p>`,
   },
   {
-    slug: "aeo-geo-case-study-b2b-electronics",
+    slug: "b2b-electronics-ai-visibility",
     indexMeta: "B2B electronics",
     eyebrow: "B2B electronics",
     indexTitle: "Sessions and coverage, together",

@@ -18,7 +18,7 @@ const entries: Entry[] = [
   { path: '/platform', changefreq: 'monthly', priority: '0.9' },
   ...ICPS.map((i) => ({ path: `/solutions/${i.slug}`, changefreq: 'monthly', priority: '0.9' })),
   { path: '/free-tools', changefreq: 'monthly', priority: '0.7' },
-  { path: '/aeo-geo-consultant', changefreq: 'monthly', priority: '0.8' },
+  { path: '/consultant', changefreq: 'monthly', priority: '0.8' },
   { path: '/chrome-extension', changefreq: 'monthly', priority: '0.8' },
   { path: '/pricing', changefreq: 'monthly', priority: '0.8' },
   { path: '/case-studies', changefreq: 'monthly', priority: '0.8' },

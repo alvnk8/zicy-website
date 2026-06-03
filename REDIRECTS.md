@@ -1,64 +1,94 @@
-# Legacy URL redirects (Growth.pro SEO site → zicy.com)
+# URL redirects → zicy.com (new Astro site)
 
-Server-side 301/302 redirects from the old WordPress SEO-agency URLs to the live
-Zicy site live in [`vercel.json`](./vercel.json) (`redirects` + `trailingSlash:false`).
-They run at Vercel's edge before static files are served, so they apply to the
-SSG build with no adapter.
+Server-side 301/302 redirects live in [`vercel.json`](./vercel.json) (`redirects` +
+`trailingSlash:false`). They run at Vercel's edge before static files are served,
+so they apply to the SSG build with no adapter. Canonical host is **www.zicy.com**
+(set `www` as the primary domain in Vercel; apex `zicy.com` → `www`).
 
-## Why `statusCode` + `trailingSlash:false`
+Two source families are merged in one file:
+1. **zicy.com current → new** — the live WordPress/old-Zicy URLs being renamed.
+2. **Growth.pro legacy SEO-agency URLs** — older agency paths consolidated onto Zicy.
 
-- **`statusCode: 301/302`** gives the classic SEO codes. (`permanent:true/false`
-  would emit 308/307 — Google treats those equivalently, but 301/302 match the
-  migration brief's language and are unambiguous.)
-- **`trailingSlash:false`** matches the site's `trailingSlash:'never'` (astro.config).
-  Old WP URLs were mostly slashed (`/about-us/`); Vercel 308-normalises any `/x/`
-  → `/x` first, then the rule below matches. Slashed legacy URLs therefore resolve
-  in at most two hops — fine for SEO consolidation.
-- **`/seo-case-study/:path*`** + bare `/seo-case-study` collapse the ~150 individual
-  case-study posts, category archives and `/page/N` pagination into one target.
-  `/blog/:path*` + `/blog` do the same for every blog post.
+## Conventions
 
-## Map → live-route reconciliation
+- **`statusCode: 301/302`** for the classic SEO codes (301 permanent, 302 temporary).
+  Not combined with `permanent`. (`permanent:true` would emit 308/307 — equivalent
+  to Google, but we use explicit 301/302.)
+- **`trailingSlash:false`** matches `astro.config` (`trailingSlash:'never'`). Slashed
+  legacy URLs (`/x/`) 308-normalise to `/x` first, then match — ≤2 hops.
+- First-match-wins; **specific rules before wildcards**; `source` is case-sensitive.
 
-The supplied redirect map targeted an aspirational AEO-consultant IA. Targets that
-don't exist on the built Zicy product site were remapped to the nearest live route
-(decisions confirmed by the owner):
+## Case-study slug rename (zicy.com → new)
 
-| Map target | Live route used | Code | Note |
+All 15 case studies were renamed to cleaner, descriptive slugs. `data/cases.ts`
+now holds the **new** slugs (pages build there); the **old** slugs 301 to them.
+`public/llms.txt` and the sitemap were updated to the new slugs too.
+
+| Old slug | New slug |
+|---|---|
+| `531-ai-citations-ecommerce` | `ecommerce-531-ai-citations` |
+| `increased-ai-users-and-events` | `ecommerce-ai-referred-traffic` |
+| `ai-optimised-content` | `ecommerce-ai-ready-content` |
+| `increasing-ai-citations` | `architectural-services-ai-citations` |
+| `aeo-case-study-brand-mentions-ai-cited-product-pages` | `ecommerce-product-pages-ai-visibility` |
+| `aeo-case-study-brand-mentions-website-citation-coverage-in-ai-results` | `ecommerce-ai-mention-coverage` |
+| `aeo-case-study-brand-mentions-ai-citations-share-of-voice` | `education-ai-share-of-voice` |
+| `aeo-geo-case-study-ai-visibility-ecommerce-growth` | `ecommerce-ai-visibility-growth` |
+| `aeo-case-study-aesthetic-clinic-ai-visibility` | `aesthetic-clinic-ai-visibility` |
+| `aeo-geo-case-study-b2b` | `b2b-advisory-ai-visibility` |
+| `aeo-geo-case-study-elevated-b2b-visibility` | `b2b-services-prompt-level-visibility` |
+| `aeo-geo-case-study-education-brand` | `education-owned-earned-citations` |
+| `aeo-case-study-b2b-brand-mentions-ai-sessions-growth` | `b2b-services-90-day-ai-visibility` |
+| `aeo-geo-case-study-interior-decor` | `commercial-interiors-ai-visibility` |
+| `aeo-geo-case-study-b2b-electronics` | `b2b-electronics-ai-visibility` |
+
+**No broad `/case-studies/:path*` catch-all.** It would shadow the new detail
+pages (Vercel redirects run before the filesystem), 301-ing every live case study
+to the index. Only `/case-studies/page/:n*` → `/case-studies` (pagination) is kept.
+
+## Other zicy.com → new
+
+| Old | New | Code | Note |
 |---|---|---|---|
-| `/about` | `/about` | 301 | exact |
-| `/contact` | `/contact` | 301 | **new page created** (`src/pages/contact.astro`) |
-| `/audit` | `/audit` | 301 | exact |
-| `/case-studies` | `/case-studies` | 301 | exact |
-| `/engagements` (pricing/services) | `/pricing` | 301 | no `/engagements`; closest commercial intent |
-| `/approach`, `/zicy` | `/consultant` | 301 | no `/approach`; methodology/consultant hub |
-| `/` (seo-malaysia) | `/` | 301 | homepage = MY-market landing |
-| `/privacy-policy` | `/legal/privacy` | 301 | live legal page (map's interim `/` superseded) |
-| `/about-for-llms` | `/about` | **302** | interim — recreate AEO asset, then drop redirect |
-| `/blog`, `/blog/*`, `/insights` | `/resources` | **302** | interim — `/insights` not built yet |
-| `/media`, `/jobs`, `/website-design-client-portfolio`, `/website-assets-portfolio` | `/about` | 301 | retired firm/portfolio pages |
+| `/aeo-geo-consultant` | `/consultant` | 301 | page **removed**; `/consultant` is the canonical consultant page (sitemap + llms.txt + free-tools repointed) |
+| `/agency` | `/solutions/agencies` | 301 | |
+| `/join-list`, `/book-a-demo` | `/pricing` | 301 | commercial intent |
+| `/terms-and-conditions` | `/legal/terms` | 301 | |
+| `/privacy-policy` | `/legal/privacy` | 301 | live legal page |
+
+## Growth.pro legacy SEO-agency URLs
+
+| Old | New | Code | Note |
+|---|---|---|---|
+| `/about-us`, `/media`, `/jobs`, `/website-design-client-portfolio`, `/website-assets-portfolio` | `/about` | 301 | firm/portfolio pages retired |
+| `/contact-us` | `/contact` | 301 | `/contact` page created in this repo |
+| `/seo-audit` | `/audit` | 301 | |
+| `/seo-pricing`, `/seo-pricing-malaysia`, `/professional-aeo-geo-content-writing-services`, `/professional-seo-content-writing-services`, `/web-design-development-pricing`, `/white-label-seo-services` | `/pricing` | 301 | commercial intent |
+| `/seo-malaysia` | `/` | 301 | MY-market landing = homepage |
+| `/zicy` | `/consultant` | 301 | methodology/consultant hub |
+| `/seo-case-study`, `/seo-case-study/:path*` | `/case-studies` | 301 | ~150 old agency case-study URLs → index |
 | `/feed`, `/comments/feed` | `/` | 301 | legacy WordPress RSS |
+| `/about-for-llms` | `/about` | **302** | interim — recreate AEO asset, then drop redirect |
 
 WordPress system URLs (`/wp-admin/*`, `/wp-login.php`, `/xmlrpc.php`,
 `/wp-content/uploads/*`) are intentionally **not** redirected — let them 404/410.
 
-## TODO when `/insights` ships
+## Blog (interim) + staged activation
 
-The blog posts are 302 → `/resources` for now. When the `/insights` section is
-built, **insert these 1:1 301s _above_ the `/blog/:path*` wildcard** (first match
-wins) and flip the wildcard from 302→301. These are the on-brand AEO posts the map
-flagged high-priority for 1:1 migration (note the one slug typo fix):
+Blog has no section on the new site yet, so:
 
 ```
-/blog/google-ai-grounding-budget                 → /insights/google-ai-grounding-budget
-/blog/ai-ready-marketing-steps                    → /insights/ai-ready-marketing-steps
-/blog/tracking-seo-success-in-ai-era              → /insights/tracking-seo-success-in-ai-era
-/blog/seo-strategis-for-ai-driven-search          → /insights/seo-strategies-for-ai-driven-search   (typo fixed)
-/blog/query-fan-out-explained                     → /insights/query-fan-out-explained
-/blog/google-gemini-ai-brain-behind-future-of-search → /insights/google-gemini-ai-brain-behind-future-of-search
-/blog/why-google-ai-mode-changes-everything       → /insights/why-google-ai-mode-changes-everything
-/blog/entities-and-seo                            → /insights/entities-and-seo
-/blog/google-eat-ymyl-seo-content                 → /insights/google-eat-ymyl-seo-content
+/blog          → /resources   (302)
+/blog/:path*   → /resources   (302)
 ```
 
-Also recreate `/about-for-llms` as a real asset, then remove its interim 302.
+When a blog/resources article section ships, activate
+[`REDIRECTS.blog-staged.json`](./REDIRECTS.blog-staged.json): it carries the two
+known typo-slug 1:1 fixes plus a catch-all to the blog index. **Find-replace the
+destination prefix** to match the real section (e.g. `/blog` → `/resources` or
+`/insights`), then replace the two interim `/blog` rules above with that block,
+keeping the specific rules **before** the wildcard. Flip them to 301 at that point.
+
+If instead an `/insights` section ships, the on-brand AEO posts from the original
+Growth.pro map should 301 1:1 (incl. the typo fix
+`seo-strategis-for-ai-driven-search` → `seo-strategies-for-ai-driven-search`).

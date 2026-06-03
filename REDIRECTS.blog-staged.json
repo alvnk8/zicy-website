@@ -1,0 +1,11 @@
+{
+  "$comment": "STAGED — NOT ACTIVE. Activate when a blog/resources article section ships. Rule of thumb: if a post is republished at the SAME slug, the new site serves it natively — add NO rule (a same-path redirect loops). Only add a 1:1 rule when the new slug DIFFERS from the old. Below: the 2 old slugs that carry typos (so their corrected new slugs differ), plus a catch-all sending any old post NOT republished (and pagination) to the section index. If the new section is /resources or /insights instead of /blog, find-replace the destination prefix. To activate: move these into vercel.json's 'redirects' (specific rules BEFORE the wildcard) and REPLACE the two interim '/blog' -> '/resources' (302) rules. Flip statusCode to 301 once live.",
+
+  "redirects": [
+    { "source": "/blog/pr-news-releases-wikidata-improve-ai-visbility", "destination": "/blog/pr-news-releases-wikidata-improve-ai-visibility", "statusCode": 301 },
+    { "source": "/blog/prepare-website-for-googl-ai-overviews", "destination": "/blog/prepare-website-for-google-ai-overviews", "statusCode": 301 },
+
+    { "source": "/blog/page/:n*", "destination": "/blog", "statusCode": 301 },
+    { "source": "/blog/:path*", "destination": "/blog", "statusCode": 301 }
+  ]
+}
