@@ -25,6 +25,7 @@ const entries: Entry[] = [
   ...CASES.map((c) => ({ path: `/case-studies/${c.slug}`, changefreq: 'yearly', priority: '0.6' })),
   { path: '/done-for-you', changefreq: 'monthly', priority: '0.8' },
   { path: '/about', changefreq: 'monthly', priority: '0.7' },
+  { path: '/contact', changefreq: 'yearly', priority: '0.5' },
   { path: '/resources', changefreq: 'weekly', priority: '0.7' },
   ...LEGAL.map((d) => ({ path: `/legal/${d}`, changefreq: 'yearly', priority: '0.3' })),
 ];

@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../data/site';
+
+const title = 'Contact Zicy, talk to the AI visibility team';
+const description =
+  'Get in touch with Zicy. Run a free AI visibility audit, ask the AEO/GEO consultant anything, or talk to Growth.pro about a done-for-you programme.';
+
+// Real channels only — the site funnels contact intent to the audit, the live
+// consultant chat, the done-for-you enquiry and registration. No standalone
+// support inbox is published, so none is invented here.
+const channels = [
+  {
+    eyebrow: 'Start here',
+    h: 'Run a free AI visibility audit',
+    p: 'See how every major AI engine describes your brand, whether it’s right, and where the gaps are, benchmarked against rivals. No call required.',
+    cta: 'Get the free audit',
+    href: '/audit',
+    primary: true,
+  },
+  {
+    eyebrow: 'Ask anything',
+    h: 'Talk to the AEO/GEO consultant',
+    p: 'A free AI consultant powered by Growth.pro’s framework. Audit a page or ask any answer-engine optimisation question and get an answer in seconds.',
+    cta: 'Open the consultant',
+    href: '/consultant',
+  },
+  {
+    eyebrow: 'Enterprise',
+    h: 'Talk to Growth.pro about done-for-you',
+    p: 'Want the work run for you? Growth.pro operates a selective managed programme on its AI Visibility Operating System, PAVA Framework and AI Citation Enablement practice.',
+    cta: 'See done-for-you',
+    href: '/done-for-you',
+  },
+  {
+    eyebrow: 'Get started',
+    h: 'Create a free account',
+    p: 'Prefer to dive in? Start measuring on the self-serve platform, from $129/mo with a 7-day free trial. No credit card to begin.',
+    cta: 'Try for free',
+    href: 'https://app.zicy.com/register',
+  },
+];
+
+const contactGraph = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  '@id': `${SITE.url}/contact`,
+  url: `${SITE.url}/contact`,
+  name: title,
+  description,
+  about: { '@id': `${SITE.url}/#org` },
+  publisher: { '@id': `${SITE.url}/#org` },
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#org`,
+    name: SITE.name,
+    legalName: SITE.legalName,
+    url: `${SITE.url}/`,
+    sameAs: [SITE.linkedin],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '60 Persiaran Midlands',
+      postalCode: '10250',
+      addressLocality: 'Penang',
+      addressCountry: 'MY',
+    },
+  },
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(contactGraph)} />
+
+  <!-- Hero (white) -->
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Contact</span>
+      <h1>Let’s talk about how AI sees your brand.</h1>
+      <p class="lead">
+        The fastest way to reach us is to start with a free audit or ask the consultant directly,
+        you’ll get something useful back before a conversation even starts. Prefer a human? Every
+        route below reaches the team.
+      </p>
+    </div>
+  </section>
+
+  <!-- Ways to reach us (lavender) -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow"><span class="ix">01</span> Ways to reach us</span><h2>Pick the path that fits.</h2></div>
+      <div class="grid-2">
+        {channels.map((c) => (
+          <article class="contact-card">
+            <span class="eyebrow">{c.eyebrow}</span>
+            <h3>{c.h}</h3>
+            <p>{c.p}</p>
+            <a class={`btn ${c.primary ? 'btn-primary' : 'btn-ghost'}`} href={c.href}>{c.cta}</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Company (white) -->
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow"><span class="ix">02</span> The company</span><h2>Who you’re talking to.</h2></div>
+      <div class="prose" style="max-width:720px">
+        <p class="lead" style="font-size:18px">
+          Zicy is built and operated by <b>Growth Pro Sdn. Bhd.</b>, the consultancy behind the PAVA
+          Framework for AI visibility. APAC-native and globally capable, we cover every engine and
+          every language.
+        </p>
+        <address class="mono" style="font-style:normal;font-size:13px;color:var(--muted);letter-spacing:.04em;margin-top:14px;line-height:1.7">
+          Growth Pro Sdn. Bhd.<br />
+          60 Persiaran Midlands, 10250 Penang, Malaysia<br />
+          Operating under Malaysia Digital (MD) status.
+        </address>
+        <p style="margin-top:18px">
+          Follow or message us on <a href={SITE.linkedin} rel="me noopener" target="_blank">LinkedIn</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="No forms, no waiting"
+    heading="See what AI says about you, free."
+    sub="Run the audit now, or open the consultant and ask your first question."
+    ctaLabel="Run the free audit"
+    ctaHref="/audit"
+  />
+</BaseLayout>
+
+<style>
+  /* Two-up contact cards, matching the team/card system; one-up on mobile. */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .contact-card{
+    display:flex;flex-direction:column;align-items:flex-start;
+    background:#fff;border:0.5px solid var(--line);border-radius:14px;padding:28px;
+  }
+  .contact-card h3{
+    font-family:var(--display);font-size:22px;color:var(--indigo);
+    margin:10px 0 8px;letter-spacing:-0.01em;
+  }
+  .contact-card p{font-size:14.5px;color:#4a4960;line-height:1.6;margin-bottom:22px}
+  .contact-card .btn{margin-top:auto}
+
+  @media (max-width: 860px){
+    .grid-2{grid-template-columns:1fr;gap:18px}
+    .contact-card{padding:24px}
+  }
+</style>

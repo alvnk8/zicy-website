@@ -1,0 +1,38 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/about-us", "destination": "/about", "statusCode": 301 },
+    { "source": "/media", "destination": "/about", "statusCode": 301 },
+    { "source": "/jobs", "destination": "/about", "statusCode": 301 },
+    { "source": "/website-design-client-portfolio", "destination": "/about", "statusCode": 301 },
+    { "source": "/website-assets-portfolio", "destination": "/about", "statusCode": 301 },
+
+    { "source": "/contact-us", "destination": "/contact", "statusCode": 301 },
+
+    { "source": "/seo-audit", "destination": "/audit", "statusCode": 301 },
+
+    { "source": "/seo-pricing", "destination": "/pricing", "statusCode": 301 },
+    { "source": "/seo-pricing-malaysia", "destination": "/pricing", "statusCode": 301 },
+    { "source": "/professional-aeo-geo-content-writing-services", "destination": "/pricing", "statusCode": 301 },
+    { "source": "/professional-seo-content-writing-services", "destination": "/pricing", "statusCode": 301 },
+    { "source": "/web-design-development-pricing", "destination": "/pricing", "statusCode": 301 },
+    { "source": "/white-label-seo-services", "destination": "/pricing", "statusCode": 301 },
+
+    { "source": "/seo-malaysia", "destination": "/", "statusCode": 301 },
+    { "source": "/zicy", "destination": "/consultant", "statusCode": 301 },
+
+    { "source": "/seo-case-study", "destination": "/case-studies", "statusCode": 301 },
+    { "source": "/seo-case-study/:path*", "destination": "/case-studies", "statusCode": 301 },
+
+    { "source": "/privacy-policy", "destination": "/legal/privacy", "statusCode": 301 },
+
+    { "source": "/feed", "destination": "/", "statusCode": 301 },
+    { "source": "/comments/feed", "destination": "/", "statusCode": 301 },
+
+    { "source": "/blog", "destination": "/resources", "statusCode": 302 },
+    { "source": "/blog/:path*", "destination": "/resources", "statusCode": 302 },
+
+    { "source": "/about-for-llms", "destination": "/about", "statusCode": 302 }
+  ]
+}
