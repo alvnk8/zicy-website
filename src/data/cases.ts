@@ -42,7 +42,7 @@ export const CASES: CaseStudy[] = [
 <p><strong>AI Platform Citations Skyrocketed</strong></p>
 <p>Their brand began appearing as a <strong>go-to recommendation</strong> across multiple generative AI tools:</p>
 <ul>
-<li><strong>Google AI Overview</strong>: 225 citations (↑168), spread over 67 pages</li>
+<li><strong>Google AI Overviews</strong>: 225 citations (↑168), spread over 67 pages</li>
 <li><strong>ChatGPT</strong>: 117 citations (↑118), across 67 pages</li>
 <li><strong>Perplexity</strong>: 81 citations (↑78), across 53 pages</li>
 <li><strong>Gemini</strong>: 71 citations (↑65), across 69 pages</li>
@@ -257,7 +257,7 @@ export const CASES: CaseStudy[] = [
 <p><strong>AI Citations Secured: 99</strong></p>
 <ul>
 <li><strong>ChatGPT</strong>: 41 citations on 12 pages (+39 vs baseline)</li>
-<li><strong>Google AI Overview</strong>: 20 citations on 17 pages (+19)</li>
+<li><strong>Google AI Overviews</strong>: 20 citations on 17 pages (+19)</li>
 <li><strong>Gemini</strong>: 16 citations on 15 pages (+14)</li>
 <li><strong>Perplexity</strong>: 15 citations on 7 pages (+13)</li>
 <li><strong>Copilot</strong>: 7 citations on 3 pages (+5)</li>
@@ -288,14 +288,14 @@ export const CASES: CaseStudy[] = [
 </ol>
 <ul>
 <li>Strengthened topical authority by mapping content to <strong>Google’s Knowledge Graph entities</strong>.</li>
-<li>Improved brand mention consistency to align with <strong>AI Overview inclusion criteria</strong>.</li>
+<li>Improved brand mention consistency to align with <strong>AI Overviews inclusion criteria</strong>.</li>
 <li>Built <strong>internal linking structures</strong> to clarify entity relationships across the site.</li>
 </ul>
 <ol start="3">
 <li><strong> Monitoring &amp; Testing Across AI Platforms</strong></li>
 </ol>
 <ul>
-<li>Tracked presence inside <strong>Google AI Overview, ChatGPT responses, Gemini, Perplexity, and Copilot</strong>.</li>
+<li>Tracked presence inside <strong>Google AI Overviews, ChatGPT responses, Gemini, Perplexity, and Copilot</strong>.</li>
 <li>Conducted iterative <strong>Generative Engine Optimisation (GEO) testing</strong> to refine visibility triggers</li>
 </ul>
 <ol start="4">
@@ -1069,7 +1069,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <li>Gemini</li>
 <li>Perplexity</li>
 <li>Google AI Mode</li>
-<li>AI Overview.</li>
+<li>AI Overviews.</li>
 </ul>
 </li>
 </ul>
@@ -1281,7 +1281,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p><img src="/case-studies/2026/05/Key-topics.png" alt="Key topics" loading="lazy" decoding="async" /></p>
 <p><strong>Platform Breakdown:</strong></p>
 <ul>
-<li>AI Overview (72.2%)</li>
+<li>AI Overviews (72.2%)</li>
 <li>Google AI (58.3%)</li>
 <li>Perplexity (47.2%)</li>
 </ul>
