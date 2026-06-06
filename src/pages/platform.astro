@@ -64,6 +64,7 @@ const softwareApp = {
   description:
     'AI visibility platform, twelve modules across one closed loop (measure, diagnose, act, prove) across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.',
   offers: { '@type': 'Offer', price: '129', priceCurrency: 'USD' },
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#at-a-glance'] },
 };
 
 const moduleList = {
@@ -167,6 +168,23 @@ const roleCards = [
         <a class="btn btn-p btn-lg" href="https://app.zicy.com/register">Try for free</a>
         <a class="btn btn-o btn-lg" href="/pricing">See pricing</a>
       </div>
+    </div>
+  </section>
+
+  <!-- At a glance — semantic summary directly below the hero, above the first body section.
+       Reuses .shead (heading) and .checklist (list); body text is full-strength --ink (AA on
+       paper) and the list marker uses --ok, never the Sky token. No numerals in the copy. -->
+  <section id="at-a-glance">
+    <div class="wrap">
+      <div class="shead">
+        <h2>At a glance</h2>
+      </div>
+      <ul class="checklist">
+        <li>Zicy is an AI-visibility platform that tracks how AI answer engines mention, cite, and recommend your brand across ChatGPT, Gemini, Perplexity, Google AI Overviews, and Google AI Mode.</li>
+        <li>It runs one loop: measure your AI visibility, diagnose where you are losing the answer, act on the gaps, and prove the impact.</li>
+        <li>Core metrics include brand mention coverage, citation rate, AI share of voice, and average AI ranking, with the source behind every citation.</li>
+        <li>You can see how you stand against named rivals and where the highest-value topics and queries are still open.</li>
+      </ul>
     </div>
   </section>
 
