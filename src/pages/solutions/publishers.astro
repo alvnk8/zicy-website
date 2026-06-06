@@ -96,7 +96,10 @@ const modules = [
 // TODO(faq-doc): the media-sales Q&As ("We sell advertising — how does Zicy help us sell more of
 // it?" and "Are we promising advertisers that paying us gets them cited by AI?") originate on
 // this page; add them to the canonical Zicy ICP FAQ doc.
-const faqPage = faqPageJsonLd(publishersFaqs);
+const faqPage = {
+  ...faqPageJsonLd(publishersFaqs),
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#at-a-glance'] },
+};
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
@@ -116,6 +119,22 @@ const faqPage = faqPageJsonLd(publishersFaqs);
         <a class="btn btn-p btn-lg" href="https://app.zicy.com/register">Try for free</a>
         <a class="btn btn-o btn-lg" href="/platform">See the platform</a>
       </div>
+    </div>
+  </section>
+
+  <!-- At a glance — semantic summary directly below the hero, above the first body section.
+       Reuses .shead (heading) and .checklist (list); body text is full-strength --ink (AA on
+       paper) and the list marker uses --ok, never the Sky token. No numerals in the copy. -->
+  <section id="at-a-glance">
+    <div class="wrap">
+      <div class="shead">
+        <h2>At a glance</h2>
+      </div>
+      <ul class="checklist">
+        <li>Zicy shows publishers which of their pages AI answer engines cite, and for which topics and queries.</li>
+        <li>It tracks citations at the URL level across ChatGPT, Gemini, Perplexity, Google AI Overviews, and Google AI Mode.</li>
+        <li>Publishers can see where they are already the cited source and where high-value topics are still open.</li>
+      </ul>
     </div>
   </section>
 
