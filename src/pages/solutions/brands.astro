@@ -82,7 +82,10 @@ const modules = [
 
 // FAQ — page-specific block (6) from src/data/faqs.ts; the universal block renders beneath it
 // via <FaqUniversal />. JSON-LD = brands specific + universal, matching the visible answers.
-const faqPage = faqPageJsonLd(brandsFaqs);
+const faqPage = {
+  ...faqPageJsonLd(brandsFaqs),
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#at-a-glance'] },
+};
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
@@ -102,6 +105,22 @@ const faqPage = faqPageJsonLd(brandsFaqs);
         <a class="btn btn-p btn-lg" href="https://app.zicy.com/register">Try for free</a>
         <a class="btn btn-o btn-lg" href="/platform">See the platform</a>
       </div>
+    </div>
+  </section>
+
+  <!-- At a glance — semantic summary directly below the hero, above the first body section.
+       Reuses .shead (heading) and .checklist (list); body text is full-strength --ink (AA on
+       paper) and the list marker uses --ok, never the Sky token. No numerals in the copy. -->
+  <section id="at-a-glance">
+    <div class="wrap">
+      <div class="shead">
+        <h2>At a glance</h2>
+      </div>
+      <ul class="checklist">
+        <li>Zicy shows brands exactly how AI answer engines describe and recommend them, and where rivals are winning the answer instead.</li>
+        <li>It tracks brand mention coverage, citation rate, and AI share of voice across the five major AI platforms, so marketing can report AI visibility the way it reports any other channel.</li>
+        <li>Built-in diagnosis points to the specific topics, queries, and sources to fix first, turning monitoring into an action plan.</li>
+      </ul>
     </div>
   </section>
 
