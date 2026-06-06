@@ -77,7 +77,10 @@ const modules = [
 
 // FAQ — page-specific block (8) from src/data/faqs.ts; the universal block renders beneath it
 // via <FaqUniversal />. JSON-LD = PR specific + universal, matching the visible answers.
-const faqPage = faqPageJsonLd(prFaqs);
+const faqPage = {
+  ...faqPageJsonLd(prFaqs),
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#at-a-glance'] },
+};
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
@@ -96,6 +99,22 @@ const faqPage = faqPageJsonLd(prFaqs);
         <a class="btn btn-p btn-lg" href="https://app.zicy.com/register">Try for free</a>
         <a class="btn btn-o btn-lg" href="/platform">See the platform</a>
       </div>
+    </div>
+  </section>
+
+  <!-- At a glance — semantic summary directly below the hero, above the first body section.
+       Reuses .shead (heading) and .checklist (list); body text is full-strength --ink (AA on
+       paper) and the list marker uses --ok, never the Sky token. No numerals in the copy. -->
+  <section id="at-a-glance">
+    <div class="wrap">
+      <div class="shead">
+        <h2>At a glance</h2>
+      </div>
+      <ul class="checklist">
+        <li>Zicy connects earned coverage to AI outcomes, showing which publications and sources AI actually cites when it answers questions about your brand.</li>
+        <li>It tracks brand mention coverage, citation rate, and sentiment across ChatGPT, Gemini, Perplexity, Google AI Overviews, and Google AI Mode.</li>
+        <li>PR teams can see whether a placement moved AI visibility, not just whether it ran.</li>
+      </ul>
     </div>
   </section>
 
