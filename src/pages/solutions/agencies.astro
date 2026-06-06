@@ -85,7 +85,10 @@ const modules = [
 
 // §05 — FAQ, page-specific block (11) from src/data/faqs.ts; the universal block renders beneath
 // it via <FaqUniversal />. JSON-LD = agencies specific + universal, matching the visible answers.
-const faqPage = faqPageJsonLd(agenciesFaqs);
+const faqPage = {
+  ...faqPageJsonLd(agenciesFaqs),
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#at-a-glance'] },
+};
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
@@ -105,6 +108,22 @@ const faqPage = faqPageJsonLd(agenciesFaqs);
         <a class="btn btn-p btn-lg" href={PARTNER_HREF}>{PARTNER_LABEL}</a>
         <a class="btn btn-o btn-lg" href="/platform">See the platform</a>
       </div>
+    </div>
+  </section>
+
+  <!-- At a glance — semantic summary directly below the hero, above the first body section.
+       Reuses .shead (heading) and .checklist (list); body text is full-strength --ink (AA on
+       paper) and the list marker uses --ok, never the Sky token. No numerals in the copy. -->
+  <section id="at-a-glance">
+    <div class="wrap">
+      <div class="shead">
+        <h2>At a glance</h2>
+      </div>
+      <ul class="checklist">
+        <li>Zicy gives agencies one platform to measure, diagnose, and report AI visibility across every client and competitor set.</li>
+        <li>It tracks brand mention coverage, citation rate, AI share of voice, and average AI ranking across the five major AI platforms.</li>
+        <li>Diagnosis and action views turn each client&rsquo;s data into a prioritised plan you can take into the next review.</li>
+      </ul>
     </div>
   </section>
 
