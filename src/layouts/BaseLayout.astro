@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import { SITE } from '../data/site';
+import { ogImageMeta } from '../data/og-pages';
 
 interface Props {
   title: string;
@@ -15,6 +16,9 @@ interface Props {
 
 const { title, description, ogTitle, ogDescription, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
+// Per-page social-share image (build-time PNG under /og/), derived from the pathname so the URL
+// advertised here always matches the generated card. Falls back for any unlisted route.
+const og = ogImageMeta(Astro.url.pathname);
 
 // Sitewide structured data (build brief §5: Organization + WebSite in the layout).
 const siteGraph = {
@@ -84,13 +88,16 @@ const siteGraph = {
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={ogTitle ?? title} />
     <meta property="og:description" content={ogDescription ?? description} />
-    <meta property="og:image" content={new URL('/og-image.png', SITE.url).href} />
+    <meta property="og:image" content={og.image} />
+    <meta property="og:image:secure_url" content={og.image} />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={og.alt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={ogTitle ?? title} />
     <meta name="twitter:description" content={ogDescription ?? description} />
-    <meta name="twitter:image" content={new URL('/og-image.png', SITE.url).href} />
+    <meta name="twitter:image" content={og.image} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
