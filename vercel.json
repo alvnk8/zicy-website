@@ -60,6 +60,8 @@
 
     { "source": "/about-for-llms", "destination": "/about", "statusCode": 302 },
 
-    { "source": "/((?!wp-admin|wp-login\\.php|xmlrpc\\.php|wp-json).*)", "has": [{ "type": "host", "value": "wp.zicy.com" }], "destination": "https://www.zicy.com/$1", "statusCode": 308 }
+    { "source": "/((?!wp-admin|wp-login\\.php|xmlrpc\\.php|wp-json).*)", "has": [{ "type": "host", "value": "wp.zicy.com" }], "destination": "https://www.zicy.com/$1", "statusCode": 308 },
+
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "zicy.com" }], "destination": "https://www.zicy.com/$1", "statusCode": 308 }
   ]
 }
