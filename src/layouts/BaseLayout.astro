@@ -2,6 +2,7 @@
 import '../styles/theme.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Schema from '../components/Schema.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import { SITE } from '../data/site';
 import { ogImageMeta } from '../data/og-pages';
@@ -19,29 +20,6 @@ const canonical = new URL(Astro.url.pathname, SITE.url).href;
 // Per-page social-share image (build-time PNG under /og/), derived from the pathname so the URL
 // advertised here always matches the generated card. Falls back for any unlisted route.
 const og = ogImageMeta(Astro.url.pathname);
-
-// Sitewide structured data (build brief §5: Organization + WebSite in the layout).
-const siteGraph = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': `${SITE.url}/#org`,
-      name: SITE.name,
-      url: `${SITE.url}/`,
-      legalName: SITE.legalName,
-      description: SITE.tagline,
-      sameAs: [SITE.linkedin],
-    },
-    {
-      '@type': 'WebSite',
-      '@id': `${SITE.url}/#site`,
-      url: `${SITE.url}/`,
-      name: SITE.name,
-      publisher: { '@id': `${SITE.url}/#org` },
-    },
-  ],
-};
 ---
 <!doctype html>
 <html lang="en">
@@ -111,7 +89,7 @@ const siteGraph = {
       rel="stylesheet"
     />
 
-    <script type="application/ld+json" set:html={JSON.stringify(siteGraph)} />
+    <Schema />
     <slot name="head" />
   </head>
   <body>

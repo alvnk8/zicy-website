@@ -1,0 +1,147 @@
+---
+// Single owner for ALL sitewide JSON-LD. Imported once by BaseLayout, so this graph
+// renders identically on every page. Page-level nodes (FAQPage, Article, Service, the
+// Chrome-extension app, per-page product entity pages) live in their own pages and are
+// deliberately NOT defined here.
+//
+// Confirmed by the owner (2026-06-17): foundingDate 2026 (Zicy the brand); Alvin Koay LinkedIn.
+// Still omitted on purpose (do not add without confirmation):
+//  - featureList / module count: live count unreconciled. Omitted (absent beats wrong).
+//
+// House style: human-readable strings in sentence case, no em dash, no banned vocab. Engine
+// names are kept out of the descriptions so the canonical-five fixed-order rule does not apply.
+import { SITE } from '../data/site';
+
+const orgId = `${SITE.url}/#org`;
+const appId = `${SITE.url}/#app`;
+const siteId = `${SITE.url}/#site`;
+const person = {
+  alvin: `${SITE.url}/about#alvin-koay`,
+  april: `${SITE.url}/about#april-cheong`,
+  ritu: `${SITE.url}/about#ritu-khanna`,
+  peter: `${SITE.url}/about#peter-kua`,
+};
+
+const monthly = (price: string) => ({
+  '@type': 'UnitPriceSpecification',
+  price,
+  priceCurrency: 'USD',
+  unitCode: 'MON',
+  unitText: 'month',
+});
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': siteId,
+      url: `${SITE.url}/`,
+      name: SITE.name,
+      publisher: { '@id': orgId },
+    },
+    {
+      '@type': 'Organization',
+      '@id': orgId,
+      name: SITE.name,
+      legalName: SITE.legalName,
+      url: `${SITE.url}/`,
+      foundingDate: '2026',
+      logo: `${SITE.url}/zicy-logo.png`,
+      description:
+        'Zicy is the truth layer for AI visibility, showing how AI engines describe your brand, whether it is accurate, and how to improve it.',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '60 Persiaran Midlands',
+        postalCode: '10250',
+        addressLocality: 'Penang',
+        addressCountry: 'MY',
+      },
+      parentOrganization: {
+        '@type': 'Organization',
+        name: 'Growth.pro',
+        url: 'https://www.growth.pro/',
+      },
+      sameAs: [
+        SITE.linkedin,
+        'https://www.facebook.com/zicy',
+        'https://www.instagram.com/zicy',
+        'https://www.youtube.com/@zicy',
+        'https://www.growth.pro/',
+      ],
+      founder: { '@id': person.alvin },
+      employee: [
+        { '@id': person.alvin },
+        { '@id': person.april },
+        { '@id': person.ritu },
+        { '@id': person.peter },
+      ],
+    },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': appId,
+      name: SITE.name,
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      url: `${SITE.url}/`,
+      description:
+        'Zicy is an AI visibility platform to measure how AI describes your brand, prove what is working, and improve where you appear.',
+      publisher: { '@id': orgId },
+      offers: [
+        {
+          '@type': 'Offer',
+          name: 'Starter',
+          price: '129',
+          priceCurrency: 'USD',
+          url: `${SITE.url}/pricing`,
+          priceSpecification: monthly('129'),
+        },
+        {
+          '@type': 'Offer',
+          name: 'Growth',
+          price: '349',
+          priceCurrency: 'USD',
+          url: `${SITE.url}/pricing`,
+          priceSpecification: monthly('349'),
+        },
+        {
+          '@type': 'Offer',
+          name: 'Enterprise',
+          url: 'https://www.zicy.com/enterprise-inquiry',
+          availability: 'https://schema.org/InStock',
+        },
+      ],
+    },
+    {
+      '@type': 'Person',
+      '@id': person.alvin,
+      name: 'Alvin Koay',
+      jobTitle: 'Founder & CEO',
+      worksFor: { '@id': orgId },
+      sameAs: ['https://www.linkedin.com/in/alvinkoay/'],
+    },
+    {
+      '@type': 'Person',
+      '@id': person.april,
+      name: 'April Cheong',
+      jobTitle: 'Co-founder',
+      worksFor: { '@id': orgId },
+    },
+    {
+      '@type': 'Person',
+      '@id': person.ritu,
+      name: 'Ritu Khanna',
+      jobTitle: 'Co-founder',
+      worksFor: { '@id': orgId },
+    },
+    {
+      '@type': 'Person',
+      '@id': person.peter,
+      name: 'Peter Kua',
+      jobTitle: 'Chief Data Officer',
+      worksFor: { '@id': orgId },
+    },
+  ],
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

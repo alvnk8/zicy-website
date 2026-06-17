@@ -53,17 +53,15 @@ const moduleGroups = [
 ];
 const allModules = moduleGroups.flatMap((g) => g.modules);
 
-// Page-level structured data. Organization + WebSite are sitewide via BaseLayout.
-const softwareApp = {
+// Page-level structured data. The Zicy Organization, WebSite and SoftwareApplication entities
+// are sitewide (src/components/Schema.astro). This page keeps its module ItemList plus a WebPage
+// node that carries the speakable hint and points at the canonical app entity.
+const platformPage = {
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'Zicy',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
+  '@type': 'WebPage',
+  '@id': `${SITE.url}/platform`,
   url: `${SITE.url}/platform`,
-  description:
-    'AI visibility platform, twelve modules across one closed loop (measure, diagnose, act, prove) across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.',
-  offers: { '@type': 'Offer', price: '129', priceCurrency: 'USD' },
+  about: { '@id': `${SITE.url}/#app` },
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#at-a-glance'] },
 };
 
@@ -149,7 +147,7 @@ const roleCards = [
 ---
 <BaseLayout title={title} description={description}>
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(softwareApp)} />
+    <script type="application/ld+json" set:html={JSON.stringify(platformPage)} />
     <script type="application/ld+json" set:html={JSON.stringify(moduleList)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqPage)} />
   </Fragment>

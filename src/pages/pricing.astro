@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { SITE } from '../data/site';
 
 const title = "Zicy pricing, flexible plans for AI search, AEO & GEO growth";
 const description =
@@ -186,20 +185,8 @@ const faqs: Faq[] = [
   },
 ];
 
-// Schema.org SoftwareApplication with the real prices.
-const softwareApp = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'Zicy',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
-  description: 'AI visibility intelligence platform: measure, diagnose, act, prove.',
-  url: `${SITE.url}/pricing`,
-  offers: [
-    { '@type': 'Offer', name: 'Starter', price: '129', priceCurrency: 'USD' },
-    { '@type': 'Offer', name: 'Growth', price: '349', priceCurrency: 'USD' },
-  ],
-};
+// The Zicy SoftwareApplication entity (with its Starter/Growth/Enterprise offers) is sitewide,
+// in src/components/Schema.astro. This page keeps only its page-level FAQPage.
 
 // FAQ schema — flatten the structured body back to plain text for crawlers.
 function flatten(blocks: Block[]): string {
@@ -223,7 +210,6 @@ const faqPage = {
 ---
 <BaseLayout title={title} description={description}>
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(softwareApp)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqPage)} />
   </Fragment>
 

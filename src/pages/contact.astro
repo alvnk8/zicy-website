@@ -51,21 +51,7 @@ const contactGraph = {
   description,
   about: { '@id': `${SITE.url}/#org` },
   publisher: { '@id': `${SITE.url}/#org` },
-  mainEntity: {
-    '@type': 'Organization',
-    '@id': `${SITE.url}/#org`,
-    name: SITE.name,
-    legalName: SITE.legalName,
-    url: `${SITE.url}/`,
-    sameAs: [SITE.linkedin],
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: '60 Persiaran Midlands',
-      postalCode: '10250',
-      addressLocality: 'Penang',
-      addressCountry: 'MY',
-    },
-  },
+  mainEntity: { '@id': `${SITE.url}/#org` },
 };
 ---
 <BaseLayout title={title} description={description}>

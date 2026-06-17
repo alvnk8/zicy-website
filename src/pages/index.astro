@@ -8,25 +8,12 @@ import aiVisibility from '../assets/screenshots/ai-visibility-dashboard.png';
 // "AEO overview" variant because it shows answer-intent queries + branded-search
 // behaviour (exactly the proof-layer copy) and displays no uplift %/correlation figure.
 import siteTraffic from '../assets/screenshots/site-traffic-search-console.png';
-import { SITE } from '../data/site';
-
 const title = 'Zicy, be the brand AI gets right';
 const description =
   "Zicy is the AI visibility platform that shows you what AI says about your brand, whether it's true, and how to fix what's wrong, then proves the fix moved demand. Across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, in every language. Built by Growth.pro.";
 
-// Page-level structured data. Sitewide Organization + WebSite are emitted by BaseLayout;
-// SoftwareApplication + FAQPage are page-level (homepage is the canonical product entity page).
-const softwareApp = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'Zicy',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
-  url: `${SITE.url}/`,
-  description:
-    'AI visibility platform: measure, diagnose, act and prove across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.',
-  offers: { '@type': 'Offer', price: '129', priceCurrency: 'USD' },
-};
+// Page-level structured data. The Zicy Organization, WebSite and SoftwareApplication entities
+// are sitewide (src/components/Schema.astro); only the homepage FAQPage is page-level here.
 
 // FAQ — verbatim copy. The same array renders the accordion AND the FAQPage schema, so the
 // structured-data answers always match the visible (server-rendered) answers.
@@ -164,7 +151,6 @@ const solutionCards = [
 ---
 <BaseLayout title={title} description={description}>
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(softwareApp)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqPage)} />
   </Fragment>
 

@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE } from '../data/site';
 import alvinPhoto from '../assets/team/alvin-koay.png';
 import aprilPhoto from '../assets/team/april-cheong.png';
 import rituPhoto from '../assets/team/ritu-khanna.png';
@@ -58,69 +57,8 @@ const team = [
     bio: "A distinguished data science strategist who led Data Science & Analytics at REV Media Group and drove Malaysia's National Big Data Analytics Initiative under MDEC, developing the country's first National BDA Framework. Has trained senior teams at Citibank, Intel, Dell, NTT Data, Maxis and Johnson & Johnson.",
   },
 ];
-
-// JSON-LD: Organization + Person nodes, all keyed under stable @ids so AI engines
-// can link the entities together (Zicy → founder Alvin, employees April/Ritu/Peter).
-const orgId = `${SITE.url}/#org`;
-const personIds = {
-  alvin: `${SITE.url}/about#alvin-koay`,
-  april: `${SITE.url}/about#april-cheong`,
-  ritu: `${SITE.url}/about#ritu-khanna`,
-  peter: `${SITE.url}/about#peter-kua`,
-};
-const aboutGraph = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': orgId,
-      name: SITE.name,
-      legalName: SITE.legalName,
-      url: `${SITE.url}/`,
-      description: 'AI visibility intelligence platform: measure, diagnose, act, prove.',
-      founder: { '@id': personIds.alvin },
-      employee: [
-        { '@id': personIds.alvin },
-        { '@id': personIds.april },
-        { '@id': personIds.ritu },
-        { '@id': personIds.peter },
-      ],
-      sameAs: [SITE.linkedin],
-    },
-    {
-      '@type': 'Person',
-      '@id': personIds.alvin,
-      name: 'Alvin Koay',
-      jobTitle: 'Founder & CEO',
-      worksFor: { '@id': orgId },
-    },
-    {
-      '@type': 'Person',
-      '@id': personIds.april,
-      name: 'April Cheong',
-      jobTitle: 'Co-founder',
-      worksFor: { '@id': orgId },
-    },
-    {
-      '@type': 'Person',
-      '@id': personIds.ritu,
-      name: 'Ritu Khanna',
-      jobTitle: 'Co-founder',
-      worksFor: { '@id': orgId },
-    },
-    {
-      '@type': 'Person',
-      '@id': personIds.peter,
-      name: 'Peter Kua',
-      jobTitle: 'Chief Data Officer',
-      worksFor: { '@id': orgId },
-    },
-  ],
-};
 ---
 <BaseLayout title={title} description={description}>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(aboutGraph)} />
-
   <!-- Hero (white) -->
   <section class="hero inner">
     <div class="wrap">
