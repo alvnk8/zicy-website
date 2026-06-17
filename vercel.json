@@ -57,6 +57,8 @@
     { "source": "/blog", "destination": "/resources", "statusCode": 302 },
     { "source": "/blog/:path*", "destination": "/resources", "statusCode": 302 },
 
-    { "source": "/about-for-llms", "destination": "/about", "statusCode": 302 }
+    { "source": "/about-for-llms", "destination": "/about", "statusCode": 302 },
+
+    { "source": "/((?!wp-admin|wp-login\\.php|xmlrpc\\.php|wp-json).*)", "has": [{ "type": "host", "value": "wp.zicy.com" }], "destination": "https://www.zicy.com/$1", "statusCode": 308 }
   ]
 }
