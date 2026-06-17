@@ -33,7 +33,8 @@
 
     { "source": "/contact-us", "destination": "/contact", "statusCode": 301 },
 
-    { "source": "/seo-audit", "destination": "/audit", "statusCode": 301 },
+    { "source": "/audit", "destination": "/consultant", "statusCode": 301 },
+    { "source": "/seo-audit", "destination": "/consultant", "statusCode": 301 },
 
     { "source": "/seo-pricing", "destination": "/pricing", "statusCode": 301 },
     { "source": "/seo-pricing-malaysia", "destination": "/pricing", "statusCode": 301 },

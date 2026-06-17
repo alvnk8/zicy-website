@@ -26,5 +26,5 @@ export const SOLUTIONS = [
 
 export const FREE_TOOLS = [
   { label: 'AEO/GEO Consultant', href: '/consultant' },
-  { label: 'Chrome Extension', href: '/chrome-extension' },
+  { label: 'Chrome extension', href: '/chrome-extension' },
 ] as const;

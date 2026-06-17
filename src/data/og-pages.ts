@@ -98,12 +98,6 @@ const pages: Record<string, OgPage> = {
     description: 'Practical AEO and GEO guidance, and how AI search is changing brand discovery.',
     alt: 'Zicy · resources',
   },
-  audit: {
-    eyebrow: 'AI visibility audit',
-    title: 'See where you stand in AI answers',
-    description: 'A baseline of how AI describes your brand across major AI engines.',
-    alt: 'Zicy · AI visibility audit',
-  },
   'solutions/brands': {
     eyebrow: 'For brands',
     title: 'Own your answer in AI search',
