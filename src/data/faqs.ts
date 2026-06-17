@@ -132,11 +132,11 @@ export const prFaqs: Faq[] = [
   },
   {
     q: `Can I actually prove the coverage I earned moved the answer?`,
-    a: `Yes. That's what Citation Analysis is for. It shows which sources AI cites about your client, classified as owned, earned or competitor, so you connect the placement you landed to movement in the answer rather than asserting a link.`,
+    a: `Yes. That's what Citation Analysis is for. It shows which sources AI cites about your client, classified as owned, earned, competitor or uncited, so you connect the placement you landed to movement in the answer rather than asserting a link.`,
   },
   {
     q: `Can Zicy show which sources AI trusts in my client's category?`,
-    a: `Yes, Citation Analysis shows which sources AI draws on when it answers about your client's category, classified as owned, earned or competitor. That turns an earned-media plan from a guess into a targeted list of the outlets AI actually cites, by engine.`,
+    a: `Yes, Citation Analysis shows which sources AI draws on when it answers about your client's category, classified as owned, earned, competitor or uncited. That turns an earned-media plan from a guess into a targeted list of the outlets AI actually cites, by engine.`,
   },
   {
     q: `Does Zicy do the PR, and does that threaten my role?`,
