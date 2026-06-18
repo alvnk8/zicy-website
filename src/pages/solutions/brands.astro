@@ -38,7 +38,7 @@ const stakeStats = [
 const usps = [
   {
     h: 'Truth, not just mentions.',
-    p: 'Most trackers tell you whether you were named. Zicy tells you whether what AI said was true. The AI Reality Score flags hallucinations, outdated claims and wrong facts before a buyer ever sees them.',
+    p: 'Most trackers tell you whether you were named. Zicy tells you whether what AI said was true. The <a href="/platform/ai-reality-score">AI Reality Score</a> flags hallucinations, outdated claims and wrong facts before a buyer ever sees them.',
   },
   {
     h: 'Every engine, every language.',
@@ -158,7 +158,7 @@ const faqPage = {
       </div>
       <div class="grid-3">
         {usps.map((u) => (
-          <div class="card"><h3>{u.h}</h3><p>{u.p}</p></div>
+          <div class="card"><h3>{u.h}</h3><p set:html={u.p}></p></div>
         ))}
       </div>
     </div>
