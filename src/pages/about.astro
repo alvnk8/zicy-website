@@ -107,6 +107,20 @@ const team = [
           <b>AI Visibility Operating System</b>, the <b>PAVA Framework</b> and the
           <b>AI Citation Enablement</b> practice, are Growth.pro's.
         </p>
+        <ul class="fw-links">
+          <li>
+            <a href="/about/pava-framework">PAVA Framework</a>
+            <span>Presence, Authority, Visibility, Amplification, the diagnostic framework for AI visibility.</span>
+          </li>
+          <li>
+            <a href="/about/ai-visibility-operating-system">AI Visibility Operating System</a>
+            <span>The five-pillar operating model: strategy, measurement, execution, reporting, governance.</span>
+          </li>
+          <li>
+            <a href="/about/ai-citation-enablement">AI Citation Enablement</a>
+            <span>The citation and source-engineering practice that makes a brand citable by AI.</span>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -186,6 +200,13 @@ const team = [
 </BaseLayout>
 
 <style>
+  /* Framework links in §02 — three Growth.pro framework pages. Tokens only. */
+  .fw-links{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:12px;max-width:760px}
+  .fw-links li{padding:16px 18px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px}
+  .fw-links a{font-family:var(--display);font-weight:600;color:var(--indigo);font-size:17px;letter-spacing:-0.01em}
+  .fw-links a:hover{color:var(--indigo-bright)}
+  .fw-links span{display:block;margin-top:4px;font-size:14px;color:#4a4960;line-height:1.55}
+
   /* Team grid — 2-up on desktop, 1-up on mobile. */
   .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
   .team-card{

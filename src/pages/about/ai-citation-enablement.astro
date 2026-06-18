@@ -1,0 +1,289 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { SITE } from '../../data/site';
+
+const title = "AI Citation Enablement, Growth.pro's citation practice";
+const description =
+  "AI Citation Enablement is Growth.pro's citation and source-engineering practice, making brand entities citable across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, operationalised by Zicy.";
+
+const url = `${SITE.url}/about/ai-citation-enablement`;
+const definition =
+  "AI Citation Enablement is Growth.pro's citation and source-engineering practice: the work of making a brand's entities citable, engineering credible source trails, improving retrievability and strengthening citation-worthiness, so AI answer engines can find, trust and cite the brand.";
+
+// How it works: the four functions.
+const functions = [
+  {
+    n: '01',
+    h: 'Make entities citable',
+    p: 'Give AI a clear, machine-readable entity, consistent naming, schema and an llms.txt, so an engine knows what the brand is and who stands behind it.',
+  },
+  {
+    n: '02',
+    h: 'Engineer source trails',
+    p: 'Make sure the credible, corroborating sources an engine relies on actually exist and point the right way, so the brand is supported by more than its own pages.',
+  },
+  {
+    n: '03',
+    h: 'Improve retrievability',
+    p: 'Bot access, page health and structure, so crawlers can reach, read and attribute the content in the first place.',
+  },
+  {
+    n: '04',
+    h: 'Strengthen citation-worthiness',
+    p: 'Content that is specific, useful and quotable, the kind of source an engine prefers to cite, grounded in genuine expertise rather than volume.',
+  },
+];
+
+// How Zicy operationalises it.
+const modules = [
+  {
+    fn: 'See it',
+    name: 'Citation Analysis',
+    desc: 'Where you are cited and where you are paraphrased without credit, classified owned, earned, competitor or uncited, down to the individual URL.',
+  },
+  {
+    fn: 'Engineer it',
+    name: 'Action Center',
+    desc: 'The llms.txt builder and schema generator that make entities citable and retrievable, built to current best practice.',
+  },
+  {
+    fn: 'Strengthen it',
+    name: 'Content Generator',
+    desc: 'Source-grounded content that strengthens citation-worthiness, human-reviewed and brand-tone aware, never scaled or fabricated.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What is AI Citation Enablement?',
+    a: 'It is Growth.pro’s citation and source-engineering practice: the work of making a brand citable by AI answer engines, by improving its entity, its source trails, its retrievability and its citation-worthiness.',
+  },
+  {
+    q: 'Who created AI Citation Enablement?',
+    a: 'Growth.pro created the practice and runs it in done-for-you programmes. Zicy operationalises it through the Citation Analysis module, the Action Center and the Content Generator.',
+  },
+  {
+    q: 'What is the difference between a mention and a citation?',
+    a: 'A mention names the brand; a citation attributes and links it as a source. Citation is the more durable unit of AI visibility, and it is what survives as referral clicks fall.',
+  },
+  {
+    q: 'What are the four functions of AI Citation Enablement?',
+    a: 'Make entities citable, engineer source trails, improve retrievability, and strengthen citation-worthiness. Together they move a brand from hard to cite to easy to cite.',
+  },
+  {
+    q: 'How does Zicy implement AI Citation Enablement?',
+    a: 'Citation Analysis shows where you are cited or paraphrased without credit; the Action Center builds llms.txt and schema; and the Content Generator produces source-grounded content. The four functions map to those tools.',
+  },
+  {
+    q: 'Is AI Citation Enablement about gaming AI?',
+    a: 'No. It is aligned with Google’s May 2026 spam-policy guidance and works by making genuine expertise easy for AI to find, verify and cite, not by manipulating the engines.',
+  },
+  {
+    q: 'Does it work across all AI engines?',
+    a: 'Yes. Citation is measured across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, because each engine cites sources differently.',
+  },
+];
+
+const faqMain = faqs.map((f) => ({
+  '@type': 'Question',
+  name: f.q,
+  acceptedAnswer: { '@type': 'Answer', text: f.a },
+}));
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'About', item: `${SITE.url}/about` },
+        { '@type': 'ListItem', position: 3, name: 'AI Citation Enablement', item: url },
+      ],
+    },
+    {
+      '@type': 'TechArticle',
+      '@id': `${url}#article`,
+      headline: 'AI Citation Enablement',
+      name: 'AI Citation Enablement',
+      description: definition,
+      url,
+      inLanguage: 'en',
+      author: { '@type': 'Organization', name: 'Growth.pro', url: 'https://www.growth.pro/' },
+      publisher: { '@id': `${SITE.url}/#org` },
+      mainEntityOfPage: url,
+      about: { '@id': `${url}#term` },
+    },
+    {
+      '@type': 'DefinedTermSet',
+      '@id': `${SITE.url}/about#growthpro-frameworks`,
+      name: 'Growth.pro AI Visibility Frameworks',
+      url: `${SITE.url}/about`,
+    },
+    {
+      '@type': 'DefinedTerm',
+      '@id': `${url}#term`,
+      name: 'AI Citation Enablement',
+      description: definition,
+      inDefinedTermSet: { '@id': `${SITE.url}/about#growthpro-frameworks` },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${url}#faq`,
+      mainEntity: faqMain,
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <!-- 1. Hero: breadcrumb + label + H1 + one-sentence definition -->
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/about">About</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">AI Citation Enablement</span>
+      </nav>
+      <span class="eyebrow">Growth.pro framework</span>
+      <h1>AI Citation Enablement</h1>
+      <p class="lead">
+        AI Citation Enablement is Growth.pro&rsquo;s citation and source-engineering practice: the
+        work of making a brand&rsquo;s entities citable, engineering credible source trails,
+        improving retrievability and strengthening citation-worthiness, so AI answer engines can
+        find, trust and cite the brand.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. Why it matters -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">01</span> Why it matters</span>
+        <h2>Being mentioned is not being cited.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">
+          A citation attributes and links a brand as a source. It is the durable unit of AI
+          visibility, the thing that still carries value as referral clicks fall, and it is what a
+          brand can defend and license later.
+        </p>
+        <p style="margin-top:16px">
+          Most brands are technically hard to cite, regardless of how good their content is: no
+          llms.txt, thin schema, a weak entity definition, or crawlers that cannot reach the page.
+          An engine cites sources it can find, parse and trust, so the gap is rarely the writing. It
+          is the engineering around it.
+        </p>
+        <p style="margin-top:16px">
+          AI Citation Enablement is the practice that closes that gap. It is one of
+          <a href="/about">Growth.pro&rsquo;s frameworks</a>, operationalised by Zicy, and it holds
+          across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, because each
+          engine decides what to cite in its own way.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. How it works -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">02</span> How it works</span>
+        <h2>Four functions, one outcome: easy to cite.</h2>
+      </div>
+      <div class="grid-2">
+        {functions.map((f) => (
+          <div class="card">
+            <span class="eyebrow"><span class="ix">{f.n}</span></span>
+            <h3>{f.h}</h3>
+            <p>{f.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. How Zicy operationalises it -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">03</span> How Zicy operationalises it</span>
+        <h2>The practice, in the platform.</h2>
+      </div>
+      <div class="grid-3">
+        {modules.map((m) => (
+          <div class="card">
+            <span class="eyebrow">{m.fn}</span>
+            <h3>{m.name}</h3>
+            <p>{m.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p style="margin-top:24px">
+        <a class="btn btn-t" href="/platform">See the full platform &rarr;</a>
+        <a class="btn btn-t" href="/solutions/brands">For brands &rarr;</a>
+        <a class="btn btn-t" href="/solutions/agencies">For agencies &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 5. How Growth.pro applies it -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">04</span> How Growth.pro applies it</span>
+        <h2>The source engineering, run for you.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">
+          AI Citation Enablement is Growth.pro&rsquo;s practice, applied in full in its done-for-you
+          programmes, where the entity work, the source trails and the citation-worthy content are
+          engineered for the client. The Zicy platform puts the same functions in your hands for
+          self-serve teams.
+        </p>
+        <div class="cta-row" style="margin-top:24px">
+          <a class="btn btn-o" href="/done-for-you">Explore done-for-you</a>
+          <a class="btn btn-t" href="https://www.growth.pro/" target="_blank" rel="noopener noreferrer">Growth.pro &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. FAQ -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions about AI Citation Enablement.</h2>
+      </div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
+    </div>
+  </section>
+
+  <!-- 7. CTA -->
+  <section class="final">
+    <div class="wrap">
+      <h2>Make your brand easy to cite.</h2>
+      <p>See where AI cites you, and where it paraphrases you without credit, across all five engines.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="https://app.zicy.com/register">Try Zicy free</a>
+        <a class="btn btn-o" href="/done-for-you">Explore done-for-you</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb: tokens only, no hardcoded hex. */
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+</style>

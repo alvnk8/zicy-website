@@ -1,0 +1,286 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { SITE } from '../../data/site';
+
+const title = "AI Visibility Operating System, Growth.pro's operating model";
+const description =
+  "The AI Visibility Operating System is Growth.pro's five-pillar operating model for AI visibility (strategy, measurement, execution, reporting, governance), operationalised by Zicy.";
+
+const url = `${SITE.url}/about/ai-visibility-operating-system`;
+const definition =
+  "The AI Visibility Operating System is Growth.pro's full operating model for AI visibility: five pillars, Strategy, Measurement, Execution, Reporting and Governance, that run AI visibility as a continuous operation rather than a one-off project.";
+
+// How it works: the five pillars.
+const pillars = [
+  {
+    n: '01',
+    h: 'Strategy',
+    p: 'Which queries, entities and markets matter, the competitor set, and the position the brand is aiming for. The plan everything else serves.',
+  },
+  {
+    n: '02',
+    h: 'Measurement',
+    p: 'A continuous read of mention coverage, citation rate and share of voice across the five engines, against a baseline rather than a single snapshot.',
+  },
+  {
+    n: '03',
+    h: 'Execution',
+    p: 'The fixes that move the position: schema, llms.txt, content and the technical work that makes a brand readable and citable.',
+  },
+  {
+    n: '04',
+    h: 'Reporting',
+    p: 'Turning the read into decisions stakeholders can act on, so AI visibility is governed like any other channel.',
+  },
+  {
+    n: '05',
+    h: 'Governance',
+    p: 'Keeping the work accurate and on the endorsed side of platform policy, so visibility is durable rather than a risk.',
+  },
+];
+
+// How Zicy operationalises it.
+const modules = [
+  {
+    pillar: 'Measurement',
+    name: 'AI Visibility + Brand Intelligence',
+    desc: 'The continuous read: mention coverage, citation rate, share of voice and the AI Reality Score across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.',
+  },
+  {
+    pillar: 'Execution',
+    name: 'Action Center',
+    desc: 'The fixes that move the position: schema and llms.txt generators and content tooling, built to current best practice.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What is the AI Visibility Operating System?',
+    a: 'It is Growth.pro’s full operating model for AI visibility, built on five pillars: strategy, measurement, execution, reporting and governance. It treats AI visibility as a continuous operation rather than a one-off project.',
+  },
+  {
+    q: 'Who created the AI Visibility Operating System?',
+    a: 'Growth.pro created the operating system and runs it in done-for-you programmes. Zicy operationalises the measurement and execution pillars as a platform.',
+  },
+  {
+    q: 'What are the five pillars?',
+    a: 'Strategy, Measurement, Execution, Reporting and Governance. Each depends on the others, which is why the model is an operating system rather than a single tool.',
+  },
+  {
+    q: 'Which pillars does Zicy operationalise?',
+    a: 'Measurement and Execution. The AI Visibility dashboard and Brand Intelligence handle measurement, and the Action Center handles execution. Strategy, reporting and governance are operated by Growth.pro in managed programmes.',
+  },
+  {
+    q: 'How is an operating system different from a tool?',
+    a: 'A tool measures a moment; an operating system runs the whole practice over time, strategy through governance, so the work stays repeatable and accountable as the engines change.',
+  },
+  {
+    q: 'Is this only for done-for-you clients?',
+    a: 'No. The Zicy platform gives you the measurement and execution pillars self-serve. The full operating system, including strategy, reporting and governance, is what Growth.pro operates for done-for-you clients.',
+  },
+  {
+    q: 'Does it cover all AI engines?',
+    a: 'Yes. Measurement runs across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, because each engine weights sources differently.',
+  },
+];
+
+const faqMain = faqs.map((f) => ({
+  '@type': 'Question',
+  name: f.q,
+  acceptedAnswer: { '@type': 'Answer', text: f.a },
+}));
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'About', item: `${SITE.url}/about` },
+        { '@type': 'ListItem', position: 3, name: 'AI Visibility Operating System', item: url },
+      ],
+    },
+    {
+      '@type': 'TechArticle',
+      '@id': `${url}#article`,
+      headline: 'AI Visibility Operating System',
+      name: 'AI Visibility Operating System',
+      description: definition,
+      url,
+      inLanguage: 'en',
+      author: { '@type': 'Organization', name: 'Growth.pro', url: 'https://www.growth.pro/' },
+      publisher: { '@id': `${SITE.url}/#org` },
+      mainEntityOfPage: url,
+      about: { '@id': `${url}#term` },
+    },
+    {
+      '@type': 'DefinedTermSet',
+      '@id': `${SITE.url}/about#growthpro-frameworks`,
+      name: 'Growth.pro AI Visibility Frameworks',
+      url: `${SITE.url}/about`,
+    },
+    {
+      '@type': 'DefinedTerm',
+      '@id': `${url}#term`,
+      name: 'AI Visibility Operating System',
+      description: definition,
+      inDefinedTermSet: { '@id': `${SITE.url}/about#growthpro-frameworks` },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${url}#faq`,
+      mainEntity: faqMain,
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <!-- 1. Hero: breadcrumb + label + H1 + one-sentence definition -->
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/about">About</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">AI Visibility Operating System</span>
+      </nav>
+      <span class="eyebrow">Growth.pro framework</span>
+      <h1>AI Visibility Operating System</h1>
+      <p class="lead">
+        The AI Visibility Operating System is Growth.pro&rsquo;s full operating model for AI
+        visibility: five pillars, Strategy, Measurement, Execution, Reporting and Governance, that
+        run AI visibility as a continuous operation rather than a one-off project.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. Why it matters -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">01</span> Why it matters</span>
+        <h2>AI visibility is an operation, not a project.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">
+          AI visibility has no finish line. The engines update, competitors move, and a position you
+          won last quarter can quietly erode. A campaign with an end date cannot hold ground that
+          keeps shifting.
+        </p>
+        <p style="margin-top:16px">
+          A tool gives you measurement. An operating system also defines the strategy behind the
+          measurement, the execution that acts on it, the reporting that turns it into decisions, and
+          the governance that keeps the work accurate and accountable. Those five pillars are what
+          make the practice repeatable instead of a series of one-off pushes.
+        </p>
+        <p style="margin-top:16px">
+          It is engine-agnostic: the same operating model holds across ChatGPT, Gemini, Perplexity,
+          Google AI Overviews and Google AI Mode. The AI Visibility Operating System is one of
+          <a href="/about">Growth.pro&rsquo;s frameworks</a>, operationalised by Zicy.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. How it works -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">02</span> How it works</span>
+        <h2>Five pillars, run as one.</h2>
+      </div>
+      <div class="grid-3">
+        {pillars.map((p) => (
+          <div class="card">
+            <span class="eyebrow"><span class="ix">{p.n}</span></span>
+            <h3>{p.h}</h3>
+            <p>{p.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. How Zicy operationalises it -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">03</span> How Zicy operationalises it</span>
+        <h2>Zicy runs the Measurement and Execution pillars.</h2>
+      </div>
+      <div class="grid-2">
+        {modules.map((m) => (
+          <div class="card">
+            <span class="eyebrow">{m.pillar}</span>
+            <h3>{m.name}</h3>
+            <p>{m.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p style="max-width:760px;margin-top:20px">
+        Strategy, Reporting and Governance are where Growth.pro&rsquo;s team adds the operating layer
+        around the platform. <a href="/platform">See the full platform &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 5. How Growth.pro applies it -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">04</span> How Growth.pro applies it</span>
+        <h2>The full operating system, run for you.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">
+          Growth.pro runs the full operating system in its done-for-you programmes, where all five
+          pillars are operated as one continuous practice. The Zicy platform gives you the
+          measurement and execution pillars self-serve; the managed service adds the strategy,
+          reporting and governance around them.
+        </p>
+        <div class="cta-row" style="margin-top:24px">
+          <a class="btn btn-o" href="/done-for-you">Explore done-for-you</a>
+          <a class="btn btn-t" href="https://www.growth.pro/" target="_blank" rel="noopener noreferrer">Growth.pro &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. FAQ -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions about the operating system.</h2>
+      </div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
+    </div>
+  </section>
+
+  <!-- 7. CTA -->
+  <section class="final">
+    <div class="wrap">
+      <h2>Run AI visibility as an operation.</h2>
+      <p>Start with the measurement and execution pillars across all five engines.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="https://app.zicy.com/register">Try Zicy free</a>
+        <a class="btn btn-o" href="/done-for-you">Explore done-for-you</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb: tokens only, no hardcoded hex. */
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+</style>
