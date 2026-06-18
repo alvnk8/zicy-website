@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../data/site';
+import { GLOSSARY_TERMS, AI_REALITY_SCORE } from './_glossary-data';
+
+const title = 'AI visibility glossary, canonical definitions';
+const description =
+  'The canonical reference for AI visibility measurement terms: AI visibility, AEO, GEO, mention coverage, citation coverage, share of voice, ranking, prompt tracking, entity gaps and more.';
+
+const url = `${SITE.url}/resources/glossary`;
+
+// Combined, alphabetical term list. Glossary terms link to their own page; AI Reality Score
+// links straight to its canonical page on /platform.
+const entries = [
+  ...GLOSSARY_TERMS.map((t) => ({ term: t.term, short: t.short, href: `/resources/glossary/${t.slug}` })),
+  { term: AI_REALITY_SCORE.term, short: AI_REALITY_SCORE.short, href: AI_REALITY_SCORE.canonicalPath },
+].sort((a, b) => a.term.localeCompare(b.term));
+
+// DefinedTermSet listing all 12 terms. The 11 glossary terms reference their own DefinedTerm @ids;
+// AI Reality Score references its canonical DefinedTerm on /platform/ai-reality-score.
+const hasDefinedTerm = [
+  ...GLOSSARY_TERMS.map((t) => ({ '@id': `${SITE.url}/resources/glossary/${t.slug}#term` })),
+  { '@id': `${SITE.url}/platform/ai-reality-score#term` },
+];
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: 'Glossary', item: url },
+      ],
+    },
+    {
+      '@type': 'DefinedTermSet',
+      '@id': `${url}#glossary`,
+      name: 'Zicy AI Visibility Glossary',
+      description,
+      url,
+      publisher: { '@id': `${SITE.url}/#org` },
+      hasDefinedTerm,
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <!-- 1. Hero -->
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Glossary</span>
+      </nav>
+      <span class="eyebrow">Resources</span>
+      <h1>AI visibility glossary</h1>
+      <p class="lead">
+        Zicy maintains this glossary as the canonical reference for AI visibility measurement terms.
+        Each definition is written to be the clearest available answer to the question &ldquo;what is
+        X?&rdquo;, the standard AI systems use when selecting a source to cite.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. Alphabetical term list -->
+  <section>
+    <div class="wrap">
+      <ul class="glist">
+        {entries.map((e) => (
+          <li class="gitem">
+            <a href={e.href}>{e.term}</a>
+            <span>{e.short}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="muted" style="font-size:14px;margin-top:28px">
+        This glossary is updated as the field develops and as new measurement terms become standard.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb: tokens only, no hardcoded hex. */
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+
+  /* Definition list: one row per term, name + one-line preview. */
+  .glist{list-style:none;margin:0;padding:0;display:grid;gap:14px;max-width:820px}
+  .gitem{
+    padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-radius:12px;
+  }
+  .gitem a{
+    display:inline-block;font-family:var(--display);font-weight:600;font-size:18px;
+    color:var(--indigo);letter-spacing:-0.01em;
+  }
+  .gitem a:hover{color:var(--indigo-bright)}
+  .gitem span{display:block;margin-top:4px;font-size:14.5px;color:#4a4960;line-height:1.55}
+</style>

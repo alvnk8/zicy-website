@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import FaqAccordion from '../../../components/FaqAccordion.astro';
+import { SITE } from '../../../data/site';
+import { GLOSSARY_TERMS, AI_REALITY_SCORE } from './_glossary-data';
+
+export function getStaticPaths() {
+  return GLOSSARY_TERMS.map((t) => ({ params: { term: t.slug }, props: { t } }));
+}
+
+const { t } = Astro.props;
+const url = `${SITE.url}/resources/glossary/${t.slug}`;
+
+// Slug -> display name + href, for the related-terms links (includes the AI Reality Score summary).
+const LABELS: Record<string, string> = Object.fromEntries([
+  ...GLOSSARY_TERMS.map((g) => [g.slug, g.term]),
+  [AI_REALITY_SCORE.slug, AI_REALITY_SCORE.term],
+]);
+
+const title = `${t.term}, AI visibility glossary`;
+const description = t.definition;
+
+const faqMain = t.faqs.map((f) => ({
+  '@type': 'Question',
+  name: f.q,
+  acceptedAnswer: { '@type': 'Answer', text: f.a },
+}));
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: 'Glossary', item: `${SITE.url}/resources/glossary` },
+        { '@type': 'ListItem', position: 4, name: t.term, item: url },
+      ],
+    },
+    {
+      '@type': 'DefinedTerm',
+      '@id': `${url}#term`,
+      name: t.term,
+      description: t.definition,
+      url,
+      inDefinedTermSet: { '@id': `${SITE.url}/resources/glossary#glossary` },
+      ...(t.sameAs ? { sameAs: t.sameAs } : {}),
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${url}#faq`,
+      mainEntity: faqMain,
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <!-- 1. Hero: breadcrumb + H1 + one-sentence definition -->
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources/glossary">Glossary</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">{t.term}</span>
+      </nav>
+      <span class="eyebrow">AI visibility glossary</span>
+      <h1>{t.term}</h1>
+      <p class="def">{t.definition}</p>
+    </div>
+  </section>
+
+  <!-- 2. Extended explanation -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        {t.body.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Example -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">Example</span>
+        <h2>What it looks like in practice.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">{t.example}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. How Zicy measures or addresses it -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">In Zicy</span>
+        <h2>How Zicy measures it.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px" set:html={t.zicy}></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Related terms -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">Related terms</span>
+        <h2>Keep reading.</h2>
+      </div>
+      <ul class="related">
+        {t.related.map((slug) => (
+          <li><a href={`/resources/glossary/${slug}`}>{LABELS[slug] ?? slug}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6. FAQ -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions about {t.term}.</h2>
+      </div>
+      <FaqAccordion items={t.faqs} defaultOpen={0} />
+    </div>
+  </section>
+
+  <!-- 7. Soft CTA -->
+  <section class="final">
+    <div class="wrap">
+      <h2>Measure it with Zicy.</h2>
+      <p>See how AI describes your brand across all five engines. Try free for 7 days.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="https://app.zicy.com/register">Try for free</a>
+        <a class="btn btn-o" href="/resources/glossary">Back to the glossary</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb: tokens only, no hardcoded hex. */
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+
+  /* One-sentence definition, given visual weight as the extractable answer. */
+  .def{font-family:var(--display);font-size:clamp(20px,2.4vw,26px);line-height:1.45;color:var(--ink);max-width:820px;letter-spacing:-0.01em}
+
+  /* Related-terms chips. */
+  .related{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+  .related a{
+    display:inline-block;padding:8px 14px;border:0.5px solid var(--line);border-radius:999px;
+    background:#fff;font-size:14px;color:var(--indigo);font-weight:500;
+  }
+  .related a:hover{border-color:var(--indigo);color:var(--indigo-bright)}
+</style>
