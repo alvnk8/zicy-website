@@ -9,14 +9,15 @@
 // On first message the wrapper expands to an immersive fullscreen overlay that sits
 // below the sticky site header (footer is hidden via body.fullscreen).
 
+// Canonical engines shown as logos. Only ChatGPT (OpenAI mark), Gemini and Perplexity
+// have distinct logo assets today; Google AI Overviews and Google AI Mode are Google
+// search features with no standalone logo, so they are named in the subtitle text and
+// across the rest of the site rather than shown here. (Owner to supply Overviews/Mode
+// marks later, at which point this strip extends to the full canonical five.)
 const AI_ENGINES = [
-  { src: '/ai-icons/Gemini_icon.png', alt: 'Google Gemini' },
-  { src: '/ai-icons/Grok_icon.png', alt: 'Grok' },
+  { src: '/ai-icons/Openai_icon.png', alt: 'ChatGPT' },
+  { src: '/ai-icons/Gemini_icon.png', alt: 'Gemini' },
   { src: '/ai-icons/Perplexity_icon.png', alt: 'Perplexity' },
-  { src: '/ai-icons/Bing_icon.png', alt: 'Bing' },
-  { src: '/ai-icons/Deepseek_icon.png', alt: 'DeepSeek' },
-  { src: '/ai-icons/Qwen_icon.png', alt: 'Qwen' },
-  { src: '/ai-icons/Openai_icon.png', alt: 'OpenAI' },
 ];
 
 const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strategies'];
