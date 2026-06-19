@@ -3,75 +3,97 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import { SITE } from '../../data/site';
 
-const title = 'The AI Reality Score, how Zicy measures AI accuracy';
+const title = 'The AI Reality Score, Zicy’s per-engine accuracy metric';
 const description =
-  "The AI Reality Score is Zicy's per-engine accuracy score: the gap between what is true about your brand and what AI actually says, across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.";
+  "The AI Reality Score is Zicy’s per-engine accuracy metric, a score from 0 to 100 measuring how accurately AI engines describe a brand across its tracked prompt set, where 100 means every tracked response was factually correct.";
 
 const url = `${SITE.url}/platform/ai-reality-score`;
+const name = 'The AI Reality Score';
+const datePublished = '2026-06-19';
 const definition =
-  "The AI Reality Score is Zicy's per-engine accuracy score: it measures the gap between what is true about a brand and what AI actually says about it, across the tracked prompt set.";
+  "The AI Reality Score is Zicy’s per-engine accuracy metric, a score from 0 to 100 measuring how accurately AI engines describe a brand across its tracked prompt set, where 100 means every tracked response was factually correct.";
 
-// What it measures: the four signal types.
+// What it measures: four signal types.
 const signals = [
   {
-    tag: 'Strength',
+    tag: 'Lifts the score',
     h: 'Accurate descriptions',
-    p: 'Claims AI makes about the brand that are true and current, the share of the answer that holds up against the facts. This is what a high score is made of.',
+    p: 'AI responses that correctly describe the brand’s category, offering, positioning, key facts, and current state. These lift the score.',
   },
   {
-    tag: 'Risk',
+    tag: 'Reduces the score',
     h: 'Outdated claims',
-    p: 'Statements that were true once but no longer are: an old price, a former product name, a discontinued feature. Accurate yesterday, wrong today.',
+    p: 'Statements that were once true but are no longer: old pricing, former team members, discontinued products, superseded messaging. These reduce the score.',
   },
   {
-    tag: 'Risk',
+    tag: 'Reduces it most',
     h: 'Hallucinations',
-    p: 'Claims with no basis in fact: an invented feature, a fabricated statistic, a relationship that does not exist. The engine states them with the same confidence as a fact.',
+    p: 'Statements AI asserts about the brand that have no grounding in any published source and were never true. These reduce the score more heavily than outdated claims.',
   },
   {
-    tag: 'Risk',
+    tag: 'Reduces the score',
     h: 'Entity gaps',
-    p: 'Places where AI cannot confidently say who or what the brand is, so it hedges, omits, or fills the gap with a guess. Low confidence reads as low presence in the answer.',
+    p: 'Facts the brand should be known for that AI consistently omits: a key product line never mentioned, a market never attributed, a credential never surfaced. These indicate incomplete entity definition and reduce the score.',
   },
 ];
 
-// What pulls the score down.
+// What pulls the score down, in weight order.
 const downFactors = [
-  { h: 'Hallucinations', p: 'Invented facts stated as confidently as true ones, the heaviest single drag on a score.' },
-  { h: 'Outdated claims', p: 'Facts that were once right and have since changed, repeated by AI as if still current.' },
-  { h: 'Wrong attributions', p: 'A fact, quote or source credited to the brand that belongs to someone else, or the reverse.' },
-  { h: 'Missing key facts', p: 'The answer omits something material, so the picture is accurate as far as it goes but incomplete.' },
-  { h: 'Competitor conflation', p: 'AI blends the brand with a rival, attributing one’s features, pricing or positioning to the other.' },
+  'Hallucinations (highest weight).',
+  'Outdated claims.',
+  'Wrong attributions (features attributed to the wrong product, facts attributed to the wrong team member).',
+  'Missing key facts consistently absent across responses (entity gaps).',
+  'Competitor conflation (AI describing the brand with a competitor’s attributes).',
+];
+
+// How to improve it. Body may carry one inline link, rendered via set:html.
+const improve = [
+  {
+    h: 'Schema and llms.txt',
+    body: 'Make the brand’s correct facts machine-readable and unambiguous. The Action Center in Zicy generates both.',
+  },
+  {
+    h: 'Content accuracy',
+    body: 'Publish and maintain clear, crawlable, authoritative content on the facts AI gets wrong. The Content Optimizer identifies which existing pages need updating.',
+  },
+  {
+    h: 'Entity gap remediation',
+    body: 'Create content for the topics AI consistently omits. The Visibility Gaps module prioritises these by estimated impact.',
+  },
+  {
+    h: 'Source corroboration',
+    body: 'Earn citations from independent sources that state the correct facts. This is the earned-media layer, what <a href="/about/ai-citation-enablement">AI Citation Enablement</a> is designed to build.',
+  },
 ];
 
 const faqs = [
   {
     q: 'What is the AI Reality Score?',
-    a: 'The AI Reality Score is Zicy’s per-engine accuracy score. It measures the gap between what is true about your brand and what AI actually says about it, across the prompts you track on each engine.',
+    a: 'The AI Reality Score is Zicy’s per-engine accuracy metric, a score from 0 to 100 measuring how accurately AI engines describe a brand across its tracked prompt set. It is Zicy’s core differentiator: most tools measure whether a brand was named; Zicy also measures whether what was said was true.',
   },
   {
-    q: 'How is it different from a brand mention score?',
-    a: 'A mention score counts whether AI named your brand. The AI Reality Score judges whether what AI said was accurate. You can be mentioned often and still score poorly if the claims attached to those mentions are wrong or outdated.',
+    q: 'How is the AI Reality Score different from a brand mention score?',
+    a: 'Brand mention coverage tells you how often your brand appeared in AI answers. The AI Reality Score tells you whether those appearances described you correctly. A brand with 90% mention coverage and a Reality Score of 58 is being named frequently but described inaccurately, which may be worse than not being named at all.',
   },
   {
     q: 'Why does my score differ between engines?',
-    a: 'Each engine, ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, draws on different sources and weights them differently, so they can describe the same brand with different levels of accuracy. The score is calculated per engine for exactly this reason.',
+    a: 'Each AI engine has ingested different sources, applies different retrieval weights, and updates its knowledge at different rates. Gemini may have indexed a press release that ChatGPT has not. Perplexity may be citing a source with outdated information that the others have deprioritised. Scores differ between engines because the engines themselves differ in what they know about your brand.',
   },
   {
     q: 'Can I improve my AI Reality Score?',
-    a: 'Yes. The score improves when AI can find clear, current, machine-readable facts about your brand. Zicy’s Action Center generates the schema and llms.txt and flags the content to correct, which are the levers that move it.',
+    a: 'Yes. The most reliable improvements come from making correct facts machine-readable (schema, llms.txt), publishing and updating accurate content on the specific claims AI gets wrong, filling entity gaps with new content, and building corroborating citations from independent sources. Zicy’s Action Center, Content Generator, and Visibility Gaps module are built for exactly this.',
   },
   {
-    q: 'How often is it recalculated?',
-    a: 'It is recalculated on your tracking frequency, weekly by default, because answer engines evolve gradually rather than by the hour. Reading it over several cycles is more meaningful than reacting to a single week.',
+    q: 'How often is the AI Reality Score recalculated?',
+    a: 'On Starter and Growth plans, Zicy tracks prompts weekly and updates scores accordingly. On Enterprise plans, daily tracking is available. Because AI responses are probabilistic, weekly tracking gives directional trends rather than single-point readings.',
   },
   {
     q: 'Is a score of 92 out of 100 good?',
-    a: 'Generally yes, but read it as a direction rather than a grade. AI-search results are probabilistic and vary with phrasing and timing, so a score in the nineties that holds or climbs over several weeks matters more than any single reading. (92 out of 100 is used here as an illustrative figure, not a real result.)',
+    a: 'It depends on what is pulling it below 100. A score of 92 with one minor outdated claim is a very different situation from a score of 92 with a hallucination that misattributes a product feature. Zicy’s Brand Intelligence report breaks down exactly what is reducing the score so the fix can be targeted.',
   },
   {
     q: "What counts as a hallucination in Zicy's scoring?",
-    a: 'A hallucination is a claim AI states as fact that has no basis in reality: an invented feature, a fabricated statistic, or a relationship that does not exist. Because it is stated as confidently as a true fact, it weighs heavily against the score.',
+    a: 'A hallucination is a specific factual claim AI makes about a brand that has no grounding in any published source and was never true, a wrong founding year, a non-existent product, a team member who never worked there. It is distinct from an outdated claim (which was once true) and from an entity gap (a fact that is missing rather than wrong).',
   },
 ];
 
@@ -81,57 +103,62 @@ const faqMain = faqs.map((f) => ({
   acceptedAnswer: { '@type': 'Answer', text: f.a },
 }));
 
-const graph = {
+// BreadcrumbList: separate block.
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Platform', item: `${SITE.url}/platform` },
+    { '@type': 'ListItem', position: 3, name: 'AI Reality Score', item: url },
+  ],
+};
+
+// TechArticle + DefinedTerm.
+const articleGraph = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'BreadcrumbList',
-      '@id': `${url}#breadcrumb`,
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
-        { '@type': 'ListItem', position: 2, name: 'Platform', item: `${SITE.url}/platform` },
-        { '@type': 'ListItem', position: 3, name: 'AI Reality Score', item: url },
-      ],
-    },
-    {
       '@type': 'TechArticle',
       '@id': `${url}#article`,
-      headline: 'The AI Reality Score',
-      name: 'The AI Reality Score',
-      description:
-        "How Zicy calculates the AI Reality Score: a per-engine accuracy measure scored across the tracked prompt set, read as a directional indicator over time rather than a single definitive snapshot.",
+      name,
+      headline: name,
+      description: definition,
       url,
       inLanguage: 'en',
-      author: { '@id': `${SITE.url}/#org` },
+      datePublished,
+      author: { '@type': 'Organization', name: 'Zicy', url: `${SITE.url}/` },
       publisher: { '@id': `${SITE.url}/#org` },
       mainEntityOfPage: url,
       about: { '@id': `${url}#term` },
-    },
-    {
-      '@type': 'DefinedTermSet',
-      '@id': `${SITE.url}/platform#zicy-metrics`,
-      name: 'Zicy AI Visibility Metrics',
-      url: `${SITE.url}/platform`,
     },
     {
       '@type': 'DefinedTerm',
       '@id': `${url}#term`,
       name: 'AI Reality Score',
       description: definition,
-      inDefinedTermSet: { '@id': `${SITE.url}/platform#zicy-metrics` },
-    },
-    {
-      '@type': 'FAQPage',
-      '@id': `${url}#faq`,
-      mainEntity: faqMain,
+      inDefinedTermSet: {
+        '@type': 'DefinedTermSet',
+        name: 'Zicy AI Visibility Metrics',
+        url: `${SITE.url}/platform`,
+      },
     },
   ],
 };
+
+// FAQPage: separate block.
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqMain,
+};
 ---
 <BaseLayout title={title} description={description}>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleGraph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
-  <!-- 1. Hero: breadcrumb + label + H1 + one-sentence definition -->
+  <!-- 1. Hero: breadcrumb + pill + H1 + one-sentence definition -->
   <section class="hero inner">
     <div class="wrap">
       <nav class="crumbs" aria-label="Breadcrumb">
@@ -141,12 +168,9 @@ const graph = {
         <span class="sep" aria-hidden="true">&rsaquo;</span>
         <span class="here" aria-current="page">AI Reality Score</span>
       </nav>
-      <span class="eyebrow">Zicy &middot; the truth layer</span>
-      <h1>The AI Reality Score</h1>
-      <p class="lead">
-        The AI Reality Score is Zicy&rsquo;s per-engine accuracy score: it measures the gap between
-        what is true about a brand and what AI actually says about it, across the tracked prompt set.
-      </p>
+      <span class="pill">Zicy &middot; the truth layer</span>
+      <h1>{name}</h1>
+      <p class="def">{definition}</p>
     </div>
   </section>
 
@@ -155,19 +179,21 @@ const graph = {
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow"><span class="ix">01</span> Why it exists</span>
-        <h2>Being named is not the same as being described accurately.</h2>
+        <h2>A mention is only worth as much as the claim attached to it.</h2>
       </div>
       <div style="max-width:760px">
         <p class="lead" style="font-size:18px">
-          Most tools measure whether a brand was named in an AI answer. Zicy measures whether what AI
-          said was true. Those are different questions, and the second one is the one that decides
-          deals, because a buyer acts on the claim, not on the mention.
+          Most AI visibility tools measure presence: was the brand named? The AI Reality Score
+          measures something harder and more important: was what AI said actually true? A brand can
+          appear in nine out of ten AI answers and still be described with an outdated pricing tier, a
+          wrong founding year, or a product feature it discontinued. That inaccuracy reaches the buyer
+          before any page on the brand&rsquo;s website does.
         </p>
         <p style="margin-top:16px">
-          A hallucination or an outdated claim sitting in an AI answer is a buyer-decision risk, not a
-          visibility metric. It reaches the buyer with the same confidence as a true fact, before
-          anyone on your side sees it. The AI Reality Score exists to surface that gap early, so an
-          inaccurate description can be corrected before it costs you the decision.
+          The AI Reality Score exists because a mention is only valuable if the claim attached to it is
+          correct. It is the metric that turns AI visibility from a reach measure into a truth measure,
+          and the number that tells a brand whether its AI visibility work is making AI more accurate,
+          not just more frequent.
         </p>
       </div>
     </div>
@@ -200,16 +226,24 @@ const graph = {
         <h2>Scored on what AI says, per engine, over time.</h2>
       </div>
       <div style="max-width:760px">
-        <ul class="checklist">
-          <li>The score is calculated per engine, across the set of prompts you track, because each engine describes a brand in its own way.</li>
-          <li>Scoring is based on the content of the AI response, what was actually said, not just whether the brand was present or absent.</li>
-          <li>A score of 100 means AI described the brand accurately across all tracked prompts on that engine. Lower scores reflect the proportion and the severity of the inaccuracies found, so one confident hallucination weighs more than a small omission.</li>
-        </ul>
+        <p class="lead" style="font-size:18px">
+          The AI Reality Score is derived from Zicy&rsquo;s structured analysis of actual AI responses
+          across the brand&rsquo;s tracked prompt set on each engine. For each prompt, the AI response
+          is assessed against the brand&rsquo;s known facts: what is stated accurately, what is
+          outdated, what is false, what is missing.
+        </p>
         <p class="disclosure" style="margin-top:22px">
-          Read it as a direction, not a verdict. AI-search visibility is probabilistic: results vary
-          with query phrasing and the time window in which a prompt is run. The AI Reality Score is
-          best read as a directional indicator tracked over time, not a single definitive snapshot.
-          A reading that holds or improves across several cycles tells you more than any one week.
+          Important: AI-generated responses are probabilistic. The same prompt asked at different
+          times, or phrased slightly differently, can produce different outputs. The AI Reality Score
+          is therefore a directional indicator tracked over time, not a single definitive measurement.
+          Zicy tracks it weekly so changes are meaningful trends, not noise.
+        </p>
+        <p style="margin-top:18px">
+          A score of 100 means every assessed response across the tracked prompt set was accurate on
+          that engine. Scores below 100 reflect the proportion and severity of inaccuracies found.
+          Scores are per-engine: a brand may score 94 on ChatGPT and 71 on Gemini (illustrative
+          figures), reflecting genuine differences in how each engine has ingested and represented the
+          brand&rsquo;s entity data.
         </p>
       </div>
     </div>
@@ -220,16 +254,11 @@ const graph = {
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow"><span class="ix">04</span> What pulls the score down</span>
-        <h2>Five ways an answer goes wrong.</h2>
+        <h2>Inaccuracy, in weight order.</h2>
       </div>
-      <div class="grid-2">
-        {downFactors.map((d) => (
-          <div class="card">
-            <h3>{d.h}</h3>
-            <p>{d.p}</p>
-          </div>
-        ))}
-      </div>
+      <ul class="checklist" style="max-width:760px">
+        {downFactors.map((d) => <li>{d}</li>)}
+      </ul>
     </div>
   </section>
 
@@ -238,20 +267,20 @@ const graph = {
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow"><span class="ix">05</span> How to improve it</span>
-        <h2>Give AI clear, current facts to read.</h2>
+        <h2>Give AI clear, correct, corroborated facts.</h2>
       </div>
-      <div style="max-width:760px">
-        <p class="lead" style="font-size:18px">
-          The score moves when AI can find clear, current, machine-readable facts about the brand. In
-          practice that means a clean entity definition in schema, an llms.txt that states the facts
-          plainly, and content that is accurate and up to date where AI reads it.
-        </p>
-        <p style="margin-top:16px">
-          Zicy&rsquo;s <a href="/platform#modules">Action Center</a> generates the schema and llms.txt
-          and flags the content to correct, so the work of moving the score happens inside the same
-          platform that measures it. <a href="/platform">See the full platform &rarr;</a>
-        </p>
+      <div class="grid-2">
+        {improve.map((m) => (
+          <div class="card">
+            <h3>{m.h}</h3>
+            <p set:html={m.body}></p>
+          </div>
+        ))}
       </div>
+      <p style="margin-top:24px">
+        See the modules on <a href="/platform">the platform</a>, or ask the
+        <a href="/consultant">AEO/GEO consultant</a> what to fix first.
+      </p>
     </div>
   </section>
 
@@ -260,19 +289,15 @@ const graph = {
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow"><span class="ix">06</span> How it connects to demand</span>
-        <h2>Accuracy removes hesitation at the moment of decision.</h2>
+        <h2>Accuracy reduces hesitation at the moment of decision.</h2>
       </div>
       <div style="max-width:760px">
         <p class="lead" style="font-size:18px">
-          Accuracy is not an end in itself. A buyer who reads a confident, wrong claim about a brand
-          mid-decision hesitates, or moves on. Reducing inaccurate descriptions removes friction at
-          the moment the decision is forming.
-        </p>
-        <p style="margin-top:16px">
-          Zicy&rsquo;s <a href="/platform">Prove layer</a> connects the visibility work to AI-referred
-          sessions and branded-search behaviour through the Site Traffic module, so an improving AI
-          Reality Score can be read alongside movement in demand, rather than as accuracy for its own
-          sake.
+          An accurate AI description reduces buyer hesitation. When AI describes a brand correctly,
+          right category, right differentiators, right proof, the buyer who acts on that answer arrives
+          with correct expectations and higher purchase confidence. Zicy&rsquo;s
+          <a href="/platform">Site Traffic module</a> connects AI Reality Score improvements to
+          branded-search behaviour and AI-referred sessions over time, the Prove layer of the loop.
         </p>
       </div>
     </div>
@@ -289,14 +314,14 @@ const graph = {
     </div>
   </section>
 
-  <!-- 9. CTA -->
+  <!-- 9. CTAs -->
   <section class="final">
     <div class="wrap">
       <h2>See your AI Reality Score.</h2>
       <p>Find out whether AI describes your brand accurately, across all five engines.</p>
       <div class="hcta">
-        <a class="btn btn-p" href="https://app.zicy.com/register">Try for free</a>
-        <a class="btn btn-o" href="/platform">See the platform</a>
+        <a class="btn btn-p" href="https://app.zicy.com/register">See your AI Reality Score</a>
+        <a class="btn btn-o" href="/platform">How to improve it</a>
       </div>
     </div>
   </section>
@@ -309,4 +334,15 @@ const graph = {
   .crumbs a:hover{color:var(--indigo)}
   .crumbs .sep{color:var(--line-2)}
   .crumbs .here{color:var(--ink)}
+
+  /* Pill label. */
+  .pill{
+    display:inline-block;margin-bottom:16px;padding:6px 14px;border-radius:999px;
+    background:var(--lavender);border:0.5px solid var(--line);
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--indigo);font-weight:500;
+  }
+
+  /* One-sentence definition, weighted as the extractable answer. */
+  .def{font-family:var(--display);font-size:clamp(20px,2.4vw,26px);line-height:1.45;color:var(--ink);max-width:820px;letter-spacing:-0.01em}
 </style>
