@@ -3,85 +3,88 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import { SITE } from '../../data/site';
 
-const title = "PAVA Framework, Growth.pro's framework for AI visibility";
+const title = "The PAVA Framework, Growth.pro's model for AI visibility";
 const description =
-  "PAVA (Presence, Authority, Visibility, Amplification) is Growth.pro's framework for AI visibility, operationalised by Zicy across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.";
+  "The PAVA Framework is Growth.pro's four-pillar model for diagnosing and improving a brand's AI visibility, covering Presence, Authority, Visibility, and Amplification in sequence.";
 
 const url = `${SITE.url}/about/pava-framework`;
+const name = 'The PAVA Framework';
+const datePublished = '2026-06-19';
 const definition =
-  "PAVA is Growth.pro's diagnostic and strategic framework for AI visibility: four stages, Presence, Authority, Visibility and Amplification, that take a brand from a clearly defined entity to a recommended answer that moves demand.";
+  "The PAVA Framework is Growth.pro's four-pillar model for diagnosing and improving a brand's AI visibility, covering Presence, Authority, Visibility, and Amplification in sequence.";
 
-// How it works: the four stages, sequential.
-const stages = [
+// How it works: the four pillars, in sequence, each with the work that closes the gap.
+const pillars = [
   {
     k: 'P',
     h: 'Presence',
-    p: 'Is the brand entity clearly and consistently defined? One name, one category, one description of what the brand does, agreeing across the brand’s own pages and the third-party sources AI reads.',
+    p: 'Is the brand entity clearly, consistently, and completely defined across every surface AI systems ingest? Gaps here mean AI cannot resolve the brand as a single coherent entity.',
+    fixes: 'Entity schema, llms.txt, NAP consistency, social handle standardisation.',
   },
   {
     k: 'A',
     h: 'Authority',
-    p: 'Is the brand trusted and corroborated by independent sources? AI weights what others say about a brand, so authority is about credible, consistent corroboration, not self-description.',
+    p: 'Is the brand trusted and corroborated by independent third-party sources? AI systems weight entities that appear across multiple credible, non-self-referential sources.',
+    fixes: 'Earned media, partner mentions, citations, third-party directory listings, founder profiles.',
   },
   {
     k: 'V',
     h: 'Visibility',
-    p: 'Does the brand appear in AI answers for the queries that matter? Measured as mention coverage, citation rate, share of voice and average ranking across the five engines.',
+    p: 'Does the brand appear in AI answers for the category queries its buyers actually ask? This is the measurement pillar: tracked prompts, mention coverage, share of voice, average AI ranking.',
+    fixes: 'Content aligned to answer-intent queries, topical authority, citation-worthy source trails.',
   },
   {
     k: 'A',
     h: 'Amplification',
-    p: 'Does AI visibility translate into demand? The final stage connects winning the answer to branded search and AI-referred sessions, so visibility reads as a business outcome, not a vanity metric.',
+    p: 'Does AI visibility translate to real demand? The proof pillar: AI-referred sessions, branded-search lift, answer-intent queries, and the correlation between winning AI answers and downstream commercial outcomes.',
+    fixes: '',
   },
 ];
 
-// How Zicy operationalises it: each stage maps to a part of the platform.
+// How Zicy operationalises PAVA: each pillar maps to specific platform modules.
 const modules = [
   {
-    stage: 'Presence + Authority',
-    name: 'Brand Intelligence',
-    desc: 'Entity definition, the AI Reality Score, and the corroboration gaps behind low confidence.',
+    stage: 'Presence',
+    name: 'Action Center',
+    desc: 'The schema generator and llms.txt builder, so the brand entity is machine-readable and consistent across the surfaces AI reads.',
+  },
+  {
+    stage: 'Authority',
+    name: 'Citation Analysis + Content Generator',
+    desc: 'See which independent sources AI cites in the category, then produce citation-worthy content to earn more of them.',
   },
   {
     stage: 'Visibility',
-    name: 'AI Visibility dashboard',
-    desc: 'Mention coverage, citation rate, share of voice and average ranking across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.',
+    name: 'AI Visibility, Brand Intelligence + Competitive AI Performance',
+    desc: 'Mention coverage, citation rate, share of voice and average ranking across the five engines, with the AI Reality Score and your standing against named rivals.',
   },
   {
     stage: 'Amplification',
-    name: 'Site Traffic, the proof layer',
-    desc: 'AI-referred sessions and branded-search behaviour, tied back to the visibility work.',
+    name: 'Site Traffic',
+    desc: 'AI-referred sessions from GA4 and Search Console, tying winning the answer back to demand.',
   },
 ];
 
 const faqs = [
   {
     q: 'What does PAVA stand for?',
-    a: 'PAVA stands for Presence, Authority, Visibility and Amplification, the four stages of Growth.pro’s framework for AI visibility.',
+    a: "PAVA stands for Presence, Authority, Visibility, and Amplification, the four sequential pillars of the framework Growth.pro uses to diagnose and improve a brand's AI visibility.",
   },
   {
-    q: 'Who created the PAVA framework?',
-    a: 'PAVA is Growth.pro’s framework. Zicy operationalises it as a platform, so the diagnosis and the fixes are available to anyone, not only done-for-you clients.',
+    q: 'Who created the PAVA Framework?',
+    a: "Growth.pro created the PAVA Framework. It is the strategic and diagnostic model behind Growth.pro's AI visibility consultancy and managed-service programmes. Zicy, the platform built by Growth.pro, operationalises PAVA in software.",
   },
   {
-    q: 'How is PAVA different from an AI visibility score?',
-    a: 'A score is an output; PAVA is the diagnosis behind it. The four stages are sequential, so PAVA tells you which cause to fix first rather than only how high or low the number is.',
+    q: 'How is PAVA different from a standard SEO audit?',
+    a: 'A standard SEO audit measures search-engine signals such as backlinks, page speed, and keyword rankings. PAVA measures the four signals that determine AI answer-engine visibility: whether the entity is clearly defined, whether it is independently corroborated, whether it appears in AI answers for buyer queries, and whether that visibility moves demand.',
   },
   {
-    q: 'Which stage should we fix first?',
-    a: 'Presence, almost always. If AI cannot define the brand entity clearly and consistently, authority and visibility cannot compensate, so the sequence starts there.',
+    q: 'Can I use the PAVA Framework without Growth.pro?',
+    a: "Zicy's platform operationalises the measurement and action layers of PAVA as a self-serve tool. For a fully managed PAVA programme across all four pillars, Growth.pro runs done-for-you engagements for enterprise brands.",
   },
   {
-    q: 'Does PAVA work across all AI engines?',
-    a: 'Yes. PAVA is engine-agnostic, and Zicy measures it across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, because each engine weights sources differently.',
-  },
-  {
-    q: 'How does Zicy implement PAVA?',
-    a: 'Brand Intelligence covers Presence and Authority, the AI Visibility dashboard covers Visibility, and the Site Traffic proof layer covers Amplification, so each stage maps to a part of the platform.',
-  },
-  {
-    q: 'Can we use PAVA without the done-for-you service?',
-    a: 'Yes. The Zicy platform operationalises the full framework self-serve. Growth.pro’s done-for-you programmes apply PAVA end to end for teams that want the work run for them.',
+    q: 'Where does the AI Reality Score fit in the PAVA Framework?',
+    a: 'The AI Reality Score sits inside the Visibility pillar, it measures not just whether a brand appears in AI answers, but whether those answers describe the brand accurately. A high mention rate with a low AI Reality Score signals a Visibility problem of a specific kind: presence without accuracy.',
   },
 ];
 
@@ -91,56 +94,62 @@ const faqMain = faqs.map((f) => ({
   acceptedAnswer: { '@type': 'Answer', text: f.a },
 }));
 
-const graph = {
+// BreadcrumbList: separate block.
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'About', item: `${SITE.url}/about` },
+    { '@type': 'ListItem', position: 3, name, item: url },
+  ],
+};
+
+// Article + DefinedTerm.
+const articleGraph = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'BreadcrumbList',
-      '@id': `${url}#breadcrumb`,
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
-        { '@type': 'ListItem', position: 2, name: 'About', item: `${SITE.url}/about` },
-        { '@type': 'ListItem', position: 3, name: 'PAVA Framework', item: url },
-      ],
-    },
-    {
       '@type': 'TechArticle',
       '@id': `${url}#article`,
-      headline: 'PAVA Framework',
-      name: 'PAVA Framework',
+      name,
+      headline: name,
       description: definition,
       url,
       inLanguage: 'en',
+      datePublished,
       author: { '@type': 'Organization', name: 'Growth.pro', url: 'https://www.growth.pro/' },
       publisher: { '@id': `${SITE.url}/#org` },
       mainEntityOfPage: url,
       about: { '@id': `${url}#term` },
     },
     {
-      '@type': 'DefinedTermSet',
-      '@id': `${SITE.url}/about#growthpro-frameworks`,
-      name: 'Growth.pro AI Visibility Frameworks',
-      url: `${SITE.url}/about`,
-    },
-    {
       '@type': 'DefinedTerm',
       '@id': `${url}#term`,
       name: 'PAVA Framework',
       description: definition,
-      inDefinedTermSet: { '@id': `${SITE.url}/about#growthpro-frameworks` },
-    },
-    {
-      '@type': 'FAQPage',
-      '@id': `${url}#faq`,
-      mainEntity: faqMain,
+      inDefinedTermSet: {
+        '@type': 'DefinedTermSet',
+        name: 'Growth.pro AI Visibility Frameworks',
+        url: `${SITE.url}/about`,
+      },
     },
   ],
 };
+
+// FAQPage: separate block.
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqMain,
+};
 ---
 <BaseLayout title={title} description={description}>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleGraph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
-  <!-- 1. Hero: breadcrumb + label + H1 + one-sentence definition -->
+  <!-- 1. Hero: breadcrumb + pill label + H1 + one-sentence definition -->
   <section class="hero inner">
     <div class="wrap">
       <nav class="crumbs" aria-label="Breadcrumb">
@@ -148,15 +157,11 @@ const graph = {
         <span class="sep" aria-hidden="true">&rsaquo;</span>
         <a href="/about">About</a>
         <span class="sep" aria-hidden="true">&rsaquo;</span>
-        <span class="here" aria-current="page">PAVA Framework</span>
+        <span class="here" aria-current="page">{name}</span>
       </nav>
-      <span class="eyebrow">Growth.pro framework</span>
-      <h1>PAVA Framework</h1>
-      <p class="lead">
-        PAVA is Growth.pro&rsquo;s diagnostic and strategic framework for AI visibility: four stages,
-        Presence, Authority, Visibility and Amplification, that take a brand from a clearly defined
-        entity to a recommended answer that moves demand.
-      </p>
+      <span class="pill">Growth.pro framework &middot; operationalised by Zicy</span>
+      <h1>{name}</h1>
+      <p class="def">{definition}</p>
     </div>
   </section>
 
@@ -171,19 +176,18 @@ const graph = {
         <p class="lead" style="font-size:18px">
           When someone asks AI about your category, the engine builds one answer before the buyer
           reaches your site. If you are absent or described inaccurately, you need to know the cause,
-          not just a number that went down.
+          not just a number that moved.
         </p>
         <p style="margin-top:16px">
-          Most tools report a score. PAVA reports a sequence. Each stage depends on the one before it:
-          if AI cannot define your brand (Presence), no amount of content will earn it authority or
-          visibility, and visibility that never reaches demand is not worth defending in a budget
-          review. PAVA orders the work so you fix the real constraint first.
+          PAVA is a sequence, not a checklist. Each pillar depends on the one before it: if AI cannot
+          resolve who you are (Presence), no amount of content will earn you authority or visibility,
+          and visibility that never reaches demand is hard to defend in a budget review. PAVA orders
+          the work so you fix the real constraint first.
         </p>
         <p style="margin-top:16px">
-          It is engine-agnostic by design. The same four stages hold across ChatGPT, Gemini,
-          Perplexity, Google AI Overviews and Google AI Mode, which is why it works as a single
-          strategic lens rather than a per-engine tactic. PAVA is one of
-          <a href="/about">Growth.pro&rsquo;s frameworks</a>, operationalised by Zicy.
+          It is one of <a href="/about">Growth.pro&rsquo;s frameworks</a>, operationalised by Zicy,
+          and it is built around measured outcomes rather than activity. See documented results on
+          <a href="/case-studies">our case studies</a>.
         </p>
       </div>
     </div>
@@ -194,14 +198,15 @@ const graph = {
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow"><span class="ix">02</span> How it works</span>
-        <h2>Four stages, in order.</h2>
+        <h2>Four pillars, in sequence.</h2>
       </div>
       <div class="grid-2">
-        {stages.map((s) => (
+        {pillars.map((s) => (
           <div class="card">
             <span class="stage-mark" aria-hidden="true">{s.k}</span>
             <h3>{s.h}</h3>
             <p>{s.p}</p>
+            {s.fixes && <p class="fixes"><b>Fixes:</b> {s.fixes}</p>}
           </div>
         ))}
       </div>
@@ -213,9 +218,9 @@ const graph = {
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow"><span class="ix">03</span> How Zicy operationalises it</span>
-        <h2>Each stage maps to the platform.</h2>
+        <h2>Each pillar maps to the platform.</h2>
       </div>
-      <div class="grid-3">
+      <div class="grid-2">
         {modules.map((m) => (
           <div class="card">
             <span class="eyebrow">{m.stage}</span>
@@ -240,10 +245,10 @@ const graph = {
       </div>
       <div style="max-width:760px">
         <p class="lead" style="font-size:18px">
-          Growth.pro created PAVA and applies the full framework in its done-for-you programmes,
-          where the diagnosis becomes a strategy and the strategy becomes shipped work. The Zicy
-          platform puts the same diagnostic sequence in your hands; the managed service runs it end
-          to end for teams that want the work done for them.
+          Growth.pro applies PAVA through done-for-you programmes: full diagnostic, strategy,
+          execution and governance across all four pillars. The Zicy platform puts the measurement
+          and action layers in your hands; the managed service runs the whole sequence for teams that
+          want the work done for them.
         </p>
         <div class="cta-row" style="margin-top:24px">
           <a class="btn btn-o" href="/done-for-you">Explore done-for-you</a>
@@ -264,7 +269,7 @@ const graph = {
     </div>
   </section>
 
-  <!-- 7. CTA -->
+  <!-- 7. CTAs -->
   <section class="final">
     <div class="wrap">
       <h2>Put PAVA to work on your brand.</h2>
@@ -285,6 +290,17 @@ const graph = {
   .crumbs .sep{color:var(--line-2)}
   .crumbs .here{color:var(--ink)}
 
+  /* Pill label. */
+  .pill{
+    display:inline-block;margin-bottom:16px;padding:6px 14px;border-radius:999px;
+    background:var(--lavender);border:0.5px solid var(--line);
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--indigo);font-weight:500;
+  }
+
+  /* One-sentence definition, weighted as the extractable answer. */
+  .def{font-family:var(--display);font-size:clamp(20px,2.4vw,26px);line-height:1.45;color:var(--ink);max-width:820px;letter-spacing:-0.01em}
+
   /* Stage letter mark on the "how it works" cards. */
   .stage-mark{
     display:inline-flex;align-items:center;justify-content:center;
@@ -292,4 +308,6 @@ const graph = {
     font-family:var(--display);font-weight:700;font-size:17px;
     color:#fff;background:var(--violet);
   }
+  .fixes{margin-top:10px;font-size:13.5px;color:var(--muted);line-height:1.55}
+  .fixes b{color:var(--ink)}
 </style>
