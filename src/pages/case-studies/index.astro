@@ -23,8 +23,19 @@ for (const [path, mod] of Object.entries(heroModules)) {
   const slug = path.split('/assets/case-studies/')[1]?.split('/')[0];
   if (slug) heroBySlug[slug] = mod.default;
 }
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.zicy.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Case studies', item: 'https://www.zicy.com/case-studies' },
+  ],
+};
 ---
 <BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Case studies</span>
