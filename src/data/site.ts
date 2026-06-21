@@ -8,7 +8,7 @@ export const SITE = {
   legalName: 'Growth Pro Sdn. Bhd.',
   description:
     "Zicy is the truth layer for AI visibility, see how every AI engine describes your brand, whether it's true, and how to fix it. All engines. All languages. All markets.",
-  linkedin: 'https://www.linkedin.com/company/zicy',
+  linkedin: 'https://www.linkedin.com/company/askzicy/',
 } as const;
 
 export const PROVENANCE =
