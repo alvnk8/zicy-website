@@ -128,7 +128,6 @@ export const CORE_TIERS: Tier[] = [
     features: [
       'Everything in Growth',
       'Multi-market and multi-language',
-      'API and MCP access',
       'Priority support',
     ],
     cta: { label: 'Try for free', href: URLS.register, primary: false, external: true },
@@ -147,7 +146,6 @@ export const CORE_TIERS: Tier[] = [
     ],
     features: [
       'Everything in Scale',
-      'SSO and SLA',
       'Dedicated support',
       'Custom markets and languages',
       'Handoff to the Growth.pro managed service',
