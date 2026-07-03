@@ -262,7 +262,7 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
   { feature: 'Multi-language / multi-country', values: ['Yes', '50+ countries', '115+ languages', 'Enterprise', 'Enterprise', 'US and EU only'] },
   { feature: 'Brand Intelligence (perception vs reality)', values: ['Yes, core', 'No', 'No', 'Partial', 'Partial', 'Partial'] },
   { feature: 'Content generation and optimisation', values: ['Module', 'No', 'No', 'Agents', 'No', 'Agents'] },
-  { feature: 'Prove layer (GSC + GA4 + AEO attribution)', values: ['Yes, core', 'No native attribution', 'No traffic estimate', 'Removed attribution', 'GA4 (reported buggy)', 'Partial'] },
+  { feature: 'Prove layer (GSC + GA4 + AEO attribution)', values: ['Yes, core', 'No native attribution', 'No traffic estimate', 'Removed attribution', 'GA4', 'Partial'] },
   { feature: 'Daily tracking', values: ['Yes', 'Yes', 'Yes', 'Varies', 'Yes', 'Yes'] },
 ];
 export const COMPARISON_FOOTNOTE =
