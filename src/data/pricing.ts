@@ -255,18 +255,18 @@ export interface ComparisonRow {
   values: string[];
 }
 export const COMPARISON_ROWS: ComparisonRow[] = [
-  { feature: 'Entry price / month', values: ['$79 (free diagnostic above)', '$29', '~$89', '$99', '$250', '$67'] },
-  { feature: 'Engines at entry', values: ['5', '4', '3', '1', 'credits per engine', '10+'] },
-  { feature: 'Gemini and Google AI Mode included', values: ['Yes, flat', 'Add-on', 'Add-on', 'Enterprise only', 'Enterprise / credits', 'Yes'] },
-  { feature: 'Per-engine add-on maths', values: ['None', 'Yes', 'Yes', 'Yes', 'Yes (credit drain)', 'No'] },
-  { feature: 'Multi-language / multi-country', values: ['Yes', '50+ countries', '115+ languages', 'Enterprise', 'Enterprise', 'US and EU only'] },
-  { feature: 'Brand Intelligence (perception vs reality)', values: ['Yes, core', 'No', 'No', 'Partial', 'Partial', 'Partial'] },
-  { feature: 'Content generation and optimisation', values: ['Module', 'No', 'No', 'Agents', 'No', 'Agents'] },
-  { feature: 'Prove layer (GSC + GA4 + AEO attribution)', values: ['Yes, core', 'No native attribution', 'No traffic estimate', 'Removed attribution', 'GA4', 'Partial'] },
-  { feature: 'Daily tracking', values: ['Yes', 'Yes', 'Yes', 'Varies', 'Yes', 'Yes'] },
+  { feature: 'Entry price / mo', values: ['$79 (free diagnostic above)', '$29', '~$95 (€89)', '$99', '$250', '$79'] },
+  { feature: 'Engines at entry', values: ['5, flat', '4', 'Choose 3 of 7', '1 (3 on Growth)', '4 (9 on Enterprise)', 'Choose 3'] },
+  { feature: 'Gemini and Google AI Mode', values: ['Yes, flat', 'Add-on', 'Within your 3', 'Enterprise', 'Enterprise', 'Within your 3'] },
+  { feature: 'Per-engine add-on maths', values: ['None', 'Yes', 'Yes (4th+ engine)', 'Yes (tier-gated)', 'Yes (per-engine credits)', 'No'] },
+  { feature: 'Multi-language / multi-country', values: ['Yes', 'Country-level', 'Yes', 'Enterprise', 'Enterprise', 'Yes'] },
+  { feature: 'Brand Intelligence (perception vs reality)', values: ['Yes, core', 'Partial', 'Partial', 'Partial', 'Partial (Enterprise-only)', 'Partial'] },
+  { feature: 'Content generation and optimisation', values: ['Module', 'No', 'No', 'Agents', 'Limited', 'Agents'] },
+  { feature: 'Prove layer (GSC + GA4 + AEO attribution)', values: ['Yes, core', 'GA4 template', 'No', 'Yes (CDN-dependent)', 'Yes', 'Yes'] },
+  { feature: 'Daily tracking', values: ['Yes', 'Yes', 'Yes', 'Yes', 'No (72h refresh)', 'Yes'] },
 ];
 export const COMPARISON_FOOTNOTE =
-  'Competitor data verified early July 2026; re-verify against live pages before go-live.';
+  'Competitor data verified 3 July 2026 against live vendor pricing pages and current reviews. This category shifts monthly; re-verify before production.';
 
 // FAQ. The same array feeds the visible accordion and the FAQPage JSON-LD, so the schema text
 // mirrors the rendered answer verbatim. Sentence case, no em dashes, no banned vocab.
