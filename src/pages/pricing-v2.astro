@@ -1,0 +1,129 @@
+---
+// DRAFT pricing page (/pricing-v2). Unlinked and noindex until go-live; the live page at
+// src/pages/pricing.astro is untouched. Every price and count comes from src/data/pricing.ts;
+// nothing is hard-coded on this page.
+//
+// VERIFY (state at last build, do NOT action here):
+//  - astro build passes; full page renders in order at /pricing-v2.
+//  - noindex present; page unlinked (not in nav / footer / sitemap).
+//  - src/pages/pricing.astro untouched; nothing deployed.
+//
+// GO-LIVE checklist (only when Alvin says, do NOT action):
+//  1. Re-verify every competitor cell in the comparison table against live pages.
+//  2. Remove noindex.
+//  3. Add the route to nav + sitemap.
+//  4. Rename to /pricing, or 308 the old route to it.
+//  5. Confirm the /done-for-you handoff still carries
+//     utm_source=zicy&utm_medium=referral&utm_campaign=dfy.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CoreTiers from '../components/pricing/CoreTiers.astro';
+import AgencyBlock from '../components/pricing/AgencyBlock.astro';
+import ContentModule from '../components/pricing/ContentModule.astro';
+import MultiMarket from '../components/pricing/MultiMarket.astro';
+import ComparisonTable from '../components/pricing/ComparisonTable.astro';
+import PricingFAQ from '../components/pricing/PricingFAQ.astro';
+import { FREE_DIAGNOSTIC, CORE_TIERS, AGENCY_TIERS, PRICING_FAQS } from '../data/pricing';
+import { SITE } from '../data/site';
+
+const title = 'Zicy pricing, all five AI engines on every plan';
+const description =
+  'All five AI engines, every plan. No per-engine add-ons. Start with a free diagnostic, then scale from Starter to Enterprise, plus an agency track with pooled prompts.';
+
+// Offer schema: one Product node listing the four core plus two agency tiers as Offers. Tiers with a
+// fixed monthly price carry price + priceCurrency; Enterprise and the agency tiers are contact-only
+// Offers with a sales URL and no fixed price. isRelatedTo points at the sitewide SoftwareApplication
+// (@id from Schema.astro) instead of duplicating it. No aggregateRating, no review.
+const pageUrl = `${SITE.url}/pricing-v2`;
+const toOffer = (t: (typeof CORE_TIERS)[number]) =>
+  t.priceMonthly !== null
+    ? { '@type': 'Offer', name: t.name, price: String(t.priceMonthly), priceCurrency: 'USD', url: pageUrl }
+    : { '@type': 'Offer', name: t.name, priceCurrency: 'USD', url: t.cta.href, availability: 'https://schema.org/InStock' };
+const offerSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Zicy plans',
+  description:
+    'Zicy pricing plans. All five AI engines on every plan, with no per-engine add-ons.',
+  brand: { '@type': 'Organization', name: SITE.name },
+  isRelatedTo: { '@id': `${SITE.url}/#app` },
+  offers: [...CORE_TIERS, ...AGENCY_TIERS].map(toOffer),
+};
+
+// FAQPage from the same array the visible accordion renders, so the text mirrors it verbatim.
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: PRICING_FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+<BaseLayout title={title} description={description} noindex={true}>
+  <!-- 1. Hero -->
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Pricing</span>
+      <h1>All five AI engines, every plan.<br />No per-engine add-ons.</h1>
+      <p class="lead">Be the brand AI gets right, on every engine, without paying extra to see them all.</p>
+      <p class="hmicro mono">
+        One tracked prompt is measured across all five engines every day, so 50 prompts is up to
+        7,500 AI answers a month.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. Free diagnostic wedge -->
+  <section class="fdband">
+    <div class="wrap">
+      <div class="fdcard">
+        <div class="fdcopy">
+          <span class="badge">{FREE_DIAGNOSTIC.price}</span>
+          <h2>{FREE_DIAGNOSTIC.name}</h2>
+          <p>{FREE_DIAGNOSTIC.blurb}</p>
+          <ul class="fdspecs">
+            {FREE_DIAGNOSTIC.specs.map((s) => <li class="mono">{s.value}</li>)}
+          </ul>
+        </div>
+        <a
+          class:list={['btn', FREE_DIAGNOSTIC.cta.primary ? 'btn-p' : 'btn-o', 'btn-lg']}
+          href={FREE_DIAGNOSTIC.cta.href}
+          rel={FREE_DIAGNOSTIC.cta.external ? 'noopener' : undefined}
+          target={FREE_DIAGNOSTIC.cta.external ? '_blank' : undefined}
+        >{FREE_DIAGNOSTIC.cta.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Core ladder + annual toggle -->
+  <CoreTiers />
+
+  <!-- 4. Agency track -->
+  <AgencyBlock />
+
+  <!-- 5. Anchors for later parts (Part 3 owns FAQ + schema) -->
+  <!--SLOT:content-module--><ContentModule />
+  <!--SLOT:multi-market--><MultiMarket />
+  <!--SLOT:comparison--><ComparisonTable />
+  <!--SLOT:faq--><PricingFAQ />
+  <!--SLOT:schema-->
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(offerSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+</BaseLayout>
+
+<style>
+  .hmicro{font-size:13px;color:var(--muted);margin-top:22px;max-width:60ch;line-height:1.7}
+  .fdband{padding-top:0}
+  .fdcard{
+    display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;
+    border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);
+    padding:28px 30px;
+  }
+  .fdcopy{flex:1 1 320px}
+  .fdcopy h2{font-family:var(--fd);font-weight:500;font-size:26px;margin:12px 0 6px;letter-spacing:-.01em}
+  .fdcopy p{color:var(--ink-2);font-size:15px;margin:0}
+  .fdspecs{list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;margin:16px 0 0;padding:0}
+  .fdspecs li{font-size:13px;color:var(--violet-700);position:relative;padding-left:16px}
+  .fdspecs li::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--violet-300)}
+</style>

@@ -1,0 +1,71 @@
+---
+// The Act layer: content credits presented as a capability you activate, not an add-on sold on the
+// side. Scale and Enterprise already include credits (see includedNote), so this reads as topping up
+// one product. All figures come from CONTENT_MODULE in pricing.ts.
+import { CONTENT_MODULE } from '../../data/pricing';
+
+const { payg, packs, bundles, includedNote } = CONTENT_MODULE;
+---
+<section class="reveal" id="content-module">
+  <div class="wrap">
+    <div class="shead" style="max-width:none;text-align:center;margin-bottom:12px">
+      <span class="eyebrow" style="justify-content:center"><span class="ix">03</span> Act layer</span>
+      <h2 style="margin-top:14px">Activate the Act layer.</h2>
+      <p style="margin:14px auto 0;max-width:62ch;color:var(--ink-2)">
+        Measure and improve run as one loop. Content credits turn a finding into a published fix, so
+        the same product that spots the gap also closes it.
+      </p>
+    </div>
+
+    <p class="cm-included mono">{includedNote}</p>
+
+    <!-- Packs: credits that do not expire. -->
+    <div class="cm-grid">
+      {packs.map((p) => (
+        <article class="card cm-card">
+          <h3>{p.name}</h3>
+          <p class="cm-credits mono">{p.credits} credits</p>
+          <p class="cm-price"><span class="mono">${p.priceUsd}</span></p>
+        </article>
+      ))}
+    </div>
+
+    <p class="cm-payg mono">
+      Pay as you go: <span>${payg.priceUsd}</span> per {payg.credits} credits.
+    </p>
+
+    <!-- Bundles: tier plus a pack, priced below the sum of the parts. -->
+    <div class="cm-bundles">
+      <span class="cm-bundles-label eyebrow" style="justify-content:center">Bundles</span>
+      <div class="cm-bundle-grid">
+        {bundles.map((b) => (
+          <article class="card cm-bundle">
+            <h3>{b.name}</h3>
+            <p class="cm-price"><span class="mono">${b.priceUsd}</span><span class="per">/mo</span></p>
+            <span class="cm-save mono">{b.save}</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cm-included{max-width:70ch;margin:0 auto 28px;text-align:center;font-size:12px;color:var(--violet-700);background:var(--violet-50);padding:10px 16px;border-radius:var(--r-md);line-height:1.7}
+  .cm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media (max-width:760px){.cm-grid{grid-template-columns:1fr}}
+  .cm-card{text-align:center}
+  .cm-card h3{font-family:var(--fd);font-weight:500;font-size:20px;margin:0 0 8px}
+  .cm-credits{font-size:13px;color:var(--muted);margin:0 0 10px}
+  .cm-price{font-family:var(--fm);font-size:28px;color:var(--violet-700);margin:0}
+  .cm-price .per{font-family:var(--fs);font-size:14px;color:var(--muted);margin-left:2px}
+  .cm-payg{text-align:center;font-size:13px;color:var(--ink-2);margin:20px 0 0}
+  .cm-payg span{color:var(--violet-700);font-weight:500}
+  .cm-bundles{margin-top:40px}
+  .cm-bundles-label{display:flex;margin-bottom:18px}
+  .cm-bundle-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:640px;margin:0 auto}
+  @media (max-width:640px){.cm-bundle-grid{grid-template-columns:1fr}}
+  .cm-bundle{text-align:center;border-color:var(--violet-300)}
+  .cm-bundle h3{font-family:var(--fd);font-weight:500;font-size:19px;margin:0 0 8px}
+  .cm-save{display:inline-block;margin-top:10px;font-size:12px;color:var(--ok-text);background:var(--ok-bg);padding:4px 12px;border-radius:var(--r-pill)}
+</style>
