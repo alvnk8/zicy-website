@@ -64,8 +64,9 @@ const article = {
         <p>
           This was not one stray template or a single misconfigured tag. It held across all ten sites
           in the corpus, which spanned different sectors and different technology stacks. Where
-          structured data existed, it was assembled in the browser rather than delivered by the
-          server.
+          structured data existed at all, it appeared only once a full browser had downloaded the
+          page, run its JavaScript, and assembled the document in memory. On several sites it did not
+          exist in either view.
         </p>
       </div>
     </div>
@@ -87,13 +88,15 @@ const article = {
           web is slow and costly, so a great deal of retrieval happens on the raw response alone.
         </p>
         <p>
-          The systems that decide how a brand is described, and whether it is cited, ChatGPT, Gemini,
-          Perplexity, Google AI Overviews and Google AI Mode, all draw on this kind of retrieval.
-          When they build an answer about a company, the material they have to work with is whatever
-          the server actually returned. If the structured data was never in that response, it was
-          never part of the evidence. The brand is then described from prose and links alone, and the
-          careful, machine-readable summary its team believed it had published is simply not there to
-          read.
+          The crawlers behind ChatGPT, Claude, and Perplexity retrieved the raw response and did not
+          execute JavaScript (Vercel crawler analysis, 2025; confirmed across independent tests
+          through mid 2026). Google's surfaces, Gemini, Google AI Overviews, and Google AI Mode, draw
+          on Google's rendered index, though rendering there is queued rather than guaranteed.
+          Server-side structured data is the only version every engine can read. When an engine builds
+          an answer about a company, the material it has to work with is whatever was delivered in that
+          version. If the structured data was never there, it was never part of the evidence, and the
+          brand is described from prose and links alone, its careful machine-readable summary simply
+          not there to read.
         </p>
       </div>
     </div>
@@ -139,21 +142,17 @@ const article = {
           company, starts to come apart. Four failure modes recur.
         </p>
         <p>
-          <strong><a href="/resources/glossary/entity-collapse">Entity collapse</a></strong> is when
-          an engine cannot tell that the various mentions of a business refer to one and the same
-          organisation, and treats them instead as several weakly related things, or as none in
-          particular. Structured data is what normally binds those mentions into one identity.
-          Without it in the raw view, the connective tissue is gone, and the engine is left to guess
-          from surface text whether the company on this page is the company it read about elsewhere.
+          <strong><a href="/resources/glossary/entity-collapse">Entity collapse</a></strong>: A
+          multi-division or multi-offering brand gets resolved down to its most-cited part. The engine
+          knows the brand for one thing, so its other divisions, product lines, or categories never
+          surface in answers about the categories they actually compete in. Without per-division
+          structured data in the raw response, nothing tells the engine those divisions are distinct
+          authorities.
         </p>
         <p>
-          <strong>Authority leakage</strong> is when the signals that should accrue to the brand, its
-          recognition, its associations and its standing, settle instead on whichever source the
-          engine already trusts: a directory, a marketplace listing, a review aggregator, or a
-          competitor with cleaner markup. The brand holds the underlying authority but has not made
-          it legible in the raw response, so the credit lands on a third party that has. Over time the
-          brand narrates its own category less and intermediaries narrate it more, which is one way
-          competitor share grows without anyone launching a campaign.
+          <strong>Authority leakage</strong>: recognition pools in the global or head-office version
+          of the brand instead of its market entities, so a country-specific question resolves to the
+          wrong market's page, with the wrong currency, availability, or contact details.
         </p>
         <p>
           <strong>Entity fragmentation</strong> is when one organisation is split into several
@@ -164,12 +163,9 @@ const article = {
           are the ones least likely to be cited.
         </p>
         <p>
-          <strong>Variant collapse</strong> is the mirror image: distinct things are flattened into
-          one. Two different products, two people who share a name, a current offering and a
-          discontinued one, all merge into a single blurred entity because nothing in the raw view
-          keeps them apart. The engine then answers about a composite that does not exist, mixing
-          attributes that belong to different things, and the brand cannot correct it because the
-          distinction was never expressed where the engine could read it.
+          <strong>Variant collapse</strong>: a product range collapses into a single model, so
+          individual variants stop surfacing. One SKU stands in for the whole line, and questions
+          about the other models return nothing or return the wrong one.
         </p>
       </div>
     </div>
@@ -246,8 +242,8 @@ const article = {
     <div class="wrap">
       <h2>See what AI actually reads about your brand.</h2>
       <p>
-        Zicy measures how AI describes your brand from the raw view the engines actually use, across
-        all five engines.
+        Zicy measures how AI describes your brand from the server-side version every engine can read,
+        across all five engines.
       </p>
       <div class="hcta">
         <a class="btn btn-p" href="/platform">Explore the platform</a>
