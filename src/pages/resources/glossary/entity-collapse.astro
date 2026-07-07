@@ -86,8 +86,9 @@ const graph = {
           in the response.
         </p>
         <p>
-          This holds across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode,
-          because they draw on the same underlying signals. The brand has not been described
+          This holds across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. The
+          engines run on different indexes, but they read the same structural signals at the source,
+          so a collapse on the site surfaces across all of them. The brand has not been described
           inaccurately. It has been described incompletely, reduced to its most famous face while its
           other businesses fall out of view. For the divisions that never surface, the effect is the
           same as not existing: in the place where buyers now ask, they are simply not part of the
@@ -161,7 +162,7 @@ const graph = {
       <div class="prose" style="max-width:760px">
         <p>
           Fixing entity collapse is structural, and it happens at the pattern level rather than
-          through more marketing copy. Four things matter. Each division needs its own server-side
+          through more marketing copy. Five things matter. Each division needs its own server-side
           structured data, present in the raw response, so that a crawler can resolve it without
           running any JavaScript. There should be one canonical organisation node that the divisions
           all connect to, so the parent is a single, stable identity rather than a set of competing
@@ -171,9 +172,12 @@ const graph = {
           Naming should be consistent across the site and the markup, so a machine sees the same
           entity described the same way everywhere. And the relationships between parent and divisions
           should be stated explicitly on the site, so that a system does not have to infer, and
-          usually fail to infer, which businesses belong together. Done together, these give each
-          division a presence an engine can resolve on its own terms, rather than folding it back into
-          the one part that already dominates.
+          usually fail to infer, which businesses belong together. Give each division its own entity
+          home, a page that authoritatively defines it, and declare the distinct topics that division
+          actually leads on, so the engine has somewhere to resolve each division to and a reason to
+          surface it in its own category. Done together, these give each division a presence an engine
+          can resolve on its own terms, rather than folding it back into the one part that already
+          dominates.
         </p>
         <p class="prov">This definition comes from entity resolution work developed through Growth.pro engagements.</p>
       </div>

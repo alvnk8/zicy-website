@@ -13,13 +13,13 @@ const url = `${SITE.url}/resources/guides/see-your-site-like-an-ai-crawler`;
 const CHECKS = [
   {
     name: 'Check one: the raw fetch',
-    command: 'curl -A "GPTBot" https://yoursite.com | grep -c "application/ld+json"',
-    text: 'This fetches your home page as an AI crawler would, identifying as GPTBot and running no JavaScript, then counts the structured-data blocks in the response. Zero means your structured data is invisible in the raw view, so the systems that read it never see it.',
+    command: 'curl -sL -A "GPTBot" https://yoursite.com | grep -c "application/ld+json"',
+    text: 'This fetches your home page the way an AI crawler would, as GPTBot and without running JavaScript, and checks whether any structured data is present in the raw response. Zero means none was found; any other number means at least some is present.',
   },
   {
     name: 'Check two: robots.txt',
     command: '',
-    text: 'Open yoursite.com/robots.txt and look for GPTBot, ClaudeBot, PerplexityBot and Google-Extended. If any of them is disallowed, you are turning away the crawlers you want to reach, and an accidental disallow is a self-inflicted wound worth fixing before anything else.',
+    text: 'Open yoursite.com/robots.txt and look for GPTBot, ClaudeBot, Google-Extended, OAI-SearchBot, Claude-SearchBot and PerplexityBot, so you can see which AI crawlers your site allows and which it blocks.',
   },
   {
     name: 'Check three: the diff',
@@ -127,20 +127,20 @@ const graph = {
           <p class="chk-text">{c.text}</p>
           {i === 0 && (
             <p>
-              If the count comes back as one or more, your structured data is at least present in the
-              raw response, which is the first thing you want to confirm. If it comes back as zero,
-              that is the finding to act on, and the next two checks help you work out why. Repeat the
-              command on the handful of pages that carry your most important claims, since coverage can
-              vary from page to page even on the same site.
+              One caution before trusting a zero. Some bot-protection layers verify crawler identity and
+              serve a challenge page to requests that claim to be GPTBot but come from an ordinary
+              connection. If the zero comes back alongside an unusually short response, rerun the
+              command without the -A "GPTBot" flag. If structured data appears in the plain request but
+              not the bot-flagged one, the finding is a bot wall, not missing schema, and it needs a
+              closer look rather than a conclusion.
             </p>
           )}
           {i === 1 && (
             <p>
-              Blocking is easy to do by accident. A single stray rule copied from an old template, or a
-              blanket disallow added during a staging lockdown and never lifted, is enough. If you find
-              one of these agents disallowed and did not mean it, removing that line is the
-              highest-return fix on this page. It costs nothing to check, and when something is wrong
-              here, nothing else you try for AI visibility will work until it is put right.
+              These fall into two groups. GPTBot, ClaudeBot, and Google-Extended are training crawlers;
+              OAI-SearchBot, Claude-SearchBot, and PerplexityBot fetch pages to answer live questions. A
+              site can block the training group and still allow the retrieval group, so check each line
+              rather than assuming one verdict covers them all.
             </p>
           )}
           {i === 2 && (
