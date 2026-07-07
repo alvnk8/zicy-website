@@ -1,0 +1,267 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../data/site';
+
+const title =
+  'What AI crawlers actually see: a ten-site study of server-side structured data';
+const description =
+  'We fetched ten major brand sites the way AI crawlers do, without JavaScript. None served structured data in that view. Here is what that means.';
+
+const url = `${SITE.url}/resources/research/ai-crawlers-server-side-schema-study`;
+
+// Page-level Article JSON-LD only. Author and publisher reference the sitewide Organization by @id,
+// so no Organization node is defined (or duplicated) at page level.
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: title,
+  description,
+  inLanguage: 'en-GB',
+  datePublished: '2026-07-07',
+  dateModified: '2026-07-07',
+  author: { '@id': `${SITE.url}/#org` },
+  publisher: { '@id': `${SITE.url}/#org` },
+  mainEntityOfPage: url,
+  url,
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(article)} />
+
+  <!-- Hero: breadcrumb, eyebrow, H1, and the finding stated verbatim as the first paragraph -->
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">AI crawlers and server-side schema</span>
+      </nav>
+      <span class="eyebrow">Research</span>
+      <h1>What AI crawlers actually see: a ten-site study of server-side structured data</h1>
+      <p class="lead">
+        Across a ten-site corpus of major brand websites examined in mid 2026 (internal study, n=10),
+        none exposed server-side JSON-LD to a non-JavaScript fetch. Every site in the corpus served
+        its structured data, where it existed at all, only after client-side rendering.
+      </p>
+    </div>
+  </section>
+
+  <!-- The finding -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          Put plainly, the machine-readable description of each brand, the JSON-LD that tells a
+          system who the company is, what it sells and how it connects to the rest of the web, was
+          absent from the first response the server sent. It appeared only once a full browser had
+          downloaded the page, run its JavaScript and assembled the document in memory. A person with
+          a browser would never notice. A system that reads the raw response, and never runs that
+          JavaScript, sees a page with no structured data at all.
+        </p>
+        <p>
+          This was not one stray template or a single misconfigured tag. It held across all ten sites
+          in the corpus, which spanned different sectors and different technology stacks. Where
+          structured data existed, it was assembled in the browser rather than delivered by the
+          server.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why the raw view matters -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">Why the raw view matters</span>
+        <h2>Most crawlers read the page before it renders.</h2>
+      </div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          The reason this matters is a quiet property of how retrieval works. Most AI crawlers fetch
+          a page the way a plain HTTP client does: they request the HTML and read what comes back.
+          They do not open a browser, they do not wait for scripts to run, and they do not
+          reconstruct the page the way a person's screen does. Rendering JavaScript across the open
+          web is slow and costly, so a great deal of retrieval happens on the raw response alone.
+        </p>
+        <p>
+          The systems that decide how a brand is described, and whether it is cited, ChatGPT, Gemini,
+          Perplexity, Google AI Overviews and Google AI Mode, all draw on this kind of retrieval.
+          When they build an answer about a company, the material they have to work with is whatever
+          the server actually returned. If the structured data was never in that response, it was
+          never part of the evidence. The brand is then described from prose and links alone, and the
+          careful, machine-readable summary its team believed it had published is simply not there to
+          read.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The implication -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">The implication</span>
+        <h2>A green tick can hide an empty page.</h2>
+      </div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          This creates a gap that standard tooling hides. Schema validators and rich-result testers
+          open the page in a full browser, run the JavaScript and then inspect the outcome. In that
+          view the structured data is present and correct, so the tool reports a pass. The page looks
+          compliant, and everyone moves on.
+        </p>
+        <p>
+          But the validator and the AI crawler are looking at two different documents. One waited for
+          the browser to finish; the other read the raw response and left. A site can pass every
+          schema validator it is pointed at and still serve nothing to the systems that actually
+          decide citations. The check measures the rendered page; the answer engines read the page
+          before it renders. That is the heart of the problem: the tool that certifies the markup and
+          the systems that consume it are not looking at the same thing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The four entity failure modes -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">Four failure modes</span>
+        <h2>How entities come apart in the raw view.</h2>
+      </div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          When structured data is missing from the raw view, a brand does not simply lose a tidy
+          summary. The entity itself, the single resolvable thing an engine should recognise as the
+          company, starts to come apart. Four failure modes recur.
+        </p>
+        <p>
+          <strong><a href="/resources/glossary/entity-collapse">Entity collapse</a></strong> is when
+          an engine cannot tell that the various mentions of a business refer to one and the same
+          organisation, and treats them instead as several weakly related things, or as none in
+          particular. Structured data is what normally binds those mentions into one identity.
+          Without it in the raw view, the connective tissue is gone, and the engine is left to guess
+          from surface text whether the company on this page is the company it read about elsewhere.
+        </p>
+        <p>
+          <strong>Authority leakage</strong> is when the signals that should accrue to the brand, its
+          recognition, its associations and its standing, settle instead on whichever source the
+          engine already trusts: a directory, a marketplace listing, a review aggregator, or a
+          competitor with cleaner markup. The brand holds the underlying authority but has not made
+          it legible in the raw response, so the credit lands on a third party that has. Over time the
+          brand narrates its own category less and intermediaries narrate it more, which is one way
+          competitor share grows without anyone launching a campaign.
+        </p>
+        <p>
+          <strong>Entity fragmentation</strong> is when one organisation is split into several
+          partial identities. A product line reads as separate from its parent, a regional site reads
+          as unrelated to the global brand, a sub-brand floats free of the company that owns it. Each
+          fragment carries a little of the real entity and none carries the whole, so no single,
+          confident description of the business can form. The engine hedges, and hedged descriptions
+          are the ones least likely to be cited.
+        </p>
+        <p>
+          <strong>Variant collapse</strong> is the mirror image: distinct things are flattened into
+          one. Two different products, two people who share a name, a current offering and a
+          discontinued one, all merge into a single blurred entity because nothing in the raw view
+          keeps them apart. The engine then answers about a composite that does not exist, mixing
+          attributes that belong to different things, and the brand cannot correct it because the
+          distinction was never expressed where the engine could read it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to check your own site -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">Check your own site</span>
+        <h2>You can reproduce this in minutes.</h2>
+      </div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          The useful part of this finding is that anyone can reproduce it on their own domain, and you
+          do not need our corpus to do it. The test is to look at your site the way a non-JavaScript
+          crawler does, then compare that with what a browser shows. Our guide on
+          <a href="/resources/guides/see-your-site-like-an-ai-crawler">how to see your site like an AI crawler</a>
+          walks through the exact steps.
+        </p>
+        <p>
+          If the structured data you expect is missing from the raw response, that is the version the
+          answer engines are most likely to read. The fix is not more markup in the browser; it is
+          making sure the markup a crawler needs is in the server's first response, before any
+          JavaScript runs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">Method</span>
+        <h2>What we did.</h2>
+      </div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          The method was deliberately simple, so that it is easy to repeat. For each site we compared
+          a raw HTTP fetch with the rendered page, and looked for server-side JSON-LD in the raw view.
+          Nothing more elaborate than that comparison was needed to produce the result.
+        </p>
+        <p>
+          This research comes from entity resolution work developed through Growth.pro engagements.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Limitations -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">Limitations</span>
+        <h2>What this study is not.</h2>
+      </div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          The limitations are worth stating plainly. This is a small sample, n=10, drawn from a
+          single window in mid 2026, so it is a snapshot rather than a trend line, and a larger or
+          repeated study could move the picture. The corpus also skews towards large, well-resourced
+          brands, the sites most likely to have invested in structured data in the first place, which
+          makes the uniformity of the result more striking but less generalisable to the long tail.
+          Treat the finding as a strong reason to check your own raw view, not as a precise population
+          estimate.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dual CTA -->
+  <section class="final">
+    <div class="wrap">
+      <h2>See what AI actually reads about your brand.</h2>
+      <p>
+        Zicy measures how AI describes your brand from the raw view the engines actually use, across
+        all five engines.
+      </p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb: token-based, matches the glossary pages. */
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+</style>
