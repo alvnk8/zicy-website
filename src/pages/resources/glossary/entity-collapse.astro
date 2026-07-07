@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../data/site';
+
+const title = 'Entity collapse: when AI flattens a brand to one thing';
+const description =
+  'Entity collapse is when AI systems reduce a multi-division brand to its best-known part, making the rest invisible. Definition, signs, and fixes.';
+
+const url = `${SITE.url}/resources/glossary/entity-collapse`;
+
+// Single source for the definition: used for the visible .def paragraph AND the DefinedTerm
+// description, so the JSON-LD text matches the rendered definition character for character.
+const DEFINITION =
+  "Entity collapse: a structural failure in which AI systems resolve a multi-division or multi-offering brand down to its most-cited part, so the brand's other divisions, products, or categories never surface in AI answers.";
+
+// Page-level JSON-LD: one DefinedTerm inside a DefinedTermSet, plus an Article. Author and publisher
+// reference the sitewide Organization by @id, so no Organization node is defined at page level.
+// No review, no aggregateRating.
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'DefinedTermSet',
+      '@id': `${url}#set`,
+      name: 'AI entity resolution failure modes',
+      url,
+    },
+    {
+      '@type': 'DefinedTerm',
+      '@id': `${url}#term`,
+      name: 'Entity collapse',
+      description: DEFINITION,
+      url,
+      inDefinedTermSet: { '@id': `${url}#set` },
+    },
+    {
+      '@type': 'Article',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      inLanguage: 'en-GB',
+      datePublished: '2026-07-07',
+      dateModified: '2026-07-07',
+      author: { '@id': `${SITE.url}/#org` },
+      publisher: { '@id': `${SITE.url}/#org` },
+      mainEntityOfPage: url,
+      url,
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <!-- Hero: breadcrumb, H1, and the definition first, verbatim -->
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Entity collapse</span>
+      </nav>
+      <span class="eyebrow">AI visibility glossary</span>
+      <h1>Entity collapse: when AI flattens a brand to one thing</h1>
+      <p class="def">{DEFINITION}</p>
+    </div>
+  </section>
+
+  <!-- What it looks like from outside -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">What it looks like</span>
+        <h2>Accurate, but only about one part.</h2>
+      </div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          From outside, entity collapse looks like a brand that AI describes accurately but only in
+          part. Picture a multi-division group that most people know for a single consumer category.
+          Ask an answer engine about that category and the group appears, described well. Ask instead
+          about the industrial supplies, the financial services or the logistics arm that sits under
+          the same parent, and something odd happens: the group is absent. A different set of
+          companies answers the question, and the division that genuinely competes there is nowhere
+          in the response.
+        </p>
+        <p>
+          This holds across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode,
+          because they draw on the same underlying signals. The brand has not been described
+          inaccurately. It has been described incompletely, reduced to its most famous face while its
+          other businesses fall out of view. For the divisions that never surface, the effect is the
+          same as not existing: in the place where buyers now ask, they are simply not part of the
+          answer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why it happens -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">Why it happens</span>
+        <h2>The strongest signal swallows the rest.</h2>
+      </div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          At the pattern level, three things combine. First, the strongest citation signal dominates.
+          One division has been written about, linked to and referenced far more than the others, so
+          when a system resolves the brand it settles on that best-known part and treats it as the
+          whole. Second, the weaker divisions lack their own resolvable presence. They may have pages,
+          but nothing gives them a distinct, machine-readable identity that an engine can hold
+          separately from the parent's famous arm.
+        </p>
+        <p>
+          Third, and most fixable, nothing on the site tells a machine that the divisions are distinct
+          parts of one organisation. The relationships that are obvious to a human reader, that these
+          are separate businesses under a shared parent, are never stated in a form a crawler can
+          read. Our research on
+          <a href="/resources/research/ai-crawlers-server-side-schema-study">what AI crawlers actually see</a>
+          found that structured data is routinely absent from the raw, non-JavaScript response, which
+          is exactly the view these systems rely on. When the machine-readable relationships are
+          missing there, collapse is the default outcome rather than the exception.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to recognise it -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">How to recognise it</span>
+        <h2>Ask each division its own question.</h2>
+      </div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          You can test for entity collapse directly. Write a short, category-level prompt for each
+          division, the kind of question a buyer in that market would actually ask, and run it. Then
+          read which organisation answers. If the same well-known division surfaces every time, and
+          the others never appear in their own categories, suspect collapse. The tell is not that the
+          brand is described badly; it is that only one part of the brand is ever described at all.
+        </p>
+        <p>
+          Run the prompts across engines rather than trusting a single one. A division might resolve
+          on one engine and vanish on the others, which is itself a sign that its presence is thin and
+          held together by a single weak signal rather than a stable, machine-readable identity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What fixing it involves -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">What fixing it involves</span>
+        <h2>Give every division a presence a machine can resolve.</h2>
+      </div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Fixing entity collapse is structural, and it happens at the pattern level rather than
+          through more marketing copy. Four things matter. Each division needs its own server-side
+          structured data, present in the raw response, so that a crawler can resolve it without
+          running any JavaScript. There should be one canonical organisation node that the divisions
+          all connect to, so the parent is a single, stable identity rather than a set of competing
+          fragments.
+        </p>
+        <p>
+          Naming should be consistent across the site and the markup, so a machine sees the same
+          entity described the same way everywhere. And the relationships between parent and divisions
+          should be stated explicitly on the site, so that a system does not have to infer, and
+          usually fail to infer, which businesses belong together. Done together, these give each
+          division a presence an engine can resolve on its own terms, rather than folding it back into
+          the one part that already dominates.
+        </p>
+        <p class="prov">This definition comes from entity resolution work developed through Growth.pro engagements.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related terms box: plain text, no links -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">Related terms</span>
+        <h2>Other ways an entity can be misread.</h2>
+      </div>
+      <div class="card" style="max-width:760px">
+        <p><strong>Authority leakage</strong> is when the recognition a brand has earned settles on a third party with cleaner markup, a directory, a marketplace or a competitor, instead of on the brand itself.</p>
+        <p><strong>Entity fragmentation</strong> is when one organisation is split into several partial identities, none of which carries the whole, so no confident description of the business can form.</p>
+        <p><strong>Variant collapse</strong> is the mirror image of entity collapse: distinct things, two products or two people who share a name, are flattened into a single blurred entity.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb: token-based, matches the other glossary pages. */
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+
+  /* One-sentence definition, given visual weight as the extractable answer. */
+  .def{font-family:var(--display);font-size:clamp(20px,2.4vw,26px);line-height:1.45;color:var(--ink);max-width:820px;letter-spacing:-0.01em}
+
+  .prov{color:var(--muted);font-size:14px;margin-top:18px}
+</style>
