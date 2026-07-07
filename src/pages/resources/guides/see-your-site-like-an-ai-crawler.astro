@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../data/site';
+
+const title = 'See your site the way AI crawlers see it: a ten-minute self-check';
+const description =
+  'Three checks anyone can run to learn what ChatGPT, Gemini, Perplexity and the Google AI surfaces can actually read from your site.';
+
+const url = `${SITE.url}/resources/guides/see-your-site-like-an-ai-crawler`;
+
+// Single source for the three checks: drives the visible sections AND the HowTo steps, so the step
+// names and text match the rendered checks verbatim.
+const CHECKS = [
+  {
+    name: 'Check one: the raw fetch',
+    command: 'curl -A "GPTBot" https://yoursite.com | grep -c "application/ld+json"',
+    text: 'This fetches your home page as an AI crawler would, identifying as GPTBot and running no JavaScript, then counts the structured-data blocks in the response. Zero means your structured data is invisible in the raw view, so the systems that read it never see it.',
+  },
+  {
+    name: 'Check two: robots.txt',
+    command: '',
+    text: 'Open yoursite.com/robots.txt and look for GPTBot, ClaudeBot, PerplexityBot and Google-Extended. If any of them is disallowed, you are turning away the crawlers you want to reach, and an accidental disallow is a self-inflicted wound worth fixing before anything else.',
+  },
+  {
+    name: 'Check three: the diff',
+    command: '',
+    text: 'Compare the raw fetch from check one with the fully rendered page your browser shows. If the structured data appears only in the rendered view, it is client-injected, and AI crawlers do not see it. A page can look complete on screen while the raw response an engine reads is empty.',
+  },
+];
+
+// Page-level JSON-LD: a HowTo whose steps mirror the three checks, plus an Article. Author and
+// publisher reference the sitewide Organization by @id. No review, no aggregateRating.
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'HowTo',
+      '@id': `${url}#howto`,
+      name: title,
+      description,
+      step: CHECKS.map((c, i) => ({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: c.name,
+        text: c.text,
+      })),
+    },
+    {
+      '@type': 'Article',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      inLanguage: 'en-GB',
+      datePublished: '2026-07-07',
+      dateModified: '2026-07-07',
+      author: { '@id': `${SITE.url}/#org` },
+      publisher: { '@id': `${SITE.url}/#org` },
+      mainEntityOfPage: url,
+      url,
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <!-- Hero + premise -->
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">See your site like an AI crawler</span>
+      </nav>
+      <span class="eyebrow">Guide</span>
+      <h1>See your site the way AI crawlers see it: a ten-minute self-check</h1>
+      <p class="lead">
+        What you see when you open your website in a browser is not what an AI crawler fetches. Your
+        browser downloads the page, runs its JavaScript and assembles the finished document on screen.
+        Most AI crawlers do none of that. They request the raw HTML and read whatever the server sends
+        back, before a single script runs.
+      </p>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          When the two views differ, and on many sites they differ a great deal, the crawler's version
+          is the one that decides how you are described and cited. Our research on
+          <a href="/resources/research/ai-crawlers-server-side-schema-study">what AI crawlers actually see</a>
+          (internal study, n=10, mid 2026) found that none of the major brand sites tested exposed
+          their structured data to a non-JavaScript fetch, even though it was present once a browser
+          rendered the page.
+        </p>
+        <p>
+          The three checks below take about ten minutes and show you, on your own domain, exactly what
+          an engine reads. You can run every one of them with tools you already have, and act on what
+          you find without anyone's help. Run them against your home page first, then any page that
+          matters for how you are described.
+        </p>
+        <p>
+          You do not need to be a developer to get value here. The first check is a single command you
+          paste into a terminal, the second is a page you can read in your browser, and the third is a
+          comparison of the two. If you can copy and paste, you can see what an engine sees, and that
+          alone puts you ahead of most sites, which have never looked at their raw view at all.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The three checks -->
+  {CHECKS.map((c, i) => (
+    <section style={i % 2 === 0 ? '' : 'background:var(--mist)'}>
+      <div class="wrap">
+        <div class="shead">
+          <span class="eyebrow">Self-check</span>
+          <h2>{c.name}</h2>
+        </div>
+        {c.command && (
+          <pre class="code"><code>{c.command}</code></pre>
+        )}
+        <div class="prose" style="max-width:760px">
+          <p class="chk-text">{c.text}</p>
+          {i === 0 && (
+            <p>
+              If the count comes back as one or more, your structured data is at least present in the
+              raw response, which is the first thing you want to confirm. If it comes back as zero,
+              that is the finding to act on, and the next two checks help you work out why. Repeat the
+              command on the handful of pages that carry your most important claims, since coverage can
+              vary from page to page even on the same site.
+            </p>
+          )}
+          {i === 1 && (
+            <p>
+              Blocking is easy to do by accident. A single stray rule copied from an old template, or a
+              blanket disallow added during a staging lockdown and never lifted, is enough. If you find
+              one of these agents disallowed and did not mean it, removing that line is the
+              highest-return fix on this page. It costs nothing to check, and when something is wrong
+              here, nothing else you try for AI visibility will work until it is put right.
+            </p>
+          )}
+          {i === 2 && (
+            <p>
+              The simplest way to run the diff is to open the raw fetch from check one, search it for
+              the structured data you expect, then compare that with what the rendered page contains.
+              If the schema is in the browser but not the fetch, your markup is being added after the
+              page loads, which is the pattern that hides it from the systems that read it. Many teams
+              are surprised at this step, because the rendered page they are proud to ship looks
+              nothing like the sparse response a crawler actually collects.
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- What the results mean, honestly -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">What the results mean</span>
+        <h2>Honestly, what these checks can and cannot tell you.</h2>
+      </div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          These three checks are worth running, but it helps to be clear about their limits. They find
+          access and carrier problems: whether a crawler can reach your pages, and whether the
+          structured data you rely on actually travels in the raw response the engines read, ChatGPT,
+          Gemini, Perplexity, Google AI Overviews and Google AI Mode among them. Those are real
+          issues, and fixing them removes the most common reasons a brand is read incompletely.
+        </p>
+        <p>
+          What they do not tell you is whether the entity graph behind your markup resolves correctly.
+          A site can serve valid schema in the raw view and still describe its organisation, its
+          divisions and its products in a way that leaves an engine unsure who is who. That is
+          structural diagnosis, a deeper question than access, and it is not something a single command
+          can answer. If a check shows that your schema or llms.txt is missing from the raw view,
+          Zicy's Action Center can generate both for you, though the fixes above are within reach of
+          any developer who wants to do them by hand.
+        </p>
+        <p>
+          Treat this as triage rather than a full audit. Clearing the three checks means a crawler can
+          reach you and your structured data is in the response it reads. That is the floor, the point
+          below which nothing else you do about AI visibility can work. It is not the ceiling, but it
+          is the right place to start, and most sites have not started.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing dual CTA -->
+  <section class="final">
+    <div class="wrap">
+      <h2>Know what AI reads, then decide what to do about it.</h2>
+      <p>
+        Run the checks, fix what they surface, and if the harder structural questions need a hand, we
+        can help.
+      </p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb: token-based, matches the other resources pages. */
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+
+  /* Code block: JetBrains Mono via --fm, framed with existing tokens, scrolls on narrow screens. */
+  .code{
+    font-family:var(--fm);font-size:13.5px;line-height:1.6;color:var(--ink);
+    background:var(--mist);border:1px solid var(--line);border-radius:var(--r-md);
+    padding:16px 18px;margin:0 0 20px;max-width:760px;overflow-x:auto;white-space:pre;
+  }
+  .code code{font-family:inherit}
+</style>
