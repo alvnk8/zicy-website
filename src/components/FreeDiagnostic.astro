@@ -1,0 +1,532 @@
+---
+// The free diagnostic — a public lead magnet. Minimal input (brand name + website),
+// a bot fills the rest server-side, then a background job queries ChatGPT, Gemini,
+// Perplexity, Google AI Overviews and Google AI Mode and scores factual accuracy.
+// Two-stage output: an ungated teaser, then a work-email-gated full report.
+//
+// Calls same-origin /api routes so local/prod deployments can proxy to the
+// diagnostic backend without browser-side CORS issues.
+const ENGINES = ['ChatGPT', 'Gemini', 'Perplexity', 'Google AI Overviews', 'Google AI Mode'];
+const ENGINES_TEXT = ENGINES.slice(0, -1).join(', ') + ' and ' + ENGINES[ENGINES.length - 1];
+---
+
+<section id="zicy-free-diagnostic">
+  <div class="wrap fd-wrap">
+    <div class="fd-intro">
+      <span class="eyebrow">Free tool · Brand intelligence</span>
+      <h1 class="fd-heading">Be the brand AI gets right.</h1>
+      <p class="fd-sub">
+        Enter your brand name and website. We ask {ENGINES_TEXT} what they know about you, check it against the facts, and score how close AI gets to the truth.
+      </p>
+    </div>
+
+    <form id="fdForm" class="fd-form">
+      <div class="fd-row">
+        <div class="fd-field">
+          <label for="fdBrand">Brand name</label>
+          <input id="fdBrand" name="brandName" type="text" required autocomplete="organization" placeholder="e.g. Zicy" />
+        </div>
+        <div class="fd-field">
+          <label for="fdDomain">Website domain</label>
+          <input id="fdDomain" name="domain" type="text" required autocomplete="url" placeholder="e.g. zicy.com" />
+        </div>
+      </div>
+
+      <details class="fd-advanced" open>
+        <summary>Optional: category and market</summary>
+        <div class="fd-row">
+          <div class="fd-field">
+            <label for="fdCategory">Category</label>
+            <input id="fdCategory" name="category" type="text" placeholder="e.g. AI visibility platform" />
+          </div>
+          <div class="fd-field">
+            <label for="fdMarket">Market</label>
+            <input id="fdMarket" name="market" type="text" placeholder="e.g. Singapore" />
+          </div>
+        </div>
+      </details>
+
+      <button type="submit" class="btn btn-primary btn-lg fd-submit" id="fdSubmitBtn">Get my free AI reality score</button>
+      <p class="fd-disclaimer">No credit card. Takes about a minute. One free run per domain every 30 days.</p>
+    </form>
+
+    <div id="fdProgress" class="fd-progress" hidden>
+      <div class="fd-progress-container">
+        <span class="fd-progress-text" id="fdProgressText">Starting</span>
+        <div class="fd-progress-bar-wrapper"><div class="fd-progress-bar-fill" id="fdProgressFill"></div></div>
+        <span class="fd-progress-pct" id="fdProgressPct">0%</span>
+      </div>
+    </div>
+
+    <div id="fdError" class="fd-error" hidden role="alert"></div>
+
+    <div id="fdTeaser" class="fd-teaser" hidden>
+      <span class="eyebrow">Your AI reality score</span>
+      <div class="fd-score" id="fdScoreValue">0</div>
+      <p class="fd-score-line" id="fdVisibilityLine"></p>
+      <p class="fd-inaccuracy-line" id="fdInaccuracyLine"></p>
+      <p class="fd-engine-line" id="fdEngineLine"></p>
+      <button type="button" class="btn btn-primary btn-lg" id="fdUnlockBtn">See the full report</button>
+    </div>
+
+    <form id="fdUnlockForm" class="fd-unlock-form" hidden>
+      <div class="fd-field">
+        <label for="fdEmail">Work email</label>
+        <input id="fdEmail" name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
+      </div>
+      <label class="fd-consent">
+        <input id="fdConsent" name="consent" type="checkbox" />
+        <span>Send me the full report and occasional AI visibility tips from Zicy.</span>
+      </label>
+      <button type="submit" class="btn btn-primary btn-lg" id="fdUnlockSubmitBtn">Unlock the full report</button>
+    </form>
+
+    <div id="fdFullReport" class="fd-full-report" hidden>
+      <div class="shead">
+        <span class="eyebrow">Full report</span>
+        <h2 id="fdReportHeading">How AI sees your brand</h2>
+      </div>
+
+      <div class="fd-section">
+        <h3>Accuracy by engine</h3>
+        <div class="fd-table-wrap">
+          <table class="fd-table" id="fdEngineTable">
+            <thead><tr><th>Engine</th><th>Accuracy</th><th>Hallucination risk</th><th>Mentioned</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="fd-section">
+        <h3>What AI gets wrong</h3>
+        <div class="fd-inaccuracies" id="fdInaccuraciesList"></div>
+      </div>
+
+      <div class="fd-section">
+        <h3>What to fix first</h3>
+        <div class="fd-recommendations" id="fdRecommendationsList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  #zicy-free-diagnostic { width: 100%; padding: clamp(48px, 8vw, 88px) 0; }
+  #zicy-free-diagnostic .fd-wrap { max-width: 760px; }
+
+  #zicy-free-diagnostic .fd-intro { text-align: center; margin-bottom: 40px; }
+  #zicy-free-diagnostic .fd-intro .eyebrow { justify-content: center; margin-bottom: 16px; }
+  #zicy-free-diagnostic .fd-intro .eyebrow::before { display: none; }
+  #zicy-free-diagnostic .fd-heading {
+    font-family: var(--display); font-weight: 500; color: var(--ink);
+    font-size: clamp(32px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  #zicy-free-diagnostic .fd-sub { font-size: 17px; color: var(--ink-2); line-height: 1.6; max-width: 620px; margin: 0 auto; }
+
+  #zicy-free-diagnostic .fd-form {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg);
+    padding: 28px; display: flex; flex-direction: column; gap: 16px;
+  }
+  #zicy-free-diagnostic .fd-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  #zicy-free-diagnostic .fd-field { display: flex; flex-direction: column; gap: 6px; }
+  #zicy-free-diagnostic .fd-field label { font-size: 13px; font-weight: 500; color: var(--ink-2); }
+  #zicy-free-diagnostic .fd-field input {
+    height: 46px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: var(--r-sm);
+    font-family: var(--body); font-size: 15px; color: var(--ink); background: var(--surface);
+    outline: none; transition: border-color .15s, box-shadow .15s;
+  }
+  #zicy-free-diagnostic .fd-field input:focus { border-color: var(--violet); box-shadow: 0 0 0 3px var(--violet-50); }
+
+  #zicy-free-diagnostic .fd-advanced { border-top: 1px solid var(--line); padding-top: 12px; }
+  #zicy-free-diagnostic .fd-advanced summary {
+    font-size: 13.5px; font-weight: 500; color: var(--violet-700); cursor: pointer; user-select: none;
+  }
+  #zicy-free-diagnostic .fd-advanced[open] summary { margin-bottom: 12px; }
+
+  #zicy-free-diagnostic .fd-submit { width: 100%; justify-content: center; margin-top: 4px; }
+  #zicy-free-diagnostic .fd-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+  #zicy-free-diagnostic .fd-disclaimer { font-size: 13px; color: var(--muted); text-align: center; }
+
+  /* progress */
+  #zicy-free-diagnostic .fd-progress { margin-top: 24px; }
+  #zicy-free-diagnostic .fd-progress-container {
+    display: flex; flex-direction: column; gap: 8px; padding: 18px 20px;
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg);
+  }
+  #zicy-free-diagnostic .fd-progress-text { font-size: 14.5px; color: var(--ink); font-weight: 500; }
+  #zicy-free-diagnostic .fd-progress-bar-wrapper { width: 100%; height: 6px; background: var(--mist); border-radius: 3px; overflow: hidden; }
+  #zicy-free-diagnostic .fd-progress-bar-fill {
+    height: 100%; width: 4%; border-radius: 3px;
+    background: linear-gradient(90deg, var(--violet-700), var(--violet));
+    transition: width .5s ease-out;
+  }
+  #zicy-free-diagnostic .fd-progress-pct { font-size: 12px; color: var(--muted); text-align: right; font-family: var(--mono); }
+
+  #zicy-free-diagnostic .fd-error {
+    margin-top: 20px; padding: 14px 18px; border-radius: var(--r-md);
+    background: var(--flag-bg); color: var(--flag-text); font-size: 14.5px; line-height: 1.5;
+  }
+
+  /* teaser */
+  #zicy-free-diagnostic .fd-teaser {
+    margin-top: 28px; text-align: center; padding: 36px 28px;
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg);
+  }
+  #zicy-free-diagnostic .fd-teaser .eyebrow { justify-content: center; margin-bottom: 12px; }
+  #zicy-free-diagnostic .fd-score {
+    font-family: var(--display); font-weight: 500; color: var(--violet-700);
+    font-size: clamp(56px, 9vw, 88px); line-height: 1; letter-spacing: -0.02em; margin-bottom: 14px;
+  }
+  #zicy-free-diagnostic .fd-score::after { content: '/100'; font-size: 0.32em; color: var(--muted); margin-left: 6px; }
+  #zicy-free-diagnostic .fd-score-line,
+  #zicy-free-diagnostic .fd-inaccuracy-line,
+  #zicy-free-diagnostic .fd-engine-line { font-size: 15.5px; color: var(--ink-2); line-height: 1.6; margin-bottom: 6px; }
+  #zicy-free-diagnostic .fd-teaser .btn { margin-top: 18px; }
+
+  /* unlock form */
+  #zicy-free-diagnostic .fd-unlock-form {
+    margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg);
+    padding: 24px; display: flex; flex-direction: column; gap: 14px;
+  }
+  #zicy-free-diagnostic .fd-consent { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: var(--ink-2); cursor: pointer; }
+  #zicy-free-diagnostic .fd-consent input { margin-top: 3px; flex-shrink: 0; }
+
+  /* full report */
+  #zicy-free-diagnostic .fd-full-report { margin-top: 40px; }
+  #zicy-free-diagnostic .fd-section { margin-top: 32px; }
+  #zicy-free-diagnostic .fd-section h3 { font-family: var(--display); font-weight: 500; font-size: 20px; color: var(--ink); margin-bottom: 14px; }
+
+  #zicy-free-diagnostic .fd-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-lg); }
+  #zicy-free-diagnostic .fd-table { width: 100%; border-collapse: collapse; background: var(--surface); }
+  #zicy-free-diagnostic .fd-table th, #zicy-free-diagnostic .fd-table td {
+    padding: 13px 16px; text-align: left; font-size: 14.5px; border-bottom: 1px solid var(--line); white-space: nowrap;
+  }
+  #zicy-free-diagnostic .fd-table thead th { background: var(--paper); font-weight: 600; color: var(--ink); }
+  #zicy-free-diagnostic .fd-table tbody td { color: var(--ink-2); }
+  #zicy-free-diagnostic .fd-table tr:last-child td { border-bottom: 0; }
+
+  #zicy-free-diagnostic .fd-inaccuracies, #zicy-free-diagnostic .fd-recommendations { display: flex; flex-direction: column; gap: 12px; }
+  #zicy-free-diagnostic .fd-inaccuracy-card, #zicy-free-diagnostic .fd-rec-card {
+    border: 1px solid var(--line); border-radius: var(--r-md); padding: 16px 18px; background: var(--surface);
+  }
+  #zicy-free-diagnostic .fd-inaccuracy-head { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  #zicy-free-diagnostic .fd-tag {
+    display: inline-flex; align-items: center; font-family: var(--mono); font-size: 11px; font-weight: 500;
+    letter-spacing: .06em; text-transform: uppercase; padding: 4px 9px; border-radius: var(--r-pill);
+    background: var(--violet-50); color: var(--violet-700);
+  }
+  #zicy-free-diagnostic .fd-tag-high, #zicy-free-diagnostic .fd-tag-priority-high { background: var(--flag-bg); color: var(--flag-text); }
+  #zicy-free-diagnostic .fd-tag-medium, #zicy-free-diagnostic .fd-tag-priority-medium { background: var(--warn-bg); color: var(--warn-text); }
+  #zicy-free-diagnostic .fd-tag-low, #zicy-free-diagnostic .fd-tag-priority-low { background: var(--ok-bg); color: var(--ok-text); }
+
+  #zicy-free-diagnostic .fd-inaccuracy-claim { font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  #zicy-free-diagnostic .fd-inaccuracy-said { font-size: 14px; color: var(--flag-text); margin-bottom: 2px; }
+  #zicy-free-diagnostic .fd-inaccuracy-correction { font-size: 14px; color: var(--ok-text); }
+  #zicy-free-diagnostic .fd-empty { color: var(--muted); font-size: 14.5px; }
+
+  #zicy-free-diagnostic .fd-rec-card h4 { font-family: var(--display); font-weight: 500; font-size: 16px; color: var(--ink); margin: 8px 0 6px; }
+  #zicy-free-diagnostic .fd-rec-card p { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
+
+  @media (max-width: 640px) {
+    #zicy-free-diagnostic .fd-row { grid-template-columns: 1fr; }
+    #zicy-free-diagnostic .fd-form { padding: 20px; }
+    #zicy-free-diagnostic .fd-teaser { padding: 28px 18px; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var API_BASE = '';
+    var ENGINE_ORDER = ['ChatGPT', 'Gemini', 'Perplexity', 'Google AI Overviews', 'Google AI Mode'];
+    var POLL_INTERVAL_MS = 2500;
+    var PROGRESS_TOTAL_STEPS = 5;
+
+    var form = document.getElementById('fdForm');
+    var introEl = document.querySelector('#zicy-free-diagnostic .fd-intro');
+    var submitBtn = document.getElementById('fdSubmitBtn');
+    var progressEl = document.getElementById('fdProgress');
+    var progressText = document.getElementById('fdProgressText');
+    var progressFill = document.getElementById('fdProgressFill');
+    var progressPct = document.getElementById('fdProgressPct');
+    var errorEl = document.getElementById('fdError');
+    var teaserEl = document.getElementById('fdTeaser');
+    var scoreValueEl = document.getElementById('fdScoreValue');
+    var visibilityLineEl = document.getElementById('fdVisibilityLine');
+    var inaccuracyLineEl = document.getElementById('fdInaccuracyLine');
+    var engineLineEl = document.getElementById('fdEngineLine');
+    var unlockBtn = document.getElementById('fdUnlockBtn');
+    var unlockForm = document.getElementById('fdUnlockForm');
+    var unlockSubmitBtn = document.getElementById('fdUnlockSubmitBtn');
+    var fullReportEl = document.getElementById('fdFullReport');
+    var reportHeadingEl = document.getElementById('fdReportHeading');
+    var engineTableBody = document.querySelector('#fdEngineTable tbody');
+    var inaccuraciesList = document.getElementById('fdInaccuraciesList');
+    var recommendationsList = document.getElementById('fdRecommendationsList');
+
+    var currentJobId = null;
+    var pollTimer = null;
+
+    function showEl(el) { el.hidden = false; }
+    function hideEl(el) { el.hidden = true; }
+
+    function showError(message) { errorEl.textContent = message; showEl(errorEl); }
+    function clearError() { errorEl.textContent = ''; hideEl(errorEl); }
+
+    function getUtmParams() {
+      var params = {};
+      try {
+        var sp = new URLSearchParams(window.location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(function (k) {
+          var v = sp.get(k);
+          if (v) params[k] = v;
+        });
+      } catch (e) {}
+      return params;
+    }
+
+    function sortByEngineOrder(items, keyFn) {
+      return items.slice().sort(function (a, b) {
+        var ai = ENGINE_ORDER.indexOf(keyFn(a));
+        var bi = ENGINE_ORDER.indexOf(keyFn(b));
+        if (ai === -1) ai = ENGINE_ORDER.length;
+        if (bi === -1) bi = ENGINE_ORDER.length;
+        return ai - bi;
+      });
+    }
+
+    function stopPolling() {
+      if (pollTimer) { clearTimeout(pollTimer); pollTimer = null; }
+    }
+
+    function updateProgress(status) {
+      var label = status.label || 'Working';
+      var pct = Math.max(4, Math.min(96, Math.round(((status.step || 0) / PROGRESS_TOTAL_STEPS) * 100)));
+      progressText.textContent = label;
+      progressFill.style.width = pct + '%';
+      progressPct.textContent = pct + '%';
+    }
+
+    function renderTeaser(teaser) {
+      scoreValueEl.textContent = Math.round(teaser.realityScore);
+      visibilityLineEl.textContent = teaser.aggregateVisibilityLine || '';
+      inaccuracyLineEl.textContent = teaser.inaccuracyCount === 1
+        ? 'AI gets 1 thing wrong about ' + teaser.brandName + '.'
+        : 'AI gets ' + teaser.inaccuracyCount + ' things wrong about ' + teaser.brandName + '.';
+      engineLineEl.textContent = teaser.engineHighlight
+        ? teaser.engineHighlight + ' has the clearest read on ' + teaser.brandName + '.'
+        : '';
+      showEl(teaserEl);
+      hideEl(introEl);
+      hideEl(form);
+    }
+
+    async function pollStatus(jobId) {
+      try {
+        var res = await fetch(API_BASE + '/api/brand-intelligence/public/diagnostic/' + jobId, { method: 'GET' });
+        if (!res.ok) throw new Error('Status check failed (' + res.status + ')');
+        var data = await res.json();
+
+        if (data.status === 'failed') {
+          stopPolling();
+          hideEl(progressEl);
+          showError(data.error || 'The diagnostic could not be completed. Please try again.');
+          submitBtn.disabled = false;
+          return;
+        }
+
+        if (data.status === 'completed' && data.teaser) {
+          stopPolling();
+          hideEl(progressEl);
+          renderTeaser(data.teaser);
+          return;
+        }
+
+        updateProgress(data);
+        pollTimer = setTimeout(function () { pollStatus(jobId); }, POLL_INTERVAL_MS);
+      } catch (err) {
+        stopPolling();
+        hideEl(progressEl);
+        showError('Lost connection while checking your report. Please try again.');
+        submitBtn.disabled = false;
+      }
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      clearError();
+      hideEl(teaserEl);
+      hideEl(unlockForm);
+      hideEl(fullReportEl);
+
+      var brandName = document.getElementById('fdBrand').value.trim();
+      var domain = document.getElementById('fdDomain').value.trim();
+      var category = document.getElementById('fdCategory').value.trim();
+      var market = document.getElementById('fdMarket').value.trim();
+      if (!brandName || !domain) return;
+
+      submitBtn.disabled = true;
+      progressText.textContent = 'Starting';
+      progressFill.style.width = '4%';
+      progressPct.textContent = '4%';
+      showEl(progressEl);
+
+      try {
+        var res = await fetch(API_BASE + '/api/brand-intelligence/public/diagnostic/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            brandName: brandName,
+            domain: domain,
+            category: category,
+            market: market,
+            utm: getUtmParams()
+          })
+        });
+        var data = await res.json();
+        if (!res.ok) throw new Error((data && data.detail) || 'Could not start the diagnostic. Please try again.');
+        currentJobId = data.jobId;
+        pollStatus(currentJobId);
+      } catch (err) {
+        hideEl(progressEl);
+        showError(err.message || 'Could not start the diagnostic. Please try again.');
+        submitBtn.disabled = false;
+      }
+    });
+
+    unlockBtn.addEventListener('click', function () {
+      hideEl(unlockBtn);
+      showEl(unlockForm);
+    });
+
+    function renderEngineTable(perEngine, mentionCoverage) {
+      engineTableBody.innerHTML = '';
+      var coverageByPlatform = {};
+      mentionCoverage.forEach(function (c) { coverageByPlatform[c.platform] = c; });
+
+      sortByEngineOrder(perEngine, function (p) { return p.platform; }).forEach(function (p) {
+        var tr = document.createElement('tr');
+
+        var tdEngine = document.createElement('td');
+        tdEngine.textContent = p.platform;
+        tr.appendChild(tdEngine);
+
+        var tdAccuracy = document.createElement('td');
+        tdAccuracy.textContent = Math.round(p.accuracyScore) + '%';
+        tr.appendChild(tdAccuracy);
+
+        var tdRisk = document.createElement('td');
+        tdRisk.textContent = p.hallucinationRisk;
+        tr.appendChild(tdRisk);
+
+        var tdCoverage = document.createElement('td');
+        var cov = coverageByPlatform[p.platform];
+        tdCoverage.textContent = cov ? cov.mentionedCount + ' of ' + cov.queryCount + ' queries' : 'Not tested';
+        tr.appendChild(tdCoverage);
+
+        engineTableBody.appendChild(tr);
+      });
+    }
+
+    function renderInaccuracies(inaccuracies) {
+      inaccuraciesList.innerHTML = '';
+      if (!inaccuracies.length) {
+        var p = document.createElement('p');
+        p.className = 'fd-empty';
+        p.textContent = 'No factual errors found in this run.';
+        inaccuraciesList.appendChild(p);
+        return;
+      }
+      inaccuracies.forEach(function (item) {
+        var card = document.createElement('div');
+        card.className = 'fd-inaccuracy-card';
+
+        var head = document.createElement('div');
+        head.className = 'fd-inaccuracy-head';
+        var platformTag = document.createElement('span');
+        platformTag.className = 'fd-tag';
+        platformTag.textContent = item.platform;
+        var impactTag = document.createElement('span');
+        impactTag.className = 'fd-tag fd-tag-' + String(item.impact || '').toLowerCase();
+        impactTag.textContent = item.impact + ' impact';
+        head.appendChild(platformTag);
+        head.appendChild(impactTag);
+        card.appendChild(head);
+
+        var claim = document.createElement('p');
+        claim.className = 'fd-inaccuracy-claim';
+        claim.textContent = item.claim;
+        card.appendChild(claim);
+
+        var said = document.createElement('p');
+        said.className = 'fd-inaccuracy-said';
+        said.textContent = 'AI says: ' + item.aiSaid;
+        card.appendChild(said);
+
+        var correction = document.createElement('p');
+        correction.className = 'fd-inaccuracy-correction';
+        correction.textContent = 'Correct: ' + item.correction;
+        card.appendChild(correction);
+
+        inaccuraciesList.appendChild(card);
+      });
+    }
+
+    function renderRecommendations(recommendations) {
+      recommendationsList.innerHTML = '';
+      recommendations.forEach(function (rec) {
+        var card = document.createElement('div');
+        card.className = 'fd-rec-card';
+
+        var priority = document.createElement('span');
+        priority.className = 'fd-tag fd-tag-priority-' + String(rec.priority || '').toLowerCase();
+        priority.textContent = String(rec.priority || '').toLowerCase() + ' priority';
+        card.appendChild(priority);
+
+        var title = document.createElement('h4');
+        title.textContent = rec.title;
+        card.appendChild(title);
+
+        var desc = document.createElement('p');
+        desc.textContent = rec.description;
+        card.appendChild(desc);
+
+        recommendationsList.appendChild(card);
+      });
+    }
+
+    unlockForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      clearError();
+      if (!currentJobId) return;
+
+      var email = document.getElementById('fdEmail').value.trim();
+      var consent = document.getElementById('fdConsent').checked;
+      if (!email) return;
+
+      unlockSubmitBtn.disabled = true;
+
+      try {
+        var res = await fetch(API_BASE + '/api/brand-intelligence/public/diagnostic/' + currentJobId + '/unlock', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, consent: consent, utm: getUtmParams() })
+        });
+        var data = await res.json();
+        if (!res.ok) throw new Error((data && data.detail) || 'Could not unlock the report. Please try again.');
+
+        hideEl(unlockForm);
+        reportHeadingEl.textContent = 'How AI sees ' + data.brandName;
+        renderEngineTable(data.perEngine || [], data.mentionCoveragePerEngine || []);
+        renderInaccuracies(data.inaccuracies || []);
+        renderRecommendations(data.recommendations || []);
+        showEl(fullReportEl);
+        fullReportEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (err) {
+        showError(err.message || 'Could not unlock the report. Please try again.');
+      } finally {
+        unlockSubmitBtn.disabled = false;
+      }
+    });
+  })();
+</script>

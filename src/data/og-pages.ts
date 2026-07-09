@@ -92,6 +92,13 @@ const pages: Record<string, OgPage> = {
     description: 'An on-page AI-readiness check, a bot-access checker, and a one-click schema generator.',
     alt: 'Zicy · Chrome extension',
   },
+  'free-diagnostic': {
+    eyebrow: 'Free diagnostic',
+    title: 'See your free AI reality score',
+    description:
+      'Enter your brand name and website to see how ChatGPT, Gemini, Perplexity, Google AI Overviews, and Google AI Mode describe you, checked against the facts.',
+    alt: 'Zicy · free diagnostic',
+  },
   resources: {
     eyebrow: 'Resources',
     title: 'Guides and research on AI visibility',

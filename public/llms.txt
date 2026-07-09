@@ -16,6 +16,7 @@
 - About: https://www.zicy.com/about
 - Contact: https://www.zicy.com/contact
 - Free tools: https://www.zicy.com/free-tools
+- Free diagnostic: https://www.zicy.com/free-diagnostic
 - Chrome extension: https://www.zicy.com/chrome-extension
 - Done for you: https://www.zicy.com/done-for-you
 - Consultant: https://www.zicy.com/consultant
