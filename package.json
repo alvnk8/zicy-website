@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
+    "dev:local-api": "DIAGNOSTIC_API_TARGET=http://localhost:8000 astro dev",
+    "dev:prod-api": "DIAGNOSTIC_API_TARGET=https://api.zicy.com astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -12,5 +14,9 @@
   "dependencies": {
     "astro": "^5",
     "astro-og-canvas": "0.11.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^5.9.3"
   }
 }

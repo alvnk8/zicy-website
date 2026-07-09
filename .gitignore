@@ -19,3 +19,4 @@ zicy.WordPress.*.xml
 wp-lib.mjs
 gen-cases.mjs
 download-images.mjs
+firebase-debug.log

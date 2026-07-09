@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const title = 'Zicy free tools, AEO/GEO Consultant & Chrome extension';
+const title = 'Zicy free tools: AI reality score, AEO/GEO Consultant & Chrome extension';
 const description =
-  'Two free ways to see how AI reads your brand: the AEO/GEO Consultant and a browser extension.';
+  'Three free ways to see how AI reads your brand: a free AI reality score, the AEO/GEO Consultant, and a browser extension.';
 
 const tools = [
+  { eyebrow: 'Free diagnostic', h: 'Your free AI reality score', p: 'Enter your brand name and website. See how ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode describe you, checked against the facts.', link: 'Get my score →', href: '/free-diagnostic' },
   { eyebrow: 'AI consultant', h: 'AEO/GEO Consultant', p: 'Ask anything about AEO or GEO, or audit a page on the spot. Powered by Growth.pro’s proprietary framework.', link: 'Open the consultant →', href: '/consultant' },
   { eyebrow: 'Chrome extension', h: 'Audit any page in your browser', p: 'Instant AI-readiness score, AI bot-access checker, and one-click schema generator. Free.', link: 'See the extension →', href: '/chrome-extension' },
 ];
@@ -15,7 +16,7 @@ const tools = [
     <div class="wrap">
       <span class="eyebrow">Free tools</span>
       <h1>Try Zicy before you commit.</h1>
-      <p class="lead">Two free ways to see how AI reads your brand, an AI consultant and a browser extension.</p>
+      <p class="lead">Three free ways to see how AI reads your brand: a free AI reality score, an AI consultant, and a browser extension.</p>
     </div>
   </section>
 

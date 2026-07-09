@@ -1,6 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/api/brand-intelligence/:path*",
+      "destination": "https://api.zicy.com/api/brand-intelligence/:path*"
+    }
+  ],
   "redirects": [
     { "source": "/aeo-geo-consultant", "destination": "/consultant", "statusCode": 301 },
     { "source": "/agency", "destination": "/solutions/agencies", "statusCode": 301 },
