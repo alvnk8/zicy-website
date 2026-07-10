@@ -6,8 +6,13 @@ import FaqUniversal from '../../components/FaqUniversal.astro';
 import { brandsFaqs, faqPageJsonLd } from '../../data/faqs';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
-import brandIntelligenceShot from '../../assets/screenshots/brand-intelligence-report.png';
-import competitiveShot from '../../assets/screenshots/competitive-ai-performance.png';
+// Enrichment screenshots — five brands-* product views (illustrative sample data), one per
+// surfaced capability. Optimisation, WebP/AVIF srcset and lazy-loading are handled by <Screenshot>.
+import aiVisibilityShot from '../../assets/screenshots/brands-01-ai-visibility-dashboard.png';
+import brandIntelligenceShot from '../../assets/screenshots/brands-02-brand-intelligence.png';
+import keyTopicsShot from '../../assets/screenshots/brands-03-key-topics.png';
+import citationAnalysisShot from '../../assets/screenshots/brands-04-citation-analysis.png';
+import brandSentimentShot from '../../assets/screenshots/brands-05-brand-sentiment.png';
 // Proof-layer screenshot — Site Traffic, Search Console view (shared with /platform and the
 // homepage). Canon-clean: shows answer-intent queries + branded-search behaviour, no uplift %.
 import siteTraffic from '../../assets/screenshots/site-traffic-search-console.png';
@@ -38,7 +43,7 @@ const stakeStats = [
 const usps = [
   {
     h: 'Truth, not just mentions.',
-    p: 'Most trackers tell you whether you were named. Zicy tells you whether what AI said was true. The <a href="/platform/ai-reality-score">AI Reality Score</a> flags hallucinations, outdated claims and wrong facts before a buyer ever sees them.',
+    p: 'Most trackers tell you whether you were named. Zicy tells you whether what AI said was true. The <a href="/platform/ai-reality-score">AI Reality Score</a> flags hallucinations, outdated claims and wrong facts before a buyer ever sees them. Each flagged issue can be verified or rejected, then escalated straight into a prioritised fix backlog. Detection is table stakes: Zicy routes it to remediation.',
   },
   {
     h: 'Every engine, every language.',
@@ -61,6 +66,14 @@ const modules = [
   {
     name: 'Brand Intelligence',
     desc: 'How AI describes you, the AI Reality Score, the entity gaps behind low confidence, and a prioritised action plan.',
+  },
+  {
+    name: 'Key Topics',
+    desc: 'Your category split into the topics you lead, the battlegrounds, and the blind spots where AI credits a competitor instead. A budget-allocation map, not a keyword list.',
+  },
+  {
+    name: 'Citation Analysis',
+    desc: 'Every source AI cites about you, classified owned, earned, competitor or uncited. One number for how much of your own story you control, down to the individual URL.',
   },
   {
     name: 'AI Visibility',
@@ -144,7 +157,9 @@ const breadcrumb = {
           When AI misdescribes you, or names a competitor in your place, the decision is shaped
           before anyone reaches your site. It never shows up in your funnel, because the
           conversation never touched it. More than 1 billion people now use generative AI every
-          month (Meltwater &amp; We Are Social, Digital 2026).
+          month (Meltwater &amp; We Are Social, Digital 2026). 45% of B2B buyers used generative AI
+          to research vendors and products in a recent purchase (Gartner, n=645, 2025). The answer
+          they get is increasingly the shortlist.
         </p>
       </div>
       <div class="grid-3">
@@ -170,6 +185,13 @@ const breadcrumb = {
         {usps.map((u) => (
           <div class="card"><h3>{u.h}</h3><p set:html={u.p}></p></div>
         ))}
+      </div>
+      <div style="max-width:820px;margin:28px auto 0">
+        <Screenshot
+          src={brandIntelligenceShot}
+          alt="Brand Intelligence screen with AI perception, coverage and alignment scores and a plain-English perception summary."
+          caption="Illustrative product view with sample data."
+        />
       </div>
     </div>
   </section>
@@ -228,14 +250,24 @@ const breadcrumb = {
       </div>
       <div class="grid-2" style="margin-top:28px">
         <Screenshot
-          src={brandIntelligenceShot}
-          alt="Zicy Brand Intelligence report showing AI perception of the brand and an AI Reality Score fact-check."
-          caption="Brand Intelligence: perception, AI Reality Score and the descriptors moving the answer."
+          src={aiVisibilityShot}
+          alt="Zicy AI visibility dashboard showing mention coverage, citation rate, share of voice and average ranking across five AI engines."
+          caption="Illustrative product view with sample data."
         />
         <Screenshot
-          src={competitiveShot}
-          alt="Zicy Competitive AI Performance table comparing the brand against rivals on mention coverage, ranking, citations, share of voice and sentiment."
-          caption="Competitive AI Performance: your standing against the rivals you actually worry about."
+          src={keyTopicsShot}
+          alt="Key Topics treemap splitting the category into topics where the brand is present or absent."
+          caption="Illustrative product view with sample data."
+        />
+        <Screenshot
+          src={citationAnalysisShot}
+          alt="Citation analysis with narrative control, competitor share and uncited rate, plus top cited domains."
+          caption="Illustrative product view with sample data."
+        />
+        <Screenshot
+          src={brandSentimentShot}
+          alt="Brand sentiment score with positive, neutral and negative descriptor tables and counts."
+          caption="Illustrative product view with sample data."
         />
       </div>
     </div>
@@ -281,6 +313,11 @@ const breadcrumb = {
     <div class="wrap">
       <h2>See your brand the way AI describes it.</h2>
       <p>All five engines, no commitment. Start a 7-day free trial.</p>
+      <p>
+        Paste your website URL and Zicy builds your brand profile and generates buyer-intent prompts
+        for you, so your first results across all five engines arrive in minutes. 7-day free trial,
+        no card required.
+      </p>
       <div class="hcta">
         <a class="btn btn-p" href="https://app.zicy.com/register">Try for free</a>
         <a class="btn btn-o" href="/pricing">See pricing</a>
