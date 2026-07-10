@@ -158,7 +158,7 @@ export const prFaqs: Faq[] = [
 export const agenciesFaqs: Faq[] = [
   {
     q: `Can we resell Zicy under our own brand?`,
-    a: `Yes, the Scale tier provides white-label dashboards under your own name, so the audit, reporting and fixes are presented as your agency's service. The platform and methodology sit behind your brand, with no build cost and no specialist hire.`,
+    a: `Yes, the Enterprise tier provides white-label dashboards under your own name, so the audit, reporting and fixes are presented as your agency's service. The platform and methodology sit behind your brand, with no build cost and no specialist hire.`,
   },
   {
     q: `Clients are raising AI search in reviews and we're improvising, how do we have the answer?`,
@@ -186,7 +186,7 @@ export const agenciesFaqs: Faq[] = [
   },
   {
     q: `How do we run our whole client roster from one place?`,
-    a: `Every plan includes unlimited projects and brands, and the Scale tier adds multi-brand management built for a portfolio, so each client is tracked and reported separately from a single login with your agency's brand on every report.`,
+    a: `Every plan includes unlimited projects and brands, and the Enterprise tier adds multi-brand management built for a portfolio, so each client is tracked and reported separately from a single login with your agency's brand on every report.`,
   },
   {
     q: `Will this actually help us keep clients?`,
