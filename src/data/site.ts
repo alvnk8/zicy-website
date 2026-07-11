@@ -19,6 +19,7 @@ export const PROOF_TAG = 'All engines. All languages. All markets.';
 
 export const SOLUTIONS = [
   { label: 'For brands', href: '/solutions/brands' },
+  { label: 'For small businesses', href: '/solutions/smb' },
   { label: 'For PR agencies', href: '/solutions/pr' },
   { label: 'For marketing & creative agencies', href: '/solutions/agencies' },
   { label: 'For publishers', href: '/solutions/publishers' },
