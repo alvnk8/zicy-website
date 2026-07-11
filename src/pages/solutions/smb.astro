@@ -1,0 +1,355 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import FaqUniversal from '../../components/FaqUniversal.astro';
+import { faqPageJsonLd } from '../../data/faqs';
+// Product screenshots for the SMB page (illustrative sample data). Optimisation, WebP/AVIF
+// srcset and lazy-loading are handled by <Screenshot>. Alts carry no persona names.
+import aiVisibilityShot from '../../assets/screenshots/smb-01-ai-visibility-dashboard.png';
+import competitiveShot from '../../assets/screenshots/smb-02-competitive-ai-performance.png';
+import actionPlanShot from '../../assets/screenshots/smb-03-action-plan.png';
+import brandIntelligenceShot from '../../assets/screenshots/smb-04-brand-intelligence.png';
+import siteTrafficShot from '../../assets/screenshots/smb-05-site-traffic.png';
+
+const title = 'Zicy for small businesses: what AI tells your customers, and how to fix it';
+const description =
+  "See what ChatGPT, Gemini, Perplexity and Google's AI answers say about your business, what to fix in plain English, and how to fix it. No specialist required. Try Zicy free for 7 days.";
+
+// Sourced stats: every figure carries publisher, sample and year inline. Do not alter.
+const stats = [
+  {
+    n: '45%',
+    label: 'of consumers now use AI tools for local business recommendations, up from 6% a year earlier.',
+    source: 'BrightLocal, n=1,002, 2026',
+  },
+  {
+    n: '51%',
+    label: 'of B2B software buyers now start research with AI chatbots more often than Google.',
+    source: 'G2, n=1,076, 2026',
+  },
+  {
+    n: '8% vs 15%',
+    nStyle: 'font-size:clamp(30px,4.4vw,44px)',
+    label: 'Google users click a result about half as often when an AI summary appears.',
+    source: 'Pew Research Center, 68,879 searches, 2025',
+  },
+  {
+    n: '54%',
+    label: 'better conversion from AI-referred visitors than from other traffic.',
+    source: 'Adobe Analytics, 2026',
+  },
+];
+
+// What Zicy does, in plain beats. No module count is stated anywhere.
+const beats = [
+  {
+    h: 'See what AI says about you',
+    p: 'Zicy writes the buyer questions from your website, tracks them weekly across all five engines, and lets you set your city and language. Four plain numbers, each explained in a sentence: how often AI mentions you, how often it links to you, your share of the answer, and your average position.',
+  },
+  {
+    h: 'Who it recommends instead',
+    p: 'See which businesses AI puts in your place, and the exact words it uses about them and about you. Owned, earned, competitor or uncited, so you know whose story is winning.',
+  },
+  {
+    h: 'What it gets wrong',
+    p: 'Every claim AI makes about you is fact-checked per engine. Outdated facts, the wrong location, a competitor confusion: each error is routed to a prioritised fix list, not left for you to spot.',
+  },
+  {
+    h: 'Fixes, not homework',
+    p: 'The work is done with you, not handed back as a to-do list. Schema is generated for you, cited articles are written with your approval, and pages are upgraded. You review and approve.',
+  },
+  {
+    h: 'Proof in your analytics',
+    p: 'See the visits and enquiries that came from AI answers, in your own Google Analytics, so you can tell what is working and show it to anyone who asks.',
+  },
+  {
+    h: 'Ask Zicy, your in-app consultant',
+    p: 'A built-in consultant answers your questions in plain English, right where you work, so you are never stuck on what to do next.',
+  },
+];
+
+// Differentiators.
+const diff = [
+  {
+    h: 'Not another dashboard.',
+    p: 'At this price, most tools only monitor, and some skip Google\'s AI answers entirely. Zicy runs the whole loop: measure what AI says, diagnose why, act to fix it, and prove it moved demand.',
+  },
+  {
+    h: 'Truth, not just mentions.',
+    p: 'AI gets businesses wrong: outdated facts, the wrong location, a competitor in your place. Zicy fact-checks what AI says and routes every error to remediation, not just a mention count.',
+  },
+  {
+    h: 'Built for the team you actually have.',
+    p: 'Setup is pasting your website. A built-in consultant answers your questions, a report is ready for your boss, and roles let you add whoever helps. About thirty minutes a week.',
+  },
+];
+
+// The first thirteen weeks, in order.
+const timeline = [
+  { k: 'Day 1', t: 'Paste your website URL and activate. Your first read of what AI says lands within minutes.' },
+  { k: 'Weeks 1 to 2', t: 'Technical fixes go in and confirmed errors are corrected, so AI reads you accurately.' },
+  { k: 'Weeks 2 to 8', t: 'One cited article a week on your biggest gaps, written with your approval.' },
+  { k: 'Weeks 8 to 13', t: 'Watch the trend line move and the enquiries coming in from AI answers.' },
+];
+
+// ICP FAQ for SMBs. The universal block renders beneath via <FaqUniversal />. Straight
+// apostrophes, sentence case. Every stat keeps its publisher, sample and year.
+const smbFaqs = [
+  {
+    q: 'Do I need a marketer to use Zicy?',
+    a: "No. Setup is pasting your website URL. Zicy writes the questions to track, points to what to fix first in plain English, and does the technical fixes with you. A built-in consultant answers anything you are unsure about.",
+  },
+  {
+    q: 'Does this matter for a business my size?',
+    a: "More than ever. 45% of consumers now use AI tools for local business recommendations, up from 6% a year earlier (BrightLocal, n=1,002, 2026). When AI answers the question, a smaller business that shows up accurately can win the customer before a bigger competitor is even mentioned.",
+  },
+  {
+    q: 'How is this different from my SEO tool or agency?',
+    a: "Your Google rank is no longer your AI rank. SEO tools measure where you sit in a list of links; Zicy measures what AI says about you in the answer itself, whether it is accurate, and fixes what is wrong. It works alongside your SEO, it does not replace your rankings work.",
+  },
+  {
+    q: 'My CEO wants an answer this week.',
+    a: "You can have a baseline in days. Paste the website, and Zicy shows how AI describes the company today across all five engines, where it is wrong, and the plan to fix it, in a PDF report you can hand over.",
+  },
+  {
+    q: 'What about my reviews and Google Business Profile?',
+    a: "AI leans on both, so keep building genuine reviews and keeping your profile current. Zicy does not manage reviews or your Business Profile. It covers the website, content and entity signals AI reads, which are the parts most businesses never look at.",
+  },
+  {
+    q: 'What happens after I start?',
+    a: "You paste your website and get your first read within minutes. Technical fixes and confirmed errors go in over the first couple of weeks, then a cited article a week on your biggest gaps, and you watch the trend and the enquiries from AI answers.",
+  },
+];
+
+const faqPage = {
+  ...faqPageJsonLd(smbFaqs),
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#at-a-glance'] },
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.zicy.com/' },
+    { '@type': 'ListItem', position: 2, name: 'For small businesses', item: 'https://www.zicy.com/solutions/smb' },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
+
+  <!-- 1. Hero -->
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">For small businesses</span>
+      <h1>AI is answering your customers. Make sure it answers with you.</h1>
+      <p class="lead">
+        Zicy watches what ChatGPT, Gemini, Perplexity and Google's AI answers tell buyers about
+        your business, shows you what to fix in plain English, and helps you fix it. No specialist
+        required.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-p btn-lg" href="https://app.zicy.com/register">Start free: paste your website</a>
+        <a class="btn btn-o btn-lg" href="/platform">See the platform</a>
+      </div>
+      <p class="muted" style="font-size:14px;margin-top:14px">7-day free trial, no card required.</p>
+    </div>
+  </section>
+
+  <!-- At a glance — plain-English summary, also the speakable target. No numerals in the copy. -->
+  <section id="at-a-glance">
+    <div class="wrap">
+      <div class="shead">
+        <h2>At a glance</h2>
+      </div>
+      <ul class="checklist">
+        <li>Zicy shows a small business what AI answer engines say about it, whether that is accurate, and who AI recommends instead.</li>
+        <li>Setup is pasting your website. Zicy writes the questions to track, points to what to fix first in plain English, and does the technical fixes with you.</li>
+        <li>You get a report you can hand to a boss, and proof of AI-referred visits in your own analytics.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2. The shift — four sourced stats + the line -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">01</span> The shift</span>
+        <h2>Your customers are asking AI first.</h2>
+        <p>
+          Buyers now ask ChatGPT, Gemini, Perplexity and Google's AI answers about businesses like
+          yours, and act on what they hear. The visit you used to earn from a search result often
+          never happens, because the answer already came back.
+        </p>
+      </div>
+      <div class="grid-2">
+        {stats.map((s) => (
+          <div class="stat">
+            <div class="n" style={s.nStyle ?? ''}>{s.n}</div>
+            <div class="t">{s.label}</div>
+            <div class="s">Source: {s.source}</div>
+          </div>
+        ))}
+      </div>
+      <p class="pullquote">The demand didn't disappear. The click did.</p>
+    </div>
+  </section>
+
+  <!-- 3. Which sounds like you — two audience cards -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">02</span> Which sounds like you?</span>
+        <h2>Two ways in, one simple start.</h2>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>I run the business.</h3>
+          <p>
+            You wear every hat and you do not have a marketer. Good news: pasting your website is
+            the whole setup. Zicy writes the questions, shows what to fix in plain English, and does
+            the technical work with you.
+          </p>
+        </div>
+        <div class="card">
+          <h3>I run the marketing.</h3>
+          <p>
+            Your CEO asked what AI says about the company and you need a real answer. Zicy gives you
+            measurement, the fixes, and a boss-ready report, with no specialist hire and no retainer.
+          </p>
+          <p style="margin-top:12px">
+            <a href="/solutions/brands">Running a full marketing organisation? See our brands page</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. What Zicy does — beats + the five product screenshots -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">03</span> What Zicy does</span>
+        <h2>Everything in one place, in plain English.</h2>
+      </div>
+      <div class="grid-3">
+        {beats.map((b) => (
+          <div class="card">
+            <h3>{b.h}</h3>
+            <p>{b.p}</p>
+          </div>
+        ))}
+      </div>
+      <div class="grid-2" style="margin-top:28px">
+        <Screenshot
+          src={aiVisibilityShot}
+          alt="AI visibility dashboard showing mention coverage, citation rate, share of voice and average ranking across five AI engines."
+          caption="Illustrative product view with sample data."
+        />
+        <Screenshot
+          src={competitiveShot}
+          alt="Competitive AI performance table comparing the business against rivals on mention coverage, ranking, citations, share of voice and sentiment."
+          caption="Illustrative product view with sample data."
+        />
+        <Screenshot
+          src={brandIntelligenceShot}
+          alt="Brand Intelligence screen with AI perception, coverage and alignment scores and a plain-English perception summary."
+          caption="Illustrative product view with sample data."
+        />
+        <Screenshot
+          src={actionPlanShot}
+          alt="Prioritised action plan listing reality fixes with impact estimates and status, each with verify and reject controls."
+          caption="Illustrative product view with sample data."
+        />
+      </div>
+      <div style="max-width:820px;margin:28px auto 0">
+        <Screenshot
+          src={siteTrafficShot}
+          alt="Site Traffic view showing AI-referred sessions and answer-intent queries connected to the visibility work, in Google Analytics."
+          caption="Illustrative product view with sample data."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Differentiators -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">04</span> Why Zicy</span>
+        <h2>Measure, fix, and prove it, at a price that fits.</h2>
+      </div>
+      <div class="grid-3">
+        {diff.map((d) => (
+          <div class="card"><h3>{d.h}</h3><p>{d.p}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Monday — the first thirteen weeks -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">05</span> What changes on Monday</span>
+        <h2>A calm, week-by-week start.</h2>
+      </div>
+      <div class="grid-2">
+        {timeline.map((step) => (
+          <div class="card">
+            <span class="k">{step.k}</span>
+            <p style="margin-top:8px">{step.t}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Pricing -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">06</span> Pricing</span>
+        <h2>Priced for a small business, not an enterprise.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">
+          Starter is <span class="mono">$129</span> a month: less than a single Google Ads click a
+          day in many industries, and a fraction of an agency retainer. Growth is
+          <span class="mono">$349</span> for bigger teams. 7-day free trial, no card. Annual is 13
+          months for the price of 12.
+        </p>
+        <div class="cta-row" style="margin-top:22px">
+          <a class="btn btn-o" href="/pricing">See full pricing</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FAQ — page-specific block + universal block; answers in static HTML + FAQPage schema -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions small businesses ask.</h2>
+      </div>
+      <FaqAccordion items={smbFaqs} defaultOpen={0} />
+      <FaqUniversal />
+    </div>
+  </section>
+
+  <!-- 9. Final CTA = hero CTA + trial line -->
+  <section class="final">
+    <div class="wrap">
+      <h2>AI is answering your customers. Make sure it answers with you.</h2>
+      <p>Paste your website and see what AI says about your business today, across all five engines.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="https://app.zicy.com/register">Start free: paste your website</a>
+        <a class="btn btn-o" href="/pricing">See pricing</a>
+      </div>
+      <p class="muted" style="font-size:14px;margin-top:14px">7-day free trial, no card required.</p>
+    </div>
+  </section>
+</BaseLayout>
