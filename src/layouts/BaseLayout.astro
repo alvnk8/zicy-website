@@ -1,4 +1,13 @@
 ---
+// Self-hosted fonts: bundled woff2 served from our own origin, so there is no external font
+// request left in-flight to keep the network from going idle (browser automation / AI crawlers
+// wait for network-idle, not just 'load'). Fraunces uses the opsz axis to match the previous
+// opsz,wght@9..144; all keep @fontsource's font-display: swap.
+import '@fontsource-variable/fraunces/opsz.css';
+import '@fontsource/inter-tight/400.css';
+import '@fontsource/inter-tight/500.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
 import '../styles/theme.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -82,27 +91,10 @@ const og = ogImageMeta(Astro.url.pathname);
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Fonts must never gate the window 'load' event. A plain <link rel="stylesheet"> to Google
-         Fonts is load-blocking: when fonts.googleapis.com stalls (headless/AI renderers, blocked or
-         datacenter networks) the 'load' event never fires and the page hangs in a perpetual loading
-         state. Load the CSS as a non-blocking preload that swaps to a stylesheet once it arrives, so
-         'load' fires regardless. display=swap keeps text visible in a fallback meanwhile; the
-         <noscript> copy covers no-JS clients. (media="print" onload does NOT fix this: verified it
-         still gates the load event.) -->
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
-      />
-    </noscript>
+    <!-- Fonts are self-hosted via @fontsource (imported in this layout's script and bundled as
+         woff2 served from our own origin). No external Google Fonts request remains, so the network
+         reaches idle for browser automation and AI crawlers, not just the 'load' event.
+         font-display: swap is preserved by @fontsource. -->
 
     <Schema />
     <slot name="head" />
