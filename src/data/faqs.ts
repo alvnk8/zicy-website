@@ -268,10 +268,15 @@ export const publishersFaqs: Faq[] = [
 
 // Build the FAQPage JSON-LD mainEntity from a specific block + the universal block, in that
 // order. One FAQPage object per page; the structured data matches the rendered answers.
-export function faqPageJsonLd(specific: Faq[]): Record<string, unknown> {
+export function faqPageJsonLd(specific: Faq[], canonical?: string): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    // When a canonical URL is supplied (the /solutions/* segment pages, which carry a #webpage
+    // node), anchor the FAQPage with a stable @id and point mainEntityOfPage at that WebPage node.
+    ...(canonical
+      ? { '@id': `${canonical}#faq`, mainEntityOfPage: { '@id': `${canonical}#webpage` } }
+      : {}),
     mainEntity: [...specific, ...universalFaqs].map((f) => ({
       '@type': 'Question',
       name: f.q,

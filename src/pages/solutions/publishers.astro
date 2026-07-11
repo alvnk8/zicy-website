@@ -98,13 +98,14 @@ const modules = [
 // it?" and "Are we promising advertisers that paying us gets them cited by AI?") originate on
 // this page; add them to the canonical Zicy ICP FAQ doc.
 const faqPage = {
-  ...faqPageJsonLd(publishersFaqs),
+  ...faqPageJsonLd(publishersFaqs, 'https://www.zicy.com/solutions/publishers'),
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#at-a-glance'] },
 };
 
 const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
+  '@id': 'https://www.zicy.com/solutions/publishers#breadcrumbs',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.zicy.com/' },
     { '@type': 'ListItem', position: 2, name: 'For publishers', item: 'https://www.zicy.com/solutions/publishers' },

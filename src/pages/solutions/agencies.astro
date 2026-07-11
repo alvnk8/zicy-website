@@ -91,13 +91,14 @@ const modules = [
 // §05 — FAQ, page-specific block (11) from src/data/faqs.ts; the universal block renders beneath
 // it via <FaqUniversal />. JSON-LD = agencies specific + universal, matching the visible answers.
 const faqPage = {
-  ...faqPageJsonLd(agenciesFaqs),
+  ...faqPageJsonLd(agenciesFaqs, 'https://www.zicy.com/solutions/agencies'),
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#at-a-glance'] },
 };
 
 const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
+  '@id': 'https://www.zicy.com/solutions/agencies#breadcrumbs',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.zicy.com/' },
     { '@type': 'ListItem', position: 2, name: 'For marketing & creative agencies', item: 'https://www.zicy.com/solutions/agencies' },

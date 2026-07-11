@@ -97,13 +97,14 @@ const modules = [
 // FAQ — page-specific block (6) from src/data/faqs.ts; the universal block renders beneath it
 // via <FaqUniversal />. JSON-LD = brands specific + universal, matching the visible answers.
 const faqPage = {
-  ...faqPageJsonLd(brandsFaqs),
+  ...faqPageJsonLd(brandsFaqs, 'https://www.zicy.com/solutions/brands'),
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#at-a-glance'] },
 };
 
 const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
+  '@id': 'https://www.zicy.com/solutions/brands#breadcrumbs',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.zicy.com/' },
     { '@type': 'ListItem', position: 2, name: 'For brands', item: 'https://www.zicy.com/solutions/brands' },
