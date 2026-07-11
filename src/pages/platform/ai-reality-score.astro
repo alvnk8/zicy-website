@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import realityCheckShot from '../../assets/screenshots/reality-score-fact-check.png';
 import { SITE } from '../../data/site';
 
 const title = 'The AI Reality Score, Zicy’s per-engine accuracy metric';
@@ -171,6 +173,19 @@ const faqPage = {
       <span class="pill">Zicy &middot; the truth layer</span>
       <h1>{name}</h1>
       <p class="def">{definition}</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div style="max-width:1080px;margin:0 auto">
+        <Screenshot
+          src={realityCheckShot}
+          alt="Zicy Brand Intelligence Reality Check showing an AI Reality Score of 81 out of 100 and per-engine claims classified accurate, outdated or hallucination, each with verify and reject controls."
+          caption="Illustrative product view with sample data."
+          priority="eager"
+        />
+      </div>
     </div>
   </section>
 
