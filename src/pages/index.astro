@@ -8,6 +8,7 @@ import aiVisibility from '../assets/screenshots/ai-visibility-dashboard.png';
 // "AEO overview" variant because it shows answer-intent queries + branded-search
 // behaviour (exactly the proof-layer copy) and displays no uplift %/correlation figure.
 import siteTraffic from '../assets/screenshots/site-traffic-search-console.png';
+import heroShot from '../assets/screenshots/home-hero-brand-intelligence.png';
 const title = 'Zicy, be the brand AI gets right';
 const description =
   "Zicy is the AI visibility platform that shows you what AI says about your brand, whether it's true, and how to fix what's wrong, then proves the fix moved demand. Across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, in every language. Built by Growth.pro.";
@@ -155,7 +156,7 @@ const solutionCards = [
   </Fragment>
 
   <!-- 1. Hero — asymmetric grid, measurement-grid atmosphere, staggered load,
-       live "what AI says about you" card with truth-signal pills + Reality Score ring. -->
+       Brand Intelligence product screenshot in the second column (eager, LCP candidate). -->
   <section class="hero">
     <div class="grid-field" aria-hidden="true"></div>
     <div class="wrap hero-grid">
@@ -179,24 +180,14 @@ const solutionCards = [
         </div>
       </div>
 
-      <aside class="hcard rise d4" aria-label="Example of what AI says about a brand">
-        <div class="hc-top">
-          <span class="hc-q">&ldquo;Who are the top firms in [your category]?&rdquo;</span>
-        </div>
-        <div class="hc-rows">
-          <div class="hc-row"><span class="dot ok" aria-hidden="true"></span><span class="eng">ChatGPT</span><span class="hc-tag ok">names you</span></div>
-          <div class="hc-row"><span class="dot warn" aria-hidden="true"></span><span class="eng">Gemini</span><span class="hc-tag warn">outdated claim</span></div>
-          <div class="hc-row"><span class="dot flag" aria-hidden="true"></span><span class="eng">Perplexity</span><span class="hc-tag flag">names a rival</span></div>
-        </div>
-        <div class="hc-score">
-          <div>
-            <div class="hc-lab">AI Reality Score</div>
-            <div class="hc-num">92<span>/100</span></div>
-          </div>
-          <div class="hc-ring" aria-hidden="true"></div>
-        </div>
-        <p class="hc-legend">How accurately AI describes you across engines. Flagged issues pull it down.</p>
-      </aside>
+      <div class="hvis rise d5">
+        <Screenshot
+          src={heroShot}
+          alt="Zicy Brand Intelligence report showing AI perception, coverage and alignment scores and a plain-English perception summary for a demo brand."
+          caption="Illustrative product view with sample data."
+          priority="eager"
+        />
+      </div>
     </div>
   </section>
 
