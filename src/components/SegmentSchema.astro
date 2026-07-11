@@ -1,0 +1,54 @@
+---
+// Page-scoped, audience-scoped JSON-LD for the /solutions/* segment hubs. Emits a WebPage node
+// tied to the sitewide identity (isPartOf #site, about #app) with a BusinessAudience, so each
+// segment resolves to its own audience-scoped node rather than the generic platform node. On the
+// SMB page it also emits the Starter Offer. This is additive: the sitewide @graph in Schema.astro
+// is not modified. Place with slot="head" as a direct child of BaseLayout so it is server-rendered
+// in <head> (page-level slot forwarding).
+interface Props {
+  /** Canonical URL of the segment page, e.g. https://www.zicy.com/solutions/smb */
+  url: string;
+  /** The page's live title-tag text (pass the page's `title`). */
+  name: string;
+  /** schema.org BusinessAudience audienceType, e.g. "small business". */
+  audienceType: string;
+  /** Emit the Starter Offer node (SMB page only). */
+  starterOffer?: boolean;
+}
+const { url, name, audienceType, starterOffer = false } = Astro.props;
+
+const webpage = {
+  '@type': 'WebPage',
+  '@id': `${url}#webpage`,
+  url,
+  name,
+  isPartOf: { '@id': 'https://www.zicy.com/#site' },
+  about: { '@id': 'https://www.zicy.com/#app' },
+  audience: { '@type': 'BusinessAudience', audienceType },
+};
+
+const starter = {
+  '@type': 'Offer',
+  '@id': `${url}#offer-starter`,
+  name: 'Starter',
+  price: '129',
+  priceCurrency: 'USD',
+  url: 'https://www.zicy.com/pricing',
+  priceSpecification: {
+    '@type': 'UnitPriceSpecification',
+    price: '129',
+    priceCurrency: 'USD',
+    unitCode: 'MON',
+    unitText: 'month',
+  },
+  itemOffered: { '@id': 'https://www.zicy.com/#app' },
+  eligibleCustomerType: 'https://schema.org/Business',
+  audience: { '@type': 'BusinessAudience', audienceType },
+};
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': starterOffer ? [webpage, starter] : [webpage],
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SegmentSchema from '../../components/SegmentSchema.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import FaqUniversal from '../../components/FaqUniversal.astro';
@@ -106,6 +107,7 @@ const breadcrumb = {
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
+  <SegmentSchema slot="head" url="https://www.zicy.com/solutions/agencies" name={title} audienceType="marketing and creative agency" />
 
   <!-- 1. Hero -->
   <section class="hero inner">
