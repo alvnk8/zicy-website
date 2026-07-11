@@ -257,6 +257,11 @@ const breadcrumb = {
               {t.per && <span style="font-size:15px;color:var(--muted);font-family:var(--body)">{t.per}</span>}
             </div>
             <p class="muted" style="font-size:14px;margin-bottom:6px">{t.blurb}</p>
+            {t.badge === 'Starter' && (
+              <p class="muted" style="font-size:13px;margin-bottom:10px">
+                New to this and running a small business? See how it works in <a href="/solutions/smb">Zicy for small businesses</a>.
+              </p>
+            )}
             <ul>{t.features.map((f) => <li>{f}</li>)}</ul>
             <a
               class:list={['btn', t.cta.primary ? 'btn-primary' : 'btn-ghost']}
