@@ -84,10 +84,25 @@ const og = ogImageMeta(Astro.url.pathname);
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts must never gate the window 'load' event. A plain <link rel="stylesheet"> to Google
+         Fonts is load-blocking: when fonts.googleapis.com stalls (headless/AI renderers, blocked or
+         datacenter networks) the 'load' event never fires and the page hangs in a perpetual loading
+         state. Load the CSS as a non-blocking preload that swaps to a stylesheet once it arrives, so
+         'load' fires regardless. display=swap keeps text visible in a fallback meanwhile; the
+         <noscript> copy covers no-JS clients. (media="print" onload does NOT fix this: verified it
+         still gates the load event.) -->
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+      />
+    </noscript>
 
     <Schema />
     <slot name="head" />
