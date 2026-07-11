@@ -46,7 +46,7 @@ const faqs = [
   },
   {
     q: 'Who is Zicy for?',
-    a: 'Zicy is built for four groups who own the answer: brands, PR and communications teams, marketing and creative agencies, and publishers. Each gets a tailored view of the same underlying platform. See the solutions section above for the fit to your role.',
+    a: 'Zicy is built for five groups who own the answer: brands, small businesses, PR and communications teams, marketing and creative agencies, and publishers. Each gets a tailored view of the same underlying platform. See the solutions section above, or <a href="/solutions/smb">Zicy for small businesses</a> if you run the business yourself.',
   },
 ];
 
@@ -130,6 +130,12 @@ const solutionCards = [
     p: 'Know whether AI got you right, not just whether it named you.',
     href: '/solutions/brands',
     link: 'For brands →',
+  },
+  {
+    eyebrow: 'For small businesses',
+    p: 'Know what AI tells your customers, and fix it, without a specialist.',
+    href: '/solutions/smb',
+    link: 'For small businesses →',
   },
   {
     eyebrow: 'For PR & communications',
@@ -302,14 +308,14 @@ const solutionCards = [
     </div>
   </section>
 
-  <!-- 6. 05 · Solutions — four linked ICP cards -->
+  <!-- 6. 05 · Solutions — five linked ICP cards -->
   <section>
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow"><span class="ix">05</span> Solutions</span>
         <h2>Built for the people who own the answer.</h2>
       </div>
-      <div class="grid4">
+      <div class="grid4 grid-sol">
         {solutionCards.map((c) => (
           <a class="card" href={c.href}>
             <span class="k">{c.eyebrow}</span>
@@ -451,4 +457,9 @@ const solutionCards = [
 
   /* FIX 2 — AI Reality Score legend inside the (white) hero demo card. --ink-2 ~6.8:1 on white. */
   .hc-legend { margin-top: 10px; font-size: 12px; line-height: 1.45; color: var(--ink-2); }
+
+  /* 05 Solutions — five audience cards. Drop the auto-fit min to 200px so all five fit one row at
+     the 1200px .wrap on desktop, wrapping cleanly to fewer per row below. Scoped to this page, so
+     the shared .grid4 (also used on /platform) is unchanged. */
+  .grid-sol { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 </style>

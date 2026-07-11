@@ -23,7 +23,7 @@ const { items, defaultOpen = 0 } = Astro.props;
         <span class="faq-icon" aria-hidden="true"></span>
       </summary>
       <div class="faq-a">
-        <p>{item.a}</p>
+        <p set:html={item.a}></p>
       </div>
     </details>
   ))}
