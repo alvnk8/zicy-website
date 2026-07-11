@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
+import Screenshot from '../components/Screenshot.astro';
+import dfyActionPlan from '../assets/screenshots/dfy-action-plan.png';
 import { SITE } from '../data/site';
 
 const title = 'Done-for-you AI visibility, run for you by Growth.pro, the consultancy that built Zicy';
@@ -117,6 +119,19 @@ const service = {
       <div class="cta-row">
         <a class="btn btn-p btn-lg" href={GROWTH_URL}>Talk to Growth.pro</a>
         <a class="btn btn-o btn-lg" href="https://app.zicy.com/register">Try for free</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div style="max-width:1080px;margin:0 auto">
+        <Screenshot
+          src={dfyActionPlan}
+          alt="Zicy Brand Intelligence action plan showing a prioritised list of reality fixes with impact estimates and escalation status, the backlog a managed programme works through."
+          caption="Illustrative product view with sample data."
+          priority="eager"
+        />
       </div>
     </div>
   </section>
