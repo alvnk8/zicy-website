@@ -57,8 +57,12 @@ const beats = [
     p: 'Every claim AI makes about you is fact-checked per engine. Outdated facts, the wrong location, a competitor confusion: each error is routed to a prioritised fix list, not left for you to spot.',
   },
   {
-    h: 'Fixes, not homework',
-    p: 'The work is done with you, not handed back as a to-do list. Schema is generated for you, cited articles are written with your approval, and pages are upgraded. You review and approve.',
+    h: 'A to-do list with the work attached',
+    p: 'Zicy hands you a prioritised to-do list, then generates the hard part of each item: schema markup, an llms.txt file, article drafts with real cited sources, upgraded page copy. You publish them on your site, or hand the list to whoever manages it. Nothing goes live without you.',
+  },
+  {
+    h: 'Content AI can quote',
+    p: 'The content tools carry the most weight for small teams. The content generator writes new articles and pages built for AEO and GEO from the first draft: researched with real cited sources, in your tone, approved by you at every step. The content optimiser reworks pages you already have to answer-engine best practice, so existing content starts earning citations instead of being skipped.',
   },
   {
     h: 'Proof in your analytics',
@@ -74,7 +78,7 @@ const beats = [
 const diff = [
   {
     h: 'Not another dashboard.',
-    p: 'At this price, most tools only monitor, and some skip Google\'s AI answers entirely. Zicy runs the whole loop: measure what AI says, diagnose why, act to fix it, and prove it moved demand.',
+    p: 'At this price, most tools only monitor, and some skip Google\'s AI answers entirely. Zicy runs the whole loop: measure what AI says, diagnose why, generate the fixes and the content, and prove it moved demand.',
   },
   {
     h: 'Truth, not just mentions.',
@@ -89,7 +93,7 @@ const diff = [
 // The first thirteen weeks, in order.
 const timeline = [
   { k: 'Day 1', t: 'Paste your website URL and activate. Your first read of what AI says lands within minutes.' },
-  { k: 'Weeks 1 to 2', t: 'Technical fixes go in and confirmed errors are corrected, so AI reads you accurately.' },
+  { k: 'Weeks 1 to 2', t: 'You paste in the technical pieces Zicy generates (schema, llms.txt) and correct confirmed errors at the source, so AI reads you accurately.' },
   { k: 'Weeks 2 to 8', t: 'One cited article a week on your biggest gaps, written with your approval.' },
   { k: 'Weeks 8 to 13', t: 'Watch the trend line move and the enquiries coming in from AI answers.' },
 ];
@@ -99,7 +103,7 @@ const timeline = [
 const smbFaqs = [
   {
     q: 'Do I need a marketer to use Zicy?',
-    a: "No. Setup is pasting your website URL. Zicy writes the questions to track, points to what to fix first in plain English, and does the technical fixes with you. A built-in consultant answers anything you are unsure about.",
+    a: "No. Setup is pasting your website URL. Zicy writes the questions to track, points to what to fix first in plain English, and generates the technical pieces (schema, llms.txt, article drafts) ready for you to paste in. A built-in consultant answers anything you are unsure about.",
   },
   {
     q: 'Does this matter for a business my size?',
@@ -107,11 +111,15 @@ const smbFaqs = [
   },
   {
     q: 'How is this different from my SEO tool or agency?',
-    a: "Your Google rank is no longer your AI rank. SEO tools measure where you sit in a list of links; Zicy measures what AI says about you in the answer itself, whether it is accurate, and fixes what is wrong. It works alongside your SEO, it does not replace your rankings work.",
+    a: "Your Google rank is no longer your AI rank. SEO tools measure where you sit in a list of links; Zicy measures what AI says about you in the answer itself, whether it is accurate, and generates what you need to fix what is wrong. It works alongside your SEO, it does not replace your rankings work.",
   },
   {
     q: 'My CEO wants an answer this week.',
     a: "You can have a baseline in days. Paste the website, and Zicy shows how AI describes the company today across all five engines, where it is wrong, and the plan to fix it, in a PDF report you can hand over.",
+  },
+  {
+    q: 'Does Zicy make the changes to my website for me?',
+    a: 'No. Zicy never touches your website. It finds the problems, ranks them, and generates everything you need: schema markup, an llms.txt file, article drafts, upgraded page copy. You publish them, or hand them to whoever manages your site. If you would rather have the whole thing done for you, see our <a href="/done-for-you">done-for-you service</a>.',
   },
   {
     q: 'What about my reviews and Google Business Profile?',
@@ -119,7 +127,7 @@ const smbFaqs = [
   },
   {
     q: 'What happens after I start?',
-    a: "You paste your website and get your first read within minutes. Technical fixes and confirmed errors go in over the first couple of weeks, then a cited article a week on your biggest gaps, and you watch the trend and the enquiries from AI answers.",
+    a: "You paste your website and get your first read within minutes. You paste in the technical pieces Zicy generates over the first couple of weeks and correct confirmed errors at the source, then a cited article a week on your biggest gaps, and you watch the trend and the enquiries from AI answers.",
   },
 ];
 
@@ -177,7 +185,7 @@ const breadcrumb = {
       </div>
       <ul class="checklist">
         <li>Zicy shows a small business what AI answer engines say about it, whether that is accurate, and who AI recommends instead.</li>
-        <li>Setup is pasting your website. Zicy writes the questions to track, points to what to fix first in plain English, and does the technical fixes with you.</li>
+        <li>Setup is pasting your website. Zicy writes the questions to track, points to what to fix first in plain English, and generates the technical pieces for you to paste in.</li>
         <li>You get a report you can hand to a boss, and proof of AI-referred visits in your own analytics.</li>
       </ul>
     </div>
@@ -220,8 +228,8 @@ const breadcrumb = {
           <h3>I run the business.</h3>
           <p>
             You wear every hat and you do not have a marketer. Good news: pasting your website is
-            the whole setup. Zicy writes the questions, shows what to fix in plain English, and does
-            the technical work with you.
+            the whole setup. Zicy writes the questions, shows what to fix in plain English, and
+            generates the technical pieces for you to paste in.
           </p>
         </div>
         <div class="card">
