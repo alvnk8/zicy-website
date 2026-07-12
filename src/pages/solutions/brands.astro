@@ -9,7 +9,7 @@ import { brandsFaqs, faqPageJsonLd } from '../../data/faqs';
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
 // Enrichment screenshots — five brands-* product views (illustrative sample data), one per
 // surfaced capability. Optimisation, WebP/AVIF srcset and lazy-loading are handled by <Screenshot>.
-import aiVisibilityShot from '../../assets/screenshots/brands-01-ai-visibility-dashboard.png';
+import heroAiVisibility from '../../assets/screenshots/brands-01-ai-visibility-dashboard.png';
 import brandIntelligenceShot from '../../assets/screenshots/brands-02-brand-intelligence.png';
 import keyTopicsShot from '../../assets/screenshots/brands-03-key-topics.png';
 import citationAnalysisShot from '../../assets/screenshots/brands-04-citation-analysis.png';
@@ -134,6 +134,14 @@ const breadcrumb = {
         <a class="btn btn-p btn-lg" href="https://app.zicy.com/register">Try for free</a>
         <a class="btn btn-o btn-lg" href="/platform">See the platform</a>
       </div>
+      <div style="max-width:1080px;margin:44px auto 0">
+        <Screenshot
+          src={heroAiVisibility}
+          alt="Zicy AI visibility dashboard showing mention coverage, citation rate, share of voice and average ranking across five AI engines."
+          caption="Illustrative product view with sample data."
+          priority="eager"
+        />
+      </div>
     </div>
   </section>
 
@@ -255,11 +263,6 @@ const breadcrumb = {
         ))}
       </div>
       <div class="grid-2" style="margin-top:28px">
-        <Screenshot
-          src={aiVisibilityShot}
-          alt="Zicy AI visibility dashboard showing mention coverage, citation rate, share of voice and average ranking across five AI engines."
-          caption="Illustrative product view with sample data."
-        />
         <Screenshot
           src={keyTopicsShot}
           alt="Key Topics treemap splitting the category into topics where the brand is present or absent."
