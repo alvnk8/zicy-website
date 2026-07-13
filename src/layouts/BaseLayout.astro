@@ -15,6 +15,7 @@ import Schema from '../components/Schema.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import { SITE } from '../data/site';
 import { ogImageMeta } from '../data/og-pages';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title: string;
@@ -98,6 +99,8 @@ const og = ogImageMeta(Astro.url.pathname);
 
     <Schema />
     <slot name="head" />
+    <!-- Vercel Web Analytics -->
+    <Analytics />
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
