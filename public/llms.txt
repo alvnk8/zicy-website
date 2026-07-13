@@ -36,3 +36,4 @@
 - Measuring AI visibility, part 2, search halo: https://www.zicy.com/resources/measuring-ai-visibility-search-halo
 - Measuring AI visibility, part 3, sub-entity halo: https://www.zicy.com/resources/measuring-ai-visibility-sub-entity-halo
 - Why brand audits matter in the AI search era: https://www.zicy.com/resources/brand-audits-ai-search
+- How to add effective prompts to your AI tracking: https://www.zicy.com/resources/effective-prompts-ai-tracking

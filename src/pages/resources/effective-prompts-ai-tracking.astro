@@ -1,0 +1,250 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/effective-prompts-ai-tracking. articleSection Guides.
+// Author reassigned to Ritu Khanna (byline and schema both), with no prior attribution:
+// the source article carried no in-body byline, so none is present to carry over.
+// House style applied (UK spelling, sentence-case headings, em dash removed, no
+// exclamation marks, engines named in full where listed).
+const title = 'How to add effective prompts to your AI tracking';
+const description =
+  'Effective prompt tracking means choosing questions where AI actually has to name brands: buying-intent queries with a clear product, store or service, and a location for local businesses.';
+
+const url = `${SITE.url}/resources/effective-prompts-ai-tracking`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-02-04',
+      dateModified: '2026-07-13',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('prompt-tracking') }],
+      mentions: [{ '@id': gloss('answer-intent-query') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Effective prompts for AI tracking</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How to add effective prompts to your AI tracking</h1>
+
+      <p class="answer">
+        Effective <a href="/resources/glossary/prompt-tracking">prompt tracking</a> means choosing
+        questions where AI actually has to name brands: buying-intent queries with a clear product,
+        store or service, and a location for local businesses. In Zicy you track a focused set of
+        these prompts, so brand mentions reflect real demand rather than questions no engine would
+        answer with names.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 4 February 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Why it matters</span><h2>Why prompt quality matters.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          The insights you get from Zicy are only as good as the prompts you track. Track the wrong
+          prompts and you will see zero brand mentions, not because AI does not know your brand, but
+          because you are asking questions where AI has no reason to recommend anyone. The key question
+          is simple: would AI naturally need to name specific brands to answer this prompt?
+        </p>
+        <p>
+          If someone asks how to improve their fitness, AI gives general advice and names no brands. If
+          someone asks for the best gym near downtown Manhattan, AI recommends specific gyms, and your
+          brand could be one of them. That is the difference between tracking prompts that matter and
+          tracking prompts that waste your time.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Buying intent</span><h2>What makes a prompt worth tracking.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Effective prompts share one trait: buying intent. These are
+          <a href="/resources/glossary/answer-intent-query">answer-intent queries</a>, questions from
+          people ready to choose, compare or purchase, not people casually researching.
+        </p>
+        <p>Questions AI will not name brands for:</p>
+        <ul>
+          <li>What are the benefits of skincare routines?</li>
+          <li>How often should I work out?</li>
+          <li>What makes a good running shoe?</li>
+        </ul>
+        <p>Questions AI will name brands for:</p>
+        <ul>
+          <li>What is the best moisturiser for oily skin?</li>
+          <li>Which gym has the best classes in London?</li>
+          <li>What running shoes are best for marathon training?</li>
+        </ul>
+        <p>The second set asks for recommendations, so AI has to name names.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Business type</span><h2>Know your business type.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Different businesses need different prompt styles. A quick way to identify yours:</p>
+        <ul>
+          <li><strong>If you sell products you make</strong> (skincare brand, furniture manufacturer, food brand), track product-comparison prompts: what is the best product for a given need.</li>
+          <li><strong>If you sell other brands' products</strong> (electronics store, fashion retailer, online marketplace), track sourcing prompts: where can I buy a product, or what is the best store for a category.</li>
+          <li><strong>If you provide services</strong> (gym, salon, agency, clinic), track service-recommendation prompts: what is the best service in a location.</li>
+        </ul>
+        <p>
+          This distinction matters. If you are a phone retailer tracking the best smartphone, AI will
+          name Samsung and Apple, not your store. You would want where can I buy phones in your city
+          instead.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Examples</span><h2>Examples in action.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <h3>Example 1: a yoga studio in New York</h3>
+        <p>This is a local service provider, so prompts need location and service focus.</p>
+        <p><strong>Effective prompts:</strong></p>
+        <ul>
+          <li>What is the best yoga studio in New York?</li>
+          <li>Which yoga class is best for beginners in Brooklyn?</li>
+          <li>Where can I find hot yoga classes in Manhattan?</li>
+        </ul>
+        <p><strong>Will not generate brand mentions:</strong></p>
+        <ul>
+          <li>What are the benefits of yoga?</li>
+          <li>How often should I do yoga?</li>
+        </ul>
+
+        <h3>Example 2: a skincare brand</h3>
+        <p>This is a product manufacturer, so prompts should focus on product comparisons and use cases.</p>
+        <p><strong>Effective prompts:</strong></p>
+        <ul>
+          <li>What is the best vitamin C serum for sensitive skin?</li>
+          <li>Which moisturiser is best for humid climates?</li>
+          <li>What are the top anti-ageing serums this year?</li>
+        </ul>
+        <p><strong>Will not generate brand mentions:</strong></p>
+        <ul>
+          <li>How do I build a skincare routine?</li>
+          <li>What ingredients should I avoid?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Build the list</span><h2>How to build your prompt list.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Zicy generates prompts automatically based on your business profile, which gives you a strong
+          starting point covering your main products, services and markets. But you know your business
+          best. After reviewing the auto-generated prompts, consider:
+        </p>
+        <ul>
+          <li><strong>Focus areas:</strong> are there specific products or services you want to push?</li>
+          <li><strong>Target audiences:</strong> do you serve specific groups (families, professionals, beginners) worth tracking separately?</li>
+          <li><strong>Angles:</strong> are there unique selling points (affordable, premium, eco-friendly) that customers search for?</li>
+          <li><strong>Local nuances:</strong> are there neighbourhood-level or regional terms your customers actually use?</li>
+        </ul>
+        <p>Think of it as a collaboration: AI handles the heavy lifting, and you refine based on what actually matters to your business.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Checklist</span><h2>A quick checklist.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Before adding a prompt, ask:</p>
+        <ul>
+          <li>Would AI need to recommend specific brands to answer this?</li>
+          <li>Does it reflect buying intent, not just curiosity?</li>
+          <li>Does it match your business type (product, store or service)?</li>
+          <li>If you are local, is the location included?</li>
+        </ul>
+        <p>Track fewer, better prompts. Ten well-chosen prompts will give you more actionable insights than fifty generic ones.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Track the prompts where AI has to name brands.</h2>
+      <p>Zicy runs your chosen prompts across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, and reports where your brand is named and cited.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+  .prose h3{font-family:var(--display);font-size:19px;color:var(--indigo);margin:22px 0 8px;letter-spacing:-0.01em}
+</style>
