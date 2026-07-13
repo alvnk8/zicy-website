@@ -51,15 +51,17 @@ const homeActive = path === '/';
       <a href="/done-for-you" class={isActive('/done-for-you') ? 'active' : ''}>Done-for-You</a>
 
       <div class="has-dropdown">
-        <a href="/free-tools" class:list={['trigger', { active: inSection(FREE_TOOLS) || isActive('/free-tools') }]}>
-          Free tools <span class="car" aria-hidden="true">▾</span>
+        <a href="/resources" class:list={['trigger', { active: isActive('/resources') || isActive('/free-tools') || inSection(FREE_TOOLS) }]}>
+          Resources <span class="car" aria-hidden="true">▾</span>
         </a>
         <div class="dropdown">
-          {FREE_TOOLS.map((t) => <a href={t.href} class={isActive(t.href) ? 'active' : ''}>{t.label}</a>)}
+          <a href="https://docs.zicy.com/">Help centre</a>
+          <a href="/free-tools" class={isActive('/free-tools') ? 'active' : ''}>Free tools hub</a>
+          <a href="/consultant" class={isActive('/consultant') ? 'active' : ''}>AEO/GEO consultant</a>
+          <a href="/chrome-extension" class={isActive('/chrome-extension') ? 'active' : ''}>Chrome extension</a>
         </div>
       </div>
 
-      <a href="https://docs.zicy.com/">Help centre</a>
       <a class="login" href="https://app.zicy.com/">Log in</a>
       <a class="cta" href="https://app.zicy.com/register">Try for free</a>
     </div>
@@ -80,10 +82,11 @@ const homeActive = path === '/';
         <a href="/pricing" class={isActive('/pricing') ? 'active' : ''}>Pricing</a>
         <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>Case studies</a>
         <a href="/done-for-you" class={isActive('/done-for-you') ? 'active' : ''}>Done-for-You</a>
-        <p class="mnav-group">Free tools</p>
-        <a href="/free-tools" class={isActive('/free-tools') ? 'active' : ''}>Free tools hub</a>
-        {FREE_TOOLS.map((t) => <a href={t.href} class={isActive(t.href) ? 'active' : ''}>{t.label}</a>)}
+        <p class="mnav-group">Resources</p>
         <a href="https://docs.zicy.com/">Help centre</a>
+        <a href="/free-tools" class={isActive('/free-tools') ? 'active' : ''}>Free tools hub</a>
+        <a href="/consultant" class={isActive('/consultant') ? 'active' : ''}>AEO/GEO consultant</a>
+        <a href="/chrome-extension" class={isActive('/chrome-extension') ? 'active' : ''}>Chrome extension</a>
         <a class="btn btn-o" href="https://app.zicy.com/">Log in</a>
         <a class="btn btn-p" href="https://app.zicy.com/register">Try for free</a>
       </div>
