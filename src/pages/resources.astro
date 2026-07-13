@@ -9,11 +9,14 @@ const description =
 const blog = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
-  '@id': `${SITE.url}/resources`,
+  // #blog fragment on the /resources URL: disambiguates the Blog collection
+  // from the page itself, and is the stable @id the migrated posts reference.
+  '@id': `${SITE.url}/resources#blog`,
   name: 'Zicy resources',
   description,
   url: `${SITE.url}/resources`,
   publisher: { '@id': `${SITE.url}/#org` },
+  inLanguage: 'en',
 };
 
 const pillars = [

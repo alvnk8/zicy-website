@@ -119,18 +119,29 @@ const graph = {
       ],
     },
     {
+      // description/jobTitle verbatim from the visible /about team cards.
+      // sameAs: Zicy LinkedIn plus Alvin's canonical Person node on Growth.pro
+      // (@id verified live at https://www.growth.pro/#alvin-koay). No Wikidata
+      // QID exists in repo config, so none is emitted.
       '@type': 'Person',
       '@id': person.alvin,
       name: 'Alvin Koay',
       jobTitle: 'Founder & CEO',
+      description:
+        "Started Growth.pro before the pandemic and saw an SEO industry riddled with broken promises. Built Zicy to clone Growth.pro's ethos, empathy, trust, accountability, transparency and integrity, into AI, so even the smallest businesses get fair access to world-class strategies.",
       worksFor: { '@id': orgId },
-      sameAs: ['https://www.linkedin.com/in/alvinkoay/'],
+      sameAs: [
+        'https://www.linkedin.com/in/alvinkoay/',
+        'https://www.growth.pro/#alvin-koay',
+      ],
     },
     {
       '@type': 'Person',
       '@id': person.april,
       name: 'April Cheong',
       jobTitle: 'Co-founder',
+      description:
+        "April excels at the intersection of data, strategy and artificial intelligence, translating complex analytics into actionable business insights. At Zicy, April's expertise in Big Data architecture, AI-powered product ideation and workflow automation shapes our intelligent, user-focused approach to Answer Engine Optimisation.",
       worksFor: { '@id': orgId },
     },
     {
@@ -138,6 +149,8 @@ const graph = {
       '@id': person.ritu,
       name: 'Ritu Khanna',
       jobTitle: 'Co-founder',
+      description:
+        'Over 15 years in the corporate sector leading environmental-industry projects, plus a decade in SEO strategy and content planning. At Zicy, Ritu applies that experience to develop practical AI-first optimisation methods that help businesses become visible in AI-generated answers.',
       worksFor: { '@id': orgId },
     },
     {
