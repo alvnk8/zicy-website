@@ -1,0 +1,332 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/search-halo-measuring-ai-visibility. Part 2 of the
+// three-part "measuring AI visibility" series. Author: April Cheong. House style applied.
+const title = 'Measuring AI visibility: why the search halo is the second layer to understand';
+const description =
+  'The search halo is the second layer of AI visibility attribution: the lift in branded search and direct visits that follows after users discover a brand in AI answers.';
+
+const url = `${SITE.url}/resources/measuring-ai-visibility-search-halo`;
+const author = `${SITE.url}/about#april-cheong`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const pillar = `${SITE.url}/resources/measuring-ai-visibility-direct-roi#article`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-04-14',
+      dateModified: '2026-07-13',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      // Part of the blog collection and of the series pillar (part 1).
+      isPartOf: [{ '@id': blogId }, { '@id': pillar }],
+      articleSection: 'Research',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('ai-visibility') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Measuring AI visibility: search halo</span>
+      </nav>
+      <span class="eyebrow">Research &middot; Series part 2 of 3</span>
+      <h1>Measuring AI visibility: why the search halo is the second layer to understand</h1>
+
+      <p class="answer">
+        The search halo is the second layer of
+        <a href="/resources/glossary/ai-visibility">AI visibility</a> attribution: the lift in
+        branded search and direct visits that follows after users discover a brand in AI answers but
+        return through another route. Zicy pairs AI visibility tracking with Google Search Console
+        branded-query trends, so brands can read that downstream demand instead of missing it.
+      </p>
+
+      <p class="byline">By <a href="/about">April Cheong</a> &middot; 14 April 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          This is part 2 of a three-part series on measuring the effectiveness and ROI of AI
+          visibility. In
+          <a href="/resources/measuring-ai-visibility-direct-roi">part 1 on direct ROI, the clearest and most observable form of attribution</a>,
+          a user sees a brand in an AI-generated answer, clicks through and converts. But that is only
+          one layer of AI influence.
+        </p>
+        <p>
+          A large part of the impact of AI does not happen through a direct referral click. AI
+          introduces the brand, shapes interest and influences preference earlier in the journey. The
+          user then comes back through another route, most often branded search, direct traffic or a
+          later visit. That is where the search halo becomes useful: it explains what happens when AI
+          influences demand but does not own the final click.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">The blind spot</span><h2>Why direct clicks do not tell the full story.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          One of the most common mistakes brands still make is evaluating AI performance too narrowly,
+          asking only how much traffic AI sent directly to the website. That is a reasonable place to
+          start, but it is too limited as the full measurement model. It assumes AI only matters when a
+          user clicks immediately from a platform like ChatGPT, Gemini or Perplexity and lands on the
+          site in the same session. Because AI traffic is still low compared with other channels, some
+          brands choose to ignore it, which can be detrimental to the brand and the bottom line given
+          how brand influence works.
+        </p>
+        <p>
+          A user may discover a brand through AI but choose not to click in that moment. They may want
+          to verify the recommendation, compare options, or simply leave and come back later. What
+          happens next often looks more familiar: they search the brand on Google, type the URL
+          directly, or revisit through another channel, and then they convert. In that journey AI
+          still played an important role. It shaped awareness before the website visit, and without
+          that awareness the visit or conversion would never happen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Behaviour shift</span><h2>AI is becoming a brand discovery layer.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          This is one of the more important behavioural shifts happening now. AI is no longer just
+          answering informational queries. It increasingly influences how users discover, shortlist
+          and evaluate brands before a site visit ever happens. A user might ask which software is
+          best for a use case, which agency is strongest in a category, which skincare brand is most
+          trusted, or which provider to consider for a service.
+        </p>
+        <p>
+          If a brand appears in that answer, it matters. That moment can shape awareness, credibility,
+          memory and early preference. But the user may still not click through from the AI interface.
+          Instead they do something more natural: they search for the brand later. This is what makes
+          AI attribution harder to read with traditional models. AI may create the demand, while
+          another channel receives the credit.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Downstream signal</span><h2>Why branded search becomes the key downstream signal.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          A user sees a brand in an AI answer, does not click immediately, then later searches for the
+          brand name on Google. That increase in branded search activity is often one of the clearest
+          downstream signs that AI visibility is turning into real interest. Branded search is not just
+          traffic. It reflects recognition, recall, intent, trust and active consideration. In other
+          words, branded search is often a demand signal, and in the AI era that demand may
+          increasingly be shaped upstream by AI visibility.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Definition</span><h2>What the search halo means.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          A useful way to think about this is as a halo effect around branded search. The search halo
+          is the lift in branded search activity that happens after users discover a brand in
+          AI-generated answers. The journey often looks like this:
+        </p>
+        <ol>
+          <li>A user asks an AI platform for recommendations.</li>
+          <li>The brand appears in the answer.</li>
+          <li>The user leaves the AI interface.</li>
+          <li>The user later searches the brand on Google.</li>
+          <li>They visit the website through branded organic search, direct traffic or another route.</li>
+          <li>They convert.</li>
+        </ol>
+        <p>
+          This is still AI-influenced traffic and conversion. The AI platform may not appear as the
+          final source in analytics, but it helped create the interest that led to the later search
+          and visit. That is the point many teams still miss.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Why it matters</span><h2>Why this matters for brand and growth teams.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          AI is increasingly functioning less like a pure traffic channel and more like an upstream
+          influence layer. It can introduce a brand earlier in the journey, reinforce trust through
+          recommendation, shape shortlist and comparison behaviour, increase branded search demand,
+          and support conversions without receiving direct attribution. That makes it especially
+          relevant for teams responsible for brand, growth and demand generation.
+        </p>
+        <p>
+          From a reporting perspective the conversion may appear under branded organic traffic, direct
+          traffic, returning users or another later touchpoint. But the original spark may still have
+          come from AI. If brands only measure direct AI referral traffic, they are likely understating
+          the actual impact of AI.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Method</span><h2>How to measure the search halo more realistically.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          No attribution model will make this perfectly clean. Customer journeys are messy, and they
+          always have been. But the search halo gives brands a more realistic second layer. Where
+          direct ROI answers whether AI sent traffic that converted directly, the search halo answers
+          whether AI created interest that later turned into branded search, traffic and conversion.
+          In many cases AI does not behave like a last-click channel. It behaves more like a brand
+          amplifier. The goal is not perfect attribution, but a more intelligent view of influence,
+          built by connecting multiple signals:
+        </p>
+        <ol>
+          <li><strong>Track AI visibility.</strong> Understand whether the brand is actually appearing in relevant AI-generated answers, using AI search analytics such as Zicy. If AI visibility is not measured, there is no halo to measure.</li>
+          <li><strong>Track branded search trends.</strong> Look at whether branded search volume is increasing over time using Google Search Console. If users search for the brand more often as AI visibility rises, that is an important signal of positive correlation.</li>
+          <li><strong>Compare against traffic behaviour:</strong> more branded organic visits, more direct traffic, more returning users, and stronger conversion activity from those visits.</li>
+          <li><strong>Estimate the role of branded intent.</strong> If branded search is rising, branded organic visits are increasing, and AI visibility is also rising over the same period, then AI is likely contributing to those conversions indirectly. It is not perfect attribution, but it is a more realistic reflection of how modern discovery works.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">What to watch</span><h2>The signals brands should actually watch.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <ul>
+          <li><strong>AI visibility rate:</strong> how often the brand appears in relevant AI-generated answers across key queries. Source: AI visibility tracking and prompt monitoring tools such as Zicy, or manual query tracking across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</li>
+          <li><strong>Branded search volume:</strong> the number of users actively searching the brand name over time. Source: Google Search Console, Performance, Queries filtered by brand terms; Google Trends for directional validation.</li>
+          <li><strong>Branded share of organic clicks:</strong> the proportion of organic traffic that comes from brand-specific searches rather than generic queries. Source: Google Search Console, comparing branded and non-branded queries by clicks.</li>
+          <li><strong>Direct traffic trends:</strong> changes in users visiting the site directly, often reflecting increased brand recall and familiarity. Source: GA4, Reports, Acquisition, Traffic acquisition, session default channel group set to Direct.</li>
+          <li><strong>Organic conversion trends:</strong> how well organic traffic converts, especially as branded demand increases. Source: GA4 Explore or Reports, filtered by organic search, tracking key events and conversions.</li>
+          <li><strong>Correlation between AI visibility and branded search over time:</strong> whether increases in AI visibility align with growth in branded search. Source: combine AI visibility data with Search Console branded query trends over time.</li>
+        </ul>
+        <p>
+          When these signals move together, you are not just looking at isolated channel performance.
+          You are seeing evidence that AI visibility may be creating downstream brand demand. That is
+          what the search halo is designed to capture.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">The shift</span><h2>The bigger strategic shift behind this.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Attribution is slowly moving from a click-based model to an influence-based one. Brands are
+          no longer competing only for clicks inside search results. They are increasingly competing
+          for presence inside AI-generated recommendations, summaries, comparisons and synthesised
+          answers. That presence shapes who gets remembered, who gets searched, and who gets chosen
+          later. This is why measuring AI visibility only through direct referral traffic is too
+          narrow. The better question is whether AI is increasing branded demand, and whether that
+          demand is showing up in traffic and conversions over time.
+        </p>
+        <p>
+          Direct ROI is still the cleanest place to start, but it only captures the cases where AI
+          owns the click. The search halo captures the next layer, when AI influences the decision but
+          another channel receives the final credit. That makes it a necessary second step in any
+          serious AI attribution model, expanding the view beyond what is directly visible and helping
+          brands measure AI as an influence engine, not just a referral source.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">In closing</span><h2>Final thoughts.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          In the AI search era the customer journey is becoming less linear and more distributed. Users
+          do not always go from discovery to click to conversion in a single path. They may discover a
+          brand in AI, verify it through Google, return later through direct traffic, and convert
+          through a journey that traditional attribution models oversimplify. That is why the search
+          halo matters. It helps brands see the hidden impact of AI even when no direct link is
+          clicked, and offers a more realistic view of how AI visibility shapes consideration, branded
+          demand and downstream conversion behaviour.
+        </p>
+        <p>
+          Once this layer is clear, the next question becomes more specific:
+          <a href="/resources/measuring-ai-visibility-sub-entity-halo">can AI visibility create measurable demand for individual products and business lines, the sub-entity halo</a>,
+          not just the parent brand.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Read the halo before another channel takes the credit.</h2>
+      <p>Zicy tracks AI visibility across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, alongside the branded-search demand it creates.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>
