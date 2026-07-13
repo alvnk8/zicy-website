@@ -35,6 +35,7 @@ const entries: Entry[] = [
   { path: '/resources/measuring-ai-visibility-sub-entity-halo', changefreq: 'monthly', priority: '0.6' },
   { path: '/resources/brand-audits-ai-search', changefreq: 'monthly', priority: '0.6' },
   { path: '/resources/effective-prompts-ai-tracking', changefreq: 'monthly', priority: '0.6' },
+  { path: '/resources/cloudflare-bot-management', changefreq: 'monthly', priority: '0.6' },
   ...LEGAL.map((d) => ({ path: `/legal/${d}`, changefreq: 'yearly', priority: '0.3' })),
 ];
 
