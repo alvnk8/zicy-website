@@ -55,6 +55,23 @@ const moduleGroups = [
 ];
 const allModules = moduleGroups.flatMap((g) => g.modules);
 
+// Module-reference doc slug per module (docs.zicy.com). Kept separate from the module data so the
+// ItemList schema, built from allModules, is unchanged. A module with no entry renders no link.
+const MODULE_DOC: Record<string, string> = {
+  'Prompt Manager': 'm-02-prompt-manager',
+  'AI Visibility': 'm-04-ai-visibility-dashboard',
+  'Competitive AI Performance': 'm-05-competitive-ai-performance',
+  'Brand Intelligence': 'm-06-brand-intelligence',
+  'Brand Sentiment': 'm-07-brand-sentiment',
+  'Competitor Sentiment Profiles': 'm-08-competitor-sentiment-profiles',
+  'Key Topics Analysis': 'm-09-key-topics-analysis',
+  'Citation Analysis': 'm-10-citation-analysis',
+  'Site Audit': 'm-11-site-audit',
+  'Visibility Gaps': 'm-12-visibility-gaps',
+  'Action Center': 'm-13-action-center',
+  'Site Traffic': 'm-14-site-traffic',
+};
+
 // Page-level structured data. The Zicy Organization, WebSite and SoftwareApplication entities
 // are sitewide (src/components/Schema.astro). This page keeps its module ItemList plus a WebPage
 // node that carries the speakable hint and points at the canonical app entity.
@@ -286,7 +303,9 @@ const breadcrumb = {
             <span class="eyebrow">{g.stage}</span>
             <ul class="modlist" style="margin-top:12px">
               {g.modules.map((m) => (
-                <li><b>{m.name}</b>{m.desc}</li>
+                <li><b>{m.name}</b>{m.desc}{MODULE_DOC[m.name] && (
+                  <> <a href={`https://docs.zicy.com/module-reference/${MODULE_DOC[m.name]}/`}>Read the module guide &rarr;</a></>
+                )}</li>
               ))}
             </ul>
           </div>
