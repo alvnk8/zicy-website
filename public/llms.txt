@@ -34,3 +34,4 @@
 
 - Measuring AI visibility, part 1, direct ROI: https://www.zicy.com/resources/measuring-ai-visibility-direct-roi
 - Measuring AI visibility, part 2, search halo: https://www.zicy.com/resources/measuring-ai-visibility-search-halo
+- Measuring AI visibility, part 3, sub-entity halo: https://www.zicy.com/resources/measuring-ai-visibility-sub-entity-halo

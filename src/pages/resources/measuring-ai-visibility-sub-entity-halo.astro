@@ -1,0 +1,372 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/sub-entity-halo-measuring-ai-visibility. Part 3 of the
+// three-part "measuring AI visibility" series. Author: April Cheong. House style applied
+// (em dash in the original title removed, UK spelling, no exclamation marks). Brand names
+// below (Nike, HubSpot, Marriott/Moxy) are the source's illustrative, explicitly hypothetical
+// examples, kept with their "not actual performance" disclaimers, not Zicy performance claims.
+const title = 'Measuring AI visibility: the sub-entity halo, a strategic prioritisation layer';
+const description =
+  'The sub-entity halo is the third layer of AI visibility attribution: whether AI surfaces a brand\'s specific named products and services in the queries where they are most relevant.';
+
+const url = `${SITE.url}/resources/measuring-ai-visibility-sub-entity-halo`;
+const author = `${SITE.url}/about#april-cheong`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const pillar = `${SITE.url}/resources/measuring-ai-visibility-direct-roi#article`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-04-28',
+      dateModified: '2026-07-13',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: [{ '@id': blogId }, { '@id': pillar }],
+      articleSection: 'Research',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('ai-visibility') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Measuring AI visibility: sub-entity halo</span>
+      </nav>
+      <span class="eyebrow">Research &middot; Series part 3 of 3</span>
+      <h1>Measuring AI visibility: the sub-entity halo, a strategic prioritisation layer</h1>
+
+      <p class="answer">
+        The sub-entity halo is the third layer of
+        <a href="/resources/glossary/ai-visibility">AI visibility</a> attribution: whether AI
+        surfaces a brand's specific named products and services in the queries where they are most
+        relevant, and whether that drives product-level search and conversions. Zicy tracks AI
+        visibility per sub-entity, so brands can see which offerings AI knows well enough to
+        recommend by name.
+      </p>
+
+      <p class="byline">By <a href="/about">April Cheong</a> &middot; 28 April 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          This is part 3 of a three-part series on measuring the effectiveness and ROI of AI
+          visibility, after
+          <a href="/resources/measuring-ai-visibility-direct-roi">part 1 on direct ROI</a> and
+          <a href="/resources/measuring-ai-visibility-search-halo">part 2 on the branded-search halo</a>.
+        </p>
+        <p>
+          A property developer we worked with had a strong parent brand. It appeared in AI answers
+          regularly, and branded search was healthy. On the surface, AI visibility looked like it was
+          working. But when we looked at their individual property projects, something more revealing
+          showed up. Some projects were recommended by name, with their own location, features and
+          positioning clearly understood. Others were not. They were only referenced as "a project
+          from the brand", with no project name and no independent recognition, just the parent brand
+          carrying them into the answer.
+        </p>
+        <p>
+          The deeper problem is this: if AI only knows the brand but not the individual project, it
+          cannot match that project to a specific user query. When a user asks which development around
+          a location has particular features, AI needs the project's location, features and
+          positioning to answer. If it only knows the parent brand exists, the project does not get
+          recommended, not because it is a poor fit, but because AI does not have enough information to
+          know that it is. The project is excluded from the conversation at the exact moment a
+          qualified buyer is asking the right question. That is a brand architecture question, and
+          sub-entity AI visibility data answered it. That is where the sub-entity halo comes in.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">The gap</span><h2>Why brand-level measurement is not enough.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Brand-level measurement is useful, but it can hide exactly this kind of gap. A company may
+          own multiple sub-brand products or services. Even if the parent brand appears consistently
+          in AI answers, that does not tell you which specific offerings AI understands well enough to
+          recommend, and which it cannot match to a real query. Users are often far more specific than
+          brand-level measurement accounts for. They do not always ask about a brand; they ask about a
+          product with specific features, or a service that fits a specific use case.
+        </p>
+        <p>
+          If AI does not have enough detail about a specific product or service, it cannot surface the
+          brand or its offering in those queries even if the parent brand is well known. The
+          sub-entity is invisible at the exact moment it is most relevant, and that invisibility does
+          not show up at the parent-brand level. The overall brand may look stable in AI answers while
+          individual offerings are being systematically excluded from the queries that matter most.
+          That is why brands need a third layer of measurement.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Definition</span><h2>What the sub-entity halo means in plain terms.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>The sub-entity halo answers two connected questions:</p>
+        <ol>
+          <li>Is AI surfacing our specific products or services in the queries where they are most relevant?</li>
+          <li>When AI does surface them, does that lead to downstream search intent and conversions for that exact offering?</li>
+        </ol>
+        <p>
+          It is called a halo because, like the search halo, AI does not always own the final click.
+          It creates awareness and shapes consideration upstream, and that influence later shows up as
+          product-specific search behaviour and product-page conversions. The journey looks like this:
+          a user asks AI for the best option in a specific category, AI has enough specific information
+          to match the product to the query and recommends it by name, the user leaves the AI
+          interface, searches for that product or service name specifically, lands on the relevant
+          page, and converts. If the match step fails, because AI lacks the detail to connect the
+          product to the query, the rest of the journey never happens and a competitor fills that slot
+          instead.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">In practice</span><h2>The sub-entity halo in practice.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p class="note">These are illustrative examples, not actual performance, used only to show how the concept plays out for a physical product and for a service.</p>
+
+        <h3>Example 1: a physical product (Nike Air Max 270)</h3>
+        <p>
+          Nike is one of the most recognised brands in the world, but when a user asks a specific
+          question, brand recognition alone may not be enough to get a product recommended. Take the
+          query, what is a good everyday sneaker with maximum cushioning for long walks. To answer it,
+          AI needs to know that the Air Max 270 has Nike's largest heel Air unit, that it was designed
+          for all-day comfort, and that it sits in a specific price range. It needs the sub-entity, not
+          just the brand. When the sub-entity signal is strong, AI recommends the Air Max 270 by name,
+          describes its cushioning and matches it to the use case; the user then searches for it and
+          lands on the product page. When the signal is weak, AI only knows Nike makes sneakers, and a
+          competitor with clearer feature-level information fills the slot. If the data shows the Air
+          Max 270 is not named in cushioning or comfort queries, that is a signal-quality problem, not
+          a product problem.
+        </p>
+
+        <h3>Example 2: a service or solution (HubSpot Marketing Hub)</h3>
+        <p>
+          HubSpot is widely known as a CRM and marketing platform, but it is made up of distinct named
+          hubs, each targeting a different team, problem and buyer. A user evaluating solutions rarely
+          asks about HubSpot the brand; they ask about a specific solution for a specific problem, such
+          as the best tool for managing email campaigns, landing pages and lead nurturing in one place
+          for a mid-size B2B company. To answer, AI needs to know that Marketing Hub covers those
+          capabilities and is built for teams that want them integrated within a CRM. When the
+          sub-entity signal is strong, AI recommends HubSpot Marketing Hub by name and matches it to
+          the context. When it is weak, AI knows HubSpot is a marketing platform but cannot describe
+          Marketing Hub in enough detail to make the match, and recommends a competitor instead. A
+          strong parent brand does not automatically transfer to strong sub-entity visibility; each
+          hub has to earn its own place in AI answers.
+        </p>
+
+        <h3>Example 3: when the brand alone cannot enter the conversation (Moxy Hotels by Marriott)</h3>
+        <p>
+          Sometimes a query is too specific for the parent brand to answer, yet one of its sub-entities
+          is the right fit, and because AI does not know that sub-entity well enough, nothing is
+          surfaced. Marriott is one of the world's largest hotel groups, spanning luxury, business and
+          lifestyle accommodation. For the query, fun, affordable hotels for a solo trip to Amsterdam
+          in my 20s, Marriott as a brand is too broad to answer with confidence, so AI surfaces
+          hostels, boutique budget hotels or lifestyle brands whose positioning clearly matches. Moxy
+          Hotels is Marriott's answer to exactly this query, an affordable, design-led, social hotel
+          brand for younger travellers with properties across Europe. But if AI does not know Moxy as a
+          distinctly named sub-entity with its own positioning, price range and property-level detail,
+          the brand alone cannot carry that answer. Tracking Moxy as a sub-entity makes those missed
+          queries visible, and makes clear where content and PR investment would actually move the
+          needle rather than investing in the broader parent brand that was never going to win them.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Why it matters</span><h2>Why the sub-entity halo matters for brands.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>This is especially important for brands with:</p>
+        <ul>
+          <li>named product lines or service offerings,</li>
+          <li>named category-specific landing pages,</li>
+          <li>named solutions for different audiences or use cases.</li>
+        </ul>
+        <p>
+          Notice the named part. Without a name, it is not an entity a user can easily search or AI can
+          easily associate with. If you only measure AI impact at the parent-brand level, you risk
+          missing where value is being created and where it is being lost. A brand may see stable
+          overall AI performance while one product is quietly excluded from every relevant query, or a
+          high-margin offering is being recommended consistently and no one on the team knows because
+          they only look at top-level signals. AI visibility does not create value evenly across a
+          portfolio. It may favour one product, service line or sub-brand over another, and the
+          difference often comes down to how much specific, structured information AI has about each
+          sub-entity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Method</span><h2>How brands can measure the sub-entity halo in practice.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>The logic is similar to the search halo, but applied at the product or service level, in three steps.</p>
+        <ol>
+          <li><strong>Isolate the sub-entity.</strong> Define the product, service or business line you want to measure. You need a clear name and a dedicated landing page. The cleaner the definition, the better the measurement.</li>
+          <li><strong>Measure search intent for that sub-entity.</strong> In Google Search Console, look at search traffic tied specifically to that offering, using both the landing page people clicked on and the product or service name in the query. This isolates visits where the intent was genuinely about that offering.</li>
+          <li><strong>Estimate conversion impact.</strong> In GA4, measure organic conversions on that specific landing page, then apply the product-intent ratio from step 2 to estimate how many were driven by genuine product-level search intent.</li>
+        </ol>
+        <p>
+          Expressed simply, the sub-entity halo is the product-intent share of organic traffic
+          multiplied by organic conversions on that product page. So if 30 percent of organic clicks to
+          a product page come from searches clearly about that product, and the page generates 50
+          organic conversions, the estimated impact is 15 conversions. The point is not that every one
+          of those definitively came from AI. It is that if AI visibility for that product rises, and
+          product-intent search and product-page conversions move with it, you have a practical way to
+          estimate downstream impact and track it over time.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">What to look for</span><h2>What brands should look for.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <ul>
+          <li><strong>Primary input:</strong> AI visibility for the specific product or service by name.</li>
+          <li><strong>Query coverage:</strong> appearance in feature-specific and location-specific queries.</li>
+          <li><strong>Demand signal:</strong> search lift for that specific product or service name.</li>
+          <li><strong>Traffic signal:</strong> organic traffic to the matching landing page.</li>
+          <li><strong>Intent signal:</strong> product-intent share of organic traffic to that page.</li>
+          <li><strong>Output:</strong> estimated product-level halo conversions over time.</li>
+        </ul>
+        <p>
+          The first signal matters most: is the sub-entity appearing in the specific, feature-level and
+          location-level queries where it is most relevant? If it is not, the downstream metrics will
+          reflect that absence regardless of how strong the parent-brand signal is. When all signals
+          move together, you are seeing where AI is creating value at the offering level, not just the
+          parent-brand level.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">The implication</span><h2>The deeper implication of the sub-entity halo.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          The sub-entity halo is not just a measurement model. It is diagnostic. When the property
+          developer saw which projects were being named by AI and which were not, they had an answer to
+          a harder question: which projects had built enough independent signals to stand on their own,
+          and which were entirely dependent on the parent brand to carry them into AI answers. That
+          distinction has direct commercial consequences. A project AI cannot describe in sufficient
+          detail will be excluded from every query where those details are what the buyer is searching
+          for.
+        </p>
+        <p>
+          Knowing this changed where the developer invested: more content and PR behind the weaker
+          project brands, based not on instinct but on what the AI visibility data revealed about which
+          sub-entities had the signal to compete independently. That is what the sub-entity halo
+          enables. Not just attribution, but strategic prioritisation grounded in how AI actually
+          discovers and recommends specific offerings.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">The full picture</span><h2>How the sub-entity halo completes the series.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          <a href="/resources/measuring-ai-visibility-direct-roi">Part 1 on direct ROI</a> answered
+          whether AI drove direct attributable conversions.
+          <a href="/resources/measuring-ai-visibility-search-halo">Part 2 on the search halo</a>
+          answered whether AI increased branded demand that later showed up through search and indirect
+          traffic. Part 3, the sub-entity halo, answers whether AI is surfacing specific named products
+          and services in the queries where they are most relevant, and whether that leads to
+          measurable demand and conversions for those exact offerings.
+        </p>
+        <p>
+          Together, these three layers create a complete view of AI visibility ROI: direct conversion
+          impact, indirect brand-level halo impact, and indirect product-level halo impact. That is a
+          significantly better framework than relying on last-click traffic alone. In the AI search
+          era, attribution is no longer only about where the click came from. It is about understanding
+          where demand started, whether AI had enough specific information to match your offerings to
+          the right queries, and which parts of the business are being discovered or quietly excluded.
+          That is where measurement becomes genuinely strategic.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See which of your offerings AI can actually recommend.</h2>
+      <p>Zicy measures AI visibility for named products and services across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, so you can prioritise where to invest.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+  .prose h3{font-family:var(--display);font-size:19px;color:var(--indigo);margin:22px 0 8px;letter-spacing:-0.01em}
+  .note{font-size:14px;color:var(--muted);font-style:italic}
+</style>
