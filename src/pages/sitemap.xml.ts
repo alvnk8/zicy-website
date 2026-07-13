@@ -29,6 +29,8 @@ const entries: Entry[] = [
   { path: '/about', changefreq: 'monthly', priority: '0.7' },
   { path: '/contact', changefreq: 'yearly', priority: '0.5' },
   { path: '/resources', changefreq: 'weekly', priority: '0.7' },
+  // Migrated resources posts (from v1.zicy.com/blog). One line added per migrated post.
+  { path: '/resources/measuring-ai-visibility-direct-roi', changefreq: 'monthly', priority: '0.6' },
   ...LEGAL.map((d) => ({ path: `/legal/${d}`, changefreq: 'yearly', priority: '0.3' })),
 ];
 

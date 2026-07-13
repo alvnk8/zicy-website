@@ -1,0 +1,317 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/measuring-ai-visibility. Part 1 of the three-part
+// "measuring AI visibility" series (series pillar). Author: April Cheong.
+// House style applied: sentence-case headings, no em dashes, no exclamation marks,
+// engines named in full and in fixed order, no invented statistics.
+const title = 'Measuring AI visibility: why direct ROI is the first layer to understand';
+const description =
+  'Direct ROI is the first and most measurable layer of AI visibility attribution: the conversions that arrive when AI platforms send users straight to your site.';
+
+const url = `${SITE.url}/resources/measuring-ai-visibility-direct-roi`;
+const author = `${SITE.url}/about#april-cheong`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-04-13',
+      dateModified: '2026-07-13',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Research',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('ai-visibility') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <!-- Hero: breadcrumb, eyebrow, H1, direct-answer block, series nav -->
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Measuring AI visibility: direct ROI</span>
+      </nav>
+      <span class="eyebrow">Research &middot; Series part 1 of 3</span>
+      <h1>Measuring AI visibility: why direct ROI is the first layer to understand</h1>
+
+      <p class="answer">
+        Direct ROI is the first and most measurable layer of
+        <a href="/resources/glossary/ai-visibility">AI visibility</a> attribution: it counts the
+        conversions that happen when AI platforms send users straight to your website. Zicy reads
+        those AI-referred sessions and conversions from connected GA4 data, so a brand can tell
+        whether AI visibility is already producing business outcomes rather than only presence.
+      </p>
+
+      <p class="byline">By <a href="/about">April Cheong</a> &middot; 13 April 2026</p>
+    </div>
+  </section>
+
+  <!-- Series intro -->
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          This is part 1 of a three-part series on how brands can measure the effectiveness and ROI
+          of their AI visibility. The series breaks AI attribution into three layers: direct ROI here
+          in part 1, then
+          <a href="/resources/measuring-ai-visibility-search-halo">the search halo that AI visibility creates in branded search</a>
+          in part 2, and
+          <a href="/resources/measuring-ai-visibility-sub-entity-halo">the sub-entity halo across product and topic entities</a>
+          in part 3.
+        </p>
+        <p>
+          We start with direct ROI because it is the most straightforward signal. It is the closest
+          equivalent to traditional digital attribution, and the easiest place for brands to
+          establish whether AI visibility is already contributing to measurable business outcomes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why it feels unclear -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">The gap</span><h2>Why measuring AI visibility still feels unclear.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          There is increasing agreement that AI platforms are becoming an important layer in how
+          users discover and evaluate brands. Brands are told they need to appear in ChatGPT, Gemini,
+          Perplexity, Google AI Overviews and Google AI Mode, and that this presence will influence
+          awareness, trust and decision-making.
+        </p>
+        <p>
+          But most teams are still missing a practical way to answer a much simpler question: is this
+          actually driving business value? That gap is where direct ROI becomes useful.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Direct ROI as first layer -->
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">First layer</span><h2>Direct ROI as the first layer of attribution.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Direct ROI focuses on the most observable path:</p>
+        <ol>
+          <li>A user encounters your brand in an AI-generated answer.</li>
+          <li>The user clicks through to your website.</li>
+          <li>The user completes a meaningful action.</li>
+        </ol>
+        <p>
+          That action can then be attributed back to AI as the traffic source. This matters because it
+          provides a clean starting point. Before exploring indirect influence or long-term brand
+          effects, direct ROI answers a more immediate question: are AI platforms already sending
+          traffic that converts?
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- In practice -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">In practice</span><h2>What direct ROI means in practice.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Direct ROI measures the value created when AI platforms send users directly to your
+          website, and those users convert. If a user clicks from an AI platform, lands on your site
+          and completes a key action, that is direct ROI.
+        </p>
+        <p>This is the simplest form of AI measurement because the source is identifiable, the session is trackable, and the conversion is measurable. It does not capture the full impact of AI, but it provides the most concrete signal available.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works + conversions -->
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">How it works</span><h2>How direct ROI works, and what counts as a conversion.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          The logic is straightforward: direct ROI is the conversions from AI-referred sessions. You
+          identify sessions originating from AI platforms, then measure how many of those sessions
+          result in conversions. This is not a new framework. It follows the same principles used to
+          measure paid traffic, social campaigns, email performance and affiliate referrals. The only
+          difference is that the referral source is now an AI platform.
+        </p>
+        <p>The definition of conversion should reflect actual business value, and it varies by model:</p>
+        <ul>
+          <li><strong>Ecommerce:</strong> purchase, checkout completion, payment submission.</li>
+          <li><strong>B2B:</strong> demo request, contact form submission, trial signup, qualified lead.</li>
+          <li><strong>Media or subscription:</strong> newsletter signup, account creation, subscription start.</li>
+        </ul>
+        <p>The important step is not the metric itself, but ensuring it is clearly defined and properly tracked.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GA4 how-to -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Method</span><h2>How to measure direct ROI in GA4.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>The process is relatively simple, but it requires correct setup.</p>
+        <ol>
+          <li><strong>Confirm conversion tracking.</strong> In GA4, go to Admin, then Events, ensure key actions are tracked, and mark them as key events. Without this step, the rest of the analysis has limited value.</li>
+          <li><strong>Use Explore instead of standard reports.</strong> Go to Explore, then Free Form, which lets you isolate and analyse AI-driven traffic more precisely.</li>
+          <li><strong>Add relevant dimensions:</strong> session source, session medium, date, and optionally landing page and campaign.</li>
+          <li><strong>Add relevant metrics:</strong> sessions, key events, total users, conversions if configured, and revenue if applicable. Including revenue where relevant helps translate performance into business value.</li>
+          <li>
+            <strong>Filter for AI traffic sources.</strong> Apply a regex filter on session source:
+            <code class="reg">.*chatgpt.*|.*openai.*|.*claude.*|.*quillbot.*|.*blackbox.*|.*perplexity.*|.*copy\.ai.*|.*jasper.*|.*copilot.*|.*gemini.*|.*mistral.*|.*deepseek.*|.*bing.*</code>
+            This isolates sessions that originate from AI-related platforms.
+          </li>
+          <li><strong>Analyse trends over time.</strong> Add date as a dimension to observe growth in AI-driven sessions, changes in conversion volume, and overall performance trends.</li>
+          <li><strong>Compare sessions against conversions:</strong> AI-referred sessions, AI-referred conversions, conversion rate and revenue if applicable. This shows whether AI traffic is not only increasing, but also performing.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zicy way -->
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">A simpler way</span><h2>Surfacing direct ROI automatically with Zicy.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          The GA4 setup works, but it is still manual. You are building explorations, maintaining
+          filters and repeatedly checking whether AI traffic is actually converting. That creates
+          friction, and friction slows internal adoption.
+        </p>
+        <p>
+          Instead of rebuilding this analysis inside GA4 every time, you can connect your GA4 property
+          to Zicy and let the platform structure the data for you. Once connected, the dashboard
+          surfaces the same direct ROI signals automatically: sessions driven by AI platforms,
+          conversions tied to that traffic, and new users acquired through it. It also breaks down
+          which AI platforms are driving traffic, how that traffic is trending, and whether conversion
+          performance is improving. What you previously built by hand in GA4 becomes continuously
+          tracked, consistently structured and immediately interpretable.
+        </p>
+        <p>
+          The interpretation stays simple. If 100 users arrive from AI platforms and 8 of them
+          convert, then AI visibility is contributing to measurable outcomes. That is direct ROI, the
+          most literal form of attribution available in this space.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What it does / does not capture -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Scope</span><h2>What direct ROI does, and does not, capture.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Direct ROI answers an important initial question: are AI platforms already driving valuable
+          traffic to our website? If the answer is yes, then AI visibility is no longer theoretical.
+          It is already part of the acquisition funnel, and the conversation shifts from visibility,
+          presence and inclusion to sessions, conversions and revenue.
+        </p>
+        <p>
+          The limitation is worth stating plainly. Direct ROI only measures users who click directly
+          from AI platforms. It does not capture users who see your brand in AI but do not click,
+          search for your brand later, return via other channels, or convert after a longer journey.
+          It reflects one layer of impact: when AI owns the click, not when it influences the journey.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why start here + close -->
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Where to start</span><h2>Why direct ROI is still the right place to start.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Even with these limitations, direct ROI is the most practical starting point. It is easy to
+          explain, easy to measure, easy to validate internally, and aligned with existing attribution
+          models. For teams trying to understand the commercial impact of AI, this is the first signal
+          to establish. Once this layer is clear, it becomes possible to explore more complex forms of
+          attribution.
+        </p>
+        <p>
+          Measuring AI visibility does not need to begin with complex models. It can start with a
+          simple question: how many conversions are coming from AI-referred sessions? That is direct
+          ROI, the clearest entry point into AI attribution.
+        </p>
+        <p>
+          Part 2 makes the picture less direct but more interesting: what happens when AI influences
+          the user, but the conversion happens elsewhere. That is
+          <a href="/resources/measuring-ai-visibility-search-halo">the search halo, where AI exposure lifts branded search and direct visits</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="final">
+    <div class="wrap">
+      <h2>See whether AI is already sending traffic that converts.</h2>
+      <p>Zicy connects your GA4 data and surfaces AI-referred sessions and conversions across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb: token-based, matches the other resources pages. */
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+
+  /* Direct-answer block: the 40-60 word self-contained answer under the H1. */
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+  .reg{display:block;margin:10px 0;padding:12px 14px;background:var(--ink);color:#e8e8f4;
+    border-radius:8px;font-size:12.5px;overflow-x:auto;white-space:pre;font-family:var(--mono)}
+</style>

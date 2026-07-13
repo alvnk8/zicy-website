@@ -29,3 +29,7 @@
 - Getting started: https://docs.zicy.com/getting-started/gs-01-setting-up-zicy-first-time/
 - Module reference: https://docs.zicy.com/module-reference/m-04-ai-visibility-dashboard/
 - Guides by role: https://docs.zicy.com/guides-by-role/
+
+## Resources
+
+- Measuring AI visibility, part 1, direct ROI: https://www.zicy.com/resources/measuring-ai-visibility-direct-roi
