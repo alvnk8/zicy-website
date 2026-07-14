@@ -1,6 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/brand-audits-ai-search/brand-audits-matter-.jpg';
+import figFramework from '../../assets/resources/brand-audits-ai-search/ai-era-brand-audit.png';
+import figShift from '../../assets/resources/brand-audits-ai-search/the-shift-from-search-to-synthesis-.png';
+import figHallucination from '../../assets/resources/brand-audits-ai-search/hallucination-hazard.png';
+import figGraph from '../../assets/resources/brand-audits-ai-search/knowledge-graph.png';
+import figPillars from '../../assets/resources/brand-audits-ai-search/pillars-of-ai-brand-audit.png';
+
+const featuredAlt =
+  'Diagram of brand signals passing through an AI interpretation layer, shown as a neural network, and emerging as mixed-accuracy outputs including an AI summary, hallucination risk and missing or incorrect data.';
 
 // Migrated from v1.zicy.com/blog/why-brand-audits-matter-in-the-ai-search-era.
 // Author: April Cheong. articleSection Research. House style applied (UK spelling,
@@ -72,6 +82,12 @@ const graph = {
       articleSection: 'Research',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('ai-visibility') }],
       mentions: [{ '@id': gloss('hallucination') }],
     },
@@ -96,7 +112,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -110,6 +130,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Research</span>
       <h1>Why brand audits matter in the AI search era</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         A brand audit in the AI search era measures how AI systems interpret and restate a brand:
@@ -145,6 +167,7 @@ const graph = {
           It affects trust, perception and ultimately revenue, which is why
           <a href="/resources/glossary/ai-visibility">AI visibility</a> now belongs in the audit.
         </p>
+        <PostFigure src={figFramework} alt="Infographic titled the AI-era brand audit, with panels on the shift from search rankings to AI synthesis, inclusion as the new visibility, managing your knowledge graph, hallucination as a reputation risk, and accuracy over consistency." />
       </div>
     </div>
   </section>
@@ -152,6 +175,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">The shift</span><h2>From search to synthesis.</h2></div>
+      <PostFigure src={figShift} alt="Two-panel diagram contrasting the old model, a person finding and comparing many documents, with the new model, a person receiving a single direct AI recommendation." />
       <div class="prose" style="max-width:760px">
         <p>
           Traditional SEO was built around rankings. A user typed a query, search engines returned a
@@ -197,6 +221,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Reputation risk</span><h2>The hallucination hazard is a brand risk, not just a tech problem.</h2></div>
+      <PostFigure src={figHallucination} alt="Diagram of an intended brand passing through an AI processor labelled a distortion lens, emerging garbled with wrong positioning, incorrect factual details, stripped differentiation and invisibility in competitor comparisons." />
       <div class="prose" style="max-width:760px">
         <p>
           Many marketers still talk about
@@ -235,6 +260,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">The new homepage</span><h2>The knowledge graph is becoming the new brand homepage.</h2></div>
+      <PostFigure src={figGraph} alt="Radial diagram with an AI knowledge graph at the centre, fed by structured data, press mentions, executive bios, third-party reviews and a factual footprint, together forming the AI's version of your brand." />
       <div class="prose" style="max-width:760px">
         <p>
           For years we treated the brand website as the main digital home of the business, the place
@@ -299,6 +325,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Six questions</span><h2>What an AI-era brand audit should answer.</h2></div>
+      <PostFigure src={figPillars} alt="Hexagonal diagram of the six pillars of an AI-era brand audit: presence, narrative accuracy, sentiment, factual integrity, competitive framing and source signal quality." />
       <div class="prose" style="max-width:760px">
         <ol>
           <li><strong>Brand presence.</strong> When people ask AI about our category, problem or competitors, does our brand appear at all?</li>
