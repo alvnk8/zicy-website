@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/authoritative-entity/what-does-it-mean-to-become-an-authoritative-entity-for-ai-engines-.jpg';
+import figPillars from '../../assets/resources/authoritative-entity/what-does-it-mean-to-become-an-authoritative-entity-for-ai-engines-.png';
+
+const featuredAlt =
+  'A team meeting about AI citation and credibility, one person holding a tablet, with an explanatory slide on the screen behind them.';
 
 // Migrated from v1.zicy.com/blog/become-authoritative-entity-for-ai-engines. Tier-2 guide.
 // articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
@@ -42,6 +48,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('ai-visibility') }],
       mentions: [{ '@id': gloss('citation-coverage') }],
     },
@@ -57,7 +69,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -71,6 +87,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>What does it mean to become an authoritative entity for AI engines?</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         An authoritative entity is a brand that AI engines recognise as a uniquely identifiable,
@@ -151,6 +169,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">How to</span><h2>How a brand strengthens its entity authority.</h2></div>
+      <PostFigure src={figPillars} alt="Diagram titled building brand authority, with four pillars: consistency, clarity, authorship and cross-validation." />
       <div class="prose" style="max-width:760px">
         <p>To be recognised as authoritative, a brand builds a rounded evidence profile that reinforces its credibility from every angle:</p>
         <ul>
