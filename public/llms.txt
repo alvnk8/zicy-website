@@ -41,3 +41,4 @@
 - What is answer engine optimisation (AEO), pillar guide: https://www.zicy.com/resources/what-is-answer-engine-optimization
 - How to benchmark your AEO readiness against competitors: https://www.zicy.com/resources/benchmark-aeo-readiness
 - How to track AI citations and measure their impact: https://www.zicy.com/resources/track-ai-citations
+- What new KPIs replace SEO metrics in AI search: https://www.zicy.com/resources/ai-search-kpis
