@@ -1,6 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/measuring-ai-visibility-search-halo/the-search-halo.png';
+import figNarrowLens from '../../assets/resources/measuring-ai-visibility-search-halo/direct-roi-is-a-dangerously-narrow-lens.png';
+import figDiscovery from '../../assets/resources/measuring-ai-visibility-search-halo/ai-the-brand-new-discovery-layer.png';
+import figMeans from '../../assets/resources/measuring-ai-visibility-search-halo/search-halo-means.png';
+import figTrack from '../../assets/resources/measuring-ai-visibility-search-halo/track-ai-visibility-.png';
+import figCompare from '../../assets/resources/measuring-ai-visibility-search-halo/compare-against-traffic-behaviour.png';
+import figEcosystem from '../../assets/resources/measuring-ai-visibility-search-halo/the-search-halo-ecosystem-in-action.png';
+
+const featuredAlt =
+  'Infographic on the search halo: a user discovers a brand in an AI answer, later runs a branded Google search, then converts through organic or direct channels, with a table of the metrics that indicate it.';
 
 // Migrated from v1.zicy.com/blog/search-halo-measuring-ai-visibility. Part 2 of the
 // three-part "measuring AI visibility" series. Author: April Cheong. House style applied.
@@ -43,6 +54,12 @@ const graph = {
       articleSection: 'Research',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('ai-visibility') }],
     },
     {
@@ -57,7 +74,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/png' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -71,6 +92,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Research &middot; Series part 2 of 3</span>
       <h1>Measuring AI visibility: why the search halo is the second layer to understand</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         The search halo is the second layer of
@@ -108,6 +131,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">The blind spot</span><h2>Why direct clicks do not tell the full story.</h2></div>
+      <PostFigure src={figNarrowLens} alt="Side-by-side comparison of the last-click model against the influence model across goal, role of AI, downstream signal and outcome." />
       <div class="prose" style="max-width:760px">
         <p>
           One of the most common mistakes brands still make is evaluating AI performance too narrowly,
@@ -133,6 +157,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Behaviour shift</span><h2>AI is becoming a brand discovery layer.</h2></div>
+      <PostFigure src={figDiscovery} alt="Diagram showing an AI decision engine turning a trust question into awareness, credibility, memory and early preference." />
       <div class="prose" style="max-width:760px">
         <p>
           This is one of the more important behavioural shifts happening now. AI is no longer just
@@ -171,6 +196,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Definition</span><h2>What the search halo means.</h2></div>
+      <PostFigure src={figMeans} alt="Pull quote: AI does not always generate visible referral traffic; often it generates brand demand that shows up somewhere else." />
       <div class="prose" style="max-width:760px">
         <p>
           A useful way to think about this is as a halo effect around branded search. The search halo
@@ -218,6 +244,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Method</span><h2>How to measure the search halo more realistically.</h2></div>
+      <PostFigure src={figTrack} alt="Zicy performance-trends chart showing weekly brand mentions rising over five weeks." caption="Zicy dashboard showing AI visibility trends over recent weeks." />
       <div class="prose" style="max-width:760px">
         <p>
           No attribution model will make this perfectly clean. Customer journeys are messy, and they
@@ -241,6 +268,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">What to watch</span><h2>The signals brands should actually watch.</h2></div>
+      <PostFigure src={figCompare} alt="Zicy chart overlaying AI share of voice against branded search impressions from Search Console over four weeks." caption="Overlay of AI share of voice against branded search impressions, to find the correlation." />
       <div class="prose" style="max-width:760px">
         <ul>
           <li><strong>AI visibility rate:</strong> how often the brand appears in relevant AI-generated answers across key queries. Source: AI visibility tracking and prompt monitoring tools such as Zicy, or manual query tracking across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</li>
@@ -286,6 +314,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">In closing</span><h2>Final thoughts.</h2></div>
+      <PostFigure src={figEcosystem} alt="Line chart showing AI visibility rate rising first, then branded search volume, then organic conversions, over ten months." />
       <div class="prose" style="max-width:760px">
         <p>
           In the AI search era the customer journey is becoming less linear and more distributed. Users
