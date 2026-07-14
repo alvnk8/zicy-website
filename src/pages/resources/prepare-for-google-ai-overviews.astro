@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/prepare-website-for-googl-ai-overviews (source slug typo fixed
+// at target). Tier-2 guide. articleSection Guides, author Ritu Khanna. House style applied (UK
+// spelling, sentence-case headings, em dashes removed, no exclamation marks, engines named in
+// full, no statistics added).
+const title = 'How to prepare your website for Google AI Overviews (step by step)';
+const description =
+  'Google AI Overviews summarise answers from a small pool of high-confidence sources, so inclusion depends on readiness, not ranking: crawlability, front-loaded answers, accurate schema and trust signals.';
+
+const url = `${SITE.url}/resources/prepare-for-google-ai-overviews`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-04-19',
+      dateModified: '2026-07-14',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('ai-visibility') }],
+      mentions: [{ '@id': gloss('citation-coverage') }, { '@id': gloss('prompt-tracking') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Prepare for Google AI Overviews</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How to prepare your website for Google AI Overviews (step by step)</h1>
+
+      <p class="answer">
+        Google AI Overviews summarise answers from a small pool of high-confidence sources, so
+        inclusion depends on readiness, not ranking. You make your site crawlable to Google-Extended,
+        structure content into front-loaded answer blocks, add accurate schema and verifiable trust
+        signals, then monitor inclusion. Zicy tracks your <a href="/resources/glossary/ai-visibility">AI
+        visibility</a> across Google AI Overviews, Google AI Mode, ChatGPT, Gemini and Perplexity.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 19 April 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          Google AI Overviews are changing how search results appear and how users discover brands.
+          Instead of showing ten blue links, Google now summarises key answers at the top of the page,
+          often referencing only a few authoritative sites. For businesses, visibility depends less on
+          ranking and more on readiness. Because AI Overviews pull from a limited set of high-confidence
+          sources, even small improvements in readiness can decide whether your content is included. This
+          is <a href="/resources/what-is-answer-engine-optimization">answer engine optimisation</a> in
+          practice, step by step.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Step 1</span><h2>Ensure AI crawl accessibility.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Before Google's AI can summarise your content, it must be able to see it. Check three foundational elements:</p>
+        <ul>
+          <li><strong>robots.txt:</strong> confirm you are not blocking Google-Extended or other AI-related user agents.</li>
+          <li><strong>llms.txt:</strong> if you have one, specify permissions for generative AI crawlers.</li>
+          <li><strong>sitemap.xml:</strong> keep it updated and index only high-value pages.</li>
+        </ul>
+        <p>
+          These are your site's permission slips for AI access, and blocking them forfeits citation
+          opportunities. Make sure key content is server-rendered rather than hidden behind heavy
+          JavaScript, since AI crawlers may struggle to interpret dynamically loaded content, and check
+          that your most important pages are consistently discoverable and refreshed.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Step 2</span><h2>Structure your content for extraction.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>AI Overviews extract answers, not paragraphs, so make it effortless for AI to identify what matters most:</p>
+        <ul>
+          <li>Use descriptive H2 and H3 headings that mirror real-world questions.</li>
+          <li>Add concise summary sentences under each subtopic.</li>
+          <li>Include FAQ sections on important pages using FAQPage schema.</li>
+          <li>Explain what, why and how clearly, since AI struggles with ambiguity.</li>
+        </ul>
+        <p>
+          Formatting for comprehension is the new formatting for SEO. Structure content into clear answer
+          blocks that each resolve a single query completely, place key answers high within the section
+          since AI favours early, clearly stated information, and avoid excessive narrative buildup in
+          favour of direct, front-loaded explanations. The guide on
+          <a href="/resources/content-ai-prefers-to-cite">what content AI prefers to cite</a> expands on
+          this.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Step 3</span><h2>Implement essential schema and metadata.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Schema markup tells Google what your data means, not just what it says. Prioritise:</p>
+        <ul>
+          <li>Organization or LocalBusiness schema for brand identity.</li>
+          <li>Article, Product or Service schema for key offerings.</li>
+          <li>FAQPage schema for direct question-and-answer content.</li>
+          <li>Author and Review schema to enhance credibility.</li>
+        </ul>
+        <p>
+          Write meta titles and descriptions like clear answers, not slogans. For the full priority list,
+          see <a href="/resources/critical-schemas-entity-markup">which schema and entity markup matter most</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Step 4</span><h2>Strengthen your brand's trust signals.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Google's AI models factor in credibility when deciding what to include, so E-E-A-T, experience,
+          expertise, authoritativeness and trustworthiness, still matters, but now it must be
+          machine-verifiable:
+        </p>
+        <ul>
+          <li>Add author bios with credentials.</li>
+          <li>Include source citations and links to supporting data.</li>
+          <li>Keep content fresh and date-stamped.</li>
+          <li>Align brand information across all digital profiles, such as LinkedIn, Crunchbase and Wikidata.</li>
+        </ul>
+        <p>
+          Focus on verifiable claims with supporting evidence, since AI is more likely to cite content it
+          can cross-check, and maintain consistency over time so updates reinforce rather than contradict
+          existing information. See <a href="/resources/ai-trust-signals">how to build trust signals AI recognises</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Step 5</span><h2>Monitor inclusion and iterate.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>After implementation, run regular audits to see which pages appear in AI Overviews or other generative summaries. Track three metrics:</p>
+        <ul>
+          <li><strong>Visibility coverage:</strong> how often your pages appear in AI-generated results.</li>
+          <li><strong>Citation type:</strong> whether you are referenced directly or indirectly.</li>
+          <li><strong>Engagement outcome:</strong> traffic quality and lead conversions from those impressions.</li>
+        </ul>
+        <p>
+          Continuous monitoring lets you adjust schema, content and structure to keep your brand
+          top-of-mind for AI and users. Track performance across informational, comparative and
+          decision-based query types, maintain a
+          <a href="/resources/glossary/prompt-tracking">prompt tracking</a> framework using consistent
+          queries over time, and compare results against competitors for relative gains. See
+          <a href="/resources/track-ai-citations">how to track AI citations and their impact</a>. Google
+          AI Overviews reward sites that are accessible, structured and trustworthy: when your content is
+          easy for AI to interpret and cite, you become hard to leave out.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See whether you appear in Google AI Overviews.</h2>
+      <p>Zicy tracks your presence across Google AI Overviews, Google AI Mode, ChatGPT, Gemini and Perplexity.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>

@@ -49,3 +49,4 @@
 - How to get cited in ChatGPT and Perplexity answers: https://www.zicy.com/resources/get-cited-chatgpt-perplexity
 - Can PR, news releases and Wikidata improve AI visibility: https://www.zicy.com/resources/pr-wikidata-ai-visibility
 - How to optimise bilingual websites for AI citations: https://www.zicy.com/resources/bilingual-websites-ai-citations
+- How to prepare your website for Google AI Overviews: https://www.zicy.com/resources/prepare-for-google-ai-overviews
