@@ -1,6 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/track-ai-citations/how-to-track-ai-citations-and-measure-their-impact-on-leads-and-sales.jpg';
+import figMethods from '../../assets/resources/track-ai-citations/how-to-track-ai-citations-and-measure-their-impact-on-leads-and-sales.png';
+import figAnalytics from '../../assets/resources/track-ai-citations/which-analytics-tools-can-show-where-ai-engines-are-referencing-our-content--2.jpg';
+
+const featuredAlt =
+  'Abstract visualisation of connected documents feeding an AI node, with a rising bar chart labelled leads and sales.';
 
 // Migrated from v1.zicy.com/blog/how-to-track-ai-citations, merged with
 // analytics-tools-for-tracking-content-references-by-ai-engines (its non-duplicative
@@ -45,6 +52,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('citation-coverage') }],
       mentions: [{ '@id': gloss('ai-visibility') }, { '@id': gloss('ai-share-of-voice') }],
     },
@@ -60,7 +73,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -74,6 +91,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>How to track AI citations and measure their impact on leads and sales</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         An AI <a href="/resources/glossary/citation-coverage">citation</a> is when a generative engine
@@ -130,6 +149,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Tracking</span><h2>How to track when AI engines mention your brand.</h2></div>
+      <PostFigure src={figMethods} alt="Diagram of four ways to track AI citations: AI query monitoring, custom dashboards, brand alert systems and manual sampling." />
       <div class="prose" style="max-width:760px">
         <p>
           Unlike search rankings, AI citations are not indexed in public reports, so you need a
@@ -156,6 +176,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Tools</span><h2>Which tools identify AI citations and mentions.</h2></div>
+      <PostFigure src={figAnalytics} alt="Infographic on AI visibility analytics, contrasting traditional SEO analytics with AEO analytics, and listing five tool categories: AI citation trackers, entity monitoring systems, conversational visibility dashboards, structured data validators, and AI-specific alerts and APIs." />
       <div class="prose" style="max-width:760px">
         <p>
           Standard analytics were built for visitors, not for zero-click exposure. Google Analytics can
