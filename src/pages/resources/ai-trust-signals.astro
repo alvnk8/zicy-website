@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/ai-trust-signals/how-can-you-build-digital-trust-signals-that-ai-engines-recognize-.jpg';
+import figColumns from '../../assets/resources/ai-trust-signals/how-can-you-build-digital-trust-signals-that-ai-engines-recognize-.png';
+
+const featuredAlt =
+  'An AI brain chip on a circuit board linked to trust-signal icons including a padlock, handshake, verification tick, shield and authenticity badge.';
 
 // Migrated from v1.zicy.com/blog/build-trust-signals-that-ai-recognizes. Tier-2 guide.
 // articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
@@ -42,6 +48,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('ai-visibility') }],
       mentions: [{ '@id': gloss('citation-coverage') }],
     },
@@ -57,7 +69,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -71,6 +87,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>How can you build digital trust signals that AI engines recognise?</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         Trust signals are the machine-readable cues, verified authorship, transparent sources,
@@ -153,6 +171,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">How to</span><h2>How brands can actively enhance these signals.</h2></div>
+      <PostFigure src={figColumns} alt="Diagram titled brand trust building, with four columns: standardise brand data, show expertise, integrate transparency layers and strengthen external validation." />
       <div class="prose" style="max-width:760px">
         <p>Building trust is not about perfection but coherence. To translate human credibility into machine-interpretable proof:</p>
         <ul>
