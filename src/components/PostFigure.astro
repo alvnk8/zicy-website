@@ -1,0 +1,28 @@
+---
+// Body figure for migrated resources posts: an Astro-optimised image (responsive srcset,
+// format conversion at build) with an optional caption. Never a raw remote <img>.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  caption?: string | null;
+}
+const { src, alt, caption } = Astro.props;
+---
+<figure class="post-figure">
+  <Image src={src} alt={alt} widths={[480, 760, 1024]} sizes="(max-width: 820px) 100vw, 760px" />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .post-figure { margin: 24px 0; max-width: 760px; }
+  .post-figure img {
+    width: 100%; height: auto; display: block;
+    border: 0.5px solid var(--line); border-radius: 12px; background: #fafaff;
+  }
+  .post-figure figcaption {
+    margin-top: 8px; font-size: 13.5px; color: var(--muted); line-height: 1.5;
+  }
+</style>

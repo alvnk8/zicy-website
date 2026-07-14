@@ -23,13 +23,20 @@ interface Props {
   ogTitle?: string;
   ogDescription?: string;
   noindex?: boolean;
+  // Optional override of the social-share image. When set (e.g. a resources post passing its
+  // featured image's built URL), it replaces the branded /og/ card. url must be absolute.
+  ogImage?: { url: string; width?: number; height?: number; alt?: string; type?: string };
 }
 
-const { title, description, ogTitle, ogDescription, noindex = false } = Astro.props;
+const { title, description, ogTitle, ogDescription, noindex = false, ogImage } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 // Per-page social-share image (build-time PNG under /og/), derived from the pathname so the URL
 // advertised here always matches the generated card. Falls back for any unlisted route.
 const og = ogImageMeta(Astro.url.pathname);
+// Resolved OG image: the per-post featured image when provided, else the branded card.
+const ogImg = ogImage
+  ? { url: ogImage.url, alt: ogImage.alt ?? og.alt, type: ogImage.type ?? 'image/png', width: ogImage.width ?? 1200, height: ogImage.height ?? 630 }
+  : { url: og.image, alt: og.alt, type: 'image/png', width: 1200, height: 630 };
 ---
 <!doctype html>
 <html lang="en">
@@ -76,16 +83,16 @@ const og = ogImageMeta(Astro.url.pathname);
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={ogTitle ?? title} />
     <meta property="og:description" content={ogDescription ?? description} />
-    <meta property="og:image" content={og.image} />
-    <meta property="og:image:secure_url" content={og.image} />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={og.alt} />
+    <meta property="og:image" content={ogImg.url} />
+    <meta property="og:image:secure_url" content={ogImg.url} />
+    <meta property="og:image:type" content={ogImg.type} />
+    <meta property="og:image:width" content={String(ogImg.width)} />
+    <meta property="og:image:height" content={String(ogImg.height)} />
+    <meta property="og:image:alt" content={ogImg.alt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={ogTitle ?? title} />
     <meta name="twitter:description" content={ogDescription ?? description} />
-    <meta name="twitter:image" content={og.image} />
+    <meta name="twitter:image" content={ogImg.url} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />

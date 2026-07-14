@@ -1,6 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/measuring-ai-visibility-direct-roi/direct-roi.png';
+import figFirstLayer from '../../assets/resources/measuring-ai-visibility-direct-roi/1st-layer-of-ai-attribution.png';
+import figPathway from '../../assets/resources/measuring-ai-visibility-direct-roi/the-direct-roi-pathway.png';
+import figGa4 from '../../assets/resources/measuring-ai-visibility-direct-roi/the-ga4-attribution-engine.png';
+import figSiteTraffic from '../../assets/resources/measuring-ai-visibility-direct-roi/site-traffic.png';
+import figConversion from '../../assets/resources/measuring-ai-visibility-direct-roi/a-simpler-way-to-interpret-the-metric.png';
+import figBoundaries from '../../assets/resources/measuring-ai-visibility-direct-roi/the-boundaries-of-direct-roi.png';
+
+const featuredAlt =
+  'Infographic summarising direct ROI from AI visibility: conversions from AI referrals, filtering AI traffic in GA4, prioritising conversions over presence, and measuring when AI owns the click.';
 
 // Migrated from v1.zicy.com/blog/measuring-ai-visibility. Part 1 of the three-part
 // "measuring AI visibility" series (series pillar). Author: April Cheong.
@@ -43,6 +54,12 @@ const graph = {
       articleSection: 'Research',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('ai-visibility') }],
     },
     {
@@ -57,7 +74,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/png' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <!-- Hero: breadcrumb, eyebrow, H1, direct-answer block, series nav -->
@@ -72,6 +93,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Research &middot; Series part 1 of 3</span>
       <h1>Measuring AI visibility: why direct ROI is the first layer to understand</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         Direct ROI is the first and most measurable layer of
@@ -130,6 +153,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">First layer</span><h2>Direct ROI as the first layer of attribution.</h2></div>
+      <PostFigure src={figFirstLayer} alt="Diagram: an AI platform plus a direct click plus a measurable action equals direct ROI." />
       <div class="prose" style="max-width:760px">
         <p>Direct ROI focuses on the most observable path:</p>
         <ol>
@@ -166,6 +190,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">How it works</span><h2>How direct ROI works, and what counts as a conversion.</h2></div>
+      <PostFigure src={figPathway} alt="Four-step flow from a user seeing a brand in an AI answer, to a trackable referral, to landing on the site, to completing a conversion." />
       <div class="prose" style="max-width:760px">
         <p>
           The logic is straightforward: direct ROI is the conversions from AI-referred sessions. You
@@ -189,6 +214,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Method</span><h2>How to measure direct ROI in GA4.</h2></div>
+      <PostFigure src={figGa4} alt="Three-phase GA4 process: capture key events, filter AI traffic with custom dimensions, then measure AI-referred sessions against conversions." />
       <div class="prose" style="max-width:760px">
         <p>The process is relatively simple, but it requires correct setup.</p>
         <ol>
@@ -212,6 +238,8 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">A simpler way</span><h2>Surfacing direct ROI automatically with Zicy.</h2></div>
+      <PostFigure src={figSiteTraffic} alt="Zicy Site Traffic dashboard showing conversions, sessions and new users from AI, a breakdown of traffic by AI platform, and a monthly trend line." />
+      <PostFigure src={figConversion} alt="Bar chart showing 100 AI-referred sessions producing 8 key-event conversions, an 8 percent conversion rate." />
       <div class="prose" style="max-width:760px">
         <p>
           The GA4 setup works, but it is still manual. You are building explorations, maintaining
@@ -240,6 +268,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Scope</span><h2>What direct ROI does, and does not, capture.</h2></div>
+      <PostFigure src={figBoundaries} alt="Concentric-circle diagram contrasting the clicks AI owns, which are easily observable, with the wider journey AI influences when users convert later." />
       <div class="prose" style="max-width:760px">
         <p>
           Direct ROI answers an important initial question: are AI platforms already driving valuable
