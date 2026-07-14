@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/get-cited-chatgpt-perplexity/how-to-get-your-brand-mentioned-or-cited-in-chatgpt-and-perplexity-answers-.jpg';
+import figGrowth from '../../assets/resources/get-cited-chatgpt-perplexity/how-to-get-your-brand-mentioned-or-cited-in-chatgpt-and-perplexity-answers-.png';
+
+const featuredAlt =
+  'An AI chip on a circuit board linked to three factors: entity clarity, structured transparency and reputation alignment.';
 
 // Migrated from v1.zicy.com/blog/get-brand-mentioned-in-chatgpt-perplexity. Tier-2 guide.
 // articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
@@ -43,6 +49,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('citation-coverage') }],
       mentions: [{ '@id': gloss('ai-mention-coverage') }],
     },
@@ -58,7 +70,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -72,6 +88,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>How to get your brand mentioned or cited in ChatGPT and Perplexity answers?</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         To get <a href="/resources/glossary/citation-coverage">cited</a> in ChatGPT and Perplexity,
@@ -149,6 +167,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Steps</span><h2>How to start earning AI citations.</h2></div>
+      <PostFigure src={figGrowth} alt="A growth diagram titled achieving AI brand citations, with four stages: transparent knowledge, verifiable insights, cross-platform consistency, and track and refine." />
       <div class="prose" style="max-width:760px">
         <p>To have ChatGPT or Perplexity quote your site, optimise for machine comprehension and factual integrity:</p>
         <ul>
