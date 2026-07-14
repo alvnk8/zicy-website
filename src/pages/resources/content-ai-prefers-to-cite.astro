@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/content-ai-prefers-to-cite/what-kind-of-content-does-ai-prefer-to-cite.jpg';
+import figFormats from '../../assets/resources/content-ai-prefers-to-cite/what-content-ai-prefers-to-cite.png';
+
+const featuredAlt =
+  'A holographic panel asking what kind of content AI prefers to cite, with blog, FAQ and structured-data options beside an AI brain.';
 
 // Migrated from v1.zicy.com/blog/what-content-ai-prefer-to-cite. Tier-2 guide. articleSection
 // Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case headings, em dash
@@ -42,6 +48,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('citation-coverage') }],
       mentions: [{ '@id': gloss('aeo') }],
     },
@@ -57,7 +69,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -71,6 +87,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>What kind of content does AI prefer to cite: blogs, FAQs or structured data?</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         AI engines <a href="/resources/glossary/citation-coverage">cite</a> content that is clear,
@@ -125,6 +143,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Formats</span><h2>Do blogs, FAQs or structured data perform best?</h2></div>
+      <PostFigure src={figFormats} alt="Diagram comparing three content types for AI citation: blogs for depth and context, structured data for machine-readable logic, and FAQs for direct answers." />
       <div class="prose" style="max-width:760px">
         <p>Each plays a different but complementary role:</p>
         <ul>
