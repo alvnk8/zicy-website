@@ -1,6 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/benchmark-aeo-readiness/how-to-benchmark-our-aeo-readiness-against-competitors--1.jpg';
+import figMagnifier from '../../assets/resources/benchmark-aeo-readiness/how-to-benchmark-our-aeo-readiness-against-competitors-.jpg';
+import figBenchmark from '../../assets/resources/benchmark-aeo-readiness/how-to-benchmark-our-aeo-readiness-against-competitors--2.jpg';
+import figFormula from '../../assets/resources/benchmark-aeo-readiness/how-to-benchmark-our-aeo-readiness-against-competitors-.png';
+
+const featuredAlt =
+  "A businesswoman comparing her brand's AEO readiness against two competitors on a glass board with ticks and crosses.";
 
 // Migrated from v1.zicy.com/blog/how-to-benchmark-your-aeo-readiness. Tier-2 guide.
 // articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
@@ -44,6 +52,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('aeo') }],
       mentions: [{ '@id': gloss('ai-visibility') }, { '@id': gloss('ai-share-of-voice') }],
     },
@@ -59,7 +73,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -73,6 +91,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>How to benchmark your AEO readiness against competitors</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         AEO benchmarking measures your relative inclusion in AI answers against competitors, not your
@@ -106,6 +126,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Readiness</span><h2>What AEO readiness actually measures.</h2></div>
+      <PostFigure src={figMagnifier} alt="A magnifying glass held over a tablet bar chart, highlighting one company's bar against its competitors." />
       <div class="prose" style="max-width:760px">
         <p>
           AEO readiness reflects how prepared your brand is to be recognised, interpreted and cited by
@@ -133,6 +154,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Competitors</span><h2>How to assess competitors' AEO performance.</h2></div>
+      <PostFigure src={figBenchmark} alt="Infographic on benchmarking AEO readiness, listing the pillars of accessibility, structure, authority and trust signals, alongside four ways to assess competitors: comparative prompt tests, citation-frequency audits, entity-accuracy evaluation and visibility-share comparison." />
       <div class="prose" style="max-width:760px">
         <p>
           Unlike traditional SEO, where rankings are public, AEO performance must be inferred through
@@ -160,6 +182,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Scoring</span><h2>How to create an actionable AEO readiness score.</h2></div>
+      <PostFigure src={figFormula} alt="Equation: AEO readiness score equals your total divided by the average competitor total, multiplied by 100." />
       <div class="prose" style="max-width:760px">
         <p>
           Turn qualitative comparisons into quantitative insight. Assign a 1 to 5 score for each pillar,
