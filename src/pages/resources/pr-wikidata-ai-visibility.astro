@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/pr-wikidata-ai-visibility/can-pr-news-releases-and-wikidata-entries-improve-ai-visibility-.jpg';
+import figFunnel from '../../assets/resources/pr-wikidata-ai-visibility/can-pr-news-releases-and-wikidata-entries-improve-ai-visibility-.png';
+
+const featuredAlt =
+  'A laptop showing a press-release distribution page, a phone showing a Wikidata entry, and printed AEO news releases on a desk.';
 
 // Migrated from v1.zicy.com/blog/pr-news-releases-wikidata-improve-ai-visbility (source slug
 // typo fixed at target). Tier-2 guide. articleSection Guides, author Ritu Khanna. House style
@@ -45,6 +51,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('ai-visibility') }],
       mentions: [{ '@id': gloss('citation-coverage') }],
     },
@@ -60,7 +72,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -74,6 +90,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>Can PR, news releases and Wikidata entries improve AI visibility?</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         Yes. PR and Wikidata improve <a href="/resources/glossary/ai-visibility">AI visibility</a> as
@@ -144,6 +162,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Press</span><h2>Can traditional PR improve AEO visibility too?</h2></div>
+      <PostFigure src={figFunnel} alt="Diagram titled enhancing AI visibility through PR, showing digital-first publications passing through structured data inclusion, link back to brand and consistent naming to reach improved AI visibility." />
       <div class="prose" style="max-width:760px">
         <p>
           It can, but only when it is digitally structured and verifiable. Press releases distributed via
