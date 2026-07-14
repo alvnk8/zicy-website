@@ -39,3 +39,4 @@
 - How to add effective prompts to your AI tracking: https://www.zicy.com/resources/effective-prompts-ai-tracking
 - Cloudflare bot management for AI brand discoverability: https://www.zicy.com/resources/cloudflare-bot-management
 - What is answer engine optimisation (AEO), pillar guide: https://www.zicy.com/resources/what-is-answer-engine-optimization
+- How to benchmark your AEO readiness against competitors: https://www.zicy.com/resources/benchmark-aeo-readiness

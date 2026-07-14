@@ -1,0 +1,227 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/how-to-benchmark-your-aeo-readiness. Tier-2 guide.
+// articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
+// headings, em dashes removed, no exclamation marks, engines named in full, coined-metric
+// labels avoided, no statistics added; the source's scoring formula did not survive extraction
+// and was not invented, only its described outcome is stated).
+const title = 'How to benchmark your AEO readiness against competitors';
+const description =
+  'AEO benchmarking measures your relative inclusion in AI answers against competitors, not your rankings, scoring readiness across accessibility, structure, authority and trust.';
+
+const url = `${SITE.url}/resources/benchmark-aeo-readiness`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-04-23',
+      dateModified: '2026-07-14',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('aeo') }],
+      mentions: [{ '@id': gloss('ai-visibility') }, { '@id': gloss('ai-share-of-voice') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Benchmark your AEO readiness</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How to benchmark your AEO readiness against competitors</h1>
+
+      <p class="answer">
+        AEO benchmarking measures your relative inclusion in AI answers against competitors, not your
+        rankings. You score readiness across accessibility, structure, authority and trust, run
+        comparative prompt tests, and track how often each brand is cited. Zicy benchmarks your
+        <a href="/resources/glossary/ai-visibility">AI visibility</a> and share of voice against a
+        competitor set across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 23 April 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          In <a href="/resources/what-is-answer-engine-optimization">answer engine optimisation</a>
+          and generative engine optimisation, success is about being more visible than your
+          competitors in AI-generated results. If ChatGPT, Gemini or Perplexity cite your competitors
+          instead of you, those competitors have already earned algorithmic trust. To reclaim the
+          advantage, you need to measure not only how well your brand is optimised for AI engines, but
+          how your readiness compares across the industry. Unlike traditional SEO benchmarking, which
+          relies on rankings and traffic, AEO benchmarking is about relative inclusion in AI answers, a
+          more compressed and competitive layer where only a few brands are surfaced per query.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Readiness</span><h2>What AEO readiness actually measures.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          AEO readiness reflects how prepared your brand is to be recognised, interpreted and cited by
+          AI systems. It is a mix of technical health, brand authority and data-structure quality,
+          which together determine whether AI can confidently reference your site. The main pillars
+          are:
+        </p>
+        <ul>
+          <li><strong>Accessibility:</strong> can AI engines crawl and understand your site content?</li>
+          <li><strong>Structure:</strong> does your content use schema, clear headings and FAQ markup for extractability?</li>
+          <li><strong>Authority:</strong> is your brand recognised as a credible entity across the web? See <a href="/resources/authoritative-entity">how to become an authoritative entity for AI engines</a>.</li>
+          <li><strong>Trust signals:</strong> are author bios, sources and cross-references visible and verifiable? See <a href="/resources/ai-trust-signals">how to build trust signals AI recognises</a>.</li>
+        </ul>
+        <p>
+          Benchmarking these four pillars shows where you lead, lag or risk losing AI visibility.
+          Together they determine your citation eligibility, the likelihood that AI systems select your
+          content as a reliable source. Weakness in any one pillar can reduce overall readiness
+          disproportionately: strong authority may not translate into citations if content lacks
+          structure or extractability.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Competitors</span><h2>How to assess competitors' AEO performance.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Unlike traditional SEO, where rankings are public, AEO performance must be inferred through
+          AI behaviour. To benchmark effectively:
+        </p>
+        <ul>
+          <li><strong>Run comparative prompt tests.</strong> Enter industry-relevant queries into ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, and note which brands get cited or mentioned.</li>
+          <li><strong>Audit citation frequency.</strong> Track how often competitor domains appear as AI sources over time, which reflects how quickly models learn to reference them.</li>
+          <li><strong>Evaluate entity accuracy.</strong> Check whether AI descriptions of competitor brands are more complete or consistent than yours, revealing which entities have stronger reinforcement across the web.</li>
+          <li><strong>Compare your <a href="/resources/glossary/ai-share-of-voice">share of voice</a>:</strong> how often your brand appears in generative answers compared with theirs.</li>
+        </ul>
+        <p>
+          Benchmark across multiple prompt types, including informational, comparative and
+          decision-based queries, since visibility can vary significantly with user intent. Tracking
+          prompt coverage, the percentage of high-value queries where competitors appear but your brand
+          does not, highlights missed opportunities more clearly than aggregate visibility alone.
+          Together these metrics reveal not only who AI cites but why, uncovering the structural and
+          credibility gaps you can close, and the patterns of trust accumulation that show which
+          competitors are strengthening across related queries.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Scoring</span><h2>How to create an actionable AEO readiness score.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Turn qualitative comparisons into quantitative insight. Assign a 1 to 5 score for each pillar,
+          accessibility, structure, authority and trust, for both your brand and key competitors, then
+          express your total as an index against theirs: below 100 indicates competitors have stronger
+          AI recognition, and above 100 means you lead in overall readiness. This single number becomes
+          a strategic KPI you can include in quarterly reports. Track trend movement over time, not just
+          static scores, to see whether improvements are translating into more AI citations and
+          mentions, and when integrated with business metrics such as leads, conversions and brand
+          searches, the score can become a leading indicator of future demand rather than only a
+          diagnostic. The guide on
+          <a href="/resources/present-aeo-geo-performance">presenting AEO and GEO performance in C-suite reports</a>
+          covers how to communicate it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Why now</span><h2>Why benchmarking AEO readiness is critical now.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          AI engines learn continuously. Once they establish which brands to trust, that hierarchy
+          becomes self-reinforcing, and cited brands keep getting cited. Benchmarking ensures you are
+          not falling behind in an invisible race for algorithmic trust, and auditing your AEO
+          readiness regularly gives foresight into how the next generation of search engines perceives
+          your authority. This dynamic creates a compounding visibility effect where early leaders
+          expand their advantage unless competitors actively close the gap. Benchmarking is not just a
+          competitive exercise but a visibility safeguard: if you are not tracking how AI systems
+          perceive your brand versus your peers, you are optimising in the dark. It transforms AEO from
+          a theoretical concept into a measurable discipline that lets brands build and defend their
+          position in AI-driven discovery. The companion guide on
+          <a href="/resources/ai-search-kpis">the KPIs that replace traditional SEO metrics</a> pairs
+          well with this one.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Benchmark your AEO readiness against your real competitors.</h2>
+      <p>Zicy scores your visibility and share of voice against a competitor set across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>
