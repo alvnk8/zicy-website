@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/ai-search-kpis/what-new-kpis-replace-traditional-seo-metrics-in-the-age-of-ai-search.jpg';
+import figFunnel from '../../assets/resources/ai-search-kpis/what-new-kpis-replace-traditional-seo-metrics-in-the-age-of-ai-search.png';
+
+const featuredAlt =
+  'Illustration of a laptop with a glowing network hologram, titled what new KPIs replace traditional SEO metrics in the age of AI search.';
 
 // Migrated from v1.zicy.com/blog/kpis-in-age-of-ai-search. Tier-2 guide. articleSection Guides,
 // author Ritu Khanna. House style applied (UK spelling, sentence-case headings, em dashes
@@ -43,6 +49,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('ai-visibility') }],
       mentions: [{ '@id': gloss('citation-coverage') }, { '@id': gloss('ai-share-of-voice') }],
     },
@@ -58,7 +70,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -72,6 +88,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>What new KPIs replace traditional SEO metrics in the age of AI search?</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         In AI search, click-based SEO metrics no longer capture performance. The new KPIs measure
@@ -125,6 +143,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">New KPIs</span><h2>The KPIs that define AEO and GEO performance.</h2></div>
+      <PostFigure src={figFunnel} alt="Funnel diagram of five AI visibility KPIs: AI citation volume, brand mention share, entity accuracy score, answer influence index and citation-to-lead conversion rate." />
       <div class="prose" style="max-width:760px">
         <p>The next-generation measurement stack for AI-era visibility includes:</p>
         <ul>
