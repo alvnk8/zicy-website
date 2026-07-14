@@ -1,6 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/cloudflare-bot-management/cloudflare-bot-management.jpg';
+import figResponses from '../../assets/resources/cloudflare-bot-management/answer-engine-new@2x.png';
+import figDashboard from '../../assets/resources/cloudflare-bot-management/cloudflare-bot-management-ai-crawlers-and-brand-discoverability.jpg';
+
+const featuredAlt =
+  'A laptop showing a cloud-security shield and a discoverability chart, with a person working at a desk.';
 
 // Migrated from v1.zicy.com/blog/cloudflare-bot-management. articleSection Guides.
 // Author reassigned to Alvin Koay (byline and schema both); the source carried no in-body
@@ -86,6 +93,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('ai-visibility') }],
       mentions: [{ '@id': gloss('citation-coverage') }],
     },
@@ -110,7 +123,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -124,6 +141,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>Cloudflare bot management: check and manage AI bot access for brand discoverability</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         Cloudflare bot management can decide whether AI answer engines ever see your site. Its AI-bot
@@ -312,6 +331,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">How Zicy helps</span><h2>How Zicy audits your Cloudflare and AI search readiness.</h2></div>
+      <PostFigure src={figResponses} alt="Zicy screens showing AI platform responses and a performance-metrics comparison across ChatGPT, Gemini and Perplexity, with brand mention, position, share of voice and website citation." />
       <div class="prose" style="max-width:760px">
         <p>
           Zicy is built for the AI-driven web. It can inspect your Cloudflare bot settings, robots.txt
@@ -336,6 +356,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">In closing</span><h2>What to do next if you use Cloudflare.</h2></div>
+      <PostFigure src={figDashboard} alt="A person viewing a Cloudflare bot-management dashboard with AI bot-bypass metrics and a brand-discoverability impact chart." />
       <div class="prose" style="max-width:760px">
         <p>
           Cloudflare's AI bot controls are no longer a niche feature. They are part of the core power
