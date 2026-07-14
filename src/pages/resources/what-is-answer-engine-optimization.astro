@@ -1,6 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/what-is-answer-engine-optimization/what-exactly-is-answer-engine-optimization-and-why-it-matters-for-brands-.jpg';
+import figTable from '../../assets/resources/what-is-answer-engine-optimization/what-exactly-is-answer-engine-optimization-and-why-it-matters-for-brands--2.jpg';
+import figPuzzle from '../../assets/resources/what-is-answer-engine-optimization/what-exactly-is-answer-engine-optimization-and-why-it-matters-for-brands--1.jpg';
+
+const featuredAlt =
+  'Illustration titled Answer Engine Optimization, with an Ask a Question search bar feeding a direct answer, plus local results, answers and rich-content cards.';
 
 // Migrated from v1.zicy.com/blog/what-is-answer-engine-optimization. Cluster pillar for the
 // tier-2 guides. articleSection Guides, author Ritu Khanna. House style applied (UK spelling,
@@ -64,6 +71,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('aeo') }],
       mentions: [{ '@id': gloss('ai-visibility') }, { '@id': gloss('citation-coverage') }],
     },
@@ -79,7 +92,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -93,6 +110,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>What exactly is answer engine optimisation, and why does it matter for brands?</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         <a href="/resources/glossary/aeo">Answer engine optimisation</a> (AEO) is the practice of
@@ -168,6 +187,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">AEO vs SEO</span><h2>How AEO differs from traditional SEO.</h2></div>
+      <PostFigure src={figTable} alt="Comparison table of traditional SEO versus answer engine optimisation across focus, goal, format, algorithm type and success metric, contrasting ranking on search results with being cited in AI-generated answers." />
       <div class="prose" style="max-width:760px">
         <p>
           SEO and AEO share the same foundation of content quality, trust and authority, but they
@@ -273,6 +293,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Together</span><h2>How AEO and SEO work together.</h2></div>
+      <PostFigure src={figPuzzle} alt="Puzzle-piece diagram joining SEO and AEO, noting that SEO fuels discoverability while AEO adds a semantic layer for comprehension, and together they boost performance across search results and AI-generated answers." />
       <div class="prose" style="max-width:760px">
         <p>
           AEO does not replace SEO, it evolves it. Strong SEO signals such as backlinks, page speed and
