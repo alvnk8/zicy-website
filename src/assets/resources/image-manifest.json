@@ -1,0 +1,710 @@
+{
+  "cloudflare-bot-management": {
+    "featured": {
+      "file": "cloudflare-bot-management.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/12/Cloudflare-Bot-Management.jpg",
+      "originalAlt": "Cloudflare Bot Management",
+      "usedVariantFallback": false,
+      "sourceSlug": "cloudflare-bot-management"
+    },
+    "body": [
+      {
+        "file": "answer-engine-new@2x.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/11/answer-engine-new@2x.png",
+        "position": 1,
+        "precedingHeading": "Workflows Zicy can automate",
+        "originalAlt": "Zicy tracks AI citations",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "cloudflare-bot-management"
+      },
+      {
+        "file": "cloudflare-bot-management-ai-crawlers-and-brand-discoverability.jpg",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/12/Cloudflare-Bot-Management-AI-Crawlers-and-Brand-Discoverability.jpg",
+        "position": 2,
+        "precedingHeading": "Conclusion – What You Should Do Next if You Use Cloudflare",
+        "originalAlt": "Cloudflare Bot Management AI Crawlers and Brand Discoverability",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "cloudflare-bot-management"
+      }
+    ]
+  },
+  "effective-prompts-ai-tracking": {
+    "featured": {
+      "file": "add-effective-prompts-to-your-ai-tracking.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/02/Add-Effective-Prompts-to-Your-AI-Tracking.jpg",
+      "originalAlt": "Add Effective Prompts to Your AI Tracking",
+      "usedVariantFallback": false,
+      "sourceSlug": "effective-prompts-ai-tracking"
+    },
+    "body": []
+  },
+  "measuring-ai-visibility-direct-roi": {
+    "featured": {
+      "file": "direct-roi.png",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/Direct-ROI.png",
+      "originalAlt": "Direct ROI",
+      "usedVariantFallback": false,
+      "sourceSlug": "measuring-ai-visibility"
+    },
+    "body": [
+      {
+        "file": "1st-layer-of-ai-attribution.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/1st-layer-of-AI-attribution.png",
+        "position": 1,
+        "precedingHeading": "Direct ROI as the First Layer of Attribution",
+        "originalAlt": "1st layer of AI attribution",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "measuring-ai-visibility"
+      },
+      {
+        "file": "the-direct-roi-pathway.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/the-Direct-ROI-pathway.png",
+        "position": 2,
+        "precedingHeading": "How Direct ROI Works",
+        "originalAlt": "the Direct ROI pathway",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "measuring-ai-visibility"
+      },
+      {
+        "file": "the-ga4-attribution-engine.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/the-GA4-attribution-engine.png",
+        "position": 3,
+        "precedingHeading": "How to Measure Direct ROI in GA4",
+        "originalAlt": "the GA4 attribution engine",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "measuring-ai-visibility"
+      },
+      {
+        "file": "site-traffic.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/site-traffic.png",
+        "position": 4,
+        "precedingHeading": "A Simpler Way to Measure Direct ROI with Zicy",
+        "originalAlt": "site traffic",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "measuring-ai-visibility"
+      },
+      {
+        "file": "a-simpler-way-to-interpret-the-metric.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/A-Simpler-Way-to-Interpret-the-Metric.png",
+        "position": 5,
+        "precedingHeading": "A Simpler Way to Interpret the Metric",
+        "originalAlt": "A Simpler Way to Interpret the Metric",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "measuring-ai-visibility"
+      },
+      {
+        "file": "the-boundaries-of-direct-roi.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/the-boundaries-of-direct-ROI.png",
+        "position": 6,
+        "precedingHeading": "What Direct ROI Does Not Capture",
+        "originalAlt": "the boundaries of direct ROI",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "measuring-ai-visibility"
+      }
+    ]
+  },
+  "measuring-ai-visibility-search-halo": {
+    "featured": {
+      "file": "the-search-halo.png",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/The-Search-Halo.png",
+      "originalAlt": "The Search Halo",
+      "usedVariantFallback": false,
+      "sourceSlug": "search-halo-measuring-ai-visibility"
+    },
+    "body": [
+      {
+        "file": "direct-roi-is-a-dangerously-narrow-lens.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/Direct-ROI-is-a-dangerously-narrow-lens.png",
+        "position": 1,
+        "precedingHeading": "Why Direct Clicks Do Not Tell the Full Story",
+        "originalAlt": "Direct ROI is a dangerously narrow lens",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "search-halo-measuring-ai-visibility"
+      },
+      {
+        "file": "ai-the-brand-new-discovery-layer.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/AI-the-brand-new-discovery-layer.png",
+        "position": 2,
+        "precedingHeading": "AI Is Becoming a Brand Discovery Layer",
+        "originalAlt": "AI the brand new discovery layer",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "search-halo-measuring-ai-visibility"
+      },
+      {
+        "file": "search-halo-means.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/Search-Halo-Means.png",
+        "position": 3,
+        "precedingHeading": "What Search Halo Means",
+        "originalAlt": "Search Halo Means",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "search-halo-measuring-ai-visibility"
+      },
+      {
+        "file": "track-ai-visibility-.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/Track-AI-Visibility-.png",
+        "position": 4,
+        "precedingHeading": "1. Track AI Visibility",
+        "originalAlt": "Track AI Visibility",
+        "caption": "Dashboard of Zicy showing AI Visibility Trends",
+        "usedVariantFallback": false,
+        "sourceSlug": "search-halo-measuring-ai-visibility"
+      },
+      {
+        "file": "compare-against-traffic-behaviour.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/Compare-Against-Traffic-Behaviour.png",
+        "position": 5,
+        "precedingHeading": "3. Compare Against Traffic Behaviour",
+        "originalAlt": "Compare Against Traffic Behaviour",
+        "caption": "Overlay of AI Brand Mention, SOV against Branded Search Impressions to find correlation",
+        "usedVariantFallback": false,
+        "sourceSlug": "search-halo-measuring-ai-visibility"
+      },
+      {
+        "file": "the-search-halo-ecosystem-in-action.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/The-Search-Halo-Ecosystem-in-Action.png",
+        "position": 6,
+        "precedingHeading": "Correlation between AI Visibility and Branded Search Over Time",
+        "originalAlt": "The Search Halo Ecosystem in Action",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "search-halo-measuring-ai-visibility"
+      }
+    ]
+  },
+  "measuring-ai-visibility-sub-entity-halo": {
+    "featured": {
+      "file": "sub-entity-halo.png",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/sub-entity-Halo.png",
+      "originalAlt": "Measuring AI Visibility: Sub-Entity Halo — Strategic Prioritization Layer",
+      "usedVariantFallback": false,
+      "sourceSlug": "sub-entity-halo-measuring-ai-visibility"
+    },
+    "body": [
+      {
+        "file": "why-sub-entity-halo-matters-for-brands-.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/Why-Sub-entity-Halo-Matters-for-Brands-.png",
+        "position": 1,
+        "precedingHeading": "Why Sub-entity Halo Matters for Brands",
+        "originalAlt": "Why Sub-entity Halo Matters for Brands ",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "sub-entity-halo-measuring-ai-visibility"
+      },
+      {
+        "file": "the-sub-entity-halo-equation.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/The-Sub-Entity-Halo-Equation.png",
+        "position": 2,
+        "precedingHeading": "Step 3: Estimate conversion impact",
+        "originalAlt": "The Sub-Entity Halo Equation",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "sub-entity-halo-measuring-ai-visibility"
+      },
+      {
+        "file": "how-sub-entity-halo-completes-this-ai-visibility-measurement-series-.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/04/How-Sub-entity-Halo-Completes-this-AI-Visibility-Measurement-Series-.png",
+        "position": 3,
+        "precedingHeading": "How Sub-entity Halo Completes this AI Visibility Measurement Series",
+        "originalAlt": "How Sub-entity Halo Completes this AI Visibility Measurement Series ",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "sub-entity-halo-measuring-ai-visibility"
+      }
+    ]
+  },
+  "brand-audits-ai-search": {
+    "featured": {
+      "file": "brand-audits-matter-.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/03/Brand-Audits-Matter-.jpg",
+      "originalAlt": "Why Brand Audits Matter in the AI Search Era",
+      "usedVariantFallback": false,
+      "sourceSlug": "why-brand-audits-matter-in-the-ai-search-era"
+    },
+    "body": [
+      {
+        "file": "ai-era-brand-audit.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/03/AI-ERA-brand-audit.png",
+        "position": 1,
+        "precedingHeading": "",
+        "originalAlt": "The AI-ERA brand audit",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "why-brand-audits-matter-in-the-ai-search-era"
+      },
+      {
+        "file": "the-shift-from-search-to-synthesis-.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/03/The-Shift-from-Search-to-Synthesis-.png",
+        "position": 2,
+        "precedingHeading": "The Shift from Search to Synthesis",
+        "originalAlt": "The Shift from Search to Synthesis",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "why-brand-audits-matter-in-the-ai-search-era"
+      },
+      {
+        "file": "hallucination-hazard.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/03/Hallucination-Hazard.png",
+        "position": 3,
+        "precedingHeading": "The Hallucination Hazard is Now a Brand Risk, Not Just a Tech Problem",
+        "originalAlt": "The Hallucination Hazard is Now a Brand Risk, Not Just a Tech Problem ",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "why-brand-audits-matter-in-the-ai-search-era"
+      },
+      {
+        "file": "knowledge-graph.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/03/Knowledge-Graph.png",
+        "position": 4,
+        "precedingHeading": "The Knowledge Graph is Becoming the New Brand Homepage",
+        "originalAlt": "The Knowledge Graph is Becoming the New Brand Homepage ",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "why-brand-audits-matter-in-the-ai-search-era"
+      },
+      {
+        "file": "the-ai-tools.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/03/the-AI-tools.png",
+        "position": 5,
+        "precedingHeading": "Why Modern Brand Audits Matter for Three Specific Audiences",
+        "originalAlt": "the AI tools",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "why-brand-audits-matter-in-the-ai-search-era"
+      },
+      {
+        "file": "pillars-of-ai-brand-audit.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2026/03/pillars-of-AI-brand-audit.png",
+        "position": 6,
+        "precedingHeading": "A Brand Audit in the AI Era Should Answer These Important Brand Questions",
+        "originalAlt": "pillars of AI brand audit",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "why-brand-audits-matter-in-the-ai-search-era"
+      }
+    ]
+  },
+  "benchmark-aeo-readiness": {
+    "featured": {
+      "file": "how-to-benchmark-our-aeo-readiness-against-competitors--1.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_benchmark_our_aeo_readiness_against_competitors_-1.jpg",
+      "originalAlt": "",
+      "usedVariantFallback": false,
+      "sourceSlug": "how-to-benchmark-your-aeo-readiness"
+    },
+    "body": [
+      {
+        "file": "how-to-benchmark-our-aeo-readiness-against-competitors-.jpg",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_benchmark_our_aeo_readiness_against_competitors_.jpg",
+        "position": 1,
+        "precedingHeading": "What does AEO readiness actually measure?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "how-to-benchmark-your-aeo-readiness"
+      },
+      {
+        "file": "how-to-benchmark-our-aeo-readiness-against-competitors--2.jpg",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_benchmark_our_aeo_readiness_against_competitors_-2.jpg",
+        "position": 2,
+        "precedingHeading": "How can you assess competitors’ AEO performance?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "how-to-benchmark-your-aeo-readiness"
+      },
+      {
+        "file": "how-to-benchmark-our-aeo-readiness-against-competitors-.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_benchmark_our_aeo_readiness_against_competitors_.png",
+        "position": 3,
+        "precedingHeading": "How to create an actionable AEO readiness score?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "how-to-benchmark-your-aeo-readiness"
+      }
+    ]
+  },
+  "track-ai-citations": {
+    "featured": {
+      "file": "how-to-track-ai-citations-and-measure-their-impact-on-leads-and-sales.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_track_ai_citations_and_measure_their_impact_on_leads_and_sales.jpg",
+      "originalAlt": "",
+      "usedVariantFallback": false,
+      "sourceSlug": "how-to-track-ai-citations"
+    },
+    "body": [
+      {
+        "file": "how-to-track-ai-citations-and-measure-their-impact-on-leads-and-sales.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_track_ai_citations_and_measure_their_impact_on_leads_and_sales.png",
+        "position": 1,
+        "precedingHeading": "How can you track when AI engines mention your brand?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "how-to-track-ai-citations"
+      },
+      {
+        "file": "which-analytics-tools-can-show-where-ai-engines-are-referencing-our-content--1.jpg",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/which_analytics_tools_can_show_where_ai_engines_are_referencing_our_content_-1.jpg",
+        "originalAlt": "",
+        "usedVariantFallback": false,
+        "sourceSlug": "analytics-tools-for-tracking-content-references-by-ai-engines",
+        "position": 2,
+        "precedingHeading": "(was featured on analytics-tools-for-tracking-content-references-by-ai-engines)",
+        "caption": null
+      },
+      {
+        "file": "which-analytics-tools-can-show-where-ai-engines-are-referencing-our-content-.jpg",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/which_analytics_tools_can_show_where_ai_engines_are_referencing_our_content_.jpg",
+        "position": 3,
+        "precedingHeading": "Introduction",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "analytics-tools-for-tracking-content-references-by-ai-engines"
+      },
+      {
+        "file": "which-analytics-tools-can-show-where-ai-engines-are-referencing-our-content--2.jpg",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/which_analytics_tools_can_show_where_ai_engines_are_referencing_our_content_-2.jpg",
+        "position": 4,
+        "precedingHeading": "What types of tools can identify AI citations and mentions?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "analytics-tools-for-tracking-content-references-by-ai-engines"
+      }
+    ]
+  },
+  "present-aeo-geo-performance": {
+    "featured": {
+      "file": "how-to-present-aeo-geo-performance-in-c-suite-marketing-reports--1.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_present_aeo_geo_performance_in_c-suite_marketing_reports_-1.jpg",
+      "originalAlt": "",
+      "usedVariantFallback": false,
+      "sourceSlug": "how-to-present-aeo-performance"
+    },
+    "body": [
+      {
+        "file": "how-to-present-aeo-geo-performance-in-c-suite-marketing-reports-.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_present_aeo_geo_performance_in_c-suite_marketing_reports_.png",
+        "position": 1,
+        "precedingHeading": "What metrics should your AEO/GEO report include?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "how-to-present-aeo-performance"
+      },
+      {
+        "file": "how-to-present-aeo-geo-performance-in-c-suite-marketing-reports-.jpg",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_present_aeo_geo_performance_in_c-suite_marketing_reports_.jpg",
+        "position": 2,
+        "precedingHeading": "What metrics should your AEO/GEO report include?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "how-to-present-aeo-performance"
+      }
+    ]
+  },
+  "ai-search-kpis": {
+    "featured": {
+      "file": "what-new-kpis-replace-traditional-seo-metrics-in-the-age-of-ai-search.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/what_new_kpis_replace_traditional_seo_metrics_in_the_age_of_ai_search.jpg",
+      "originalAlt": "",
+      "usedVariantFallback": false,
+      "sourceSlug": "kpis-in-age-of-ai-search"
+    },
+    "body": [
+      {
+        "file": "what-new-kpis-replace-traditional-seo-metrics-in-the-age-of-ai-search.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/what_new_kpis_replace_traditional_seo_metrics_in_the_age_of_ai_search.png",
+        "position": 1,
+        "precedingHeading": "What new KPIs define AEO and GEO performance?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "kpis-in-age-of-ai-search"
+      }
+    ]
+  },
+  "pr-wikidata-ai-visibility": {
+    "featured": {
+      "file": "can-pr-news-releases-and-wikidata-entries-improve-ai-visibility-.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/can_pr_news_releases_and_wikidata_entries_improve_ai_visibility_.jpg",
+      "originalAlt": "",
+      "usedVariantFallback": false,
+      "sourceSlug": "pr-news-releases-wikidata-improve-ai-visbility"
+    },
+    "body": [
+      {
+        "file": "can-pr-news-releases-and-wikidata-entries-improve-ai-visibility-.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/can_pr_news_releases_and_wikidata_entries_improve_ai_visibility_.png",
+        "position": 1,
+        "precedingHeading": "Can traditional PR improve AEO visibility too?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "pr-news-releases-wikidata-improve-ai-visbility"
+      }
+    ]
+  },
+  "bilingual-websites-ai-citations": {
+    "featured": {
+      "file": "how-to-optimize-bilingual-websites-for-ai-citations-1.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_optimize_bilingual_websites_for_ai_citations-1.jpg",
+      "originalAlt": "",
+      "usedVariantFallback": false,
+      "sourceSlug": "optimise-bilingual-websites-for-ai-citations"
+    },
+    "body": [
+      {
+        "file": "how-to-optimize-bilingual-websites-for-ai-citations.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_optimize_bilingual_websites_for_ai_citations.png",
+        "position": 1,
+        "precedingHeading": "How can bilingual sites make content AI-readable and citation-ready?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "optimise-bilingual-websites-for-ai-citations"
+      }
+    ]
+  },
+  "prepare-for-google-ai-overviews": {
+    "featured": {
+      "file": "how-to-prepare-your-website-for-google-ai-overviews-step-by-step.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_prepare_your_website_for_google_ai_overviews_step_by_step.jpg",
+      "originalAlt": "",
+      "usedVariantFallback": false,
+      "sourceSlug": "prepare-website-for-googl-ai-overviews"
+    },
+    "body": [
+      {
+        "file": "how-to-prepare-your-website-for-google-ai-overviews-step-by-step.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_prepare_your_website_for_google_ai_overviews_step_by_step.png",
+        "position": 1,
+        "precedingHeading": "Step 1: Ensure AI crawl accessibility",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "prepare-website-for-googl-ai-overviews"
+      },
+      {
+        "file": "how-to-prepare-your-website-for-google-ai-overviews-step-by-step-2.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_prepare_your_website_for_google_ai_overviews_step_by_step-2.png",
+        "position": 2,
+        "precedingHeading": "Step 2: Structure your content for extraction",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "prepare-website-for-googl-ai-overviews"
+      },
+      {
+        "file": "how-to-prepare-your-website-for-google-ai-overviews-step-by-step-1.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_prepare_your_website_for_google_ai_overviews_step_by_step-1.png",
+        "position": 3,
+        "precedingHeading": "Step 3: Implement essential schema and metadata",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "prepare-website-for-googl-ai-overviews"
+      },
+      {
+        "file": "how-to-prepare-your-website-for-google-ai-overviews-step-by-step-3.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_prepare_your_website_for_google_ai_overviews_step_by_step-3.png",
+        "position": 4,
+        "precedingHeading": "Step 4: Strengthen your brand’s trust signals",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "prepare-website-for-googl-ai-overviews"
+      },
+      {
+        "file": "how-to-prepare-your-website-for-google-ai-overviews-step-by-step.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_prepare_your_website_for_google_ai_overviews_step_by_step.png",
+        "position": 5,
+        "precedingHeading": "Step 5: Monitor inclusion and iterate",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "prepare-website-for-googl-ai-overviews"
+      }
+    ]
+  },
+  "authoritative-entity": {
+    "featured": {
+      "file": "what-does-it-mean-to-become-an-authoritative-entity-for-ai-engines-.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/what_does_it_mean_to_become_an_authoritative_entity_for_ai_engines_.jpg",
+      "originalAlt": "",
+      "usedVariantFallback": false,
+      "sourceSlug": "become-authoritative-entity-for-ai-engines"
+    },
+    "body": [
+      {
+        "file": "what-does-it-mean-to-become-an-authoritative-entity-for-ai-engines-.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/what_does_it_mean_to_become_an_authoritative_entity_for_ai_engines_.png",
+        "position": 1,
+        "precedingHeading": "How can a brand strengthen its entity authority?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "become-authoritative-entity-for-ai-engines"
+      }
+    ]
+  },
+  "ai-trust-signals": {
+    "featured": {
+      "file": "how-can-you-build-digital-trust-signals-that-ai-engines-recognize-.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_can_you_build_digital_trust_signals_that_ai_engines_recognize_.jpg",
+      "originalAlt": "",
+      "usedVariantFallback": false,
+      "sourceSlug": "build-trust-signals-that-ai-recognizes"
+    },
+    "body": [
+      {
+        "file": "how-can-you-build-digital-trust-signals-that-ai-engines-recognize-.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_can_you_build_digital_trust_signals_that_ai_engines_recognize_.png",
+        "position": 1,
+        "precedingHeading": "How can brands actively enhance these signals?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "build-trust-signals-that-ai-recognizes"
+      }
+    ]
+  },
+  "content-ai-prefers-to-cite": {
+    "featured": {
+      "file": "what-kind-of-content-does-ai-prefer-to-cite.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/What-Kind-of-Content-Does-AI-Prefer-to-Cite.jpg",
+      "originalAlt": "What Kind of Content Does AI Prefer to Cite",
+      "usedVariantFallback": false,
+      "sourceSlug": "what-content-ai-prefer-to-cite"
+    },
+    "body": [
+      {
+        "file": "what-content-ai-prefers-to-cite.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/what-content-AI-prefers-to-cite.png",
+        "position": 1,
+        "precedingHeading": "Do blogs, FAQs, or structured data perform best?",
+        "originalAlt": "what content AI prefers to cite",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "what-content-ai-prefer-to-cite"
+      }
+    ]
+  },
+  "get-cited-chatgpt-perplexity": {
+    "featured": {
+      "file": "how-to-get-your-brand-mentioned-or-cited-in-chatgpt-and-perplexity-answers-.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_get_your_brand_mentioned_or_cited_in_chatgpt_and_perplexity_answers_.jpg",
+      "originalAlt": "",
+      "usedVariantFallback": false,
+      "sourceSlug": "get-brand-mentioned-in-chatgpt-perplexity"
+    },
+    "body": [
+      {
+        "file": "how-to-get-your-brand-mentioned-or-cited-in-chatgpt-and-perplexity-answers-.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/how_to_get_your_brand_mentioned_or_cited_in_chatgpt_and_perplexity_answers_.png",
+        "position": 1,
+        "precedingHeading": "What steps can brands take to start earning AI citations?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "get-brand-mentioned-in-chatgpt-perplexity"
+      }
+    ]
+  },
+  "what-is-answer-engine-optimization": {
+    "featured": {
+      "file": "what-exactly-is-answer-engine-optimization-and-why-it-matters-for-brands-.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/what_exactly_is_answer_engine_optimization_and_why_it_matters_for_brands_.jpg",
+      "originalAlt": "",
+      "usedVariantFallback": false,
+      "sourceSlug": "what-is-answer-engine-optimization"
+    },
+    "body": [
+      {
+        "file": "aeo.jpg",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/09/AEO.jpg",
+        "position": 1,
+        "precedingHeading": "Introduction",
+        "originalAlt": "Answer Engine Optimization ",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "what-is-answer-engine-optimization"
+      },
+      {
+        "file": "what-exactly-is-answer-engine-optimization-and-why-it-matters-for-brands--2.jpg",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/what_exactly_is_answer_engine_optimization_and_why_it_matters_for_brands_-2.jpg",
+        "position": 2,
+        "precedingHeading": "How AEO differs from traditional SEO?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "what-is-answer-engine-optimization"
+      },
+      {
+        "file": "what-exactly-is-answer-engine-optimization-and-why-it-matters-for-brands--1.jpg",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/what_exactly_is_answer_engine_optimization_and_why_it_matters_for_brands_-1.jpg",
+        "position": 3,
+        "precedingHeading": "How AEO and SEO work together?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "what-is-answer-engine-optimization"
+      }
+    ]
+  },
+  "critical-schemas-entity-markup": {
+    "featured": {
+      "file": "which-schemas-and-entity-markups-are-most-critical-for-brands-.jpg",
+      "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/which_schemas_and_entity_markups_are_most_critical_for_brands_.jpg",
+      "originalAlt": "",
+      "usedVariantFallback": false,
+      "sourceSlug": "schemas-entity-markups-critical-for-brands"
+    },
+    "body": [
+      {
+        "file": "which-schemas-and-entity-markups-are-most-critical-for-brands--1.jpg",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/which_schemas_and_entity_markups_are_most_critical_for_brands_-1.jpg",
+        "position": 1,
+        "precedingHeading": "Introduction",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "schemas-entity-markups-critical-for-brands"
+      },
+      {
+        "file": "which-schemas-and-entity-markups-are-most-critical-for-brands--2.jpg",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/which_schemas_and_entity_markups_are_most_critical_for_brands_-2.jpg",
+        "position": 2,
+        "precedingHeading": "What does schema markup actually do?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "schemas-entity-markups-critical-for-brands"
+      },
+      {
+        "file": "which-schemas-and-entity-markups-are-most-critical-for-brands-.png",
+        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/which_schemas_and_entity_markups_are_most_critical_for_brands_.png",
+        "position": 3,
+        "precedingHeading": "Which schema types are most essential for modern brands?",
+        "originalAlt": "",
+        "caption": null,
+        "usedVariantFallback": false,
+        "sourceSlug": "schemas-entity-markups-critical-for-brands"
+      }
+    ]
+  }
+}
