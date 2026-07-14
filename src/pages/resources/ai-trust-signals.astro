@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/build-trust-signals-that-ai-recognizes. Tier-2 guide.
+// articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
+// headings, em dashes removed, no exclamation marks, engines named in full, no statistics added).
+const title = 'How can you build digital trust signals that AI engines recognise?';
+const description =
+  'Trust signals are the machine-readable cues, verified authorship, transparent sources, consistent facts and secure infrastructure, that tell AI a brand is real, reliable and worth citing.';
+
+const url = `${SITE.url}/resources/ai-trust-signals`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-04-18',
+      dateModified: '2026-07-14',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('ai-visibility') }],
+      mentions: [{ '@id': gloss('citation-coverage') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Build trust signals AI recognises</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How can you build digital trust signals that AI engines recognise?</h1>
+
+      <p class="answer">
+        Trust signals are the machine-readable cues, verified authorship, transparent sources,
+        consistent facts and secure infrastructure, that tell AI a brand is real, reliable and worth
+        citing. AI evaluates them continuously through verifiability, consistency and completeness.
+        Zicy tracks whether that credibility is translating into
+        <a href="/resources/glossary/ai-visibility">AI visibility</a> across ChatGPT, Gemini,
+        Perplexity, Google AI Overviews and Google AI Mode.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 18 April 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          Trust has always been a cornerstone of marketing, but now it needs to be machine-readable. As
+          platforms like ChatGPT, Gemini and Perplexity shape how people discover brands, credibility is
+          not judged by human perception alone. AI engines analyse thousands of trust signals, the
+          digital cues that tell them your brand is real, reliable and worth citing. In the AI era those
+          signals function as validation inputs: structured evidence that helps models decide whether
+          your content can be safely included in generated answers. This is closely tied to
+          <a href="/resources/what-is-answer-engine-optimization">answer engine optimisation</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Definition</span><h2>What trust signals mean in the AI era.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          On the traditional web, trust came from backlinks and reviews. On the AI-driven web, trust is
+          built through verifiable transparency: facts, context and reputation that machines can
+          cross-check. AI engines ask three silent questions when evaluating your site:
+        </p>
+        <ul>
+          <li>Can I verify this information across multiple credible sources?</li>
+          <li>Is the author or organisation recognised elsewhere online?</li>
+          <li>Is this information current, clear and complete?</li>
+        </ul>
+        <p>
+          If your digital presence answers yes to all three, you are feeding AI the same confidence
+          humans feel when dealing with a known brand. These signals are evaluated continuously, so
+          trust is not a one-time achievement but a dynamic state maintained over time. AI also assesses
+          consistency: stable, repeated signals strengthen trust, while conflicting or outdated
+          information weakens it. Trust signals are the verification layer beneath
+          <a href="/resources/authoritative-entity">becoming an authoritative entity</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">What matters</span><h2>Which trust signals matter most.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>AI engines prioritise signals that demonstrate factual accuracy, consistency and authority. The most influential include:</p>
+        <ul>
+          <li><strong>Verified authorship:</strong> associate real experts with every piece of content, with bios, credentials and profile links.</li>
+          <li><strong>Transparent sources:</strong> reference data, research or case studies that can be independently validated.</li>
+          <li><strong>Updated content:</strong> AI favours recent, revised information, since freshness implies reliability.</li>
+          <li><strong>Secure infrastructure:</strong> HTTPS, structured metadata and accessible sitemaps confirm technical trustworthiness.</li>
+          <li><strong>Cross-platform consistency:</strong> brand details such as name, tagline, services and leadership must match across your website, press coverage and business directories.</li>
+        </ul>
+        <p>
+          Not all signals carry equal weight. Those tied to verifiability, sources, authorship and
+          external validation, tend to have a stronger impact than purely technical ones, and signal
+          alignment, where multiple signals reinforce the same narrative, increases AI confidence in
+          your credibility. Being consistently cited is one measurable outcome, so pair this with
+          <a href="/resources/glossary/citation-coverage">citation coverage</a> tracking.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">How to</span><h2>How brands can actively enhance these signals.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Building trust is not about perfection but coherence. To translate human credibility into machine-interpretable proof:</p>
+        <ul>
+          <li><strong>Standardise brand data:</strong> use the same factual descriptors, founded date, CEO name, HQ city, everywhere online.</li>
+          <li><strong>Show expertise:</strong> publish authored explainers, whitepapers and guides that address core industry queries.</li>
+          <li><strong>Integrate transparency layers:</strong> add schema markup for reviews, FAQs and authorship.</li>
+          <li><strong>Strengthen external validation:</strong> earn citations from credible domains such as universities, news outlets or verified directories.</li>
+        </ul>
+        <p>
+          Refresh trust signals regularly rather than leaving them static, and build interlinked trust
+          ecosystems where your content references and is referenced by other credible entities. These
+          actions help AI models connect your digital presence to a consistent identity, reinforcing
+          your trust graph over time. When you are ready to test the outcome, see
+          <a href="/resources/get-cited-chatgpt-perplexity">how to get cited in ChatGPT and Perplexity</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Advantage</span><h2>Why trust signals are the new competitive advantage.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          In generative search, AI models curate answers rather than ads, so you cannot pay for
+          placement. You must earn your spot through reliability. The brands that win are those AI
+          systems repeatedly cite because they have proven integrity, clarity and authority in their
+          digital footprint. This creates an environment where brands with stronger trust signals gain
+          disproportionate visibility, since AI prefers a smaller set of highly reliable sources over a
+          large set of uncertain ones, and as AI evolves, trust signals will increasingly influence not
+          just citations but recommendations, comparisons and decision-making outputs. AI engines reward
+          brands that are verifiable, transparent and consistent. Digital trust signals are not
+          decoration; they are the currency of credibility in the generative web, and brands that build
+          and maintain them benefit from compounding credibility as AI continues to reuse trusted
+          sources.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See whether your credibility is earning citations.</h2>
+      <p>Zicy tracks how AI describes and cites your brand across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>
