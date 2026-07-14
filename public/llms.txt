@@ -42,3 +42,4 @@
 - How to benchmark your AEO readiness against competitors: https://www.zicy.com/resources/benchmark-aeo-readiness
 - How to track AI citations and measure their impact: https://www.zicy.com/resources/track-ai-citations
 - What new KPIs replace SEO metrics in AI search: https://www.zicy.com/resources/ai-search-kpis
+- What it means to become an authoritative entity for AI engines: https://www.zicy.com/resources/authoritative-entity

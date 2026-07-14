@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/become-authoritative-entity-for-ai-engines. Tier-2 guide.
+// articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
+// headings, em dashes removed, no exclamation marks, engines named in full, no statistics added).
+const title = 'What does it mean to become an authoritative entity for AI engines?';
+const description =
+  'An authoritative entity is a brand AI engines recognise as a uniquely identifiable, verified part of the knowledge graph, not just a set of pages, reinforced by consistent, corroborated facts.';
+
+const url = `${SITE.url}/resources/authoritative-entity`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-04-18',
+      dateModified: '2026-07-14',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('ai-visibility') }],
+      mentions: [{ '@id': gloss('citation-coverage') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Become an authoritative entity</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>What does it mean to become an authoritative entity for AI engines?</h1>
+
+      <p class="answer">
+        An authoritative entity is a brand that AI engines recognise as a uniquely identifiable,
+        verified part of the knowledge graph, not just a set of pages. Authority shifts from backlinks
+        to consistent, corroborated facts about who you are. Zicy tracks how accurately AI describes
+        your entity, and your <a href="/resources/glossary/ai-visibility">AI visibility</a>, across
+        ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 18 April 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          In traditional SEO, authority meant backlinks and domain strength. In the AI era, authority
+          means something deeper: being understood and trusted as a factual entity. When systems like
+          ChatGPT, Gemini or Perplexity cite your brand as a reliable source, they are not responding to
+          keywords but to credibility patterns. Becoming an authoritative entity means your organisation
+          is formally recognised by machines as a verified part of the global knowledge graph. This is a
+          move from document-level authority, pages and links, to entity-level authority, who you are
+          rather than just what you publish, a more persistent and scalable form of visibility, and it
+          is a core part of
+          <a href="/resources/what-is-answer-engine-optimization">answer engine optimisation</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Definition</span><h2>What an authoritative entity is.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          In AI and semantic search, an entity is a uniquely identifiable object, a company, person,
+          product or concept, that algorithms can connect across multiple data sources. When your brand
+          is structured as an entity, AI engines can distinguish you from competitors, understand your
+          expertise and recall you across topics. Being authoritative means that recognition is
+          reinforced by trustworthy evidence: consistent facts, verified authorship and external
+          validation. Strong entity definition supports disambiguation, so AI systems identify your
+          brand correctly even when similar names exist, and well-defined entities are retrieved across
+          more query variations. In simple terms, SEO tells search engines what you do; AEO teaches AI
+          who you are and why you are credible.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Trust</span><h2>How AI engines decide which entities to trust.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          AI systems use contextual correlation and credibility scoring, cross-referencing your brand
+          information with data from multiple authoritative sources. Trust builds when your brand facts,
+          name, description, founders, sector and location, are consistent across:
+        </p>
+        <ul>
+          <li>your website;</li>
+          <li>profiles such as LinkedIn, Crunchbase and Wikidata;</li>
+          <li>news mentions and PR coverage;</li>
+          <li>structured data markup.</li>
+        </ul>
+        <p>
+          When these align, AI models form a single, stable understanding of your entity. Consensus
+          signals matter: when multiple independent sources confirm the same information, confidence
+          increases significantly. Contextual relevance matters too, since consistent association with
+          specific topics reinforces your authority within those domains. Much of this depends on the
+          schema you publish, covered in
+          <a href="/resources/critical-schemas-entity-markup">which schema and entity markup matter most</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">How to</span><h2>How a brand strengthens its entity authority.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>To be recognised as authoritative, a brand builds a rounded evidence profile that reinforces its credibility from every angle:</p>
+        <ul>
+          <li><strong>Consistency:</strong> all external references use the same company name, tagline and core description.</li>
+          <li><strong>Clarity:</strong> schema markup defines organisation type, founders, headquarters and services.</li>
+          <li><strong>Authorship:</strong> real experts are associated with the brand through bylines and verified credentials.</li>
+          <li><strong>Cross-validation:</strong> your entity links to other trusted entities such as partners, certifications and awards.</li>
+        </ul>
+        <p>
+          Brands should also build topic-entity alignment, reinforcing expertise within a defined set of
+          topics rather than spreading across unrelated areas, and establish first-party authority
+          signals such as original research or proprietary data, which AI systems are more likely to
+          reference. Over time these efforts create a stronger entity footprint, increasing the
+          likelihood of being cited across queries. The companion guide on
+          <a href="/resources/ai-trust-signals">building trust signals AI recognises</a> covers the
+          verification layer in detail.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Why now</span><h2>Why this matters now.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          As AI-generated results replace traditional search, engines rely more on entities than URLs,
+          so your entity authority determines your visibility. The stronger your profile, the more
+          likely AI engines are to cite you across queries, even outside your direct niche. This creates
+          a threshold effect: brands below a certain level of entity authority may rarely be cited,
+          while those above it gain consistent visibility across multiple use cases. Being recognised as
+          an authoritative entity increasingly becomes the entry ticket to being mentioned, recommended
+          or quoted in AI-generated experiences, from summaries to product recommendations. Becoming an
+          authoritative entity is not about gaming algorithms but earning digital trust through
+          verifiable truth, and brands that invest in a strong, consistent entity today benefit from
+          long-term, compounding visibility. In the AI-driven internet, authority is not claimed. It is
+          confirmed.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See how AI recognises your brand as an entity.</h2>
+      <p>Zicy measures how accurately, and how often, AI describes your brand across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>
