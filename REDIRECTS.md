@@ -75,12 +75,14 @@ WordPress system URLs (`/wp-admin/*`, `/wp-login.php`, `/xmlrpc.php`,
 
 ## Blog → resources (1:1, live)
 
-The `/resources` section has shipped with 20 migrated posts (19 targets; two old
-slugs merge onto `track-ai-citations`). Each legacy `/blog/{slug}` now 301s
-directly to its matching `/resources/{slug}` post, so history and indexed body
-content (e.g. `/blog/cloudflare-bot-management`) land on the equivalent page, not
-the hub. All 20 specific rules are **permanent 301s** and are ordered **before**
-the two fallback rules (first-match-wins). Two source slugs carry typos fixed at
+The `/resources` section has shipped with the migrated posts. Each legacy
+`/blog/{slug}` now 301s directly to its matching `/resources/{slug}` post, so
+history and indexed body content (e.g. `/blog/cloudflare-bot-management`) land on
+the equivalent page, not the hub. There are **26 specific 301 rules** (24 distinct
+`/resources` targets): two old slugs merge onto `track-ai-citations`, and the
+retired `roi-of-being-cited-by-ai-engines` folds onto
+`measuring-ai-visibility-direct-roi`. All specific rules are **permanent 301s** and
+ordered **before** the two fallback rules (first-match-wins). Two source slugs carry typos fixed at
 the target: `pr-news-releases-wikidata-improve-ai-visbility` →
 `pr-wikidata-ai-visibility`, `prepare-website-for-googl-ai-overviews` →
 `prepare-for-google-ai-overviews`.
