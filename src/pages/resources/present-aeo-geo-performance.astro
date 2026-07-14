@@ -1,6 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/present-aeo-geo-performance/how-to-present-aeo-geo-performance-in-c-suite-marketing-reports--1.jpg';
+import figMetrics from '../../assets/resources/present-aeo-geo-performance/how-to-present-aeo-geo-performance-in-c-suite-marketing-reports-.png';
+import figBoardroom from '../../assets/resources/present-aeo-geo-performance/how-to-present-aeo-geo-performance-in-c-suite-marketing-reports-.jpg';
+
+const featuredAlt =
+  'A tablet on a desk displaying an AEO and GEO marketing report with performance charts and a key-findings summary.';
 
 // Migrated from v1.zicy.com/blog/how-to-present-aeo-performance. Tier-2 guide. articleSection
 // Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case headings, em
@@ -43,6 +50,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('ai-visibility') }],
       mentions: [{ '@id': gloss('citation-coverage') }, { '@id': gloss('ai-share-of-voice') }],
     },
@@ -58,7 +71,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -72,6 +89,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>How to present AEO and GEO performance in C-suite marketing reports</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         Presenting AEO and GEO performance to the C-suite means translating
@@ -131,6 +150,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Metrics</span><h2>What metrics your AEO and GEO report should include.</h2></div>
+      <PostFigure src={figMetrics} alt="Diagram of five AI brand performance metrics: citation growth trend, AI citation volume, influence-to-lead correlation, share of conversation and entity accuracy score." />
       <div class="prose" style="max-width:760px">
         <p>To resonate with executives, your dashboard should show influence over activity. Key metrics:</p>
         <ul>
@@ -153,6 +173,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Narrative</span><h2>How to tell the AEO and GEO story effectively.</h2></div>
+      <PostFigure src={figBoardroom} alt="A presenter showing AEO and GEO performance charts on a screen to executives in a boardroom." />
       <div class="prose" style="max-width:760px">
         <p>Data alone will not move leadership; context will. Frame the report around a narrative arc executives can follow:</p>
         <ul>
