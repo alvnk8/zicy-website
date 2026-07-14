@@ -1,6 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/prepare-for-google-ai-overviews/how-to-prepare-your-website-for-google-ai-overviews-step-by-step.jpg';
+import figCrawl from '../../assets/resources/prepare-for-google-ai-overviews/how-to-prepare-your-website-for-google-ai-overviews-step-by-step.png';
+import figExtract from '../../assets/resources/prepare-for-google-ai-overviews/how-to-prepare-your-website-for-google-ai-overviews-step-by-step-2.png';
+import figSchema from '../../assets/resources/prepare-for-google-ai-overviews/how-to-prepare-your-website-for-google-ai-overviews-step-by-step-1.png';
+import figTrust from '../../assets/resources/prepare-for-google-ai-overviews/how-to-prepare-your-website-for-google-ai-overviews-step-by-step-3.png';
+
+const featuredAlt =
+  'Two people at a desk viewing a monitor with a Google AI search interface and code.';
 
 // Migrated from v1.zicy.com/blog/prepare-website-for-googl-ai-overviews (source slug typo fixed
 // at target). Tier-2 guide. articleSection Guides, author Ritu Khanna. House style applied (UK
@@ -43,6 +52,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('ai-visibility') }],
       mentions: [{ '@id': gloss('citation-coverage') }, { '@id': gloss('prompt-tracking') }],
     },
@@ -58,7 +73,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -72,6 +91,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>How to prepare your website for Google AI Overviews (step by step)</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         Google AI Overviews summarise answers from a small pool of high-confidence sources, so
@@ -104,6 +125,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Step 1</span><h2>Ensure AI crawl accessibility.</h2></div>
+      <PostFigure src={figCrawl} alt="Diagram of three ways to ensure AI crawl accessibility: check robots.txt, specify llms.txt and update sitemap.xml." />
       <div class="prose" style="max-width:760px">
         <p>Before Google's AI can summarise your content, it must be able to see it. Check three foundational elements:</p>
         <ul>
@@ -124,6 +146,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Step 2</span><h2>Structure your content for extraction.</h2></div>
+      <PostFigure src={figExtract} alt="Diagram of four ways to structure content for AI extraction: descriptive headings, concise summaries, FAQ sections and clear explanations." />
       <div class="prose" style="max-width:760px">
         <p>AI Overviews extract answers, not paragraphs, so make it effortless for AI to identify what matters most:</p>
         <ul>
@@ -147,6 +170,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Step 3</span><h2>Implement essential schema and metadata.</h2></div>
+      <PostFigure src={figSchema} alt="Diagram of the schema markup to implement: Organization or LocalBusiness, Article, Product or Service, FAQPage, and Author or Review." />
       <div class="prose" style="max-width:760px">
         <p>Schema markup tells Google what your data means, not just what it says. Prioritise:</p>
         <ul>
@@ -166,6 +190,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Step 4</span><h2>Strengthen your brand's trust signals.</h2></div>
+      <PostFigure src={figTrust} alt="Diagram of four content improvement tips for trust signals: author bios, source citations, fresh content and brand alignment." />
       <div class="prose" style="max-width:760px">
         <p>
           Google's AI models factor in credibility when deciding what to include, so E-E-A-T, experience,
