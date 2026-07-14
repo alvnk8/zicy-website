@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/pr-news-releases-wikidata-improve-ai-visbility (source slug
+// typo fixed at target). Tier-2 guide. articleSection Guides, author Ritu Khanna. House style
+// applied (UK spelling, sentence-case headings, em dashes removed, no exclamation marks, engines
+// named in full, no statistics added). Editorial framing added per the migration brief:
+// Wikidata item creation and PR are off-site dependencies a brand pursues, distinct from the
+// on-site sameAs markup the brand controls directly.
+const title = 'Can PR, news releases and Wikidata entries improve AI visibility?';
+const description =
+  'PR and Wikidata improve AI visibility as external validation: AI engines confirm a brand\'s claims by cross-referencing independent, high-authority sources, so widely acknowledged facts are more likely to be cited.';
+
+const url = `${SITE.url}/resources/pr-wikidata-ai-visibility`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-04-20',
+      dateModified: '2026-07-14',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('ai-visibility') }],
+      mentions: [{ '@id': gloss('citation-coverage') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">PR, Wikidata and AI visibility</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>Can PR, news releases and Wikidata entries improve AI visibility?</h1>
+
+      <p class="answer">
+        Yes. PR and Wikidata improve <a href="/resources/glossary/ai-visibility">AI visibility</a> as
+        external validation: AI engines confirm a brand's claims by cross-referencing independent,
+        high-authority sources, so widely acknowledged facts are more likely to be cited. Wikidata
+        anchors your entity and prevents confusion with similar names. Zicy tracks whether that
+        recognition shows up across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 20 April 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          On the traditional web, PR built reputation. On the AI-driven web, PR builds recognition. When
+          your company appears in credible news sources or structured databases like Wikidata, it does
+          not just reach audiences, it signals to AI engines that your brand is verifiable and
+          trustworthy. That signal can improve your visibility in
+          <a href="/resources/what-is-answer-engine-optimization">answer engine optimisation</a> and
+          generative engine optimisation results, because external mentions act as independent
+          validation, helping AI confirm that your brand's claims are widely acknowledged rather than
+          only self-published.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Validation</span><h2>Why AI engines rely on PR and external references.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          AI systems like ChatGPT, Gemini and Perplexity build their worldview from interconnected
+          facts drawn from trusted data sources. Your website remains your primary authority, but AI
+          validates your claims by cross-referencing them with third-party mentions. When multiple
+          high-authority sites confirm the same information, models reinforce it as true, which is why a
+          brand mentioned in reliable media is more likely to be cited: it already exists within the
+          model's verified data clusters. This consensus effect, where repeated confirmation across
+          independent sources increases confidence, also helps AI determine source hierarchy,
+          prioritising domains with established authority and editorial standards. It is a core input to
+          <a href="/resources/authoritative-entity">becoming an authoritative entity</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Wikidata</span><h2>How Wikidata entries strengthen AEO signals.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Wikidata, the structured database behind Wikipedia, plays a critical role in how AI engines
+          interpret entities. It is one of the few open, machine-readable repositories of global facts.
+          When your brand has a verified Wikidata entry with accurate relationships, founder,
+          headquarters, industry and website, AI can confidently identify your organisation across
+          contexts. That entry becomes a semantic anchor linking your brand to other recognised entities
+          such as partners, awards and products, which helps prevent confusion and ensures citations
+          reference your brand, not a similarly named one. The schema that supports this is covered in
+          <a href="/resources/critical-schemas-entity-markup">which schema and entity markup matter most</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Press</span><h2>Can traditional PR improve AEO visibility too?</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          It can, but only when it is digitally structured and verifiable. Press releases distributed via
+          wire services still matter, but for AI visibility, where and how they are published is the key:
+        </p>
+        <ul>
+          <li>Focus on digital-first publications that are indexed by Google News and accessible to AI crawlers.</li>
+          <li>Include structured data, such as NewsArticle schema, in your newsroom or blog posts.</li>
+          <li>Link back to core brand and product pages to help AI connect topics to entities.</li>
+          <li>Keep naming conventions consistent, with no variations of brand names, product titles or company details.</li>
+        </ul>
+        <p>
+          Each press mention acts as a citation pathway that strengthens your data authority. Publication
+          quality matters: mentions from high-trust editorial domains carry more weight than low-authority
+          or syndicated content, and consistency across mentions reinforces entity signals so AI connects
+          every reference back to a single, unified brand identity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">On-site vs off-site</span><h2>What you control directly, and what you pursue.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          It helps to separate the two levers, because they are not equally within your control. The
+          on-site part is the part you own directly: declaring your entity on your own pages and linking
+          it, through <code>sameAs</code> markup, to your official profiles and any external record such
+          as a Wikidata item. You can ship that today without anyone else's involvement. The off-site
+          part is a set of dependencies you pursue rather than control: getting a Wikidata item created
+          and accepted, and earning genuine PR and media coverage. Those depend on third parties,
+          editorial judgement and community review, so they take time and cannot be willed into
+          existence. The realistic sequence is to get the on-site <code>sameAs</code> markup correct
+          first, then work the off-site dependencies so that when a Wikidata item or a press mention does
+          appear, your own pages already corroborate it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Together</span><h2>How to combine PR, data and AEO effectively.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Think of PR and structured data as two sides of credibility: PR gives you visibility in trusted
+          human media, and structured data gives you legibility in machine media. When both align,
+          verified news coverage linked to properly marked-up brand pages, you create a feedback loop that
+          reinforces your authority in human and AI search alike, where each new validated mention
+          increases the likelihood of future citations and builds a stronger entity footprint across more
+          queries. PR builds awareness, structured data builds proof, and together they make your brand
+          recognisable, cite-worthy and resilient. In the generative era, credibility is not claimed
+          through keywords; it is earned through confirmation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See whether your PR and entity work is being recognised.</h2>
+      <p>Zicy tracks how AI describes and cites your brand across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+  .prose code{font-family:var(--mono);font-size:0.92em;background:var(--line);padding:1px 5px;border-radius:4px}
+</style>
