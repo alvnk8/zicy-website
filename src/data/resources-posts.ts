@@ -85,6 +85,14 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "authorName": "Ritu Khanna"
   },
   {
+    "slug": "aeo-geo-examples",
+    "title": "What are examples of companies already succeeding with AEO and GEO?",
+    "description": "Early AEO and GEO winners are not the biggest publishers but the clearest ones: knowledge-driven firms, consumer innovators and data publishers whose structured, well-sourced content AI can extract and trust.",
+    "articleSection": "Guides",
+    "datePublished": "2026-04-18",
+    "authorName": "Ritu Khanna"
+  },
+  {
     "slug": "authoritative-entity",
     "title": "What does it mean to become an authoritative entity for AI engines?",
     "description": "An authoritative entity is a brand AI engines recognise as a uniquely identifiable, verified part of the knowledge graph, not just a set of pages, reinforced by consistent, corroborated facts.",
@@ -98,6 +106,30 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "description": "AI engines cite content that is clear, factual and self-contained. FAQs have the highest direct citation potential, blogs build context and authority, and structured data lets AI verify what is true.",
     "articleSection": "Guides",
     "datePublished": "2026-04-18",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "ai-product-recommendations",
+    "title": "Can AI engines like Copilot or Gemini recommend your products to users?",
+    "description": "AI assistants increasingly recommend specific products, not just answer questions. Whether yours is recommended depends on structured, complete product data and brand authority AI can trust.",
+    "articleSection": "Guides",
+    "datePublished": "2026-04-17",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "investing-in-aeo-geo",
+    "title": "Should your marketing team start investing in AEO and GEO now or wait?",
+    "description": "AI citation patterns are stickier than search rankings: once an engine settles on the sources it trusts for a topic, early-cited brands become the default references and compound that advantage.",
+    "articleSection": "Guides",
+    "datePublished": "2026-04-17",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "ai-overviews-chatgpt-seo",
+    "title": "How will Google AI Overviews and ChatGPT change SEO for your business?",
+    "description": "Google AI Overviews and ChatGPT move discovery from ranked links to synthesised answers, so SEO shifts from ranking to being cited in a limited answer set, where clarity beats domain size.",
+    "articleSection": "Guides",
+    "datePublished": "2026-04-16",
     "authorName": "Ritu Khanna"
   },
   {
@@ -162,6 +194,14 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "description": "For AI, the most critical schema are Organization, Article, Product, FAQPage and Author. They make a brand machine-readable, reducing ambiguity so AI can correctly associate and cite it.",
     "articleSection": "Guides",
     "datePublished": "2025-04-19",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "generative-search-industries",
+    "title": "Which industries will be most affected by generative search?",
+    "description": "The industries most affected by generative search are those built on informational discovery, healthcare, finance, education, technology and travel, where users seek expert answers before acting.",
+    "articleSection": "Guides",
+    "datePublished": "2025-04-17",
     "authorName": "Ritu Khanna"
   }
 ];

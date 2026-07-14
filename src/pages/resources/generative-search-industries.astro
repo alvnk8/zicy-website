@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/industries-most-affected-by-generative-search. Tier-3 guide.
+// articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
+// headings, em dashes removed, no exclamation marks, engines named in full with Copilot only as
+// context, unsourced "early data" claims neutralised, no statistics added).
+const title = 'Which industries will be most affected by generative search?';
+const description =
+  'The industries most affected by generative search are those built on informational discovery, healthcare, finance, education, technology and travel, where users seek expert answers before acting.';
+
+const url = `${SITE.url}/resources/generative-search-industries`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2025-04-17',
+      dateModified: '2026-07-14',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('ai-visibility') }],
+      mentions: [{ '@id': gloss('citation-coverage') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Industries affected by generative search</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>Which industries will be most affected by generative search?</h1>
+
+      <p class="answer">
+        The industries most affected by generative search are those built on informational discovery,
+        healthcare, finance, education, technology and travel, where users seek expert answers,
+        comparisons and guidance before acting. AI both cites sources and frames the decision criteria.
+        Zicy measures whether your brand is the <a href="/resources/glossary/citation-coverage">cited</a>
+        authority in your category across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 17 April 2025</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          AI-driven search is reshaping how consumers discover brands, evaluate options and make
+          decisions. Generative engines like Gemini, ChatGPT and Perplexity now curate and summarise
+          knowledge rather than list results. This does not affect every sector equally: some industries
+          are far more exposed, and understanding where your business stands helps you prepare for how
+          <a href="/resources/what-is-answer-engine-optimization">answer engine optimisation</a> and
+          generative engine optimisation redefine visibility, leads and competitive advantage.
+          Industries with longer decision cycles and higher research depth appear to be shifting toward
+          AI-driven discovery faster, as users rely on summarised insights before exploring individual
+          brands.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Most exposed</span><h2>Which industries face the biggest impact.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>The industries most affected share one thing: they rely on informational discovery, where customers seek expert answers, comparisons or guidance before taking action.</p>
+        <ul>
+          <li><strong>Healthcare and wellness:</strong> patients increasingly turn to AI for symptom checks, treatment options and provider comparisons, so clinics and healthcare brands must ensure their information is medically reviewed and structured to be cited responsibly.</li>
+          <li><strong>Finance and insurance:</strong> AI summaries in banking, investments and insurance now influence high-stakes choices, and brands with well-defined, fact-verified data are best placed to hold trusted answer spaces.</li>
+          <li><strong>Education and training:</strong> students and professionals use AI for career advice, course recommendations and learning content, so institutions with entity-rich knowledge bases become the default authorities.</li>
+          <li><strong>Technology and SaaS:</strong> from best CRM tools to how AI affects marketing, B2B discovery is now conversational, and brands that publish structured thought leadership appear more often in AI citations.</li>
+          <li><strong>Travel and hospitality:</strong> generative engines already curate itineraries and hotel suggestions, so providers that optimise listings, FAQs and reviews for AI readability capture more visibility.</li>
+        </ul>
+        <p>
+          Across these sectors, AI is not just recommending options but framing the decision criteria,
+          shaping how users evaluate what matters before they compare brands. See
+          <a href="/resources/content-ai-prefers-to-cite">what content AI prefers to cite</a> and
+          <a href="/resources/aeo-geo-examples">examples of companies already succeeding with AEO and GEO</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Why first</span><h2>Why these sectors feel the change first.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Generative search prioritises clarity, credibility and context, so in industries where
+          decisions are guided by trust or expertise, AI models lean toward verified, semantically
+          consistent sources. That is why finance, health and education realign faster: their success
+          depends on being recognised as authoritative entities. Once an engine consistently cites a
+          brand for a category, that brand can become the default reference, producing a
+          winner-takes-most dynamic where a small group of consistently cited brands dominate visibility
+          across many related queries, even reducing exposure for others that rank well traditionally.
+          Low-involvement or purely transactional categories may feel a slower impact at first, but as AI
+          generates
+          <a href="/resources/ai-product-recommendations">product recommendations and comparisons</a>,
+          structured brand data again determines visibility, driven by comparison queries like best under
+          a price or top alternatives that consolidate options into a shortlist. See
+          <a href="/resources/authoritative-entity">how to become an authoritative entity for AI engines</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">How to adapt</span><h2>How businesses in these industries can adapt.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Start by identifying where generative search overlaps with your customer journey:</p>
+        <ul>
+          <li><strong>Audit your informational footprint:</strong> what questions are customers asking that AI is already answering?</li>
+          <li><strong>Structure key pages for clarity:</strong> add schema markup, concise explanations and entity links around core topics. See <a href="/resources/prepare-for-google-ai-overviews">how to prepare your site for Google AI Overviews</a>.</li>
+          <li><strong>Establish thought leadership:</strong> create content that answers your industry's top money questions.</li>
+          <li><strong>Monitor brand mentions in AI:</strong> track whether AI names or cites your company. See <a href="/resources/track-ai-citations">how to track AI citations and their impact</a>.</li>
+        </ul>
+        <p>
+          Generative search is not a single disruption but a new content economy, where brands compete
+          to be referenced, not merely ranked. Map your query influence zones, identifying which stages
+          of the journey, awareness, comparison and decision, are already shaped by AI answers, and
+          prioritise those. Build topic-level authority clusters so multiple pages reinforce expertise
+          within a domain, and evaluate how your brand appears across external platforms such as forums,
+          reviews and knowledge bases, since AI increasingly incorporates off-site signals when judging
+          trust. Industries that rely on information, trust and expert guidance will feel generative
+          search first, and the winners will be those that turn expertise into structured, citable
+          knowledge AI can confidently quote.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See how exposed your category is, and where you stand.</h2>
+      <p>Zicy measures whether AI cites your brand as the authority in your category across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>

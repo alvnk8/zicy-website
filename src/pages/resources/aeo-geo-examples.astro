@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/examples-companies-succeeding-with-aeo. Tier-3 guide.
+// articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
+// headings, em dashes removed, no exclamation marks, engines named in full, no statistics added).
+const title = 'What are examples of companies already succeeding with AEO and GEO?';
+const description =
+  'Early AEO and GEO winners are not the biggest publishers but the clearest ones: knowledge-driven firms, consumer innovators and data publishers whose structured, well-sourced content AI can extract and trust.';
+
+const url = `${SITE.url}/resources/aeo-geo-examples`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-04-18',
+      dateModified: '2026-07-14',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('ai-visibility') }],
+      mentions: [{ '@id': gloss('aeo') }, { '@id': gloss('citation-coverage') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Companies succeeding with AEO and GEO</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>What are examples of companies already succeeding with AEO and GEO?</h1>
+
+      <p class="answer">
+        Early AEO and GEO winners are not the biggest publishers but the clearest ones:
+        knowledge-driven firms, consumer innovators and data publishers whose factual, structured,
+        well-sourced content AI can extract and trust. They treat
+        <a href="/resources/glossary/ai-visibility">AI visibility</a> as a strategic asset. Zicy
+        measures whether your brand is among those AI cites across ChatGPT, Gemini, Perplexity, Google
+        AI Overviews and Google AI Mode.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 18 April 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          The era of generative search is no longer theoretical. Some companies are already winning it.
+          Across industries, early adopters of
+          <a href="/resources/what-is-answer-engine-optimization">answer engine optimisation</a> and
+          generative engine optimisation are seeing their brands mentioned, cited and recommended by AI
+          platforms such as ChatGPT, Gemini and Perplexity. What is notable is that many did not set out
+          to optimise for AI specifically; their focus on clarity, structure and credibility naturally
+          aligns with how AI systems retrieve and rank information.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Who wins</span><h2>Which types of companies see early success.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>The common denominator among early winners is that they treat AI visibility as an asset, not an experiment. They tend to fall into three groups:</p>
+        <ul>
+          <li><strong>Knowledge-driven organisations:</strong> consulting firms, analytics platforms and SaaS companies that publish structured insights. Their content is factual, well-cited and entity-rich, ideal for AI extraction.</li>
+          <li><strong>Consumer-facing innovators:</strong> health, travel and fintech companies that translate expertise into concise, schema-backed content, and dominate when AI answers which is best, how to choose, or what is safe.</li>
+          <li><strong>Media and data publishers:</strong> outlets that maintain accurate, regularly updated data sets such as product reviews, research summaries and comparison charts, which generative engines lean on.</li>
+        </ul>
+        <p>
+          They also focus on high-intent query spaces, where users are actively seeking guidance,
+          comparisons or recommendations, making them more likely to be cited. Each demonstrates the
+          same principle: clarity and verifiability outperform volume and hype. This overlaps with
+          <a href="/resources/generative-search-industries">which industries generative search affects most</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">What they do</span><h2>What they do differently from traditional SEO leaders.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Instead of chasing rankings, successful brands focus on structuring knowledge, through three shifts AI engines recognise:</p>
+        <ul>
+          <li><strong>Entity-first publishing:</strong> they define key entities, company, products and experts, using schema markup and Wikidata. See <a href="/resources/critical-schemas-entity-markup">which schema and entity markup matter most</a>.</li>
+          <li><strong>Answer-centric formatting:</strong> their pages read like explanations, not sales copy, so AI can extract concise, factual segments.</li>
+          <li><strong>Source-credibility layering:</strong> they back every claim with references, internal cross-links and external validation. See <a href="/resources/ai-trust-signals">how to build trust signals AI recognises</a>.</li>
+        </ul>
+        <p>
+          The result is that they become the default mentions in AI conversations, the names users see
+          quoted for their category. They optimise for extractability, keeping key insights in concise,
+          self-contained sections, and they build topic-level authority, where multiple pieces reinforce
+          expertise within a domain rather than relying on isolated high-performing pages.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Results</span><h2>What measurable results they achieve.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Although AI citation analytics are still emerging, these brands report tangible advantages: increased brand recall, since users recognise their name from AI summaries even without a click; higher conversion intent, since leads from AI-referred exposure show stronger trust and shorter decision cycles; and cross-platform authority, since once cited in one engine, they are often re-quoted across others. In short, they are not just visible, they are believed, and repeated citations across platforms build category dominance, where a brand becomes strongly associated with specific topics. You can see real case studies on the <a href="/case-studies">Zicy case studies</a> page.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Lessons</span><h2>What other brands can learn.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          The takeaway is clear: AI does not reward scale, it rewards structure. Brands succeeding with
+          AEO and GEO are not publishing more, they are publishing smarter, with clarity, credibility
+          and context designed for both humans and machines. Prioritise quality of information over
+          quantity of content, focusing on accuracy, completeness and relevance, and align content,
+          entity signals and trust signals so every layer reinforces the same narrative. In the
+          generative era, visibility is earned not by shouting the loudest but by being the clearest
+          voice in the data, and success is less about tactics than about building a system of clarity,
+          trust and consistency that AI engines can repeatedly rely on.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See whether AI already counts you among the winners.</h2>
+      <p>Zicy measures how often AI mentions and cites your brand across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>

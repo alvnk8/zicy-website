@@ -1,0 +1,216 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/can-ai-engines-recommend-products. Tier-3 guide. articleSection
+// Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case headings, em dashes
+// removed, no exclamation marks, no statistics added). Copilot is kept only as named context
+// (shopping assistants), never listed among the five tracked engines.
+const title = 'Can AI engines like Copilot or Gemini recommend your products to users?';
+const description =
+  'AI assistants increasingly recommend specific products, not just answer questions. Whether yours is recommended depends on structured, complete product data and brand authority AI can trust.';
+
+const url = `${SITE.url}/resources/ai-product-recommendations`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-04-17',
+      dateModified: '2026-07-14',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('ai-visibility') }],
+      mentions: [{ '@id': gloss('citation-coverage') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">AI product recommendations</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>Can AI engines like Copilot or Gemini recommend your products to users?</h1>
+
+      <p class="answer">
+        Yes. AI assistants increasingly recommend specific products, not just answer questions. Whether
+        yours is recommended depends on structured, complete product data and brand authority AI can
+        trust, more than on ads or rankings. Zicy measures where AI names and
+        <a href="/resources/glossary/ai-visibility">cites</a> your brand across ChatGPT, Gemini,
+        Perplexity, Google AI Overviews and Google AI Mode.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 17 April 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          AI assistants are evolving from answering questions to suggesting solutions, including specific
+          products, services and brands. When users ask which laptop is best for graphic design, or what
+          the safest sunscreen is for sensitive skin, engines can surface curated product suggestions,
+          and shopping-focused assistants such as Microsoft Copilot and Gemini increasingly do this
+          directly. For businesses, the next wave of ecommerce visibility will come less from ads or
+          rankings and more from AI recommendations powered by structured, trusted data. This is a shift
+          from search-driven discovery to guided decision-making, where AI filters options into a
+          shortlist, often reducing how many brands a user evaluates. It is a specialised case of
+          <a href="/resources/what-is-answer-engine-optimization">answer engine optimisation</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Selection</span><h2>How AI engines choose which products to recommend.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>AI engines do not browse your website like humans; they synthesise from knowledge graphs, verified data and product feeds. Their recommendation logic depends on:</p>
+        <ul>
+          <li><strong>Structured product data:</strong> detailed specifications, schema markup and accurate metadata such as price, category and reviews.</li>
+          <li><strong>Brand authority:</strong> the reputation and consistency of your brand across the web.</li>
+          <li><strong>User context:</strong> the AI interprets the query, its intent, location or preference, and matches it with high-confidence product data.</li>
+        </ul>
+        <p>
+          The more machine-readable and verifiable your product information is, the more likely it is to
+          appear in AI-generated lists. Attribute completeness matters, since products with clearly
+          defined features are easier to match to intent, as does comparability, since products easily
+          compared across standard attributes are more likely to appear in best-of or top-options lists.
+          Much of this depends on <a href="/resources/prepare-for-google-ai-overviews">preparing your site for Google AI Overviews</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Authority</span><h2>Why brand authority matters as much as data accuracy.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Even when product data is available, AI engines prefer citing trusted brands. Authority acts
+          as a multiplier: two identical data entries can produce different outcomes if one brand is
+          considered more reliable. That reliability is signalled through mentions and citations across
+          credible sites, authoritative entity recognition within AI models, and reinforced reputation
+          via news, encyclopaedias or external validation. This is where AEO and GEO intersect with
+          product visibility: you are not just optimising SKUs, you are teaching AI to associate your
+          brand with trust, relevance and category leadership. AI often applies a confidence threshold
+          when recommending, and stronger authority signals help a brand pass it, especially for
+          high-consideration queries, while repeated inclusion builds a category-association effect. See
+          <a href="/resources/authoritative-entity">how to become an authoritative entity for AI engines</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Ethically</span><h2>Can brands influence AI recommendations ethically?</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Yes, through transparent optimisation, not manipulation. The brands that succeed treat AI as a distribution channel for verified expertise, not just product promotion. Key strategies:</p>
+        <ul>
+          <li>Publish neutral, factual product comparisons that position your brand as an educator, not just a seller.</li>
+          <li>Keep website data, merchant feeds and structured product markup consistent.</li>
+          <li>Ensure real user reviews and quality ratings are indexed by AI engines.</li>
+          <li>Use AEO-aligned metadata to connect products to broader topics.</li>
+        </ul>
+        <p>
+          Optimise for use-case queries such as for beginners, for sensitive skin or for small
+          businesses, since AI frequently maps intent to scenarios rather than generic categories, and
+          create decision-support content that explains how to choose, compare or evaluate products,
+          which AI often uses as the basis for a recommendation. Done well, this helps AI recommend your
+          products organically, the digital equivalent of word of mouth. The
+          <a href="/resources/effective-prompts-ai-tracking">prompts you track</a> should reflect these
+          buying-intent queries.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Long term</span><h2>The long-term opportunity for brands.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          As AI assistants integrate shopping, they will act as personalised decision advisors. That
+          means fewer clicks but stronger brand recall for those cited or recommended, and in time
+          AI-driven recommendations could rival ad placements in influence without the cost. The brands
+          that win will blend data integrity, content clarity and ethical transparency, because the AI
+          marketplace rewards truth more than hype. This may redefine digital shelf space: instead of
+          competing for page positions, brands compete for placement within AI-generated shortlists,
+          where only a limited number of products are surfaced per query, and as personalisation
+          improves, rich, contextual product data that adapts to different user scenarios becomes
+          critical. AI does not sell products, it recommends trust, so the goal is not just to be listed
+          but to be chosen, by both algorithms and the audiences they serve. It connects back to
+          <a href="/resources/measuring-ai-visibility-direct-roi">the ROI of being cited by AI engines</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See whether AI recommends you, or a competitor.</h2>
+      <p>Zicy measures how AI names, cites and recommends your brand across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>

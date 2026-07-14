@@ -51,3 +51,8 @@
 - How to optimise bilingual websites for AI citations: https://www.zicy.com/resources/bilingual-websites-ai-citations
 - How to prepare your website for Google AI Overviews: https://www.zicy.com/resources/prepare-for-google-ai-overviews
 - Which schema and entity markup are most critical for brands: https://www.zicy.com/resources/critical-schemas-entity-markup
+- Examples of companies already succeeding with AEO and GEO: https://www.zicy.com/resources/aeo-geo-examples
+- Can AI engines recommend your products to users: https://www.zicy.com/resources/ai-product-recommendations
+- Should you invest in AEO and GEO now or wait: https://www.zicy.com/resources/investing-in-aeo-geo
+- How Google AI Overviews and ChatGPT change SEO: https://www.zicy.com/resources/ai-overviews-chatgpt-seo
+- Which industries will be most affected by generative search: https://www.zicy.com/resources/generative-search-industries

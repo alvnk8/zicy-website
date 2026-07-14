@@ -49,6 +49,11 @@ const entries: Entry[] = [
   { path: '/resources/bilingual-websites-ai-citations', changefreq: 'monthly', priority: '0.6' },
   { path: '/resources/prepare-for-google-ai-overviews', changefreq: 'monthly', priority: '0.6' },
   { path: '/resources/critical-schemas-entity-markup', changefreq: 'monthly', priority: '0.6' },
+  { path: '/resources/aeo-geo-examples', changefreq: 'monthly', priority: '0.6' },
+  { path: '/resources/ai-product-recommendations', changefreq: 'monthly', priority: '0.6' },
+  { path: '/resources/investing-in-aeo-geo', changefreq: 'monthly', priority: '0.6' },
+  { path: '/resources/ai-overviews-chatgpt-seo', changefreq: 'monthly', priority: '0.6' },
+  { path: '/resources/generative-search-industries', changefreq: 'monthly', priority: '0.6' },
   ...LEGAL.map((d) => ({ path: `/legal/${d}`, changefreq: 'yearly', priority: '0.3' })),
 ];
 
