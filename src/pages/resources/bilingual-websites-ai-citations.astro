@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/bilingual-websites-ai-citations/how-to-optimize-bilingual-websites-for-ai-citations-1.jpg';
+import figSteps from '../../assets/resources/bilingual-websites-ai-citations/how-to-optimize-bilingual-websites-for-ai-citations.png';
+
+const featuredAlt =
+  'A globe merging with an AI speech bubble, titled optimise bilingual websites for AI citations.';
 
 // Migrated from v1.zicy.com/blog/optimise-bilingual-websites-for-ai-citations. Tier-2 guide.
 // articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
@@ -42,6 +48,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('citation-coverage') }],
       mentions: [{ '@id': gloss('ai-visibility') }],
     },
@@ -57,7 +69,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -71,6 +87,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>How to optimise bilingual websites for AI citations</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         Optimising a bilingual website for AI <a href="/resources/glossary/citation-coverage">citations</a>
@@ -129,6 +147,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">How to</span><h2>How to make bilingual content AI-readable and citation-ready.</h2></div>
+      <PostFigure src={figSteps} alt="Diagram of five ways to optimise a bilingual website for AI citations: standardise entity names, maintain consistent schema, segment URLs clearly, use hreflang attributes, and translate for meaning." />
       <div class="prose" style="max-width:760px">
         <p>To earn citations across languages, treat each version of your site as a distinct yet connected source:</p>
         <ul>
