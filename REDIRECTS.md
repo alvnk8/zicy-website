@@ -73,21 +73,27 @@ to the index. Only `/case-studies/page/:n*` → `/case-studies` (pagination) is 
 WordPress system URLs (`/wp-admin/*`, `/wp-login.php`, `/xmlrpc.php`,
 `/wp-content/uploads/*`) are intentionally **not** redirected — let them 404/410.
 
-## Blog (interim) + staged activation
+## Blog → resources (1:1, live)
 
-Blog has no section on the new site yet, so:
+The `/resources` section has shipped with 20 migrated posts (19 targets; two old
+slugs merge onto `track-ai-citations`). Each legacy `/blog/{slug}` now 301s
+directly to its matching `/resources/{slug}` post, so history and indexed body
+content (e.g. `/blog/cloudflare-bot-management`) land on the equivalent page, not
+the hub. All 20 specific rules are **permanent 301s** and are ordered **before**
+the two fallback rules (first-match-wins). Two source slugs carry typos fixed at
+the target: `pr-news-releases-wikidata-improve-ai-visbility` →
+`pr-wikidata-ai-visibility`, `prepare-website-for-googl-ai-overviews` →
+`prepare-for-google-ai-overviews`.
 
 ```
-/blog          → /resources   (302)
-/blog/:path*   → /resources   (302)
+/blog/{slug}    → /resources/{target}   (301)   ← 20 specific rules, evaluated first
+/blog           → /resources            (302)   ← fallback: blog index
+/blog/:path*    → /resources            (302)   ← fallback: any unmapped legacy path
 ```
 
-When a blog/resources article section ships, activate
-[`REDIRECTS.blog-staged.json`](./REDIRECTS.blog-staged.json): it carries the two
-known typo-slug 1:1 fixes plus a catch-all to the blog index. **Find-replace the
-destination prefix** to match the real section (e.g. `/blog` → `/resources` or
-`/insights`), then replace the two interim `/blog` rules above with that block,
-keeping the specific rules **before** the wildcard. Flip them to 301 at that point.
+The two `/blog` → `/resources` fallbacks are kept last so unmapped legacy paths
+still land somewhere valid (the hub). The full map lives in `vercel.json`.
+`REDIRECTS.blog-staged.json` (the old two-typo staging file) is now superseded.
 
 If instead an `/insights` section ships, the on-brand AEO posts from the original
 Growth.pro map should 301 1:1 (incl. the typo fix
