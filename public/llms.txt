@@ -50,3 +50,4 @@
 - Can PR, news releases and Wikidata improve AI visibility: https://www.zicy.com/resources/pr-wikidata-ai-visibility
 - How to optimise bilingual websites for AI citations: https://www.zicy.com/resources/bilingual-websites-ai-citations
 - How to prepare your website for Google AI Overviews: https://www.zicy.com/resources/prepare-for-google-ai-overviews
+- Which schema and entity markup are most critical for brands: https://www.zicy.com/resources/critical-schemas-entity-markup

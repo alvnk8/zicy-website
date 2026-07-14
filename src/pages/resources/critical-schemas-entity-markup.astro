@@ -1,0 +1,216 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/schemas-entity-markups-critical-for-brands. Tier-2 guide.
+// articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
+// headings, em dashes removed, no exclamation marks, engines named in full, Copilot not listed
+// among the five engines, no statistics added). The "Tesla" example is the source's illustration.
+const title = 'Which schema and entity markup are most critical for brands?';
+const description =
+  'For AI, the most critical schema are Organization, Article, Product, FAQPage and Author. They make a brand machine-readable, reducing ambiguity so AI can correctly associate and cite it.';
+
+const url = `${SITE.url}/resources/critical-schemas-entity-markup`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2025-04-19',
+      dateModified: '2026-07-14',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('aeo') }],
+      mentions: [{ '@id': gloss('citation-coverage') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Critical schema and entity markup</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>Which schema and entity markup are most critical for brands?</h1>
+
+      <p class="answer">
+        For AI, the most critical schema are Organization or LocalBusiness, Article or BlogPosting,
+        Product or Service, FAQPage, and Person or Author. They make your brand machine-readable,
+        reducing ambiguity so AI can correctly associate you with topics and
+        <a href="/resources/glossary/citation-coverage">cite</a> you. Combining them on a page adds
+        context and credibility. Zicy checks whether that markup is helping you get cited across the
+        five engines.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 19 April 2025</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          Engines like Gemini, ChatGPT and Perplexity rely on structured data to understand context, not
+          just keywords, which is where schema markup and entity tagging come in. They tell machines who
+          you are, what you offer and why your content matters. In
+          <a href="/resources/what-is-answer-engine-optimization">answer engine optimisation</a> and
+          generative engine optimisation, schema is the connective tissue between your human message and
+          AI comprehension. It does not just improve visibility; it improves interpretation accuracy,
+          reducing ambiguity and increasing the likelihood that AI correctly associates your brand with
+          relevant topics.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">What it does</span><h2>What schema markup actually does.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          A schema is a standardised vocabulary that helps engines interpret your content. Instead of
+          merely reading text, AI can understand relationships between people, organisations, products
+          and ideas. For example, if your about page lists your CEO's name, schema ensures AI knows this
+          person leads your company rather than was simply mentioned on the page. That clarity fuels
+          visibility in AI Overviews, chat responses and voice assistants. Schema also enables
+          relationship mapping, connecting your brand with related entities such as industries, products
+          and partners within the knowledge graph. Without structured data, AI must infer meaning from
+          raw text, which increases the risk of misinterpretation or omission. Simply put, schema makes
+          your brand's digital identity machine-readable, and therefore citable. It is a prerequisite for
+          <a href="/resources/prepare-for-google-ai-overviews">preparing your site for Google AI Overviews</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">The essentials</span><h2>Which schema types are most essential.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>There are hundreds of schema types, but a few are foundational for entity-level authority:</p>
+        <ul>
+          <li><strong>Organization or LocalBusiness:</strong> defines your company's identity, contact details and service area. Use it on every brand site.</li>
+          <li><strong>Article or BlogPosting:</strong> communicates what your content covers, who authored it and when it was updated, strengthening topical authority and recency.</li>
+          <li><strong>Product or Service:</strong> details specifications, pricing, reviews and availability, vital for brands with product lines.</li>
+          <li><strong>FAQPage:</strong> converts question-and-answer content into structured responses AI can quote directly.</li>
+          <li><strong>Person or Author:</strong> establishes credibility through verified expert authorship, a cornerstone of digital trust.</li>
+        </ul>
+        <p>
+          Prioritise the types that directly support AI extraction and validation, particularly FAQPage,
+          Article and Organization. Combining several types on a single page, such as Article, Author and
+          FAQ, creates a multi-layered understanding that improves both context and credibility, turning
+          your site into a knowledge-graph node AI can map and reference. This underpins
+          <a href="/resources/ai-trust-signals">the trust signals AI recognises</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Schema vs entity</span><h2>Schema markup versus entity optimisation.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Schema describes your content's structure; entity optimisation defines your brand's identity.
+          An entity is a concept AI can recognise, categorise and associate with others, for example
+          Tesla connecting to electric vehicles and to sustainability. When your schema, metadata and
+          external profiles all reinforce the same facts, the result is entity consolidation, where AI
+          forms a single, stable representation of your brand across sources. Schema is the technical
+          layer and entity optimisation is the strategic layer; both must align for consistent AI
+          recognition, and strong alignment improves disambiguation so your brand is identified correctly
+          even when similar names exist. This is the mechanism behind
+          <a href="/resources/authoritative-entity">becoming an authoritative entity for AI engines</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Hygiene</span><h2>How to maintain schema and entity hygiene.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Treat structured data like your company's digital DNA that needs regular checkups:</p>
+        <ul>
+          <li><strong>Audit quarterly:</strong> ensure all schema types remain valid and error-free.</li>
+          <li><strong>Update promptly:</strong> reflect new products, leadership changes or awards.</li>
+          <li><strong>Cross-verify data:</strong> keep consistency between website schema, Wikidata and social profiles.</li>
+          <li><strong>Test frequently:</strong> use Google's Rich Results Test and the Schema.org validator to confirm accuracy.</li>
+        </ul>
+        <p>
+          Keep schema consistent across templates so similar page types follow the same patterns, and
+          watch for schema drift, where content changes are not reflected in structured data, a common
+          issue that reduces AI confidence. Over time, consistent implementation contributes to a stronger
+          entity footprint and more citations. Schema markup is the new metadata of trust: the more
+          precisely you define your brand's entities, the more confidently AI can quote, recommend and
+          rank your content. To see how you compare, read
+          <a href="/resources/benchmark-aeo-readiness">how to benchmark your AEO readiness against competitors</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Check whether your schema is earning citations.</h2>
+      <p>Zicy audits how AI reads your brand and where it cites you across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>
