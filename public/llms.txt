@@ -48,3 +48,4 @@
 - What content AI prefers to cite, blogs, FAQs or structured data: https://www.zicy.com/resources/content-ai-prefers-to-cite
 - How to get cited in ChatGPT and Perplexity answers: https://www.zicy.com/resources/get-cited-chatgpt-perplexity
 - Can PR, news releases and Wikidata improve AI visibility: https://www.zicy.com/resources/pr-wikidata-ai-visibility
+- How to optimise bilingual websites for AI citations: https://www.zicy.com/resources/bilingual-websites-ai-citations
