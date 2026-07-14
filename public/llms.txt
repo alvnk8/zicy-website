@@ -44,3 +44,4 @@
 - What new KPIs replace SEO metrics in AI search: https://www.zicy.com/resources/ai-search-kpis
 - What it means to become an authoritative entity for AI engines: https://www.zicy.com/resources/authoritative-entity
 - How to build digital trust signals that AI engines recognise: https://www.zicy.com/resources/ai-trust-signals
+- How to present AEO and GEO performance in C-suite reports: https://www.zicy.com/resources/present-aeo-geo-performance
