@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/get-brand-mentioned-in-chatgpt-perplexity. Tier-2 guide.
+// articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
+// headings, em dashes removed, no exclamation marks, engines named in full, no statistics added).
+// Link to the not-yet-migrated "investing-in-aeo-geo" post was dropped.
+const title = 'How to get your brand mentioned or cited in ChatGPT and Perplexity answers?';
+const description =
+  'To get cited in ChatGPT and Perplexity, your brand must be understandable, verifiable and consistent: clear entity definitions, structured data, and facts that match across independent sources.';
+
+const url = `${SITE.url}/resources/get-cited-chatgpt-perplexity`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2025-10-06',
+      dateModified: '2026-07-14',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('citation-coverage') }],
+      mentions: [{ '@id': gloss('ai-mention-coverage') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Get cited in ChatGPT and Perplexity</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How to get your brand mentioned or cited in ChatGPT and Perplexity answers?</h1>
+
+      <p class="answer">
+        To get <a href="/resources/glossary/citation-coverage">cited</a> in ChatGPT and Perplexity,
+        your brand must be understandable, verifiable and consistent: clear entity definitions,
+        structured data, and facts that match across independent sources. AI cites what it can trust,
+        favouring self-contained answer blocks and comparative content. Zicy tracks where your brand is
+        mentioned and cited across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 6 October 2025</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          Being mentioned in an AI-generated answer is a new form of digital authority. When ChatGPT,
+          Gemini or Perplexity cite your brand, they publicly validate you as a reliable source, which
+          drives awareness, credibility and influence even before a user clicks your website. AI
+          citations often act as pre-qualification signals: users are more likely to trust and shortlist
+          brands already named in answers, even before deeper research. This guide is part of
+          <a href="/resources/what-is-answer-engine-optimization">answer engine optimisation</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Selection</span><h2>How AI engines decide which brands to cite.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Engines like ChatGPT and Perplexity do not select sources at random. They rely on data
+          quality, factual clarity and contextual authority, citing what they can understand, verify and
+          trust. Their selection depends on three signals:
+        </p>
+        <ul>
+          <li><strong>Entity clarity:</strong> your brand, products and experts must be clearly defined and consistently described across the web.</li>
+          <li><strong>Structured transparency:</strong> schema markup, author profiles and source links make your content readable by machines.</li>
+          <li><strong>Reputation alignment:</strong> AI weighs credibility from reviews, backlinks, news coverage and references from authoritative sites.</li>
+        </ul>
+        <p>
+          In effect, AI engines behave like professional editors, prioritising sources that are clear,
+          verifiable and consistently credible. They increasingly evaluate cross-source consensus,
+          whether similar facts about your brand appear consistently across independent sources, and
+          they favour content that minimises ambiguity, so brands with clear positioning and distinct
+          terminology are retrieved and cited more accurately. This builds on
+          <a href="/resources/authoritative-entity">becoming an authoritative entity for AI engines</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Content</span><h2>What content gets cited most often.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          AI prefers content that directly answers questions. The more structured, factual and
+          contextually complete your text, the more extractable it becomes. That includes concise
+          explanations that answer a query in one paragraph, well-formatted sections with subheadings
+          and logical flow, and supported claims with cited sources or original data. Blogs, FAQs,
+          research reports and product explainers with clear headings are ideal. Keyword stuffing does
+          not help; AI favours semantic relevance, the overall clarity and completeness of the idea. It
+          typically extracts self-contained answer blocks that fully resolve a question, and it shows a
+          growing preference for comparative and decision-support content such as best, versus and how
+          to choose. For more, see
+          <a href="/resources/content-ai-prefers-to-cite">what kind of content AI prefers to cite</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Steps</span><h2>How to start earning AI citations.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>To have ChatGPT or Perplexity quote your site, optimise for machine comprehension and factual integrity:</p>
+        <ul>
+          <li><strong>Create a transparent knowledge layer:</strong> add schema markup, FAQ sections and internal linking to your top content.</li>
+          <li><strong>Publish verifiable insights:</strong> include original research, statistics or case studies AI engines can confidently cite.</li>
+          <li><strong>Ensure cross-platform consistency:</strong> keep your brand name, tagline and descriptions uniform across profiles, encyclopaedias and company bios.</li>
+          <li><strong>Track and refine:</strong> identify which prompts already surface your brand and where new opportunities exist. See <a href="/resources/track-ai-citations">how to track AI citations and their impact</a>.</li>
+        </ul>
+        <p>
+          Focus on prompt-level optimisation, aligning your content with how AI retrieves information,
+          and develop topic clusters rather than isolated pages to reinforce authority across related
+          queries. Incorporate fresh, verifiable data points where possible, since measurable insights
+          improve confidence in the generated response.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Why now</span><h2>Why brands should act now.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          AI engines expand their data models continuously, learning which sources to trust, and early
+          movers are already shaping that trust network. If your competitors are cited today, their
+          advantage compounds with every model update, because AI systems show reinforcement behaviour:
+          once a source is repeatedly cited it becomes a preferred reference, and displacing it later
+          requires significantly stronger signals. To be cited by ChatGPT or Perplexity, your brand must
+          speak the language of machines, structured data, consistent facts and credible expertise. In
+          the new search era, the most readable brands become the most visible ones, and citation
+          success is not about publishing more content but publishing more usable content, where
+          clarity, structure and trust outweigh volume.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See where you are already cited, and where you are not.</h2>
+      <p>Zicy tracks your mentions and citations across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>

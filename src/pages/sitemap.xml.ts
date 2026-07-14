@@ -44,6 +44,7 @@ const entries: Entry[] = [
   { path: '/resources/ai-trust-signals', changefreq: 'monthly', priority: '0.6' },
   { path: '/resources/present-aeo-geo-performance', changefreq: 'monthly', priority: '0.6' },
   { path: '/resources/content-ai-prefers-to-cite', changefreq: 'monthly', priority: '0.6' },
+  { path: '/resources/get-cited-chatgpt-perplexity', changefreq: 'monthly', priority: '0.6' },
   ...LEGAL.map((d) => ({ path: `/legal/${d}`, changefreq: 'yearly', priority: '0.3' })),
 ];
 
