@@ -1,6 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/effective-prompts-ai-tracking/add-effective-prompts-to-your-ai-tracking.jpg';
+
+const featuredAlt =
+  'A smartphone displaying a colourful AI tracking dashboard with bar charts and network icons.';
 
 // Migrated from v1.zicy.com/blog/effective-prompts-ai-tracking. articleSection Guides.
 // Author reassigned to Ritu Khanna (byline and schema both), with no prior attribution:
@@ -44,6 +49,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('prompt-tracking') }],
       mentions: [{ '@id': gloss('answer-intent-query') }],
     },
@@ -59,7 +70,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -73,6 +88,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>How to add effective prompts to your AI tracking</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         Effective <a href="/resources/glossary/prompt-tracking">prompt tracking</a> means choosing
