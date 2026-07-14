@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/what-is-answer-engine-optimization. Cluster pillar for the
+// tier-2 guides. articleSection Guides, author Ritu Khanna. House style applied (UK spelling,
+// sentence-case headings, em dashes removed, no exclamation marks, engines named in full,
+// unsourced "industry data" claims softened to neutral explanations, no statistics added).
+const title = 'What exactly is answer engine optimisation, and why does it matter for brands?';
+const description =
+  'Answer engine optimisation (AEO) is the practice of structuring a brand\'s content, entity data and technical signals so AI systems can understand, extract and cite it in their answers.';
+
+const url = `${SITE.url}/resources/what-is-answer-engine-optimization`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+// Sibling tier-2 guides this pillar links out to (the "go deeper" section).
+const cluster = [
+  { href: '/resources/benchmark-aeo-readiness', text: 'benchmark your AEO readiness against competitors' },
+  { href: '/resources/track-ai-citations', text: 'track AI citations and measure their impact' },
+  { href: '/resources/present-aeo-geo-performance', text: 'present AEO and GEO performance to stakeholders' },
+  { href: '/resources/ai-search-kpis', text: 'choose the KPIs that matter in AI search' },
+  { href: '/resources/pr-wikidata-ai-visibility', text: 'use PR and Wikidata to strengthen AI visibility' },
+  { href: '/resources/bilingual-websites-ai-citations', text: 'optimise bilingual websites for AI citations' },
+  { href: '/resources/prepare-for-google-ai-overviews', text: 'prepare your website for Google AI Overviews' },
+  { href: '/resources/authoritative-entity', text: 'become an authoritative entity for AI engines' },
+  { href: '/resources/ai-trust-signals', text: 'build the trust signals AI recognises' },
+  { href: '/resources/content-ai-prefers-to-cite', text: 'understand the content AI prefers to cite' },
+  { href: '/resources/get-cited-chatgpt-perplexity', text: 'get cited in ChatGPT and Perplexity' },
+  { href: '/resources/critical-schemas-entity-markup', text: 'add the schema and entity markup that matter most' },
+];
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-04-16',
+      dateModified: '2026-07-14',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('aeo') }],
+      mentions: [{ '@id': gloss('ai-visibility') }, { '@id': gloss('citation-coverage') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">What is answer engine optimisation?</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>What exactly is answer engine optimisation, and why does it matter for brands?</h1>
+
+      <p class="answer">
+        <a href="/resources/glossary/aeo">Answer engine optimisation</a> (AEO) is the practice of
+        structuring a brand's content, entity data and technical signals so AI systems can understand,
+        extract and cite it when they answer questions. Where SEO earns rankings, AEO earns citations
+        inside AI answers across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.
+        Zicy measures where a brand is cited.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 16 April 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Key takeaways</span><h2>The short version.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <ul>
+          <li>AI answers are now often the first touchpoint, not just a search feature.</li>
+          <li>Visibility is shifting from ranking pages to being cited in answers.</li>
+          <li>AEO rewards snippet clarity, not just page authority.</li>
+          <li>Content works best when designed for extraction, not just reading.</li>
+          <li>Metrics are moving from traffic to AI mentions, coverage and share of voice.</li>
+          <li>Zero-click visibility still carries real brand and revenue impact.</li>
+          <li>AEO does not replace SEO. The two work together.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Introduction</span><h2>From ten blue links to answers.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Search is no longer only about ten blue links. From Google AI Overviews to ChatGPT and
+          Perplexity, users now expect direct, summarised responses rather than lists of websites. That
+          shift gave rise to answer engine optimisation: the discipline of helping AI systems
+          understand, extract and cite your brand when they answer user questions. For CMOs and brand
+          strategists, AEO is becoming as important as SEO once was. AI-generated responses are
+          increasingly the first interaction layer rather than an assistive feature, and in many
+          discovery journeys users form a brand perception before ever visiting a website. Visibility
+          in AI answers now influences consideration, not just awareness.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Definition</span><h2>What answer engine optimisation really means.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          AEO focuses on optimising your content so AI models can easily interpret and quote it. Unlike
+          traditional SEO, which targets keyword rankings, AEO makes a brand's information readable,
+          factual and structured enough for AI systems to use in their generated responses. Engines
+          like Gemini, ChatGPT and Perplexity rely on factual snippets from high-authority sources.
+          They do not just index pages, they synthesise knowledge, so well-structured, verified and
+          semantically clear content increases the chance of being mentioned or cited.
+        </p>
+        <p>
+          You can think of AEO as teaching machines how to talk about you correctly, which means
+          embracing schema markup, rich entities and clear author credibility, the language AI engines
+          use to connect information. In practical terms, AI systems break a query into many
+          sub-questions, often ten to twenty variations, and retrieve short, high-confidence snippets
+          across sources. Content that is dense, precise and contextually complete within small
+          sections, typically 100 to 300 words, is significantly more likely to be extracted and cited.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">AEO vs SEO</span><h2>How AEO differs from traditional SEO.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          SEO and AEO share the same foundation of content quality, trust and authority, but they
+          differ in intent and mechanics. SEO helps users find your site; AEO helps AI understand and
+          explain it. The retrieval behaviour also differs: traditional SEO rewards page-level
+          authority, while AEO rewards snippet-level clarity, so a single well-structured paragraph can
+          outperform a whole high-ranking page if it answers a query more directly. In short, SEO earns
+          traffic while AEO earns trusted visibility. You may not always get the click, but you can win
+          the conversation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Signals</span><h2>The core signals AI engines look for.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>For content to earn citations, it generally needs to satisfy four signals:</p>
+        <ul>
+          <li><strong>Clarity:</strong> each page answers a specific intent or question cleanly.</li>
+          <li><strong>Structure:</strong> schema, headings, FAQs and data markup make it extractable.</li>
+          <li><strong>Credibility:</strong> author names, sources and linked references prove reliability.</li>
+          <li><strong>Relevance:</strong> current stats and updated facts keep it fresh.</li>
+        </ul>
+        <p>
+          Two further implicit signals appear to influence citations: consistency across sources, since
+          brands described similarly across multiple platforms are more likely to be trusted and cited,
+          and entity disambiguation, since clear differentiation from similarly named entities improves
+          citation accuracy. Engines like Gemini or Perplexity do not rank so much as reason, so the
+          clearer and more factual your data, the more confidently they cite it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Metrics</span><h2>How AEO success is measured.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>In AEO, performance metrics move beyond traditional analytics. Teams have started tracking:</p>
+        <ul>
+          <li>AI mentions and citations: how often your brand appears in AI-generated answers.</li>
+          <li>Entity accuracy: how correctly AI models describe your brand, products or services.</li>
+          <li>Citation share against competitors: the proportion of visibility your brand holds in generative results.</li>
+          <li>Zero-click brand lift: growth in brand searches after AI mentions.</li>
+          <li>Answer conversion ratio: leads or inquiries correlated with AI-generated exposure.</li>
+          <li>Average AI rank per prompt, prompt coverage across high-intent queries, and whether your brand appears in top summaries or only deeper explanations.</li>
+        </ul>
+        <p>
+          These metrics move AEO from a theoretical concept to a measurable performance discipline. The
+          companion guides on
+          <a href="/resources/track-ai-citations">tracking AI citations and their impact</a> and
+          <a href="/resources/ai-search-kpis">the KPIs that matter in AI search</a> go deeper.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Why it matters</span><h2>Why this shift matters for modern brands.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          The stakes are higher than visibility. They are about representation. AI answer engines shape
+          what people believe, buy and trust. If competitors are cited by AI models and your brand is
+          not, you effectively disappear from the discovery phase of the customer journey. Citations
+          inside AI responses are the new organic reach, driving
+          <a href="/resources/glossary/ai-visibility">AI visibility</a> even when potential customers
+          never visit your site. For decision-makers this changes how ROI is measured, from rankings
+          and traffic to mentions, citations and brand recall.
+        </p>
+        <p>
+          There is also a zero-click influence loop. Even without a click, repeated exposure to a brand
+          within AI answers increases branded searches, direct visits and conversion intent over time.
+          Being cited builds implicit trust, since users assume the brands named in AI answers are
+          authoritative, and that halo can influence perception and partnerships beyond search. Brands
+          are no longer competing only for rankings, but for inclusion in a limited answer set where
+          only a handful of sources are referenced per response.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Adapting</span><h2>How organisations can adapt.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Start by treating your website not as content storage but as a machine-readable knowledge
+          base, so your expertise and product data are instantly usable by AI engines. Three strategic
+          pivots help: structure for comprehension with schema, clear headings and concise
+          explanations machines can parse; prove authority with author bios, sources and cross-domain
+          citations; and measure visibility differently by tracking when and where your brand is
+          mentioned or cited, the modern equivalent of backlinks. It also helps to treat content as
+          retrieval assets rather than pages, designing each section to answer one intent fully, to
+          stand alone when extracted, and to depend less on long narrative flow for meaning.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Together</span><h2>How AEO and SEO work together.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          AEO does not replace SEO, it evolves it. Strong SEO signals such as backlinks, page speed and
+          topical depth remain critical, but AEO adds a semantic layer that helps AI engines understand
+          what your pages mean, not just what they say. SEO fuels discoverability, ensuring your site is
+          indexed and trusted, while AEO fuels comprehension, enabling AI to interpret and summarise
+          your expertise. Together they build answer-level authority, where your brand appears
+          consistently across both search results and AI-generated content. AEO is, in essence, brand
+          communication for machines: the more precisely your content speaks their language, the more
+          confidently AI speaks about you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Go deeper: pillar links out to each tier-2 guide -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Go deeper</span><h2>The rest of the AEO guide series.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <ul>
+          {cluster.map((c) => (<li><a href={c.href}>{c.text}</a></li>))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See where AI cites your brand, and where it does not.</h2>
+      <p>Zicy measures your citations and mentions across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>
