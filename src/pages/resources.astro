@@ -1,11 +1,28 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../data/site';
+import { RESOURCE_POSTS } from '../data/resources-posts';
 
 const title = 'Zicy resources, AI visibility guides, research and updates';
 const description =
   'Practical guides to AEO/GEO, original research, and updates on how AI search is changing brand discovery.';
 
+// Drift guard: the post listing and the Blog node's blogPost members are generated from
+// RESOURCE_POSTS. Assert at build time that RESOURCE_POSTS matches the actual post files under
+// src/pages/resources/*.astro, so the two can never silently diverge. import.meta.glob is a
+// single-level glob, so it matches the 19 post pages but not the glossary subdirectory.
+const fileSlugs = Object.keys(import.meta.glob('./resources/*.astro'))
+  .map((p) => p.split('/').pop()!.replace(/\.astro$/, ''))
+  .sort();
+const dataSlugs = RESOURCE_POSTS.map((p) => p.slug).sort();
+if (JSON.stringify(fileSlugs) !== JSON.stringify(dataSlugs)) {
+  throw new Error(
+    `resources-posts.ts is out of sync with src/pages/resources/*.astro.\n  files: ${fileSlugs.join(', ')}\n  data:  ${dataSlugs.join(', ')}`
+  );
+}
+
+// Blog node with members. blogPost references every live post by its BlogPosting @id, generated
+// from RESOURCE_POSTS (one entry per live post), so it cannot drift.
 const blog = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
@@ -17,13 +34,22 @@ const blog = {
   url: `${SITE.url}/resources`,
   publisher: { '@id': `${SITE.url}/#org` },
   inLanguage: 'en',
+  blogPost: RESOURCE_POSTS.map((p) => ({ '@id': `${SITE.url}/resources/${p.slug}#article` })),
 };
 
-const pillars = [
-  { eyebrow: 'Guides', h: 'AEO/GEO fundamentals', p: 'llms.txt, schema for AI, citation strategy, the practical playbooks.' },
-  { eyebrow: 'Research', h: 'Original data', p: 'Zicy’s own data on how AI cites brands across engines and markets.' },
-  { eyebrow: 'Updates', h: 'What changed, and why it matters', p: 'Platform changes, policy shifts, and what they mean for your brand.' },
+// The three pillars already on the page; cards are grouped under these by articleSection.
+const PILLARS = [
+  { section: 'Guides' as const, blurb: 'AEO and GEO fundamentals: schema, citations, prompts, the practical playbooks.' },
+  { section: 'Research' as const, blurb: 'Zicy\'s own analysis of how AI cites and describes brands across engines and markets.' },
+  { section: 'Updates' as const, blurb: 'Platform changes, policy shifts, and what they mean for your brand.' },
 ];
+
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+function fmtDate(iso: string): string {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${d} ${MONTHS[m - 1]} ${y}`;
+}
+const postsIn = (section: string) => RESOURCE_POSTS.filter((p) => p.articleSection === section);
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(blog)} />
@@ -39,12 +65,31 @@ const pillars = [
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow"><span class="ix">01</span> Three pillars</span><h2>Guides, research and updates.</h2></div>
-      <div class="grid-3">
-        {pillars.map((p) => (
-          <div class="card"><span class="eyebrow">{p.eyebrow}</span><h3>{p.h}</h3><p>{p.p}</p></div>
-        ))}
-      </div>
-      <p class="muted" style="font-size:14px;margin-top:24px">New guides, research and updates are published here regularly.</p>
+
+      {PILLARS.map((pillar) => {
+        const posts = postsIn(pillar.section);
+        return (
+          <div class="pillar">
+            <div class="phead">
+              <span class="eyebrow">{pillar.section}</span>
+              <p class="muted" style="font-size:14px;margin-top:4px">{pillar.blurb}</p>
+            </div>
+            {posts.length > 0 ? (
+              <div class="grid-3">
+                {posts.map((p) => (
+                  <article class="card pcard">
+                    <h3><a href={`/resources/${p.slug}`}>{p.title}</a></h3>
+                    <p class="pdesc">{p.description}</p>
+                    <p class="pmeta">{p.authorName} &middot; {fmtDate(p.datePublished)}</p>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p class="muted" style="font-size:14px">New {pillar.section.toLowerCase()} will appear here soon.</p>
+            )}
+          </div>
+        );
+      })}
     </div>
   </section>
 
@@ -64,3 +109,15 @@ const pillars = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .pillar{margin-top:28px}
+  .pillar + .pillar{margin-top:40px}
+  .phead{margin-bottom:16px}
+  .pcard{display:flex;flex-direction:column;gap:8px}
+  .pcard h3{font-family:var(--display);font-size:18px;line-height:1.3;letter-spacing:-0.01em;margin:0}
+  .pcard h3 a{color:var(--indigo)}
+  .pcard h3 a:hover{color:var(--indigo-bright)}
+  .pdesc{font-size:14.5px;color:#4a4960;line-height:1.55;margin:0}
+  .pmeta{font-size:13px;color:var(--muted);margin:auto 0 0;font-family:var(--mono);letter-spacing:.02em}
+</style>
