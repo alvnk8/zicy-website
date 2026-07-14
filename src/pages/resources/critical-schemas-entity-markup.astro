@@ -1,6 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import featuredImg from '../../assets/resources/critical-schemas-entity-markup/which-schemas-and-entity-markups-are-most-critical-for-brands-.jpg';
+import figDesk from '../../assets/resources/critical-schemas-entity-markup/which-schemas-and-entity-markups-are-most-critical-for-brands--1.jpg';
+import figHierarchy from '../../assets/resources/critical-schemas-entity-markup/which-schemas-and-entity-markups-are-most-critical-for-brands--2.jpg';
+import figWhich from '../../assets/resources/critical-schemas-entity-markup/which-schemas-and-entity-markups-are-most-critical-for-brands-.png';
+
+const featuredAlt =
+  'A wireframe human head labelled engine optimisation surrounded by schema.org code snippets and analytics icons.';
 
 // Migrated from v1.zicy.com/blog/schemas-entity-markups-critical-for-brands. Tier-2 guide.
 // articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
@@ -43,6 +51,12 @@ const graph = {
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${featuredImg.src}`,
+        width: featuredImg.width,
+        height: featuredImg.height,
+      },
       about: [{ '@id': gloss('aeo') }],
       mentions: [{ '@id': gloss('citation-coverage') }],
     },
@@ -58,7 +72,11 @@ const graph = {
   ],
 };
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
   <section class="hero inner">
@@ -72,6 +90,8 @@ const graph = {
       </nav>
       <span class="eyebrow">Guides</span>
       <h1>Which schema and entity markup are most critical for brands?</h1>
+
+      <PostFigure src={featuredImg} alt={featuredAlt} />
 
       <p class="answer">
         For AI, the most critical schema are Organization or LocalBusiness, Article or BlogPosting,
@@ -99,6 +119,7 @@ const graph = {
           reducing ambiguity and increasing the likelihood that AI correctly associates your brand with
           relevant topics.
         </p>
+        <PostFigure src={figDesk} alt="A desk arrangement linking a notebook headed schemas and markups, listing product, organization, local business, review and article, to a phone showing rich snippets, a shopfront and a newspaper article." />
       </div>
     </div>
   </section>
@@ -106,6 +127,7 @@ const graph = {
   <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">What it does</span><h2>What schema markup actually does.</h2></div>
+      <PostFigure src={figHierarchy} alt="Funnel titled schema hierarchy for brand authority, from person schema at the top through FAQ, article and product schema to organization schema at the base." />
       <div class="prose" style="max-width:760px">
         <p>
           A schema is a standardised vocabulary that helps engines interpret your content. Instead of
@@ -126,6 +148,7 @@ const graph = {
   <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">The essentials</span><h2>Which schema types are most essential.</h2></div>
+      <PostFigure src={figWhich} alt="Diagram of the schema markup to implement: Organization or LocalBusiness, Article, Product or Service, FAQPage, and Author or Review." />
       <div class="prose" style="max-width:760px">
         <p>There are hundreds of schema types, but a few are foundational for entity-level authority:</p>
         <ul>
