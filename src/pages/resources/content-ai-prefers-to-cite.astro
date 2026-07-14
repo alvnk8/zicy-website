@@ -1,0 +1,212 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+
+// Migrated from v1.zicy.com/blog/what-content-ai-prefer-to-cite. Tier-2 guide. articleSection
+// Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case headings, em dash
+// in the original title removed, no exclamation marks, engines named in full, no statistics added).
+const title = 'What kind of content does AI prefer to cite: blogs, FAQs or structured data?';
+const description =
+  'AI engines cite content that is clear, factual and self-contained. FAQs have the highest direct citation potential, blogs build context and authority, and structured data lets AI verify what is true.';
+
+const url = `${SITE.url}/resources/content-ai-prefers-to-cite`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-04-18',
+      dateModified: '2026-07-14',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      about: [{ '@id': gloss('citation-coverage') }],
+      mentions: [{ '@id': gloss('aeo') }],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">What content AI prefers to cite</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>What kind of content does AI prefer to cite: blogs, FAQs or structured data?</h1>
+
+      <p class="answer">
+        AI engines <a href="/resources/glossary/citation-coverage">cite</a> content that is clear,
+        factual and self-contained. FAQs have the highest direct citation potential because their
+        question-and-answer format mirrors how people prompt; blogs build context and authority; and
+        structured data lets AI verify what is true. The strongest approach integrates all three. Zicy
+        shows which of your pages AI actually cites across the five engines.
+      </p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 18 April 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="prose" style="max-width:760px">
+        <p>
+          When engines like ChatGPT, Gemini and Perplexity generate answers, they do not pull from
+          random pages. They extract from content that is clear, factual and structured. For brands
+          investing in
+          <a href="/resources/what-is-answer-engine-optimization">answer engine optimisation</a> or
+          generative engine optimisation, understanding what AI prefers to cite can be the difference
+          between being visible in answers and being invisible. AI systems typically retrieve
+          information in small, high-confidence chunks, so content that delivers complete answers within
+          compact sections is more likely to be cited.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Extractability</span><h2>What makes content AI-friendly.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>AI models prioritise extractability, how easily they can find, isolate and quote precise information. They favour content that has:</p>
+        <ul>
+          <li><strong>Logical structure:</strong> clear headings, bullet lists and short paragraphs.</li>
+          <li><strong>Direct relevance:</strong> content that answers questions explicitly, not vaguely.</li>
+          <li><strong>Factual consistency:</strong> claims that match what AI engines see in other authoritative sources.</li>
+        </ul>
+        <p>
+          Self-containment matters too: each section should be understandable on its own, without
+          requiring the reader or the AI to reference other parts of the page. AI also favours precision
+          over length, since a concise, well-structured explanation often outperforms longer, less
+          focused content. AI does not care about keyword density; it cares about semantic clarity, so
+          your page must explain rather than merely promote.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Formats</span><h2>Do blogs, FAQs or structured data perform best?</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Each plays a different but complementary role:</p>
+        <ul>
+          <li><strong>Blogs offer depth and context.</strong> They help AI understand your brand's perspective and expertise, and when well-formatted and source-supported they become the foundation for extractable insights.</li>
+          <li><strong>FAQs deliver precision.</strong> Question-and-answer formats mirror how users prompt chat models, so each well-written FAQ is an invitation for AI to quote your text.</li>
+          <li><strong>Structured data provides validation.</strong> Schema markup translates human explanations into machine-readable logic, letting AI verify what is true and where it comes from. See <a href="/resources/critical-schemas-entity-markup">which schema and entity markup matter most</a>.</li>
+        </ul>
+        <p>
+          In practice, FAQs often have the highest direct citation probability, blogs contribute to
+          authority and context, and structured data improves interpretation accuracy. The most
+          effective strategy is not choosing one format but integrating all three, so AI can combine
+          context, clarity and validation when generating responses.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">How to</span><h2>How to optimise your content mix for AI citation.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>Think of your site as a hierarchy of clarity:</p>
+        <ul>
+          <li>Use blogs to explore topics and demonstrate expertise.</li>
+          <li>Add FAQs under each major section to summarise key answers.</li>
+          <li>Layer schema, such as FAQPage, Article, Product or Organization markup, to help AI map context to content.</li>
+          <li>Link internally between related articles to strengthen semantic associations.</li>
+        </ul>
+        <p>
+          Update older content regularly, since AI engines assign higher reliability to fresh,
+          maintained sources. Structure content into answer blocks that each respond to a specific
+          query, prioritise high-intent phrasing such as what is, how to, best and versus, and keep
+          formatting consistent across pages so retrieval systems can predict where to look. The
+          companion guide on <a href="/resources/ai-trust-signals">building trust signals AI recognises</a>
+          covers the credibility layer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Structure</span><h2>Why content structure now defines discoverability.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          AI search rewards clarity over creativity. If your content can answer a prompt cleanly, it is
+          more likely to be cited even if it ranks lower on Google. This flips the old SEO logic:
+          instead of writing for algorithms, you are writing for comprehension. It also shifts
+          competition from the page level to the section level, where individual answer blocks compete
+          for inclusion in AI responses, so even a single well-structured section can outperform an
+          entire page if it gives a clearer answer. AI engines prefer content that is easy to read, easy
+          to trust and easy to quote. Blogs build expertise, FAQs build precision and structured data
+          builds context, and together they make your brand hard to overlook. The most successful brands
+          design content for retrieval systems as well as readers. When you are ready to test it, see
+          <a href="/resources/get-cited-chatgpt-perplexity">how to get cited in ChatGPT and Perplexity</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See which of your pages AI actually cites.</h2>
+      <p>Zicy shows the sources AI cites about your brand across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose ol,.prose ul{max-width:760px;margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>
