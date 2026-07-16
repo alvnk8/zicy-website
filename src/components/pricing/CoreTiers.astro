@@ -1,0 +1,39 @@
+---
+// The core self-serve ladder: Starter, Growth (default), Scale, Enterprise, with the annual toggle
+// above it. All tiers come from CORE_TIERS in pricing.ts.
+import { CORE_TIERS } from '../../data/pricing';
+import TierCard from './TierCard.astro';
+import AnnualToggle from './AnnualToggle.astro';
+
+const gridId = 'pv2-core-tiers';
+---
+<section class="reveal">
+  <div class="wrap">
+    <div class="shead" style="max-width:none;text-align:center;margin-bottom:28px">
+      <span class="eyebrow" style="justify-content:center"><span class="ix">01</span> Plans</span>
+      <h2 style="margin-top:14px">All five engines on every plan.</h2>
+    </div>
+
+    <div class="ptoggle-wrap">
+      <AnnualToggle target={gridId} />
+    </div>
+
+    <div class="ptiers" id={gridId} data-billing="monthly">
+      {CORE_TIERS.map((tier) => <TierCard tier={tier} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ptoggle-wrap{margin:0 0 32px}
+  .ptiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:stretch}
+  @media (max-width:1000px){.ptiers{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:640px){.ptiers{grid-template-columns:1fr}}
+</style>
+
+<!-- Billing swap: global (crosses into TierCard) but namespaced by the grid id so it cannot leak.
+     An id selector outranks TierCard's scoped class rules, so no !important is needed. -->
+<style is:global>
+  #pv2-core-tiers[data-billing="annual"] .amt.is-monthly{display:none}
+  #pv2-core-tiers[data-billing="annual"] .amt.is-annual{display:inline}
+</style>

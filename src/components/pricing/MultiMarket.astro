@@ -1,0 +1,42 @@
+---
+// Multi-market rule: entry tiers get a single-market baseline; Scale and above add multi-language
+// and extra markets, with an optional per-market pack. Values from MULTI_MARKET(_PACK) in pricing.ts.
+import { MULTI_MARKET, MULTI_MARKET_PACK } from '../../data/pricing';
+---
+<section class="reveal" id="multi-market" style="background:var(--mist)">
+  <div class="wrap">
+    <div class="shead" style="max-width:none;text-align:center;margin-bottom:28px">
+      <span class="eyebrow" style="justify-content:center"><span class="ix">04</span> Markets and languages</span>
+      <h2 style="margin-top:14px">One brand, every market it sells in.</h2>
+    </div>
+
+    <div class="mm-grid">
+      {MULTI_MARKET.map((m) => (
+        <article class="card mm-card">
+          <h3>{m.label}</h3>
+          <ul class="mm-specs">
+            <li><span class="k">Markets</span><span class="v mono">{m.markets}</span></li>
+            <li><span class="k">Languages</span><span class="v mono">{m.languages}</span></li>
+          </ul>
+        </article>
+      ))}
+    </div>
+
+    <p class="mm-pack mono">
+      Optional add-on: about <span>${MULTI_MARKET_PACK.approxPriceUsd}</span> {MULTI_MARKET_PACK.unit}. {MULTI_MARKET_PACK.note}
+    </p>
+  </div>
+</section>
+
+<style>
+  .mm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:760px;margin:0 auto}
+  @media (max-width:640px){.mm-grid{grid-template-columns:1fr}}
+  .mm-card h3{font-family:var(--fd);font-weight:500;font-size:20px;margin:0 0 12px}
+  .mm-specs{list-style:none;margin:0;padding:0}
+  .mm-specs li{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .mm-specs li:last-child{border-bottom:0}
+  .mm-specs .k{color:var(--ink-2)}
+  .mm-specs .v{color:var(--ink);font-weight:500;text-align:right}
+  .mm-pack{text-align:center;font-size:13px;color:var(--ink-2);margin:22px auto 0;max-width:64ch;line-height:1.7}
+  .mm-pack span{color:var(--violet-700);font-weight:500}
+</style>

@@ -1,0 +1,43 @@
+---
+// Visible pricing FAQ. Renders straight from PRICING_FAQS; the page emits the FAQPage JSON-LD from
+// the same array, so the schema answer text mirrors what is shown here verbatim.
+import { PRICING_FAQS } from '../../data/pricing';
+---
+<section class="reveal" id="pricing-faq">
+  <div class="wrap">
+    <div class="shead" style="max-width:none;text-align:center;margin-bottom:28px">
+      <span class="eyebrow" style="justify-content:center"><span class="ix">06</span> FAQ</span>
+      <h2 style="margin-top:14px">Pricing questions.</h2>
+    </div>
+
+    <div class="pfaq">
+      {PRICING_FAQS.map((f) => (
+        <details class="pfaq-item">
+          <summary>
+            <span class="pfaq-q">{f.q}</span>
+            <span class="pfaq-mark" aria-hidden="true"></span>
+          </summary>
+          <p class="pfaq-a">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pfaq{max-width:760px;margin:0 auto}
+  .pfaq-item{border-top:1px solid var(--line)}
+  .pfaq-item:last-child{border-bottom:1px solid var(--line)}
+  .pfaq-item summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+    gap:18px;padding:22px 0;
+  }
+  .pfaq-item summary::-webkit-details-marker{display:none}
+  .pfaq-q{font-family:var(--fd);font-weight:500;font-size:18px;color:var(--ink);letter-spacing:-.01em}
+  .pfaq-mark{position:relative;flex:0 0 14px;width:14px;height:14px}
+  .pfaq-mark::before,.pfaq-mark::after{content:'';position:absolute;background:var(--violet);transition:transform .2s var(--ease)}
+  .pfaq-mark::before{top:6px;left:0;width:14px;height:2px}
+  .pfaq-mark::after{top:0;left:6px;width:2px;height:14px}
+  .pfaq-item[open] .pfaq-mark::after{transform:scaleY(0)}
+  .pfaq-a{color:var(--ink-2);font-size:15px;line-height:1.7;margin:0 0 22px;max-width:64ch}
+</style>

@@ -1,0 +1,29 @@
+---
+// The agency track: pooled prompts across client workspaces, separate from the core ladder.
+// Tiers come from AGENCY_TIERS in pricing.ts; annual note comes from ANNUAL.
+import { AGENCY_TIERS, ANNUAL } from '../../data/pricing';
+import TierCard from './TierCard.astro';
+---
+<section class="reveal" style="background:var(--mist)">
+  <div class="wrap">
+    <div class="shead" style="max-width:none;text-align:center;margin-bottom:28px">
+      <span class="eyebrow" style="justify-content:center"><span class="ix">02</span> For agencies</span>
+      <h2 style="margin-top:14px">Pooled prompts across every client.</h2>
+      <p style="margin:14px auto 0;max-width:60ch;color:var(--ink-2)">
+        One pool of prompts you split across client workspaces, white-labelled, with unlimited seats.
+      </p>
+    </div>
+
+    <div class="agrid">
+      {AGENCY_TIERS.map((tier) => <TierCard tier={tier} />)}
+    </div>
+
+    <p class="anote mono">Annual billing available: {ANNUAL.note}.</p>
+  </div>
+</section>
+
+<style>
+  .agrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:760px;margin:0 auto;align-items:stretch}
+  @media (max-width:640px){.agrid{grid-template-columns:1fr}}
+  .anote{text-align:center;font-size:12px;color:var(--violet-700);margin-top:20px}
+</style>

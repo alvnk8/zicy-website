@@ -1,0 +1,76 @@
+---
+// One card in a pricing ladder (core or agency). All values come from the Tier passed in;
+// nothing is hard-coded here. Reuses the sitewide .tier / .badge / .price / .btn patterns.
+import { annualMonthly, type Tier } from '../../data/pricing';
+
+interface Props {
+  tier: Tier;
+}
+const { tier } = Astro.props;
+
+const hasPrice = tier.priceMonthly !== null;
+const monthly = hasPrice ? tier.priceMonthly! : null;
+const annual = monthly !== null ? annualMonthly(monthly) : null;
+---
+<article class:list={['tier', 'ptier', { feat: tier.default }]}>
+  {tier.badge && <span class="ptier-flag">{tier.badge}</span>}
+
+  <div class="badge">{tier.name}</div>
+  {tier.label && <p class="ptier-label">{tier.label}</p>}
+
+  <div class="price">
+    {hasPrice ? (
+      <>
+        {/* Both prices sit in the DOM; the annual toggle swaps which is shown. */}
+        <span class="amt is-monthly"><span class="mono">${monthly}</span>{tier.per && <span class="per">{tier.per}</span>}</span>
+        <span class="amt is-annual"><span class="mono">${annual}</span>{tier.per && <span class="per">{tier.per}</span>}</span>
+      </>
+    ) : (
+      <span class="amt is-static">{tier.priceDisplay}</span>
+    )}
+  </div>
+
+  <ul class="ptier-specs">
+    {tier.specs.map((s) => (
+      <li><span class="k">{s.label}</span><span class="v mono">{s.value}</span></li>
+    ))}
+  </ul>
+
+  {tier.features.length > 0 && (
+    <ul class="ptier-feats">
+      {tier.features.map((f) => <li>{f}</li>)}
+    </ul>
+  )}
+
+  <a
+    class:list={['btn', tier.cta.primary ? 'btn-p' : 'btn-o', 'ptier-cta']}
+    href={tier.cta.href}
+    rel={tier.cta.external ? 'noopener' : undefined}
+    target={tier.cta.external ? '_blank' : undefined}
+  >{tier.cta.label}</a>
+</article>
+
+<style>
+  .ptier{display:flex;flex-direction:column;position:relative}
+  .ptier-flag{
+    position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    background:var(--violet);color:#fff;white-space:nowrap;
+    font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:.02em;
+    padding:4px 12px;border-radius:var(--r-pill);
+  }
+  .ptier-label{font-size:13px;color:var(--muted);margin:0 0 4px}
+  .price{display:flex;align-items:baseline;gap:2px}
+  .price .amt{font-family:var(--fm);font-size:34px;color:var(--violet-700);line-height:1.1}
+  .price .amt .mono{font-size:inherit}
+  .price .per{font-family:var(--fs);font-size:15px;color:var(--muted);margin-left:3px}
+  /* Default view is monthly; the annual variant is revealed by the toggle container. */
+  .price .is-annual{display:none}
+  .ptier-specs{list-style:none;margin:18px 0 0;padding:0}
+  .ptier-specs li{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .ptier-specs .k{color:var(--ink-2)}
+  .ptier-specs .v{color:var(--ink);font-weight:500}
+  .ptier-feats{list-style:none;margin:16px 0 0;padding:0;font-size:14px}
+  .ptier-feats li{position:relative;padding:6px 0 6px 20px;color:var(--ink-2)}
+  .ptier-feats li::before{content:'';position:absolute;left:0;top:13px;width:8px;height:8px;border-radius:2px;background:var(--violet-300)}
+  .ptier-cta{margin-top:22px;width:100%;justify-content:center}
+</style>
