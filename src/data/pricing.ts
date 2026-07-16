@@ -71,7 +71,7 @@ export const CORE_TIERS: Tier[] = [
       { label: 'Audit pages', value: '500' },
       { label: 'Brand Intelligence runs', value: '5' },
       { label: 'Brands', value: '1' },
-      { label: 'Content credits', value: '0' },
+      { label: 'Content credits', value: '1' },
     ],
     features: [
       'All five AI engines, flat',
@@ -92,7 +92,7 @@ export const CORE_TIERS: Tier[] = [
       { label: 'Audit pages', value: '1,500' },
       { label: 'Brand Intelligence runs', value: '20' },
       { label: 'Brands', value: '3' },
-      { label: 'Content credits', value: '0' },
+      { label: 'Content credits', value: '5' },
     ],
     features: [
       'Everything in Starter',
@@ -186,8 +186,8 @@ export const AGENCY_TIERS: Tier[] = [
 // ---------------------------------------------------------------------------------------------
 
 // Content module. Framed as activating the Act layer, a capability, not "credits sold separately".
-// Scale includes 10 credits and Enterprise 50, so the measure-improve loop runs as one product
-// from the top; PAYG and packs simply top up execution capacity.
+// Every core tier includes content credits (Starter 1, Growth 5, Scale 10, Enterprise 50), so the
+// measure-improve loop runs as one product from the start; PAYG and packs simply top up capacity.
 export interface ContentPack {
   name: string;
   credits: number;
@@ -211,7 +211,7 @@ export const CONTENT_MODULE = {
     { name: 'Scale + Content Pro', priceUsd: 569, save: 'save 12%' },
   ] as ContentBundle[],
   includedNote:
-    'Scale includes 10 content credits and Enterprise includes 50, so the loop reads as one product from the top. Add capacity below only when you want to publish more.',
+    'Every plan includes content credits, from 1 on Starter to 50 on Enterprise, so the loop reads as one product from the start. Add capacity below only when you want to publish more.',
 };
 // Back-compat alias for any earlier reference to the packs list.
 export const CONTENT_PACKS: ContentPack[] = CONTENT_MODULE.packs;
@@ -279,6 +279,6 @@ export const PRICING_FAQS: PricingFaq[] = [
   },
   {
     q: 'How do content credits work?',
-    a: 'Content is a separate module you can activate, the Act layer. Buy it pay as you go, in monthly packs, or as a discounted bundle. Scale and Enterprise include content credits.',
+    a: 'Content is a separate module you can activate, the Act layer. Buy it pay as you go, in monthly packs, or as a discounted bundle. Every plan includes content credits, from 1 on Starter to 50 on Enterprise.',
   },
 ];
