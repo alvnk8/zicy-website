@@ -22,12 +22,12 @@ import ContentModule from '../components/pricing/ContentModule.astro';
 import MultiMarket from '../components/pricing/MultiMarket.astro';
 import ComparisonTable from '../components/pricing/ComparisonTable.astro';
 import PricingFAQ from '../components/pricing/PricingFAQ.astro';
-import { FREE_DIAGNOSTIC, CORE_TIERS, AGENCY_TIERS, PRICING_FAQS } from '../data/pricing';
+import { CORE_TIERS, AGENCY_TIERS, PRICING_FAQS } from '../data/pricing';
 import { SITE } from '../data/site';
 
 const title = 'Zicy pricing, all five AI engines on every plan';
 const description =
-  'All five AI engines, every plan. No per-engine add-ons. Start with a free diagnostic, then scale from Starter to Enterprise, plus an agency track with pooled prompts.';
+  'All five AI engines, every plan. No per-engine add-ons. Scale from Starter to Enterprise, plus an agency track with pooled prompts.';
 
 // Offer schema: one Product node listing the four core plus two agency tiers as Offers. Tiers with a
 // fixed monthly price carry price + priceCurrency; Enterprise and the agency tiers are contact-only
@@ -75,35 +75,13 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- 2. Free diagnostic wedge -->
-  <section class="fdband">
-    <div class="wrap">
-      <div class="fdcard">
-        <div class="fdcopy">
-          <span class="badge">{FREE_DIAGNOSTIC.price}</span>
-          <h2>{FREE_DIAGNOSTIC.name}</h2>
-          <p>{FREE_DIAGNOSTIC.blurb}</p>
-          <ul class="fdspecs">
-            {FREE_DIAGNOSTIC.specs.map((s) => <li class="mono">{s.value}</li>)}
-          </ul>
-        </div>
-        <a
-          class:list={['btn', FREE_DIAGNOSTIC.cta.primary ? 'btn-p' : 'btn-o', 'btn-lg']}
-          href={FREE_DIAGNOSTIC.cta.href}
-          rel={FREE_DIAGNOSTIC.cta.external ? 'noopener' : undefined}
-          target={FREE_DIAGNOSTIC.cta.external ? '_blank' : undefined}
-        >{FREE_DIAGNOSTIC.cta.label}</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. Core ladder + annual toggle -->
+  <!-- 2. Core ladder + annual toggle -->
   <CoreTiers />
 
-  <!-- 4. Agency track -->
+  <!-- 3. Agency track -->
   <AgencyBlock />
 
-  <!-- 5. Anchors for later parts (Part 3 owns FAQ + schema) -->
+  <!-- 4. Anchors for later parts (Part 3 owns FAQ + schema) -->
   <!--SLOT:content-module--><ContentModule />
   <!--SLOT:multi-market--><MultiMarket />
   <!--SLOT:comparison--><ComparisonTable />
@@ -116,16 +94,4 @@ const faqSchema = {
 <style>
   .hengines{font-size:15px;color:var(--ink);font-weight:500;margin-top:16px;max-width:60ch;line-height:1.6}
   .hmicro{font-size:13px;color:var(--muted);margin-top:16px;max-width:60ch;line-height:1.7}
-  .fdband{padding-top:0}
-  .fdcard{
-    display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;
-    border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);
-    padding:28px 30px;
-  }
-  .fdcopy{flex:1 1 320px}
-  .fdcopy h2{font-family:var(--fd);font-weight:500;font-size:26px;margin:12px 0 6px;letter-spacing:-.01em}
-  .fdcopy p{color:var(--ink-2);font-size:15px;margin:0}
-  .fdspecs{list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;margin:16px 0 0;padding:0}
-  .fdspecs li{font-size:13px;color:var(--violet-700);position:relative;padding-left:16px}
-  .fdspecs li::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--violet-300)}
 </style>

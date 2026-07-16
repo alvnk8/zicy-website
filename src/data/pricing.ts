@@ -7,7 +7,7 @@
 // the components, not by anything here.
 
 export const URLS = {
-  // Self-serve register (free diagnostic + self-serve tiers) and the sales contact.
+  // Self-serve register (self-serve tiers) and the sales contact.
   register: 'https://app.zicy.com/register',
   contactSales: 'https://www.zicy.com/enterprise-inquiry',
 } as const;
@@ -57,20 +57,6 @@ export interface Tier {
   features: string[];
   cta: Cta;
 }
-
-// --- Free diagnostic: the funnel-top wedge shown ABOVE the paid ladder, not a ladder card. ---
-export const FREE_DIAGNOSTIC = {
-  name: 'Free diagnostic',
-  price: 'Free',
-  blurb: 'A one-off snapshot of how AI engines describe your brand today.',
-  specs: [
-    { label: 'One-off snapshot', value: 'One-off snapshot' },
-    { label: 'Audit pages', value: 'Limited audit pages' },
-    { label: 'Brand Intelligence runs', value: '1 run' },
-    { label: 'Brands', value: '1 brand' },
-  ] as Spec[],
-  cta: { label: 'Run a free diagnostic', href: URLS.register, primary: true, external: true } as Cta,
-};
 
 // --- Core self-serve ladder: Starter, Growth (default), Scale, Enterprise. ---
 export const CORE_TIERS: Tier[] = [
@@ -255,7 +241,7 @@ export interface ComparisonRow {
   values: string[];
 }
 export const COMPARISON_ROWS: ComparisonRow[] = [
-  { feature: 'Entry price / mo', values: ['$79 (free diagnostic above)', '$29', '~$95 (€89)', '$99', '$250', '$79'] },
+  { feature: 'Entry price / mo', values: ['$79', '$29', '~$95 (€89)', '$99', '$250', '$79'] },
   { feature: 'Engines at entry', values: ['5, flat', '4', 'Choose 3 of 7', '1 (3 on Growth)', '4 (9 on Enterprise)', 'Choose 3'] },
   { feature: 'Gemini and Google AI Mode', values: ['Yes, flat', 'Add-on', 'Within your 3', 'Enterprise', 'Enterprise', 'Within your 3'] },
   { feature: 'Per-engine add-on maths', values: ['None', 'Yes', 'Yes (4th+ engine)', 'Yes (tier-gated)', 'Yes (per-engine credits)', 'No'] },
