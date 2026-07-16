@@ -200,7 +200,7 @@ export interface ContentBundle {
   save: string;
 }
 export const CONTENT_MODULE = {
-  payg: { credits: 5, priceUsd: 12 },
+  payg: { credits: 5, priceUsd: 15 },
   packs: [
     { name: 'Content Lite', credits: 10, priceUsd: 29 },
     { name: 'Content Plus', credits: 30, priceUsd: 69 },
@@ -252,7 +252,7 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
   { feature: 'Daily tracking', values: ['Yes', 'Yes', 'Yes', 'Yes', 'No (72h refresh)', 'Yes'] },
 ];
 export const COMPARISON_FOOTNOTE =
-  'Competitor data verified 16 July 2026 against live vendor pricing pages and current reviews. Scrunch is now a Sitecore company. This category shifts monthly; re-verify before production.';
+  'Competitor data verified 16 July 2026 against live vendor pricing pages and current reviews.';
 
 // FAQ. The same array feeds the visible accordion and the FAQPage JSON-LD, so the schema text
 // mirrors the rendered answer verbatim. Sentence case, no em dashes, no banned vocab.
