@@ -96,6 +96,9 @@ export const CORE_TIERS: Tier[] = [
     ],
     features: [
       'Everything in Starter',
+      'Multi-brand tracking, up to 3 brands',
+      'Competitor share of voice benchmarking',
+      'Content credits included for the Act layer',
     ],
     cta: { label: 'Try for free', href: URLS.register, primary: true, external: true },
   },
