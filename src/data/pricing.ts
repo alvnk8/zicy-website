@@ -99,6 +99,7 @@ export const CORE_TIERS: Tier[] = [
       'Multi-brand tracking, up to 3 brands',
       'Competitor share of voice benchmarking',
       'Content credits included for the Act layer',
+      'AI visibility to traffic attribution (GSC and GA4)',
     ],
     cta: { label: 'Try for free', href: URLS.register, primary: true, external: true },
   },
