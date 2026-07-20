@@ -3,8 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SegmentSchema from '../../components/SegmentSchema.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
-import FaqUniversal from '../../components/FaqUniversal.astro';
-import { faqPageJsonLd } from '../../data/faqs';
+import { universalFaqs } from '../../data/faqs';
 // Product screenshots for the SMB page (illustrative sample data). Optimisation, WebP/AVIF
 // srcset and lazy-loading are handled by <Screenshot>. Alts carry no persona names.
 import aiVisibilityShot from '../../assets/screenshots/smb-01-ai-visibility-dashboard.png';
@@ -46,7 +45,7 @@ const stats = [
 const beats = [
   {
     h: 'See what AI says about you',
-    p: 'Zicy writes the buyer questions from your website, tracks them weekly across all five engines, and lets you set your city and language. Four plain numbers, each explained in a sentence: how often AI mentions you, how often it links to you, your share of the answer, and your average position.',
+    p: 'Zicy writes the buyer questions from your website, tracks them daily across all five engines, and lets you set your city and language. Four plain numbers, each explained in a sentence: how often AI mentions you, how often it links to you, your share of the answer, and your average position.',
   },
   {
     h: 'Who it recommends instead',
@@ -131,8 +130,33 @@ const smbFaqs = [
   },
 ];
 
+// Local cadence correction for the two universal FAQ answers that still describe weekly
+// tracking (src/data/faqs.ts is shared across all four /solutions pages, so it isn't edited
+// here; product truth is daily tracking on every tier). Every other universal question and
+// answer renders verbatim, unchanged.
+const CADENCE_FIX: Record<string, string> = {
+  'How does Zicy know what the AI said, does it scrape, and is it reliable week to week?':
+    'Measurement uses legitimate API access where available and respects platform terms of service, no machine-generated rank-checking traffic. Tracking is daily on every tier, so you see meaningful shifts as soon as they happen, not a week after.',
+  'How quickly does AI visibility change once you act?':
+    'AI visibility shifts gradually rather than overnight, because the engines rebuild entity understanding and retrieval over time rather than on a fixed schedule. Zicy tracks daily so you can watch movement against a baseline as fixes, content and earned coverage take effect, rather than waiting for a single before-and-after snapshot.',
+};
+const universalFaqsDailyFixed = universalFaqs.map((f) =>
+  CADENCE_FIX[f.q] ? { ...f, a: CADENCE_FIX[f.q] } : f
+);
+
+// Built locally (not via faqPageJsonLd's canonical universalFaqs merge) so the JSON-LD mirrors
+// the corrected, cadence-fixed answers actually rendered below, verbatim, per this codebase's
+// own rule that FAQPage schema must match the visible answers.
 const faqPage = {
-  ...faqPageJsonLd(smbFaqs, 'https://www.zicy.com/solutions/smb'),
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': 'https://www.zicy.com/solutions/smb#faq',
+  mainEntityOfPage: { '@id': 'https://www.zicy.com/solutions/smb#webpage' },
+  mainEntity: [...smbFaqs, ...universalFaqsDailyFixed].map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#at-a-glance'] },
 };
 
@@ -158,8 +182,8 @@ const breadcrumb = {
       <h1>AI is answering your customers. Make sure it answers with you.</h1>
       <p class="lead">
         Zicy watches what ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode tell
-        buyers about your business, shows you what to fix in plain English, and helps you fix it. No
-        specialist required.
+        buyers about your business, wherever your customers are, shows you what to fix in plain
+        English, and helps you fix it. No specialist required.
       </p>
       <div class="cta-row">
         <a class="btn btn-p btn-lg" href="https://app.zicy.com/register">Start free: paste your website</a>
@@ -346,6 +370,29 @@ const breadcrumb = {
     </div>
   </section>
 
+  <!-- 7b. 07 · What it looks like when it works — anonymised case + locked disclosure -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">07</span> What it looks like when it works</span>
+        <h2>From near-zero to 52% mention coverage.</h2>
+      </div>
+      <div style="max-width:760px">
+        <div class="stat" style="padding:32px 34px">
+          <div class="n" style="color:var(--ok)">52%</div>
+          <div class="t" style="margin-top:12px">
+            AI mention rate &middot; healthcare / aesthetics &middot; share of voice 5.4% to 9.4%
+          </div>
+        </div>
+        <p class="disclosure">
+          Measurement: AI brand mention and citation rates across tracked category queries on
+          ChatGPT, Gemini and Perplexity, via Zicy&rsquo;s measurement infrastructure. Client
+          anonymised pending naming permission.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- 8. FAQ — page-specific block + universal block; answers in static HTML + FAQPage schema -->
   <section>
     <div class="wrap">
@@ -354,7 +401,11 @@ const breadcrumb = {
         <h2>Questions small businesses ask.</h2>
       </div>
       <FaqAccordion items={smbFaqs} defaultOpen={0} />
-      <FaqUniversal />
+      <div class="shead" style="margin-top:60px">
+        <span class="eyebrow">General questions</span>
+        <h2>General questions about Zicy and AI visibility.</h2>
+      </div>
+      <FaqAccordion items={universalFaqsDailyFixed} defaultOpen={-1} />
     </div>
   </section>
 
