@@ -1,6 +1,6 @@
 # Zicy
 
-> Zicy is an AI visibility platform that measures how AI describes a brand, diagnoses what is inaccurate, acts on the fixes a brand controls, and proves the work moved demand, across ChatGPT, Gemini, Perplexity, Google AI Overviews, and Google AI Mode.
+> Zicy is an AI visibility platform for businesses without an AEO specialist, that measures how AI describes a brand, diagnoses what is inaccurate, acts on the fixes a brand controls, and proves the work moved demand, across ChatGPT, Gemini, Perplexity, Google AI Overviews, and Google AI Mode.
 
 - Brand: Zicy
 - Legal name: Growth Pro Sdn. Bhd.
