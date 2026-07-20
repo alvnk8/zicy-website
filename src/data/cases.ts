@@ -16,6 +16,10 @@ export interface CaseStudy {
   datePublished: string;
   dateModified: string;
   bodyHtml: string; // full restyled article HTML
+  /** Optional index-only badge for studies an SME/owner reader can recognise at a glance.
+   *  Describes existing, already-anonymised study content only, never a new claim. Rendered on
+   *  the /case-studies grid; not used on the detail page. */
+  smeLabel?: string;
 }
 
 export const CASES: CaseStudy[] = [
@@ -687,6 +691,7 @@ export const CASES: CaseStudy[] = [
     indexTitle: "Local category leadership",
     big: "52%",
     indexSub: "mentions · SOV 5.4% → 9.4%",
+    smeLabel: "Local services",
     h1: "How an Aesthetic Clinic Drove 52% Mentions, 29.75% Citations & Increased AI Share of Voice from 5.4% to 9.4%",
     metaTitle: "Aesthetic Clinic Increased AI Mentions & Share of Voice, Zicy",
     metaDescription: "Discover the AEO/GEO strategy that drove 52% brand mentions, 29.75% citations, and boosted AI share of voice from 5.4% to 9.4% for a Malaysian Aethetic Clinic!",
@@ -1041,6 +1046,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
     indexTitle: "Full programme, no prior AI strategy",
     big: "56.67%",
     indexSub: "mentions · 2,971 AI sessions",
+    smeLabel: "Small team, no prior AI strategy",
     h1: "How a B2B Brand Captured 56.67% AI Mentions and Generated 2,971 AI Sessions in 90 Days",
     metaTitle: "AEO/GEO Case Study: B2B Brand Mentions + AI Sessions, Zicy",
     metaDescription: "Learn how this B2B brand increased their AI brand mentions to 56.67%, with 2971 total AI sessions, 40% citations & more in just 90 days!",

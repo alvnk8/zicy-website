@@ -24,6 +24,16 @@ for (const [path, mod] of Object.entries(heroModules)) {
   if (slug) heroBySlug[slug] = mod.default;
 }
 
+// Feature one clearly SME-shaped story near the top of the grid (index-display order only;
+// CASES itself is left in its original order since sitemap.xml.ts and og-pages.ts also read it).
+// Every other study keeps its existing relative order, just shifted one slot later.
+const FEATURED_SME_SLUG = 'aesthetic-clinic-ai-visibility';
+const featuredCase = CASES.find((c) => c.slug === FEATURED_SME_SLUG);
+const otherCases = CASES.filter((c) => c.slug !== FEATURED_SME_SLUG);
+const displayCases = featuredCase
+  ? [otherCases[0], featuredCase, ...otherCases.slice(1)]
+  : CASES;
+
 const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -47,7 +57,7 @@ const breadcrumb = {
   <section>
     <div class="wrap">
       <div class="cs-grid">
-        {CASES.map((c) => (
+        {displayCases.map((c) => (
           <a class="card cs-card" href={`/case-studies/${c.slug}`}>
             {heroBySlug[c.slug] && (
               <div class="cs-shot">
@@ -61,6 +71,7 @@ const breadcrumb = {
                 />
               </div>
             )}
+            {c.smeLabel && <span class="badge" style="margin-bottom:10px">{c.smeLabel}</span>}
             <span class="k">{c.indexMeta}</span>
             <h3>{c.indexTitle}</h3>
             <div class="mono" style="font-size:36px;color:var(--violet-700);margin-top:14px;font-variant-numeric:tabular-nums slashed-zero;font-weight:500;letter-spacing:-.02em">{c.big}</div>
