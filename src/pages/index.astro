@@ -63,19 +63,19 @@ const faqPage = {
 // Three sourced stats — every figure carries publisher + sample + year inline. Do not alter.
 const shiftStats = [
   {
-    n: '73%',
-    label: 'of brands ranking on Google page one have zero mentions in AI answers.',
-    source: 'Wellows GEO Visibility Research, 2025',
+    n: '45%',
+    label: 'of consumers now use AI tools for local business recommendations, up from 6% a year earlier.',
+    source: 'BrightLocal, n=1,002, 2026',
   },
   {
-    n: '62%',
-    label: 'of consumers trust AI tools to guide their brand decisions.',
-    source: 'Yext / Researchscape, n=2,237, 2025',
+    n: '51%',
+    label: 'of B2B software buyers now start research with AI chatbots more often than Google.',
+    source: 'G2, n=1,076, 2026',
   },
   {
-    n: '38%',
-    label: 'drop in outbound clicks when AI Overviews appear.',
-    source: 'Agarwal & Sen, Carnegie Mellon, randomised field experiment, 2026',
+    n: '8% vs 15%',
+    label: "how often Google users click a result when an AI summary appears, versus when it doesn't.",
+    source: 'Pew Research Center, 68,879 searches, 2025',
   },
 ];
 
@@ -83,22 +83,22 @@ const loopCards = [
   {
     k: '01 · Measure',
     h: 'Measure',
-    p: 'Mention coverage, citation rate, share of voice and ranking across the five engines, weekly.',
+    p: 'Mention coverage, citation rate, share of voice and ranking across the five engines, daily.',
   },
   {
     k: '02 · Diagnose',
     h: 'Diagnose',
-    p: 'The AI Reality Score flags hallucinations, outdated claims and entity gaps before a buyer sees them.',
+    p: 'Zicy flags what AI gets wrong about you: outdated claims, missing facts, mistaken identity, before a buyer sees it.',
   },
   {
     k: '03 · Act',
     h: 'Act',
-    p: 'Schema, llms.txt and content tooling, built to current best practice.',
+    p: 'Zicy generates the fixes: schema, article drafts, upgraded page copy. You publish them; nothing goes live without you.',
   },
   {
     k: '04 · Prove',
     h: 'Prove',
-    p: 'AI-referred traffic, downstream engagement, and the link back to demand.',
+    p: 'See whether the fix actually moved traffic and demand, not just the score.',
   },
 ];
 
@@ -126,16 +126,16 @@ const proofBullets = [
 
 const solutionCards = [
   {
+    eyebrow: 'For small businesses',
+    p: 'AI visibility without an AEO specialist. See what AI tells your customers, and fix it.',
+    href: '/solutions/smb',
+    link: 'For small businesses →',
+  },
+  {
     eyebrow: 'For brands',
     p: 'Know whether AI got you right, not just whether it named you.',
     href: '/solutions/brands',
     link: 'For brands →',
-  },
-  {
-    eyebrow: 'For small businesses',
-    p: 'Know what AI tells your customers, and fix it, without a specialist.',
-    href: '/solutions/smb',
-    link: 'For small businesses →',
   },
   {
     eyebrow: 'For PR & communications',
@@ -171,12 +171,12 @@ const solutionCards = [
         <span class="eyebrow rise d1">AI visibility</span>
         <h1 class="rise d2">Be the brand AI gets right.</h1>
         <p class="sub rise d3">
-          Buyers ask AI about your category every day. Zicy shows you what it says, whether
-          it&rsquo;s true, how to fix what&rsquo;s wrong, and proves the fix moved demand.
-          Across every engine, every language.
+          Customers ask ChatGPT, Gemini and Google&rsquo;s AI about businesses like yours every
+          day. Zicy shows you what they hear, what to fix, and helps you fix it. No specialist
+          required.
         </p>
         <div class="hcta rise d4">
-          <a class="btn btn-p" href="https://app.zicy.com/register">Try for free</a>
+          <a class="btn btn-p" href="https://app.zicy.com/register">Start free: paste your website</a>
           <a class="btn btn-o" href="/platform">See the platform</a>
         </div>
         <p class="hero-price rise d4">From <span class="mono">$79/mo</span> &middot; 7-day free trial &middot; no card required</p>
@@ -223,7 +223,28 @@ const solutionCards = [
         And SEO is not AI visibility: just 12% of AI citations overlap with a brand&rsquo;s Google
         top-10 results. (Ahrefs, 15,000 prompts, 2025)
       </p>
-      <p class="pullquote">The answer&rsquo;s already written. Make sure you&rsquo;re in it.</p>
+      <p class="pullquote">The demand didn&rsquo;t disappear. The click did. And the answer names three businesses, not ten links.</p>
+    </div>
+  </section>
+
+  <!-- 2b. Who this is for — compact two-card split, quiet third line for full brands -->
+  <section>
+    <div class="wrap">
+      <div class="grid4 grid-sol" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <a class="card" href="/solutions/smb">
+          <span class="k">I run the business</span>
+          <p>No marketing team. Pasting your website is the whole setup.</p>
+          <span class="arrow">See how it works →</span>
+        </a>
+        <a class="card" href="/solutions/smb">
+          <span class="k">I run the marketing</span>
+          <p>Your CEO asked what AI says about the company. Measurement, fixes and a report, no specialist hire.</p>
+          <span class="arrow">See how it works →</span>
+        </a>
+      </div>
+      <p class="mono" style="margin-top:20px;font-size:13px;color:var(--muted);letter-spacing:.01em">
+        Running a full marketing organisation with specialist roles? <a href="/solutions/brands">See our brands page.</a>
+      </p>
     </div>
   </section>
 
