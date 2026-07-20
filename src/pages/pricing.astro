@@ -3,7 +3,8 @@
 // pricing/* components; nothing is hard-coded on this page. The sitewide SoftwareApplication offers
 // live in src/components/Schema.astro and must stay in sync with the tiers in data/pricing.ts.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CoreTiers from '../components/pricing/CoreTiers.astro';
+import TierCard from '../components/pricing/TierCard.astro';
+import AnnualToggle from '../components/pricing/AnnualToggle.astro';
 import AgencyBlock from '../components/pricing/AgencyBlock.astro';
 import ContentModule from '../components/pricing/ContentModule.astro';
 import MultiMarket from '../components/pricing/MultiMarket.astro';
@@ -55,6 +56,18 @@ const breadcrumb = {
     { '@type': 'ListItem', position: 2, name: 'Pricing', item: pageUrl },
   ],
 };
+
+// Core ladder grid, rendered here (not via the CoreTiers component) so the SME-first framing
+// copy below stays in this file. Tier labels are overridden locally, on top of CORE_TIERS,
+// without touching the shared tier data: Starter's own label is untouched.
+const coreGridId = 'pv2-core-tiers';
+const TIER_LABEL_OVERRIDE: Record<string, string> = {
+  growth: 'For a small team or multi-brand business',
+  scale: 'For teams tracking many markets',
+};
+const displayTiers = CORE_TIERS.map((t) =>
+  TIER_LABEL_OVERRIDE[t.id] ? { ...t, label: TIER_LABEL_OVERRIDE[t.id] } : t
+);
 ---
 <BaseLayout title={title} description={description}>
   <!-- 1. Hero -->
@@ -72,7 +85,32 @@ const breadcrumb = {
   </section>
 
   <!-- 2. Core ladder + annual toggle -->
-  <CoreTiers />
+  <section class="reveal">
+    <div class="wrap">
+      <div class="shead" style="max-width:none;text-align:center;margin-bottom:28px">
+        <span class="eyebrow" style="justify-content:center"><span class="ix">01</span> Plans</span>
+        <h2 style="margin-top:14px">All five engines on every plan.</h2>
+      </div>
+
+      <div class="ptoggle-wrap">
+        <AnnualToggle target={coreGridId} />
+      </div>
+
+      <p class="mono pv2-anchor">
+        Starter is $79 a month, less than a single Google Ads click a day in many industries.
+        Growth is $199, a fraction of an agency retainer.
+      </p>
+
+      <div class="ptiers" id={coreGridId} data-billing="monthly">
+        {displayTiers.map((tier) => <TierCard tier={tier} />)}
+      </div>
+
+      <p class="pv2-fit"><b>Which plan fits?</b> Owner with one business &rarr; Starter. Small marketing team &rarr;
+        <a href="/solutions/smb">Growth</a>. Agency or multi-market &rarr;
+        <a href="/solutions/agencies">Scale or Enterprise</a>.
+      </p>
+    </div>
+  </section>
 
   <!-- 3. Agency track -->
   <AgencyBlock />
@@ -91,4 +129,19 @@ const breadcrumb = {
 <style>
   .hengines{font-size:15px;color:var(--ink);font-weight:500;margin-top:16px;max-width:60ch;line-height:1.6}
   .hmicro{font-size:13px;color:var(--muted);margin-top:16px;max-width:60ch;line-height:1.7}
+
+  .ptoggle-wrap{margin:0 0 32px}
+  .ptiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:stretch}
+  @media (max-width:1000px){.ptiers{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:640px){.ptiers{grid-template-columns:1fr}}
+  .pv2-anchor{text-align:center;max-width:60ch;margin:-16px auto 32px;font-size:13px;color:var(--muted);letter-spacing:.01em}
+  .pv2-fit{text-align:center;max-width:64ch;margin:28px auto 0;font-size:14px;color:var(--ink-2);line-height:1.7}
+  .pv2-fit b{color:var(--ink);font-weight:600}
+</style>
+
+<!-- Billing swap: global (crosses into TierCard) but namespaced by the grid id so it cannot leak.
+     An id selector outranks TierCard's scoped class rules, so no !important is needed. -->
+<style is:global>
+  #pv2-core-tiers[data-billing="annual"] .amt.is-monthly{display:none}
+  #pv2-core-tiers[data-billing="annual"] .amt.is-annual{display:inline}
 </style>
