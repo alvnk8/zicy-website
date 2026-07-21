@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import citationAnalysisNovara from '../../assets/screenshots/resource-citation-analysis-novara.png';
 import featuredImg from '../../assets/resources/track-ai-citations/how-to-track-ai-citations-and-measure-their-impact-on-leads-and-sales.jpg';
 import figMethods from '../../assets/resources/track-ai-citations/how-to-track-ai-citations-and-measure-their-impact-on-leads-and-sales.png';
 import figAnalytics from '../../assets/resources/track-ai-citations/which-analytics-tools-can-show-where-ai-engines-are-referencing-our-content--2.jpg';
@@ -24,6 +27,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: 'How do I track ChatGPT and Perplexity referrals in GA4, and why does so much show as Direct?',
+    a: 'AI engines usually appear as referrals from domains like chatgpt.com and perplexity.ai, which you can group into a custom AI channel. Free ChatGPT clicks often pass no referrer and fall into Direct, so GA4 undercounts AI traffic; tagging your own shared links with UTMs helps close the gap (Rankshift, 2025).',
+  },
+  {
+    q: 'Do visitors from AI answer engines convert better than organic search?',
+    a: 'Early evidence is directional but promising. Across 1,200+ publisher and news sites, visitors referred by large language models signed up at 1.66% against 0.15% from search (Microsoft Clarity, 2025, reported by Digiday). Single-site multiples vary widely, so measure your own cohorts before assuming a benchmark.',
+  },
+  {
+    q: 'How do I attribute revenue when AI citations are zero-click?',
+    a: 'Combine three reads: AI referral sessions in GA4, branded-search and direct-visit lift after citation spikes, and influence or assisted attribution against your CRM. The goal is a composite view of how AI exposure contributes to pipeline, not a last-click number.',
+  },
+  {
+    q: 'How often should I check my AI visibility?',
+    a: 'Frequently. Re-running the same prompts a day apart changed roughly 65% of cited sources in one study (Schulte, Bleeker and Kaufmann, arXiv, 2026), so a single snapshot is unreliable. Daily tracking across a fixed prompt library is far more accurate.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -79,6 +113,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -142,6 +177,12 @@ const graph = {
           time repeated citations across different queries reinforce how AI systems recognise and
           prioritise your brand.
         </p>
+        <p>
+          The reason a citation matters so much is that AI answers lean on very few sources. In one
+          large analysis, Wikipedia alone accounted for about 7.8% of all ChatGPT citations and Reddit
+          for about 6.6% of Perplexity's (Profound, 680 million citations, 2025). When a small set of
+          domains supplies most answers in your category, being one of them is a durable advantage.
+        </p>
       </div>
     </div>
   </section>
@@ -155,6 +196,12 @@ const graph = {
           Unlike search rankings, AI citations are not indexed in public reports, so you need a
           multi-layer monitoring approach:
         </p>
+        <Screenshot
+          src={citationAnalysisNovara}
+          alt="Zicy Citation Analysis showing narrative control 58.4%, competitor share 25.4% and uncited rate 16.2%, a citation breakdown donut split into owned, earned, competitor and uncited sources, a top-cited-domains table, and buying-intent questions the brand is not capturing."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
         <ul>
           <li><strong>AI query monitoring:</strong> run recurring prompts on ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode using your target money questions, and track which brands appear.</li>
           <li><strong>Custom dashboards:</strong> use analytics tools that crawl AI-generated summaries and store responses over time.</li>
@@ -165,7 +212,8 @@ const graph = {
           This hybrid method gives a running baseline of where and how often AI models reference your
           brand. For reliability, track across clusters of related prompts rather than isolated
           queries, since AI responses vary with phrasing and context, and maintain a standardised
-          prompt library so measurement stays consistent. Capturing historical snapshots of AI
+          <a href="/resources/effective-prompts-ai-tracking">prompt library</a> so measurement stays
+          consistent. Capturing historical snapshots of AI
           responses lets you compare citation trends and detect gains or losses in visibility.
         </p>
       </div>
@@ -202,6 +250,26 @@ const graph = {
 
   <section>
     <div class="wrap">
+      <div class="shead"><span class="eyebrow">Tracking AI referrals in GA4</span><h2>Tracking AI referrals in GA4.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          Some of this is visible in your own analytics. Traffic from AI engines usually arrives in GA4
+          as referrals from chatgpt.com, perplexity.ai, gemini.google.com and copilot.microsoft.com, and
+          you can group them into a custom AI channel so they stop hiding inside general referral
+          traffic (Rankshift, 2025). Two cautions. First, free ChatGPT clicks often send no referrer and
+          land in Direct, so GA4 tends to undercount AI traffic; tagging your own shared links with UTMs
+          is the usual workaround (Rankshift, 2025). Second, early analyses suggest AI-referred visitors
+          can be unusually high intent: across 1,200+ publisher and news sites, visitors from large
+          language models signed up at 1.66%, against 0.15% from search and 0.13% direct (Microsoft
+          Clarity, 2025, reported by Digiday). Treat single-site conversion multiples with care, but the
+          direction is consistent. People who arrive after an AI names you often already trust you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
       <div class="shead"><span class="eyebrow">Metrics</span><h2>What metrics to measure.</h2></div>
       <div class="prose" style="max-width:760px">
         <p>Tracking citations is not just about counting mentions; it is about interpreting impact. Three metrics to focus on:</p>
@@ -221,7 +289,7 @@ const graph = {
     </div>
   </section>
 
-  <section style="background:var(--mist)">
+  <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">ROI</span><h2>How to interpret ROI from AI visibility.</h2></div>
       <div class="prose" style="max-width:760px">
@@ -241,14 +309,14 @@ const graph = {
           citation counts alongside organic traffic, compare share of conversation with keyword share,
           correlate mention growth with leads and conversions, and visualise entity accuracy as part of
           brand authority. Leading teams combine citation metrics, prompt coverage and entity accuracy
-          into a single executive scorecard, and track visibility by funnel stage, mapping which
+          into a single <a href="/resources/present-aeo-geo-performance">executive scorecard</a>, and track visibility by funnel stage, mapping which
           awareness, comparison and decision queries drive AI mentions.
         </p>
       </div>
     </div>
   </section>
 
-  <section>
+  <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">In closing</span><h2>Why tracking AI references is now a necessity.</h2></div>
       <div class="prose" style="max-width:760px">
@@ -262,7 +330,24 @@ const graph = {
           conversations that shape buyer intent. The goal is not just to track mentions, but to
           understand how AI-driven visibility shapes buyer intent before measurable engagement occurs.
         </p>
+        <p>
+          One habit matters more than any single tool: measure continuously, not once. When researchers
+          re-ran identical prompts within 24 hours, only 32% to 43% of the cited sources stayed the
+          same, and about 65% of sources changed from one day to the next (Schulte, Bleeker and
+          Kaufmann, arXiv, 2026). A one-time audit captures a single roll of the dice; the authors
+          recommend at least seven runs per prompt to read visibility reliably, which is why continuous,
+          daily tracking across a stable prompt library is the honest way to measure AI citations. It is
+          also the feedback loop behind Growth.pro's AI Citation Enablement practice, where measuring
+          what AI actually cites tells you which work compounded.
+        </p>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about tracking AI citations.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 

@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import aiVisibilityReportVireo from '../../assets/screenshots/resource-ai-visibility-report-vireo.png';
 import featuredImg from '../../assets/resources/what-is-answer-engine-optimization/what-exactly-is-answer-engine-optimization-and-why-it-matters-for-brands-.jpg';
 import figTable from '../../assets/resources/what-is-answer-engine-optimization/what-exactly-is-answer-engine-optimization-and-why-it-matters-for-brands--2.jpg';
 import figPuzzle from '../../assets/resources/what-is-answer-engine-optimization/what-exactly-is-answer-engine-optimization-and-why-it-matters-for-brands--1.jpg';
@@ -43,6 +46,37 @@ const cluster = [
   { href: '/resources/ai-overviews-chatgpt-seo', text: 'understand how Google AI Overviews and ChatGPT change SEO' },
   { href: '/resources/generative-search-industries', text: 'find which industries generative search affects most' },
 ];
+
+const faqs = [
+  {
+    q: 'Is answer engine optimisation the same as SEO?',
+    a: 'No. SEO helps people find your site in a list of results; AEO helps AI systems understand, extract and cite your content inside a generated answer. They share foundations like content quality and trust, but AEO rewards snippet-level clarity and entity consistency rather than page-level ranking alone.',
+  },
+  {
+    q: 'Do I need to rank on page one of Google to be cited by AI?',
+    a: 'No. Roughly 62% of AI Overview citations point to pages ranked below the top 10, and only about 38% come from the top 10 (Ahrefs, 863,000 keyword SERPs, 2026). Clear, extractable, well-attributed content can be cited even when it does not rank first.',
+  },
+  {
+    q: 'Which AI engines should I optimise for?',
+    a: 'The five that decide most answers today are ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. Citation patterns differ across them, so track all five rather than optimising for one.',
+  },
+  {
+    q: 'Can I be penalised for optimising for AI answers?',
+    a: 'You can. Since 15 May 2026 Google treats manipulating generative AI responses as spam (Search Engine Land, 2026). Optimising through clarity, accuracy and demonstrable expertise is safe; manufacturing signals is not.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -98,6 +132,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -186,6 +221,26 @@ const graph = {
 
   <section style="background:var(--mist)">
     <div class="wrap">
+      <div class="shead"><span class="eyebrow">The shift, in numbers</span><h2>The shift, in numbers.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          The shift is already at scale. Google's AI Overviews reached about 2 billion monthly users by
+          mid 2025 (Google Q2 2025 earnings, reported by TechCrunch, 2025), and AI Mode passed 100
+          million (same source). Being cited is not the same as ranking. Only 37.9% of AI Overview
+          citations came from the top 10 organic results in early 2026, down from 76% six months
+          earlier, with roughly 62% of citations pointing to pages ranked below position 10 (Ahrefs,
+          863,000 keyword SERPs, 2026). When an AI summary is present, users click through to a website
+          in only 8% of searches, against 15% when no summary appears, and just 1% click a link inside
+          the summary itself (Pew Research Center, 68,879 US searches, 2025). AI Overviews cite roughly
+          three domains per answer and Google AI Mode about seven (Semrush, 5,000 keywords and 150,000+
+          citations, 2025). A handful of sources shape the answer, and everyone else is invisible.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
       <div class="shead"><span class="eyebrow">AEO vs SEO</span><h2>How AEO differs from traditional SEO.</h2></div>
       <PostFigure src={figTable} alt="Comparison table of traditional SEO versus answer engine optimisation across focus, goal, format, algorithm type and success metric, contrasting ranking on search results with being cited in AI-generated answers." />
       <div class="prose" style="max-width:760px">
@@ -198,18 +253,25 @@ const graph = {
           traffic while AEO earns trusted visibility. You may not always get the click, but you can win
           the conversation.
         </p>
+        <p>
+          This is also why a strong Google ranking no longer guarantees an AI citation. The overlap
+          varies sharply by engine: AI Overviews share about 86% of their cited domains with Google's
+          top 10, but Google AI Mode overlaps on only about 54% of domains and 35% of exact URLs
+          (Semrush, 5,000 keywords, 2025). Optimising a page to rank and optimising it to be extracted
+          and cited are related jobs, but not the same job.
+        </p>
       </div>
     </div>
   </section>
 
-  <section>
+  <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Signals</span><h2>The core signals AI engines look for.</h2></div>
       <div class="prose" style="max-width:760px">
         <p>For content to earn citations, it generally needs to satisfy four signals:</p>
         <ul>
           <li><strong>Clarity:</strong> each page answers a specific intent or question cleanly.</li>
-          <li><strong>Structure:</strong> schema, headings, FAQs and data markup make it extractable.</li>
+          <li><strong>Structure:</strong> <a href="/resources/critical-schemas-entity-markup">schema</a>, headings, FAQs and data markup make it extractable.</li>
           <li><strong>Credibility:</strong> author names, sources and linked references prove reliability.</li>
           <li><strong>Relevance:</strong> current stats and updated facts keep it fresh.</li>
         </ul>
@@ -224,11 +286,17 @@ const graph = {
     </div>
   </section>
 
-  <section style="background:var(--mist)">
+  <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Metrics</span><h2>How AEO success is measured.</h2></div>
       <div class="prose" style="max-width:760px">
         <p>In AEO, performance metrics move beyond traditional analytics. Teams have started tracking:</p>
+        <Screenshot
+          src={aiVisibilityReportVireo}
+          alt="Zicy AI Visibility Report showing mention coverage 61.8%, citation rate 24.6%, share of voice 12.4% and average AI ranking #2.9 across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, with a five-engine platform-coverage radar and daily performance trends."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
         <ul>
           <li>AI mentions and citations: how often your brand appears in AI-generated answers.</li>
           <li>Entity accuracy: how correctly AI models describe your brand, products or services.</li>
@@ -247,7 +315,7 @@ const graph = {
     </div>
   </section>
 
-  <section>
+  <section style="background:var(--mist)">
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Why it matters</span><h2>Why this shift matters for modern brands.</h2></div>
       <div class="prose" style="max-width:760px">
@@ -272,7 +340,7 @@ const graph = {
     </div>
   </section>
 
-  <section style="background:var(--mist)">
+  <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Adapting</span><h2>How organisations can adapt.</h2></div>
       <div class="prose" style="max-width:760px">
@@ -280,11 +348,27 @@ const graph = {
           Start by treating your website not as content storage but as a machine-readable knowledge
           base, so your expertise and product data are instantly usable by AI engines. Three strategic
           pivots help: structure for comprehension with schema, clear headings and concise
-          explanations machines can parse; prove authority with author bios, sources and cross-domain
+          explanations machines can parse; prove authority with <a href="/resources/ai-trust-signals">author bios</a>, sources and cross-domain
           citations; and measure visibility differently by tracking when and where your brand is
           mentioned or cited, the modern equivalent of backlinks. It also helps to treat content as
           retrieval assets rather than pages, designing each section to answer one intent fully, to
           stand alone when extracted, and to depend less on long narrative flow for meaning.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">What changed in 2026</span><h2>What changed in 2026.</h2></div>
+      <div class="prose" style="max-width:760px">
+        <p>
+          One thing changed the rules in 2026. On 15 May 2026 Google extended its search spam policies
+          to explicitly cover attempts to manipulate generative AI responses in AI Overviews and AI Mode
+          (Search Engine Land, 2026). The durable approach is the one the policy rewards: make your
+          expertise clear, accurate and easy for AI to verify, rather than trying to game the answer. It
+          is the same brand-side logic behind Growth.pro's PAVA framework, which sequences the work as
+          Presence, Authority, Visibility and Amplification.
         </p>
       </div>
     </div>
@@ -309,8 +393,15 @@ const graph = {
     </div>
   </section>
 
-  <!-- Go deeper: pillar links out to each tier-2 guide -->
   <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about answer engine optimisation.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
+    </div>
+  </section>
+
+  <!-- Go deeper: pillar links out to each tier-2 guide -->
+  <section>
     <div class="wrap">
       <div class="shead"><span class="eyebrow">Go deeper</span><h2>The rest of the AEO guide series.</h2></div>
       <div class="prose" style="max-width:760px">

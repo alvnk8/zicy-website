@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import realityCheckMarlowe from '../../assets/screenshots/resource-reality-check-marlowe.png';
 import featuredImg from '../../assets/resources/brand-audits-ai-search/brand-audits-matter-.jpg';
 import figFramework from '../../assets/resources/brand-audits-ai-search/ai-era-brand-audit.png';
 import figShift from '../../assets/resources/brand-audits-ai-search/the-shift-from-search-to-synthesis-.png';
@@ -52,6 +54,22 @@ const faqs = [
   {
     q: 'Who should care about AI-era brand audits?',
     a: 'Brand owners, in-house marketing teams, and agencies should all care. Anyone responsible for reputation, demand generation, digital visibility, or brand strategy now needs to understand how AI systems interpret and present the brand.',
+  },
+  {
+    q: 'How do I fix wrong information that ChatGPT or Gemini shows about my brand?',
+    a: 'Start by finding every claim and where it comes from, then correct the sources AI reads: your own <a href="/resources/authoritative-entity">entity data</a> and <a href="/resources/critical-schemas-entity-markup">schema</a> first, then the <a href="/resources/pr-wikidata-ai-visibility">third-party pages</a> that supply most citations. Because about 82% of AI citations are earned or third-party (Muck Rack, 1M+ citations, 2025), fixing only your website usually is not enough.',
+  },
+  {
+    q: 'Why does AI cite competitors or third-party sites instead of my own website?',
+    a: 'Because AI systems trust agreement across independent sources. Owned sites supply only about 5% to 10% of AI citations (McKinsey, 2025), so if the wider web is quiet or inconsistent about you, AI leans on whoever it does find, including competitors.',
+  },
+  {
+    q: 'Can my company be held liable for what our AI chatbot tells customers?',
+    a: "It can. In 2024 a tribunal held Air Canada responsible for a refund policy its chatbot invented (Forbes, 2024). Treating your AI's public statements as your own is the safer assumption.",
+  },
+  {
+    q: 'How often do AI search engines get brand facts wrong?',
+    a: 'Often enough to audit for it. Eight AI search engines answered sourcing questions incorrectly in more than 60% of tests in one study (Tow Center, 1,600 queries, 2025), and hallucination rates still reach double digits on some models (Vectara, 2026).',
   },
 ];
 
@@ -235,6 +253,12 @@ const graph = {
           category wrong. The real problem is not just that these errors can happen, but that they may
           happen convincingly.
         </p>
+        <Screenshot
+          src={realityCheckMarlowe}
+          alt="Zicy Brand Reality Check showing an AI Reality Score of 72 out of 100 with a signal summary of 14 accurate, 5 outdated and 3 hallucinated claims, and a list of claims classified per engine as accurate, outdated or hallucination with verify and reject controls."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
         <p>
           That creates one of the biggest blind spots in modern brand management: many companies do
           not know when AI is misrepresenting them until the misinformation has already influenced
@@ -253,6 +277,23 @@ const graph = {
           makes hallucinations different from a minor inconsistency on a forgotten page: they can
           affect perception at the exact moment a user is trying to make sense of your brand quickly.
           That is a commercial problem, not a technical inconvenience.
+        </p>
+        <p>
+          The risk is not hypothetical, and it is not rare. When the Tow Center for Digital Journalism
+          at Columbia tested eight AI search engines on sourcing questions, they answered incorrectly in
+          more than 60% of cases (Tow Center, 1,600 queries, 2025). Hallucination rates vary widely even
+          on controlled summarisation tasks, from about 1.8% on the best models to over 24% on the worst
+          (Vectara Hallucination Leaderboard, 7,700+ articles, 2026). And the engines do not even agree
+          with each other: Google AI Overviews were about 44% more likely than ChatGPT to surface
+          negative brand sentiment, and the two flagged different brands roughly 73% of the time
+          (BrightEdge, 2026). An audit that checks only one engine misses most of the picture.
+        </p>
+        <p>
+          Courts and headlines have started to catch up. In 2024 a tribunal held Air Canada liable after
+          its own chatbot invented a refund policy (reported by Forbes, 2024), and in 2025 a US radio
+          host sued OpenAI after ChatGPT fabricated an embezzlement claim about him (Walters v. OpenAI,
+          2025). Whatever the verdict, the reputational exposure of an AI stating something false about
+          your brand is now a board-level question.
         </p>
       </div>
     </div>
@@ -284,6 +325,15 @@ const graph = {
           authoritative sources, and the overall consistency of their digital identity signals. A brand
           audit in this environment is not just a communications exercise. It is a diagnostic process
           for the new reputation infrastructure your brand depends on.
+        </p>
+        <p>
+          It also explains where the fixes live. AI answers lean heavily on independent sources: earned
+          and third-party media account for roughly 82% of AI citations, while brand-owned sites supply
+          only about 5% to 10% (Muck Rack, 1M+ citations, 2025, corroborated by McKinsey, 2025). So a
+          serious audit checks both your own entity data and the third-party sources AI reads. That
+          split is the reason Growth.pro's PAVA framework treats entity integrity (Presence) and
+          independent authority (Authority) as separate pillars: fixing your website is necessary, but
+          it is rarely sufficient.
         </p>
       </div>
     </div>
@@ -335,7 +385,7 @@ const graph = {
           <li><strong>Sentiment.</strong> Is the tone around our brand generally positive, neutral or negative in AI-generated summaries?</li>
           <li><strong>Factual integrity.</strong> Are core details about our products, services, leadership or mission represented accurately?</li>
           <li><strong>Competitive framing.</strong> How does AI compare us against competitors, and are we positioned as credible, differentiated and relevant?</li>
-          <li><strong>Source signal quality.</strong> Are our public digital assets strong enough to support accurate AI interpretation, or do gaps and inconsistencies leave room for distortion?</li>
+          <li><strong><a href="/resources/ai-trust-signals">Source signal quality</a>.</strong> Are our public digital assets strong enough to support accurate AI interpretation, or do gaps and inconsistencies leave room for distortion?</li>
         </ol>
       </div>
     </div>
@@ -366,6 +416,13 @@ const graph = {
           misinformation risk, understanding how AI interprets the brand today, finding narrative gaps,
           benchmarking against competitors, prioritising which assets need strengthening, and improving
           the factual consistency feeding the wider AI ecosystem.
+        </p>
+        <p>
+          This shapes real decisions. When AI and a brand's own messaging conflict, only 29% of
+          consumers said they trust the brand outright and 54% go looking for outside validation; 47%
+          had already acted on brand information from AI, with 17% switching brands and 19% avoiding a
+          purchase (Skyword and Dynata, 1,000 US adults, 2026). Wrong facts in an answer are not a
+          cosmetic problem. They move revenue.
         </p>
       </div>
     </div>
@@ -399,7 +456,7 @@ const graph = {
         {faqs.map((f) => (
           <div class="faq">
             <h3>{f.q}</h3>
-            <p>{f.a}</p>
+            <p set:html={f.a} />
           </div>
         ))}
       </div>
