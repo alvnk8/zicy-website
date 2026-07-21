@@ -54,7 +54,7 @@ const faqs = [
   },
   {
     q: 'Do I need to rank on page one of Google to be cited by AI?',
-    a: 'No. Roughly 62% of AI Overview citations point to pages ranked below the top 10, and only about 38% come from the top 10 (Ahrefs, 863,000 keyword SERPs, 2026). Clear, extractable, well-attributed content can be cited even when it does not rank first.',
+    a: 'No. Roughly 62% of AI Overview citations point to pages ranked below the top 10, and only about 38% come from the top 10 (<a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">Ahrefs</a>, 863,000 keyword SERPs, 2026). Clear, extractable, well-attributed content can be cited even when it does not rank first.',
   },
   {
     q: 'Which AI engines should I optimise for?',
@@ -62,7 +62,7 @@ const faqs = [
   },
   {
     q: 'Can I be penalised for optimising for AI answers?',
-    a: 'You can. Since 15 May 2026 Google treats manipulating generative AI responses as spam (Search Engine Land, 2026). Optimising through clarity, accuracy and demonstrable expertise is safe; manufacturing signals is not.',
+    a: 'You can. Since 15 May 2026 Google treats manipulating generative AI responses as spam (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search Engine Land</a>, 2026). Optimising through clarity, accuracy and demonstrable expertise is safe; manufacturing signals is not.',
   },
 ];
 
@@ -223,18 +223,14 @@ const graph = {
     <div class="wrap">
       <div class="shead"><span class="eyebrow">The shift, in numbers</span><h2>The shift, in numbers.</h2></div>
       <div class="prose" style="max-width:760px">
-        <p>
-          The shift is already at scale. Google's AI Overviews reached about 2 billion monthly users by
-          mid 2025 (Google Q2 2025 earnings, reported by TechCrunch, 2025), and AI Mode passed 100
-          million (same source). Being cited is not the same as ranking. Only 37.9% of AI Overview
-          citations came from the top 10 organic results in early 2026, down from 76% six months
-          earlier, with roughly 62% of citations pointing to pages ranked below position 10 (Ahrefs,
-          863,000 keyword SERPs, 2026). When an AI summary is present, users click through to a website
-          in only 8% of searches, against 15% when no summary appears, and just 1% click a link inside
-          the summary itself (Pew Research Center, 68,879 US searches, 2025). AI Overviews cite roughly
-          three domains per answer and Google AI Mode about seven (Semrush, 5,000 keywords and 150,000+
-          citations, 2025). A handful of sources shape the answer, and everyone else is invisible.
-        </p>
+        <p>The shift is already at scale, and it rewards citation over ranking.</p>
+        <ul>
+          <li>AI Overviews reached about 2 billion monthly users by mid 2025, and AI Mode passed 100 million (Google Q2 2025 earnings, via <a href="https://techcrunch.com/2025/07/23/googles-ai-overviews-have-2b-monthly-users-ai-mode-100m-in-the-us-and-india/">TechCrunch</a>, 2025).</li>
+          <li>Only 37.9% of AI Overview citations came from the top 10 organic results in early 2026, down from 76% six months earlier; roughly 62% now point to pages below position 10 (<a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">Ahrefs</a>, 863,000 keyword SERPs, 2026).</li>
+          <li>With an AI summary present, users click through to a site in only 8% of searches, against 15% without one, and just 1% click a link inside the summary (<a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Pew Research Center</a>, 68,879 US searches, 2025).</li>
+          <li>A typical answer cites few sources: about three domains for AI Overviews, about seven for Google AI Mode (<a href="https://www.semrush.com/blog/ai-mode-comparison-study">Semrush</a>, 5,000 keywords, 2025).</li>
+        </ul>
+        <p>A handful of sources shape the answer. Everyone else is invisible.</p>
       </div>
     </div>
   </section>
@@ -254,11 +250,12 @@ const graph = {
           the conversation.
         </p>
         <p>
-          This is also why a strong Google ranking no longer guarantees an AI citation. The overlap
-          varies sharply by engine: AI Overviews share about 86% of their cited domains with Google's
-          top 10, but Google AI Mode overlaps on only about 54% of domains and 35% of exact URLs
-          (Semrush, 5,000 keywords, 2025). Optimising a page to rank and optimising it to be extracted
-          and cited are related jobs, but not the same job.
+          A strong Google ranking no longer guarantees an AI citation. Overlap varies sharply by engine:
+          AI Overviews share about 86% of cited domains with Google's top 10, but Google AI Mode
+          overlaps on only about 54% of domains and 35% of exact URLs (<a href="https://www.semrush.com/blog/ai-mode-comparison-study">Semrush</a>, 5,000 keywords, 2025).
+        </p>
+        <p>
+          Ranking a page and getting it cited are related jobs, not the same job.
         </p>
       </div>
     </div>
@@ -363,12 +360,13 @@ const graph = {
       <div class="shead"><span class="eyebrow">What changed in 2026</span><h2>What changed in 2026.</h2></div>
       <div class="prose" style="max-width:760px">
         <p>
-          One thing changed the rules in 2026. On 15 May 2026 Google extended its search spam policies
-          to explicitly cover attempts to manipulate generative AI responses in AI Overviews and AI Mode
-          (Search Engine Land, 2026). The durable approach is the one the policy rewards: make your
-          expertise clear, accurate and easy for AI to verify, rather than trying to game the answer. It
-          is the same brand-side logic behind Growth.pro's PAVA framework, which sequences the work as
-          Presence, Authority, Visibility and Amplification.
+          One change reset the rules. On 15 May 2026 Google extended its spam policies to cover attempts
+          to manipulate generative AI responses in AI Overviews and AI Mode (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search Engine Land</a>, 2026).
+        </p>
+        <p>
+          The durable move is to make your expertise clear, accurate and easy for AI to verify, not to
+          game the answer. That is the brand-side logic behind Growth.pro's PAVA framework: Presence,
+          Authority, Visibility, Amplification.
         </p>
       </div>
     </div>

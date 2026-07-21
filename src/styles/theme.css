@@ -106,7 +106,7 @@ h2{font-family:var(--fd);font-weight:500;font-size:clamp(28px,4vw,42px);line-hei
 .btn-lg{padding:14px 26px;font-size:15.5px}
 
 /* ===== sections + motion (interior sections inherit these in Phase 1) ===== */
-section{padding:clamp(64px,9vw,112px) 0}
+section{padding:clamp(36px,4.5vw,60px) 0}
 .rule{border:0;border-top:1px solid var(--line)}
 .shead{max-width:62ch;margin-bottom:48px}
 .shead h2{margin-top:14px}
@@ -220,7 +220,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
 .hc-ring::after{content:'';position:absolute;inset:6px;border-radius:50%;background:var(--surface)}
 
 /* inner-page hero (non-homepage) — keep simple per Phase 2 plan */
-.hero.inner{padding:clamp(64px,9vw,112px) 0 clamp(40px,5vw,56px);background:var(--paper)}
+.hero.inner{padding:clamp(40px,5vw,64px) 0 clamp(40px,5vw,56px);background:var(--paper)}
 .hero.inner h1{font-size:clamp(34px,4.5vw,48px);max-width:760px}
 
 /* ===== FOOTER (dark canvas, 5 cols, 3px grad rule, social, contact) ===== */
