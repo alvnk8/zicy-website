@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import siteAuditPerch from '../../assets/screenshots/resource-site-audit-perch.png';
 import featuredImg from '../../assets/resources/prepare-for-google-ai-overviews/how-to-prepare-your-website-for-google-ai-overviews-step-by-step.jpg';
 import figCrawl from '../../assets/resources/prepare-for-google-ai-overviews/how-to-prepare-your-website-for-google-ai-overviews-step-by-step.png';
 import figExtract from '../../assets/resources/prepare-for-google-ai-overviews/how-to-prepare-your-website-for-google-ai-overviews-step-by-step-2.png';
@@ -24,6 +27,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: 'Do I need to rank number one on Google to appear in AI Overviews?',
+    a: 'No. Only about 38% of AI Overview citations come from the top 10 results (<a href="https://ahrefs.com/blog/search-rankings-ai-citations/">Ahrefs</a>, 863,000 keywords, 2026), and the number-one result appears in just 46% of Overviews on desktop (<a href="https://www.semrush.com/blog/ai-overviews-study/">Semrush</a>, 200,000 keywords, 2025). Clear, answer-first content can be cited without ranking first.',
+  },
+  {
+    q: 'Does adding schema or FAQ markup get me cited in AI Overviews?',
+    a: 'Not on its own. Google says no special <a href="/resources/critical-schemas-entity-markup">schema</a> is required, only structured data that matches your visible text (<a href="https://developers.google.com/search/docs/appearance/ai-features">Google Search Central</a>, 2026), and a controlled test found adding JSON-LD produced no meaningful citation change (<a href="https://ahrefs.com/blog/search-rankings-ai-citations/">Ahrefs</a>, 2026). Schema keeps you accurate and crawlable; it is not a shortcut.',
+  },
+  {
+    q: 'How do I check whether my pages appear in AI Overviews or AI Mode?',
+    a: '<a href="/resources/track-ai-citations">Track a fixed set of queries across the engines and record where you are named or cited</a>, then watch coverage over time. A tool that monitors ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode together makes the gaps visible.',
+  },
+  {
+    q: 'Can I be penalised for optimising for AI Overviews?',
+    a: 'Yes. Since 15 May 2026 Google treats manipulating generative AI responses as spam (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search Engine Land</a>, 2026). Optimise through clarity, accuracy and genuine expertise, not manufactured signals.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -79,6 +113,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -118,6 +153,19 @@ const graph = {
           is <a href="/resources/what-is-answer-engine-optimization">answer engine optimisation</a> in
           practice, step by step.
         </p>
+        <Screenshot
+          src={siteAuditPerch}
+          alt="Zicy AI Readiness Audit showing a readiness score of 68 out of 100, where the brand appears across ChatGPT, Perplexity, Gemini, Google AI Overviews and Google AI Mode, and a checklist of readiness checks such as AI-crawler access, structured data matching visible text, answer-first structure and entity consistency, each marked pass, improve or failing."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
+        <p>
+          First, a reality check on what actually moves the needle.
+        </p>
+        <ul>
+          <li>The scale is large: AI Overviews reached about 2 billion monthly users by mid 2025 (Alphabet Q2 2025 earnings, via <a href="https://digiday.com/media/googles-ai-overviews-reach-over-2-billion-monthly-users/">Digiday</a>) and appeared on roughly 18% of US searches in early 2025 (<a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Pew Research Center</a>, 900 US adults, 2025).</li>
+          <li>Google is explicit that there are no special requirements to appear: no dedicated schema and no AI text files, just standard indexing, helpful content, a crawlable site, and structured data that matches your visible text (<a href="https://developers.google.com/search/docs/appearance/ai-features">Google Search Central</a>, 2026).</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -138,6 +186,11 @@ const graph = {
           opportunities. Make sure key content is server-rendered rather than hidden behind heavy
           JavaScript, since AI crawlers may struggle to interpret dynamically loaded content, and check
           that your most important pages are consistently discoverable and refreshed.
+        </p>
+        <p>
+          One caution on llms.txt: Google does not use it. Treat it as an unproven, optional extra, not
+          a requirement (<a href="https://developers.google.com/search/docs/appearance/ai-features">Google Search Central</a>, 2026). Focus on letting the crawlers you can verify (Googlebot,
+          GPTBot, PerplexityBot) reach the site.
         </p>
       </div>
     </div>
@@ -163,6 +216,13 @@ const graph = {
           <a href="/resources/content-ai-prefers-to-cite">what content AI prefers to cite</a> expands on
           this.
         </p>
+        <p>
+          Structure matters because ranking no longer guarantees a citation. Only about 38% of AI
+          Overview citations now come from the top 10 organic results, down from 76% a year earlier
+          (<a href="https://ahrefs.com/blog/search-rankings-ai-citations/">Ahrefs</a>, 863,000 keywords, 2026), and an AI Overview cites around 11 sources, with the #1
+          result appearing in only 46% of them on desktop (<a href="https://www.semrush.com/blog/ai-overviews-study/">Semrush</a>, 200,000 keywords, 2025). Clear,
+          answer-first passages give you a way in even when you do not rank first.
+        </p>
       </div>
     </div>
   </section>
@@ -182,6 +242,13 @@ const graph = {
         <p>
           Write meta titles and descriptions like clear answers, not slogans. For the full priority list,
           see <a href="/resources/critical-schemas-entity-markup">which schema and entity markup matter most</a>.
+        </p>
+        <p>
+          Set expectations for schema. It makes content machine-readable and keeps your facts
+          consistent, which supports eligibility, but do not expect markup alone to win citations. In a
+          controlled test, adding JSON-LD produced no meaningful change in AI citations (<a href="https://ahrefs.com/blog/schema-ai-citations/">Ahrefs schema
+          study</a>, 1,885 pages versus 4,000 controls, 2026). Use schema to be accurate and crawlable,
+          not as a growth hack.
         </p>
       </div>
     </div>
@@ -232,7 +299,21 @@ const graph = {
           AI Overviews reward sites that are accessible, structured and trustworthy: when your content is
           easy for AI to interpret and cite, you become hard to leave out.
         </p>
+        <p>
+          Measure because the click math changed. When an AI Overview appears, users click a result in
+          about 8% of searches, against 15% without one, and only 1% click a link inside the summary
+          (<a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Pew Research Center</a>, 900 US adults, 2025). Appearing in the answer, not just ranking, is the
+          outcome to track. And keep it genuine: since 15 May 2026 Google treats manipulating AI answers
+          as spam (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search Engine Land</a>, 2026).
+        </p>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about preparing for Google AI Overviews.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 

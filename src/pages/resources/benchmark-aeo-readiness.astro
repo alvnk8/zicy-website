@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import competitiveHalcyon from '../../assets/screenshots/resource-competitive-halcyon.png';
 import featuredImg from '../../assets/resources/benchmark-aeo-readiness/how-to-benchmark-our-aeo-readiness-against-competitors--1.jpg';
 import figMagnifier from '../../assets/resources/benchmark-aeo-readiness/how-to-benchmark-our-aeo-readiness-against-competitors-.jpg';
 import figBenchmark from '../../assets/resources/benchmark-aeo-readiness/how-to-benchmark-our-aeo-readiness-against-competitors--2.jpg';
@@ -24,6 +27,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: 'How do I find which competitors AI recommends instead of my brand?',
+    a: 'Track a set of buying-intent prompts across all five engines and <a href="/resources/track-ai-citations">record which brands each answer names and cites</a>. Because engines disagree, only 2.7% of cited domains appear on all five (<a href="https://surfacedby.com/blog/ai-citation-study-engine-overlap">SurfacedBy</a>, 127,198 citations, 2026), so a rival can dominate one engine while you lead another. Compare per engine, not just overall.',
+  },
+  {
+    q: 'Why does my brand appear in ChatGPT but not Gemini or Google AI Overviews?',
+    a: 'Because the engines draw on different sources. Source overlap between engines runs just 16% to 59% (<a href="https://www.brightedge.com/resources/weekly-ai-search-insights/ai-search-same-brands-different-sources">BrightEdge</a>, 2026), so being cited in one is no guarantee of another. Track all five and close the gaps where rivals appear and you do not.',
+  },
+  {
+    q: 'How many prompts do I need to benchmark AI visibility accurately?',
+    a: 'Enough to cover real intent and absorb variance. A focused benchmark uses 75 to 150 prompts across three to five competitors, re-run on a schedule (<a href="https://lseo.com/answer-engine-optimization-services/designing-a-repeatable-aeo-benchmarking-study/">LSEO</a>, 2026), and each prompt should run several times, since identical prompts changed a model\'s recommendation up to 40% of the time (<a href="https://link.springer.com/article/10.1007/s11606-025-10071-1">Journal of General Internal Medicine</a>, 2025).',
+  },
+  {
+    q: 'What is a good AI share of voice compared with competitors?',
+    a: 'There is no universal number; it is relative. Read your <a href="/resources/ai-search-kpis">share against your tracked competitor set</a> and, more importantly, its direction over time. Rising share and shrinking prompt gaps matter more than any single figure.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -79,6 +113,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -160,6 +195,12 @@ const graph = {
           Unlike traditional SEO, where rankings are public, AEO performance must be inferred through
           AI behaviour. To benchmark effectively:
         </p>
+        <Screenshot
+          src={competitiveHalcyon}
+          alt="Zicy Competitive AI Performance showing share of voice 18.6%, category rank #3 of 6 and mention coverage 47.2%, with a competitor comparison table of mention, citation, share of voice and average rank across five engines, and prompts where a rival wins and the brand is absent."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
         <ul>
           <li><strong>Run comparative prompt tests.</strong> Enter industry-relevant queries into ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, and note which brands get cited or mentioned.</li>
           <li><strong>Audit citation frequency.</strong> Track how often competitor domains appear as AI sources over time, which reflects how quickly models learn to reference them.</li>
@@ -174,6 +215,18 @@ const graph = {
           Together these metrics reveal not only who AI cites but why, uncovering the structural and
           credibility gaps you can close, and the patterns of trust accumulation that show which
           competitors are strengthening across related queries.
+        </p>
+        <p>
+          Benchmarking only works if you test the way buyers actually ask, across every engine.
+        </p>
+        <ul>
+          <li>Engines rarely agree on sources: only 2.7% of cited domains were cited by all five engines, and 69.6% appeared on just one (<a href="https://surfacedby.com/blog/ai-citation-study-engine-overlap">SurfacedBy</a>, 127,198 citations, 2026).</li>
+          <li>They agree more on brands than sources: source overlap runs 16% to 59% between engines, but the brands they recommend overlap 36% to 55% (<a href="https://www.brightedge.com/resources/weekly-ai-search-insights/ai-search-same-brands-different-sources">BrightEdge</a>, 5 engines and 9 industries, 2026).</li>
+          <li>Volume differs sharply: Gemini cites about 11 sources per answer against ChatGPT's 3.7 (<a href="https://surfacedby.com/blog/ai-citation-study-engine-overlap">SurfacedBy</a>, 2026).</li>
+          <li>Wording swings results: short conversational prompts produced 30 to 50 times more brand mentions than long structured ones (<a href="https://www.semrush.com/blog/the-ghost-citations-study/">Semrush</a>, 115 prompts across 4 engines, 2026).</li>
+        </ul>
+        <p>
+          A benchmark built on one engine and one prompt tells you almost nothing.
         </p>
       </div>
     </div>
@@ -197,6 +250,13 @@ const graph = {
           <a href="/resources/present-aeo-geo-performance">presenting AEO and GEO performance in C-suite reports</a>
           covers how to communicate it.
         </p>
+        <p>
+          Two cautions before you trust a score:
+        </p>
+        <ol>
+          <li>Run each prompt several times. Identical prompts changed a model's final recommendation up to 40% of the time (<a href="https://link.springer.com/article/10.1007/s11606-025-10071-1">Journal of General Internal Medicine</a>, 6 models over 5 runs, 2025), and about half the difference a better model makes comes from how the prompt is phrased (<a href="https://mitsloan.mit.edu/ideas-made-to-matter/study-generative-ai-results-depend-user-prompts-much-models">MIT Sloan</a>, ~1,900 participants, 2025).</li>
+          <li>Count mentions, not just links. About 62% of AI citations are ghost citations, where a source is used but the brand is never named; only 38.3% of brand appearances included a mention (<a href="https://www.semrush.com/blog/the-ghost-citations-study/">Semrush</a>, 3,981 appearances, 2026).</li>
+        </ol>
       </div>
     </div>
   </section>
@@ -219,7 +279,24 @@ const graph = {
           <a href="/resources/ai-search-kpis">the KPIs that replace traditional SEO metrics</a> pairs
           well with this one.
         </p>
+        <p>
+          This is why a one-time audit is not enough. A focused benchmark tests 75 to 150 prompts
+          against three to five competitors and re-runs on a fixed schedule, so a snapshot becomes a
+          trend (<a href="https://lseo.com/answer-engine-optimization-services/designing-a-repeatable-aeo-benchmarking-study/">LSEO</a>, 2026).
+        </p>
+        <p>
+          It is also why the work must be genuine: since 15 May 2026 Google treats manipulating AI
+          answers, including manufactured mentions, as spam (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search Engine Land</a>, 2026). The durable path
+          is real authority measured continuously, the logic behind Growth.pro's PAVA framework.
+        </p>
       </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about benchmarking AEO readiness.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 

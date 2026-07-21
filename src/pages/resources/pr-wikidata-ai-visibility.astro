@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import sourcesEntityRidgeline from '../../assets/screenshots/resource-sources-entity-ridgeline.png';
 import featuredImg from '../../assets/resources/pr-wikidata-ai-visibility/can-pr-news-releases-and-wikidata-entries-improve-ai-visibility-.jpg';
 import figFunnel from '../../assets/resources/pr-wikidata-ai-visibility/can-pr-news-releases-and-wikidata-entries-improve-ai-visibility-.png';
 
@@ -23,6 +26,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: 'Does my brand need a Wikipedia page to be cited by AI?',
+    a: 'No, but it helps where you qualify. Wikipedia is the most-cited domain in ChatGPT at about 7.8% of citations (<a href="https://www.tryprofound.com/blog/ai-platform-citation-patterns">Profound</a>, 680 million citations, 2025), yet you cannot buy your way in: notability requires significant independent coverage (<a href="https://en.wikipedia.org/wiki/Wikipedia:Notability_cannot_be_purchased">Wikipedia</a>). Earned media and an accurate Wikidata entry lift visibility even without an article.',
+  },
+  {
+    q: 'Do press releases actually help you get cited by ChatGPT and Perplexity?',
+    a: "Only when they earn coverage. Syndicated wire releases appeared in 0 of 100 category answers in one test, because AI cites the journalist's pickup, not the wire copy (<a href=\"https://finance.yahoo.com/sectors/technology/articles/zero-press-release-domains-appeared-221800810.html\">Loganix</a>, 100 queries, 2026). Aim for genuine editorial interest, not distribution volume.",
+  },
+  {
+    q: 'What is Wikidata and how does it affect my Knowledge Panel and AI visibility?',
+    a: 'Wikidata is an open, structured database of entities that Google draws on for its Knowledge Graph and knowledge panels (<a href="https://www.mlforseo.com/knowledge-graph-strategy/wikidata-for-brands-notability-criteria-and-a-realistic-path/">MLforSEO</a>, 2026). An accurate Wikidata record helps AI recognise your brand and avoid confusing it with a similarly named company.',
+  },
+  {
+    q: 'Is earned media or my own website more likely to be cited by AI?',
+    a: 'Earned media, by a wide margin. About 84% of AI citations come from third-party sources, against a small share from brand-owned sites (<a href="https://www.globenewswire.com/news-release/2026/05/07/3290268/0/en/Generative-Pulse-Earned-Media-Consistently-Drives-AI-Citations-Holding-at-84.html">Muck Rack</a>, 25M+ links, 2026). Your site still matters for accuracy, but independent coverage does most of the citing.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -78,6 +112,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -137,6 +172,22 @@ const graph = {
           prioritising domains with established authority and editorial standards. It is a core input to
           <a href="/resources/authoritative-entity">becoming an authoritative entity</a>.
         </p>
+        <Screenshot
+          src={sourcesEntityRidgeline}
+          alt="Zicy Sources and Entity view showing earned share 83% and owned share 11%, a breakdown of where citations come from, a list of top cited sources including Wikipedia and trade press, and an entity health panel with Wikidata entry, Google Knowledge Panel and name-consistency status."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
+        <p>
+          AI leans on what others say about you, not what you say about yourself.
+        </p>
+        <ul>
+          <li>About 84% of AI citations come from earned media (journalism, reference, academic and other third-party sources), while paid and advertorial content is just 0.3% (<a href="https://www.globenewswire.com/news-release/2026/05/07/3290268/0/en/Generative-Pulse-Earned-Media-Consistently-Drives-AI-Citations-Holding-at-84.html">Muck Rack</a>, 25M+ links, 2026).</li>
+        </ul>
+        <p>
+          So the fastest way to be trusted by AI is to be covered, accurately, by sources it already
+          trusts.
+        </p>
       </div>
     </div>
   </section>
@@ -154,6 +205,18 @@ const graph = {
           such as partners, awards and products, which helps prevent confusion and ensures citations
           reference your brand, not a similarly named one. The schema that supports this is covered in
           <a href="/resources/critical-schemas-entity-markup">which schema and entity markup matter most</a>.
+        </p>
+        <p>
+          Wikipedia carries unusual weight, but unevenly.
+        </p>
+        <ul>
+          <li>It is the single most-cited domain in ChatGPT, at about 7.8% of all citations, and makes up roughly 48% of ChatGPT's top sources, against only about 6% of Google AI Overviews' (<a href="https://www.tryprofound.com/blog/ai-platform-citation-patterns">Profound</a>, 680 million citations, 2025).</li>
+          <li>On Google AI Mode it appears in only about 2% of responses, versus more than 20% on ChatGPT (<a href="https://www.semrush.com/blog/most-cited-domains-ai/">Semrush</a>, 230,000+ prompts, 2025).</li>
+        </ul>
+        <p>
+          Wikidata matters because Google draws on it for its Knowledge Graph and knowledge panels, and
+          a consistent, accurate entity record helps AI identify you and avoid confusing you with a
+          similarly named company (<a href="https://www.mlforseo.com/knowledge-graph-strategy/wikidata-for-brands-notability-criteria-and-a-realistic-path/">MLforSEO</a>, 2026).
         </p>
       </div>
     </div>
@@ -179,6 +242,12 @@ const graph = {
           quality matters: mentions from high-trust editorial domains carry more weight than low-authority
           or syndicated content, and consistency across mentions reinforces entity signals so AI connects
           every reference back to a single, unified brand identity.
+        </p>
+        <p>
+          One caution on press releases: distribution alone does almost nothing. In one test, syndicated
+          wire releases appeared in 0 of 100 category answers across ChatGPT, Perplexity and Gemini,
+          because AI cites the journalist's coverage, not the wire copy (<a href="https://finance.yahoo.com/sectors/technology/articles/zero-press-release-domains-appeared-221800810.html">Loganix</a>, 100 queries, 2026). PR
+          helps when it earns genuine editorial pickup, not when it is merely published.
         </p>
       </div>
     </div>
@@ -218,7 +287,25 @@ const graph = {
           recognisable, cite-worthy and resilient. In the generative era, credibility is not claimed
           through keywords; it is earned through confirmation.
         </p>
+        <p>
+          None of this can be bought outright. Wikipedia's own rule is that notability cannot be
+          purchased: a page needs significant independent coverage, and paid editors must disclose who
+          they work for (<a href="https://en.wikipedia.org/wiki/Wikipedia:Conflict_of_interest">Wikipedia conflict-of-interest policy</a>). And since 15 May 2026 Google treats manufactured
+          authority signals as spam (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search Engine Land</a>, 2026).
+        </p>
+        <p>
+          The honest play is to earn coverage and keep your entity data accurate, so PR, Wikidata and
+          your own structured data reinforce each other. That is what Growth.pro's PAVA framework calls
+          Authority, built on the brand's merits.
+        </p>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about PR, Wikidata and AI visibility.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 
