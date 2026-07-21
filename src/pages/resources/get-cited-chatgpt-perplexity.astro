@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import promptAnalysisAster from '../../assets/screenshots/resource-prompt-analysis-aster.png';
 import featuredImg from '../../assets/resources/get-cited-chatgpt-perplexity/how-to-get-your-brand-mentioned-or-cited-in-chatgpt-and-perplexity-answers-.jpg';
 import figGrowth from '../../assets/resources/get-cited-chatgpt-perplexity/how-to-get-your-brand-mentioned-or-cited-in-chatgpt-and-perplexity-answers-.png';
 
@@ -21,6 +24,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: "Do I need to rank on Google's first page to get cited by ChatGPT or Perplexity?",
+    a: 'No. About 62% of AI citations point to pages ranked below the top 10 (<a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">Ahrefs</a>, 863,000 keywords, 2026). Being indexed, current and answer-first matters more than ranking first, since ChatGPT retrieves through Bing and Perplexity uses its own fresh index.',
+  },
+  {
+    q: 'Why does Perplexity cite my site but ChatGPT never does, or the reverse?',
+    a: 'Because they draw on different pools. ChatGPT leans on reference sources like Wikipedia, while Perplexity leans on community sources like Reddit and cites far more per answer (<a href="https://www.tryprofound.com/blog/ai-platform-citation-patterns">Profound</a>, 680 million citations, 2025; <a href="https://www.qwairy.co/blog/provider-citation-behavior-q3-2025">Qwairy</a>, 2025). Presence in one does not guarantee the other.',
+  },
+  {
+    q: 'How does ChatGPT actually choose which sources to cite?',
+    a: "ChatGPT search finds candidate pages through Bing's index, then favours clear, answer-first passages; about 44% of its citations come from the first third of a page (<a href=\"https://almcorp.com/blog/chatgpt-citations-study-44-percent-first-third-content/\">Kevin Indig</a>, 1.2 million responses, 2026). Lead with the answer, backed by data.",
+  },
+  {
+    q: 'Does Reddit or Wikipedia presence really help, and how do I earn it ethically?',
+    a: "Yes, both are heavily cited, but you earn them, not buy them. Contribute useful, accurate material and meet each platform's notability and community rules; manufactured presence now risks being treated as spam (<a href=\"https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657\">Search Engine Land</a>, 2026).",
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -76,6 +110,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -127,6 +162,12 @@ const graph = {
           quality, factual clarity and contextual authority, citing what they can understand, verify and
           trust. Their selection depends on three signals:
         </p>
+        <Screenshot
+          src={promptAnalysisAster}
+          alt="Zicy Prompt Analysis showing 48 tracked buyer questions, cited in 21 and mentioned in 33, and a table of prompts with per-engine chips for ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, each marked cited, mentioned or absent with the top cited source."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
         <ul>
           <li><strong>Entity clarity:</strong> your brand, products and experts must be clearly defined and consistently described across the web.</li>
           <li><strong>Structured transparency:</strong> schema markup, author profiles and source links make your content readable by machines.</li>
@@ -139,6 +180,18 @@ const graph = {
           they favour content that minimises ambiguity, so brands with clear positioning and distinct
           terminology are retrieved and cited more accurately. This builds on
           <a href="/resources/authoritative-entity">becoming an authoritative entity for AI engines</a>.
+        </p>
+        <p>
+          ChatGPT and Perplexity do not cite the same way, so getting cited is two jobs, not one.
+        </p>
+        <ul>
+          <li>ChatGPT leans on reference sources: Wikipedia is its most-cited domain, about 7.8% of all citations and roughly 48% of its top-source share (<a href="https://www.tryprofound.com/blog/ai-platform-citation-patterns">Profound</a>, 680 million citations, 2025).</li>
+          <li>Perplexity leans on community: Reddit is about 6.6% of its citations and roughly 47% of its top-source share (<a href="https://www.tryprofound.com/blog/ai-platform-citation-patterns">Profound</a>, 2025).</li>
+          <li>Perplexity also cites far more per answer, about 22 sources against ChatGPT's 8 (<a href="https://www.qwairy.co/blog/provider-citation-behavior-q3-2025">Qwairy</a>, 118,101 answers, 2025).</li>
+        </ul>
+        <p>
+          Earn reference-grade credibility for ChatGPT, and genuine community and review presence for
+          Perplexity.
         </p>
       </div>
     </div>
@@ -160,6 +213,14 @@ const graph = {
           to choose. For more, see
           <a href="/resources/content-ai-prefers-to-cite">what kind of content AI prefers to cite</a>.
         </p>
+        <p>
+          Both reward extractable substance.
+        </p>
+        <ul>
+          <li>In a controlled study, adding citations, quotations or statistics each lifted a page's visibility in AI answers by about 30% to 40%, and up to 115% for pages that did not already rank well (<a href="https://arxiv.org/abs/2311.09735">Princeton GEO study</a>, 10,000 queries, 2024).</li>
+          <li>44% of ChatGPT's citations come from the first third of a page, so put the answer near the top (<a href="https://almcorp.com/blog/chatgpt-citations-study-44-percent-first-third-content/">Kevin Indig</a>, 1.2 million responses, 2026).</li>
+          <li>Among cited blog posts, 72% opened with a 40 to 60 word answer and 52% included original or owned data (<a href="https://searchengineland.com/how-to-get-cited-by-chatgpt-the-content-traits-llms-quote-most-464868">Adam Gnuse</a>, ~7,500 sessions, 2025).</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -181,6 +242,17 @@ const graph = {
           and develop topic clusters rather than isolated pages to reinforce authority across related
           queries. Incorporate fresh, verifiable data points where possible, since measurable insights
           improve confidence in the generated response.
+        </p>
+        <p>
+          Being on page one is not the entry ticket. About 62% of AI citations point to pages ranked
+          below the top 10 (<a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">Ahrefs</a>, 863,000 keywords, 2026). ChatGPT search retrieves candidates through Bing's
+          index while Perplexity crawls with its own bot and weights freshness, so being indexed, fast
+          and current matters as much as ranking.
+        </p>
+        <p>
+          Do it on the merits: since 15 May 2026 Google treats manufactured citations as spam (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search
+          Engine Land</a>, 2026), which is why Growth.pro's PAVA framework builds real Presence and
+          Authority rather than gaming the answer.
         </p>
       </div>
     </div>
@@ -204,6 +276,13 @@ const graph = {
           clarity, structure and trust outweigh volume.
         </p>
       </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about getting cited in ChatGPT and Perplexity.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 

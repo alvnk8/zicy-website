@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import keyTopicsQuill from '../../assets/screenshots/resource-key-topics-quill.png';
 import featuredImg from '../../assets/resources/content-ai-prefers-to-cite/what-kind-of-content-does-ai-prefer-to-cite.jpg';
 import figFormats from '../../assets/resources/content-ai-prefers-to-cite/what-content-ai-prefers-to-cite.png';
 
@@ -20,6 +23,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: 'What types of content do AI engines like ChatGPT and Perplexity cite most?',
+    a: 'Structured, list-style and third-party content. Listicles are 40% to 65% of cited URLs (<a href="https://searchengineland.com/ai-search-loves-listicles-what-25000-urls-reveal-about-citations-477682">Evertune</a>, ~25,000 URLs, 2026), and for branded queries most citations go to reviews, listicles, forums and case studies rather than classic thought-leadership (<a href="https://beomniscient.com/blog/content-types-cited-in-llms/">Omniscient Digital</a>, 2026).',
+  },
+  {
+    q: 'Does adding statistics, quotes or original data increase the chance of being cited?',
+    a: 'Yes, measurably. In a controlled study each of citations, quotations and statistics lifted a page\'s AI visibility by about 30% to 40% (<a href="https://arxiv.org/abs/2311.09735">Princeton GEO study</a>, 10,000 queries, 2024). Original, specific data is one of the strongest signals.',
+  },
+  {
+    q: 'Do listicles and comparison pages get cited more than long-form blog posts?',
+    a: 'Usually. Ranked lists dominate cited URLs across engines (<a href="https://searchengineland.com/ai-search-loves-listicles-what-25000-urls-reveal-about-citations-477682">Evertune</a>, 2026), because they are easy to extract. A long post can still be cited if it opens with a clear answer and includes structured, specific facts.',
+  },
+  {
+    q: 'Why does Reddit get cited so much, and can editorial content compete?',
+    a: 'AI leans on community sources for real-world experience; Reddit is the most-cited domain (<a href="https://searchengineland.com/ai-search-engines-cite-reddit-youtube-and-linkedin-most-study-473138">Peec AI</a>, ~30 million sources, 2026). Editorial content competes by being specific, well-structured and backed by original data, not by length or brand alone.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -75,6 +109,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -136,6 +171,16 @@ const graph = {
           focused content. AI does not care about keyword density; it cares about semantic clarity, so
           your page must explain rather than merely promote.
         </p>
+        <p>
+          AI cites content it can lift cleanly and trust, not the best-written page.
+        </p>
+        <ul>
+          <li>In a controlled study, adding citations, quotations or statistics each raised a page's visibility in AI answers by about 30% to 40%, while keyword stuffing gave no gain or hurt (<a href="https://arxiv.org/abs/2311.09735">Princeton GEO study</a>, 10,000 queries, 2024).</li>
+          <li>Across a meta-analysis of 54 studies, clear AI-ready structure scored 8.6 out of 10 as a citation factor and factual specificity 8.3, while domain authority scored only about 5.0 (<a href="https://signal.zyppy.com/p/ai-citation-ranking-factors">Zyppy</a>, 54 studies, 2026).</li>
+        </ul>
+        <p>
+          Structure and verifiable facts beat brand size.
+        </p>
       </div>
     </div>
   </section>
@@ -146,6 +191,12 @@ const graph = {
       <PostFigure src={figFormats} alt="Diagram comparing three content types for AI citation: blogs for depth and context, structured data for machine-readable logic, and FAQs for direct answers." />
       <div class="prose" style="max-width:760px">
         <p>Each plays a different but complementary role:</p>
+        <Screenshot
+          src={keyTopicsQuill}
+          alt="Zicy Key Topics view showing the themes AI associates with the brand as a treemap, from pricing and integrations to comparisons and API docs, alongside a breakdown of the content types the brand gets cited in, led by listicles and reviews."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
         <ul>
           <li><strong>Blogs offer depth and context.</strong> They help AI understand your brand's perspective and expertise, and when well-formatted and source-supported they become the foundation for extractable insights.</li>
           <li><strong>FAQs deliver precision.</strong> Question-and-answer formats mirror how users prompt chat models, so each well-written FAQ is an invitation for AI to quote your text.</li>
@@ -157,6 +208,14 @@ const graph = {
           effective strategy is not choosing one format but integrating all three, so AI can combine
           context, clarity and validation when generating responses.
         </p>
+        <p>
+          Format matters more than most teams expect.
+        </p>
+        <ul>
+          <li>Listicles dominate: 63% of Gemini's most-cited URLs are ranked lists, and 40% to 65% across engines (<a href="https://searchengineland.com/ai-search-loves-listicles-what-25000-urls-reveal-about-citations-477682">Evertune</a>, ~25,000 URLs, 2026).</li>
+          <li>For branded queries, 57% of citations go to reviews, listicles, forums, social and case studies, and only about 5% to classic thought-leadership or how-to content (<a href="https://beomniscient.com/blog/content-types-cited-in-llms/">Omniscient Digital</a>, 23,387 sources, 2026).</li>
+          <li>Community carries weight: Reddit is the single most-cited domain, ahead of YouTube, LinkedIn and Wikipedia (<a href="https://searchengineland.com/ai-search-engines-cite-reddit-youtube-and-linkedin-most-study-473138">Peec AI</a>, ~30 million sources, 2026).</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -180,6 +239,15 @@ const graph = {
           companion guide on <a href="/resources/ai-trust-signals">building trust signals AI recognises</a>
           covers the credibility layer.
         </p>
+        <p>
+          So build for extraction:
+        </p>
+        <ol>
+          <li>Open each page with a direct, self-contained answer, then expand.</li>
+          <li>Add original data, statistics and named sources; these lift citation the most (<a href="https://arxiv.org/abs/2311.09735">Princeton GEO study</a>, 2024).</li>
+          <li>Use clear H2 and H3 headings, short sentences and lists.</li>
+          <li>Keep pages current; freshness helps, though how much depends on the query (<a href="https://signal.zyppy.com/p/ai-citation-ranking-factors">Zyppy</a>, 2026).</li>
+        </ol>
       </div>
     </div>
   </section>
@@ -200,7 +268,20 @@ const graph = {
           design content for retrieval systems as well as readers. When you are ready to test it, see
           <a href="/resources/get-cited-chatgpt-perplexity">how to get cited in ChatGPT and Perplexity</a>.
         </p>
+        <p>
+          One caution as you scale content. Google's 2026 updates confirm AI-generated content is not
+          banned, but scaled low-value pages and bought or faked citations are penalised (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search Engine
+          Land</a>, 2026). Earned, specific, well-structured content is the durable path, the foundation
+          of Growth.pro's PAVA framework.
+        </p>
       </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about the content AI prefers to cite.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 

@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import boardReportMeridian from '../../assets/screenshots/resource-board-report-meridian.png';
 import featuredImg from '../../assets/resources/present-aeo-geo-performance/how-to-present-aeo-geo-performance-in-c-suite-marketing-reports--1.jpg';
 import figMetrics from '../../assets/resources/present-aeo-geo-performance/how-to-present-aeo-geo-performance-in-c-suite-marketing-reports-.png';
 import figBoardroom from '../../assets/resources/present-aeo-geo-performance/how-to-present-aeo-geo-performance-in-c-suite-marketing-reports-.jpg';
@@ -22,6 +25,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: 'Which AEO and GEO metrics belong in a board deck, and which are vanity?',
+    a: 'Lead with four: <a href="/resources/ai-search-kpis">mention coverage, citation rate, share of voice and average AI ranking</a>, tied to AI-referred pipeline. These map to influence and revenue. Raw impressions and follower counts are vanity in this context; leave them out.',
+  },
+  {
+    q: 'How do I connect AI visibility to pipeline when so much is zero-click?',
+    a: 'Combine reads rather than chasing last-click. About 68% of US Google searches now end without a click (<a href="https://sparktoro.com/blog/in-2026-less-than-one-third-of-google-searches-still-send-a-click/">SparkToro</a> with Similarweb, 2026), so pair AI referral sessions with branded-search and direct lift after <a href="/resources/track-ai-citations">citation gains</a>, and assisted or influence attribution against your CRM.',
+  },
+  {
+    q: 'How do I benchmark our AI visibility against named competitors for the C-suite?',
+    a: '<a href="/resources/benchmark-aeo-readiness">Report share of voice against a fixed competitor set</a>, per engine and over time. A rising share and shrinking prompt gaps tell a clearer story to executives than any absolute number.',
+  },
+  {
+    q: 'How often should these numbers refresh, and how do I explain volatility?',
+    a: 'Continuously, and show trends, not snapshots. Only 32% to 43% of AI-cited sources repeat within 24 hours (Schulte, Bleeker and Kaufmann, <a href="https://arxiv.org/abs/2604.07585">arXiv</a>, 2026), so frame month-to-month movement as normal and focus leadership on the direction of travel.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -77,6 +111,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -143,6 +178,18 @@ const graph = {
           citations reinforce perception, trust and top-of-mind awareness. It pairs naturally with
           <a href="/resources/authoritative-entity">becoming an authoritative entity for AI engines</a>.
         </p>
+        <p>
+          Executives do not buy activity metrics. They buy influence and revenue, and AI is now a real
+          channel.
+        </p>
+        <ul>
+          <li>AI referral traffic grew more than ten times in the US between July 2024 and February 2025 (<a href="https://business.adobe.com/blog/the-explosive-rise-of-generative-ai-referral-traffic">Adobe Analytics</a>, US retail, travel and banking traffic, 2025).</li>
+          <li>45% of B2B buyers now use generative AI in the buying process, consulting about seven sources each (<a href="https://www.businesswire.com/news/home/20260520585188/en/Gartner-Survey-Finds-69-of-B2B-Buyers-Turn-to-Sales-Reps-to-Validate-AI-Generated-Insights">Gartner</a>, 645 B2B buyers, 2025).</li>
+          <li>Enterprises put about 12% of digital budgets into AEO in 2025, and 94% plan to increase that in 2026 (<a href="https://www.conductor.com/academy/state-of-aeo-geo-report/">Conductor</a>, 250+ CMOs, 2026).</li>
+        </ul>
+        <p>
+          The board's question is no longer whether AI matters, but what your visibility in it is worth.
+        </p>
       </div>
     </div>
   </section>
@@ -166,6 +213,17 @@ const graph = {
           your brand is mentioned early or late within answers. Together these form a more complete view
           of your competitive standing in generative ecosystems.
         </p>
+        <p>
+          Report influence, and be honest about attribution.
+        </p>
+        <ul>
+          <li>68% of US Google searches now end without a click to the open web (<a href="https://sparktoro.com/blog/in-2026-less-than-one-third-of-google-searches-still-send-a-click/">SparkToro</a> with Similarweb, 2026), so much AI influence never shows up as a session.</li>
+          <li>AI search is still under 1% of referral traffic while Google holds most of it (<a href="https://www.brightedge.com/resources/research-reports/ai-search-visits-in-surging-2025">BrightEdge</a>, 2025), so present AI visibility as a growing top-of-funnel signal, not a direct-conversion channel yet.</li>
+        </ul>
+        <p>
+          The four board-ready numbers are mention coverage, citation rate, share of voice and average
+          AI ranking, tied to AI-referred pipeline.
+        </p>
       </div>
     </div>
   </section>
@@ -188,6 +246,18 @@ const graph = {
           entity accuracy to demonstrate progress. This structure turns complex metrics into strategic
           insight and reinforces marketing's role as a growth driver.
         </p>
+        <p>
+          When AI does send a visit, it converts. The gap between AI-referred and other visitors
+          narrowed from 43% less likely to convert to just 9% in seven months, and those visitors
+          browsed 12% more pages and stayed 41% longer (<a href="https://business.adobe.com/blog/the-explosive-rise-of-generative-ai-referral-traffic">Adobe Analytics</a>, 2025).
+        </p>
+        <p>
+          Refresh the numbers continuously, not once. Only 32% to 43% of AI-cited sources repeat within
+          24 hours (Schulte, Bleeker and Kaufmann, <a href="https://arxiv.org/abs/2604.07585">arXiv</a>, 2026), so show trend lines and explain that
+          month-to-month movement is normal. And since 15 May 2026 Google treats manufactured mentions
+          as spam (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search Engine Land</a>, 2026), so the story to leadership is one of earned, measured authority, the basis of
+          Growth.pro's PAVA framework.
+        </p>
       </div>
     </div>
   </section>
@@ -197,6 +267,12 @@ const graph = {
       <div class="shead"><span class="eyebrow">Visuals</span><h2>How to visualise AI performance in reports.</h2></div>
       <div class="prose" style="max-width:760px">
         <p>Executives absorb information best through simple, visual storytelling:</p>
+        <Screenshot
+          src={boardReportMeridian}
+          alt="Zicy Board Report summarising AI visibility for leadership: mention coverage 54.8%, citation rate 22.1%, share of voice 19.7% and AI-referred pipeline of 184k dollars, with a two-quarter share-of-voice trend versus competitors, an executive summary and an export to PDF control."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
         <ul>
           <li>Use line graphs to show citation growth over time.</li>
           <li>Compare AI visibility share with search traffic trends to highlight the paradigm shift.</li>
@@ -211,6 +287,13 @@ const graph = {
           not just being found, it is being trusted by the systems shaping tomorrow's decisions.
         </p>
       </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about presenting AEO and GEO performance.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 
