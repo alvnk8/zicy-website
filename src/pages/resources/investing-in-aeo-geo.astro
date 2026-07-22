@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import roiModelTenfold from '../../assets/screenshots/resource-roi-model-tenfold.png';
 
 // Migrated from v1.zicy.com/blog/investing-in-aeo-geo. Tier-3 guide. articleSection Guides,
 // author Ritu Khanna. House style applied (UK spelling, sentence-case headings, em dashes removed,
@@ -16,6 +19,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: 'Is AEO and GEO worth investing in now, or is it too early?',
+    a: 'It is early, which is the point. 45% of B2B buyers already use generative AI in buying (<a href="https://www.businesswire.com/news/home/20260520585188/en/Gartner-Survey-Finds-69-of-B2B-Buyers-Turn-to-Sales-Reps-to-Validate-AI-Generated-Insights">Gartner</a>, 645 buyers, 2025), and citations compound, so early, corroborated presence is hard to displace (<a href="https://thedigitalbloom.com/learn/2025-ai-citation-llm-visibility-report/">The Digital Bloom</a>, 2025). Start small and measured rather than waiting for the channel to mature.',
+  },
+  {
+    q: 'What ROI can I expect, and how soon?',
+    a: 'Treat it as an early-channel signal plus compounding authority, not a guaranteed return. AI-referred visitors increasingly convert on par with other traffic (<a href="https://business.adobe.com/blog/the-explosive-rise-of-generative-ai-referral-traffic">Adobe Analytics</a>, 2025), but you should model your own pipeline and measure, rather than assume a fixed multiple.',
+  },
+  {
+    q: 'How much of my budget should go to AEO and GEO?',
+    a: 'Use peers as a reference, not a rule. Enterprises put about 12% of digital budget into AEO in 2025 and 94% plan to increase it in 2026 (<a href="https://www.conductor.com/academy/state-of-aeo-geo-report/">Conductor</a>, 250+ CMOs, 2026). Scale your spend to the evidence you gather from your own tracking.',
+  },
+  {
+    q: 'If competitors are already cited in AI answers, can I still catch up?',
+    a: 'Yes. Because engines share only about 11% of cited domains (<a href="https://thedigitalbloom.com/learn/2025-ai-citation-llm-visibility-report/">The Digital Bloom</a>, 2025), there are openings on engines where rivals are weak. The advantage goes to brands that build genuine authority across engines, not to a single early placement.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -61,6 +95,7 @@ const graph = {
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -124,6 +159,19 @@ const graph = {
           competitor's structured content, author pages and entity markup can define your category
           before you do.
         </p>
+        <p>
+          The channel is already forming, and the cost of waiting is being invisible while buyers
+          decide.
+        </p>
+        <ul>
+          <li>45% of B2B buyers now use generative AI in the buying process (<a href="https://www.businesswire.com/news/home/20260520585188/en/Gartner-Survey-Finds-69-of-B2B-Buyers-Turn-to-Sales-Reps-to-Validate-AI-Generated-Insights">Gartner</a>, 645 buyers, 2025).</li>
+          <li>ChatGPT alone passed 900 million weekly active users in early 2026 (<a href="https://backlinko.com/chatgpt-stats">OpenAI</a>, 2026).</li>
+          <li>AI referral traffic to US sites grew more than ten times between July 2024 and February 2025 (<a href="https://business.adobe.com/blog/the-explosive-rise-of-generative-ai-referral-traffic">Adobe Analytics</a>, 2025).</li>
+        </ul>
+        <p>
+          If AI is already naming competitors in your category, every month of absence is share you
+          are not being considered for.
+        </p>
       </div>
     </div>
   </section>
@@ -144,6 +192,13 @@ const graph = {
           building what amounts to an AI memory footprint. See
           <a href="/resources/authoritative-entity">how to become an authoritative entity for AI engines</a>.
         </p>
+        <p>
+          The edge compounds, but it is earned per engine.
+        </p>
+        <ul>
+          <li>Citations concentrate: a small set of trusted domains captures most of the mentions in a category, and early, corroborated presence is hard to displace (<a href="https://thedigitalbloom.com/learn/2025-ai-citation-llm-visibility-report/">The Digital Bloom</a>, 680 million citations, 2025).</li>
+          <li>But dominance is not won once. Only about 11% of domains cited by ChatGPT are also cited by Perplexity (<a href="https://thedigitalbloom.com/learn/2025-ai-citation-llm-visibility-report/">The Digital Bloom</a>, 2025), so the advantage goes to brands that build authority across engines early, not to a single lucky placement.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -180,7 +235,34 @@ const graph = {
           competitors but becoming structurally absent from the AI discovery layer, where decisions are
           increasingly shaped before users ever visit a website.
         </p>
+        <Screenshot
+          src={roiModelTenfold}
+          alt="Zicy AI Visibility ROI model showing a projected annual value of 312k dollars, a 4.1 month payback and an allowable cost per opportunity, with conservative, likely and aggressive value scenarios and the pipeline assumptions behind them."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
+        <p>
+          Judge it as an early channel, not a guaranteed return. AI-referred visitors already behave
+          well: they stayed 41% longer, viewed 12% more pages, and their conversion gap versus other
+          traffic narrowed from 43% to just 9% in seven months (<a href="https://business.adobe.com/blog/the-explosive-rise-of-generative-ai-referral-traffic">Adobe Analytics</a>, 2025).
+        </p>
+        <p>
+          Budgets are moving too: enterprises put about 12% of digital budget into AEO in 2025, and 94%
+          plan to increase it in 2026 (<a href="https://www.conductor.com/academy/state-of-aeo-geo-report/">Conductor</a>, 250+ CMOs, 2026).
+        </p>
+        <p>
+          And the bar for authenticity just rose: since 15 May 2026 Google treats manufactured
+          authority as spam (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search Engine Land</a>, 2026), which rewards brands that invest in real authority now,
+          the logic behind Growth.pro's PAVA framework.
+        </p>
       </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about investing in AEO and GEO.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 

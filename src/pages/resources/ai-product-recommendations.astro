@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import productRecsVerve from '../../assets/screenshots/resource-product-recs-verve.png';
 
 // Migrated from v1.zicy.com/blog/can-ai-engines-recommend-products. Tier-3 guide. articleSection
 // Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case headings, em dashes
@@ -15,6 +18,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: 'How do I get my product recommended by ChatGPT when buyers ask for the best option?',
+    a: "Earn presence in the sources AI reads for recommendations. Best-of listicles supply about 44% of ChatGPT's product-category citations (<a href=\"https://ahrefs.com/blog/how-to-rank-on-chatgpt/\">Ahrefs</a>, 75,000 brands, 2025), so accurate product data plus genuine reviews and third-party coverage matter more than your own page.",
+  },
+  {
+    q: 'Why does AI recommend competitors instead of my product?',
+    a: 'Because rivals have stronger third-party signals in the sources that engine trusts. Recommendations also diverge by engine, with only about 11% of domains shared between ChatGPT and Perplexity (<a href="https://thedigitalbloom.com/learn/2025-ai-citation-llm-visibility-report/">The Digital Bloom</a>, 680 million citations, 2025), so a competitor can lead one engine and not another.',
+  },
+  {
+    q: 'Do reviews on G2, Amazon and Reddit affect whether AI recommends my product?',
+    a: "Yes. Reddit, Wikipedia and Amazon are among ChatGPT's most-cited domains (<a href=\"https://ahrefs.com/blog/how-to-rank-on-chatgpt/\">Ahrefs</a>, 2025), so genuine reviews, marketplace presence and community discussion feed the recommendation.",
+  },
+  {
+    q: 'Why do ChatGPT, Perplexity and Gemini recommend different products for the same question?',
+    a: 'They draw on different source pools, so their shortlists differ. You have to earn visibility on each engine rather than assuming one placement carries across all of them.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -60,6 +94,7 @@ const graph = {
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -108,6 +143,12 @@ const graph = {
       <div class="shead"><span class="eyebrow">Selection</span><h2>How AI engines choose which products to recommend.</h2></div>
       <div class="prose" style="max-width:760px">
         <p>AI engines do not browse your website like humans; they synthesise from knowledge graphs, verified data and product feeds. Their recommendation logic depends on:</p>
+        <Screenshot
+          src={productRecsVerve}
+          alt="Zicy AI Product Recommendations showing a 38% recommendation rate and an average list position of 4.2, with a table of best-of prompts across five engines showing where the brand ranks and which competitor is recommended above it."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
         <ul>
           <li><strong>Structured product data:</strong> detailed specifications, schema markup and accurate metadata such as price, category and reviews.</li>
           <li><strong>Brand authority:</strong> the reputation and consistency of your brand across the web.</li>
@@ -119,6 +160,17 @@ const graph = {
           defined features are easier to match to intent, as does comparability, since products easily
           compared across standard attributes are more likely to appear in best-of or top-options lists.
           Much of this depends on <a href="/resources/prepare-for-google-ai-overviews">preparing your site for Google AI Overviews</a>.
+        </p>
+        <p>
+          Buyers now ask AI for the shortlist, and they act on it.
+        </p>
+        <ul>
+          <li>55% of AI users research products with AI weekly, using it to narrow choices (57%) and compare options (53%) (<a href="https://www.semrush.com/blog/ai-tools-the-modern-buyer-journey-study/">Semrush</a>, 1,030 US consumers, 2025).</li>
+          <li>50% have bought something after AI research, and 22% completed a purchase inside an AI tool (<a href="https://www.semrush.com/blog/ai-tools-the-modern-buyer-journey-study/">Semrush</a>, 2025).</li>
+          <li>But 86% still verify a recommendation before buying, mostly on Google and brand sites (<a href="https://www.semrush.com/blog/ai-tools-the-modern-buyer-journey-study/">Semrush</a>, 2025).</li>
+        </ul>
+        <p>
+          AI narrows the field; being on the shortlist is what matters.
         </p>
       </div>
     </div>
@@ -140,6 +192,14 @@ const graph = {
           high-consideration queries, while repeated inclusion builds a category-association effect. See
           <a href="/resources/authoritative-entity">how to become an authoritative entity for AI engines</a>.
         </p>
+        <p>
+          Recommendations are built from third-party signals, not your product page.
+        </p>
+        <ul>
+          <li>For product-category questions, best-of listicles account for about 44% of ChatGPT's citations, against 14% for standard blog posts (<a href="https://ahrefs.com/blog/how-to-rank-on-chatgpt/">Ahrefs</a>, 75,000 brands, 2025).</li>
+          <li>Reddit, Wikipedia and Amazon are among ChatGPT's most-cited domains, so reviews, community and marketplace presence shape which products it names (<a href="https://ahrefs.com/blog/how-to-rank-on-chatgpt/">Ahrefs</a>, 2025).</li>
+          <li>More than 60% of consumers report high trust in AI results, and for daily users AI is now the single most influential purchase touchpoint (<a href="https://www.bcg.com/publications/2026/consumers-trust-ai-to-buy-better-brands-must-adapt">BCG</a>, 9,000+ respondents per wave, 2025).</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -164,6 +224,17 @@ const graph = {
           <a href="/resources/effective-prompts-ai-tracking">prompts you track</a> should reflect these
           buying-intent queries.
         </p>
+        <p>
+          Two guardrails to plan around.
+        </p>
+        <ul>
+          <li>Recommendations diverge by engine: only about 11% of domains cited by ChatGPT are also cited by Perplexity (<a href="https://thedigitalbloom.com/learn/2025-ai-citation-llm-visibility-report/">The Digital Bloom</a>, 680 million citations, 2025), so you earn each engine separately.</li>
+          <li>Manufacturing recommendations is against the rules: since 15 May 2026 Google treats inauthentic brand mentions used to manipulate AI answers as spam (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search Engine Land</a>, 2026).</li>
+        </ul>
+        <p>
+          The ethical path is the durable one: accurate product data, genuine reviews and earned
+          coverage, the Authority pillar in Growth.pro's PAVA framework.
+        </p>
       </div>
     </div>
   </section>
@@ -186,6 +257,13 @@ const graph = {
           <a href="/resources/measuring-ai-visibility-direct-roi">the ROI of being cited by AI engines</a>.
         </p>
       </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about AI product recommendations.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 
