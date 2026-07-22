@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import siteTrafficSable from '../../assets/screenshots/resource-site-traffic-sable.png';
 import featuredImg from '../../assets/resources/ai-search-kpis/what-new-kpis-replace-traditional-seo-metrics-in-the-age-of-ai-search.jpg';
 import figFunnel from '../../assets/resources/ai-search-kpis/what-new-kpis-replace-traditional-seo-metrics-in-the-age-of-ai-search.png';
 
@@ -21,6 +24,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: 'What metrics should replace keyword rankings for measuring AI search?',
+    a: 'Track presence in the answer, not position in a list: mention coverage, <a href="/resources/track-ai-citations">citation rate</a>, AI share of voice, average AI ranking, and AI-referred traffic with its conversion. These describe whether AI names, cites and recommends you, which rankings no longer predict (<a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">Ahrefs</a>, 863,000 keywords, 2026).',
+  },
+  {
+    q: 'Why does my brand appear in AI answers one day and vanish the next?',
+    a: 'Because AI citations are volatile. A brand can appear in 86% of tracked answers one period and 14% the next (<a href="https://www.similarweb.com/blog/marketing/geo/ai-citation-volatility/">Similarweb</a>, 2025). Measure continuously across a fixed prompt set and read the trend, not a single snapshot.',
+  },
+  {
+    q: 'Does AI referral traffic actually convert?',
+    a: 'Increasingly, yes. AI-referred visitors stayed 41% longer and viewed 12% more pages, and their conversion gap versus other traffic narrowed from 43% to just 9% in seven months (<a href="https://business.adobe.com/blog/the-explosive-rise-of-generative-ai-referral-traffic">Adobe Analytics</a>, 2025). Measure your own cohorts to confirm.',
+  },
+  {
+    q: 'Can Google Search Console show my AI search performance?',
+    a: 'Partly. Search Console added generative AI performance reports in June 2026, breaking out impressions for AI Overviews and AI Mode, though clicks are still bundled into the main report (<a href="https://ppc.land/google-finally-gives-search-console-its-own-generative-ai-visibility-reports/">Google Search Console</a>, 2026).',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -76,6 +110,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -136,6 +171,18 @@ const graph = {
           level, so high-ranking pages may still have low AI visibility. AI visibility needs metrics
           that measure influence, authority and representation even when clicks do not occur.
         </p>
+        <p>
+          The old scoreboard is going dark.
+        </p>
+        <ul>
+          <li>With an AI summary present, users click a result in only 8% of searches, against 15% without one, and just 1% click a link inside the summary (<a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Pew Research Center</a>, 900 US adults, 2025).</li>
+          <li>Ranking is decoupling from citation: only 38% of AI Overview citations now come from the top 10 results, down from 76% a year earlier (<a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">Ahrefs</a>, 863,000 keywords, 2026).</li>
+          <li>Visibility is volatile: a brand can appear in 86% of tracked answers one period and 14% the next (<a href="https://www.similarweb.com/blog/marketing/geo/ai-citation-volatility/">Similarweb</a>, 2025).</li>
+        </ul>
+        <p>
+          Rankings, clicks and impressions still exist, but they no longer describe how buyers find
+          you.
+        </p>
       </div>
     </div>
   </section>
@@ -158,6 +205,20 @@ const graph = {
           consistency across repeated prompts over time. Collectively these shift focus from traffic to
           trust-based influence, measuring how your brand shapes digital conversations rather than just
           appearing in them.
+        </p>
+        <p>
+          Measure presence in the answer, not position in a list. The metrics that matter now:
+        </p>
+        <ul>
+          <li>Mention coverage: the share of tracked prompts that name you.</li>
+          <li>Citation rate: the share that link you as a source.</li>
+          <li>AI share of voice: your mentions against the competitor set.</li>
+          <li>Average AI ranking: where you appear when named.</li>
+          <li>AI-referred traffic and its conversion: the downstream signal.</li>
+        </ul>
+        <p>
+          Google is catching up: Search Console added generative AI performance reports in June 2026,
+          though it still reports impressions more clearly than clicks (<a href="https://ppc.land/google-finally-gives-search-console-its-own-generative-ai-visibility-reports/">Google Search Console</a>, 2026).
         </p>
       </div>
     </div>
@@ -199,7 +260,30 @@ const graph = {
           used to measure visibility through clicks; AEO measures authority through citations, and the
           brands that track both see not just traffic but trust at scale.
         </p>
+        <Screenshot
+          src={siteTrafficSable}
+          alt="Zicy AI Site Traffic showing 4,182 AI-referred sessions up 52%, a 3.1% AI conversion rate, 96k dollars of assisted pipeline and ChatGPT as the top AI source, with an eight-week sessions trend and a breakdown of referrers including chatgpt.com, perplexity.ai and gemini.google.com."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
+        <p>
+          These map to money because AI-referred visitors behave better. They stayed 41% longer, viewed
+          12% more pages and bounced 23% less than other visitors, and their conversion gap narrowed
+          from 43% below other traffic to just 9% in seven months (<a href="https://business.adobe.com/blog/the-explosive-rise-of-generative-ai-referral-traffic">Adobe Analytics</a>, 2025).
+        </p>
+        <p>
+          Measure it continuously and honestly. Manufacturing mentions is now treated as spam (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search
+          Engine Land</a>, 2026), and citations shift day to day, so trends beat snapshots. This is the
+          measurement layer of Growth.pro's PAVA framework.
+        </p>
       </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about AI search KPIs.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 

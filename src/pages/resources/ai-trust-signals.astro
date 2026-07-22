@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import actionCenterThistle from '../../assets/screenshots/resource-action-center-thistle.png';
 import featuredImg from '../../assets/resources/ai-trust-signals/how-can-you-build-digital-trust-signals-that-ai-engines-recognize-.jpg';
 import figColumns from '../../assets/resources/ai-trust-signals/how-can-you-build-digital-trust-signals-that-ai-engines-recognize-.png';
 
@@ -20,6 +23,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: 'What trust signals do AI engines like ChatGPT and Perplexity actually look for?',
+    a: 'Verifiable, corroborated ones: named authors and expertise, cited sources and original data, earned third-party coverage, and consistent entity data. About 84% of AI citations come from third-party media rather than owned pages (<a href="https://www.globenewswire.com/news-release/2026/05/07/3290268/0/en/Generative-Pulse-Earned-Media-Consistently-Drives-AI-Citations-Holding-at-84.html">Muck Rack</a>, 25M+ links, 2026).',
+  },
+  {
+    q: 'Do author bios and named experts (E-E-A-T) help you get cited by AI?',
+    a: 'They help. Google states that optimising for AI search is optimising for the search experience, where demonstrated expertise matters (<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Google Search Central</a>, 2026). Named authors, credentials and cited sources make your expertise verifiable to both readers and AI.',
+  },
+  {
+    q: 'Do online reviews on G2 or Reddit affect whether AI recommends my brand?',
+    a: 'Yes, materially. 34.5% of Google AI Overviews cite a review platform (<a href="https://seranking.com/blog/review-platforms-in-ai-overviews/">SE Ranking</a>, 30,000 keywords, 2026), and on G2 most products now get more AI citations than human pageviews (<a href="https://sell.g2.com/resources/success/g2-products-ai-citations-vs-human-pageviews">G2</a>, 80,000+ products, 2026). Genuine reviews and community presence feed AI trust.',
+  },
+  {
+    q: 'Is earned media or my own website more likely to be cited by AI?',
+    a: 'Earned media, by a wide margin, at about 84% of AI citations versus a small share for owned sites (<a href="https://www.globenewswire.com/news-release/2026/05/07/3290268/0/en/Generative-Pulse-Earned-Media-Consistently-Drives-AI-Citations-Holding-at-84.html">Muck Rack</a>, 25M+ links, 2026). Your site still matters for accuracy, but independent coverage does most of the citing.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -75,6 +109,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -164,6 +199,17 @@ const graph = {
           your credibility. Being consistently cited is one measurable outcome, so pair this with
           <a href="/resources/glossary/citation-coverage">citation coverage</a> tracking.
         </p>
+        <p>
+          AI trusts what it can verify and what others confirm, not what you claim.
+        </p>
+        <ul>
+          <li>Earned beats owned: about 84% of AI citations come from third-party media, and just 0.3% from paid or advertorial (<a href="https://www.globenewswire.com/news-release/2026/05/07/3290268/0/en/Generative-Pulse-Earned-Media-Consistently-Drives-AI-Citations-Holding-at-84.html">Muck Rack</a>, 25M+ links, 2026).</li>
+          <li>Reviews are a trust signal: 34.5% of Google AI Overviews cite a review platform, rising to 49% when the query asks for reviews, and five platforms supply 88% of those citations (<a href="https://seranking.com/blog/review-platforms-in-ai-overviews/">SE Ranking</a>, 30,000 keywords, 2026).</li>
+          <li>On G2, 80% of products now get more AI citations than human pageviews (<a href="https://sell.g2.com/resources/success/g2-products-ai-citations-vs-human-pageviews">G2</a>, 80,000+ products, 2026).</li>
+        </ul>
+        <p>
+          Presence on the sources AI already trusts is itself a trust signal.
+        </p>
       </div>
     </div>
   </section>
@@ -174,6 +220,12 @@ const graph = {
       <PostFigure src={figColumns} alt="Diagram titled brand trust building, with four columns: standardise brand data, show expertise, integrate transparency layers and strengthen external validation." />
       <div class="prose" style="max-width:760px">
         <p>Building trust is not about perfection but coherence. To translate human credibility into machine-interpretable proof:</p>
+        <Screenshot
+          src={actionCenterThistle}
+          alt="Zicy Action Center showing prioritised recommendations to build trust and win AI citations, such as fixing entity name mismatches, adding answer-first passages, publishing original data and earning review-platform coverage, each tagged with impact and effort."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
         <ul>
           <li><strong>Standardise brand data:</strong> use the same factual descriptors, founded date, CEO name, HQ city, everywhere online.</li>
           <li><strong>Show expertise:</strong> publish authored explainers, whitepapers and guides that address core industry queries.</li>
@@ -187,6 +239,15 @@ const graph = {
           your trust graph over time. When you are ready to test the outcome, see
           <a href="/resources/get-cited-chatgpt-perplexity">how to get cited in ChatGPT and Perplexity</a>.
         </p>
+        <p>
+          Build signals AI can read and corroborate:
+        </p>
+        <ol>
+          <li>Put named authors and real expertise on your pages; demonstrated expertise carries to AI surfaces (<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Google Search Central</a>, 2026).</li>
+          <li>Cite sources and add original data; each of citations, quotations and statistics lifted AI visibility by about 30% to 40% in a controlled study (<a href="https://arxiv.org/abs/2311.09735">Princeton GEO study</a>, 10,000 queries, 2024).</li>
+          <li>Earn coverage across many independent sources; only 2.7% of cited domains appear on all five engines, so breadth is what makes you durable (<a href="https://surfacedby.com/blog/ai-citation-study-engine-overlap">SurfacedBy</a>, 127,198 citations, 2026).</li>
+          <li>Keep your entity data consistent across the web so AI recognises you.</li>
+        </ol>
       </div>
     </div>
   </section>
@@ -208,7 +269,20 @@ const graph = {
           and maintain them benefit from compounding credibility as AI continues to reuse trusted
           sources.
         </p>
+        <p>
+          This is now the only safe game. Since 15 May 2026 Google treats bought or faked citations as
+          spam, enforced through its June 2026 update (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search Engine Land</a>, 2026), and recovery takes
+          months. Earned, corroborated trust is the durable moat, the Authority pillar in Growth.pro's
+          PAVA framework.
+        </p>
       </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about AI trust signals.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 

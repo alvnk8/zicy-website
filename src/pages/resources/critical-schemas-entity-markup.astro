@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
 import featuredImg from '../../assets/resources/critical-schemas-entity-markup/which-schemas-and-entity-markups-are-most-critical-for-brands-.jpg';
 import figDesk from '../../assets/resources/critical-schemas-entity-markup/which-schemas-and-entity-markups-are-most-critical-for-brands--1.jpg';
 import figHierarchy from '../../assets/resources/critical-schemas-entity-markup/which-schemas-and-entity-markups-are-most-critical-for-brands--2.jpg';
@@ -23,6 +24,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: 'Does adding schema markup actually get you cited by AI?',
+    a: 'Not directly. In a controlled test, adding JSON-LD changed AI citations by about -4.6% to +2%, effectively zero (<a href="https://ahrefs.com/blog/schema-ai-citations/">Ahrefs</a>, 1,885 pages versus 4,000 controls, 2026). Schema helps AI read and trust your content, but it is not a citation lever on its own.',
+  },
+  {
+    q: 'Which schema types still matter now that FAQ and HowTo rich results are gone?',
+    a: 'Google removed FAQ rich results on 7 May 2026 and HowTo in 2023 (<a href="https://www.searchenginejournal.com/google-drops-faq-rich-results-from-search/574429/">Search Engine Journal</a>, 2026), though the markup stays valid for machine-readability. Prioritise Organization, Article or BlogPosting, Product or Service, and Breadcrumb, all matching your visible text.',
+  },
+  {
+    q: 'What are sameAs, Wikidata and @id for?',
+    a: 'They link your brand to public identifiers so AI can recognise your entity and avoid confusing you with a similarly named company (<a href="https://ipullrank.com/ai-search-entity-recognition">iPullRank</a>, 2025). <a href="/resources/pr-wikidata-ai-visibility">Wikidata</a> in particular feeds Google\'s Knowledge Graph and knowledge panels (<a href="https://www.mlforseo.com/knowledge-graph-strategy/wikidata-for-brands-notability-criteria-and-a-realistic-path/">MLforSEO</a>, 2026).',
+  },
+  {
+    q: 'If Google says no special schema is needed, is structured data still worth doing?',
+    a: 'Yes. Google requires only that structured data match your visible text, not that you add AI-specific markup (<a href="https://developers.google.com/search/docs/appearance/ai-features">Google Search Central</a>, 2026). Accurate schema improves machine-readability, eligibility and entity clarity, so it remains worthwhile, just not a shortcut to citations.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -78,6 +110,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -141,6 +174,20 @@ const graph = {
           your brand's digital identity machine-readable, and therefore citable. It is a prerequisite for
           <a href="/resources/prepare-for-google-ai-overviews">preparing your site for Google AI Overviews</a>.
         </p>
+        <p>
+          Set expectations honestly. Google is explicit that there is no special schema you must add to
+          appear in AI features; what matters is standard indexing, helpful content, and structured data
+          that matches your visible text (<a href="https://developers.google.com/search/docs/appearance/ai-features">Google Search Central</a>, 2026).
+        </p>
+        <p>
+          In the only controlled test, adding JSON-LD barely moved AI citations, about -4.6% on Google
+          AI Overviews and roughly +2% on AI Mode and ChatGPT, effectively zero. Cited pages were about
+          three times more likely to already carry schema, but adding it to visible pages did not lift
+          citations (<a href="https://ahrefs.com/blog/schema-ai-citations/">Ahrefs</a>, 1,885 pages versus 4,000 controls, 2026).
+        </p>
+        <p>
+          So schema buys machine-readability, eligibility and disambiguation, not a citation on its own.
+        </p>
       </div>
     </div>
   </section>
@@ -165,6 +212,13 @@ const graph = {
           your site into a knowledge-graph node AI can map and reference. This underpins
           <a href="/resources/ai-trust-signals">the trust signals AI recognises</a>.
         </p>
+        <p>
+          One 2026 change to note. Google removed FAQ rich results from Search on 7 May 2026, and had
+          already retired HowTo results in 2023 (<a href="https://www.searchenginejournal.com/google-drops-faq-rich-results-from-search/574429/">Search Engine Journal</a>, 2026). FAQPage and HowTo markup
+          are still valid structured data and useful for machine-readability, but they no longer produce
+          visible rich results. Prioritise Organization, Article or BlogPosting, Product or Service, and
+          Breadcrumb, and keep every field matching the visible page.
+        </p>
       </div>
     </div>
   </section>
@@ -183,6 +237,16 @@ const graph = {
           recognition, and strong alignment improves disambiguation so your brand is identified correctly
           even when similar names exist. This is the mechanism behind
           <a href="/resources/authoritative-entity">becoming an authoritative entity for AI engines</a>.
+        </p>
+        <p>
+          This is where the real leverage sits. AI systems assemble answers grounded in entities, not
+          keywords (<a href="https://ipullrank.com/ai-search-entity-recognition">iPullRank</a>, 2025).
+        </p>
+        <p>
+          Linking your brand to public identifiers, using schema.org sameAs and @id, Wikidata and
+          product IDs, lets AI features disambiguate you and avoid confusing you with a similarly named
+          company, though inclusion is never guaranteed (<a href="https://ipullrank.com/ai-search-entity-recognition">iPullRank</a>, 2025). Wikidata matters because Google
+          draws on it for its Knowledge Graph and knowledge panels (<a href="https://www.mlforseo.com/knowledge-graph-strategy/wikidata-for-brands-notability-criteria-and-a-realistic-path/">MLforSEO</a>, 2026).
         </p>
       </div>
     </div>
@@ -208,7 +272,20 @@ const graph = {
           rank your content. To see how you compare, read
           <a href="/resources/benchmark-aeo-readiness">how to benchmark your AEO readiness against competitors</a>.
         </p>
+        <p>
+          Keep it accurate, not clever. Mismatched or invisible markup is a policy violation (<a href="https://developers.google.com/search/docs/appearance/ai-features">Google
+          Search Central</a>, 2026), and since 15 May 2026 manufactured authority signals are treated as
+          spam (<a href="https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657">Search Engine Land</a>, 2026). Consistent, truthful entity data across your site and the
+          wider web is the durable foundation, the Presence pillar in Growth.pro's PAVA framework.
+        </p>
       </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about schema and entity markup.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 
