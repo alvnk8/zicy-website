@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import promptManagerWren from '../../assets/screenshots/resource-prompt-manager-wren.png';
 import featuredImg from '../../assets/resources/effective-prompts-ai-tracking/add-effective-prompts-to-your-ai-tracking.jpg';
 
 const featuredAlt =
@@ -21,6 +24,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
+
+const faqs = [
+  {
+    q: 'How many prompts do I need to track AI visibility accurately?',
+    a: 'Start with 20 to 40 prompts across awareness, comparison and decision intents, and scale to 75 to 150 for a <a href="/resources/benchmark-aeo-readiness">competitive benchmark</a> against three to five rivals (<a href="https://seranking.com/blog/how-to-choose-prompts-to-track/">SE Ranking</a>, 2026; <a href="https://lseo.com/answer-engine-optimization-services/designing-a-repeatable-aeo-benchmarking-study/">LSEO</a>, 2026). Coverage of real buyer intent matters more than raw volume.',
+  },
+  {
+    q: 'How often should I re-run the same prompts?',
+    a: 'Run each prompt about five times per check and re-run on a schedule. Resampling drives roughly a third of answer variance and a sixth run adds almost nothing (<a href="https://arxiv.org/abs/2607.13304">Zatuchin</a>, arXiv, 2026), while re-running a day later can change about 65% of cited sources (<a href="https://arxiv.org/abs/2604.07585">Schulte, Bleeker and Kaufmann</a>, arXiv, 2026).',
+  },
+  {
+    q: 'Why does the same question give different brands each time I ask?',
+    a: "Because AI answers are probabilistic. Identical prompts changed a model's final recommendation up to 40% of the time (<a href=\"https://link.springer.com/article/10.1007/s11606-025-10071-1\">Journal of General Internal Medicine</a>, 2025), which is why you repeat each prompt and read the trend rather than a single answer.",
+  },
+  {
+    q: 'Do I need different prompts for ChatGPT, Gemini and Perplexity?',
+    a: 'Track the same intents across all five engines separately, since only 2.7% of cited domains appear on every engine (<a href="https://surfacedby.com/blog/ai-citation-study-engine-overlap">SurfacedBy</a>, 127,198 citations, 2026). Phrasing and results differ by engine, so per-engine tracking is essential.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 
 const graph = {
   '@context': 'https://schema.org',
@@ -76,6 +110,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner">
     <div class="wrap">
@@ -119,6 +154,16 @@ const graph = {
           brand could be one of them. That is the difference between tracking prompts that matter and
           tracking prompts that waste your time.
         </p>
+        <p>
+          The prompt is your measurement instrument. A sloppy one gives you noise.
+        </p>
+        <ul>
+          <li>Phrasing changes the result: list and keyword-style prompts shifted brand visibility by around 20% to 25% versus conversational wording, while prompt length made almost no difference (<a href="https://www.searchenginejournal.com/ai-prompt-intent-keywords-peec-spa/576201/">Peec AI</a>, 37,804 responses across 5 engines, 2026).</li>
+          <li>Answers are unstable: identical prompts changed a model's final recommendation up to 40% of the time (<a href="https://link.springer.com/article/10.1007/s11606-025-10071-1">Journal of General Internal Medicine</a>, 6 models over 5 runs, 2025), and re-running a day later changed about 65% of cited sources (<a href="https://arxiv.org/abs/2604.07585">Schulte, Bleeker and Kaufmann</a>, arXiv, 2026).</li>
+        </ul>
+        <p>
+          Track prompts that mirror how buyers really ask, and run each one several times.
+        </p>
       </div>
     </div>
   </section>
@@ -145,6 +190,14 @@ const graph = {
           <li>What running shoes are best for marathon training?</li>
         </ul>
         <p>The second set asks for recommendations, so AI has to name names.</p>
+        <p>
+          Track buying-intent prompts, not idle curiosity.
+        </p>
+        <ul>
+          <li>Cover the funnel: awareness (what is X), comparison (best X for Y, X vs Z) and decision (X pricing, X near me).</li>
+          <li>Be specific: name a product, category, use case and, for local businesses, a location, so a brand can naturally appear.</li>
+          <li>Mirror real language: use the phrasings your buyers actually type, since phrasing moves visibility as much as it does (<a href="https://www.searchenginejournal.com/ai-prompt-intent-keywords-peec-spa/576201/">Peec AI</a>, 2026).</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -212,6 +265,12 @@ const graph = {
           starting point covering your main products, services and markets. But you know your business
           best. After reviewing the auto-generated prompts, consider:
         </p>
+        <Screenshot
+          src={promptManagerWren}
+          alt="Zicy Prompt Manager showing 42 tracked prompts across awareness, comparison and decision intents, run five times a day on each of the five engines, with example buyer questions grouped by funnel stage."
+          caption="Illustrative product view with sample data."
+          priority="lazy"
+        />
         <ul>
           <li><strong>Focus areas:</strong> are there specific products or services you want to push?</li>
           <li><strong>Target audiences:</strong> do you serve specific groups (families, professionals, beginners) worth tracking separately?</li>
@@ -219,6 +278,15 @@ const graph = {
           <li><strong>Local nuances:</strong> are there neighbourhood-level or regional terms your customers actually use?</li>
         </ul>
         <p>Think of it as a collaboration: AI handles the heavy lifting, and you refine based on what actually matters to your business.</p>
+        <p>
+          A workable design:
+        </p>
+        <ol>
+          <li>Size it: 20 to 40 prompts to start, or 75 to 150 for a competitive benchmark against three to five rivals (<a href="https://seranking.com/blog/how-to-choose-prompts-to-track/">SE Ranking</a>, 2026; <a href="https://lseo.com/answer-engine-optimization-services/designing-a-repeatable-aeo-benchmarking-study/">LSEO</a>, 2026).</li>
+          <li>Repeat each: run every prompt about five times; resampling drives roughly a third of all answer variance, and a sixth run adds almost nothing (<a href="https://arxiv.org/abs/2607.13304">Zatuchin</a>, arXiv, 12,933 responses, 2026).</li>
+          <li>Cover every engine: only 2.7% of cited domains appear on all five engines (<a href="https://surfacedby.com/blog/ai-citation-study-engine-overlap">SurfacedBy</a>, 127,198 citations, 2026), so track ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode separately.</li>
+          <li>Fix the locale and persona, and re-run on a schedule so a snapshot becomes a trend. A one-time pull is a single roll of the dice; a stable, repeated prompt set is the feedback loop behind Growth.pro's AI Citation Enablement practice.</li>
+        </ol>
       </div>
     </div>
   </section>
@@ -236,6 +304,13 @@ const graph = {
         </ul>
         <p>Track fewer, better prompts. Ten well-chosen prompts will give you more actionable insights than fifty generic ones.</p>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">FAQ</span><h2>Questions about effective prompts for AI tracking.</h2></div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
     </div>
   </section>
 
