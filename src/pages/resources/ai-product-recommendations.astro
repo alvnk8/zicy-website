@@ -3,7 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import Screenshot from '../../components/Screenshot.astro';
-import productRecsVerve from '../../assets/screenshots/resource-product-recs-verve.png';
 
 // Migrated from v1.zicy.com/blog/can-ai-engines-recommend-products. Tier-3 guide. articleSection
 // Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case headings, em dashes
@@ -143,12 +142,6 @@ const graph = {
       <div class="shead"><span class="eyebrow">Selection</span><h2>How AI engines choose which products to recommend.</h2></div>
       <div class="prose" style="max-width:760px">
         <p>AI engines do not browse your website like humans; they synthesise from knowledge graphs, verified data and product feeds. Their recommendation logic depends on:</p>
-        <Screenshot
-          src={productRecsVerve}
-          alt="Zicy AI Product Recommendations showing a 38% recommendation rate and an average list position of 4.2, with a table of best-of prompts across five engines showing where the brand ranks and which competitor is recommended above it."
-          caption="Illustrative product view with sample data."
-          priority="lazy"
-        />
         <ul>
           <li><strong>Structured product data:</strong> detailed specifications, schema markup and accurate metadata such as price, category and reviews.</li>
           <li><strong>Brand authority:</strong> the reputation and consistency of your brand across the web.</li>
