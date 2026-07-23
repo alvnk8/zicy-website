@@ -3,8 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
-import Screenshot from '../../components/Screenshot.astro';
-import keyTopicsQuill from '../../assets/screenshots/resource-key-topics-quill.png';
 import featuredImg from '../../assets/resources/content-ai-prefers-to-cite/what-kind-of-content-does-ai-prefer-to-cite.jpg';
 import figFormats from '../../assets/resources/content-ai-prefers-to-cite/what-content-ai-prefers-to-cite.png';
 
@@ -191,12 +189,6 @@ const graph = {
       <PostFigure src={figFormats} alt="Diagram comparing three content types for AI citation: blogs for depth and context, structured data for machine-readable logic, and FAQs for direct answers." />
       <div class="prose" style="max-width:760px">
         <p>Each plays a different but complementary role:</p>
-        <Screenshot
-          src={keyTopicsQuill}
-          alt="Zicy Key Topics view showing the themes AI associates with the brand as a treemap, from pricing and integrations to comparisons and API docs, alongside a breakdown of the content types the brand gets cited in, led by listicles and reviews."
-          caption="Illustrative product view with sample data."
-          priority="lazy"
-        />
         <ul>
           <li><strong>Blogs offer depth and context.</strong> They help AI understand your brand's perspective and expertise, and when well-formatted and source-supported they become the foundation for extractable insights.</li>
           <li><strong>FAQs deliver precision.</strong> Question-and-answer formats mirror how users prompt chat models, so each well-written FAQ is an invitation for AI to quote your text.</li>
