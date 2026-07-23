@@ -3,8 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
-import Screenshot from '../../components/Screenshot.astro';
-import promptManagerWren from '../../assets/screenshots/resource-prompt-manager-wren.png';
 import featuredImg from '../../assets/resources/effective-prompts-ai-tracking/add-effective-prompts-to-your-ai-tracking.jpg';
 
 const featuredAlt =
@@ -265,12 +263,6 @@ const graph = {
           starting point covering your main products, services and markets. But you know your business
           best. After reviewing the auto-generated prompts, consider:
         </p>
-        <Screenshot
-          src={promptManagerWren}
-          alt="Zicy Prompt Manager showing 42 tracked prompts across awareness, comparison and decision intents, run five times a day on each of the five engines, with example buyer questions grouped by funnel stage."
-          caption="Illustrative product view with sample data."
-          priority="lazy"
-        />
         <ul>
           <li><strong>Focus areas:</strong> are there specific products or services you want to push?</li>
           <li><strong>Target audiences:</strong> do you serve specific groups (families, professionals, beginners) worth tracking separately?</li>

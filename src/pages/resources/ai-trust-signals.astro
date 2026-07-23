@@ -3,8 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
-import Screenshot from '../../components/Screenshot.astro';
-import actionCenterThistle from '../../assets/screenshots/resource-action-center-thistle.png';
 import featuredImg from '../../assets/resources/ai-trust-signals/how-can-you-build-digital-trust-signals-that-ai-engines-recognize-.jpg';
 import figColumns from '../../assets/resources/ai-trust-signals/how-can-you-build-digital-trust-signals-that-ai-engines-recognize-.png';
 
@@ -220,12 +218,6 @@ const graph = {
       <PostFigure src={figColumns} alt="Diagram titled brand trust building, with four columns: standardise brand data, show expertise, integrate transparency layers and strengthen external validation." />
       <div class="prose" style="max-width:760px">
         <p>Building trust is not about perfection but coherence. To translate human credibility into machine-interpretable proof:</p>
-        <Screenshot
-          src={actionCenterThistle}
-          alt="Zicy Action Center showing prioritised recommendations to build trust and win AI citations, such as fixing entity name mismatches, adding answer-first passages, publishing original data and earning review-platform coverage, each tagged with impact and effort."
-          caption="Illustrative product view with sample data."
-          priority="lazy"
-        />
         <ul>
           <li><strong>Standardise brand data:</strong> use the same factual descriptors, founded date, CEO name, HQ city, everywhere online.</li>
           <li><strong>Show expertise:</strong> publish authored explainers, whitepapers and guides that address core industry queries.</li>
