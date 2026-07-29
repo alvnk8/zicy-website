@@ -6,6 +6,8 @@ import FaqAccordion from '../../components/FaqAccordion.astro';
 import featuredImg from '../../assets/resources/track-ai-citations/how-to-track-ai-citations-and-measure-their-impact-on-leads-and-sales.jpg';
 import figMethods from '../../assets/resources/track-ai-citations/how-to-track-ai-citations-and-measure-their-impact-on-leads-and-sales.png';
 import figAnalytics from '../../assets/resources/track-ai-citations/which-analytics-tools-can-show-where-ai-engines-are-referencing-our-content--2.jpg';
+import figPerPrompt from '../../assets/resources/track-ai-citations/zicy-per-prompt-results.png';
+import figCitationAnalysis from '../../assets/resources/track-ai-citations/zicy-citation-analysis.png';
 
 const featuredAlt =
   'Abstract visualisation of connected documents feeding an AI node, with a rising bar chart labelled leads and sales.';
@@ -222,7 +224,17 @@ const graph = {
           consistent. Capturing historical snapshots of AI
           responses lets you compare citation trends and detect gains or losses in visibility.
         </p>
+        <p>
+          In Zicy, per-prompt results show each tracked prompt's answer on ChatGPT, Gemini,
+          Perplexity, Google AI Overviews and Google AI Mode, which brands were named, and whether
+          your domain was cited.
+        </p>
       </div>
+      <PostFigure
+        src={figPerPrompt}
+        alt="Zicy per-prompt results screen listing a tracked prompt's answers across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, with brand mentions and citations flagged per engine."
+        caption="Per-prompt results in Zicy, shown with demo data."
+      />
     </div>
   </section>
 
@@ -256,7 +268,18 @@ const graph = {
           Tools like Zicy give marketers and executives
           visibility into AI-era influence, not just web traffic.
         </p>
+        <p>
+          This is what an AI citation tracker looks like in practice. Zicy's Citation Analysis shows
+          which domains and pages the engines actually cite for your tracked prompts, split by
+          engine, so you can see at a glance whether your citations come from your own site or from
+          third-party sources.
+        </p>
       </div>
+      <PostFigure
+        src={figCitationAnalysis}
+        alt="Zicy Citation Analysis screen showing cited domains and pages per engine for a set of tracked prompts."
+        caption="Citation Analysis in Zicy, shown with demo data."
+      />
     </div>
   </section>
 

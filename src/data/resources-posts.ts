@@ -18,7 +18,7 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "description": "The sub-entity halo is the third layer of AI visibility attribution: whether AI surfaces a brand's specific named products and services in the queries where they are most relevant.",
     "articleSection": "Research",
     "datePublished": "2026-04-28",
-    "authorName": "April Cheong"
+    "authorName": "Ritu Khanna"
   },
   {
     "slug": "benchmark-aeo-readiness",
@@ -146,7 +146,7 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "description": "The search halo is the second layer of AI visibility attribution: the lift in branded search and direct visits that follows after users discover a brand in AI answers.",
     "articleSection": "Research",
     "datePublished": "2026-04-14",
-    "authorName": "April Cheong"
+    "authorName": "Ritu Khanna"
   },
   {
     "slug": "measuring-ai-visibility-direct-roi",
@@ -154,7 +154,7 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "description": "Direct ROI is the first and most measurable layer of AI visibility attribution: the conversions that arrive when AI platforms send users straight to your site.",
     "articleSection": "Research",
     "datePublished": "2026-04-13",
-    "authorName": "April Cheong"
+    "authorName": "Ritu Khanna"
   },
   {
     "slug": "brand-audits-ai-search",
@@ -162,7 +162,7 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "description": "A brand audit in the AI search era measures how AI systems interpret and restate a brand: whether it appears, what facts AI attaches to it, the sentiment, and where AI is confidently wrong.",
     "articleSection": "Research",
     "datePublished": "2026-03-26",
-    "authorName": "April Cheong"
+    "authorName": "Ritu Khanna"
   },
   {
     "slug": "effective-prompts-ai-tracking",
