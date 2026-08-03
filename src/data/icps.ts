@@ -7,7 +7,6 @@ import citationUrls from '../assets/screenshots/citation-analysis-urls.png';
 import competitiveAnonymised from '../assets/screenshots/anonymised/competitive-ai-performance.png';
 import brandSentimentAnonymised from '../assets/screenshots/anonymised/brand-sentiment.png';
 import citationOverviewAnonymised from '../assets/screenshots/anonymised/citation-analysis-overview.png';
-import competitorSentimentAnonymised from '../assets/screenshots/anonymised/competitor-sentiment-profiles.png';
 import aiVisibilityAnonymised from '../assets/screenshots/anonymised/ai-visibility-dashboard.png';
 import visibilityGapsAnonymised from '../assets/screenshots/anonymised/visibility-gaps.png';
 import keyTopicsLeadersAnonymised from '../assets/screenshots/anonymised/key-topics-leaders.png';
@@ -117,12 +116,6 @@ export const ICPS: Icp[] = [
         src: citationOverviewAnonymised,
         alt: "Zicy Citation Analysis showing how often AI cites the client's own sources versus competitors, with competitor share and uncited rate.",
         caption: 'Citation Analysis, narrative control, competitor share and uncited rate.',
-      },
-      {
-        desc: 'Competitor Sentiment Profiles',
-        src: competitorSentimentAnonymised,
-        alt: 'Zicy Competitor Sentiment Profiles showing the positive, neutral and negative associations AI attaches to each brand.',
-        caption: 'Competitor Sentiment Profiles, what AI says about each rival.',
       },
     ],
     whyHeading: 'Why PR teams choose Zicy',
