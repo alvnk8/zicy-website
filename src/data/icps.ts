@@ -4,12 +4,6 @@ import type { ImageMetadata } from 'astro';
 // Explicit imports — only screenshots cleared by the privacy gate (§1.1 of the brief).
 // The anonymised/ versions have a 'SAMPLE DASHBOARD' banner + blurred brand/competitor/URL regions.
 import citationUrls from '../assets/screenshots/citation-analysis-urls.png';
-import competitiveAnonymised from '../assets/screenshots/anonymised/competitive-ai-performance.png';
-import brandSentimentAnonymised from '../assets/screenshots/anonymised/brand-sentiment.png';
-import citationOverviewAnonymised from '../assets/screenshots/anonymised/citation-analysis-overview.png';
-import aiVisibilityAnonymised from '../assets/screenshots/anonymised/ai-visibility-dashboard.png';
-import visibilityGapsAnonymised from '../assets/screenshots/anonymised/visibility-gaps.png';
-import keyTopicsLeadersAnonymised from '../assets/screenshots/anonymised/key-topics-leaders.png';
 
 export interface Module {
   name: string;
@@ -68,21 +62,7 @@ export const ICPS: Icp[] = [
       { name: 'AI Visibility', desc: 'Your mention coverage, citation rate and share of voice against the competitors you actually worry about.' },
       { name: 'Brand Sentiment', desc: 'The language AI attaches to your brand, and the sources moving it.' },
     ],
-    screenshots: [
-      // Brand Intelligence module is a gap — using brand-sentiment as the brief's stated fallback.
-      {
-        desc: 'Brand Intelligence report, perception + AI Reality Score',
-        src: brandSentimentAnonymised,
-        alt: 'Zicy Brand Intelligence report showing AI perception of the brand and an AI Reality Score fact-check.',
-        caption: 'Brand Sentiment, how AI describes the brand, with the descriptors moving it.',
-      },
-      {
-        desc: 'Competitive AI Performance, vs. named rivals',
-        src: competitiveAnonymised,
-        alt: 'Zicy Competitive AI Performance table comparing the brand against rivals on mention coverage, ranking, citations, share of voice and sentiment.',
-        caption: 'Competitive AI Performance, your standing vs. named rivals.',
-      },
-    ],
+    screenshots: [],
     whyHeading: 'Why brands choose Zicy',
     why: [
       { lead: 'See the truth first', desc: 'Catch a hallucination or an outdated claim before it costs you a deal.' },
@@ -110,14 +90,7 @@ export const ICPS: Icp[] = [
       { name: 'Brand & Competitor Sentiment', desc: 'The language AI attaches to your client and their rivals, tracked over time.' },
       { name: 'AI Visibility', desc: 'Mention coverage and share of voice, so you can show movement after a campaign lands.' },
     ],
-    screenshots: [
-      {
-        desc: 'Citation Analysis, owned / earned / competitor / uncited split',
-        src: citationOverviewAnonymised,
-        alt: "Zicy Citation Analysis showing how often AI cites the client's own sources versus competitors, with competitor share and uncited rate.",
-        caption: 'Citation Analysis, narrative control, competitor share and uncited rate.',
-      },
-    ],
+    screenshots: [],
     whyHeading: 'Why PR teams choose Zicy',
     why: [
       { lead: 'Prove earned media works', desc: 'Connect the coverage you land to movement in AI answers.' },
@@ -145,20 +118,7 @@ export const ICPS: Icp[] = [
       { name: 'Visibility Gaps + Action Center', desc: 'The prioritised fix list, plus the schema, llms.txt and content tooling to close it.' },
       { name: 'White-label reporting', desc: 'Your brand on the dashboard and the deliverables.' },
     ],
-    screenshots: [
-      {
-        desc: 'AI Visibility dashboard',
-        src: aiVisibilityAnonymised,
-        alt: 'Zicy AI Visibility dashboard a client can be shown, coverage, share of voice and ranking across AI engines.',
-        caption: 'AI Visibility, the scoreboard you put in front of any client.',
-      },
-      {
-        desc: 'Visibility Gaps + Action Center',
-        src: visibilityGapsAnonymised,
-        alt: 'Zicy Visibility Gaps showing prioritised technical fixes, content optimisation and new-content opportunities.',
-        caption: 'Visibility Gaps, the prioritised fix list, ready to ship to a client.',
-      },
-    ],
+    screenshots: [],
     whyHeading: 'Why agencies choose Zicy',
     why: [
       { lead: 'A new revenue line', desc: 'Productise AI visibility as a retainer or a one-off audit.' },
@@ -193,12 +153,6 @@ export const ICPS: Icp[] = [
         src: citationUrls,
         alt: 'Zicy Citation Analysis drilling into the domains and individual URLs AI cites, classified as owned, earned or competitor.',
         caption: 'Citation Analysis, drill down to the exact URLs AI is citing.',
-      },
-      {
-        desc: 'Key Topics, Leaders / Battlegrounds / Blind Spots',
-        src: keyTopicsLeadersAnonymised,
-        alt: 'Zicy Key Topics Analysis showing topics where the brand leads, contests, or is absent versus competitors.',
-        caption: 'Key Topics, Leaders, Battlegrounds and Blind Spots vs. competitors.',
       },
     ],
     whyHeading: 'Why publishers choose Zicy',
