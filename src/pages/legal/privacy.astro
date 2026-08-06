@@ -32,20 +32,26 @@ const sections = [
 ];
 ---
 <BaseLayout title={title} description={description}>
+  <link rel="alternate" hreflang="en" href="https://www.zicy.com/legal/privacy" slot="head" />
+  <link rel="alternate" hreflang="ms-MY" href="https://www.zicy.com/legal/privacy-bm" slot="head" />
+  <link rel="alternate" hreflang="x-default" href="https://www.zicy.com/legal/privacy" slot="head" />
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Legal</span>
       <h1>Privacy policy</h1>
       <p class="meta-dates">Last updated: 6 August 2026</p>
+      <p class="lang-notice">
+        This policy is published in English and in Bahasa Malaysia. If this English version conflicts with the
+        Bahasa Malaysia version, the English version prevails.
+      </p>
       <p class="sub">
         This policy explains what Zicy collects, why, who we share it with, and what you can ask us to do about
         it. Zicy is operated by Growth Pro Sdn. Bhd. in Penang, Malaysia.
       </p>
       <p class="sibling-links">
-        <a href="/legal/terms">Terms of service</a> ·
-        <a href="/legal/dpa">Data processing addendum</a> ·
         <a href="/legal/cookies">Cookie policy</a> ·
-        <button type="button" class="cc-reopen" onclick="window.zicyOpenCookieSettings && window.zicyOpenCookieSettings()">Cookie settings</button>
+        <button type="button" class="cc-reopen" onclick="window.zicyOpenCookieSettings && window.zicyOpenCookieSettings()">Cookie settings</button> ·
+        <a href="/legal/privacy-bm">Bahasa Malaysia</a>
       </p>
     </div>
   </section>
@@ -115,8 +121,8 @@ const sections = [
           <li>Content drafts generated or optimised in the product</li>
         </ul>
         <p>
-          For that second group you, or the client you act for, are the controller. Our processing terms are in
-          the <a href="/legal/dpa">data processing addendum</a>.
+          For that second group you, or the client you act for, are the controller. Our processing terms for that
+          data are available on request from <a href="mailto:privacy@zicy.com">privacy@zicy.com</a>.
         </p>
 
         <h2 id="sec-4-what-we-collect">4. What we collect and why</h2>
@@ -303,7 +309,7 @@ const sections = [
         <h2 id="sec-10-sharing">10. Who we share data with</h2>
         <p>We share personal data only with the categories below, and only as far as needed.</p>
         <ul>
-          <li><strong>Service providers, sometimes called sub-processors.</strong> Hosting, database, email delivery, payments, error monitoring, product analytics and AI providers. Each is bound by contract to protect the data and to use it only on our instructions</li>
+          <li><strong>Service providers, sometimes called sub-processors.</strong> Hosting, database, email delivery, payments, error monitoring, product analytics and AI providers. Each is engaged under its published terms, and where a data processing agreement is in place, it requires that provider to protect the data and process it only on our instructions</li>
           <li><strong>The AI engines we measure.</strong> We send your tracked prompt text</li>
           <li><strong>Your own organisation.</strong> Anyone you invite can see the profiles they are assigned to. An owner can see the organisation's usage and billing</li>
           <li><strong>Professional advisers, auditors and insurers,</strong> under confidentiality</li>
@@ -313,8 +319,7 @@ const sections = [
         <p>We do not sell personal data. We do not share personal data for cross-context behavioural advertising.</p>
         <p>
           <strong>Sub-processor list.</strong> A current list of our sub-processors is available on request from
-          <a href="mailto:privacy@zicy.com">privacy@zicy.com</a>, and is also set out in our
-          <a href="/legal/dpa">data processing addendum</a>.
+          <a href="mailto:privacy@zicy.com">privacy@zicy.com</a>.
         </p>
 
         <h2 id="sec-11-transfers">11. Where your data goes</h2>
@@ -425,7 +430,7 @@ const sections = [
           <li>Role-based access control, with staff access limited to those who need it</li>
           <li>Password hashing, and support for the sign-in methods shown in your account settings</li>
           <li>Logging and monitoring of access to production systems</li>
-          <li>Contractual security obligations on every sub-processor</li>
+          <li>Contractual security obligations on providers where a data processing agreement is in place</li>
           <li>Regular review of access rights</li>
         </ul>
         <p>
@@ -523,6 +528,16 @@ const sections = [
     font-size: 12.5px;
     letter-spacing: 0.02em;
     color: var(--muted);
+  }
+  .lang-notice {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    font-size: 13.5px;
+    color: var(--ink-2);
+    max-width: 620px;
   }
   .sibling-links {
     margin-top: 18px;

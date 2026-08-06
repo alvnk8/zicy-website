@@ -26,9 +26,12 @@ interface Props {
   // Optional override of the social-share image. When set (e.g. a resources post passing its
   // featured image's built URL), it replaces the branded /og/ card. url must be absolute.
   ogImage?: { url: string; width?: number; height?: number; alt?: string; type?: string };
+  // Optional override of the <html lang> attribute for a non-English page (e.g. the Bahasa
+  // Malaysia privacy policy). Defaults to English, which every other page relies on.
+  lang?: string;
 }
 
-const { title, description, ogTitle, ogDescription, noindex = false, ogImage } = Astro.props;
+const { title, description, ogTitle, ogDescription, noindex = false, ogImage, lang = 'en' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 // Per-page social-share image (build-time PNG under /og/), derived from the pathname so the URL
 // advertised here always matches the generated card. Falls back for any unlisted route.
@@ -39,7 +42,7 @@ const ogImg = ogImage
   : { url: og.image, alt: og.alt, type: 'image/png', width: 1200, height: 630 };
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
