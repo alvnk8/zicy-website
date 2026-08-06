@@ -32,18 +32,26 @@ const sections = [
 ];
 ---
 <BaseLayout title={title} description={description}>
+  <link rel="alternate" hreflang="en" href="https://www.zicy.com/legal/privacy" slot="head" />
+  <link rel="alternate" hreflang="ms-MY" href="https://www.zicy.com/legal/privacy-bm" slot="head" />
+  <link rel="alternate" hreflang="x-default" href="https://www.zicy.com/legal/privacy" slot="head" />
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Legal</span>
       <h1>Privacy policy</h1>
       <p class="meta-dates">Last updated: 6 August 2026</p>
+      <p class="lang-notice">
+        This policy is published in English and in Bahasa Malaysia. If this English version conflicts with the
+        Bahasa Malaysia version, the English version prevails.
+      </p>
       <p class="sub">
         This policy explains what Zicy collects, why, who we share it with, and what you can ask us to do about
         it. Zicy is operated by Growth Pro Sdn. Bhd. in Penang, Malaysia.
       </p>
       <p class="sibling-links">
         <a href="/legal/cookies">Cookie policy</a> ·
-        <button type="button" class="cc-reopen" onclick="window.zicyOpenCookieSettings && window.zicyOpenCookieSettings()">Cookie settings</button>
+        <button type="button" class="cc-reopen" onclick="window.zicyOpenCookieSettings && window.zicyOpenCookieSettings()">Cookie settings</button> ·
+        <a href="/legal/privacy-bm">Bahasa Malaysia</a>
       </p>
     </div>
   </section>
@@ -520,6 +528,16 @@ const sections = [
     font-size: 12.5px;
     letter-spacing: 0.02em;
     color: var(--muted);
+  }
+  .lang-notice {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    font-size: 13.5px;
+    color: var(--ink-2);
+    max-width: 620px;
   }
   .sibling-links {
     margin-top: 18px;
