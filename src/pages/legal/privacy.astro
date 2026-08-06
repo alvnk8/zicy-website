@@ -1,0 +1,595 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Built from docs/zicy-privacy-policy-copy-v1.md. Every [FACT-nn] token in that source
+// is an unconfirmed item (retention periods, sub-processor names, hosting region, AI
+// training commitments, the payment processor, and similar). None have been answered
+// yet, so every sentence, bullet or table row that depended on one has been left out
+// entirely rather than guessed or softened. See HANDOVER.md / the session report for
+// the full list of what was omitted and why.
+const title = 'Privacy policy, Zicy';
+const description =
+  'How Zicy and Growth Pro Sdn. Bhd. collect, use, share and protect personal data across the Zicy web app, Chrome extension, AEO/GEO consultant and WordPress plugin.';
+
+const sections = [
+  { id: 'sec-1-short-version', label: '1. The short version' },
+  { id: 'sec-2-who-this-covers', label: '2. Who this policy covers' },
+  { id: 'sec-3-controller-processor', label: '3. Controller and processor' },
+  { id: 'sec-4-what-we-collect', label: '4. What we collect and why' },
+  { id: 'sec-5-google-user-data', label: '5. Google user data' },
+  { id: 'sec-6-chrome-extension', label: '6. The Chrome extension' },
+  { id: 'sec-7-consultant', label: '7. The public AEO and GEO consultant' },
+  { id: 'sec-8-ai-and-models', label: '8. How we use AI' },
+  { id: 'sec-9-cookies', label: '9. Cookies and similar technologies' },
+  { id: 'sec-10-sharing', label: '10. Who we share data with' },
+  { id: 'sec-11-transfers', label: '11. Where your data goes' },
+  { id: 'sec-12-retention', label: '12. How long we keep things' },
+  { id: 'sec-13-security', label: '13. How we protect it' },
+  { id: 'sec-14-your-rights', label: '14. Your rights' },
+  { id: 'sec-15-children', label: '15. Children' },
+  { id: 'sec-16-changes', label: '16. Changes to this policy' },
+  { id: 'sec-17-contact', label: '17. Contact us' },
+];
+---
+<BaseLayout title={title} description={description}>
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy policy</h1>
+      <p class="meta-dates">Last updated: 6 August 2026</p>
+      <p class="sub">
+        This policy explains what Zicy collects, why, who we share it with, and what you can ask us to do about
+        it. Zicy is operated by Growth Pro Sdn. Bhd. in Penang, Malaysia.
+      </p>
+      <p class="sibling-links">
+        <a href="/legal/terms">Terms of service</a> ·
+        <a href="/legal/dpa">Data processing addendum</a> ·
+        <a href="/legal/cookies">Cookie policy</a> ·
+        <button type="button" class="cc-reopen" onclick="window.zicyOpenCookieSettings && window.zicyOpenCookieSettings()">Cookie settings</button>
+      </p>
+    </div>
+  </section>
+
+  <section class="legal-body">
+    <div class="wrap">
+      <article class="prose">
+        <nav class="toc" aria-label="Table of contents">
+          <h2>Contents</h2>
+          <ol>
+            {sections.map((s) => <li><a href={`#${s.id}`}>{s.label}</a></li>)}
+          </ol>
+        </nav>
+
+        <h2 id="sec-1-short-version">1. The short version</h2>
+        <p>A plain-English summary. It is a summary only, and the rest of this policy governs.</p>
+        <table class="ctable">
+          <thead><tr><th>Question</th><th>Answer</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row">Who runs Zicy</th>
+              <td data-col="Answer">Growth Pro Sdn. Bhd., a company registered in Malaysia.</td>
+            </tr>
+            <tr>
+              <th scope="row">What we mainly hold</th>
+              <td data-col="Answer">Your account details, your billing details, the brands and prompts you choose to track, and the data you connect from Google, Bing and your own website.</td>
+            </tr>
+            <tr>
+              <th scope="row">Do we sell your data</th>
+              <td data-col="Answer">No. We do not sell personal data and we do not share it for cross-context behavioural advertising.</td>
+            </tr>
+            <tr>
+              <th scope="row">How long we keep it</th>
+              <td data-col="Answer">While your account is active, then for the periods set out in section 12.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="sec-2-who-this-covers">2. Who this policy covers</h2>
+        <p>This policy applies to:</p>
+        <ul>
+          <li>The Zicy web application at app.zicy.com</li>
+          <li>The Zicy marketing website at zicy.com and the help centre at docs.zicy.com</li>
+          <li>The Zicy Chrome extension</li>
+          <li>The public AEO and GEO consultant tool at zicy.com/consultant</li>
+          <li>The Zicy WordPress plugin</li>
+          <li>Email, support and sales conversations with us</li>
+        </ul>
+        <p>It does not cover third-party websites we link to, or what an AI platform does with a question you type into it directly.</p>
+
+        <h2 id="sec-3-controller-processor">3. When we are the controller and when we are the processor</h2>
+        <p>This distinction matters if you are buying Zicy on behalf of a client or an employer.</p>
+        <p><strong>We are the data controller for:</strong></p>
+        <ul>
+          <li>Your account and profile details</li>
+          <li>Your organisation, team and invitation records</li>
+          <li>Billing, subscription and quota records</li>
+          <li>Product usage, device and log data</li>
+          <li>Marketing and support communications</li>
+        </ul>
+        <p><strong>We are the data processor for:</strong></p>
+        <ul>
+          <li>Brand profiles, tracked prompts and competitor lists you enter</li>
+          <li>Analytics and Search Console data you connect</li>
+          <li>Content crawled from a website you nominate</li>
+          <li>AI engine responses captured for your tracked prompts</li>
+          <li>Content drafts generated or optimised in the product</li>
+        </ul>
+        <p>
+          For that second group you, or the client you act for, are the controller. Our processing terms are in
+          the <a href="/legal/dpa">data processing addendum</a>.
+        </p>
+
+        <h2 id="sec-4-what-we-collect">4. What we collect and why</h2>
+        <p>Everything below is either given to us by you, generated by your use of Zicy, or fetched from a service you connected.</p>
+
+        <h3>4.1 Account and identity</h3>
+        <ul>
+          <li><strong>What:</strong> full name, email address, password (stored hashed, never in readable form), organisation name, organisation ID, sign-in method, role, profile access scope</li>
+          <li><strong>Why:</strong> to create and secure your account, apply permissions, and provide the service</li>
+          <li><strong>Legal basis, where the GDPR applies:</strong> performance of a contract</li>
+        </ul>
+
+        <h3>4.2 Team and invitations</h3>
+        <ul>
+          <li><strong>What:</strong> the email address, role and status of anyone you invite, and the expiry of their invitation</li>
+          <li><strong>Why:</strong> to run team access and quota allocation</li>
+          <li><strong>Note:</strong> if you invite a colleague, you are asking us to email them on your behalf. Only invite people who expect to hear from you</li>
+          <li><strong>Legal basis:</strong> performance of a contract, and our legitimate interest in operating team features</li>
+        </ul>
+
+        <h3>4.3 Billing and subscription</h3>
+        <ul>
+          <li><strong>What:</strong> plan, quota and credit usage, add-on purchases, voucher redemptions, invoices, billing contact details</li>
+          <li><strong>Why:</strong> to take payment, issue invoices, meet tax and accounting obligations</li>
+          <li><strong>Legal basis:</strong> performance of a contract, and legal obligation</li>
+        </ul>
+
+        <h3>4.4 Brand and prompt data</h3>
+        <ul>
+          <li><strong>What:</strong> brand names and variations, website URLs, industry, products and services, mission, unique selling proposition, tone and writing style, competitor names and URLs, brand facts such as founding year and headquarters, the prompts you track, and the tags you apply</li>
+          <li><strong>Why:</strong> every Zicy module is calibrated against this. Without it we cannot measure anything</li>
+          <li><strong>Personal data warning:</strong> these fields are free text. Do not enter personal data about individuals unless you need to, and never enter special category data such as health or biometric information</li>
+          <li><strong>Legal basis:</strong> performance of a contract. Where the data belongs to your client, we process it on your instructions</li>
+        </ul>
+
+        <h3>4.5 AI engine responses</h3>
+        <ul>
+          <li><strong>What:</strong> the answers ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode return for your tracked prompts, plus the brands, positions, sentiment and citations we extract from them</li>
+          <li><strong>How:</strong> we send your tracked prompt to each engine on a daily cycle and record the response</li>
+          <li><strong>Incidental personal data:</strong> an AI answer can name a person, for example a founder or an author. We store the answer as returned so you have the evidence</li>
+          <li><strong>Legal basis:</strong> performance of a contract, and our legitimate interest in providing a measurement record you can rely on</li>
+        </ul>
+
+        <h3>4.6 Connected Google accounts</h3>
+        <p>Covered separately in section 5, because Google imposes specific rules on us.</p>
+
+        <h3>4.7 Connected Bing Webmaster Tools</h3>
+        <ul>
+          <li><strong>What:</strong> impressions, clicks, click-through rate, average position, top pages and top queries for the property you connect</li>
+          <li><strong>Why:</strong> Bing's index also feeds Microsoft Copilot and other answer engines, so it is part of your visibility picture</li>
+          <li><strong>Legal basis:</strong> performance of a contract</li>
+        </ul>
+
+        <h3>4.8 WordPress plugin and AI bot logs</h3>
+        <ul>
+          <li><strong>What:</strong> access-log records showing which AI crawlers visited your site and which pages they read. Depending on your server configuration these logs can contain IP addresses and user-agent strings</li>
+          <li><strong>Why:</strong> to show you which AI assistants are actually reading your site and where they take answers from</li>
+          <li><strong>Your responsibility:</strong> you are the controller of your own server logs. Only sync them if you are entitled to</li>
+          <li><strong>Legal basis:</strong> performance of a contract, on your instructions</li>
+        </ul>
+
+        <h3>4.9 Website crawl data</h3>
+        <ul>
+          <li><strong>What:</strong> page URLs, titles, meta descriptions, headings, body content, structured data, robots.txt, sitemap and llms.txt for the domain you nominate</li>
+          <li><strong>Why:</strong> to run site audits, page summaries, duplicate detection and content scoring</li>
+          <li><strong>Limit:</strong> we crawl only domains you nominate on a brand profile, and we never publish or change anything on your website. Every asset Zicy produces is handed to you to publish yourself</li>
+          <li><strong>Legal basis:</strong> performance of a contract</li>
+        </ul>
+
+        <h3>4.10 Ask Zicy and the AI consultant</h3>
+        <ul>
+          <li><strong>What:</strong> the messages you type into Ask Zicy, the chat tab titles you set, and the responses returned</li>
+          <li><strong>Why:</strong> to answer your question and to meter chat usage against your plan</li>
+          <li><strong>Legal basis:</strong> performance of a contract</li>
+        </ul>
+
+        <h3>4.11 Generated and optimised content</h3>
+        <ul>
+          <li><strong>What:</strong> article drafts, optimised page copy, schema markup and llms.txt files produced in the product, and the inputs you gave to produce them</li>
+          <li><strong>Why:</strong> so your content library persists and you can return to a draft</li>
+          <li><strong>Legal basis:</strong> performance of a contract</li>
+        </ul>
+
+        <h3>4.12 Product usage, device and log data</h3>
+        <ul>
+          <li><strong>What:</strong> IP address, browser and device type, pages and features used, timestamps, referring URL, error and diagnostic records</li>
+          <li><strong>Why:</strong> to keep the service secure, diagnose faults, prevent abuse, and understand which features are used</li>
+          <li><strong>Legal basis:</strong> legitimate interests in securing and improving the service</li>
+        </ul>
+
+        <h3>4.13 Communications and marketing</h3>
+        <ul>
+          <li><strong>What:</strong> contact form and demo request details, support conversations, and email preferences</li>
+          <li><strong>Why:</strong> to reply to you and to send product and marketing email you have asked for</li>
+          <li><strong>Control:</strong> the notification centre in Settings has a master switch to pause all optional emails. Emails about payments, invoices and invitations are operational and are always sent</li>
+          <li><strong>Legal basis:</strong> consent for marketing, legitimate interests for operational messages</li>
+        </ul>
+
+        <h2 id="sec-5-google-user-data">5. Google user data, and Google's Limited Use requirements</h2>
+        <p>
+          If you connect Google Analytics or Google Search Console, Zicy accesses Google user data through Google
+          APIs, with your explicit permission at the consent screen.
+        </p>
+        <p><strong>What we access:</strong></p>
+        <ul>
+          <li>Google Analytics: traffic, source and engagement metrics for the property you select, including the AI referral sources we report on</li>
+          <li>Google Search Console: query, impression, click, click-through rate and position data for the property you select</li>
+          <li>The email address of the connected Google account, so you can see which account is linked and disconnect it</li>
+        </ul>
+        <p><strong>How we use it:</strong> only to produce the reports and features you can see in Zicy. Nothing else.</p>
+        <p>
+          <strong>The Limited Use commitment.</strong> Zicy's use and transfer of information received from
+          Google APIs adheres to the
+          <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>,
+          including the Limited Use requirements. In practice that means:
+        </p>
+        <ul>
+          <li>We use Google user data only to provide or improve features that are visible and prominent in Zicy</li>
+          <li>We do not transfer Google user data except to provide those features with your consent, for security purposes, to comply with the law, or in a merger, acquisition or sale of assets</li>
+          <li>We do not allow humans to read Google user data, except where you have specifically agreed, where it is necessary for security or to comply with the law, or where the data is aggregated for internal operations</li>
+          <li>We do not use Google user data for advertising, and we do not sell it</li>
+        </ul>
+        <p>
+          <strong>How to disconnect:</strong> open Site Traffic in the app and choose Disconnect on the Analytics or
+          Search Console tab, or revoke Zicy's access at
+          <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>. Revoking access
+          stops future syncing. To delete data already imported, contact
+          <a href="mailto:privacy@zicy.com">privacy@zicy.com</a>.
+        </p>
+
+        <h2 id="sec-6-chrome-extension">6. The Chrome extension</h2>
+        <p>The Zicy Chrome extension audits a page for AI readiness when you ask it to.</p>
+        <ul>
+          <li>It analyses a page only when you trigger an audit. It does not run in the background</li>
+          <li>It does not track or transmit your browsing history</li>
+          <li>It does not sell or share your data with third parties for their own purposes</li>
+          <li>Uninstalling the extension stops all collection</li>
+        </ul>
+
+        <h2 id="sec-7-consultant">7. The public AEO and GEO consultant</h2>
+        <p>The consultant tool at zicy.com/consultant is open to visitors without an account.</p>
+        <ul>
+          <li>We process the questions and URLs you submit in order to answer them</li>
+          <li>Do not paste confidential or personal information into a public tool</li>
+        </ul>
+
+        <h2 id="sec-8-ai-and-models">8. How we use AI, and whether your data trains models</h2>
+        <p>
+          This is the question buyers ask most, so we answer it directly. We use AI in two different ways, and we
+          keep them separate rather than blur them together.
+        </p>
+
+        <h3>OpenAI: Ask Zicy, embeddings, content and analysis</h3>
+        <p>Ask Zicy, our embeddings, and our content and analysis tools run on OpenAI's API.</p>
+        <ul>
+          <li>OpenAI does not use API data to train its models unless the customer opts in to that. Zicy has not opted in</li>
+          <li>OpenAI may retain API inputs and outputs for up to 30 days for abuse monitoring, then deletes them</li>
+          <li>OpenAI has completed a SOC 2 Type 2 audit covering the API platform</li>
+        </ul>
+
+        <h3>Tracked prompts sent to the AI engines we measure</h3>
+        <p>
+          Separately from how we use OpenAI, Zicy sends your tracked prompts to ChatGPT, Gemini, Perplexity,
+          Google AI Overviews and Google AI Mode, in order to record what those engines answer. That is the
+          product itself.
+        </p>
+
+        <ul>
+          <li>We do use aggregated and de-identified statistics, which cannot identify you or your clients, to improve Zicy's benchmarks and features</li>
+          <li>We do not make decisions about you that have a legal or similarly significant effect using automated processing alone</li>
+        </ul>
+
+        <h2 id="sec-9-cookies">9. Cookies and similar technologies</h2>
+        <p>
+          We use cookies and similar technologies for sign-in and security, for remembering preferences such as
+          the theme toggle, and for measuring how the site and product are used.
+        </p>
+        <p>
+          Non-essential cookies are set only with your consent, and you can change your choice at any time using
+          <button type="button" class="cc-reopen inline" onclick="window.zicyOpenCookieSettings && window.zicyOpenCookieSettings()">Cookie settings</button>
+          in the footer. The full list is in the <a href="/legal/cookies">cookie policy</a>.
+        </p>
+
+        <h2 id="sec-10-sharing">10. Who we share data with</h2>
+        <p>We share personal data only with the categories below, and only as far as needed.</p>
+        <ul>
+          <li><strong>Service providers, sometimes called sub-processors.</strong> Hosting, database, email delivery, payments, error monitoring, product analytics and AI providers. Each is bound by contract to protect the data and to use it only on our instructions</li>
+          <li><strong>The AI engines we measure.</strong> We send your tracked prompt text</li>
+          <li><strong>Your own organisation.</strong> Anyone you invite can see the profiles they are assigned to. An owner can see the organisation's usage and billing</li>
+          <li><strong>Professional advisers, auditors and insurers,</strong> under confidentiality</li>
+          <li><strong>Authorities,</strong> where we are legally required to disclose, and where lawful we will tell you first</li>
+          <li><strong>A buyer,</strong> if the business is merged, acquired or sold, with notice to you</li>
+        </ul>
+        <p>We do not sell personal data. We do not share personal data for cross-context behavioural advertising.</p>
+        <p>
+          <strong>Sub-processor list.</strong> A current list of our sub-processors is available on request from
+          <a href="mailto:privacy@zicy.com">privacy@zicy.com</a>, and is also set out in our
+          <a href="/legal/dpa">data processing addendum</a>.
+        </p>
+
+        <h2 id="sec-11-transfers">11. Where your data goes</h2>
+        <p>
+          Growth Pro Sdn. Bhd. is in Malaysia, and the providers we use operate in several countries, so your data
+          may be processed outside the country you are in.
+        </p>
+        <p>
+          The Personal Data Protection (Amendment) Act 2024 replaced the old transfer whitelist with a risk-based
+          test: a transfer is permitted where the destination has law substantially similar to the PDPA or
+          provides an adequate level of protection, or under one of the Act's other permitted grounds. The
+          Personal Data Protection Commissioner's 2025 Cross-Border Personal Data Transfer Guidelines accept
+          contractual protections, including the European Commission's standard contractual clauses, as one valid
+          way to meet that test.
+        </p>
+        <table class="ctable">
+          <thead><tr><th>Provider</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row">Google</th>
+              <td data-col="Purpose">Firebase Authentication for sign-in, and Google Analytics 4 and Tag Manager for site and product analytics</td>
+            </tr>
+            <tr>
+              <th scope="row">Stripe</th>
+              <td data-col="Purpose">Payment processing</td>
+            </tr>
+            <tr>
+              <th scope="row">Sentry</th>
+              <td data-col="Purpose">Error and crash monitoring. Sentry's ingest region for Zicy is the United States</td>
+            </tr>
+            <tr>
+              <th scope="row">Vercel</th>
+              <td data-col="Purpose">Marketing site hosting and cookieless site analytics</td>
+            </tr>
+            <tr>
+              <th scope="row">OpenAI</th>
+              <td data-col="Purpose">Ask Zicy, embeddings, content and analysis features</td>
+            </tr>
+            <tr>
+              <th scope="row">MongoDB Atlas</th>
+              <td data-col="Purpose">Primary database and vector search</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>You can ask us for more detail on the safeguards at <a href="mailto:privacy@zicy.com">privacy@zicy.com</a>.</p>
+
+        <h2 id="sec-12-retention">12. How long we keep things</h2>
+        <table class="ctable">
+          <thead><tr><th>Data</th><th>Kept for</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row">Account and profile records</th>
+              <td data-col="Kept for">Life of the account, then deleted 90 days after closure</td>
+              <td data-col="Why">Industry-standard grace period for accidental closure and reactivation</td>
+            </tr>
+            <tr>
+              <th scope="row">Brand profiles, tracked prompts and analysis history</th>
+              <td data-col="Kept for">Life of the account, then deleted 90 days after closure</td>
+              <td data-col="Why">One rule across product data is easier to honour than five</td>
+            </tr>
+            <tr>
+              <th scope="row">AI engine responses</th>
+              <td data-col="Kept for">Life of the account, then deleted 90 days after closure</td>
+              <td data-col="Why">This is the historical trend record the product exists to build</td>
+            </tr>
+            <tr>
+              <th scope="row">Connected Google and Bing data, after disconnect</th>
+              <td data-col="Kept for">30 days</td>
+              <td data-col="Why">Deliberately short. Google's Limited Use terms push toward prompt deletion, and a short window is a selling point</td>
+            </tr>
+            <tr>
+              <th scope="row">Ask Zicy chat history, after account closure</th>
+              <td data-col="Kept for">90 days</td>
+              <td data-col="Why">Matches the account rule</td>
+            </tr>
+            <tr>
+              <th scope="row">Generated content drafts</th>
+              <td data-col="Kept for">Life of the account, then deleted 90 days after closure</td>
+              <td data-col="Why">Matches the account rule</td>
+            </tr>
+            <tr>
+              <th scope="row">Billing and invoice records</th>
+              <td data-col="Kept for">7 years</td>
+              <td data-col="Why">Not discretionary. Malaysian tax law requires business records to be kept for 7 years</td>
+            </tr>
+            <tr>
+              <th scope="row">Security and access logs</th>
+              <td data-col="Kept for">12 months</td>
+              <td data-col="Why">Long enough for incident forensics, proportionate under storage limitation</td>
+            </tr>
+            <tr>
+              <th scope="row">Data sent to OpenAI</th>
+              <td data-col="Kept for">Up to 30 days, held by OpenAI</td>
+              <td data-col="Why">OpenAI's published API retention for abuse monitoring, then deleted. Not used for training</td>
+            </tr>
+            <tr>
+              <th scope="row">Marketing contacts</th>
+              <td data-col="Kept for">Until you unsubscribe, then suppression-list only</td>
+              <td data-col="Why"></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Data deleted from live systems remains in encrypted backups until the backup cycle overwrites it.</p>
+
+        <h2 id="sec-13-security">13. How we protect it</h2>
+        <ul>
+          <li>Encryption in transit using TLS, and encryption at rest</li>
+          <li>Role-based access control, with staff access limited to those who need it</li>
+          <li>Password hashing, and support for the sign-in methods shown in your account settings</li>
+          <li>Logging and monitoring of access to production systems</li>
+          <li>Contractual security obligations on every sub-processor</li>
+          <li>Regular review of access rights</li>
+        </ul>
+        <p>
+          No system is perfectly secure. If a breach occurs that is likely to cause you significant harm, we will
+          notify the Personal Data Protection Commissioner of Malaysia as soon as practicable and in any event
+          within 72 hours of becoming aware of it, and we will notify affected individuals without undue delay and
+          no later than seven days after that report, as required by the Personal Data Protection Act 2010 as
+          amended. Where the GDPR applies, we will meet its equivalent obligations.
+        </p>
+
+        <h2 id="sec-14-your-rights">14. Your rights</h2>
+
+        <h3>If you are in Malaysia</h3>
+        <p>
+          Under the Personal Data Protection Act 2010, as amended by the Personal Data Protection (Amendment) Act
+          2024, you can:
+        </p>
+        <ul>
+          <li>Ask for access to the personal data we hold about you</li>
+          <li>Ask us to correct data that is inaccurate, incomplete or out of date</li>
+          <li>Withdraw consent where we rely on it</li>
+          <li>Ask us to stop processing that is causing or likely to cause damage or distress</li>
+          <li>Ask us to stop processing for direct marketing</li>
+          <li>Ask us to transmit your personal data to another data controller, where that is technically feasible and the formats are compatible</li>
+          <li>Complain to the Personal Data Protection Commissioner</li>
+        </ul>
+
+        <h3>If you are in the European Economic Area or the United Kingdom</h3>
+        <p>
+          You can also ask for erasure, restriction of processing, and a copy of your data in a portable format,
+          and you can object to processing based on legitimate interests. You can complain to your local
+          supervisory authority.
+        </p>
+
+        <h3>If you are in California</h3>
+        <p>
+          You can ask what we collect, ask for a copy, ask for deletion, ask for correction, and you have the
+          right not to be discriminated against for exercising these rights. We do not sell personal information
+          and we do not share it for cross-context behavioural advertising, so there is no opt-out for you to
+          exercise on those points.
+        </p>
+
+        <h3>How to make a request</h3>
+        <p>
+          Email <a href="mailto:privacy@zicy.com">privacy@zicy.com</a>. We will verify your identity before
+          acting, and we will respond within the period the law allows, which is 21 days in Malaysia and one
+          month under the GDPR unless we tell you we need longer.
+        </p>
+        <p>
+          If your data sits inside a Zicy account run by someone else, for example an agency that added you,
+          please contact them first. We will help them respond.
+        </p>
+
+        <h2 id="sec-15-children">15. Children</h2>
+        <p>
+          Zicy is a business tool and is not intended for children. We do not knowingly collect personal data from
+          anyone under 18. If you believe a child has given us data, email
+          <a href="mailto:privacy@zicy.com">privacy@zicy.com</a> and we will delete it.
+        </p>
+
+        <h2 id="sec-16-changes">16. Changes to this policy</h2>
+        <p>
+          We will post any change on this page and update the date at the top. If a change materially affects
+          your rights, we will tell you by email or in the product before it takes effect.
+        </p>
+
+        <h2 id="sec-17-contact">17. Contact us</h2>
+        <ul>
+          <li><strong>Privacy questions and rights requests:</strong> <a href="mailto:privacy@zicy.com">privacy@zicy.com</a></li>
+          <li><strong>Postal address:</strong> Growth Pro Sdn. Bhd., 60 Persiaran Midlands, 10250 Penang, Malaysia</li>
+          <li><strong>Regulator in Malaysia:</strong> Personal Data Protection Department (Jabatan Perlindungan Data Peribadi), <a href="https://www.pdp.gov.my/">pdp.gov.my</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Scoped to this page only — does not touch the sitewide `section` rule in theme.css,
+     which every other page still uses. */
+  .legal-body {
+    padding: clamp(24px, 3vw, 36px) 0;
+  }
+  .prose {
+    max-width: 700px;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .prose h3 {
+    color: var(--ink);
+  }
+  .meta-dates {
+    margin-top: 14px;
+    font-family: var(--fm);
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+  .sibling-links {
+    margin-top: 18px;
+    font-size: 14.5px;
+    color: var(--ink-2);
+  }
+  .sibling-links a {
+    color: var(--violet-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .sibling-links a:hover {
+    color: var(--violet-900);
+  }
+  .cc-reopen {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: var(--violet-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+  .cc-reopen:hover {
+    color: var(--violet-900);
+  }
+  .cc-reopen.inline {
+    font-size: inherit;
+  }
+  .toc {
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    padding: 20px 24px;
+    margin-bottom: 8px;
+  }
+  .toc h2 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-family: var(--fm);
+    font-weight: 500;
+  }
+  .toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 24px;
+  }
+  .toc li {
+    font-size: 14.5px;
+  }
+  .toc a {
+    color: var(--violet-700);
+    text-decoration: none;
+  }
+  .toc a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 560px) {
+    .toc ol {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,309 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Built from docs/zicy-cookie-policy-copy-v1.md, with every [FACT-Cnn] token resolved
+// from docs/zicy-cookie-inventory-verified_1.md (v2, supersedes v1, live inspection of
+// www.zicy.com and app.zicy.com on 6 August 2026). Section 8 (Chrome extension /
+// WordPress plugin) had no evidence for either FACT-C09 or FACT-C10, so it was deleted
+// in full rather than guessed, and the sections after it renumbered.
+const title = 'Cookie policy, Zicy';
+const description =
+  'Which cookies and storage items Zicy sets on www.zicy.com and app.zicy.com, what each one does, and how to change your consent choices at any time.';
+
+const sections = [
+  { id: 'sec-1-short-version', label: '1. The short version' },
+  { id: 'sec-2-what-a-cookie-is', label: '2. What a cookie is' },
+  { id: 'sec-3-categories', label: '3. The categories we use' },
+  { id: 'sec-4-cookies-we-set', label: '4. The cookies we actually set' },
+  { id: 'sec-5-third-parties', label: '5. Third parties that can set cookies' },
+  { id: 'sec-6-change-choices', label: '6. How to change your choices' },
+  { id: 'sec-7-consent', label: '7. Consent, and where it applies' },
+  { id: 'sec-8-changes', label: '8. Changes to this policy' },
+  { id: 'sec-9-contact', label: '9. Contact' },
+];
+---
+<BaseLayout title={title} description={description}>
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Legal</span>
+      <h1>Cookie policy</h1>
+      <p class="meta-dates">Last updated: 6 August 2026 · Effective: 6 August 2026</p>
+      <p class="sub">
+        This policy explains the cookies and similar technologies Zicy uses, what each one is for, and how to
+        change your choices. It sits alongside our privacy policy. It covers both www.zicy.com and app.zicy.com:
+        Google and Stripe set some cookies at the shared .zicy.com domain, so a visitor cannot tell which host set
+        what.
+      </p>
+      <p class="sibling-links">
+        <a href="/legal/privacy">Privacy policy</a> ·
+        <a href="/legal/terms">Terms of service</a> ·
+        <a href="/legal/dpa">Data processing addendum</a> ·
+        <button type="button" class="cc-reopen" onclick="window.zicyOpenCookieSettings && window.zicyOpenCookieSettings()">Cookie settings</button>
+      </p>
+    </div>
+  </section>
+
+  <section class="legal-body">
+    <div class="wrap">
+      <article class="prose">
+        <nav class="toc" aria-label="Table of contents">
+          <h2>Contents</h2>
+          <ol>
+            {sections.map((s) => <li><a href={`#${s.id}`}>{s.label}</a></li>)}
+          </ol>
+        </nav>
+
+        <h2 id="sec-1-short-version">1. The short version</h2>
+        <ul>
+          <li>Cookies that keep you signed in and keep the service secure are always on. The site cannot work without them</li>
+          <li>Everything else is off until you say yes</li>
+          <li>
+            You can change your mind at any time using
+            <button type="button" class="cc-reopen inline" onclick="window.zicyOpenCookieSettings && window.zicyOpenCookieSettings()">Cookie settings</button>
+            in the footer
+          </li>
+          <li>We do not use cookies to sell your data or to build advertising profiles about you</li>
+        </ul>
+
+        <h2 id="sec-2-what-a-cookie-is">2. What a cookie is</h2>
+        <p>A cookie is a small text file a website stores on your device so it can recognise your browser on a later visit.</p>
+        <p>We use the word cookie loosely in this policy to also cover similar technologies, which do a comparable job:</p>
+        <ul>
+          <li><strong>Local storage and session storage,</strong> which hold data in your browser rather than in a cookie file</li>
+          <li><strong>Pixels and tags,</strong> small pieces of code that record that a page or an email was opened</li>
+          <li><strong>Software development kits,</strong> code inside our Chrome extension and WordPress plugin</li>
+        </ul>
+        <p>
+          The marketing site at www.zicy.com is served as static files, with no request-time server, so it cannot
+          set cookies itself. Every storage item you can find on either www.zicy.com or app.zicy.com is set by
+          client-side code, or by the Zicy app's own sign-in and payment systems, and is listed in section 4.
+        </p>
+
+        <h2 id="sec-3-categories">3. The categories we use</h2>
+        <h3>Strictly necessary</h3>
+        <p>These are required for the service to function and are set without consent, because you cannot use Zicy without them.</p>
+        <p>
+          They do things like keep you signed in across pages, remember which brand profile is active, protect
+          forms against cross-site request forgery, balance server load, and enforce your plan's limits.
+        </p>
+
+        <h3>Functional</h3>
+        <p>
+          These remember preferences so the product behaves the way you left it. Examples are the light and dark
+          theme toggle, your language, your dismissal of a banner, and your saved filters.
+        </p>
+        <p>Turning these off does not break Zicy, but it will keep forgetting your choices.</p>
+
+        <h3>Analytics</h3>
+        <p>
+          These tell us which pages and features are used, where people get stuck, and which errors are firing.
+          We use this to fix and improve the product.
+        </p>
+        <p>
+          We use Google Consent Mode v2. Before you give consent, analytics runs without cookies and without
+          personalised advertising signals.
+        </p>
+
+        <h2 id="sec-4-cookies-we-set">4. The cookies we actually set</h2>
+        <table class="ctable">
+          <thead><tr><th>Name</th><th>Provider</th><th>Category</th><th>Purpose</th><th>Lifetime</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row">zicy-consent</th>
+              <td data-col="Provider">Zicy, first party, browser localStorage</td>
+              <td data-col="Category">Strictly necessary</td>
+              <td data-col="Purpose">Stores your cookie choice so the banner does not ask again</td>
+              <td data-col="Lifetime">Until you clear site data. Browser storage has no expiry date</td>
+            </tr>
+            <tr>
+              <th scope="row">currentToken</th>
+              <td data-col="Provider">Zicy, first party</td>
+              <td data-col="Category">Strictly necessary</td>
+              <td data-col="Purpose">Keeps you signed in to the Zicy app</td>
+              <td data-col="Lifetime">Until you sign out or the session expires</td>
+            </tr>
+            <tr>
+              <th scope="row">firebase:authUser</th>
+              <td data-col="Provider">Google Firebase, first party, browser localStorage</td>
+              <td data-col="Category">Strictly necessary</td>
+              <td data-col="Purpose">Holds your sign-in session for the Zicy app</td>
+              <td data-col="Lifetime">Until you sign out</td>
+            </tr>
+            <tr>
+              <th scope="row">__stripe_mid</th>
+              <td data-col="Provider">Stripe</td>
+              <td data-col="Category">Strictly necessary</td>
+              <td data-col="Purpose">Fraud prevention on payment pages</td>
+              <td data-col="Lifetime">1 year</td>
+            </tr>
+            <tr>
+              <th scope="row">__stripe_sid</th>
+              <td data-col="Provider">Stripe</td>
+              <td data-col="Category">Strictly necessary</td>
+              <td data-col="Purpose">Fraud prevention within a single session</td>
+              <td data-col="Lifetime">30 minutes</td>
+            </tr>
+            <tr>
+              <th scope="row">_ga</th>
+              <td data-col="Provider">Google Analytics, first party</td>
+              <td data-col="Category">Analytics</td>
+              <td data-col="Purpose">Distinguishes one visitor from another</td>
+              <td data-col="Lifetime">2 years</td>
+            </tr>
+            <tr>
+              <th scope="row">_ga_YEW4D13JKT and _ga_KV5E88LTXN</th>
+              <td data-col="Provider">Google Analytics, first party</td>
+              <td data-col="Category">Analytics</td>
+              <td data-col="Purpose">Keep session state for the Zicy website and the Zicy app respectively</td>
+              <td data-col="Lifetime">2 years</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>The analytics cookies are set only after you accept analytics cookies. If you decline, Zicy's site measurement runs without cookies.</p>
+        <p>
+          Cookie names and lifetimes change as we ship. If you find one on our site that is not listed here, tell
+          us at <a href="mailto:privacy@zicy.com">privacy@zicy.com</a> and we will correct this page.
+        </p>
+
+        <h2 id="sec-5-third-parties">5. Third parties that can set cookies</h2>
+        <ul>
+          <li><strong>Google,</strong> for Tag Manager, Analytics 4 and Firebase Authentication. <a href="https://policies.google.com/privacy">policies.google.com/privacy</a></li>
+          <li><strong>Stripe,</strong> for payment processing and payment fraud prevention. <a href="https://stripe.com/privacy">stripe.com/privacy</a></li>
+          <li><strong>Vercel,</strong> for privacy-friendly site analytics that sets no cookies and no browser storage. <a href="https://vercel.com/legal/privacy-policy">vercel.com/legal/privacy-policy</a></li>
+        </ul>
+        <p>
+          Where a third party sets a cookie through our site, that provider's own notice governs what it does with
+          the data. We choose our providers carefully and bind them by contract, but we do not control their
+          notices.
+        </p>
+
+        <h2 id="sec-6-change-choices">6. How to change your choices</h2>
+        <ul>
+          <li>
+            <strong>On our site:</strong> open
+            <button type="button" class="cc-reopen inline" onclick="window.zicyOpenCookieSettings && window.zicyOpenCookieSettings()">Cookie settings</button>
+            here or in the footer. Your choice is stored and applied on every later visit. This is Zicy's own
+            consent tool; we do not use a third-party consent platform
+          </li>
+          <li><strong>In your browser:</strong> every major browser lets you block or delete cookies in its settings. Blocking strictly necessary cookies will stop Zicy from working</li>
+        </ul>
+        <p>Clearing your cookies also clears your stored consent choice, so you will be asked again on your next visit.</p>
+
+        <h2 id="sec-7-consent">7. Consent, and where it applies</h2>
+        <p>
+          If you are in the European Economic Area or the United Kingdom, we ask for your consent before setting
+          any cookie that is not strictly necessary, and we do not treat continued browsing as consent.
+        </p>
+        <p>
+          If you are in Malaysia, Personal Data Protection Act 2010 as amended, or in California, we still give
+          you the same controls. We think one standard is simpler than three.
+        </p>
+        <p>You can withdraw consent at any time, and withdrawing is as easy as giving it.</p>
+
+        <h2 id="sec-8-changes">8. Changes to this policy</h2>
+        <p>
+          We update this page when our cookies change, and we change the date at the top. If a change means we
+          need your consent again, we will ask.
+        </p>
+
+        <h2 id="sec-9-contact">9. Contact</h2>
+        <ul>
+          <li><strong>Questions about cookies:</strong> <a href="mailto:privacy@zicy.com">privacy@zicy.com</a></li>
+          <li><strong>Postal address:</strong> Growth Pro Sdn. Bhd., 60 Persiaran Midlands, 10250 Penang, Malaysia</li>
+          <li><strong>More detail on how we handle personal data:</strong> see the <a href="/legal/privacy">privacy policy</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Scoped to this page only — does not touch the sitewide `section` rule in theme.css,
+     which every other page still uses. Matches src/pages/legal/privacy.astro exactly. */
+  .legal-body {
+    padding: clamp(24px, 3vw, 36px) 0;
+  }
+  .prose {
+    max-width: 700px;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .prose h3 {
+    color: var(--ink);
+  }
+  .meta-dates {
+    margin-top: 14px;
+    font-family: var(--fm);
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+  .sibling-links {
+    margin-top: 18px;
+    font-size: 14.5px;
+    color: var(--ink-2);
+  }
+  .sibling-links a {
+    color: var(--violet-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .sibling-links a:hover {
+    color: var(--violet-900);
+  }
+  .cc-reopen {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: var(--violet-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+  .cc-reopen:hover {
+    color: var(--violet-900);
+  }
+  .cc-reopen.inline {
+    font-size: inherit;
+  }
+  .toc {
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    padding: 20px 24px;
+    margin-bottom: 8px;
+  }
+  .toc h2 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-family: var(--fm);
+    font-weight: 500;
+  }
+  .toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 24px;
+  }
+  .toc li {
+    font-size: 14.5px;
+  }
+  .toc a {
+    color: var(--violet-700);
+    text-decoration: none;
+  }
+  .toc a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 560px) {
+    .toc ol {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
