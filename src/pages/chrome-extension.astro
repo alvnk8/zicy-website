@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { webPageSchema } from '../lib/schema';
 
 const title = 'Zicy Chrome extension, AEO/GEO audit & AI consultant in your browser';
 const description =
@@ -28,6 +29,7 @@ const softwareApp = {
 };
 ---
 <BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/chrome-extension', title))} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(softwareApp)} />
 
   <section class="hero inner">

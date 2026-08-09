@@ -6,6 +6,7 @@ export const SITE = {
   url: 'https://www.zicy.com',
   tagline: 'The truth layer for AI visibility.',
   legalName: 'Growth Pro Sdn. Bhd.',
+  regNumber: 'Reg. 202001011280 (1367600-U)',
   description:
     "Zicy is the truth layer for AI visibility, see how every AI engine describes your brand, whether it's true, and how to fix it. All engines. All languages. All markets.",
   linkedin: 'https://www.linkedin.com/company/askzicy/',

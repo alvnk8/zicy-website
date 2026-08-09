@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../data/site';
 import { RESOURCE_POSTS } from '../data/resources-posts';
+import { webPageSchema } from '../lib/schema';
 
 const title = 'Zicy resources, AI visibility guides, research and updates';
 const description =
@@ -52,6 +53,7 @@ function fmtDate(iso: string): string {
 const postsIn = (section: string) => RESOURCE_POSTS.filter((p) => p.articleSection === section);
 ---
 <BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/resources', title))} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(blog)} />
 
   <section class="hero inner">

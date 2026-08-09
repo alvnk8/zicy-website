@@ -4,22 +4,24 @@
 // Chrome-extension app, per-page product entity pages) live in their own pages and are
 // deliberately NOT defined here.
 //
-// Confirmed by the owner (2026-06-17): foundingDate 2026 (Zicy the brand); Alvin Koay LinkedIn.
+// The canonical Organization node (orgNode, from ../lib/schema) is only spliced into the graph
+// on the homepage — every other page's WebPage node references it by @id instead (see
+// webPageSchema in ../lib/schema). Emitting the full node on every page would put one node with
+// the same @id in every file under dist/, which is the entity fragmentation this guards against.
+//
 // Still omitted on purpose (do not add without confirmation):
 //  - featureList / module count: live count unreconciled. Omitted (absent beats wrong).
 //
 // House style: human-readable strings in sentence case, no em dash, no banned vocab. Engine
 // names are kept out of the descriptions so the canonical-five fixed-order rule does not apply.
 import { SITE } from '../data/site';
+import { ORG_ID, PERSON_IDS, orgNode } from '../lib/schema';
 
-const orgId = `${SITE.url}/#org`;
+const orgId = ORG_ID;
 const appId = `${SITE.url}/#app`;
 const siteId = `${SITE.url}/#site`;
-const person = {
-  alvin: `${SITE.url}/about#alvin-koay`,
-  ritu: `${SITE.url}/about#ritu-khanna`,
-  peter: `${SITE.url}/about#peter-kua`,
-};
+const person = PERSON_IDS;
+const isHome = Astro.url.pathname === '/';
 
 const monthly = (price: string) => ({
   '@type': 'UnitPriceSpecification',
@@ -39,42 +41,7 @@ const graph = {
       name: SITE.name,
       publisher: { '@id': orgId },
     },
-    {
-      '@type': 'Organization',
-      '@id': orgId,
-      name: SITE.name,
-      legalName: SITE.legalName,
-      url: `${SITE.url}/`,
-      foundingDate: '2026',
-      logo: `${SITE.url}/zicy-logo.png`,
-      description:
-        'Zicy is the truth layer for AI visibility, showing how AI engines describe your brand, whether it is accurate, and how to improve it.',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: '60 Persiaran Midlands',
-        postalCode: '10250',
-        addressLocality: 'Penang',
-        addressCountry: 'MY',
-      },
-      parentOrganization: {
-        '@type': 'Organization',
-        name: 'Growth.pro',
-        url: 'https://www.growth.pro/',
-      },
-      sameAs: [
-        SITE.linkedin,
-        'https://www.facebook.com/askzicy',
-        'https://www.instagram.com/askzicy/',
-        'https://www.youtube.com/@askzicy',
-        'https://www.growth.pro/',
-      ],
-      founder: { '@id': person.alvin },
-      employee: [
-        { '@id': person.alvin },
-        { '@id': person.ritu },
-        { '@id': person.peter },
-      ],
-    },
+    ...(isHome ? [orgNode] : []),
     {
       '@type': 'SoftwareApplication',
       '@id': appId,

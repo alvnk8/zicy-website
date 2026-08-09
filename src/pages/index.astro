@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Screenshot from '../components/Screenshot.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
+import { webPageSchema } from '../lib/schema';
 import aiVisibility from '../assets/screenshots/home-ai-visibility.png';
 // Proof-layer screenshot — Site Traffic, Search Console view. Demo brand
 // "Acme Pickleball Fashion" (illustrative, not a real client). Chosen over the GA4
@@ -158,6 +159,7 @@ const solutionCards = [
 ];
 ---
 <BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/', title))} />
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(faqPage)} />
   </Fragment>

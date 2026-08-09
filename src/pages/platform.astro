@@ -13,6 +13,7 @@ import siteTraffic from '../assets/screenshots/platform-site-traffic.png';
 // Hero screenshot — the prioritised fix backlog (diagnose to act) for demo brand "Cobalt".
 import heroActionPlan from '../assets/screenshots/platform-hero-action-plan.png';
 import { SITE } from '../data/site';
+import { webPageSchema } from '../lib/schema';
 
 const title = 'Zicy Platform, twelve modules across one loop: measure, diagnose, act, prove';
 const description =
@@ -175,6 +176,7 @@ const breadcrumb = {
 };
 ---
 <BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/platform', title))} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(platformPage)} />

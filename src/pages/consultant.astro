@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Consultant from '../components/Consultant.astro';
+import { webPageSchema } from '../lib/schema';
 
 const title = 'Zicy AEO/GEO Consultant: ask anything about AI search visibility';
 const description =
@@ -17,6 +18,7 @@ const breadcrumb = {
 };
 ---
 <BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/consultant', title))} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
   <Consultant />
 </BaseLayout>

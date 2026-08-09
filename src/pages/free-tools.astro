@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { webPageSchema } from '../lib/schema';
 
 const title = 'Zicy free tools, AEO/GEO Consultant & Chrome extension';
 const description =
@@ -11,6 +12,7 @@ const tools = [
 ];
 ---
 <BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/free-tools', title))} />
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Free tools</span>

@@ -12,6 +12,7 @@ import ComparisonTable from '../components/pricing/ComparisonTable.astro';
 import PricingFAQ from '../components/pricing/PricingFAQ.astro';
 import { CORE_TIERS, AGENCY_TIERS, PRICING_FAQS } from '../data/pricing';
 import { SITE } from '../data/site';
+import { ORG_ID, webPageSchema } from '../lib/schema';
 
 const title = 'Zicy pricing, all five AI engines on every plan';
 const description =
@@ -32,7 +33,7 @@ const offerSchema = {
   name: 'Zicy plans',
   description:
     'Zicy pricing plans. All five AI engines on every plan, with no per-engine add-ons.',
-  brand: { '@type': 'Organization', name: SITE.name },
+  brand: { '@id': ORG_ID },
   isRelatedTo: { '@id': `${SITE.url}/#app` },
   offers: [...CORE_TIERS, ...AGENCY_TIERS].map(toOffer),
 };
@@ -121,6 +122,7 @@ const displayTiers = CORE_TIERS.map((t) =>
   <!--SLOT:comparison--><ComparisonTable />
   <!--SLOT:faq--><PricingFAQ />
   <!--SLOT:schema-->
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/pricing', title))} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(offerSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />

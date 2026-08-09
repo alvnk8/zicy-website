@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { webPageSchema } from '../lib/schema';
 import alvinPhoto from '../assets/team/alvin-koay.png';
 import rituPhoto from '../assets/team/ritu-khanna.png';
 import peterPhoto from '../assets/team/peter-kua.jpg';
@@ -60,6 +61,7 @@ const breadcrumb = {
 };
 ---
 <BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/about', title))} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
 
   <!-- Hero (white) -->
