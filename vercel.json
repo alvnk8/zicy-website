@@ -65,6 +65,8 @@
     { "source": "/feed", "destination": "/", "statusCode": 301 },
     { "source": "/comments/feed", "destination": "/", "statusCode": 301 },
 
+    { "source": "/sitemap.xml", "destination": "/sitemap-index.xml", "statusCode": 308 },
+
     { "source": "/blog/cloudflare-bot-management", "destination": "/resources/cloudflare-bot-management", "statusCode": 301 },
     { "source": "/blog/effective-prompts-ai-tracking", "destination": "/resources/effective-prompts-ai-tracking", "statusCode": 301 },
     { "source": "/blog/measuring-ai-visibility", "destination": "/resources/measuring-ai-visibility-direct-roi", "statusCode": 301 },
