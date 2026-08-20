@@ -9,7 +9,7 @@
 export const URLS = {
   // Self-serve register (self-serve tiers) and the sales contact.
   register: 'https://app.zicy.com/register',
-  contactSales: 'https://www.zicy.com/enterprise-inquiry',
+  contactSales: '/contact',
 } as const;
 
 // Annual billing is Zicy's own commitment: 13 months for the price of 12. The toggle shows the
