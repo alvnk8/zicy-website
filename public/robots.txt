@@ -4,41 +4,78 @@
 
 User-agent: GPTBot
 Allow: /
+Disallow:
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow:
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow:
 
 User-agent: ClaudeBot
 Allow: /
+Disallow:
 
-User-agent: Claude-Web
+User-agent: Claude-User
 Allow: /
+Disallow:
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow:
+
+User-agent: anthropic-ai
+Allow: /
+Disallow:
 
 User-agent: PerplexityBot
 Allow: /
+Disallow:
 
 User-agent: Perplexity-User
 Allow: /
+Disallow:
 
 User-agent: Google-Extended
 Allow: /
+Disallow:
 
 User-agent: Googlebot
 Allow: /
+Disallow:
+
+User-agent: GoogleOther
+Allow: /
+Disallow:
 
 User-agent: Bingbot
 Allow: /
+Disallow:
 
 User-agent: Applebot
 Allow: /
+Disallow:
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow:
+
+User-agent: CCBot
+Allow: /
+Disallow:
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow:
+
+User-agent: Amazonbot
+Allow: /
+Disallow:
 
 User-agent: *
 Allow: /
+Disallow:
 
-Sitemap: https://www.zicy.com/sitemap.xml
+Sitemap: https://www.zicy.com/sitemap-index.xml
