@@ -40,7 +40,7 @@ function sourceFileFor(pathname) {
   return undefined;
 }
 
-const EXCLUDED_PATHS = new Set(['/legal/terms', '/legal/dpa', '/legal/cookies']);
+const EXCLUDED_PATHS = new Set(['/legal/terms', '/legal/dpa']);
 
 // Static output (SSG): every page is pre-rendered to HTML at build time, so all
 // content is present in the initial HTML for AI crawlers (GPTBot, ClaudeBot,
