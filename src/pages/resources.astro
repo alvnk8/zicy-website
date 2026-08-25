@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../data/site';
 import { RESOURCE_POSTS } from '../data/resources-posts';
-import { webPageSchema } from '../lib/schema';
+import { webPageSchema, faqPageSchema } from '../lib/schema';
 
 const title = 'Zicy resources, AI visibility guides, research and updates';
 const description =
@@ -51,10 +51,22 @@ function fmtDate(iso: string): string {
   return `${d} ${MONTHS[m - 1]} ${y}`;
 }
 const postsIn = (section: string) => RESOURCE_POSTS.filter((p) => p.articleSection === section);
+
+// Entity finding f-006 (2026-08-25): this page renders every post's title as an <h3> and its
+// description as the visible paragraph directly beneath it (see the card markup below). A post
+// title phrased as a question, ending "?", is a visible question with a visible answer already
+// on this page. Deriving mainEntity from the exact same title/description strings the cards
+// render (not a re-typed copy) means the schema cannot drift from the visible copy.
+const faqQuestions = RESOURCE_POSTS.filter((p) => p.title.endsWith('?')).map((p) => ({
+  question: p.title,
+  answer: p.description,
+}));
+const resourcesFaq = faqPageSchema('https://www.zicy.com/resources#faq', faqQuestions);
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/resources', title))} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(blog)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(resourcesFaq)} />
 
   <section class="hero inner">
     <div class="wrap">
