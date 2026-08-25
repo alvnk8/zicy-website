@@ -87,6 +87,24 @@ export function webPageSchema(path: string, name: string) {
   };
 }
 
+// Entity finding f-006 (2026-08-25): a generic FAQPage builder for pages whose visible Q&A pairs
+// live in structured page data rather than a hand-authored Faq[] (see faqPageJsonLd in
+// data/faqs.ts for the sibling pattern used by /solutions/*). Callers must pass the exact same
+// question/answer strings already used to render the page's visible copy, never a re-typed copy,
+// so schema and visible copy cannot drift apart.
+export function faqPageSchema(id: string, questions: { question: string; answer: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': id,
+    mainEntity: questions.map((q) => ({
+      '@type': 'Question',
+      name: q.question,
+      acceptedAnswer: { '@type': 'Answer', text: q.answer },
+    })),
+  };
+}
+
 // Entity finding f-005 (2026-08-25): one Service node per client-confirmed offering (Alvin,
 // 2026-08-25). name/description/serviceType must be lifted verbatim from that page's own visible
 // copy by the caller, never invented here. No areaServed/offers/prices — not confirmed.
