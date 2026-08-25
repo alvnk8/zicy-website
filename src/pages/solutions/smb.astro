@@ -4,6 +4,7 @@ import SegmentSchema from '../../components/SegmentSchema.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import { universalFaqs } from '../../data/faqs';
+import { serviceSchema } from '../../lib/schema';
 // Product screenshots for the SMB page (illustrative sample data). Optimisation, WebP/AVIF
 // srcset and lazy-loading are handled by <Screenshot>. Alts carry no persona names.
 import aiVisibilityShot from '../../assets/screenshots/smb-01-ai-visibility-dashboard.png';
@@ -169,10 +170,21 @@ const breadcrumb = {
     { '@type': 'ListItem', position: 2, name: 'For small businesses', item: 'https://www.zicy.com/solutions/smb' },
   ],
 };
+
+// Entity finding f-005, client-confirmed offering (Alvin, 2026-08-25). name = the page's own H1,
+// description = the hero lead paragraph, serviceType = "AI visibility" as it appears verbatim
+// elsewhere on this page (e.g. the general-questions heading below). All verbatim, not invented.
+const serviceNode = serviceSchema(
+  '/solutions/smb',
+  'AI is answering your customers. Make sure it answers with you.',
+  'Zicy watches what ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode tell buyers about your business, wherever your customers are, shows you what to fix in plain English, and helps you fix it. No specialist required.',
+  'AI visibility'
+);
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceNode)} />
   <SegmentSchema slot="head" url="https://www.zicy.com/solutions/smb" name={title} audienceType="small business" starterOffer />
 
   <!-- 1. Hero -->

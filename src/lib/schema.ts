@@ -24,6 +24,19 @@ export const ORG_SAME_AS = [
   'https://www.growth.pro/#alvin-koay',
 ] as const;
 
+// Entity finding f-003 (2026-08-25): plain strings only, no Wikipedia/Wikidata URLs (unverified).
+// Site spelling is British ("optimisation"), confirmed against the glossary's canonical AEO/GEO
+// term format (src/pages/resources/glossary/_glossary-data.ts) — do not switch to "optimization".
+export const ORG_KNOWS_ABOUT = [
+  'Answer engine optimisation (AEO)',
+  'Generative engine optimisation (GEO)',
+  'AI visibility tracking',
+  'AI citation monitoring',
+  'Brand visibility in AI answers (ChatGPT, Gemini, Perplexity, Google AI Overviews, Google AI Mode)',
+  'Share of voice in AI answers',
+  'AI crawler access management',
+] as const;
+
 // Confirmed by the owner (2026-06-17): foundingDate 2026 (Zicy the brand); Alvin Koay LinkedIn.
 // legalName and the registration number are the owner-supplied legal identity; do not alter.
 export const orgNode = {
@@ -50,6 +63,7 @@ export const orgNode = {
     url: 'https://www.growth.pro/',
   },
   sameAs: ORG_SAME_AS,
+  knowsAbout: ORG_KNOWS_ABOUT,
   founder: { '@id': PERSON_IDS.alvin },
   employee: [
     { '@id': PERSON_IDS.alvin },
@@ -70,5 +84,27 @@ export function webPageSchema(path: string, name: string) {
     name,
     about: { '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
+  };
+}
+
+// Entity finding f-005 (2026-08-25): one Service node per client-confirmed offering (Alvin,
+// 2026-08-25). name/description/serviceType must be lifted verbatim from that page's own visible
+// copy by the caller, never invented here. No areaServed/offers/prices — not confirmed.
+export function serviceSchema(
+  path: string,
+  name: string,
+  description: string,
+  serviceType: string
+) {
+  const url = `${SITE.url}${path}`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${url}#service`,
+    name,
+    description,
+    serviceType,
+    provider: { '@id': ORG_ID },
+    url,
   };
 }
