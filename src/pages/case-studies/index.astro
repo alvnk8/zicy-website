@@ -24,15 +24,20 @@ for (const [path, mod] of Object.entries(heroModules)) {
   if (slug) heroBySlug[slug] = mod.default;
 }
 
-// Feature one clearly SME-shaped story near the top of the grid (index-display order only;
-// CASES itself is left in its original order since sitemap.xml.ts and og-pages.ts also read it).
-// Every other study keeps its existing relative order, just shifted one slot later.
+// Lead with the two newest studies, then feature one clearly SME-shaped story near the top of
+// the grid (index-display order only; CASES itself is left in its original order since
+// sitemap.xml.ts and og-pages.ts also read it). Every other study keeps its existing relative
+// order, just shifted later.
+const LEAD_SLUGS = ['aesthetic-clinic-ai-referred-purchases', 'b2b-logistics-ai-procurement-filter'];
 const FEATURED_SME_SLUG = 'aesthetic-clinic-ai-visibility';
+const leadCases = LEAD_SLUGS.map((slug) => CASES.find((c) => c.slug === slug)).filter(Boolean);
 const featuredCase = CASES.find((c) => c.slug === FEATURED_SME_SLUG);
-const otherCases = CASES.filter((c) => c.slug !== FEATURED_SME_SLUG);
+const otherCases = CASES.filter(
+  (c) => c.slug !== FEATURED_SME_SLUG && !LEAD_SLUGS.includes(c.slug)
+);
 const displayCases = featuredCase
-  ? [otherCases[0], featuredCase, ...otherCases.slice(1)]
-  : CASES;
+  ? [...leadCases, otherCases[0], featuredCase, ...otherCases.slice(1)]
+  : [...leadCases, ...otherCases];
 
 const breadcrumb = {
   '@context': 'https://schema.org',
