@@ -5,6 +5,7 @@ import Screenshot from '../../components/Screenshot.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import FaqUniversal from '../../components/FaqUniversal.astro';
 import { agenciesFaqs, faqPageJsonLd } from '../../data/faqs';
+import { serviceSchema } from '../../lib/schema';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
 import aiVisibilityShot from '../../assets/screenshots/agencies-ai-visibility.png';
@@ -105,10 +106,21 @@ const breadcrumb = {
     { '@type': 'ListItem', position: 2, name: 'For marketing & creative agencies', item: 'https://www.zicy.com/solutions/agencies' },
   ],
 };
+
+// Entity finding f-005, client-confirmed offering (Alvin, 2026-08-25). name = the page's own H1,
+// description = the hero lead paragraph, serviceType = "GEO services" as it appears verbatim in
+// the §01 opportunity stat below ("the GEO services market, 2024 to 2031"). All verbatim.
+const serviceNode = serviceSchema(
+  '/solutions/agencies',
+  'Walk into the room with the client’s live AI visibility, not a generic deck.',
+  'Clients are raising AI search in reviews and pitches. Zicy lets you answer first, show a prospect exactly how AI describes them today across all five engines (ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode), where it’s wrong, and your plan to fix it, all under your own brand.',
+  'GEO services'
+);
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceNode)} />
   <SegmentSchema slot="head" url="https://www.zicy.com/solutions/agencies" name={title} audienceType="marketing and creative agency" />
 
   <!-- 1. Hero -->
