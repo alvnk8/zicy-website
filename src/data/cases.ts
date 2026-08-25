@@ -1406,4 +1406,55 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>The engines do not think alike. They weight different sources, trust different signals, and reward different structures. This brand is near-dominant in Google's ecosystem and still building in ChatGPT's, and that gap is quantified, not vague. A named gap with a known size, on the platform with the largest assistant user base, is not a weakness in the report. It is next quarter's roadmap.</p>
 <p>AI visibility is a measurable position, not a vibe. It can be known, tracked, attacked, defended, and lost, the same way market share can.</p>`,
   },
+  {
+    slug: "aesthetic-clinic-ai-referred-purchases",
+    indexMeta: "Healthcare / aesthetics · AI-to-revenue",
+    eyebrow: "Healthcare / aesthetics · AI-to-revenue",
+    indexTitle: "From AI answers to real purchases",
+    big: "256%",
+    indexSub: "more AI-referred purchases · 219.6% more AI-referred sessions",
+    h1: "How a Malaysian Aesthetic Clinic Group Turned AI Visibility Into 221 Tracked Purchases, Up 256.45%",
+    metaTitle: "AI Visibility Drove 256% More Purchases for an Aesthetic Clinic, Zicy",
+    metaDescription: "See how a Malaysian aesthetic clinic group connected AI mention coverage to revenue: 219.6% more ChatGPT-referred sessions and 256.45% more tracked purchases, year on year.",
+    datePublished: "2026-08-19",
+    dateModified: "2026-08-19",
+    bodyHtml: `<p>Search visibility used to be one number stack: rankings, clicks, sessions. AI added a second stack most brands still cannot see: mentions, citations, share of voice, sentiment, and position, measured at the level of an individual question a real buyer asks.</p>
+<p>The client is a Malaysian aesthetic clinic group in a B2C, high-consideration, heavily researched category, exactly where someone opens ChatGPT and asks which clinic is best for a specific concern before they ever open Google. This engagement measured both the visibility side and the revenue side of the same funnel.</p>
+<h2>What we did</h2>
+<ul>
+<li><strong>Tracked real patient-intent prompts, not keywords:</strong> treatment queries, concern queries, clinic-selection queries, across five AI engines.</li>
+<li><strong>Made the clinic extractable:</strong> treatment content restructured so an engine can lift a clean, quotable answer.</li>
+<li><strong>Used the gaps as the content roadmap:</strong> weak-coverage prompts became the priority list, strong-coverage prompts got reinforced before competitors moved in.</li>
+<li><strong>Watched the competitive set, not just the client:</strong> mentions, citations, ranking, and share of voice benchmarked against the top five competing clinics, monthly.</li>
+<li><strong>Connected it to the money:</strong> referral traffic from ChatGPT, Gemini, Perplexity, and Copilot, tracked through to engagement and purchases.</li>
+</ul>
+<h2>The visibility numbers</h2>
+<ul>
+<li><strong>Mention coverage: 39.01%</strong> (815 of 2,089 AI responses mentioned the brand)</li>
+<li><strong>Web citation rate: 36.24%</strong> (757 responses linked to the site)</li>
+<li><strong>Share of voice: 16.44%</strong> (3,227 of 19,626 total brand mentions in the category)</li>
+<li><strong>Average AI ranking: #2.54</strong></li>
+<li><strong>Sentiment: 78/100 positive</strong></li>
+</ul>
+<p>Over two months, share of voice moved from 12.2% to 16.4%, brand mentions from 920 to 2,307, and average ranking from 3.0 to 2.5.</p>
+<p><img src="/case-studies/2026/08/AI-Visibility-Report-Two-Month-Trend.png" alt="Two-month AI visibility report, mention coverage, citation coverage, share of voice, ranking and platform coverage trend" loading="lazy" decoding="async" /></p>
+<h2>Category leadership, with a number attached</h2>
+<p>Share of voice on its own is a vanity metric. Share of voice next to competitors is a market position. This clinic held 16.44% share of voice against 6.07% for the next best competitor, then 5.77%, 4.71%, 3.92%, and 3.60%. Nearly three times the nearest rival, in a category with five actively visible competitors, while sentiment held at 78/100, the highest in the set.</p>
+<p><img src="/case-studies/2026/08/Competitive-AI-Performance-Share-of-Voice.png" alt="The client against its five closest competitors, 16.44% share of voice versus 6.07% for the next best, brand names redacted" loading="lazy" decoding="async" /></p>
+<p>At prompt level the strength was distributed, not propped up by one or two queries. Multiple prompts held 3/5 or 4/5 platform coverage, individual prompts reached 41.67% share of voice, and average positions clustered between #1 and #2 on the queries that matter most.</p>
+<p><img src="/case-studies/2026/08/Individual-Tracked-Prompts-Per-Engine.png" alt="Individual tracked prompts scored per engine, prompt text redacted apart from one example" loading="lazy" decoding="async" /></p>
+<h2>From visibility to revenue</h2>
+<p>Visibility is the leading indicator. This is the lagging one, measured year on year over seven months:</p>
+<ul>
+<li>13,225 sessions from ChatGPT alone, against 4,138 a year earlier: up 219.6%</li>
+<li>10,767 engaged sessions, up 170.9%</li>
+<li>221 purchases, against 62: up 256.45%</li>
+<li>Gemini referrals up 1,048%, Perplexity up 150%, Copilot from zero</li>
+</ul>
+<p>Purchases grew faster than the traffic that produced them. The standard objection to AI referral traffic is that it is curious browsers, high volume and low intent. Here the opposite happened: someone who arrives already told by an AI that this clinic is a credible option arrives further down the funnel than someone who clicked a blue link.</p>
+<p><img src="/case-studies/2026/08/AI-Referred-Sessions-Engagement-Purchases.png" alt="AI-referred sessions, engagement and purchases year on year, engagement rate fell from 96 percent to 81 percent at three times the volume" loading="lazy" decoding="async" /></p>
+<p>One honest caveat: the visibility window is two months, while the traffic comparison is seven months year on year. They are not the same period, and this is not a claim that one caused the other in a straight line.</p>
+<h2>The takeaway</h2>
+<p>Nearly all of this clinic's converting traffic came from ChatGPT, the one engine where its visibility was weakest at 15.9% coverage. Perplexity, at 63.1% coverage, sent 120 sessions. ChatGPT, at 15.9%, sent 13,225. Coverage and revenue are not the same axis, and averaging them into a single visibility score hides exactly the thing a brand needs to see. The strategy question is no longer how to get mentioned more. It is: which engine do buyers actually use, and what is the brand's position there specifically.</p>`,
+  },
 ];
