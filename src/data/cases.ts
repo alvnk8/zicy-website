@@ -1359,4 +1359,51 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>The brands that understand how AI mentions, cites, and ranks them will shape the next wave of B2B discovery.</p>
 <p><a href="/">Zicy</a> makes that visibility measurable and optimisable.</p>`,
   },
+  {
+    slug: "b2b-logistics-ai-procurement-filter",
+    indexMeta: "B2B logistics · 5 platforms",
+    eyebrow: "B2B logistics · 5 platforms",
+    indexTitle: "The AI procurement filter, passed",
+    big: "67.4%",
+    indexSub: "brand mention coverage · 65.57% citation coverage",
+    h1: "How a B2B Logistics Manufacturer Reached 67.4% AI Mention Coverage and 65.57% Citation Coverage Across Five Platforms",
+    metaTitle: "67.4% AI Mention Coverage for a B2B Logistics Manufacturer, Zicy",
+    metaDescription: "See how a certified offshore container manufacturer reached 67.4% AI brand mention coverage and 65.57% website citation coverage across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.",
+    datePublished: "2026-08-11",
+    dateModified: "2026-08-11",
+    bodyHtml: `<p>There is a moment in every B2B purchase that most marketing teams never see. A procurement engineer, a compliance officer, or a technical buyer asks an AI assistant to explain a standard, compare an option, or name who does this properly, before an RFQ, a vendor shortlist, or a single phone call.</p>
+<p>This client operates in the certified offshore container space, where compliance language is the buying criteria. Strong engineering, real certifications, genuine category expertise. And almost no presence in the AI answers where that expertise was being asked about.</p>
+<p>In certification-driven industries, being left out of an AI answer does not just cost a sale. It costs technical legitimacy. Buyers were not asking AI for recommendations. They were asking it to validate standards: DNV 2.7-1, EN 12079, load testing, certification scope.</p>
+<h2>What we did</h2>
+<p>We treated this as four separate problems, not one.</p>
+<ul>
+<li><strong>Prompt-level visibility mapping.</strong> We mapped 140+ high-intent prompts a real buyer actually asks, decision-stage, specification-heavy, compliance-led, rather than generic keywords.</li>
+<li><strong>Certification-focused entity strengthening.</strong> We made the brand unambiguously legible to machines on the standards it actually owns, with pages structured so an AI can extract a clean, quotable, citable answer.</li>
+<li><strong>Share of voice expansion.</strong> We tracked competitor density inside certification clusters and reinforced the prompts where rivals were gaining ground, before they consolidated.</li>
+<li><strong>Citation consistency.</strong> We worked the formatting, structure, and source authority until the brand's own site became the thing AI links to, not just the thing it paraphrases.</li>
+</ul>
+<p><img src="/case-studies/2026/08/Tracked-Prompts-Scored-Per-Platform.png" alt="140+ tracked buyer prompts scored per platform, most priority prompts hold 4 out of 5 or 5 out of 5 coverage" loading="lazy" decoding="async" /></p>
+<h2>The results</h2>
+<p>Across five AI platforms:</p>
+<ul>
+<li><strong>Brand mention coverage: 67.4%</strong> (184 of 273 responses), up 41.3% on the prior period</li>
+<li><strong>Website citation coverage: 65.57%</strong>, up 22.3%</li>
+<li><strong>Share of voice: 23.73%</strong> (931 of 3,712 total brand mentions), up 57.7%</li>
+<li><strong>Average AI ranking: #2.64</strong></li>
+</ul>
+<p><img src="/case-studies/2026/08/AI-Visibility-Report-Cross-Platform-Coverage-Trend.png" alt="Cross-platform coverage and five-week trend, dominant in three engines, wide open in two" loading="lazy" decoding="async" /></p>
+<p><strong>By platform:</strong></p>
+<ul>
+<li>Google AI Overviews: 93.9%</li>
+<li>Perplexity: 92.9%</li>
+<li>Google AI Mode: 91.1%</li>
+<li>Gemini: 44.6%</li>
+<li>ChatGPT: 17.9%</li>
+</ul>
+<p>At topic level, the brand registered as a Brand Leader across 419 topics, with 70 to 87% coverage in its core certification territory: 72% on DNV 2.7-1 / EN 12079, 87% on DNV 2.7-1 / ISO 10855.</p>
+<p><img src="/case-studies/2026/08/Key-Topics-Detected-Brand-Leaders-Blind-Spots.png" alt="1,895 topics detected, 419 where the brand leads, 19 contested battlegrounds, 1,457 blind spots" loading="lazy" decoding="async" /></p>
+<h2>The takeaway</h2>
+<p>The engines do not think alike. They weight different sources, trust different signals, and reward different structures. This brand is near-dominant in Google's ecosystem and still building in ChatGPT's, and that gap is quantified, not vague. A named gap with a known size, on the platform with the largest assistant user base, is not a weakness in the report. It is next quarter's roadmap.</p>
+<p>AI visibility is a measurable position, not a vibe. It can be known, tracked, attacked, defended, and lost, the same way market share can.</p>`,
+  },
 ];
