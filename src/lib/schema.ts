@@ -75,7 +75,9 @@ export const orgNode = {
 // path must match the site's actually-served URL: trailingSlash:'never' (astro.config.mjs) means
 // no trailing slash except '/' itself. aboutId defaults to the Organization but a page whose
 // primary subject is a specific entity (e.g. the Alvin Koay founder page) can point elsewhere.
-export function webPageSchema(path: string, name: string, aboutId: string = ORG_ID) {
+// mentionsId is optional: a secondary entity the page discusses without being primarily about it
+// (e.g. /media is about the Organization but mentions the founder Person by reference only).
+export function webPageSchema(path: string, name: string, aboutId: string = ORG_ID, mentionsId?: string) {
   const url = path === '/' ? `${SITE.url}/` : `${SITE.url}${path}`;
   return {
     '@context': 'https://schema.org',
@@ -84,6 +86,7 @@ export function webPageSchema(path: string, name: string, aboutId: string = ORG_
     url,
     name,
     about: { '@id': aboutId },
+    ...(mentionsId ? { mentions: { '@id': mentionsId } } : {}),
     publisher: { '@id': ORG_ID },
   };
 }

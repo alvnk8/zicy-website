@@ -60,7 +60,7 @@ to the index. Only `/case-studies/page/:n*` → `/case-studies` (pagination) is 
 
 | Old | New | Code | Note |
 |---|---|---|---|
-| `/about-us`, `/media`, `/jobs`, `/website-design-client-portfolio`, `/website-assets-portfolio` | `/about` | 301 | firm/portfolio pages retired |
+| `/about-us`, `/jobs`, `/website-design-client-portfolio`, `/website-assets-portfolio` | `/about` | 301 | firm/portfolio pages retired |
 | `/contact-us` | `/contact` | 301 | `/contact` page created in this repo |
 | `/seo-audit` | `/audit` | 301 | |
 | `/seo-pricing`, `/seo-pricing-malaysia`, `/professional-aeo-geo-content-writing-services`, `/professional-seo-content-writing-services`, `/web-design-development-pricing`, `/white-label-seo-services` | `/pricing` | 301 | commercial intent |

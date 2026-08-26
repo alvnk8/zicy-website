@@ -36,7 +36,6 @@
     { "source": "/case-studies/page/:n*", "destination": "/case-studies", "statusCode": 301 },
 
     { "source": "/about-us", "destination": "/about", "statusCode": 301 },
-    { "source": "/media", "destination": "/about", "statusCode": 301 },
     { "source": "/jobs", "destination": "/about", "statusCode": 301 },
     { "source": "/website-design-client-portfolio", "destination": "/about", "statusCode": 301 },
     { "source": "/website-assets-portfolio", "destination": "/about", "statusCode": 301 },
