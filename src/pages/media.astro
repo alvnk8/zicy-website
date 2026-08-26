@@ -1,52 +1,77 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
 import { SITE } from '../data/site';
-import { webPageSchema, ORG_ID, PERSON_IDS } from '../lib/schema';
+import { orgNode } from '../lib/schema';
 
-const title = 'Zicy in the press';
+const title = 'Zicy in the press | Media coverage and press kit';
 const description =
-  'Press coverage naming Zicy, and media appearances by founder Alvin Koay, verified against the publisher’s own page for each item.';
+  'Independent press coverage of Zicy and founder Alvin Koay, plus a downloadable media kit: logo pack, brand colours, headshot and boilerplate.';
+
+const MONTHS = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
+// Single date renderer so every date on the page reads identically: "12 July 2026".
+function formatDate(iso: string | null) {
+  if (!iso) return 'Date not stated';
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${d} ${MONTHS[m - 1]} ${y}`;
+}
 
 // DNA sentence reproduced exactly as recorded in the verified media-source evidence. Never reword.
 const dnaQuote =
   "To address this very gap in the market, GrowthPro built Zicy, an AI-powered platform that tracks share of voice, citation volume, positioning and sentiment across five major answer engines, and uses an AI agent to identify content gaps and restructure website content for LLM retrieval.";
-const dnaHref =
-  'https://www.digitalnewsasia.com/business/growthpros-alvin-koay-googles-ai-has-rewritten-rules-search';
-const dnaDate = 'July 12, 2026';
 
-// Coverage naming Zicy (verified YES in _cc-media-sources.md), newest first.
+// All seven verified press items, one array. publication/date/headline/summary/href values are
+// moved verbatim from the prior coverage + founderMedia arrays; only the structure changed.
+// logo paths are the intended /press/<slug>.svg location; none of these files exist in public/
+// yet (verified before writing this), so the render below falls back to a text wordmark for
+// every one of them rather than emitting a broken <img>.
 const coverage = [
   {
     publication: 'Digital News Asia',
-    date: 'July 12, 2026',
+    date: '2026-07-12',
     headline: "GrowthPro's Alvin Koay: Google's AI has rewritten the rules of search",
     summary:
       "Alvin explains how Google's AI Overviews and AI Mode have cut into publisher and brand traffic, and introduces Zicy as the platform GrowthPro built to track share of voice, citation volume, positioning and sentiment across the major answer engines.",
-    href: dnaHref,
+    href: 'https://www.digitalnewsasia.com/business/growthpros-alvin-koay-googles-ai-has-rewritten-rules-search',
+    type: 'Article',
+    scope: 'zicy',
+    logo: '/press/digital-news-asia.svg',
   },
   {
     publication: 'Biz.bio',
-    date: 'March 18, 2026',
+    date: '2026-03-18',
     headline: 'Alvin Koay and Zicy: Rebuilding in the Age of AI',
     summary:
       "A founder profile tracing Alvin's path from an early ad-tech startup through Growth.pro to building Zicy, the system he built to help brands become visible inside AI-generated answers.",
     href: 'https://biz.bio/founders/alvin-koay-and-zicy-rebuilding-in-the-age-of-ai/',
+    type: 'Article',
+    scope: 'zicy',
+    logo: '/press/biz-bio.svg',
   },
   {
     publication: 'e27',
-    date: '16 March 2026',
+    date: '2026-03-16',
     headline: 'The new growth metric: AI Share of Voice',
     summary:
       'Alvin argues that AI Share of Voice and citation authority are becoming the metrics that matter more than traffic, as AI answers replace clicks.',
     href: 'https://e27.co/the-new-growth-metric-ai-share-of-voice-20260316/',
+    type: 'Article',
+    scope: 'zicy',
+    logo: '/press/e27.svg',
   },
   {
     publication: 'e27',
-    date: '12 March 2026',
+    date: '2026-03-12',
     headline: 'Your biggest competitor might be the AI answer itself',
     summary:
       'Alvin explains why AI answer engine optimisation is becoming a strategic necessity for startups, and how being cited by AI is starting to decide who gets considered at all.',
     href: 'https://e27.co/your-biggest-competitor-might-be-the-ai-answer-itself-20260312/',
+    type: 'Article',
+    scope: 'zicy',
+    logo: '/press/e27.svg',
   },
   {
     publication: 'Malaysia SME+',
@@ -56,31 +81,141 @@ const coverage = [
     summary:
       'Alvin walks through why answer engine optimisation is replacing traditional SEO, and what businesses need to restructure in their content and schema to stay discoverable.',
     href: 'https://www.malaysiasme.com.my/answer-engines-such-as-chatgpt-gemini-googles-ai-mode-are-your-customers-new-best-friends-businesses-must-align-web-pages-and-online-presence-or-risk-losing-leads-and-revenue-generatio/',
+    type: 'Article',
+    scope: 'zicy',
+    logo: '/press/malaysia-sme.svg',
   },
-];
-
-// Alvin Koay in the media (verified NO in _cc-media-sources.md, Zicy not named), newest first.
-const founderMedia = [
   {
-    programme: 'Open For Business (BFM 89.9)',
-    date: '3 March 2026',
+    publication: 'BFM 89.9',
+    programme: 'Open For Business',
+    date: '2026-03-03',
     headline: 'The Growthpro Strategy to Combat Traditional SEOs',
     summary:
       'Alvin discusses how Growth.pro sells visibility inside AI systems rather than rankings and traffic, and how the agency runs and differentiates itself in a crowded market.',
     href: 'https://www.bfm.my/content/podcast/the-growthpro-strategy-to-combat-traditional-seos',
+    type: 'Podcast',
+    scope: 'founder',
+    logo: '/press/bfm.svg',
   },
   {
-    programme: 'Marketing Mojo (BFM 89.9)',
-    date: '10 February 2026',
+    publication: 'BFM 89.9',
+    programme: 'Marketing Mojo',
+    date: '2026-02-10',
     headline: 'Is SEO Dead? The AI Search Shake-Up',
     summary:
       'Alvin discusses how AI tools are changing search behaviour and why traditional SEO metrics are losing relevance for Malaysian marketing teams.',
     href: 'https://www.bfm.my/content/podcast/is-seo-dead-the-ai-search-shake-up',
+    type: 'Podcast',
+    scope: 'founder',
+    logo: '/press/bfm.svg',
   },
 ];
+
+// All coverage, newest first, any undated item last. ISO date strings sort lexicographically in
+// chronological order, so a plain string comparison is enough.
+const sortedCoverage = [...coverage].sort((a, b) => {
+  if (a.date === null && b.date === null) return 0;
+  if (a.date === null) return 1;
+  if (b.date === null) return -1;
+  return b.date.localeCompare(a.date);
+});
+
+// The Malaysia SME+ headline as published is ~40 words and partly capitalised. Rendered display
+// copy is sentence case and short; the full original is kept as the link's title attribute so
+// nothing is lost, keyed by href so a mismatch can never silently apply to the wrong item.
+const DISPLAY_HEADLINES: Record<string, string> = {
+  'https://www.malaysiasme.com.my/answer-engines-such-as-chatgpt-gemini-googles-ai-mode-are-your-customers-new-best-friends-businesses-must-align-web-pages-and-online-presence-or-risk-losing-leads-and-revenue-generatio/':
+    "Answer engines are your customers' new best friends",
+};
+
+// JSON-LD is generated from `coverage` (via sortedCoverage, already newest-first with any
+// undated item last) so it can never drift from the visible list. headline uses each item's
+// full original text, not the shortened on-page display override, since structured data should
+// carry the real published headline. datePublished is omitted entirely for the one undated item
+// (Malaysia SME+) rather than emitting an empty string.
+function toNewsOrPodcastNode(item: (typeof coverage)[number]) {
+  return {
+    '@type': item.type === 'Podcast' ? 'PodcastEpisode' : 'NewsArticle',
+    headline: item.headline,
+    url: item.href,
+    ...(item.date ? { datePublished: item.date } : {}),
+    publisher: { '@type': 'Organization', name: item.publication },
+  };
+}
+
+const mediaPageUrl = `${SITE.url}/media`;
+
+// about: the site's single canonical Organization node (src/lib/schema.ts), referenced whole
+// rather than hand-typed, so name/url/logo/founder/sameAs can never drift from every other page's
+// copy of the same entity.
+const collectionPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': `${mediaPageUrl}#webpage`,
+  name: 'Zicy in the press',
+  url: mediaPageUrl,
+  about: orgNode,
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: sortedCoverage.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: toNewsOrPodcastNode(item),
+    })),
+  },
+};
+
+const uniquePublishers = [...new Set(coverage.map((c) => c.publication))];
+const proofLine = `${coverage.length} mentions across ${uniquePublishers.length} publications since February 2026`;
+
+// Publisher logo wall, one entry per unique publication. No logo asset exists in public/ for
+// any of these (checked directly: no public/press/ directory and no matching files under
+// public/ for any of the five publishers), so every entry renders as a text wordmark.
+const publisherWall = uniquePublishers.map((name) => coverage.find((c) => c.publication === name)!);
+
+const dnaItem = coverage.find((c) => c.publication === 'Digital News Asia')!;
+
+const inBrief = [
+  'Zicy is an AI visibility platform that tracks how brands appear inside AI-generated answers across ChatGPT, Gemini, Perplexity, Google AI Overviews, and Google AI Mode.',
+  'Coverage focuses on the shift from rankings to citations, and why being named in an AI answer increasingly decides whether a brand is considered at all.',
+  'Founder Alvin Koay speaks on answer engine optimisation, AI share of voice, and what marketing teams should measure as clicks decline.',
+  'Zicy was built by Growth.pro and is used by brands, PR agencies, marketing and creative agencies, and publishers.',
+];
+
+// Media kit rows. Every href below was checked directly against the filesystem before writing
+// this (see build report); each of these four files genuinely exists under public/.
+const logoPack = [
+  { label: 'Logo, SVG (light)', href: '/zicy-logo.svg' },
+  { label: 'Logo, PNG (light)', href: '/zicy-logo.png' },
+  { label: 'Logo, SVG (dark)', href: '/zicy-logo-white.svg' },
+  { label: 'Logo, PNG (dark)', href: '/zicy-logo-white.png' },
+];
+
+// Brand colours: the three facet hues already defined as the brand palette in
+// src/styles/theme.css (--sky/--violet/--magenta, commented there as "brand — from logo
+// facets"). No new colour values were introduced.
+const brandColours = [
+  { name: 'Sky', hex: '#83C9EB' },
+  { name: 'Violet', hex: '#6E63AC' },
+  { name: 'Magenta', hex: '#AA5EA4' },
+];
+
+const headshotHref = '/alvin.png';
+
+// Product screenshots: no such asset exists under public/ (checked directly: no file with
+// "screenshot" in its name anywhere under public/, only inside src/assets/, which the build
+// pipeline processes and does not expose as a stable public/ URL). Row renders muted per the
+// hard rule: never link to a file that is not there.
+const screenshotsExist = false;
+
+// Free-trial CTA reused verbatim from the site's own persistent header nav (Header.astro) and
+// the homepage's own closing CTA (index.astro) — the one label/URL pair used consistently
+// site-wide, not written fresh for this page.
+const freeTrialLabel = 'Try for free';
+const freeTrialHref = 'https://app.zicy.com/register';
 ---
 <BaseLayout title={title} description={description}>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/media', title, ORG_ID, PERSON_IDS.alvin))} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionPageSchema)} />
 
   <!-- Hero -->
   <section class="hero inner">
@@ -92,54 +227,241 @@ const founderMedia = [
       </nav>
       <span class="eyebrow">Media</span>
       <h1>Zicy in the press</h1>
-      <blockquote class="dna-quote">
-        <p>&ldquo;{dnaQuote}&rdquo;</p>
-        <footer>
-          Digital News Asia, {dnaDate} &middot; see the full coverage below
-        </footer>
-      </blockquote>
+      <p class="dek">
+        Independent coverage of Zicy, and of founder Alvin Koay, on AI search, answer engines, and
+        the shift from rankings to citations.
+      </p>
+      <p class="proof-line">{proofLine}</p>
+      <div class="hero-links">
+        <a href="#media-kit">Media kit</a>
+        <a href="/contact">Press enquiries</a>
+      </div>
     </div>
   </section>
 
-  <!-- Coverage naming Zicy -->
+  <!-- Publisher logo wall -->
+  <section class="logo-wall-section">
+    <div class="wrap">
+      <div class="logo-wall">
+        {publisherWall.map((p) => (
+          <span class="logo-wall-item" tabindex="0" title={p.publication}>
+            <span class="vh">{p.publication}</span>
+            <span aria-hidden="true">{p.publication}</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- In brief -->
   <section style="background:var(--lavender)">
     <div class="wrap">
-      <div class="shead"><h2>Coverage naming Zicy</h2></div>
-      <div class="press-list">
-        {coverage.map((p) => (
-          <article class="press-item">
-            <p class="press-meta">
-              {p.publication}{p.date ? <> &middot; {p.date}</> : null}
-            </p>
-            <h3><a href={p.href} target="_blank" rel="noopener">{p.headline}</a></h3>
-            <p class="press-summary">{p.summary}</p>
-          </article>
-        ))}
-      </div>
+      <div class="shead"><h2>In brief</h2></div>
+      <ul class="checklist">
+        {inBrief.map((line) => <li>{line}</li>)}
+      </ul>
     </div>
   </section>
 
-  <!-- Alvin Koay in the media -->
+  <!-- Featured: Digital News Asia -->
   <section>
     <div class="wrap">
-      <div class="shead"><h2>Alvin Koay in the media</h2></div>
+      <div class="shead"><h2>Featured</h2></div>
+      <article class="featured-card">
+        <span class="logo-wall-item featured-wordmark" aria-hidden="true">{dnaItem.publication}</span>
+        <blockquote class="dna-quote">
+          <p>&ldquo;{dnaQuote}&rdquo;</p>
+          <p class="dna-attribution">{dnaItem.publication}, {formatDate(dnaItem.date)}</p>
+        </blockquote>
+        <a class="featured-link" href={dnaItem.href} target="_blank" rel="noopener">Read on Digital News Asia</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- All coverage -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><h2>All coverage</h2></div>
       <p class="section-note">
-        These are appearances by Zicy's founder, Alvin Koay, in which Zicy itself is not named.
+        Founder appearances are interviews in which Alvin Koay speaks on AI search but Zicy is not
+        named.
       </p>
-      <div class="press-list">
-        {founderMedia.map((p) => (
-          <article class="press-item">
-            <p class="press-meta">{p.programme} &middot; {p.date}</p>
-            <h3><a href={p.href} target="_blank" rel="noopener">{p.headline}</a></h3>
-            <p class="press-summary">{p.summary}</p>
-          </article>
-        ))}
+
+      <div class="filter-row">
+        <div class="filter-group" role="group" aria-label="Filter coverage by type" data-media-filter-group>
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="article" aria-pressed="false">Articles</button>
+          <button type="button" data-filter="podcast" aria-pressed="false">Podcasts</button>
+        </div>
+        <p class="filter-count" aria-live="polite">
+          <span data-media-count>{coverage.length} of {coverage.length}</span>
+        </p>
       </div>
+
+      <div class="media-grid">
+        {sortedCoverage.map((p) => {
+          const displayHeadline = DISPLAY_HEADLINES[p.href] ?? p.headline;
+          const hasOverride = displayHeadline !== p.headline;
+          return (
+            <article class="media-card" data-media-card={p.type.toLowerCase()}>
+              <div class="chip-row">
+                <span class="badge">{p.type}</span>
+                {p.scope === 'founder' && <span class="badge">Founder appearance</span>}
+              </div>
+              <p class="media-meta">{p.publication} &middot; {formatDate(p.date)}</p>
+              <h3 class="media-headline">
+                <a
+                  class="card-link"
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={hasOverride ? p.headline : undefined}
+                >
+                  {displayHeadline}
+                  <svg class="ext-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z" />
+                    <path fill="currentColor" d="M5 5h6v2H7v10h10v-4h2v6H5V5z" />
+                  </svg>
+                  <span class="vh"> (opens in a new tab)</span>
+                </a>
+              </h3>
+              <p class="media-summary">{p.summary}</p>
+              {p.programme && <p class="media-programme">{p.programme}</p>}
+            </article>
+          );
+        })}
+      </div>
+
       <p style="margin-top:24px">
         More on Zicy's founder: <a href="/about/alvin-koay">Alvin Koay, founder and CEO</a>.
       </p>
     </div>
   </section>
+
+  <script>
+    const group = document.querySelector('[data-media-filter-group]');
+    if (group) {
+      const buttons = [...group.querySelectorAll<HTMLButtonElement>('button[data-filter]')];
+      const cards = [...document.querySelectorAll<HTMLElement>('[data-media-card]')];
+      const countEl = document.querySelector('[data-media-count]');
+      const total = cards.length;
+
+      const applyFilter = (filter: string) => {
+        let visible = 0;
+        cards.forEach((card) => {
+          const match = filter === 'all' || card.dataset.mediaCard === filter;
+          card.hidden = !match;
+          if (match) visible += 1;
+        });
+        if (countEl) countEl.textContent = `${visible} of ${total}`;
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
+      };
+
+      buttons.forEach((b) => b.addEventListener('click', () => applyFilter(b.dataset.filter || 'all')));
+    }
+  </script>
+
+  <!-- Media kit -->
+  <section id="media-kit">
+    <div class="wrap">
+      <div class="shead"><h2>Media kit</h2></div>
+
+      <div class="kit-list">
+        <div class="kit-row">
+          <span class="kit-label">Logo pack</span>
+          <div class="kit-links">
+            {logoPack.map((f) => <a href={f.href} download>{f.label}</a>)}
+          </div>
+        </div>
+
+        <div class="kit-row">
+          <span class="kit-label">Brand colours</span>
+          <div class="kit-swatches" data-copy-swatches>
+            {brandColours.map((c) => (
+              <button type="button" class="swatch" data-copy-value={c.hex} style={`--sw:${c.hex}`}>
+                <span class="swatch-dot" aria-hidden="true"></span>
+                <span class="swatch-text">{c.name} <span class="mono">{c.hex}</span></span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div class="kit-row">
+          <span class="kit-label">Founder headshot</span>
+          <div class="kit-links">
+            <a href={headshotHref} download>Alvin Koay, high resolution (PNG)</a>
+          </div>
+        </div>
+
+        <div class="kit-row">
+          <span class="kit-label">Product screenshots</span>
+          <div class="kit-links">
+            {screenshotsExist ? null : (
+              <span class="kit-muted">Available on request &middot; <a href="#press-enquiries">contact press</a></span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div class="boilerplate-block">
+        <h3>Boilerplate</h3>
+        <p class="boilerplate-text">
+          Withheld. Two clauses in the supplied paragraph, identifies content gaps and
+          restructures web content so it can be retrieved and cited, are not backed by a generic
+          Zicy product claim anywhere on the site. See the build report for what was checked.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Press enquiries -->
+  <section id="press-enquiries" style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><h2>Press enquiries</h2></div>
+      <p class="press-contact">
+        <a href="mailto:privacy@zicy.com">privacy@zicy.com</a><br />
+        We reply within two working days.
+      </p>
+      <address class="press-address">
+        60 Persiaran Midlands<br />
+        10250 Penang, Malaysia<br />
+        {/* No timezone string exists anywhere in this repo (checked Footer.astro and the whole
+            tree); this is supplied from general public knowledge of Malaysia's single, non-DST
+            zone, not taken from any site content. Flagged in the build report. */}
+        Malaysia Time (GMT+8)
+      </address>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <CtaBand
+    heading="See how AI answers describe your brand"
+    sub="Zicy tracks your share of voice, citations, positioning and sentiment across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode."
+    ctaLabel={freeTrialLabel}
+    ctaHref={freeTrialHref}
+  />
+  <div class="cta-secondary-wrap">
+    <a href="/case-studies">Case studies</a>
+  </div>
+
+  <script>
+    document.querySelectorAll<HTMLButtonElement>('[data-copy-value]').forEach((btn) => {
+      const label = btn.querySelector<HTMLElement>('.swatch-text, [data-copy-label]');
+      btn.addEventListener('click', async () => {
+        const value = btn.dataset.copyValue || '';
+        try {
+          await navigator.clipboard.writeText(value);
+          if (label) {
+            const original = label.textContent;
+            label.textContent = 'Copied';
+            setTimeout(() => { if (original) label.textContent = original; }, 1200);
+          }
+        } catch {
+          /* clipboard unavailable; label still shows the intended value as plain text */
+        }
+      });
+    });
+  </script>
 </BaseLayout>
 
 <style>
@@ -149,22 +471,108 @@ const founderMedia = [
   .crumbs .sep{color:var(--line-2)}
   .crumbs .here{color:var(--ink)}
 
-  .dna-quote{margin-top:22px;padding:22px 24px;background:var(--lavender);border:0.5px solid var(--line);border-radius:14px;max-width:820px}
+  .dek{margin-top:16px;font-size:19px;color:var(--ink-2);max-width:640px;line-height:1.5}
+  .proof-line{margin-top:14px;font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--muted)}
+  .hero-links{display:flex;gap:20px;margin-top:22px}
+  .hero-links a{font-size:14.5px;font-weight:500;color:var(--indigo)}
+  .hero-links a:hover{color:var(--indigo-bright)}
+
+  /* Publisher logo wall: text wordmarks (no logo assets exist yet), greyscale-equivalent at
+     rest via muted colour + reduced opacity, full colour on hover/focus. */
+  .logo-wall-section{padding-top:0}
+  .logo-wall{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
+  .logo-wall-item{
+    font-family:var(--display);font-weight:500;font-size:17px;letter-spacing:-0.01em;
+    color:var(--muted);opacity:.65;filter:grayscale(1);
+    transition:color .18s var(--ease),opacity .18s var(--ease),filter .18s var(--ease);
+    cursor:default;
+  }
+  .logo-wall-item:hover,.logo-wall-item:focus-visible{color:var(--indigo);opacity:1;filter:grayscale(0)}
+
+  .checklist{margin-top:8px}
+
+  .featured-card{background:var(--surface);border:0.5px solid var(--line);border-radius:14px;padding:28px 26px;max-width:820px}
+  .featured-wordmark{display:inline-block;margin-bottom:16px;opacity:1;filter:none}
   .dna-quote p{font-family:var(--display);font-size:clamp(18px,2.1vw,22px);line-height:1.5;color:var(--ink);letter-spacing:-0.01em}
-  .dna-quote footer{margin-top:10px;font-size:13.5px;color:var(--muted)}
-  .dna-quote footer a{color:var(--indigo)}
-  .dna-quote footer a:hover{color:var(--indigo-bright)}
+  .dna-attribution{margin-top:10px;font-size:13.5px;color:var(--muted)}
+  .featured-link{display:inline-block;margin-top:18px;font-weight:500;font-size:14.5px;color:var(--indigo)}
+  .featured-link:hover{color:var(--indigo-bright)}
 
   .section-note{max-width:760px;font-size:14.5px;color:#4a4960;margin-bottom:20px}
 
-  .press-list{display:grid;gap:18px;max-width:760px}
-  .press-item{padding:20px 22px;background:#fff;border:0.5px solid var(--line);border-radius:14px}
-  .press-meta{
+  /* Filter row: real <button> toggles, aria-pressed reflects state; the site's global
+     *:focus-visible rule (theme.css) supplies the visible focus ring, nothing extra needed here. */
+  .filter-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
+  .filter-group{display:inline-flex;gap:8px;border:0.5px solid var(--line);border-radius:var(--r-pill);padding:4px;background:var(--surface)}
+  .filter-group button{
+    font-family:var(--fs);font-size:13.5px;font-weight:500;color:var(--muted);
+    background:transparent;border:0;border-radius:var(--r-pill);padding:8px 16px;cursor:pointer;
+    transition:background .15s var(--ease),color .15s var(--ease);
+  }
+  .filter-group button:hover{color:var(--ink)}
+  .filter-group button[aria-pressed="true"]{background:var(--violet);color:#fff}
+  .filter-count{font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+  /* Card grid: two columns from ~900px, one below; equal row height and spacing from grid+gap
+     only (no per-card margins). */
+  .media-grid{display:grid;grid-template-columns:1fr;gap:20px}
+  @media(min-width:900px){.media-grid{grid-template-columns:1fr 1fr}}
+
+  .media-card{position:relative;display:flex;flex-direction:column;padding:22px 24px;background:#fff;border:0.5px solid var(--line);border-radius:14px}
+  .media-card[hidden]{display:none}
+
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+
+  .media-meta{
     font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
     color:var(--orange);margin-bottom:8px;font-weight:500;
   }
-  .press-item h3{font-family:var(--display);font-size:19px;line-height:1.4;margin-bottom:8px;letter-spacing:-0.01em}
-  .press-item h3 a{color:var(--indigo)}
-  .press-item h3 a:hover{color:var(--indigo-bright)}
-  .press-summary{font-size:14.5px;color:#4a4960;line-height:1.6}
+
+  .media-headline{font-family:var(--display);font-size:19px;line-height:1.4;letter-spacing:-0.01em;margin-bottom:8px}
+  .card-link{color:var(--indigo);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .card-link:hover{color:var(--indigo-bright)}
+  /* Stretched link: the headline anchor is the one accessible link, but its ::after covers the
+     whole card so the entire card is clickable. */
+  .card-link::after{content:'';position:absolute;inset:0}
+  .ext-icon{width:14px;height:14px;margin-left:4px;vertical-align:-2px;flex:none}
+
+  .media-summary{font-size:14.5px;color:#4a4960;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .media-programme{margin-top:10px;font-size:13px;color:var(--muted)}
+
+  /* Media kit */
+  .kit-list{display:flex;flex-direction:column;max-width:820px}
+  .kit-row{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;padding:16px 0;border-top:1px solid var(--line)}
+  .kit-list .kit-row:first-child{border-top:1px solid var(--line)}
+  .kit-label{flex:0 0 160px;font-family:var(--fs);font-weight:500;font-size:14.5px;color:var(--ink)}
+  .kit-links{display:flex;flex-wrap:wrap;gap:6px 18px;flex:1 1 auto}
+  .kit-links a{font-size:14px;color:var(--indigo)}
+  .kit-links a:hover{color:var(--indigo-bright)}
+  .kit-muted{font-size:14px;color:var(--muted)}
+  .kit-muted a{color:var(--indigo)}
+  .kit-muted a:hover{color:var(--indigo-bright)}
+
+  .kit-swatches{display:flex;flex-wrap:wrap;gap:10px;flex:1 1 auto}
+  .swatch{
+    display:inline-flex;align-items:center;gap:8px;padding:7px 12px 7px 8px;
+    border:0.5px solid var(--line);border-radius:var(--r-pill);background:var(--surface);cursor:pointer;
+    font-family:var(--fs);
+  }
+  .swatch-dot{width:16px;height:16px;border-radius:50%;background:var(--sw);flex:none;border:1px solid rgba(21,21,31,.1)}
+  .swatch-text{font-size:13.5px;color:var(--ink)}
+  .swatch-text .mono{color:var(--muted);font-size:12px;margin-left:4px}
+  .swatch:hover{border-color:var(--violet-300)}
+
+  .boilerplate-block{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);max-width:760px}
+  .boilerplate-block h3{font-family:var(--display);font-size:18px;margin-bottom:10px;color:var(--ink)}
+  .boilerplate-text{font-size:14.5px;color:var(--ink-2);line-height:1.65;margin-bottom:14px}
+
+  /* Press enquiries */
+  .press-contact{font-size:16px;line-height:1.7;color:var(--ink-2);margin-bottom:16px}
+  .press-contact a{color:var(--indigo);font-weight:500}
+  .press-contact a:hover{color:var(--indigo-bright)}
+  .press-address{font-size:14.5px;line-height:1.7;color:var(--muted);font-style:normal}
+
+  .cta-secondary-wrap{background:var(--violet-50);text-align:center;padding:0 0 clamp(24px,3vw,36px)}
+  .cta-secondary-wrap a{font-weight:500;font-size:15px;color:var(--indigo)}
+  .cta-secondary-wrap a:hover{color:var(--indigo-bright)}
 </style>
