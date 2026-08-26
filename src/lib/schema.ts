@@ -8,7 +8,7 @@ export const ORG_ID = `${SITE.url}/#org`;
 const GROWTH_PRO_ORG_ID = 'https://www.growth.pro/#org';
 
 export const PERSON_IDS = {
-  alvin: `${SITE.url}/about#alvin-koay`,
+  alvin: `${SITE.url}/about/alvin-koay#alvin-koay`,
   ritu: `${SITE.url}/about#ritu-khanna`,
   peter: `${SITE.url}/about#peter-kua`,
 } as const;
@@ -73,8 +73,9 @@ export const orgNode = {
 };
 
 // path must match the site's actually-served URL: trailingSlash:'never' (astro.config.mjs) means
-// no trailing slash except '/' itself.
-export function webPageSchema(path: string, name: string) {
+// no trailing slash except '/' itself. aboutId defaults to the Organization but a page whose
+// primary subject is a specific entity (e.g. the Alvin Koay founder page) can point elsewhere.
+export function webPageSchema(path: string, name: string, aboutId: string = ORG_ID) {
   const url = path === '/' ? `${SITE.url}/` : `${SITE.url}${path}`;
   return {
     '@context': 'https://schema.org',
@@ -82,10 +83,31 @@ export function webPageSchema(path: string, name: string) {
     '@id': `${url}#webpage`,
     url,
     name,
-    about: { '@id': ORG_ID },
+    about: { '@id': aboutId },
     publisher: { '@id': ORG_ID },
   };
 }
+
+// Entity finding (2026-08-26): dedicated founder entity page. Emitted in full ONLY on
+// /about/alvin-koay (see Schema.astro's isAlvinPage gate) so Alvin resolves to exactly one
+// canonical URL; every other page references him by @id only (PERSON_IDS.alvin), the same
+// pattern orgNode uses for the Organization. description/jobTitle verbatim from the visible
+// /about team card. sameAs: Zicy LinkedIn plus Alvin's canonical Person node on Growth.pro
+// (@id verified live at https://www.growth.pro/#alvin-koay) — no new URLs added.
+export const alvinPersonNode = {
+  '@type': 'Person',
+  '@id': PERSON_IDS.alvin,
+  name: 'Alvin Koay',
+  jobTitle: 'Founder and CEO',
+  description:
+    "Started Growth.pro before the pandemic and saw an SEO industry riddled with broken promises. Built Zicy to clone Growth.pro's ethos, empathy, trust, accountability, transparency and integrity, into AI, so even the smallest businesses get fair access to world-class strategies.",
+  url: `${SITE.url}/about/alvin-koay`,
+  worksFor: { '@id': ORG_ID },
+  sameAs: [
+    'https://www.linkedin.com/in/alvinkoay/',
+    'https://www.growth.pro/#alvin-koay',
+  ],
+};
 
 // Entity finding f-006 (2026-08-25): a generic FAQPage builder for pages whose visible Q&A pairs
 // live in structured page data rather than a hand-authored Faq[] (see faqPageJsonLd in

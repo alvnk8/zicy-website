@@ -34,6 +34,7 @@ const team = [
     photo: alvinPhoto,
     alt: 'Alvin Koay, Founder and CEO of Zicy',
     bio: "Started Growth.pro before the pandemic and saw an SEO industry riddled with broken promises. Built Zicy to clone Growth.pro's ethos, empathy, trust, accountability, transparency and integrity, into AI, so even the smallest businesses get fair access to world-class strategies.",
+    link: '/about/alvin-koay',
   },
   {
     name: 'Ritu Khanna',
@@ -41,6 +42,7 @@ const team = [
     photo: rituPhoto,
     alt: 'Ritu Khanna, Co-founder of Zicy',
     bio: 'Over 15 years in the corporate sector leading environmental-industry projects, plus a decade in SEO strategy and content planning. At Zicy, Ritu applies that experience to develop practical AI-first optimisation methods that help businesses become visible in AI-generated answers.',
+    link: null as string | null,
   },
   {
     name: 'Peter Kua',
@@ -48,6 +50,7 @@ const team = [
     photo: peterPhoto,
     alt: 'Peter Kua, Chief Data Officer of Zicy',
     bio: "A distinguished data science strategist who led Data Science & Analytics at REV Media Group and drove Malaysia's National Big Data Analytics Initiative under MDEC, developing the country's first National BDA Framework. Has trained senior teams at Citibank, Intel, Dell, NTT Data, Maxis and Johnson & Johnson.",
+    link: null as string | null,
   },
 ];
 
@@ -183,6 +186,7 @@ const breadcrumb = {
               <h3>{m.name}</h3>
               <p class="team-role">{m.role}</p>
               <p class="team-bio">{m.bio}</p>
+              {m.link && <a class="team-link" href={m.link}>Full bio & press &rarr;</a>}
             </div>
           </article>
         ))}
@@ -238,6 +242,8 @@ const breadcrumb = {
     color:var(--orange);margin-bottom:12px;font-weight:500;
   }
   .team-bio{font-size:14.5px;color:#4a4960;line-height:1.6}
+  .team-link{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--indigo);font-weight:500}
+  .team-link:hover{color:var(--indigo-bright)}
 
   @media (max-width: 860px){
     .team-grid{grid-template-columns:1fr;gap:18px}

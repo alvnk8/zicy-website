@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import { PERSON_IDS } from '../../lib/schema';
 import PostFigure from '../../components/PostFigure.astro';
 import featuredImg from '../../assets/resources/cloudflare-bot-management/cloudflare-bot-management.jpg';
 import figResponses from '../../assets/resources/cloudflare-bot-management/answer-engine-new@2x.png';
@@ -21,7 +22,7 @@ const description =
   'Cloudflare bot management can decide whether AI answer engines ever see your site. This guide shows how to check your Cloudflare, robots.txt and WAF settings and stay discoverable in AI answers.';
 
 const url = `${SITE.url}/resources/cloudflare-bot-management`;
-const author = `${SITE.url}/about#alvin-koay`;
+const author = PERSON_IDS.alvin;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 const gloss = (slug: string) => `${SITE.url}/resources/glossary/${slug}#term`;
