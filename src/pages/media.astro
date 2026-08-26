@@ -5,6 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { SITE } from '../data/site';
 import { orgNode } from '../lib/schema';
+import { LOGO_SCALE } from '../data/press-logo-scale.mjs';
 
 const title = 'Zicy in the press | Media coverage and press kit';
 const description =
@@ -127,13 +128,27 @@ const coverage = [
 function slugFromLogo(logoPath: string) {
   return logoPath.match(/\/press\/([^/.]+)\.svg$/)![1];
 }
-const TILES_DIR = path.resolve(process.cwd(), 'public', 'press', 'tiles');
+const PUBLIC_PRESS_DIR = path.resolve(process.cwd(), 'public', 'press');
+const TILES_DIR = path.join(PUBLIC_PRESS_DIR, 'tiles');
 function effectiveThumb(item: (typeof coverage)[number]) {
   if (item.thumb) return item.thumb;
   const slug = slugFromLogo(item.logo);
   const tileFile = path.join(TILES_DIR, `${slug}.webp`);
   return fs.existsSync(tileFile) ? `/press/tiles/${slug}.webp` : null;
 }
+
+// Logo wall image branch: render the publisher's real logo (public/press/<slug>.{svg,png,webp})
+// when it exists at build time, greyscale at rest via the existing .logo-wall-item CSS, full
+// colour on hover/focus. Falls back to the current text wordmark — never a broken <img> — for any
+// publisher without a file. Same LOGO_SCALE table as the tile generator so the two stay in sync.
+const WALL_LOGO_EXTENSIONS = ['.svg', '.png', '.webp'];
+function publisherLogoSrc(slug: string) {
+  for (const ext of WALL_LOGO_EXTENSIONS) {
+    if (fs.existsSync(path.join(PUBLIC_PRESS_DIR, `${slug}${ext}`))) return `/press/${slug}${ext}`;
+  }
+  return null;
+}
+const WALL_LOGO_BASE_HEIGHT = 34;
 
 // This repo does use astro:assets' <Image> elsewhere (about.astro, PostFigure.astro), but it
 // isn't usable here: <Image> requires a static import resolvable at build time from src/, and
@@ -199,9 +214,8 @@ const collectionPageSchema = {
 const uniquePublishers = [...new Set(coverage.map((c) => c.publication))];
 const proofLine = `${coverage.length} mentions across ${uniquePublishers.length} publications since February 2026`;
 
-// Publisher logo wall, one entry per unique publication. No logo asset exists in public/ for
-// any of these (checked directly: no public/press/ directory and no matching files under
-// public/ for any of the five publishers), so every entry renders as a text wordmark.
+// Publisher logo wall, one entry per unique publication. All five now have a real logo file
+// under public/press/ (see publisherLogoSrc above), so the wall renders images.
 const publisherWall = uniquePublishers.map((name) => coverage.find((c) => c.publication === name)!);
 
 const dnaItem = coverage.find((c) => c.publication === 'Digital News Asia')!;
@@ -275,12 +289,28 @@ const freeTrialHref = 'https://app.zicy.com/register';
   <section class="logo-wall-section">
     <div class="wrap">
       <div class="logo-wall">
-        {publisherWall.map((p) => (
-          <span class="logo-wall-item" tabindex="0" title={p.publication}>
-            <span class="vh">{p.publication}</span>
-            <span aria-hidden="true">{p.publication}</span>
-          </span>
-        ))}
+        {publisherWall.map((p) => {
+          const slug = slugFromLogo(p.logo);
+          const logoSrc = publisherLogoSrc(slug);
+          const scale = LOGO_SCALE[slug] ?? 1;
+          return logoSrc ? (
+            <img
+              class="logo-wall-item logo-wall-img"
+              src={logoSrc}
+              alt={p.publication}
+              title={p.publication}
+              tabindex="0"
+              style={`height:${Math.round(WALL_LOGO_BASE_HEIGHT * scale)}px`}
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <span class="logo-wall-item" tabindex="0" title={p.publication}>
+              <span class="vh">{p.publication}</span>
+              <span aria-hidden="true">{p.publication}</span>
+            </span>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -524,8 +554,11 @@ const freeTrialHref = 'https://app.zicy.com/register';
   .hero-links a{font-size:14.5px;font-weight:500;color:var(--indigo)}
   .hero-links a:hover{color:var(--indigo-bright)}
 
-  /* Publisher logo wall: text wordmarks (no logo assets exist yet), greyscale-equivalent at
-     rest via muted colour + reduced opacity, full colour on hover/focus. */
+  /* Publisher logo wall: real logo images (falls back to a text wordmark only when a publisher
+     has no file under public/press/), greyscale at rest via reduced opacity + grayscale filter,
+     full colour on hover/focus. .logo-wall-item carries the shared treatment for both; .logo-wall-img
+     resets img-specific defaults and sizes by height only (width auto) so aspect ratio is never
+     distorted — the per-publisher height itself comes from the inline style (LOGO_SCALE). */
   .logo-wall-section{padding-top:0}
   .logo-wall{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
   .logo-wall-item{
@@ -535,6 +568,7 @@ const freeTrialHref = 'https://app.zicy.com/register';
     cursor:default;
   }
   .logo-wall-item:hover,.logo-wall-item:focus-visible{color:var(--indigo);opacity:1;filter:grayscale(0)}
+  .logo-wall-img{display:block;width:auto;max-width:100%}
 
   .checklist{margin-top:8px}
 
