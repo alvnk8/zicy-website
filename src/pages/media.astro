@@ -1,8 +1,11 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { SITE } from '../data/site';
 import { orgNode } from '../lib/schema';
+import { LOGO_SCALE_WALL } from '../data/press-logo-scale.mjs';
 
 const title = 'Zicy in the press | Media coverage and press kit';
 const description =
@@ -39,6 +42,7 @@ const coverage = [
     type: 'Article',
     scope: 'zicy',
     logo: '/press/digital-news-asia.svg',
+    thumb: null,
   },
   {
     publication: 'Biz.bio',
@@ -50,6 +54,7 @@ const coverage = [
     type: 'Article',
     scope: 'zicy',
     logo: '/press/biz-bio.svg',
+    thumb: null,
   },
   {
     publication: 'e27',
@@ -61,6 +66,7 @@ const coverage = [
     type: 'Article',
     scope: 'zicy',
     logo: '/press/e27.svg',
+    thumb: null,
   },
   {
     publication: 'e27',
@@ -72,6 +78,7 @@ const coverage = [
     type: 'Article',
     scope: 'zicy',
     logo: '/press/e27.svg',
+    thumb: null,
   },
   {
     publication: 'Malaysia SME+',
@@ -84,6 +91,7 @@ const coverage = [
     type: 'Article',
     scope: 'zicy',
     logo: '/press/malaysia-sme.svg',
+    thumb: null,
   },
   {
     publication: 'BFM 89.9',
@@ -96,6 +104,7 @@ const coverage = [
     type: 'Podcast',
     scope: 'founder',
     logo: '/press/bfm.svg',
+    thumb: null,
   },
   {
     publication: 'BFM 89.9',
@@ -108,8 +117,46 @@ const coverage = [
     type: 'Podcast',
     scope: 'founder',
     logo: '/press/bfm.svg',
+    thumb: null,
   },
 ];
+
+// Effective thumbnail per item: the per-item `thumb` override when set, else the generated tile
+// at public/press/tiles/<slug>.webp when that file exists at build time, else null (renders the
+// current text-only card — never a broken image, never an empty box). Slug is derived from the
+// item's own `logo` path so the two stay in lockstep without a second manual mapping.
+function slugFromLogo(logoPath: string) {
+  return logoPath.match(/\/press\/([^/.]+)\.svg$/)![1];
+}
+const PUBLIC_PRESS_DIR = path.resolve(process.cwd(), 'public', 'press');
+const TILES_DIR = path.join(PUBLIC_PRESS_DIR, 'tiles');
+function effectiveThumb(item: (typeof coverage)[number]) {
+  if (item.thumb) return item.thumb;
+  const slug = slugFromLogo(item.logo);
+  const tileFile = path.join(TILES_DIR, `${slug}.webp`);
+  return fs.existsSync(tileFile) ? `/press/tiles/${slug}.webp` : null;
+}
+
+// Logo wall image branch: render the publisher's real logo (public/press/<slug>.{svg,png,webp})
+// when it exists at build time, greyscale at rest via the existing .logo-wall-item CSS, full
+// colour on hover/focus. Falls back to the current text wordmark — never a broken <img> — for any
+// publisher without a file. Uses LOGO_SCALE_WALL (defaults to the tile generator's LOGO_SCALE,
+// overridden per publisher where the wall's height-only sizing needs a different value).
+const WALL_LOGO_EXTENSIONS = ['.svg', '.png', '.webp'];
+function publisherLogoSrc(slug: string) {
+  for (const ext of WALL_LOGO_EXTENSIONS) {
+    if (fs.existsSync(path.join(PUBLIC_PRESS_DIR, `${slug}${ext}`))) return `/press/${slug}${ext}`;
+  }
+  return null;
+}
+const WALL_LOGO_BASE_HEIGHT = 34;
+
+// This repo does use astro:assets' <Image> elsewhere (about.astro, PostFigure.astro), but it
+// isn't usable here: <Image> requires a static import resolvable at build time from src/, and
+// these files are conditionally generated (by scripts/make-press-tiles.mjs, possibly after this
+// page's own code hasn't changed) into public/, checked for existence at render time. A plain
+// <img> with explicit width/height (matching the tiles' real 800x600) is the correct tool for a
+// build-time-conditional public/ asset — hence the fs.existsSync check above instead.
 
 // All coverage, newest first, any undated item last. ISO date strings sort lexicographically in
 // chronological order, so a plain string comparison is enough.
@@ -168,12 +215,12 @@ const collectionPageSchema = {
 const uniquePublishers = [...new Set(coverage.map((c) => c.publication))];
 const proofLine = `${coverage.length} mentions across ${uniquePublishers.length} publications since February 2026`;
 
-// Publisher logo wall, one entry per unique publication. No logo asset exists in public/ for
-// any of these (checked directly: no public/press/ directory and no matching files under
-// public/ for any of the five publishers), so every entry renders as a text wordmark.
+// Publisher logo wall, one entry per unique publication. All five now have a real logo file
+// under public/press/ (see publisherLogoSrc above), so the wall renders images.
 const publisherWall = uniquePublishers.map((name) => coverage.find((c) => c.publication === name)!);
 
 const dnaItem = coverage.find((c) => c.publication === 'Digital News Asia')!;
+const featuredThumb = effectiveThumb(dnaItem);
 
 const inBrief = [
   'Zicy is an AI visibility platform that tracks how brands appear inside AI-generated answers across ChatGPT, Gemini, Perplexity, Google AI Overviews, and Google AI Mode.',
@@ -243,12 +290,28 @@ const freeTrialHref = 'https://app.zicy.com/register';
   <section class="logo-wall-section">
     <div class="wrap">
       <div class="logo-wall">
-        {publisherWall.map((p) => (
-          <span class="logo-wall-item" tabindex="0" title={p.publication}>
-            <span class="vh">{p.publication}</span>
-            <span aria-hidden="true">{p.publication}</span>
-          </span>
-        ))}
+        {publisherWall.map((p) => {
+          const slug = slugFromLogo(p.logo);
+          const logoSrc = publisherLogoSrc(slug);
+          const scale = LOGO_SCALE_WALL[slug] ?? 1;
+          return logoSrc ? (
+            <img
+              class="logo-wall-item logo-wall-img"
+              src={logoSrc}
+              alt={p.publication}
+              title={p.publication}
+              tabindex="0"
+              style={`height:${Math.round(WALL_LOGO_BASE_HEIGHT * scale)}px`}
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <span class="logo-wall-item" tabindex="0" title={p.publication}>
+              <span class="vh">{p.publication}</span>
+              <span aria-hidden="true">{p.publication}</span>
+            </span>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -267,13 +330,20 @@ const freeTrialHref = 'https://app.zicy.com/register';
   <section>
     <div class="wrap">
       <div class="shead"><h2>Featured</h2></div>
-      <article class="featured-card">
-        <span class="logo-wall-item featured-wordmark" aria-hidden="true">{dnaItem.publication}</span>
-        <blockquote class="dna-quote">
-          <p>&ldquo;{dnaQuote}&rdquo;</p>
-          <p class="dna-attribution">{dnaItem.publication}, {formatDate(dnaItem.date)}</p>
-        </blockquote>
-        <a class="featured-link" href={dnaItem.href} target="_blank" rel="noopener">Read on Digital News Asia</a>
+      <article class:list={['featured-card', { 'has-thumb': !!featuredThumb }]}>
+        {featuredThumb && (
+          <div class="featured-thumb">
+            <img src={featuredThumb} width="800" height="600" alt="" aria-hidden="true" loading="eager" decoding="async" />
+          </div>
+        )}
+        <div class="featured-body">
+          <span class="logo-wall-item featured-wordmark" aria-hidden="true">{dnaItem.publication}</span>
+          <blockquote class="dna-quote">
+            <p>&ldquo;{dnaQuote}&rdquo;</p>
+            <p class="dna-attribution">{dnaItem.publication}, {formatDate(dnaItem.date)}</p>
+          </blockquote>
+          <a class="featured-link" href={dnaItem.href} target="_blank" rel="noopener">Read on Digital News Asia</a>
+        </div>
       </article>
     </div>
   </section>
@@ -302,31 +372,39 @@ const freeTrialHref = 'https://app.zicy.com/register';
         {sortedCoverage.map((p) => {
           const displayHeadline = DISPLAY_HEADLINES[p.href] ?? p.headline;
           const hasOverride = displayHeadline !== p.headline;
+          const thumbSrc = effectiveThumb(p);
           return (
-            <article class="media-card" data-media-card={p.type.toLowerCase()}>
-              <div class="chip-row">
-                <span class="badge">{p.type}</span>
-                {p.scope === 'founder' && <span class="badge">Founder appearance</span>}
+            <article class:list={['media-card', { 'has-thumb': !!thumbSrc }]} data-media-card={p.type.toLowerCase()}>
+              {thumbSrc && (
+                <div class="media-thumb">
+                  <img src={thumbSrc} width="800" height="600" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                </div>
+              )}
+              <div class="media-body">
+                <div class="chip-row">
+                  <span class="badge">{p.type}</span>
+                  {p.scope === 'founder' && <span class="badge">Founder appearance</span>}
+                </div>
+                <p class="media-meta">{p.publication} &middot; {formatDate(p.date)}</p>
+                <h3 class="media-headline">
+                  <a
+                    class="card-link"
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={hasOverride ? p.headline : undefined}
+                  >
+                    {displayHeadline}
+                    <svg class="ext-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z" />
+                      <path fill="currentColor" d="M5 5h6v2H7v10h10v-4h2v6H5V5z" />
+                    </svg>
+                    <span class="vh"> (opens in a new tab)</span>
+                  </a>
+                </h3>
+                <p class="media-summary">{p.summary}</p>
+                {p.programme && <p class="media-programme">{p.programme}</p>}
               </div>
-              <p class="media-meta">{p.publication} &middot; {formatDate(p.date)}</p>
-              <h3 class="media-headline">
-                <a
-                  class="card-link"
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={hasOverride ? p.headline : undefined}
-                >
-                  {displayHeadline}
-                  <svg class="ext-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z" />
-                    <path fill="currentColor" d="M5 5h6v2H7v10h10v-4h2v6H5V5z" />
-                  </svg>
-                  <span class="vh"> (opens in a new tab)</span>
-                </a>
-              </h3>
-              <p class="media-summary">{p.summary}</p>
-              {p.programme && <p class="media-programme">{p.programme}</p>}
             </article>
           );
         })}
@@ -477,8 +555,11 @@ const freeTrialHref = 'https://app.zicy.com/register';
   .hero-links a{font-size:14.5px;font-weight:500;color:var(--indigo)}
   .hero-links a:hover{color:var(--indigo-bright)}
 
-  /* Publisher logo wall: text wordmarks (no logo assets exist yet), greyscale-equivalent at
-     rest via muted colour + reduced opacity, full colour on hover/focus. */
+  /* Publisher logo wall: real logo images (falls back to a text wordmark only when a publisher
+     has no file under public/press/), greyscale at rest via reduced opacity + grayscale filter,
+     full colour on hover/focus. .logo-wall-item carries the shared treatment for both; .logo-wall-img
+     resets img-specific defaults and sizes by height only (width auto) so aspect ratio is never
+     distorted — the per-publisher height itself comes from the inline style (LOGO_SCALE_WALL). */
   .logo-wall-section{padding-top:0}
   .logo-wall{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
   .logo-wall-item{
@@ -488,10 +569,21 @@ const freeTrialHref = 'https://app.zicy.com/register';
     cursor:default;
   }
   .logo-wall-item:hover,.logo-wall-item:focus-visible{color:var(--indigo);opacity:1;filter:grayscale(0)}
+  .logo-wall-img{display:block;width:auto;max-width:100%}
 
   .checklist{margin-top:8px}
 
   .featured-card{background:var(--surface);border:0.5px solid var(--line);border-radius:14px;padding:28px 26px;max-width:820px}
+  .featured-card.has-thumb{display:flex;gap:24px;align-items:flex-start}
+  .featured-body{flex:1 1 auto;min-width:0}
+  /* Same treatment as the grid cards' thumbnail, just wider, since the Featured card has more
+     room to spend on it. */
+  .featured-thumb{flex:0 0 260px;width:260px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:var(--mist)}
+  .featured-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  @media(max-width:700px){
+    .featured-card.has-thumb{flex-direction:column}
+    .featured-thumb{flex-basis:88px;width:88px;aspect-ratio:1/1}
+  }
   .featured-wordmark{display:inline-block;margin-bottom:16px;opacity:1;filter:none}
   .dna-quote p{font-family:var(--display);font-size:clamp(18px,2.1vw,22px);line-height:1.5;color:var(--ink);letter-spacing:-0.01em}
   .dna-attribution{margin-top:10px;font-size:13.5px;color:var(--muted)}
@@ -517,9 +609,24 @@ const freeTrialHref = 'https://app.zicy.com/register';
      only (no per-card margins). */
   .media-grid{display:grid;grid-template-columns:1fr;gap:20px}
   @media(min-width:900px){.media-grid{grid-template-columns:1fr 1fr}}
+  /* Orphan fix: when the (DOM) card count is odd, the last card spans both columns. Matches
+     :last-child (real DOM position, unaffected by the [hidden] the filter script toggles) with
+     :nth-child(odd), so it only fires when that position is genuinely odd. */
+  .media-grid > .media-card:last-child:nth-child(odd){grid-column:1 / -1}
 
   .media-card{position:relative;display:flex;flex-direction:column;padding:22px 24px;background:#fff;border:0.5px solid var(--line);border-radius:14px}
   .media-card[hidden]{display:none}
+  .media-card.has-thumb{flex-direction:row;gap:18px}
+  .media-body{flex:1 1 auto;min-width:0}
+
+  /* Thumbnail: fixed 4:3 box on desktop, object-fit:cover so a mixed-ratio override (per-item
+     `thumb`) can never distort or break the grid. Below 700px it becomes an 88px square instead,
+     small enough that the headline stays the dominant element of the card. */
+  .media-thumb{flex:0 0 160px;width:160px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:var(--mist)}
+  .media-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  @media(max-width:700px){
+    .media-thumb{flex-basis:88px;width:88px;aspect-ratio:1/1}
+  }
 
   .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 
