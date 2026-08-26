@@ -1,85 +1,92 @@
 // Generates one 800x600 press-tile thumbnail per publisher into public/press/tiles/<slug>.webp.
-// Run: node scripts/make-press-tiles.mjs
+// Run: node scripts/make-press-tiles.mjs (or: npm run press-tiles)
+//
+// Composes the tile as an SVG string (background + publisher logo or wordmark + Article/Podcast
+// glyph) and pipes it through sharp to WebP. No browser involved — a flat tile doesn't need one.
 //
 // Idempotent: re-running regenerates every tile from scratch. Drop a real logo at
 // public/press/<slug>.svg and re-run to swap that one publisher from a text wordmark to its
 // real logo — no other change, no code edit required for that.
 //
 // Adding a brand-new publisher (item 8+) is one manifest line below plus one command; the
-// template, palette and layout are already built and never need touching again.
-import { chromium } from 'playwright';
+// palette and layout are already built and never need touching again.
 import sharp from 'sharp';
 import fs from 'node:fs';
 import path from 'node:path';
-import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
-const TEMPLATE_PATH = path.join(__dirname, 'press-tile-template.html');
 const PUBLIC_PRESS_DIR = path.join(REPO_ROOT, 'public', 'press');
 const TILES_DIR = path.join(PUBLIC_PRESS_DIR, 'tiles');
 
-// Fixed 5-value palette, one field colour per publisher, no invented hex values — every value
-// below is copied verbatim from src/styles/theme.css's existing token list. Kept in sync with
-// the `coverage` array in src/pages/media.astro (same publishers, same slugs as each item's
-// `logo` field).
+const WIDTH = 800;
+const HEIGHT = 600;
+
+// Palette: all five tiles drawn from theme.css's -300 step (the only step where every available
+// hue clears 4.5:1 against an existing dark token). theme.css has no --blue-300, so the step
+// offers 3 hues, not 5 — two are repeated below, placed so no two grid-adjacent tiles (see
+// .media-grid's 2-col layout in media.astro) share a color. Verified contrast of --ink on each:
+// sky-300 12.87:1, violet-300 9.61:1, magenta-300 8.98:1 (all >> 4.5:1 AA).
 const PUBLISHERS = [
   { name: 'Digital News Asia', slug: 'digital-news-asia', type: 'Article', color: '#B4E0F4' }, // --sky-300
   { name: 'Biz.bio',           slug: 'biz-bio',           type: 'Article', color: '#BEB9DA' }, // --violet-300
   { name: 'e27',               slug: 'e27',               type: 'Article', color: '#D6A8D3' }, // --magenta-300
-  { name: 'Malaysia SME+',     slug: 'malaysia-sme',      type: 'Article', color: '#F3F3F8' }, // --violet-50
-  { name: 'BFM 89.9',          slug: 'bfm',               type: 'Podcast', color: '#83C9EB' }, // --sky
+  { name: 'Malaysia SME+',     slug: 'malaysia-sme',      type: 'Article', color: '#B4E0F4' }, // --sky-300
+  { name: 'BFM 89.9',          slug: 'bfm',               type: 'Podcast', color: '#BEB9DA' }, // --violet-300
 ];
 
-// --violet-900, dark enough for AA text/glyph contrast against every field colour above.
-const TEXT_COLOR = '#2A2641';
+// --ink
+const TEXT_COLOR = '#15151F';
 
+// Inner markup only (no outer <svg>/viewBox) — wrapped into a nested <svg width="56" height="56"
+// viewBox="0 0 24 24"> at composition time below.
 const GLYPHS = {
-  Article: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="3" width="16" height="18" rx="2" stroke="${TEXT_COLOR}" stroke-width="1.6"/><line x1="7.5" y1="8" x2="16.5" y2="8" stroke="${TEXT_COLOR}" stroke-width="1.6"/><line x1="7.5" y1="12" x2="16.5" y2="12" stroke="${TEXT_COLOR}" stroke-width="1.6"/><line x1="7.5" y1="16" x2="13" y2="16" stroke="${TEXT_COLOR}" stroke-width="1.6"/></svg>`,
-  Podcast: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="3" width="6" height="11" rx="3" stroke="${TEXT_COLOR}" stroke-width="1.6"/><path d="M6 11a6 6 0 0 0 12 0" stroke="${TEXT_COLOR}" stroke-width="1.6" stroke-linecap="round"/><line x1="12" y1="17" x2="12" y2="21" stroke="${TEXT_COLOR}" stroke-width="1.6"/><line x1="8.5" y1="21" x2="15.5" y2="21" stroke="${TEXT_COLOR}" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+  Article: `<rect x="4" y="3" width="16" height="18" rx="2" stroke="${TEXT_COLOR}" stroke-width="1.6" fill="none"/><line x1="7.5" y1="8" x2="16.5" y2="8" stroke="${TEXT_COLOR}" stroke-width="1.6"/><line x1="7.5" y1="12" x2="16.5" y2="12" stroke="${TEXT_COLOR}" stroke-width="1.6"/><line x1="7.5" y1="16" x2="13" y2="16" stroke="${TEXT_COLOR}" stroke-width="1.6"/>`,
+  Podcast: `<rect x="9" y="3" width="6" height="11" rx="3" stroke="${TEXT_COLOR}" stroke-width="1.6" fill="none"/><path d="M6 11a6 6 0 0 0 12 0" stroke="${TEXT_COLOR}" stroke-width="1.6" stroke-linecap="round" fill="none"/><line x1="12" y1="17" x2="12" y2="21" stroke="${TEXT_COLOR}" stroke-width="1.6"/><line x1="8.5" y1="21" x2="15.5" y2="21" stroke="${TEXT_COLOR}" stroke-width="1.6" stroke-linecap="round"/>`,
 };
 
-fs.mkdirSync(TILES_DIR, { recursive: true });
-const template = fs.readFileSync(TEMPLATE_PATH, 'utf8');
+function escapeXml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 
-const browser = await chromium.launch();
+// Background + optional wordmark + glyph, as one SVG. The publisher logo (when present) is
+// composited on top afterwards via sharp, rather than embedded in this markup, since sharp can
+// rasterize the source SVG logo directly and .composite() it cleanly.
+function backgroundSvg({ color, wordmark, glyphMarkup }) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}">
+  <rect width="${WIDTH}" height="${HEIGHT}" fill="${color}"/>
+  ${wordmark ? `<text x="${WIDTH / 2}" y="${HEIGHT / 2}" text-anchor="middle" dominant-baseline="middle" font-family="'Fraunces Variable','Fraunces',Georgia,serif" font-size="56" font-weight="500" fill="${TEXT_COLOR}">${escapeXml(wordmark)}</text>` : ''}
+  <svg x="${WIDTH - 88}" y="${HEIGHT - 88}" width="56" height="56" viewBox="0 0 24 24">${glyphMarkup}</svg>
+</svg>`;
+}
+
+fs.mkdirSync(TILES_DIR, { recursive: true });
 const report = [];
 
 for (const pub of PUBLISHERS) {
-  const svgPath = path.join(PUBLIC_PRESS_DIR, `${pub.slug}.svg`);
-  const hasLogo = fs.existsSync(svgPath);
-  const content = hasLogo
-    ? `<img class="logo" src="file://${svgPath.replace(/\\/g, '/')}" alt="">`
-    : `<span class="wordmark">${pub.name}</span>`;
+  const svgLogoPath = path.join(PUBLIC_PRESS_DIR, `${pub.slug}.svg`);
+  const hasLogo = fs.existsSync(svgLogoPath);
 
-  const html = template
-    .replaceAll('__FIELD_COLOR__', pub.color)
-    .replaceAll('__TEXT_COLOR__', TEXT_COLOR)
-    .replaceAll('__CONTENT__', content)
-    .replaceAll('__GLYPH__', GLYPHS[pub.type]);
+  const bgSvg = backgroundSvg({
+    color: pub.color,
+    wordmark: hasLogo ? null : pub.name,
+    glyphMarkup: GLYPHS[pub.type],
+  });
 
-  const tmpHtml = path.join(os.tmpdir(), `press-tile-${pub.slug}.html`);
-  const tmpPng = path.join(os.tmpdir(), `press-tile-${pub.slug}.png`);
-  fs.writeFileSync(tmpHtml, html, 'utf8');
+  let pipeline = sharp(Buffer.from(bgSvg));
 
-  const page = await browser.newPage({ viewport: { width: 800, height: 600 } });
-  await page.goto(`file://${tmpHtml.replace(/\\/g, '/')}`);
-  await page.waitForTimeout(100);
-  await page.screenshot({ path: tmpPng });
-  await page.close();
+  if (hasLogo) {
+    const logoBuffer = await sharp(svgLogoPath).resize(520, 280, { fit: 'inside' }).toBuffer();
+    pipeline = pipeline.composite([{ input: logoBuffer, gravity: 'centre' }]);
+  }
 
   const outFile = path.join(TILES_DIR, `${pub.slug}.webp`);
-  await sharp(tmpPng).webp({ quality: 82 }).toFile(outFile);
-
-  fs.unlinkSync(tmpHtml);
-  fs.unlinkSync(tmpPng);
+  await pipeline.webp({ quality: 82 }).toFile(outFile);
 
   const size = fs.statSync(outFile).size;
   report.push({ ...pub, hasLogo, outFile: path.relative(REPO_ROOT, outFile), size });
 }
-
-await browser.close();
 
 console.log('Tile generation report:');
 let total = 0;
