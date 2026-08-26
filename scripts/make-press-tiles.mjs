@@ -8,6 +8,11 @@
 // public/press/<slug>.svg and re-run to swap that one publisher from a text wordmark to its
 // real logo — no other change, no code edit required for that.
 //
+// Two branches from one template:
+//   - Logo present:  neutral --surface field, no tint, logo greyscaled (matches the grayscale(1)
+//     treatment already used on the logo wall in media.astro).
+//   - No logo (fallback): tinted -300-step field + text wordmark, per the palette fix below.
+//
 // Adding a brand-new publisher (item 8+) is one manifest line below plus one command; the
 // palette and layout are already built and never need touching again.
 import sharp from 'sharp';
@@ -39,6 +44,9 @@ const PUBLISHERS = [
 // --ink
 const TEXT_COLOR = '#15151F';
 
+// --surface, for the logo branch's neutral field (no tint).
+const SURFACE_COLOR = '#FFFFFF';
+
 // Inner markup only (no outer <svg>/viewBox) — wrapped into a nested <svg width="56" height="56"
 // viewBox="0 0 24 24"> at composition time below.
 const GLYPHS = {
@@ -69,7 +77,7 @@ for (const pub of PUBLISHERS) {
   const hasLogo = fs.existsSync(svgLogoPath);
 
   const bgSvg = backgroundSvg({
-    color: pub.color,
+    color: hasLogo ? SURFACE_COLOR : pub.color,
     wordmark: hasLogo ? null : pub.name,
     glyphMarkup: GLYPHS[pub.type],
   });
@@ -77,7 +85,10 @@ for (const pub of PUBLISHERS) {
   let pipeline = sharp(Buffer.from(bgSvg));
 
   if (hasLogo) {
-    const logoBuffer = await sharp(svgLogoPath).resize(520, 280, { fit: 'inside' }).toBuffer();
+    const logoBuffer = await sharp(svgLogoPath)
+      .resize(520, 280, { fit: 'inside' })
+      .grayscale()
+      .toBuffer();
     pipeline = pipeline.composite([{ input: logoBuffer, gravity: 'centre' }]);
   }
 
