@@ -15,13 +15,16 @@
 // House style: human-readable strings in sentence case, no em dash, no banned vocab. Engine
 // names are kept out of the descriptions so the canonical-five fixed-order rule does not apply.
 import { SITE } from '../data/site';
-import { ORG_ID, PERSON_IDS, orgNode } from '../lib/schema';
+import { ORG_ID, PERSON_IDS, orgNode, alvinPersonNode } from '../lib/schema';
 
 const orgId = ORG_ID;
 const appId = `${SITE.url}/#app`;
 const siteId = `${SITE.url}/#site`;
 const person = PERSON_IDS;
 const isHome = Astro.url.pathname === '/';
+// Alvin's full Person node is emitted only on his dedicated entity page (see alvinPersonNode's
+// comment in lib/schema); every other page keeps referencing him by @id only.
+const isAlvinPage = Astro.url.pathname === '/about/alvin-koay';
 
 const monthly = (price: string) => ({
   '@type': 'UnitPriceSpecification',
@@ -91,22 +94,7 @@ const graph = {
         },
       ],
     },
-    {
-      // description/jobTitle verbatim from the visible /about team cards.
-      // sameAs: Zicy LinkedIn plus Alvin's canonical Person node on Growth.pro
-      // (@id verified live at https://www.growth.pro/#alvin-koay).
-      '@type': 'Person',
-      '@id': person.alvin,
-      name: 'Alvin Koay',
-      jobTitle: 'Founder & CEO',
-      description:
-        "Started Growth.pro before the pandemic and saw an SEO industry riddled with broken promises. Built Zicy to clone Growth.pro's ethos, empathy, trust, accountability, transparency and integrity, into AI, so even the smallest businesses get fair access to world-class strategies.",
-      worksFor: { '@id': orgId },
-      sameAs: [
-        'https://www.linkedin.com/in/alvinkoay/',
-        'https://www.growth.pro/#alvin-koay',
-      ],
-    },
+    ...(isAlvinPage ? [alvinPersonNode] : []),
     {
       '@type': 'Person',
       '@id': person.ritu,

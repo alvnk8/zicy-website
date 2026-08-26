@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import { webPageSchema, PERSON_IDS } from '../../lib/schema';
+
+const title = 'Alvin Koay, founder and CEO of Zicy';
+const description =
+  'Alvin Koay founded Growth.pro and Zicy, and writes and speaks about AI visibility measurement across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.';
+
+const url = `${SITE.url}/about/alvin-koay`;
+
+// Press items verified by rendering each page with a real browser (Playwright) and reading the
+// published headline, byline and date directly off the page. No BFM item: no publisher URL for it.
+const press = [
+  {
+    publication: 'e27',
+    date: '16 March 2026',
+    headline: 'The new growth metric: AI Share of Voice',
+    summary:
+      'Alvin argues that AI Share of Voice and citation authority are becoming the metrics that matter more than traffic, as AI answers replace clicks.',
+    href: 'https://e27.co/the-new-growth-metric-ai-share-of-voice-20260316/',
+  },
+  {
+    publication: 'e27',
+    date: '12 March 2026',
+    headline: 'Your biggest competitor might be the AI answer itself',
+    summary:
+      'Alvin explains why AI answer engine optimisation is becoming a strategic necessity for startups, and how being cited by AI is starting to decide who gets considered at all.',
+    href: 'https://e27.co/your-biggest-competitor-might-be-the-ai-answer-itself-20260312/',
+  },
+  {
+    publication: 'Malaysia SME+',
+    date: null,
+    headline:
+      "Answer Engines such as CHATGPT, GEMINI, GOOGLE's AI Mode are your customers' new best friends – businesses must align web pages and online presence or risk losing leads and revenue generation channels.",
+    summary:
+      'Alvin walks through why answer engine optimisation is replacing traditional SEO, and what businesses need to restructure in their content and schema to stay discoverable.',
+    href: 'https://www.malaysiasme.com.my/answer-engines-such-as-chatgpt-gemini-googles-ai-mode-are-your-customers-new-best-friends-businesses-must-align-web-pages-and-online-presence-or-risk-losing-leads-and-revenue-generatio/',
+  },
+];
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'About', item: `${SITE.url}/about` },
+    { '@type': 'ListItem', position: 3, name: 'Alvin Koay', item: url },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/about/alvin-koay', title, PERSON_IDS.alvin))} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+
+  <!-- Hero -->
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/about">About</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Alvin Koay</span>
+      </nav>
+      <span class="eyebrow">Founder and CEO</span>
+      <h1>Alvin Koay</h1>
+      <p class="lead">
+        Alvin founded Growth.pro before the pandemic, then built Zicy to bring that same ethos,
+        empathy, trust, accountability, transparency and integrity, into AI. Zicy measures how
+        brands are described across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI
+        Mode, and helps fix what's wrong.
+      </p>
+    </div>
+  </section>
+
+  <!-- Alvin in the press -->
+  <section style="background:var(--lavender)">
+    <div class="wrap">
+      <div class="shead"><h2>Alvin in the press</h2></div>
+      <div class="press-list">
+        {press.map((p) => (
+          <article class="press-item">
+            <p class="press-meta">
+              {p.publication}{p.date ? <> &middot; {p.date}</> : null}
+            </p>
+            <h3><a href={p.href} target="_blank" rel="noopener">{p.headline}</a></h3>
+            <p class="press-summary">{p.summary}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+
+  .press-list{display:grid;gap:18px;max-width:760px}
+  .press-item{padding:20px 22px;background:#fff;border:0.5px solid var(--line);border-radius:14px}
+  .press-meta{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--orange);margin-bottom:8px;font-weight:500;
+  }
+  .press-item h3{font-family:var(--display);font-size:19px;line-height:1.4;margin-bottom:8px;letter-spacing:-0.01em}
+  .press-item h3 a{color:var(--indigo)}
+  .press-item h3 a:hover{color:var(--indigo-bright)}
+  .press-summary{font-size:14.5px;color:#4a4960;line-height:1.6}
+</style>
