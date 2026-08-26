@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { SITE } from '../data/site';
 import { orgNode } from '../lib/schema';
-import { LOGO_SCALE } from '../data/press-logo-scale.mjs';
+import { LOGO_SCALE_WALL } from '../data/press-logo-scale.mjs';
 
 const title = 'Zicy in the press | Media coverage and press kit';
 const description =
@@ -140,7 +140,8 @@ function effectiveThumb(item: (typeof coverage)[number]) {
 // Logo wall image branch: render the publisher's real logo (public/press/<slug>.{svg,png,webp})
 // when it exists at build time, greyscale at rest via the existing .logo-wall-item CSS, full
 // colour on hover/focus. Falls back to the current text wordmark — never a broken <img> — for any
-// publisher without a file. Same LOGO_SCALE table as the tile generator so the two stay in sync.
+// publisher without a file. Uses LOGO_SCALE_WALL (defaults to the tile generator's LOGO_SCALE,
+// overridden per publisher where the wall's height-only sizing needs a different value).
 const WALL_LOGO_EXTENSIONS = ['.svg', '.png', '.webp'];
 function publisherLogoSrc(slug: string) {
   for (const ext of WALL_LOGO_EXTENSIONS) {
@@ -292,7 +293,7 @@ const freeTrialHref = 'https://app.zicy.com/register';
         {publisherWall.map((p) => {
           const slug = slugFromLogo(p.logo);
           const logoSrc = publisherLogoSrc(slug);
-          const scale = LOGO_SCALE[slug] ?? 1;
+          const scale = LOGO_SCALE_WALL[slug] ?? 1;
           return logoSrc ? (
             <img
               class="logo-wall-item logo-wall-img"
@@ -558,7 +559,7 @@ const freeTrialHref = 'https://app.zicy.com/register';
      has no file under public/press/), greyscale at rest via reduced opacity + grayscale filter,
      full colour on hover/focus. .logo-wall-item carries the shared treatment for both; .logo-wall-img
      resets img-specific defaults and sizes by height only (width auto) so aspect ratio is never
-     distorted — the per-publisher height itself comes from the inline style (LOGO_SCALE). */
+     distorted — the per-publisher height itself comes from the inline style (LOGO_SCALE_WALL). */
   .logo-wall-section{padding-top:0}
   .logo-wall{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
   .logo-wall-item{
