@@ -48,6 +48,7 @@ const annual = monthly !== null ? annualMonthly(monthly) : null;
     rel={tier.cta.external ? 'noopener' : undefined}
     target={tier.cta.external ? '_blank' : undefined}
   >{tier.cta.label}</a>
+  {tier.cta.label === 'Try for free' && <p class="ptier-trial">7-day free trial, no credit card required</p>}
 </article>
 
 <style>
@@ -73,4 +74,5 @@ const annual = monthly !== null ? annualMonthly(monthly) : null;
   .ptier-feats li{position:relative;padding:6px 0 6px 20px;color:var(--ink-2)}
   .ptier-feats li::before{content:'';position:absolute;left:0;top:13px;width:8px;height:8px;border-radius:2px;background:var(--violet-300)}
   .ptier-cta{margin-top:22px;width:100%;justify-content:center}
+  .ptier-trial{margin:8px 0 0;font-size:12px;color:var(--muted);text-align:center}
 </style>

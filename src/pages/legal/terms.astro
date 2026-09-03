@@ -1,0 +1,361 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Built from docs/zicy-terms-of-service-copy-v1.md (v1.3, all facts and commercial
+// positions settled). Editorial scaffolding in the source (SETTLED:, Note for Alvin,
+// Note for counsel, and similar) is instruction to us, not page copy, and has been
+// stripped; the decisions themselves are all published below.
+const title = 'Terms of service, Zicy';
+const description =
+  'The agreement between you and Growth Pro Sdn. Bhd. for your use of Zicy: plans, billing, the free trial, cancellation, AI outputs, liability and governing law.';
+
+const sections = [
+  { id: 'sec-1-who-you-are-contracting-with', label: '1. Who you are contracting with' },
+  { id: 'sec-2-the-agreement', label: '2. The agreement' },
+  { id: 'sec-3-accounts', label: '3. Accounts, teams and agency workspaces' },
+  { id: 'sec-4-plans-quotas-credits', label: '4. Plans, quotas and credits' },
+  { id: 'sec-5-free-trial', label: '5. Free trial' },
+  { id: 'sec-6-fees-billing-renewal', label: '6. Fees, billing and renewal' },
+  { id: 'sec-7-cancellation', label: '7. Cancellation and downgrades' },
+  { id: 'sec-8-your-content-your-data', label: '8. Your content and your data' },
+  { id: 'sec-9-our-ip', label: '9. Our intellectual property' },
+  { id: 'sec-10-ai-outputs', label: '10. AI outputs' },
+  { id: 'sec-11-what-we-do-not-promise', label: '11. What we do not promise' },
+  { id: 'sec-12-acceptable-use', label: '12. Acceptable use' },
+  { id: 'sec-13-confidentiality', label: '13. Confidentiality' },
+  { id: 'sec-14-suspension-termination', label: '14. Suspension and termination' },
+  { id: 'sec-15-disclaimer', label: '15. Disclaimer of warranties' },
+  { id: 'sec-16-liability', label: '16. Limitation of liability' },
+  { id: 'sec-17-indemnity', label: '17. Indemnity' },
+  { id: 'sec-18-changes', label: '18. Changes' },
+  { id: 'sec-19-governing-law', label: '19. Governing law and disputes' },
+  { id: 'sec-20-general', label: '20. General' },
+  { id: 'sec-21-contact', label: '21. Contact' },
+];
+---
+<BaseLayout title={title} description={description}>
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Legal</span>
+      <h1>Terms of service</h1>
+      <p class="meta-dates">Last updated: 3 September 2026 · Effective: 3 September 2026</p>
+      <p class="sub">
+        These terms are the agreement between you and Growth Pro Sdn. Bhd. for your use of Zicy. Please read
+        them. If you are buying on behalf of a company or a client, you confirm you are authorised to accept
+        them.
+      </p>
+      <p class="sibling-links">
+        <a href="/legal/privacy">Privacy policy</a> ·
+        <a href="/legal/cookies">Cookie policy</a> ·
+        <button type="button" class="cc-reopen" onclick="window.zicyOpenCookieSettings && window.zicyOpenCookieSettings()">Cookie settings</button>
+      </p>
+    </div>
+  </section>
+
+  <section class="legal-body">
+    <div class="wrap">
+      <article class="prose">
+        <nav class="toc" aria-label="Table of contents">
+          <h2>Contents</h2>
+          <ol>
+            {sections.map((s) => <li><a href={`#${s.id}`}>{s.label}</a></li>)}
+          </ol>
+        </nav>
+
+        <h2 id="sec-1-who-you-are-contracting-with">1. Who you are contracting with</h2>
+        <p>
+          Malaysia's Consumer Protection (Electronic Trade Transactions) Regulations 2024 require an online
+          business to publish these identifying details.
+        </p>
+        <table class="ctable">
+          <thead><tr><th>Field</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row">Company</th>
+              <td data-col="Detail">Growth Pro Sdn. Bhd.</td>
+            </tr>
+            <tr>
+              <th scope="row">Company registration number</th>
+              <td data-col="Detail">202001011280 (1367600-U)</td>
+            </tr>
+            <tr>
+              <th scope="row">Registered address</th>
+              <td data-col="Detail">60 Persiaran Midlands, 10250 Penang, Malaysia</td>
+            </tr>
+            <tr>
+              <th scope="row">Email</th>
+              <td data-col="Detail"><a href="mailto:contact@zicy.com">contact@zicy.com</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Telephone</th>
+              <td data-col="Detail"><a href="tel:+60124726233">+6012 472 6233</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Website</th>
+              <td data-col="Detail">www.zicy.com</td>
+            </tr>
+            <tr>
+              <th scope="row">What we supply</th>
+              <td data-col="Detail">A subscription software service for measuring and improving how AI answer engines describe a brand.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="sec-2-the-agreement">2. The agreement</h2>
+        <ul>
+          <li>These terms, the <a href="/legal/privacy">privacy policy</a>, the <a href="/legal/cookies">cookie policy</a> and the data processing addendum together form the whole agreement.</li>
+          <li>You accept them by creating an account, starting a trial, or paying for a plan.</li>
+          <li>If your organisation has signed a separate written agreement with us, that agreement prevails over these terms where they conflict.</li>
+          <li>You must be at least 18 and able to enter a binding contract. Zicy is a business tool and is not offered to consumers for personal use.</li>
+        </ul>
+
+        <h2 id="sec-3-accounts">3. Accounts, teams and agency workspaces</h2>
+        <ul>
+          <li>You are responsible for everything done under your account, and for keeping credentials secure. Tell us promptly at <a href="mailto:contact@zicy.com">contact@zicy.com</a> if you suspect unauthorised access.</li>
+          <li>An owner can invite team members and assign them to brand profiles. Anyone you invite can see the profiles they are assigned to.</li>
+          <li><strong>Agency plans.</strong> If you use Zicy on behalf of clients, you confirm you have each client's authority to add their brand, nominate their domains, connect their analytics, and receive reports on their behalf. You remain responsible to us for use of the account, and you are responsible to your client for what you do with it.</li>
+          <li>We may refuse, suspend or close an account we reasonably believe is being used in breach of these terms.</li>
+        </ul>
+
+        <h2 id="sec-4-plans-quotas-credits">4. Plans, quotas and credits</h2>
+        <ul>
+          <li>Each plan includes a stated allowance of tracked prompts, audit pages, Brand Intelligence runs, brand profiles and content credits. Current allowances are on the pricing page and form part of these terms.</li>
+          <li>Allowances reset each billing period. Unused allowance and credits do not roll over, have no cash value, and are not refundable.</li>
+          <li>Where an action consumes quota, the product tells you before you confirm.</li>
+          <li>We may change plan contents and allowances for future billing periods on 30 days' notice. Your current paid period is not changed.</li>
+        </ul>
+
+        <h2 id="sec-5-free-trial">5. Free trial</h2>
+        <ul>
+          <li><strong>The free trial is 7 days, and no payment method is required to start it.</strong></li>
+          <li>Because no card is taken, the trial cannot and does not convert automatically. At the end of 7 days the trial simply ends. Nothing is charged. You choose a plan if you want to continue.</li>
+          <li>Trials are for evaluation, one per organisation, and we may end a trial that is being used to circumvent paid limits.</li>
+        </ul>
+
+        <h2 id="sec-6-fees-billing-renewal">6. Fees, billing and renewal</h2>
+        <ul>
+          <li>Prices are shown on the pricing page and are in US dollars (USD).</li>
+          <li>Prices exclude any applicable taxes, which are added at checkout where required.</li>
+          <li>Payment is taken by Stripe. We never see or store your full card details.</li>
+          <li><strong>Subscriptions renew automatically at the end of each billing period, monthly or annual, until cancelled.</strong></li>
+          <li>Annual billing is charged in advance, at thirteen months for the price of twelve across the annual term.</li>
+          <li>We may change prices on 30 days' notice, effective from your next renewal. If you do not accept a price change, cancel before it takes effect.</li>
+          <li>If a payment fails we may retry, and may suspend access until it succeeds.</li>
+        </ul>
+
+        <h2 id="sec-7-cancellation">7. Cancellation and downgrades</h2>
+        <ul>
+          <li>You can cancel at any time from your account settings. Cancellation stops the next renewal.</li>
+          <li>Your access continues until the end of the period you have already paid for.</li>
+          <li>Fees for a period that has already started are not returned, including where you cancel part way through it.</li>
+          <li>On downgrade, the lower allowance applies from the next billing period.</li>
+          <li>After cancellation you can export your data for 30 days, after which the retention periods in the <a href="/legal/privacy">privacy policy</a> apply.</li>
+          <li>If we materially reduce what your plan includes during a period you have already paid for, you may cancel and we will refund the unused portion of that period.</li>
+        </ul>
+
+        <h2 id="sec-8-your-content-your-data">8. Your content and your data</h2>
+        <ul>
+          <li><strong>You keep ownership of everything you put into Zicy:</strong> brand profiles, prompts, competitor lists, connected analytics data, crawled content from domains you nominate, and server logs you sync.</li>
+          <li>You grant us a licence to host, process, transmit and display that material solely to provide the service to you, and to our sub-processors for the same purpose. The licence ends when the data is deleted.</li>
+          <li>You warrant that you own or are authorised to provide everything you enter, that you are entitled to nominate each domain you ask us to crawl, that you are entitled to sync any server logs, and that you have the authority to connect any analytics property.</li>
+          <li>Our handling of personal data is governed by the <a href="/legal/privacy">privacy policy</a> and the data processing addendum.</li>
+        </ul>
+
+        <h2 id="sec-9-our-ip">9. Our intellectual property</h2>
+        <ul>
+          <li>Zicy, its software, interface, methodology, benchmarks, documentation and brand are ours and stay ours.</li>
+          <li>We grant you a non-exclusive, non-transferable, revocable right to use the service during your subscription, for your own business or your clients' businesses.</li>
+          <li>You may not copy, resell, sublicence, reverse engineer, scrape, or use the service to build a competing product, and you may not circumvent quotas or access controls.</li>
+          <li><strong>White-label.</strong> Where your plan includes white-label reporting, you may present outputs under your own brand to your clients. That does not transfer ownership of Zicy or its methodology.</li>
+          <li>We may use aggregated, de-identified statistics that cannot identify you or your clients to improve Zicy's benchmarks and features.</li>
+        </ul>
+
+        <h2 id="sec-10-ai-outputs">10. AI outputs, and what you must do before relying on them</h2>
+        <ul>
+          <li><strong>You own the outputs you generate</strong>, article drafts, optimised copy, schema markup, llms.txt files, subject to your paying for the service and complying with these terms.</li>
+          <li><strong>Outputs are not exclusive.</strong> AI systems produce similar results from similar inputs. We cannot and do not promise that comparable output has not been or will not be generated for someone else. Do not claim exclusivity you do not have.</li>
+          <li><strong>Outputs are drafts, not advice.</strong> AI generated content can be wrong, out of date, incomplete, or unintentionally similar to existing material. You must review everything before you publish it.</li>
+          <li><strong>You are responsible for what you publish.</strong> Zicy never publishes to your site or changes it. Every asset is handed to you to publish yourself, and once you do, it is your content.</li>
+          <li>We do not provide legal, financial, medical or regulatory advice, and outputs must not be treated as any of those.</li>
+        </ul>
+
+        <h2 id="sec-11-what-we-do-not-promise">11. What we do not promise</h2>
+        <ul>
+          <li><strong>We do not guarantee visibility, mentions, citations, rankings, share of voice, traffic, leads or revenue.</strong> Zicy measures what AI engines say and helps you act on it. The engines decide what they say. Anyone promising otherwise in this category is promising something they do not control.</li>
+          <li><strong>AI engine responses vary.</strong> The same prompt can return different answers at different times, to different users, in different regions. Zicy reports a sample taken at a point in time. It is a measurement, not an audit, and not a certification.</li>
+          <li><strong>Engine coverage can change.</strong> We track ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. If a third party changes or withdraws access, coverage of that engine may change or stop. We will tell you, and it is not a breach of these terms.</li>
+          <li><strong>Third-party connections</strong> to Google Analytics, Google Search Console and Bing depend on those providers and on your permissions remaining valid.</li>
+          <li>There is no uptime service level commitment on self-serve plans. A service level agreement is available on Enterprise plans by separate agreement.</li>
+        </ul>
+
+        <h2 id="sec-12-acceptable-use">12. Acceptable use</h2>
+        <p>You must not use Zicy to:</p>
+        <ul>
+          <li>break any law, or infringe anyone's intellectual property, privacy or confidentiality</li>
+          <li>enter personal data about individuals into free-text brand fields where it is not needed</li>
+          <li>generate content that is deceptive, defamatory, discriminatory, or designed to impersonate a person or organisation</li>
+          <li>generate or publish content intended to manipulate AI engines through deception, including fabricated claims, fake reviews, or fabricated citations</li>
+          <li>crawl, monitor or profile a domain you have no right to</li>
+          <li>attempt to access another customer's data, probe our security, or interfere with the service</li>
+          <li>resell or redistribute the service except as your plan expressly allows</li>
+        </ul>
+        <p>We may suspend access immediately where we reasonably believe there is a serious breach, a security risk, or a legal requirement to do so.</p>
+
+        <h2 id="sec-13-confidentiality">13. Confidentiality</h2>
+        <p>
+          Each side will protect the other's non-public information, use it only for the agreement, and disclose
+          it only to people who need it and are bound to protect it. This does not cover information that is
+          public, independently developed, or required to be disclosed by law.
+        </p>
+
+        <h2 id="sec-14-suspension-termination">14. Suspension and termination</h2>
+        <ul>
+          <li>Either side may terminate at the end of a billing period by cancelling.</li>
+          <li>We may suspend or terminate immediately for serious breach, non-payment after notice, or where required by law. Where practical we will give notice and a chance to fix the problem first.</li>
+          <li>On termination your right to use the service stops, and the data export window in section 7 applies.</li>
+          <li>Sections on ownership, confidentiality, disclaimers, liability, indemnity and governing law survive termination.</li>
+        </ul>
+
+        <h2 id="sec-15-disclaimer">15. Disclaimer of warranties</h2>
+        <p>
+          The service is provided "as is" and "as available". To the fullest extent the law allows, we exclude
+          implied warranties of merchantability, fitness for a particular purpose and non-infringement. We do not
+          warrant that the service will be uninterrupted, error-free, or that results will meet your expectations.
+        </p>
+        <p>
+          Nothing in these terms excludes liability that cannot lawfully be excluded, including for fraud or for
+          death or personal injury caused by negligence.
+        </p>
+
+        <h2 id="sec-16-liability">16. Limitation of liability</h2>
+        <ul>
+          <li>Our total liability in connection with the agreement is limited to the fees you paid in the twelve months before the claim.</li>
+          <li>Neither side is liable for indirect or consequential loss, loss of profit, revenue, goodwill, data or anticipated savings.</li>
+        </ul>
+
+        <h2 id="sec-17-indemnity">17. Indemnity</h2>
+        <p>
+          You will indemnify us against claims arising from your breach of these terms, from content you publish
+          that was generated or optimised in Zicy, from domains or analytics properties you were not entitled to
+          connect, and from your use of the service on behalf of a client without their authority.
+        </p>
+
+        <h2 id="sec-18-changes">18. Changes</h2>
+        <ul>
+          <li>We may change these terms. Material changes take effect on 30 days' notice by email or in the product, and continuing to use Zicy after that means you accept them.</li>
+          <li>We may change or discontinue features. Where a change materially reduces what your plan includes during a period you have paid for, you may cancel and we will refund the unused portion of that period.</li>
+        </ul>
+
+        <h2 id="sec-19-governing-law">19. Governing law and disputes</h2>
+        <ul>
+          <li>These terms are governed by the laws of Malaysia, and the courts of Malaysia have exclusive jurisdiction.</li>
+          <li>We will each try to resolve a dispute informally first. Contact <a href="mailto:contact@zicy.com">contact@zicy.com</a>.</li>
+        </ul>
+
+        <h2 id="sec-20-general">20. General</h2>
+        <ul>
+          <li><strong>Assignment:</strong> you may not assign without our consent; we may assign to a successor in a merger or sale, with notice.</li>
+          <li><strong>Force majeure:</strong> neither side is liable for delay caused by events outside its reasonable control.</li>
+          <li><strong>Severability:</strong> if a clause is unenforceable, the rest stands.</li>
+          <li><strong>No waiver:</strong> not enforcing a term once does not waive it.</li>
+          <li><strong>Notices:</strong> to you at your account email; to us at contact@zicy.com and the registered address above.</li>
+          <li><strong>Entire agreement:</strong> these terms and the documents they reference are the whole agreement between us.</li>
+        </ul>
+
+        <h2 id="sec-21-contact">21. Contact</h2>
+        <ul>
+          <li><strong>Commercial and account questions:</strong> <a href="mailto:contact@zicy.com">contact@zicy.com</a></li>
+          <li><strong>Privacy questions:</strong> <a href="mailto:privacy@zicy.com">privacy@zicy.com</a></li>
+          <li><strong>Postal:</strong> Growth Pro Sdn. Bhd., 60 Persiaran Midlands, 10250 Penang, Malaysia</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Scoped to this page only, matching /legal/privacy. */
+  .legal-body {
+    padding: clamp(24px, 3vw, 36px) 0;
+  }
+  .prose {
+    max-width: 700px;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .prose h3 {
+    color: var(--ink);
+  }
+  .meta-dates {
+    margin-top: 14px;
+    font-family: var(--fm);
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+  .sibling-links {
+    margin-top: 18px;
+    font-size: 14.5px;
+    color: var(--ink-2);
+  }
+  .sibling-links a {
+    color: var(--violet-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .sibling-links a:hover {
+    color: var(--violet-900);
+  }
+  .cc-reopen {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: var(--violet-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+  .cc-reopen:hover {
+    color: var(--violet-900);
+  }
+  .toc {
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    padding: 20px 24px;
+    margin-bottom: 8px;
+  }
+  .toc h2 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-family: var(--fm);
+    font-weight: 500;
+  }
+  .toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 24px;
+  }
+  .toc li {
+    font-size: 14.5px;
+  }
+  .toc a {
+    color: var(--violet-700);
+    text-decoration: none;
+  }
+  .toc a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 560px) {
+    .toc ol {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
