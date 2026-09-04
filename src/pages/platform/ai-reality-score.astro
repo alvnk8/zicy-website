@@ -139,11 +139,10 @@ const articleGraph = {
       '@id': `${url}#term`,
       name: 'AI Reality Score',
       description: definition,
-      inDefinedTermSet: {
-        '@type': 'DefinedTermSet',
-        name: 'Zicy AI Visibility Metrics',
-        url: `${SITE.url}/platform`,
-      },
+      // Entity-graph fix 2026-09: the glossary set's actual member is now the DefinedTerm on
+      // /resources/glossary/ai-reality-score (see that page); this canonical page's own term
+      // records the relationship via sameAs instead of also claiming set membership.
+      sameAs: `${SITE.url}/resources/glossary/ai-reality-score#term`,
     },
   ],
 };

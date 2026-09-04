@@ -16,11 +16,14 @@ const entries = [
   { term: AI_REALITY_SCORE.term, short: AI_REALITY_SCORE.short, href: AI_REALITY_SCORE.canonicalPath },
 ].sort((a, b) => a.term.localeCompare(b.term));
 
-// DefinedTermSet listing all 12 terms. The 11 glossary terms reference their own DefinedTerm @ids;
-// AI Reality Score references its canonical DefinedTerm on /platform/ai-reality-score.
+// DefinedTermSet listing all 13 terms: the 11 glossary terms, entity-collapse (its own standalone
+// page, previously a private single-member set of its own), and AI Reality Score (whose glossary
+// member now lives on its own glossary stub page — see resources/glossary/ai-reality-score.astro
+// — not on the canonical /platform page, which records the relationship via sameAs instead).
 const hasDefinedTerm = [
   ...GLOSSARY_TERMS.map((t) => ({ '@id': `${SITE.url}/resources/glossary/${t.slug}#term` })),
-  { '@id': `${SITE.url}/platform/ai-reality-score#term` },
+  { '@id': `${SITE.url}/resources/glossary/entity-collapse#term` },
+  { '@id': `${SITE.url}/resources/glossary/ai-reality-score#term` },
 ];
 
 const graph = {

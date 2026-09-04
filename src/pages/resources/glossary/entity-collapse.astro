@@ -13,25 +13,22 @@ const url = `${SITE.url}/resources/glossary/entity-collapse`;
 const DEFINITION =
   "Entity collapse: a structural failure in which AI systems resolve a multi-division or multi-offering brand down to its most-cited part, so the brand's other divisions, products, or categories never surface in AI answers.";
 
-// Page-level JSON-LD: one DefinedTerm inside a DefinedTermSet, plus an Article. Author and publisher
-// reference the sitewide Organization by @id, so no Organization node is defined at page level.
-// No review, no aggregateRating.
+// Page-level JSON-LD: one DefinedTerm (member of the main glossary set), plus an Article. Author
+// and publisher reference the sitewide Organization by @id, so no Organization node is defined at
+// page level. No review, no aggregateRating.
+// Entity-graph fix 2026-09: this term used to sit in its own private, single-member DefinedTermSet
+// (#set), orphaned from /resources/glossary#glossary's hasDefinedTerm list. Repointed to the main
+// glossary set directly; the private set is removed as nothing else referenced it.
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
-    {
-      '@type': 'DefinedTermSet',
-      '@id': `${url}#set`,
-      name: 'AI entity resolution failure modes',
-      url,
-    },
     {
       '@type': 'DefinedTerm',
       '@id': `${url}#term`,
       name: 'Entity collapse',
       description: DEFINITION,
       url,
-      inDefinedTermSet: { '@id': `${url}#set` },
+      inDefinedTermSet: { '@id': `${SITE.url}/resources/glossary#glossary` },
     },
     {
       '@type': 'Article',
