@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import { rituPersonNode } from '../../lib/schema';
 
 // Migrated from v1.zicy.com/blog/how-google-ai-overviews-chatgpt-change-seo. Tier-3 guide.
 // articleSection Guides, author Ritu Khanna. House style applied (UK spelling, sentence-case
@@ -61,6 +62,7 @@ const graph = {
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(rituPersonNode)} />
 
   <section class="hero inner">
     <div class="wrap">

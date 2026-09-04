@@ -1,10 +1,11 @@
 // Single source of truth for the canonical Zicy Organization entity and the per-page WebPage
-// node shape. Schema.astro renders `orgNode` once, homepage only; every other page wires in via
-// webPageSchema(), which references the org by @id instead of repeating it. Duplicating the org
-// node's literal JSON per page is the fragmentation this module exists to prevent.
+// node shape. Schema.astro renders `orgNode` on every page (entity-graph fix 2026-09: repeating
+// the same @id/content on every page is the documented pattern for a sitewide entity, not
+// fragmentation — omitting it left pages like /legal/privacy with zero JSON-LD at all).
 import { SITE } from '../data/site';
 
 export const ORG_ID = `${SITE.url}/#org`;
+export const BRAND_ID = `${SITE.url}/#brand`;
 const GROWTH_PRO_ORG_ID = 'https://www.growth.pro/#org';
 
 export const PERSON_IDS = {
@@ -14,14 +15,15 @@ export const PERSON_IDS = {
 } as const;
 
 // Byte-identical everywhere it appears. Do not fork a per-page copy.
+// Entity-graph fix 2026-09: dropped the three Growth.pro/Alvin-personal links (growth.pro
+// homepage, Alvin's personal LinkedIn, Alvin's Growth.pro Person @id) per the 2026-09 entity graph
+// review — sameAs should carry the entity's OWN verified profiles, not its parent's or a person's.
+// The relationship to Growth.pro is still expressed structurally via parentOrganization below.
 export const ORG_SAME_AS = [
   SITE.linkedin,
   'https://www.facebook.com/askzicy',
   'https://www.instagram.com/askzicy/',
   'https://www.youtube.com/@askzicy',
-  'https://www.growth.pro/',
-  'https://www.linkedin.com/in/alvinkoay/',
-  'https://www.growth.pro/#alvin-koay',
 ] as const;
 
 // Entity finding f-003 (2026-08-25): plain strings only, no Wikipedia/Wikidata URLs (unverified).
@@ -38,12 +40,15 @@ export const ORG_KNOWS_ABOUT = [
 ] as const;
 
 // Confirmed by the owner (2026-06-17): foundingDate 2026 (Zicy the brand); Alvin Koay LinkedIn.
-// legalName and the registration number are the owner-supplied legal identity; do not alter.
+// Entity-graph fix 2026-09: legalName removed from THIS node. SITE.legalName ('Growth Pro Sdn.
+// Bhd.') is the parent's registered name, not a separate Zicy registration — Zicy has no legal
+// name of its own (see parentOrganization below, and /about's own copy: "Growth Pro Sdn. Bhd.
+// operates under Malaysia Digital (MD) status"). A legalName here would misstate Zicy as its own
+// registered entity. If Zicy is ever separately incorporated, add the real legalName then.
 export const orgNode = {
   '@type': 'Organization',
   '@id': ORG_ID,
   name: SITE.name,
-  legalName: SITE.legalName,
   url: `${SITE.url}/`,
   foundingDate: '2026',
   logo: `${SITE.url}/zicy-logo.png`,
@@ -62,6 +67,7 @@ export const orgNode = {
     name: 'Growth.pro',
     url: 'https://www.growth.pro/',
   },
+  brand: { '@id': BRAND_ID },
   sameAs: ORG_SAME_AS,
   knowsAbout: ORG_KNOWS_ABOUT,
   founder: { '@id': PERSON_IDS.alvin },
@@ -70,6 +76,18 @@ export const orgNode = {
     { '@id': PERSON_IDS.ritu },
     { '@id': PERSON_IDS.peter },
   ],
+};
+
+// Entity-graph fix 2026-09: Brand node distinct from the Organization, so "Zicy" the product/
+// brand can be referenced independently of "Zicy" the operating entity. Rendered on every page
+// alongside orgNode (Schema.astro), same rationale.
+export const brandNode = {
+  '@type': 'Brand',
+  '@id': BRAND_ID,
+  name: SITE.name,
+  url: `${SITE.url}/`,
+  logo: `${SITE.url}/zicy-logo.png`,
+  parentOrganization: { '@id': ORG_ID },
 };
 
 // path must match the site's actually-served URL: trailingSlash:'never' (astro.config.mjs) means
@@ -110,6 +128,33 @@ export const alvinPersonNode = {
     'https://www.linkedin.com/in/alvinkoay/',
     'https://www.growth.pro/#alvin-koay',
   ],
+};
+
+// Entity-graph fix 2026-09: Ritu and Peter have no dedicated bio page (about.astro leaves their
+// `link` null), so unlike Alvin they resolve to their #fragment on /about itself. Emitted in full
+// on /about (see about.astro) and on any resources article that names them as byline author (see
+// each article's own `author` reference to PERSON_IDS.ritu/.peter) — @id only everywhere else.
+// name/jobTitle/description verbatim from the visible /about team card.
+export const rituPersonNode = {
+  '@type': 'Person',
+  '@id': PERSON_IDS.ritu,
+  name: 'Ritu Khanna',
+  jobTitle: 'Co-founder',
+  description:
+    'Over 15 years in the corporate sector leading environmental-industry projects, plus a decade in SEO strategy and content planning. At Zicy, Ritu applies that experience to develop practical AI-first optimisation methods that help businesses become visible in AI-generated answers.',
+  url: `${SITE.url}/about#ritu-khanna`,
+  worksFor: { '@id': ORG_ID },
+};
+
+export const peterPersonNode = {
+  '@type': 'Person',
+  '@id': PERSON_IDS.peter,
+  name: 'Peter Kua',
+  jobTitle: 'Chief Data Officer',
+  description:
+    "A distinguished data science strategist who led Data Science & Analytics at REV Media Group and drove Malaysia's National Big Data Analytics Initiative under MDEC, developing the country's first National BDA Framework. Has trained senior teams at Citibank, Intel, Dell, NTT Data, Maxis and Johnson & Johnson.",
+  url: `${SITE.url}/about#peter-kua`,
+  worksFor: { '@id': ORG_ID },
 };
 
 // Entity finding f-006 (2026-08-25): a generic FAQPage builder for pages whose visible Q&A pairs
