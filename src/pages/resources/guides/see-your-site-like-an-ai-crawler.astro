@@ -38,6 +38,8 @@ const graph = {
       '@id': `${url}#howto`,
       name: title,
       description,
+      publisher: { '@id': `${SITE.url}/#org` },
+      isPartOf: { '@id': `${url}#article` },
       step: CHECKS.map((c, i) => ({
         '@type': 'HowToStep',
         position: i + 1,
@@ -55,6 +57,7 @@ const graph = {
       dateModified: '2026-07-07',
       author: { '@id': `${SITE.url}/#org` },
       publisher: { '@id': `${SITE.url}/#org` },
+      isPartOf: { '@id': `${SITE.url}/resources#blog` },
       mainEntityOfPage: url,
       url,
     },

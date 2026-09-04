@@ -23,7 +23,13 @@ if (JSON.stringify(fileSlugs) !== JSON.stringify(dataSlugs)) {
 }
 
 // Blog node with members. blogPost references every live post by its BlogPosting @id, generated
-// from RESOURCE_POSTS (one entry per live post), so it cannot drift.
+// from RESOURCE_POSTS (one entry per live post), so it cannot drift, plus two pages that live
+// under subdirectories the drift guard's single-level glob doesn't reach (added by hand below;
+// they aren't part of RESOURCE_POSTS so the drift guard is untouched).
+const EXTRA_BLOG_POSTS = [
+  `${SITE.url}/resources/research/ai-crawlers-server-side-schema-study#article`,
+  `${SITE.url}/resources/guides/see-your-site-like-an-ai-crawler#article`,
+];
 const blog = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
@@ -35,7 +41,10 @@ const blog = {
   url: `${SITE.url}/resources`,
   publisher: { '@id': `${SITE.url}/#org` },
   inLanguage: 'en',
-  blogPost: RESOURCE_POSTS.map((p) => ({ '@id': `${SITE.url}/resources/${p.slug}#article` })),
+  blogPost: [
+    ...RESOURCE_POSTS.map((p) => ({ '@id': `${SITE.url}/resources/${p.slug}#article` })),
+    ...EXTRA_BLOG_POSTS.map((id) => ({ '@id': id })),
+  ],
 };
 
 // The three pillars already on the page; cards are grouped under these by articleSection.
