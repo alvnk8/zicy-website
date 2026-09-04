@@ -95,7 +95,16 @@ export const brandNode = {
 // primary subject is a specific entity (e.g. the Alvin Koay founder page) can point elsewhere.
 // mentionsId is optional: a secondary entity the page discusses without being primarily about it
 // (e.g. /media is about the Organization but mentions the founder Person by reference only).
-export function webPageSchema(path: string, name: string, aboutId: string = ORG_ID, mentionsId?: string) {
+// inLanguage defaults to 'en' (Gate 3, entity-graph fix 2026-09: normalise inLanguage on English
+// pages) — pass 'ms-MY' for the Bahasa Malaysia privacy page, the only non-English page on the
+// site.
+export function webPageSchema(
+  path: string,
+  name: string,
+  aboutId: string = ORG_ID,
+  mentionsId?: string,
+  inLanguage: string = 'en'
+) {
   const url = path === '/' ? `${SITE.url}/` : `${SITE.url}${path}`;
   return {
     '@context': 'https://schema.org',
@@ -106,6 +115,7 @@ export function webPageSchema(path: string, name: string, aboutId: string = ORG_
     about: { '@id': aboutId },
     ...(mentionsId ? { mentions: { '@id': mentionsId } } : {}),
     publisher: { '@id': ORG_ID },
+    inLanguage,
   };
 }
 
