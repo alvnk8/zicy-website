@@ -178,11 +178,15 @@ export function faqPageSchema(id: string, questions: { question: string; answer:
 // Entity finding f-005 (2026-08-25): one Service node per client-confirmed offering (Alvin,
 // 2026-08-25). name/description/serviceType must be lifted verbatim from that page's own visible
 // copy by the caller, never invented here. No areaServed/offers/prices — not confirmed.
+// Entity-graph fix 2026-09: added isRelatedTo (links the service back to the #app product) and an
+// audience (schema.org BusinessAudience, same audienceType string already passed to that page's
+// <SegmentSchema>) so every /solutions/* Service node shares one consistent shape.
 export function serviceSchema(
   path: string,
   name: string,
   description: string,
-  serviceType: string
+  serviceType: string,
+  audienceType: string
 ) {
   const url = `${SITE.url}${path}`;
   return {
@@ -193,6 +197,8 @@ export function serviceSchema(
     description,
     serviceType,
     provider: { '@id': ORG_ID },
+    isRelatedTo: { '@id': `${SITE.url}/#app` },
+    audience: { '@type': 'BusinessAudience', audienceType },
     url,
   };
 }

@@ -114,14 +114,15 @@ const serviceNode = serviceSchema(
   '/solutions/agencies',
   'Walk into the room with the client’s live AI visibility, not a generic deck.',
   'Clients are raising AI search in reviews and pitches. Zicy lets you answer first, show a prospect exactly how AI describes them today across all five engines (ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode), where it’s wrong, and your plan to fix it, all under your own brand.',
-  'GEO services'
+  'GEO services',
+  'marketing and creative agency'
 );
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceNode)} />
-  <SegmentSchema slot="head" url="https://www.zicy.com/solutions/agencies" name={title} audienceType="marketing and creative agency" />
+  <SegmentSchema slot="head" url="https://www.zicy.com/solutions/agencies" name={title} audienceType="marketing and creative agency" serviceId={serviceNode['@id']} />
 
   <!-- 1. Hero -->
   <section class="hero inner">

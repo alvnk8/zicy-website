@@ -5,6 +5,7 @@ import Screenshot from '../../components/Screenshot.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import FaqUniversal from '../../components/FaqUniversal.astro';
 import { publishersFaqs, faqPageJsonLd } from '../../data/faqs';
+import { serviceSchema } from '../../lib/schema';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
 // citation-analysis-urls.png carries CLEAN labels (owned / earned / competitor / uncited;
@@ -112,11 +113,23 @@ const breadcrumb = {
     { '@type': 'ListItem', position: 2, name: 'For publishers', item: 'https://www.zicy.com/solutions/publishers' },
   ],
 };
+
+// Entity finding f-005 pattern (see /solutions/smb). name = the page's own H1, description = the
+// hero lead paragraph, serviceType = "AI Visibility" as it appears verbatim as a module name
+// below (§05 modules[0].name). All verbatim, not invented.
+const serviceNode = serviceSchema(
+  '/solutions/publishers',
+  'Sell advertising as measurable AI-visibility uplift, not just impressions.',
+  'Publishers sell media to brands. Zicy lets you sell it as something an advertiser can’t get from a rate card alone: proof that a campaign with you lifted their branded search and their visibility across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. And it shows whether AI credits your own journalism, too.',
+  'AI Visibility',
+  'publisher'
+);
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
-  <SegmentSchema slot="head" url="https://www.zicy.com/solutions/publishers" name={title} audienceType="publisher" />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceNode)} />
+  <SegmentSchema slot="head" url="https://www.zicy.com/solutions/publishers" name={title} audienceType="publisher" serviceId={serviceNode['@id']} />
 
   <!-- 1. Hero — leads with the media-sales motion -->
   <section class="hero inner">
