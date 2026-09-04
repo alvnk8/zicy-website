@@ -62,10 +62,28 @@ const breadcrumb = {
     { '@type': 'ListItem', position: 2, name: 'About', item: 'https://www.zicy.com/about' },
   ],
 };
+
+// Entity-graph fix 2026-09: the three Growth.pro framework pages (linked from §02 below) each
+// used to declare their own anonymous, unlinked "Growth.pro AI Visibility Frameworks"
+// DefinedTermSet. Consolidated into this one canonical set; each framework page's DefinedTerm now
+// references it by @id instead.
+const doctrine = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTermSet',
+  '@id': 'https://www.zicy.com/about#doctrine',
+  name: 'Growth.pro AI Visibility Frameworks',
+  url: 'https://www.zicy.com/about',
+  hasDefinedTerm: [
+    { '@id': 'https://www.zicy.com/about/pava-framework#term' },
+    { '@id': 'https://www.zicy.com/about/ai-visibility-operating-system#term' },
+    { '@id': 'https://www.zicy.com/about/ai-citation-enablement#term' },
+  ],
+};
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/about', title))} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(doctrine)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(rituPersonNode)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(peterPersonNode)} />
 

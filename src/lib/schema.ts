@@ -6,7 +6,7 @@ import { SITE } from '../data/site';
 
 export const ORG_ID = `${SITE.url}/#org`;
 export const BRAND_ID = `${SITE.url}/#brand`;
-const GROWTH_PRO_ORG_ID = 'https://www.growth.pro/#org';
+export const GROWTH_PRO_ORG_ID = 'https://www.growth.pro/#org';
 
 export const PERSON_IDS = {
   alvin: `${SITE.url}/about/alvin-koay#alvin-koay`,
