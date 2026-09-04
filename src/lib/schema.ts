@@ -196,7 +196,7 @@ export function serviceSchema(
   name: string,
   description: string,
   serviceType: string,
-  audienceType: string
+  audienceType?: string
 ) {
   const url = `${SITE.url}${path}`;
   return {
@@ -208,7 +208,7 @@ export function serviceSchema(
     serviceType,
     provider: { '@id': ORG_ID },
     isRelatedTo: { '@id': `${SITE.url}/#app` },
-    audience: { '@type': 'BusinessAudience', audienceType },
+    ...(audienceType ? { audience: { '@type': 'BusinessAudience', audienceType } } : {}),
     url,
   };
 }

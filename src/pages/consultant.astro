@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Consultant from '../components/Consultant.astro';
-import { webPageSchema } from '../lib/schema';
+import { webPageSchema, serviceSchema } from '../lib/schema';
 
 const title = 'Zicy AEO/GEO Consultant: ask anything about AI search visibility';
 const description =
@@ -16,9 +16,21 @@ const breadcrumb = {
     { '@type': 'ListItem', position: 3, name: 'AEO/GEO Consultant', item: 'https://www.zicy.com/consultant' },
   ],
 };
+
+// name = the tool's own H1 (Consultant.astro), description = its subtitle paragraph in plain
+// text, serviceType = "AI consultant" as it appears verbatim (the page's own eyebrow, and the
+// free-tools hub's eyebrow for this same tool). No audience segment: this is an open, public
+// tool, not aimed at one ICP.
+const serviceNode = serviceSchema(
+  '/consultant',
+  'Your AEO/GEO Consultant',
+  'Ask Zicy anything AEO or GEO (Answer/Generative Engine Optimization). Audit your webpage or ask for tactics to get cited or mentioned in ChatGPT, Google Gemini, Perplexity and other answer engines.',
+  'AI consultant'
+);
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/consultant', title))} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceNode)} />
   <Consultant />
 </BaseLayout>
