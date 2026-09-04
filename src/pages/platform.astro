@@ -74,17 +74,20 @@ const MODULE_DOC: Record<string, string> = {
 };
 
 // Page-level structured data. The Zicy Organization, WebSite and SoftwareApplication entities
-// are sitewide (src/components/Schema.astro). This page keeps its module ItemList plus a WebPage
-// node that carries the speakable hint and points at the canonical app entity.
-const platformPage = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': `${SITE.url}/platform`,
-  url: `${SITE.url}/platform`,
-  about: { '@id': `${SITE.url}/#app` },
+// are sitewide (src/components/Schema.astro). This page keeps its module ItemList plus its one
+// WebPage node (below, from webPageSchema) with the speakable hint added on top.
+// Entity-graph fix 2026-09: this used to be a second, duplicate WebPage node for the same URL
+// (bare @id with no #webpage fragment, about #app) alongside webPageSchema('/platform', title)'s
+// proper one (@id with #webpage, about #org). Consolidated into one node; speakable moved onto it.
+const platformWebPage = {
+  ...webPageSchema('/platform', title),
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['#at-a-glance'] },
 };
 
+// Entity-graph fix 2026-09: each feature now has its own @id (/platform#feature-{slug}, derived
+// from the module's own name), so a module can be referenced from elsewhere instead of existing
+// only as an anonymous entry in this list.
+const slugify = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 const moduleList = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
@@ -93,6 +96,7 @@ const moduleList = {
   itemListElement: allModules.map((m, i) => ({
     '@type': 'ListItem',
     position: i + 1,
+    '@id': `${SITE.url}/platform#feature-${slugify(m.name)}`,
     name: m.name,
     description: m.desc,
   })),
@@ -176,10 +180,9 @@ const breadcrumb = {
 };
 ---
 <BaseLayout title={title} description={description}>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/platform', title))} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(platformWebPage)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(platformPage)} />
     <script type="application/ld+json" set:html={JSON.stringify(moduleList)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqPage)} />
   </Fragment>
