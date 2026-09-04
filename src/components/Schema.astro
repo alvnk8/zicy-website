@@ -29,14 +29,10 @@ const orgId = orgNode['@id'];
 // Alvin's full Person node is emitted only on his dedicated entity page (see alvinPersonNode's
 // comment in lib/schema); every other page keeps referencing him by @id only.
 const isAlvinPage = Astro.url.pathname === '/about/alvin-koay';
-
-const monthly = (price: string) => ({
-  '@type': 'UnitPriceSpecification',
-  price,
-  priceCurrency: 'USD',
-  unitCode: 'MON',
-  unitText: 'month',
-});
+// Entity-graph fix 2026-09: these four Offer nodes now live at /pricing#offer-{id} (see
+// pricing.astro), each with a real @id, itemOffered and offeredBy — not repeated here as
+// anonymous inline objects. #app just references them.
+const pricingUrl = `${SITE.url}/pricing`;
 
 const graph = {
   '@context': 'https://schema.org',
@@ -67,36 +63,10 @@ const graph = {
         'Zicy is an AI visibility platform to measure how AI describes your brand, prove what is working, and improve where you appear.',
       publisher: { '@id': orgId },
       offers: [
-        {
-          '@type': 'Offer',
-          name: 'Starter',
-          price: '79',
-          priceCurrency: 'USD',
-          url: `${SITE.url}/pricing`,
-          priceSpecification: monthly('79'),
-        },
-        {
-          '@type': 'Offer',
-          name: 'Growth',
-          price: '199',
-          priceCurrency: 'USD',
-          url: `${SITE.url}/pricing`,
-          priceSpecification: monthly('199'),
-        },
-        {
-          '@type': 'Offer',
-          name: 'Scale',
-          price: '449',
-          priceCurrency: 'USD',
-          url: `${SITE.url}/pricing`,
-          priceSpecification: monthly('449'),
-        },
-        {
-          '@type': 'Offer',
-          name: 'Enterprise',
-          url: `${SITE.url}/contact`,
-          availability: 'https://schema.org/InStock',
-        },
+        { '@id': `${pricingUrl}#offer-starter` },
+        { '@id': `${pricingUrl}#offer-growth` },
+        { '@id': `${pricingUrl}#offer-scale` },
+        { '@id': `${pricingUrl}#offer-enterprise` },
       ],
     },
     ...(isAlvinPage ? [alvinPersonNode] : []),
