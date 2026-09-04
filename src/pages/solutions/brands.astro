@@ -6,6 +6,7 @@ import FaqAccordion from '../../components/FaqAccordion.astro';
 import FaqUniversal from '../../components/FaqUniversal.astro';
 import { brandsFaqs, faqPageJsonLd } from '../../data/faqs';
 import { serviceSchema } from '../../lib/schema';
+import { caseSlugsForIcp } from '../../data/case-entity-map';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
 // Enrichment screenshots — five brands-* product views (illustrative sample data), one per
@@ -115,13 +116,20 @@ const breadcrumb = {
 // Entity finding f-005 pattern (see /solutions/smb). name = the page's own H1, description = the
 // hero lead paragraph, serviceType = "AI visibility" as it appears verbatim in the hero
 // screenshot's alt text below. All verbatim, not invented.
-const serviceNode = serviceSchema(
-  '/solutions/brands',
-  'AI is your brand’s new first impression. Make it the one you built.',
-  'Every day, buyers, partners and journalists ask AI about your category and act on the answer before they ever reach your site. Zicy shows you what AI says about you across all five major engines, whether it’s accurate, and how to fix what’s wrong, then ties the fix back to demand.',
-  'AI visibility',
-  'brand and marketing team'
-);
+// Reciprocal edge: every case study whose Article.about points at this Service (see
+// case-studies/[slug].astro + data/case-entity-map.ts), in one place so the two can't drift.
+const serviceNode = {
+  ...serviceSchema(
+    '/solutions/brands',
+    'AI is your brand’s new first impression. Make it the one you built.',
+    'Every day, buyers, partners and journalists ask AI about your category and act on the answer before they ever reach your site. Zicy shows you what AI says about you across all five major engines, whether it’s accurate, and how to fix what’s wrong, then ties the fix back to demand.',
+    'AI visibility',
+    'brand and marketing team'
+  ),
+  subjectOf: caseSlugsForIcp('brands').map((slug) => ({
+    '@id': `https://www.zicy.com/case-studies/${slug}#article`,
+  })),
+};
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
