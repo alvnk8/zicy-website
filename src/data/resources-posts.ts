@@ -18,7 +18,7 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "description": "Learn when to use branded and non-branded AI prompts, what each type measures, and how to avoid distorting your AI visibility data.",
     "articleSection": "Guides",
     "datePublished": "2026-09-07",
-    "authorName": "Vivien Koay"
+    "authorName": "Vi Vien Koay"
   },
   {
     "slug": "how-to-choose-buyer-intent-prompts-that-reveal-brand-visibility",
@@ -26,7 +26,7 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "description": "Learn how to choose buyer-intent prompts that help reveal whether AI recommends your business when potential customers are evaluating their options.",
     "articleSection": "Guides",
     "datePublished": "2026-09-07",
-    "authorName": "Vivien Koay"
+    "authorName": "Vi Vien Koay"
   },
   {
     "slug": "how-to-find-the-right-ai-prompts-to-track-for-your-business",
@@ -34,7 +34,7 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "description": "Learn how to choose the customer questions worth monitoring in AI, build a balanced prompt set and track the areas that matter most to your business.",
     "articleSection": "Guides",
     "datePublished": "2026-09-07",
-    "authorName": "Vivien Koay"
+    "authorName": "Vi Vien Koay"
   },
   {
     "slug": "how-to-check-what-ai-knows-and-says-about-your-business",
@@ -42,7 +42,7 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "description": "Learn how to check what AI knows and says about your business, identify inaccurate or missing information, and see how Zicy helps monitor AI perception.",
     "articleSection": "Guides",
     "datePublished": "2026-09-07",
-    "authorName": "Vivien Koay"
+    "authorName": "Vi Vien Koay"
   },
   {
     "slug": "how-to-check-your-business-across-ai-answer-engines",
@@ -50,7 +50,7 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "description": "Learn how to check whether your business appears across ChatGPT, Gemini, Perplexity and Google AI when customers search for products or services like yours.",
     "articleSection": "Guides",
     "datePublished": "2026-09-07",
-    "authorName": "Vivien Koay"
+    "authorName": "Vi Vien Koay"
   },
   {
     "slug": "how-ai-answers-change-small-business-discovery",
@@ -58,7 +58,7 @@ export const RESOURCE_POSTS: ResourcePost[] = [
     "description": "Learn how to check your business visibility across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.",
     "articleSection": "Guides",
     "datePublished": "2026-09-07",
-    "authorName": "Vivien Koay"
+    "authorName": "Vi Vien Koay"
   },
   {
     "slug": "what-is-aeo",
