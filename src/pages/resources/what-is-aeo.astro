@@ -1,0 +1,551 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/what-is-aeo/aeo-simplified-small-business-guide.png';
+
+const metaTitle = 'What Is AEO | Zicy';
+const title = 'What Is AEO? An Easy-to-Understand Guide for Small Business Owners';
+const description =
+  'Learn what AEO and GEO mean, how they differ from SEO, why AI visibility matters, and how small businesses can get started.';
+
+const url = `${SITE.url}/resources/what-is-aeo`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-09-07',
+      dateModified: '2026-09-07',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${heroImg.src}`,
+        width: heroImg.width,
+        height: heroImg.height,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout
+  title={metaTitle}
+  description={description}
+  ogTitle={title}
+  ogImage={{
+    url: `${SITE.url}${heroImg.src}`,
+    width: heroImg.width,
+    height: heroImg.height,
+    alt: 'AEO Simplified: A Small Business Guide to Answer Engine Optimisation',
+    type: 'image/png',
+  }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">What Is AEO?</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>What Is AEO? An Easy-to-Understand Guide for Small Business Owners</h1>
+
+      <p class="answer">Learn what AEO and GEO mean, how they differ from SEO, why AI visibility matters, and how small businesses can get started.</p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 7 September 2026</p>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+      <div class="prose">
+        <ul>
+          <li><em>AEO stands for Answer Engine Optimisation. It is the practice of making your business and content easier for answer engines to understand, trust and use when responding to customer questions.</em></li>
+          <li><em>GEO stands for Generative Engine Optimisation. The term is commonly used for improving visibility in generative AI answers. In everyday marketing, AEO and GEO increasingly overlap.</em></li>
+          <li><em>AEO does not replace SEO. SEO helps you get found in search results; AEO extends that work into AI-generated and direct-answer experiences.</em></li>
+          <li><em>Good AEO is not about stuffing “AI keywords” into your website. It starts with clear information, useful content, technically accessible pages and consistent facts about your business.</em></li>
+          <li><em>AI visibility can include whether your brand is mentioned, whether your website is cited, where your brand appears and how often competitors appear instead.</em></li>
+          <li><em>Small businesses do not need to optimise everything at once. Start with the questions customers ask when choosing a product, service or provider like you.</em></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <PostFigure
+        src={heroImg}
+        alt="AEO Simplified: A Small Business Guide to Answer Engine Optimisation"
+      />
+
+      <div class="shead"><span class="eyebrow">The basics</span><h2>Introduction</h2></div>
+      <div class="prose">
+        <p>A few years ago, getting found online mostly meant one thing: Can customers find your business on Google?</p>
+        <p>Today, there is another question: Can AI find, understand and recommend your business when customers ask for answers?</p>
+        <p>A potential customer might still search <em>“accounting firm Kuala Lumpur.”</em></p>
+        <p>But they can also ask <em>“Which accounting firms in Kuala Lumpur are suitable for a small retail business?”</em></p>
+        <p>Or <em>“Recommend a few accountants in KL that work with SMEs and explain what I should compare.”</em></p>
+        <p>Instead of simply receiving a list of websites, the customer may receive an AI-generated answer that includes explanations, recommendations, and links.</p>
+        <p>This can happen through tools and experiences such as ChatGPT, Gemini, Perplexity and Google's AI-powered Search features.</p>
+        <p>Google itself says people are asking longer and more complex questions in AI-powered Search. Its AI Mode can even break a question into several related subtopics, search for them simultaneously and bring the information together into one response.</p>
+        <p>For businesses, this creates a new visibility challenge.</p>
+        <p>You don't only want your webpage to rank.</p>
+        <p>You also want AI systems to understand your business well enough to consider it when answering relevant customer questions.</p>
+        <p>That is where <strong>AEO </strong>comes in.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Answer Engine Optimisation</span><h2>What Is AEO?</h2></div>
+      <div class="prose">
+        <p><strong>AEO stands for Answer Engine Optimisation.</strong></p>
+        <p>In simple terms, AEO means improving your online information so that answer engines can more easily understand and potentially use it when answering people's questions.</p>
+        <p>An “answer engine” could include an AI assistant or an AI-powered search experience that provides a direct response rather than only displaying a list of webpages.</p>
+        <p>For example, imagine you run a corporate training company in Malaysia.</p>
+        <p>A potential customer asks <em>“What should I look for when choosing a sales training provider in Malaysia?”</em></p>
+        <p>An AI answer might explain:</p>
+        <ul>
+          <li>what experience to look for;</li>
+          <li>whether programmes can be customised;</li>
+          <li>what training methods are used;</li>
+          <li>what evidence of results is available; and</li>
+          <li>which providers the customer could consider.</li>
+        </ul>
+        <p>AEO is about increasing your ability to participate in this kind of discovery.</p>
+        <p>It is not simply about telling AI: “Recommend my company.”</p>
+        <p>It is about building clear, useful and trustworthy information that helps search and AI systems understand: who you are, what you do, what you know about and which customer questions your business can genuinely help answer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Generative Engine Optimisation</span><h2>What Is GEO?</h2></div>
+      <div class="prose">
+        <p><strong>GEO</strong> stands for <strong>Generative Engine Optimisation</strong>.</p>
+        <p>GEO generally refers to improving the likelihood that your brand, website, or content appears in answers generated by generative AI systems.</p>
+        <p>The term became more widely discussed following academic research into “Generative Engine Optimization”, which examined methods for improving the visibility of content within generative engine responses.</p>
+        <p>For a small business owner, however, there is no need to become overly concerned about the terminology.</p>
+        <p>You may see:</p>
+        <ul>
+          <li><strong>AEO — Answer Engine Optimisation</strong></li>
+          <li><strong>GEO — Generative Engine Optimisation</strong></li>
+          <li><strong>AI search optimisation</strong></li>
+          <li><strong>AI visibility optimisation</strong></li>
+        </ul>
+        <p>These terms are not always used in exactly the same way by everyone.</p>
+        <p>But they are largely discussing the same new business challenge: How do we make sure our business remains discoverable when customers increasingly receive answers generated by AI?</p>
+        <p>For the purposes of this guide, we will mainly use <strong>AEO</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">AEO and SEO</span><h2>How Is AEO Different From SEO?</h2></div>
+      <div class="prose">
+        <p>This is probably the most important distinction to understand.</p>
+        <p>SEO (Search Engine Optimisation) traditionally focuses on helping your webpages become visible in search engine results.</p>
+        <p>AEO focuses on helping your information and brand become useful and understandable within answer-driven experiences.</p>
+        <p>Consider a customer looking for payroll software.</p>
+        <h3>Traditional search</h3>
+        <p>They search: <em>“payroll software Malaysia”</em></p>
+        <p>Google displays search results.</p>
+        <p>Your objective is to have your website appear prominently so the customer clicks it.</p>
+        <h3>AI-powered discovery</h3>
+        <p>The same customer asks: <em>“What payroll software would suit a Malaysian company with 30 employees?”</em></p>
+        <p>An AI system may provide an answer that compares several options, explains key features, and cites useful sources.</p>
+        <p>Your objective now includes another question: <em>Does my business become part of that answer?</em></p>
+        <p>This is why SEO and AEO are related but not identical.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">SEO</th>
+                <th scope="col">AEO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Helps webpages become visible in search results</td>
+                <td>Helps brands and information become visible in answer experiences</td>
+              </tr>
+              <tr>
+                <td>Often measured through rankings, impressions and clicks</td>
+                <td>Can be measured through mentions, citations, AI ranking and Share of Voice</td>
+              </tr>
+              <tr>
+                <td>Commonly begins with search queries and keywords</td>
+                <td>Often focuses on real questions and customer intent</td>
+              </tr>
+              <tr>
+                <td>Aims to earn visibility and website visits</td>
+                <td>Also considers visibility within the answer itself</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Most importantly, you do not need to choose between SEO and AEO.</p>
+        <p>Google's own guidance makes this clear. Its AI search experiences still depend heavily on web content and its existing search systems.</p>
+        <p>Good SEO foundations therefore remain important.</p>
+        <p>Think of AEO as extending your visibility strategy into the places where AI is now helping customers find answers.</p>
+        <p>Also read: <a href="/resources/how-is-ai-visibility-different-from-google-rankings">How Is AI Visibility Different From Google Rankings</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Why now</span><h2>Why Does AEO Matter for a Small Business?</h2></div>
+      <div class="prose">
+        <p>Because customers can now ask much more specific questions.</p>
+        <p>Someone searching for a café might once have typed: <em>“cafe Subang Jaya”</em></p>
+        <p>Now they can ask: <em>“Suggest cafés around Subang Jaya that are quiet enough to work from, have Wi-Fi and stay open after 8 pm.”</em></p>
+        <p>Google says users of its AI search experiences are asking longer and more complex questions. AI Mode, for example, is designed to break complex questions into subtopics and search across multiple sources before constructing an answer.</p>
+        <p>That creates both an opportunity and a risk for small businesses.</p>
+        <h3>The opportunity</h3>
+        <p>AI may help your business become visible for very specific customer needs, rather than only broad keywords.</p>
+        <p>A small café may not dominate Google for “best cafe Malaysia”.</p>
+        <p>But it could still be highly relevant to someone asking for: <em>“a quiet café near SS15 with Wi-Fi that stays open late.”</em></p>
+        <h3>The risk</h3>
+        <p>If information about your business is unclear, incomplete, inconsistent or difficult to verify, AI may have less confidence in using it.</p>
+        <p>Meanwhile, another business may be easier to understand.</p>
+        <p>For an SME or micro business, AEO therefore isn't about competing with multinational brands for every possible search.</p>
+        <p>It is about becoming clear and relevant for the questions that matter to your own customers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Answer engines</span><h2>How Do AI Answer Engines Find Information?</h2></div>
+      <div class="prose">
+        <p>You do not need to understand the technical details of large language models to understand AEO.</p>
+        <p>Think about it more simply.</p>
+        <p>When an AI-powered search experience needs to answer a question, it may need information about:</p>
+        <ul>
+          <li>the subject being discussed;</li>
+          <li>businesses or products that are relevant;</li>
+          <li>facts about those businesses;</li>
+          <li>useful webpages;</li>
+          <li>supporting sources;</li>
+          <li>locations;</li>
+          <li>reviews or other third-party information; and</li>
+          <li>how different pieces of information relate to one another.</li>
+        </ul>
+        <p>Different AI platforms work differently, so there is no single universal formula.</p>
+        <p>Google, for example, explains that AI Mode can divide a question into several subtopics and search for each simultaneously before bringing the results together.</p>
+        <p>Microsoft similarly explains that some of its generative answer systems retrieve web information and then summarise relevant results, with sources available for users to trace.</p>
+        <p>This helps explain why AEO involves more than writing one “AI-optimised” blog.</p>
+        <p>Your wider online presence can matter too.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">AEO foundations</span><h2>What Does AEO Actually Involve?</h2></div>
+      <div class="prose">
+        <p>AEO can sound complicated because it is often discussed using technical language.</p>
+        <p>For a small business, the basics are much simpler.</p>
+        <h3>1. Make it clear what your business does</h3>
+        <p>Imagine your website says: <em>“Transforming possibilities through innovative solutions.”</em></p>
+        <p>It sounds polished. But what do you actually sell?</p>
+        <p>Compare that with: <em>“We provide HR and payroll software for SMEs in Malaysia.”</em></p>
+        <p>The second sentence gives much clearer information.</p>
+        <p>Customers benefit from that clarity, and machines do too.</p>
+        <p>Your important pages should make it easy to understand:</p>
+        <ul>
+          <li>who you are;</li>
+          <li>what you offer;</li>
+          <li>who it is for;</li>
+          <li>where you operate; and</li>
+          <li>what makes the product or service relevant.</li>
+        </ul>
+        <h3>2. Answer the questions customers actually ask</h3>
+        <p>Good AEO content starts with real customer questions.</p>
+        <p>A renovation company might need content answering: </p>
+        <p><em>“How much does condo renovation cost in Malaysia?”</em></p>
+        <ul>
+          <li><em>“How long does a condominium renovation normally take?”</em></li>
+          <li><em>“What should I ask a renovation contractor before hiring them?”</em></li>
+          <li><em>“What is included in a renovation quotation?”</em></li>
+          <li>These questions give you opportunities to provide useful, direct information.</li>
+        </ul>
+        <p>They can also help search and AI systems understand what subjects your business has useful information about.</p>
+        <h3>3. Make important information easy to find</h3>
+        <p>Do not bury the answer underneath 800 words of introduction.</p>
+        <p>If someone asks: <em>“What is corporate video production?”, </em>give them a straightforward explanation near the beginning.</p>
+        <p>Then add detail.</p>
+        <p>Useful headings, short sections, FAQs, tables and clearly written explanations can make complicated information easier for humans to consume.</p>
+        <p>AEO should make content better for people, not stranger for machines.</p>
+        <h3>4. Give AI reasons to trust the information</h3>
+        <p>Imagine two websites make the same claim.</p>
+        <p>One explains who wrote the information, provides evidence, uses accurate facts and keeps important information current.</p>
+        <p>The other contains vague claims and outdated information.</p>
+        <p>Which would you trust?</p>
+        <p>AI systems also have to deal with questions of reliability and supporting evidence.</p>
+        <p>That is why good AEO often involves strengthening things such as:</p>
+        <ul>
+          <li>factual accuracy;</li>
+          <li>first-hand expertise;</li>
+          <li>clear company information;</li>
+          <li>supporting evidence;</li>
+          <li>useful original information; and</li>
+          <li>up-to-date content.</li>
+        </ul>
+        <h3>5. Keep your business information consistent</h3>
+        <p>Suppose your website says your business is in Petaling Jaya.</p>
+        <p>Your Google Business Profile says Subang Jaya.</p>
+        <p>One directory contains an old phone number. Another still lists your previous address.</p>
+        <p>You have now created several versions of the same business.</p>
+        <p>For a local SME especially, keeping important business information consistent across your website and trusted external profiles can make your online identity clearer.</p>
+        <h3>6. Make sure your website can actually be accessed</h3>
+        <p>Great content is not very useful if search systems cannot properly access it. Technical basics still matter.</p>
+        <p>These can include:</p>
+        <ul>
+          <li>crawl access;</li>
+          <li>HTTPS;</li>
+          <li>a working sitemap;</li>
+          <li>sensible internal links;</li>
+          <li>indexable pages; and</li>
+          <li>reasonable website performance.</li>
+        </ul>
+        <p>This is another reason AEO should not be treated as something completely separate from SEO.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Visibility metrics</span><h2>What Are Brand Mentions and AI Citations?</h2></div>
+      <div class="prose">
+        <p>Two terms you will hear frequently in AEO are <strong>brand mentions</strong> and <strong>citations</strong>.</p>
+        <p>They sound similar, but they measure different things.</p>
+        <h3>Brand mention</h3>
+        <p>A brand mention happens when an AI answer names your business.</p>
+        <p>For example: <em>“Some corporate training providers in Malaysia include Company A, Company B and Your Company.”</em></p>
+        <p>Your Company has been <strong>mentioned</strong>.</p>
+        <p>If you track ten relevant AI questions and your business appears in six of the answers, your <strong>Brand Mention Coverage</strong> would be 60%.</p>
+        <h3>AI citation</h3>
+        <p>A citation occurs when the AI answer references or links to a source that supports the response.</p>
+        <p>That source might be your website, or somebody else's.</p>
+        <p>So AI could mention your business without citing your website.</p>
+        <p>This distinction matters because being known and being used as a source are two different forms of visibility.</p>
+        <p>Later guides in this series will explain both metrics in much more detail.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Common misconceptions</span><h2>What Does AEO NOT Mean?</h2></div>
+      <div class="prose">
+        <p>Because AEO is relatively new, there are plenty of shortcuts and exaggerated claims around it.</p>
+        <p>It helps to understand what AEO is <strong>not</strong>.</p>
+        <h3>AEO is not putting “AI keywords” everywhere</h3>
+        <p>There is no magic phrase you can insert into every page that forces ChatGPT or Gemini to recommend you.</p>
+        <h3>AEO is not abandoning Google SEO</h3>
+        <p>Search engines and AI-powered discovery increasingly overlap.</p>
+        <p>Google itself says existing SEO fundamentals remain relevant to its generative AI search features.</p>
+        <h3>AEO is not creating hundreds of generic AI articles</h3>
+        <p>More content does not automatically mean more visibility.</p>
+        <p>Ten useful pages answering real customer needs may be more valuable than hundreds of repetitive pages saying roughly the same thing.</p>
+        <h3>AEO is not guaranteeing an AI recommendation</h3>
+        <p>No legitimate optimisation process can promise that ChatGPT, Gemini, Google AI or another platform will always recommend a particular business.</p>
+        <p>AI answers can vary between platforms, questions and contexts.</p>
+        <p>The sensible goal is to improve your business's ability to be understood, considered and supported by useful information,  then measure what actually happens.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Getting started</span><h2>How Can a Small Business Start With AEO?</h2></div>
+      <div class="prose">
+        <p>You do not need an enormous AEO project.</p>
+        <p>Start with five simple steps.</p>
+        <p><strong>Step 1: Write down 10 questions potential customers ask before buying.</strong></p>
+        <p>Avoid putting your brand name in them.</p>
+        <p>Instead of: <em>“Is ABC Accounting good?”</em></p>
+        <p>use:</p>
+        <p><em>“Which accounting firms in Kuala Lumpur specialise in SMEs?”</em></p>
+        <p><strong>Step 2: Check what different AI platforms say.</strong></p>
+        <p>Look at which companies appear and what sources are used.</p>
+        <p><strong>Step 3: Check whether your own business appears.</strong></p>
+        <p>If it does, look at how it is described.</p>
+        <p>Is the information accurate?</p>
+        <p><strong>Step 4: Look for obvious gaps.</strong></p>
+        <p>Perhaps your website never clearly explains an important service.</p>
+        <p>Perhaps a key question has no useful answer.</p>
+        <p>Perhaps important company information is inconsistent.</p>
+        <p><strong>Step 5: Improve the highest-value gaps first.</strong></p>
+        <p>Do not try to “optimise for AI” everywhere at once.</p>
+        <p>Start with the products, services and questions most likely to influence a customer's decision.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Zicy</span><h2>How Does Zicy Help With AEO?</h2></div>
+      <div class="prose">
+        <p>AEO can quickly become difficult to manage manually.</p>
+        <p>You could ask ChatGPT ten questions, repeat them in Gemini, check Perplexity, examine Google's AI answers, copy everything into a spreadsheet and repeat the exercise later.</p>
+        <p>But it becomes difficult to see patterns.</p>
+        <p>Zicy is designed to bring that process together around a simple loop: </p>
+        <h3>Measure</h3>
+        <p>Zicy's Prompt Manager lets you define the real questions customers may ask and track how your business appears across major AI answer engines.</p>
+        <p>The AI Visibility Dashboard then measures areas such as:</p>
+        <ul>
+          <li>Brand Mention Coverage;</li>
+          <li>Website Citation Rate;</li>
+          <li>Share of Voice; and</li>
+          <li>Average AI Ranking.</li>
+        </ul>
+        <h3>Diagnose</h3>
+        <p>If your visibility is weak, Zicy helps investigate why.</p>
+        <p>For example, Prompt Analysis lets you see the actual AI answers behind your scores rather than only seeing a percentage.</p>
+        <p>Brand Intelligence can also help identify differences between what AI believes about your business and what you actually want to be known for.</p>
+        <h3>Act</h3>
+        <p>Once you know the problem, Zicy provides tools to help turn findings into action — including website audits, content optimisation, content creation, schema generation and visibility-gap analysis.</p>
+        <p>Zicy does not make changes directly to your website. It produces recommendations and assets that you can review and publish yourself.</p>
+        <h3>Prove</h3>
+        <p>Finally, you need to know whether the work made a difference.</p>
+        <p>Zicy can track visibility trends and connect with analytics and search data so you can examine whether changes in AI visibility are accompanied by changes in traffic and customer actions.</p>
+        <p>The purpose is not simply to receive an “AEO score”.</p>
+        <p>It is to understand:</p>
+        <ul>
+          <li><em>Where are we visible?</em></li>
+          <li><em>Where are we missing?</em></li>
+          <li><em>Why?</em></li>
+          <li><em>What should we fix next?</em></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Simple comparison</span><h2>AEO vs GEO vs SEO: The Simple Version</h2></div>
+      <div class="prose">
+        <p>If all the terminology still feels confusing, remember this:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Term</th>
+                <th scope="col">Simple Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SEO</td>
+                <td>Helping your website become easier to find through search engines</td>
+              </tr>
+              <tr>
+                <td>AEO</td>
+                <td>Helping your business and information become useful in direct and AI-generated answers</td>
+              </tr>
+              <tr>
+                <td>GEO</td>
+                <td>Optimising visibility within answers created by generative AI systems</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>There is significant overlap.</p>
+        <p>A well-structured, trustworthy and useful website can support all three.</p>
+        <p>For a small business owner, the terminology matters less than the business objective:</p>
+        <p>Make sure customers can still discover, understand and consider your business as the way they search changes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Conclusion</span><h2>Final Thoughts</h2></div>
+      <div class="prose">
+        <p>AEO can sound like another complicated digital marketing acronym. At its core, it isn't.</p>
+        <p>Customers are asking more detailed questions. AI is increasingly helping answer those questions.</p>
+        <p>Businesses therefore need to think beyond: <em>“Does my website rank?”</em></p>
+        <p>and start asking: <em>“Does AI understand who we are, what we offer and when we are relevant to a customer?”</em></p>
+        <p>That is the basic idea behind Answer Engine Optimisation.</p>
+        <p>You do not need to rebuild your entire website or publish hundreds of articles.</p>
+        <p>Start by making your business clear. Answer genuine customer questions. Keep important information accurate. Build useful content. Make sure your website is technically accessible. Then measure whether your business actually appears in the AI answers that matter.</p>
+        <p>AEO is not about chasing every new AI trend.</p>
+        <p>It is about making sure that as the way people search changes, your business remains part of the conversation.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Make your business<br />part of the answer.</h2>
+      <p>Zicy tracks brand mentions, website citations, share of voice and average AI ranking across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}
+  .prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+  .table-wrap{overflow-x:auto;margin:24px 0}
+  table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
+  th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}
+  thead th{background:var(--mist);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:170px}}
+</style>

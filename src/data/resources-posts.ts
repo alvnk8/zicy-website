@@ -13,6 +13,70 @@ export interface ResourcePost {
 
 export const RESOURCE_POSTS: ResourcePost[] = [
   {
+    "slug": "how-to-use-branded-and-non-branded-prompts-without-distorting-ai-visibility",
+    "title": "How To Use Branded And Non-Branded Prompts Without Distorting Your AI Visibility",
+    "description": "Learn when to use branded and non-branded AI prompts, what each type measures, and how to avoid distorting your AI visibility data.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-07",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "how-to-choose-buyer-intent-prompts-that-reveal-brand-visibility",
+    "title": "How To Choose Buyer-Intent Prompts That Can Actually Reveal Brand Visibility",
+    "description": "Learn how to choose buyer-intent prompts that help reveal whether AI recommends your business when potential customers are evaluating their options.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-07",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "how-to-find-the-right-ai-prompts-to-track-for-your-business",
+    "title": "How To Find The Right AI Prompts To Track For Your Business",
+    "description": "Learn how to choose the customer questions worth monitoring in AI, build a balanced prompt set and track the areas that matter most to your business.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-07",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "how-to-check-what-ai-knows-and-says-about-your-business",
+    "title": "How To Check What AI Knows And Says About Your Business",
+    "description": "Learn how to check what AI knows and says about your business, identify inaccurate or missing information, and see how Zicy helps monitor AI perception.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-07",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "how-to-check-your-business-across-ai-answer-engines",
+    "title": "How To Check Your Business Across AI Answer Engines",
+    "description": "Learn how to check whether your business appears across ChatGPT, Gemini, Perplexity and Google AI when customers search for products or services like yours.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-07",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "how-ai-answers-change-small-business-discovery",
+    "title": "How Do AI Answers Change The Way Customers Discover Small Businesses?",
+    "description": "Learn how to check your business visibility across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-07",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "what-is-aeo",
+    "title": "What Is AEO? An Easy-to-Understand Guide for Small Business Owners",
+    "description": "Learn what AEO and GEO mean, how they differ from SEO, why AI visibility matters, and how small businesses can get started.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-07",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "how-is-ai-visibility-different-from-google-rankings",
+    "title": "How Is AI Visibility Different From Google Rankings? A Simple Guide for Small Businesses",
+    "description": "Learn how AI visibility differs from Google rankings, why it matters for small businesses, and how to track your brand across AI answers.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-07",
+    "authorName": "Ritu Khanna"
+  },
+  {
     "slug": "measuring-ai-visibility-sub-entity-halo",
     "title": "Measuring AI visibility: the sub-entity halo, a strategic prioritisation layer",
     "description": "The sub-entity halo is the third layer of AI visibility attribution: whether AI surfaces a brand's specific named products and services in the queries where they are most relevant.",

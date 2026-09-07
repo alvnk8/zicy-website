@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import buyerIntentImg from '../../assets/resources/how-to-choose-buyer-intent-prompts-that-reveal-brand-visibility/buyer-intent-prompt-visibility.png';
+import promptManagerImg from '../../assets/resources/how-to-choose-buyer-intent-prompts-that-reveal-brand-visibility/prompt-manager.png';
+
+const metaTitle = 'How to Choose Buyer-Intent AI Prompts That Reveal Brand Visibility';
+const title = 'How To Choose Buyer-Intent Prompts That Can Actually Reveal Brand Visibility';
+const description =
+  'Learn how to choose buyer-intent prompts that help reveal whether AI recommends your business when potential customers are evaluating their options.';
+
+const url = `${SITE.url}/resources/how-to-choose-buyer-intent-prompts-that-reveal-brand-visibility`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-09-07',
+      dateModified: '2026-09-07',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${buyerIntentImg.src}`,
+        width: buyerIntentImg.width,
+        height: buyerIntentImg.height,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout
+  title={metaTitle}
+  description={description}
+  ogTitle={title}
+  ogImage={{
+    url: `${SITE.url}${buyerIntentImg.src}`,
+    width: buyerIntentImg.width,
+    height: buyerIntentImg.height,
+    alt: 'Does this prompt reveal brand visibility?',
+    type: 'image/png',
+  }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Choosing Buyer-Intent Prompts</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How To Choose Buyer-Intent Prompts That Can Actually Reveal Brand Visibility</h1>
+
+      <p class="answer">Learn how to choose buyer-intent prompts that help reveal whether AI recommends your business when potential customers are evaluating their options.</p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 7 September 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+      <div class="prose">
+        <ul>
+          <li>Buyer-intent prompts are questions where recommending or comparing real businesses, products or providers would make the answer more useful.</li>
+          <li>General informational questions may be useful for content, but they often tell you very little about whether AI would recommend your brand.</li>
+          <li>Strong prompts usually include sufficient context about the customer, problem, requirement, location, or use case to create a realistic decision-making scenario.</li>
+          <li>A good test is whether AI has a genuine reason to name businesses in order to answer the question well.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">The basics</span><h2>Introduction</h2></div>
+      <div class="prose">
+        <p>Not every customer question is useful for measuring AI brand visibility.</p>
+        <p>Compare:</p>
+        <p>“What is payroll software?”</p>
+        <p>with:</p>
+        <p>“What payroll software is suitable for a small Malaysian company?”</p>
+        <p>The first asks AI to explain a topic.</p>
+        <p>The second asks AI to help someone identify a suitable solution.</p>
+        <p>That difference matters.</p>
+        <p>If you want to understand whether AI puts your business in front of potential customers, you need questions where products, services or providers could <strong>naturally form part of the answer</strong>.</p>
+        <p>These are <strong>buyer-intent prompts</strong>.</p>
+        <p>The key question is: <strong>Would mentioning businesses make the AI answer more useful to the customer?</strong></p>
+        <p>If yes, the prompt may be suitable for visibility measurement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Buyer intent</span><h2>What does buyer intent mean in an AI prompt?</h2></div>
+      <div class="prose">
+        <p>Buyer intent does not mean the customer is ready to make a purchase immediately.</p>
+        <p>It means the question has moved beyond simply learning about a topic towards <strong>evaluating how to solve a need or which option might suit them</strong>.</p>
+        <p>For example:</p>
+        <p><strong>Informational</strong></p>
+        <p>“What does a digital marketing agency do?”</p>
+        <p><strong>Buyer intent</strong></p>
+        <p>“Which digital marketing agencies are suitable for a growing ecommerce business in Malaysia?”</p>
+        <p>Or:</p>
+        <p><strong>Informational</strong></p>
+        <p>“What is an HR management system?”</p>
+        <p><strong>Buyer intent</strong></p>
+        <p>“What HR software is suitable for a company with 50 employees that needs payroll and leave management?”</p>
+        <p>The buyer-intent versions create a situation where identifying or comparing actual options makes the answer more useful.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Measurement quality</span><h2>Why can informational prompts give misleading visibility data?</h2></div>
+      <div class="prose">
+        <p>Informational questions are valuable.</p>
+        <p>Customers ask them, and they can be useful for content marketing.</p>
+        <p>The problem comes when you use them to judge whether your brand is being discovered.</p>
+        <p>Suppose you track:</p>
+        <p>“What is cloud accounting?”</p>
+        <p>ChatGPT, Gemini and Perplexity could all provide excellent explanations without naming a single accounting software company.</p>
+        <p>If your brand receives zero mentions, that does not automatically mean your AI visibility is weak.</p>
+        <p>The question simply gave AI <strong>no strong reason to recommend a business</strong>.</p>
+        <p>This is why visibility measurements are more meaningful when the underlying prompt creates an opportunity for brands to appear.</p>
+        <p>A useful test is:</p>
+        <p><strong>If all company and product names were removed from the answer, would the customer still have what they need?</strong></p>
+        <p>For:</p>
+        <p>“What is contrast therapy?”</p>
+        <p>probably yes.</p>
+        <p>For:</p>
+        <p>“Where can I try contrast therapy in Kuala Lumpur?”</p>
+        <p>probably not.</p>
+        <p>The second question needs actual options to become useful.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Intent signals</span><h2>What signals buyer intent?</h2></div>
+      <div class="prose">
+        <p>Do not judge a prompt only by individual words.</p>
+        <p>Buyer-intent prompts may include terms such as:</p>
+        <ul>
+          <li>which;</li>
+          <li>recommended;</li>
+          <li>suitable;</li>
+          <li>alternatives;</li>
+          <li>provider;</li>
+          <li>where can I find;</li>
+          <li>options; or</li>
+          <li>best for.</li>
+        </ul>
+        <p>But the <strong>intent behind the question matters more than the wording</strong>.</p>
+        <p>The customer should be trying to identify, evaluate or choose a solution.</p>
+        <p>For example:</p>
+        <p>“What software can help a retailer manage invoices across multiple outlets?”</p>
+        <p>does not say “best” or “recommended”.</p>
+        <p>It can still create buyer intent because a useful answer may involve suggesting specific software products.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Prompt strength</span><h2>What does a strong buyer-intent prompt look like?</h2></div>
+      <div class="prose">
+        <p>Strong prompts usually combine a real customer need with enough information for AI to determine which options are relevant.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Informational or too broad</th>
+                <th scope="col">Stronger buyer-intent prompt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>What is CRM software?</td><td>What CRM is suitable for a small sales team?</td></tr>
+              <tr><td>How does payroll outsourcing work?</td><td>Which payroll outsourcing services are suitable for SMEs in Malaysia?</td></tr>
+              <tr><td>What is event production?</td><td>Which event production companies can handle a corporate product launch in Kuala Lumpur?</td></tr>
+              <tr><td>What are international schools?</td><td>Which international schools in Johor Bahru offer Cambridge IGCSE?</td></tr>
+              <tr><td>How does inventory software work?</td><td>What inventory software is suitable for a small retailer with multiple outlets?</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The stronger versions represent situations in which a potential customer could realistically be deciding <strong>what to use or whom to contact</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Useful context</span><h2>How much context should you add?</h2></div>
+      <div class="prose">
+        <p>Add information that could genuinely change which businesses are suitable.</p>
+        <p>Useful context may include:</p>
+        <p><strong>Customer type:</strong> “for a small manufacturer”</p>
+        <p><strong>Problem:</strong> “that needs automated payroll”</p>
+        <p><strong>Requirement:</strong> “with multi-currency invoicing”</p>
+        <p><strong>Location:</strong> “in Penang”</p>
+        <p><strong>Use case:</strong> “for a 200-person corporate conference”</p>
+        <p>For example:</p>
+        <p>“What accounting software should I use?”</p>
+        <p>could become:</p>
+        <p>“What accounting software is suitable for a small Malaysian retailer that needs invoicing and inventory management?”</p>
+        <p>The second question gives AI a clearer decision situation.</p>
+        <p>But more detail is not automatically better.</p>
+        <p>Do not make prompts artificially long. Add context only when it could reasonably affect which option is suitable.</p>
+
+        <PostFigure
+          src={buyerIntentImg}
+          alt="Does this prompt reveal brand visibility?"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Natural questions</span><h2>Do buyer-intent prompts need to ask for the “best” option?</h2></div>
+      <div class="prose">
+        <p>No.</p>
+        <p>Customers do not always ask:</p>
+        <p>“What is the best...?”</p>
+        <p>They may ask:</p>
+        <ul>
+          <li>“What software can help me manage...?”</li>
+          <li>“Which provider is suitable for...?”</li>
+          <li>“What are my options for...?”</li>
+          <li>“Where can I find...?”</li>
+          <li>“Which service supports...?”</li>
+        </ul>
+        <p>All can reveal visibility if a useful answer naturally involves suggesting businesses or products.</p>
+        <p>Tracking only “best” questions may actually give you too narrow a view of how customers make decisions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Natural discovery</span><h2>Should you include your own brand name?</h2></div>
+      <div class="prose">
+        <p>Usually not when you are measuring <strong>natural discovery</strong>.</p>
+        <p>Compare:</p>
+        <p>“Is MyBrand suitable for small businesses?”</p>
+        <p>with:</p>
+        <p>“Which providers are suitable for small businesses that need [specific requirement]?”</p>
+        <p>The first tells AI which business to discuss.</p>
+        <p>The second lets AI decide which businesses are relevant.</p>
+        <p>Branded prompts still have a useful purpose when you want to check <strong>what AI knows and says about your business</strong>.</p>
+        <p>But they are not a fair test of whether AI would independently introduce your business to someone who had not already heard of you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Prompt strategy</span><h2>How does buyer intent fit into your overall prompt strategy?</h2></div>
+      <div class="prose">
+        <p>Buyer intent indicates whether a <strong>given question</strong> is suitable for measuring visibility.</p>
+        <p>It does not tell you which products, services, customer groups, locations and problems your entire tracking programme should cover.</p>
+        <p>That is a separate decision.</p>
+        <p>Once you know how to identify strong buyer-intent questions, see <a href="/resources/how-to-find-the-right-ai-prompts-to-track-for-your-business"><strong>How To Find The Right AI Prompts To Track For Your Business</strong></a> to build those questions into a balanced prompt portfolio.</p>
+        <p>The distinction is simple:</p>
+        <p><strong>Choose the right business areas first. Then make sure the questions you use to represent those areas are fair tests of AI visibility.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Zicy monitoring</span><h2>How can Zicy help measure buyer-intent prompts?</h2></div>
+      <div class="prose">
+        <p>Zicy's <strong>Prompt Manager</strong> lets you choose and manage the questions used to measure your AI visibility.</p>
+        <p>Once those prompts are analysed, Zicy can show measures such as:</p>
+        <ul>
+          <li>Brand Mention Coverage;</li>
+          <li>Position;</li>
+          <li>Share of Voice; and</li>
+          <li>Website Citation Coverage.</li>
+        </ul>
+        <p>Results can also be reviewed by individual AI engine.</p>
+        <p>This lets you see what actually happened for a customer question instead of relying on occasional manual searches.</p>
+
+        <PostFigure
+          src={promptManagerImg}
+          alt="Zicy Prompt Manager dashboard"
+          caption="Zicy helps businesses review how their brand performs for individual buyer-focused questions across AI answer engines."
+        />
+
+        <p>Prompt quality matters because visibility numbers need context.</p>
+        <p>A zero for a question where AI had no reason to mention brands tells you very little.</p>
+        <p>A zero for a question where a potential customer is actively asking AI to recommend suitable businesses is much more meaningful.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Getting started</span><h2>Which buyer-intent prompts should you start with?</h2></div>
+      <div class="prose">
+        <p>Begin with one simple question:</p>
+        <p><strong>What would a potential customer ask AI when they know what they need but have not yet decided who to choose?</strong></p>
+        <p>Turn those situations into natural questions.</p>
+        <p>Then ask:</p>
+        <p><strong>Would AI reasonably need to recommend or compare businesses to answer this well?</strong></p>
+        <p>If yes, the prompt is likely worth considering for visibility tracking.</p>
+        <p>The aim is not to make every customer question transactional.</p>
+        <p>It is to make sure the questions used to <strong>measure AI visibility</strong> actually create an opportunity for your business—or a competitor—to appear.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Track the buyer questions that matter<br />{' '}and see where your brand appears with Zicy.</h2>
+      <p>Zicy tracks brand mentions, website citations, share of voice and average AI ranking across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}
+  .prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+  .table-wrap{overflow-x:auto;margin:24px 0}
+  table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
+  th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}
+  thead th{background:var(--surface);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:170px}}
+</style>

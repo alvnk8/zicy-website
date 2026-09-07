@@ -1,0 +1,384 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/how-to-find-the-right-ai-prompts-to-track-for-your-business/ai-prompt-tracking-set.png';
+import promptManagerImg from '../../assets/resources/how-to-find-the-right-ai-prompts-to-track-for-your-business/prompt-manager.png';
+
+const metaTitle = 'How to Find the Right AI Prompts to Track for Your Business';
+const title = 'How To Find The Right AI Prompts To Track For Your Business';
+const description =
+  'Learn how to choose the customer questions worth monitoring in AI, build a balanced prompt set and track the areas that matter most to your business.';
+
+const url = `${SITE.url}/resources/how-to-find-the-right-ai-prompts-to-track-for-your-business`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-09-07',
+      dateModified: '2026-09-07',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${heroImg.src}`,
+        width: heroImg.width,
+        height: heroImg.height,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout
+  title={metaTitle}
+  description={description}
+  ogTitle={title}
+  ogImage={{
+    url: `${SITE.url}${heroImg.src}`,
+    width: heroImg.width,
+    height: heroImg.height,
+    alt: 'How to build your AI prompt tracking set',
+    type: 'image/png',
+  }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Finding AI Prompts To Track</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How To Find The Right AI Prompts To Track For Your Business</h1>
+
+      <p class="answer">Learn how to choose the customer questions worth monitoring in AI, build a balanced prompt set and track the areas that matter most to your business.</p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 7 September 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+      <div class="prose">
+        <ul>
+          <li>Build your prompt set around the products, services, customer groups, problems and locations that matter most commercially.</li>
+          <li>Use real customer questions and buying situations as your starting point instead of generating a large list of generic prompts.</li>
+          <li>Prioritise meaningful differences in customer needs rather than tracking many small wording variations of the same question.</li>
+          <li>Keep a stable core set of prompts so changes in visibility can be compared consistently over time.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Prompt strategy</span><h2>Introduction</h2></div>
+      <div class="prose">
+        <p>Tracking your business in AI starts with deciding <strong>which customer questions are important enough to monitor</strong>.</p>
+        <p>These questions are commonly called prompts. They are what people may type or ask when using ChatGPT, Gemini, Perplexity or Google's AI experiences.</p>
+        <p>But there are potentially hundreds of questions related to any business.</p>
+        <p>Trying to track all of them creates noise. Tracking only a handful of obvious questions can leave important parts of your business uncovered.</p>
+        <p>The goal is to build a focused prompt set that represents the customer situations where you genuinely want your business to be visible.</p>
+        <p>A useful prompt strategy should help answer:</p>
+        <p><strong>When customers ask AI about the products, services and problems most important to our business, where do we appear?</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Business priorities</span><h2>Start with the parts of your business that matter most</h2></div>
+      <div class="prose">
+        <p>Do not start by asking AI to generate a long list of random questions.</p>
+        <p>Start with your business priorities.</p>
+        <p>Think about the areas where being recommended by AI could make a meaningful difference.</p>
+        <p>These may include:</p>
+        <ul>
+          <li>your main products or services;</li>
+          <li>your most valuable customer groups;</li>
+          <li>important customer problems;</li>
+          <li>particular capabilities or requirements;</li>
+          <li>priority locations or markets; and</li>
+          <li>services you want to grow.</li>
+        </ul>
+        <p>For example, an accounting software company may serve retailers, professional services firms and ecommerce businesses.</p>
+        <p>Tracking only:</p>
+        <p>“What is the best accounting software?”</p>
+        <p>would give a very narrow picture.</p>
+        <p>It may be more useful to understand whether the company appears when different customer groups ask questions related to invoicing, inventory, multiple outlets or ecommerce integrations.</p>
+        <p>Your prompt set should therefore reflect <strong>how your business actually makes money</strong>, not simply the broad category you belong to.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Customer insight</span><h2>Use real customer questions as your starting point</h2></div>
+      <div class="prose">
+        <p>One of the best sources of prompts is the questions customers already ask.</p>
+        <p>Look at:</p>
+        <ul>
+          <li>sales enquiries;</li>
+          <li>consultation calls;</li>
+          <li>quote requests;</li>
+          <li>customer emails;</li>
+          <li>website FAQs;</li>
+          <li>product enquiries;</li>
+          <li>common objections; and</li>
+          <li>questions heard repeatedly by sales or customer service teams.</li>
+        </ul>
+        <p>These questions reveal what customers care about before making a decision.</p>
+        <p>For example, an event production company might regularly hear:</p>
+        <ul>
+          <li>“Can you manage both creative and technical production?”</li>
+          <li>“Do you handle corporate product launches?”</li>
+          <li>“Can you provide LED screens?”</li>
+          <li>“Do you work outside Kuala Lumpur?”</li>
+        </ul>
+        <p>You would not necessarily track those exact questions word for word.</p>
+        <p>Instead, use them to identify the <strong>needs, requirements and situations</strong> your prompt set should represent.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Portfolio coverage</span><h2>How to build coverage across the main customer situations?</h2></div>
+      <div class="prose">
+        <p>A useful prompt portfolio should not depend too heavily on one type of question.</p>
+        <p>Think about several dimensions.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Area</th>
+                <th scope="col">What your prompts might represent</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Products or services</td><td>Your main commercial offerings</td></tr>
+              <tr><td>Customer types</td><td>SMEs, enterprises, families, retailers or specific industries</td></tr>
+              <tr><td>Problems</td><td>The problems customers need solved</td></tr>
+              <tr><td>Requirements</td><td>Important features, expertise or capabilities</td></tr>
+              <tr><td>Locations</td><td>Cities, neighbourhoods or markets where location affects the choice</td></tr>
+              <tr><td>Use cases</td><td>Specific situations where customers need your product or service</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>For example, a digital marketing agency may want questions around SEO, paid media and social media, but also around ecommerce brands, B2B companies and businesses in Malaysia.</p>
+        <p>This provides a much more useful view than tracking many variations of one generic “best agency” question.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Prioritisation</span><h2>How to decide which areas deserve more prompts?</h2></div>
+      <div class="prose">
+        <p>Not every part of your business needs equal coverage.</p>
+        <p>Give more attention to areas that are:</p>
+        <ul>
+          <li>commercially important;</li>
+          <li>strategically important;</li>
+          <li>frequently requested by customers;</li>
+          <li>highly competitive; or</li>
+          <li>areas where you specifically want to grow.</li>
+        </ul>
+        <p>A company with five services may decide that two deserve heavier tracking because they generate most new business.</p>
+        <p>Similarly, a multi-location business may prioritise the cities where it actively competes instead of creating prompts for every location it could theoretically serve.</p>
+        <p>Prompt tracking should reflect <strong>business priorities</strong>, not just topic volume.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Buyer intent</span><h2>How to ensure the individual prompts are suitable for visibility tracking?</h2></div>
+      <div class="prose">
+        <p>Once you know what areas you want to monitor, the next step is choosing questions that can actually reveal brand visibility.</p>
+        <p>This is where buyer intent becomes important.</p>
+        <p>A question such as:</p>
+        <p>“What is payroll software?”</p>
+        <p>may be relevant to your industry, but AI can answer it perfectly without recommending any provider.</p>
+        <p>A question such as:</p>
+        <p>“Which payroll software is suitable for a Malaysian SME?”</p>
+        <p>creates a clearer opportunity for businesses to appear.</p>
+        <p>Learn <strong>How To Choose Buyer-Intent Prompts That Can Actually Reveal Brand Visibility</strong> to check whether each question is suitable for measuring visibility.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Location relevance</span><h2>Include location when it genuinely changes the choice</h2></div>
+      <div class="prose">
+        <p>Location matters more for some businesses than others.</p>
+        <p>A plumber, clinic, tuition centre, restaurant or local professional service may need prompts that reflect the areas customers actually search from.</p>
+        <p>For example:</p>
+        <p>“Which dental clinics in Petaling Jaya are suitable for families?”</p>
+        <p>may be more useful than:</p>
+        <p>“Which dental clinics are recommended?”</p>
+        <p>For a business selling nationally, city-level prompts may be unnecessary.</p>
+        <p>Use location when it would realistically affect which business a customer could choose.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Remove overlap</span><h2>Remove prompts that represent the same situation</h2></div>
+      <div class="prose">
+        <p>Prompt lists can grow quickly because small wording changes feel different.</p>
+        <p>Consider:</p>
+        <ul>
+          <li>“Best payroll software for SMEs”</li>
+          <li>“Top payroll software for SMEs”</li>
+          <li>“Recommended payroll software for SMEs”</li>
+        </ul>
+        <p>The wording differs, but the underlying customer situation is almost identical.</p>
+        <p>You may still test wording variations occasionally, but your core tracking set should prioritise <strong>meaningfully different customer situations</strong>.</p>
+        <p>For example:</p>
+        <ul>
+          <li>payroll software for a 10-person SME;</li>
+          <li>payroll software with leave management;</li>
+          <li>payroll software for multiple branches; and</li>
+          <li>payroll software suitable for Malaysian compliance needs.</li>
+        </ul>
+        <p>Each introduces a genuine difference in what the customer needs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Consistent tracking</span><h2>Keep a core set that you can monitor consistently</h2></div>
+      <div class="prose">
+        <p>Your prompt list should evolve, but not constantly.</p>
+        <p>If you replace large numbers of questions every week, changes in your visibility data become difficult to interpret.</p>
+        <p>Did your business improve?</p>
+        <p>Or are you simply measuring different questions?</p>
+        <p>Keep a stable core set and make changes when there is a real business reason, such as:</p>
+        <ul>
+          <li>launching a new product;</li>
+          <li>entering a new market;</li>
+          <li>targeting a new customer group;</li>
+          <li>discovering an important customer need; or</li>
+          <li>retiring an old service.</li>
+        </ul>
+        <p>This gives you a more meaningful baseline over time.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <PostFigure
+        src={heroImg}
+        alt="How to build your AI prompt tracking set in six steps"
+      />
+
+      <div class="shead"><span class="eyebrow">Zicy Prompt Manager</span><h2>How can Zicy help organise your prompt strategy?</h2></div>
+      <div class="prose">
+        <p>Zicy's <strong>Prompt Manager</strong> gives businesses one place to manage the questions used for AI visibility tracking.</p>
+        <p>You can review suggested prompts, add custom questions and manage them as <strong>Draft, Active or Paused</strong>.</p>
+        <p>Tags can also help organise prompts into meaningful groups such as:</p>
+        <ul>
+          <li>products;</li>
+          <li>services;</li>
+          <li>customer segments;</li>
+          <li>locations; or</li>
+          <li>types of buying question.</li>
+        </ul>
+        <p>This becomes particularly useful as your prompt set grows.</p>
+        <p>Instead of looking only at one overall visibility number, you can examine whether performance differs across different parts of the business.</p>
+
+        <PostFigure
+          src={promptManagerImg}
+          alt="Zicy Prompt Manager dashboard"
+          caption="Zicy Prompt Manager helps businesses organise and manage the customer questions they want to monitor across AI answer engines."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">First steps</span><h2>What should you do first?</h2></div>
+      <div class="prose">
+        <p>Start with your business rather than starting with AI.</p>
+        <p>Write down:</p>
+        <p><strong>What do we most want customers to find us for? Who are those customers? What problems are they trying to solve? Which locations or requirements matter?</strong></p>
+        <p>Turn those priorities into a manageable list of customer situations.</p>
+        <p>Then check whether each question creates a genuine opportunity for AI to recommend businesses.</p>
+        <p>You do not need hundreds of prompts.</p>
+        <p>You need enough good questions to give you a representative view of the parts of your business that matter.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Find and track the AI prompts<br />{' '}that matter to your business with Zicy.</h2>
+      <p>Zicy tracks brand mentions, website citations, share of voice and average AI ranking across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}
+  .prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+  .table-wrap{overflow-x:auto;margin:24px 0}
+  table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
+  th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}
+  thead th{background:var(--mist);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:170px}}
+</style>

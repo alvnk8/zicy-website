@@ -1,0 +1,324 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/how-to-check-what-ai-knows-and-says-about-your-business/how-ai-sees-your-business.png';
+import brandIntelligenceImg from '../../assets/resources/how-to-check-what-ai-knows-and-says-about-your-business/brand-intelligence.png';
+
+const metaTitle = 'How to Check What AI Knows About Your Business';
+const title = 'How To Check What AI Knows And Says About Your Business';
+const description =
+  'Learn how to check what AI knows and says about your business, identify inaccurate or missing information, and see how Zicy helps monitor AI perception.';
+
+const url = `${SITE.url}/resources/how-to-check-what-ai-knows-and-says-about-your-business`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-09-07',
+      dateModified: '2026-09-07',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${heroImg.src}`,
+        width: heroImg.width,
+        height: heroImg.height,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout
+  title={metaTitle}
+  description={description}
+  ogTitle={title}
+  ogImage={{
+    url: `${SITE.url}${heroImg.src}`,
+    width: heroImg.width,
+    height: heroImg.height,
+    alt: 'How AI sees your business',
+    type: 'image/png',
+  }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">What AI Knows About Your Business</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How To Check What AI Knows And Says About Your Business</h1>
+
+      <p class="answer">Learn how to check what AI knows and says about your business, identify inaccurate or missing information, and see how Zicy helps monitor AI perception.</p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 7 September 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+      <div class="prose">
+        <ul>
+          <li>Use branded questions to see how AI understands and describes your business when it is asked about you directly.</li>
+          <li>Check whether AI has the correct information about your services, target customers, locations, category, positioning and differentiators.</li>
+          <li>Separate inaccurate information from missing information, because both can affect how potential customers perceive your business.</li>
+          <li>Focus on repeated patterns across multiple answers or AI engines before deciding what information needs to be clarified or updated.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">AI perception</span><h2>Introduction</h2></div>
+      <div class="prose">
+        <p>Customers may ask AI about your business before visiting your website. They may want to know what you sell, who you serve, where you operate or whether you are suitable for a particular need.</p>
+        <p>The answer may not always match how you describe your own business.</p>
+        <p>AI may use outdated information, omit an important service, confuse your company with another business or misunderstand what makes you different. Even when most of the answer is correct, one missing or inaccurate detail can affect how a potential customer understands your business.</p>
+        <p>The key question is:</p>
+        <p><strong>How accurately does AI understand and describe my business?</strong></p>
+        <p>This is different from testing whether AI can <strong>discover your business</strong> when the customer has not named you. Here, the purpose is to check the picture AI has already formed about your brand.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Branded questions</span><h2>What should you ask AI about your business?</h2></div>
+      <div class="prose">
+        <p>For this type of check, include your business name.</p>
+        <p>Start with simple questions that cover the information a potential customer may want to know:</p>
+        <ul>
+          <li>“What is [Business Name]?”</li>
+          <li>“What products or services does [Business Name] offer?”</li>
+          <li>“Who is [Business Name] for?”</li>
+          <li>“Where does [Business Name] operate?”</li>
+          <li>“What is [Business Name] known for?”</li>
+          <li>“What makes [Business Name] different?”</li>
+          <li>“When would you recommend [Business Name]?”</li>
+        </ul>
+        <p>You can then ask more specific questions about important services, audiences or locations.</p>
+        <p>For example, a law firm could ask:</p>
+        <p>“Does [Business Name] provide employment law advice?”</p>
+        <p>A software company might ask:</p>
+        <p>“Is [Business Name] suitable for small retailers?”</p>
+        <p>The purpose is not to see whether your brand appears. You have already named it.</p>
+        <p>The purpose is to understand <strong>what AI believes about your business and how clearly it can explain it</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Accuracy check</span><h2>What should you look for in the answers?</h2></div>
+      <div class="prose">
+        <p>Recognition alone is not enough. Compare what AI says with your current business information.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">What to check</th>
+                <th scope="col">What to look for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Business identity</td><td>Is AI describing the correct company?</td></tr>
+              <tr><td>Products and services</td><td>Does it understand your important offerings?</td></tr>
+              <tr><td>Target customers</td><td>Does it accurately describe who you serve?</td></tr>
+              <tr><td>Location</td><td>Does it understand where you operate?</td></tr>
+              <tr><td>Business category</td><td>Does it place you in the right industry?</td></tr>
+              <tr><td>Positioning</td><td>What does AI think you are known for?</td></tr>
+              <tr><td>Differentiators</td><td>Does it recognise what makes you different?</td></tr>
+              <tr><td>Accuracy and freshness</td><td>Is the information still current?</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Pay particular attention to the difference between <strong>wrong information</strong> and <strong>missing information</strong>.</p>
+        <p>Wrong information is directly inaccurate. For example, AI may state that you operate from an old location or still provide a service you have discontinued.</p>
+        <p>Missing information is different. AI may correctly explain part of your business while leaving out an important service, customer segment or area of expertise.</p>
+        <p>Both matter.</p>
+        <p>An incorrect fact can mislead a customer. Missing information can make your business appear less relevant or capable than it really is.</p>
+        <p>The goal is not to make every AI answer copy your website word for word. What matters is whether AI has a <strong>clear, current and reasonably complete understanding</strong> of your business.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <PostFigure
+        src={heroImg}
+        alt="How AI sees your business: a five-step accuracy check"
+      />
+
+      <div class="shead"><span class="eyebrow">Information sources</span><h2>Why might AI misunderstand your business?</h2></div>
+      <div class="prose">
+        <p>AI-generated answers can reflect information found across different sources rather than relying only on your website.</p>
+        <p>If your business information is inconsistent, unclear or outdated across those sources, the resulting description may also become inconsistent.</p>
+        <p>For example, your website may describe you as serving both consumers and businesses, while older profiles still describe you only as a consumer brand. AI may then produce different interpretations depending on the sources available to it.</p>
+        <p>This is why an inaccurate AI answer should be treated as a signal to investigate, rather than something to fix blindly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Pattern comparison</span><h2>Should you compare more than one AI engine?</h2></div>
+      <div class="prose">
+        <p>Yes, but the purpose here is to identify <strong>perception patterns</strong>, not to compare visibility or rankings.</p>
+        <p>One engine may understand your services correctly while another uses an outdated description. If the same error or omission appears repeatedly across several engines, it may indicate a broader information problem.</p>
+        <p>If an issue appears only once, it may simply be an isolated answer.</p>
+        <p>For a detailed guide to comparing where your business appears across platforms, see <a href="/resources/how-to-check-your-business-across-ai-answer-engines"><strong>How To Check Your Business Across AI Answer Engines</strong></a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Record findings</span><h2>How should you record what AI gets wrong or misses?</h2></div>
+      <div class="prose">
+        <p>Keep your record focused on the information itself.</p>
+        <p>For each finding, note:</p>
+        <ul>
+          <li>what AI said;</li>
+          <li>whether it is correct, outdated or incomplete;</li>
+          <li>what the correct information should be;</li>
+          <li>which AI engine produced the answer; and</li>
+          <li>whether the same issue appears elsewhere.</li>
+        </ul>
+        <p>You could also group findings by theme, such as services, locations, target customers or positioning.</p>
+        <p>This makes it easier to identify repeated misunderstandings rather than reacting to individual answers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Investigate first</span><h2>What should you do if AI information looks wrong?</h2></div>
+      <div class="prose">
+        <p>First, verify the information against sources you know are current, such as your website, service pages and business profiles.</p>
+        <p>Then investigate why the misunderstanding may exist.</p>
+        <p>For example, if AI describes you only as a consumer business but you also serve commercial clients, check whether that distinction is clearly explained across your main business information.</p>
+        <p>Do the same for:</p>
+        <ul>
+          <li>old locations;</li>
+          <li>discontinued services;</li>
+          <li>unclear business descriptions;</li>
+          <li>missing specialisms; or</li>
+          <li>conflicting information between different profiles.</li>
+        </ul>
+        <p>Avoid changing your website or messaging because of one unusual AI response.</p>
+        <p>Look for repeated evidence first.</p>
+        <p>If several answers show the same misunderstanding, you have a much stronger reason to investigate the underlying information.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Zicy Brand Intelligence</span><h2>How can Zicy check AI perception more efficiently?</h2></div>
+      <div class="prose">
+        <p>Manual checking is useful for an initial review. It becomes harder when you need to compare many questions, engines and changes over time.</p>
+        <p>Zicy's <strong>Brand Intelligence</strong> is designed for this problem.</p>
+        <p>It compares how AI perceives your business with the business information you provide as ground truth.</p>
+        <p>Its Brand Analysis helps you understand:</p>
+        <ul>
+          <li>what AI thinks you are known for;</li>
+          <li>what you want to be known for; and</li>
+          <li>what AI may be missing or getting wrong.</li>
+        </ul>
+        <p>Its <strong>Gaps</strong> view can then highlight conflicts between AI responses and your business information so they can be reviewed rather than automatically assumed to be true.</p>
+
+        <PostFigure
+          src={brandIntelligenceImg}
+          alt="Zicy Brand Intelligence dashboard"
+          caption="Zicy Brand Intelligence compares AI perception with your actual business information to highlight where the two may not align."
+        />
+
+        <p>If you need to investigate a particular answer in more detail, <strong>Prompt Analysis</strong> provides the underlying responses from individual AI engines. </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">First steps</span><h2>What should an SME business do first?</h2></div>
+      <div class="prose">
+        <p>Start with a small set of direct questions about your business.</p>
+        <p>Check whether AI can correctly explain:</p>
+        <p><strong>What do we offer? Who do we serve? Where do we operate? What are we known for?</strong></p>
+        <p>Then separate what AI gets <strong>right</strong>, what is <strong>wrong</strong>, and what is <strong>missing</strong>.</p>
+        <p>Do not worry about fixing everything immediately. First identify whether the same misunderstanding appears repeatedly and confirm what the correct information should be.</p>
+        <p>That gives you a clearer starting point for deciding what business information may need to be clarified or updated.</p>
+        <p><strong>Begin with evidence rather than assumptions.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See what AI knows and says<br />{' '}about your business with Zicy.</h2>
+      <p>Zicy tracks brand mentions, website citations, share of voice and average AI ranking across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}
+  .prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+  .table-wrap{overflow-x:auto;margin:24px 0}
+  table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
+  th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}
+  thead th{background:var(--mist);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:170px}}
+</style>
