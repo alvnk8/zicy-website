@@ -1,0 +1,499 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import comparisonImg from '../../assets/resources/how-is-ai-visibility-different-from-google-rankings/google-ranking-vs-ai-visibility.png';
+import dashboardImg from '../../assets/resources/how-is-ai-visibility-different-from-google-rankings/zicy-ai-visibility-dashboard.png';
+
+const metaTitle = 'How Is AI Visibility Different From Google Rankings | Zicy';
+const title = 'How Is AI Visibility Different From Google Rankings? A Simple Guide for Small Businesses';
+const description =
+  'Learn how AI visibility differs from Google rankings, why it matters for small businesses, and how to track your brand across AI answers.';
+
+const url = `${SITE.url}/resources/how-is-ai-visibility-different-from-google-rankings`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-09-07',
+      dateModified: '2026-09-07',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${comparisonImg.src}`,
+        width: comparisonImg.width,
+        height: comparisonImg.height,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout
+  title={metaTitle}
+  description={description}
+  ogTitle={title}
+  ogImage={{
+    url: `${SITE.url}${comparisonImg.src}`,
+    width: comparisonImg.width,
+    height: comparisonImg.height,
+    alt: 'Google Ranking vs. AI Visibility: Navigating the New Search Landscape',
+    type: 'image/png',
+  }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">AI visibility and Google rankings</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How Is AI Visibility Different From Google Rankings? A Simple Guide for Small Businesses</h1>
+
+      <p class="answer">Learn how AI visibility differs from Google rankings, why it matters for small businesses, and how to track your brand across AI answers.</p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 7 September 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+      <div class="prose">
+        <ul>
+          <li>Google ranking and AI visibility are not the same thing. Your website can rank well in traditional search while your business is rarely mentioned in AI-generated answers.</li>
+          <li>AI visibility is about whether AI includes your business in the answer, not simply where one webpage ranks in a list of search results.</li>
+          <li>Customers are increasingly asking longer, more specific questions such as “Which accounting software is best for a small Malaysian business?” rather than searching only short keywords.</li>
+          <li>AI may answer a question without the customer visiting a website first. This makes being part of the answer itself increasingly important.</li>
+          <li>SEO still matters. A strong, trustworthy and technically accessible website can support both traditional Google visibility and visibility in AI-powered search experiences.</li>
+          <li>Small businesses should start measuring where they appear, what AI says about them and which competitors appear instead, rather than relying only on keyword rankings.</li>
+        </ul>
+
+      </div>
+      <PostFigure
+        src={comparisonImg}
+        alt="Google Ranking vs. AI Visibility: Navigating the New Search Landscape"
+      />
+
+      <div class="shead"><span class="eyebrow">The basics</span><h2>Introduction</h2></div>
+      <div class="prose">
+        <p>For years, getting found online followed a fairly familiar pattern.</p>
+        <p>A potential customer searched Google for something like: <em>“accounting firm Kuala Lumpur”</em></p>
+        <p>Google displayed a list of websites. If your business appeared near the top, there was a better chance that the customer would click your website.</p>
+        <p>That is traditional search visibility, and it remains important.</p>
+        <p>But customers now have another way to search.</p>
+        <p>Instead of looking through ten websites, they might ask ChatGPT: <em>“Which accounting firms in Kuala Lumpur are suitable for a small business?”</em></p>
+        <p>Or ask Gemini: <em>“Recommend a few accounting firms in KL that work with SMEs.”</em></p>
+        <p>Or search Google and receive an AI-generated answer through AI Overviews or AI Mode.</p>
+        <p>This creates a new question for small businesses: <strong>Is your business actually appearing inside the answers AI gives potential customers?</strong></p>
+        <p>That is where <strong>AI visibility</strong> comes in.</p>
+        <p>And it is possible to have good Google rankings while still having weak AI visibility.</p>
+
+      </div>
+      <div class="shead"><span class="eyebrow">Traditional search</span><h2>What Is a Google Ranking?</h2></div>
+      <div class="prose">
+        <p>A Google ranking is simply <strong>the position of a webpage in Google's search results for a particular search query.</strong></p>
+        <p>For example, imagine you own an air-conditioning servicing company in Petaling Jaya.</p>
+        <p>Someone searches: <strong>“aircon servicing Petaling Jaya”</strong></p>
+        <p>Your website might appear:</p>
+        <ol>
+          <li>Company A</li>
+          <li>Your company</li>
+          <li>Company B</li>
+          <li>Company C</li>
+        </ol>
+        <p>In this example, your website ranks <strong>#2.</strong></p>
+        <p>Traditional SEO (Search Engine Optimisation) tries to improve this visibility.</p>
+        <p>Businesses may improve their website content, technical setup, internal linking, authority, local business information, and other signals so that Google can understand their pages and consider them useful for relevant searches.</p>
+        <p>For a long time, marketers therefore watched metrics such as:</p>
+        <ul>
+          <li>keyword rankings;</li>
+          <li>Google impressions;</li>
+          <li>organic clicks;</li>
+          <li>click-through rate; and</li>
+          <li>organic website traffic.</li>
+        </ul>
+        <p>These metrics are still valuable.</p>
+        <p>The problem is that they no longer show the entire customer discovery journey.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">AI visibility</span><h2>What Is AI Visibility?</h2></div>
+      <div class="prose">
+        <p>AI visibility addresses a different question: When someone asks an AI platform a relevant question, does your business become part of the answer?</p>
+        <p>Imagine the same air-conditioning company.</p>
+        <p>Instead of Googling “aircon servicing Petaling Jaya”, the customer asks an AI assistant:</p>
+        <p><em>“What are some reliable aircon servicing companies in Petaling Jaya for a small office?”</em></p>
+        <p>The AI might answer:“You could consider Company A, Company B and Company C…”</p>
+        <p>Your website may rank well on Google.</p>
+        <p>But if your company is missing from that AI-generated answer, your AI visibility for that customer question is weak.</p>
+        <p>That is the fundamental difference.</p>
+        <p><em>Google ranking asks: Where does my webpage appear in search results?</em></p>
+        <p><em>AI visibility asks: Does AI include my business when answering the questions my customers ask?</em></p>
+        <p>The two can overlap, but they should not be treated as identical.</p>
+
+      </div>
+      <div class="shead"><span class="eyebrow">Why now</span><h2>Why Is AI Visibility Becoming Important for Small Businesses?</h2></div>
+      <div class="prose">
+        <p>The way people search is changing.</p>
+        <p>Customers do not always want a list of webpages anymore. Increasingly, they can ask a detailed question and receive a summarised response.</p>
+        <p>Google itself describes AI Overviews as a way to provide users with a snapshot of key information on a topic or question, along with links for further exploration. Google has also expanded AI-powered search with AI Mode, where users can ask more complex questions and continue with follow-ups.</p>
+        <p>This matters because the journey can become: <strong>Question → AI answer → shortlist → business</strong></p>
+        <p>rather than:</p>
+        <p><strong>Keyword → Google results → website → research → shortlist</strong></p>
+        <p>The AI can therefore become part of the customer's decision-making process before the customer ever reaches your website.</p>
+        <h3>A simple example</h3>
+        <p>Suppose you run a renovation company.</p>
+        <p>A traditional Google search might be: <em>“renovation contractor KL”</em></p>
+        <p>But an AI question could be: <em>“Which renovation contractors in Kuala Lumpur are suitable for renovating a small condominium on a RM100,000 budget?”</em></p>
+        <p>That question contains much more context.</p>
+        <p>The AI may compare companies, explain their strengths and suggest a shortlist.</p>
+        <p>If your company is included, you have entered the customer's consideration set.</p>
+        <p>If it isn't, the customer may start comparing three competitors without knowing your business was an option.</p>
+        <p>That is the practical importance of AI visibility.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Google Rankings</span><h2>Does This Mean Google Rankings No Longer Matter?</h2></div>
+      <div class="prose">
+        <p>No.</p>
+        <p>This is one of the most important things for small businesses to understand.</p>
+        <p><strong>AI visibility is not a reason to abandon SEO.</strong></p>
+        <p>In fact, Google explicitly states that many of the same foundational SEO practices remain relevant to its AI features, including creating helpful, reliable content and ensuring pages meet Google's technical requirements.</p>
+        <p>For a page to be eligible to appear as a supporting link in Google's AI Overviews or AI Mode, Google says it must be indexed and eligible to appear in Search with a snippet.</p>
+        <p>So this is not: <strong>SEO OR AI visibility.</strong></p>
+        <p>It is increasingly: <strong>SEO AND AI visibility.</strong></p>
+        <p>A useful way to think about it is this:</p>
+        <p>Traditional SEO helps your business become <strong>findable.</strong></p>
+        <p>AI visibility helps you understand whether your business is becoming <strong>part of the answer.</strong></p>
+        <p>A strong digital strategy increasingly needs to consider both.</p>
+
+      </div>
+      <div class="shead"><span class="eyebrow">AI answers</span><h2>How Can a Business Rank on Google but Still Be Missing From AI Answers?</h2></div>
+      <div class="prose">
+        <p>This is where the difference becomes clearer.</p>
+        <p>A traditional search engine can rank individual webpages.</p>
+        <p>An AI-generated answer has a different job. It needs to construct an answer to the user's question.</p>
+        <p>That may involve understanding several things at once:</p>
+        <ul>
+          <li>What businesses are relevant?</li>
+          <li>Which businesses fit the user's particular requirement?</li>
+          <li>What information can be supported?</li>
+          <li>Which sources provide useful information?</li>
+          <li>How should the different options be explained or compared?</li>
+        </ul>
+        <p>Google says its AI features can use different models and techniques, and the responses and links shown may vary.</p>
+        <p>That means a page ranking strongly for one keyword does not automatically guarantee that the business will be included every time an AI system answers a related question.</p>
+        <p>Think of it like this. Imagine a customer asks: <em>“Which cafés in my area are good for working on a laptop and open after 8 pm?”</em></p>
+        <p>Traditional search might separately consider pages about:</p>
+        <ul>
+          <li>cafés nearby;</li>
+          <li>opening hours;</li>
+          <li>Wi-Fi;</li>
+          <li>reviews; and</li>
+          <li>location.</li>
+        </ul>
+        <p>An AI answer may try to bring all those pieces together into one recommendation.</p>
+        <p>For the café owner, simply ranking for <strong>“café near me”</strong> does not tell the whole story anymore.</p>
+        <p>You also want to know whether AI understands your business well enough to consider it relevant when a customer asks a more specific question.</p>
+
+      </div>
+      <div class="shead"><span class="eyebrow">Search behaviour</span><h2>Can Customers Get an Answer Without Clicking Your Website?</h2></div>
+      <div class="prose">
+        <p>Yes, and this is another reason AI visibility deserves attention.</p>
+        <p>AI-generated search experiences can answer part — and sometimes most — of a user's question directly.</p>
+        <p>Independent research has repeatedly found changes in click behaviour when AI-generated answers are present.</p>
+        <p>For example, recent <a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/?utm_source=chatgpt.com">research</a> on Google AI Overview behaviour found that visits containing an AI Overview were associated with fewer clicks to external sources and a greater likelihood that the browsing session would end on the search results page.</p>
+        <p>Other research has produced different estimates depending on the queries, users and methodology involved, so businesses should not assume that every AI answer eliminates clicks.</p>
+        <p>The broader lesson is simpler: <strong>A website visit is no longer the only way a potential customer can encounter information about your business.</strong></p>
+        <p>Someone may learn your name, compare you with competitors and form an impression of your business inside an AI answer before deciding whether to visit your website.</p>
+        <p>For an SME, that means website traffic alone cannot tell you everything about your visibility.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">AI visibility</span><h2>What Does Good AI Visibility Actually Look Like?</h2></div>
+      <div class="prose">
+        <p>There is no single number that tells the whole story.</p>
+        <p>Instead, small businesses can start with a few very simple questions.</p>
+        <h3>1. Does AI mention your business?</h3>
+        <p>If someone asks AI for businesses, products or services like yours, are you included?</p>
+        <p>For example: <em>“Which HR training companies in Malaysia work with SMEs?”</em></p>
+        <p>If your company repeatedly appears, that is a useful visibility signal.</p>
+        <p>This is often measured by <strong>brand-mention coverage</strong>, which is the percentage of tracked AI answers that mention your brand. For example, if your business appears in 6 out of 10 relevant AI answers, your brand mention coverage would be 60%.</p>
+        <p>We will explore brand mentions and how to measure them properly in a separate guide.</p>
+        <h3>2. Where does your business appear?</h3>
+        <p>Being included is useful. But position can matter too.</p>
+        <p>If the answer recommends:</p>
+        <ol>
+          <li>Competitor A</li>
+          <li>Competitor B</li>
+          <li>Your Business</li>
+          <li>Competitor C</li>
+        </ol>
+        <p>you are visible, but two competitors are being presented before you.</p>
+        <h3>3. Does AI cite your website?</h3>
+        <p>Sometimes an AI system may mention your brand but use another website as its supporting source.</p>
+        <p>At other times, it may reference or link directly to your website.</p>
+        <p>This is where <strong>AI citations</strong> become important.</p>
+        <p>An AI citation is when an AI answer uses or links to your website as a source supporting its response. So, AI can mention your brand without actually citing your website.</p>
+        <p>For example, ChatGPT might recommend your company but link to an industry article or directory rather than your own site.</p>
+        <p>A mention and a citation are therefore not the same thing, and we will cover this distinction in detail in another guide.</p>
+        <h3>4. Which competitors appear instead?</h3>
+        <p>Suppose your company appears in two out of ten relevant AI answers.</p>
+        <p>A competitor appears in eight.</p>
+        <p>Knowing that difference is much more useful than simply asking ChatGPT once: “Do you know my company?”</p>
+        <p>Proper AI visibility measurement needs a consistent set of realistic customer questions so that you can see patterns over time.</p>
+
+      </div>
+      <div class="shead"><span class="eyebrow">Reliable measurement</span><h2>Why Checking ChatGPT Once Is Not Enough?</h2></div>
+      <div class="prose">
+        <p>A common mistake is to open ChatGPT, type your business name and ask: <em>“Tell me about ABC Company.”</em></p>
+        <p>ChatGPT responds with information about ABC Company.</p>
+        <p>You conclude: “Great. AI knows us.”</p>
+        <p>Unfortunately, that does not tell you whether you are visible to a potential customer who has <strong>not yet decided to search for you.</strong></p>
+        <p>A more useful question would be: <em>“Which payroll software providers are suitable for SMEs in Malaysia?”</em></p>
+        <p>Now the AI has to decide which businesses to include.</p>
+        <p>This is much closer to a real discovery situation.</p>
+        <p>There is another complication: AI visibility can differ between platforms.</p>
+        <p>A business could appear in ChatGPT but not Gemini. It could appear in Google's AI features for one question but not another.</p>
+        <p>That is why AI visibility needs to be measured across <strong>relevant questions and relevant platforms</strong>, rather than through occasional manual checks.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Small Businesses</span><h2>What Happens If a Small Business Ignores AI Visibility?</h2></div>
+      <div class="prose">
+        <p>It does not mean your business suddenly disappears from the internet.</p>
+        <p>Google Search, your website, Google Business Profile, social media, referrals, and other discovery channels all continue to matter.</p>
+        <p>The risk is more gradual.</p>
+        <p>Your customers may begin using AI during their research while you continue measuring only traditional search rankings.</p>
+        <p>You might see: <strong>Google position: #3</strong> and assume your visibility is strong.</p>
+        <p>Meanwhile, AI-generated recommendations for important buying questions may repeatedly feature: <strong>Competitor A + Competitor B + Competitor C</strong>, but not you.</p>
+        <p>The problem is not simply losing a website click.</p>
+        <p>It is potentially missing the stage where the customer forms their shortlist.</p>
+        <p>For a small business with limited marketing resources, discovering that gap early can be much more useful than waiting until AI-driven discovery becomes a much larger part of customer behaviour.</p>
+
+      </div>
+      <div class="shead"><span class="eyebrow">Benefits</span><h2>What Can Small Businesses Gain by Tracking AI Visibility?</h2></div>
+      <div class="prose">
+        <p>The immediate benefit is not “more AI traffic”.</p>
+        <p>It is better information about how your business is being discovered and represented.</p>
+        <p>Tracking AI visibility can help you understand:</p>
+        <ul>
+          <li><strong>Whether AI knows you exist:</strong> You can see whether your business appears when customers ask relevant category questions.</li>
+          <li><strong>Which competitors AI prefers:</strong> Your traditional Google competitors may not always be the businesses that dominate AI-generated answers.</li>
+          <li><strong>Where your visibility gaps are:</strong> You may discover that you appear strongly for one service but rarely for another.</li>
+          <li><strong>Whether AI understands your business correctly:</strong> Being visible is not useful if AI describes your services incorrectly or associates you with the wrong type of business.</li>
+          <li><strong>Whether your improvements are working:</strong> Once you improve your website, content or online business information, you can track whether your presence in AI answers changes over time.</li>
+        </ul>
+        <p>That turns AI visibility from a vague marketing trend into something you can actually observe.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Zicy</span><h2>How Can Zicy Help You Measure AI Visibility?</h2></div>
+      <div class="prose">
+        <p>This is where <a href="https://www.zicy.com/">Zicy's</a> <strong>AI Visibility Dashboard</strong> is useful.</p>
+        <p>Instead of manually opening different AI platforms and typing random questions, Zicy allows a business to define the questions (or <strong>prompts</strong>) that real customers may ask and track how the business performs across AI answer engines.</p>
+        <p>Zicy currently measures four core visibility areas:</p>
+        <ul>
+          <li><strong>Brand Mention Coverage</strong> — how often your brand appears;</li>
+          <li><strong>Website Citation Rate</strong> — how often your website is cited;</li>
+          <li><strong>Share of Voice</strong> — how much visibility your brand receives compared with others; and</li>
+          <li><strong>Average AI Ranking</strong> — where your brand tends to appear when brands are listed or recommended.</li>
+        </ul>
+        <p>You can then look beyond the headline numbers and inspect individual tracked prompts to see the actual AI answers behind them.</p>
+        <p>That last part matters.</p>
+        <p>If your visibility changes, you should be able to see <strong>which customer question changed and what the AI actually said</strong>, rather than simply trusting a mysterious score.</p>
+
+        <PostFigure
+          src={dashboardImg}
+          alt="Zicy's AI Visibility Dashboard helps businesses see whether they are being mentioned, cited and recommended across tracked AI answers."
+          caption="Image: Zicy's AI Visibility Dashboard helps businesses see whether they are being mentioned, cited and recommended across tracked AI answers."
+        />
+
+        <p>For a small business owner, the objective is not to become an AI expert.</p>
+        <p>It is simply to answer the question: “When customers ask AI about businesses like mine, am I actually showing up?”</p>
+
+      </div>
+      <div class="shead"><span class="eyebrow">Getting started</span><h2>What Should a Small Business Do First?</h2></div>
+      <div class="prose">
+        <p>Do not begin by tracking hundreds of questions.</p>
+        <p>Start small.</p>
+        <p>Think about five to ten questions a genuine potential customer might ask when they do not already know your business name.</p>
+        <p>For example, a tuition centre might start with:</p>
+        <ul>
+          <li>“What are some good maths tuition centres in Subang Jaya?”</li>
+          <li>“Which tuition centres in Subang Jaya are suitable for secondary school students?”</li>
+          <li>“What are the best maths tuition options near SS15?”</li>
+          <li>“Which tuition centres offer small-group maths classes?”</li>
+          <li>“What should I compare when choosing a maths tuition centre?”</li>
+        </ul>
+        <p>Then check whether your business appears.</p>
+        <p>Also note:</p>
+        <ul>
+          <li>which competitors appear;</li>
+          <li>which AI platforms include you;</li>
+          <li>how your business is described; and</li>
+          <li>whether your website is used as a source.</li>
+        </ul>
+        <p>You now have a starting point.</p>
+        <p>From there, you can begin understanding more specific AI visibility concepts such as prompts, brand mentions, citations, AI rankings and Share of Voice.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">The Simple Difference</span><h2>Google Rankings and AI Visibility: The Simple Difference</h2></div>
+      <div class="prose">
+        <p>The easiest way to remember the distinction is this:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Google Ranking</th>
+                <th scope="col">AI Visibility</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Main question</th>
+                <td>Where does my webpage rank?</td>
+                <td>Does AI include my business in its answer?</td>
+              </tr>
+              <tr>
+                <th scope="row">Typical user behaviour</th>
+                <td>Searches and reviews results</td>
+                <td>Asks a question and receives an answer</td>
+              </tr>
+              <tr>
+                <th scope="row">What businesses traditionally track</th>
+                <td>Keywords, positions, clicks</td>
+                <td>Mentions, citations, AI ranking and Share of Voice</td>
+              </tr>
+              <tr>
+                <th scope="row">Competitor visibility</th>
+                <td>Who ranks around you</td>
+                <td>Who AI mentions or recommends instead</td>
+              </tr>
+              <tr>
+                <th scope="row">Main goal</th>
+                <td>Be easy to find in search</td>
+                <td>Be part of relevant AI-generated answers</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Neither replaces the other.</p>
+        <p>A small business should ideally be visible when customers search for an answer and when AI constructs that answer for them.</p>
+
+      </div>
+      <div class="shead"><span class="eyebrow">Conclusion</span><h2>Final Thoughts</h2></div>
+      <div class="prose">
+        <p>Your website still matters.</p>
+        <p>But the way customers discover businesses is expanding.</p>
+        <p>They can now ask AI detailed questions, compare options and receive recommendations without following the traditional journey of searching a keyword and visiting several websites.</p>
+        <p>For SMEs and micro businesses, the important change is therefore not that “SEO is dead”.</p>
+        <p>It isn't.</p>
+        <p>The change is that ranking is no longer the only type of online visibility worth measuring.</p>
+        <p>You need to know whether customers can find you in traditional search and whether AI includes you when answering the questions that influence their decisions.</p>
+        <p>Because being #1 on a search results page is valuable.</p>
+        <p>But if your next customer asks AI instead, you also want your business to be part of that answer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See whether your business<br />is part of the answer.</h2>
+      <p>Zicy tracks brand mentions, website citations, share of voice and average AI ranking across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&utm_medium=referral&utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);
+    border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;
+    font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}
+  .prose + .shead{margin-top:clamp(64px,7vw,88px)}
+  .prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+  .table-wrap{overflow-x:auto;margin:24px 0}
+  table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
+  th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}
+  thead th{background:var(--mist);color:var(--ink)}
+  tbody th{min-width:180px;color:var(--ink)}
+  @media (max-width:640px){
+    th,td{padding:11px 12px;min-width:170px}
+    tbody th{min-width:150px}
+  }
+</style>

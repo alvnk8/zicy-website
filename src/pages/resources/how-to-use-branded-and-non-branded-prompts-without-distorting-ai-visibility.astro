@@ -1,0 +1,340 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import promptTypesImg from '../../assets/resources/how-to-use-branded-and-non-branded-prompts-without-distorting-ai-visibility/branded-vs-non-branded-prompts.png';
+import promptManagerImg from '../../assets/resources/how-to-use-branded-and-non-branded-prompts-without-distorting-ai-visibility/prompt-manager.png';
+
+const metaTitle = 'Branded vs Non-Branded AI Prompts: How to Track Both Correctly';
+const title = 'How To Use Branded And Non-Branded Prompts Without Distorting Your AI Visibility';
+const description =
+  'Learn when to use branded and non-branded AI prompts, what each type measures, and how to avoid distorting your AI visibility data.';
+
+const url = `${SITE.url}/resources/how-to-use-branded-and-non-branded-prompts-without-distorting-ai-visibility`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-09-07',
+      dateModified: '2026-09-07',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${promptTypesImg.src}`,
+        width: promptTypesImg.width,
+        height: promptTypesImg.height,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout
+  title={metaTitle}
+  description={description}
+  ogTitle={title}
+  ogImage={{
+    url: `${SITE.url}${promptTypesImg.src}`,
+    width: promptTypesImg.width,
+    height: promptTypesImg.height,
+    alt: 'How to use branded and non-branded prompts to measure AI visibility accurately',
+    type: 'image/png',
+  }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Branded and Non-Branded Prompts</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How To Use Branded And Non-Branded Prompts Without Distorting Your AI Visibility</h1>
+
+      <p class="answer">Learn when to use branded and non-branded AI prompts, what each type measures, and how to avoid distorting your AI visibility data.</p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 7 September 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+      <div class="prose">
+        <ul>
+          <li>Branded prompts are useful for understanding what AI knows, believes and says about your business.</li>
+          <li>Non-branded prompts are better for measuring whether AI discovers and recommends your business without being told your name first.</li>
+          <li>Mixing both types into the same visibility measurement can make performance look stronger than it really is.</li>
+          <li>Keep brand-perception questions and discovery questions separate so each set of results answers the right business question.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">The basics</span><h2>Introduction</h2></div>
+      <div class="prose">
+        <p>Branded and non-branded AI prompts can both tell you something useful about your business.</p>
+        <p>The problem comes when you treat them as if they measure the same thing.</p>
+        <p>Compare:</p>
+        <p><strong>Branded prompt:<br /></strong>“What is [Your Brand] known for?”</p>
+        <p><strong>Non-branded prompt:<br /></strong>“Which accounting software is suitable for a small retailer in Malaysia?”</p>
+        <p>The first tells AI which business to discuss. The second leaves AI to decide which businesses are relevant.</p>
+        <p>That means they answer two different questions:</p>
+        <p><strong>Branded prompts help you understand what AI knows and says about you.</strong></p>
+        <p><strong>Non-branded prompts help you understand whether AI discovers and recommends you when a customer has not already chosen your brand.</strong></p>
+        <p>Mixing the two together can make your AI visibility look stronger than it really is.</p>
+
+        <PostFigure
+          src={promptTypesImg}
+          alt="How to use branded and non-branded prompts to measure AI visibility accurately"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Brand perception</span><h2>What is a branded AI prompt?</h2></div>
+      <div class="prose">
+        <p>A branded prompt includes your company, product or brand name directly in the question.</p>
+        <p>Examples include:</p>
+        <p>“What does [Brand] offer?”</p>
+        <p>“Is [Brand] suitable for SMEs?”</p>
+        <p>“What is [Brand] known for?”</p>
+        <p>“How does [Brand] compare with [Competitor]?”</p>
+        <p>“Does [Brand] provide services in Kuala Lumpur?”</p>
+        <p>These prompts are useful when you want to understand <strong>AI's perception of an existing brand</strong>.</p>
+        <p>They can reveal whether AI:</p>
+        <ul>
+          <li>understands what you sell;</li>
+          <li>describes your target customers correctly;</li>
+          <li>associates you with the right locations;</li>
+          <li>recognises your differentiators; or</li>
+          <li>repeats outdated or incorrect information.</li>
+        </ul>
+        <p>In other words, branded prompts are mainly useful for checking <strong>understanding, accuracy and perception</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Measurement risk</span><h2>Why can branded prompts distort AI visibility?</h2></div>
+      <div class="prose">
+        <p>Because the prompt itself tells AI to talk about your business.</p>
+        <p>If you ask:</p>
+        <p><strong>“Is ABC Software good for small businesses?”</strong></p>
+        <p>and ABC Software appears in the answer, that does not prove AI would have discovered ABC without being prompted.</p>
+        <p>This matters when measuring metrics such as brand mentions, ranking or share of voice.</p>
+        <p><a href="https://www.zicy.com/">Zicy's</a> product guidance specifically warns that branded prompts can inflate visibility measurements because the brand is already present in the question. This can make ranking and share-of-voice results less meaningful for competitive discovery.</p>
+        <p>A dashboard full of branded questions could therefore create a reassuring picture:</p>
+        <p><strong>“AI mentions us almost everywhere.”</strong></p>
+        <p>But the more important discovery question remains unanswered:</p>
+        <p><strong>Would AI have mentioned you if the customer had not already named you?</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Natural discovery</span><h2>What is a non-branded AI prompt?</h2></div>
+      <div class="prose">
+        <p>A non-branded prompt describes the customer's need without naming your business.</p>
+        <p>For example:</p>
+        <p><strong>“Which payroll software is suitable for a company with 30 employees?”</strong></p>
+        <p><strong>“What are the best inventory systems for small retailers in Malaysia?”</strong></p>
+        <p><strong>“Which event production companies can manage a product launch in Kuala Lumpur?”</strong></p>
+        <p>These prompts create a more competitive test.</p>
+        <p>AI has to decide which companies, products or services are relevant.</p>
+        <p>If your brand appears, that tells you something much more meaningful about <strong>natural discovery</strong>.</p>
+        <p>Zicy therefore treats buyer-focused, non-branded questions as the stronger basis for measuring brand visibility because AI has an opportunity to name and rank businesses rather than being instructed to discuss one specific brand.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Different jobs</span><h2>When should you use branded and non-branded prompts?</h2></div>
+      <div class="prose">
+        <p>Use them for different jobs.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Prompt type</th><th scope="col">Best used to understand</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Branded</td><td>What AI knows about your business</td></tr>
+              <tr><td>Branded</td><td>Whether descriptions are accurate</td></tr>
+              <tr><td>Branded</td><td>What AI associates with your brand</td></tr>
+              <tr><td>Branded</td><td>How AI describes your products, services or positioning</td></tr>
+              <tr><td>Non-branded</td><td>Whether customers can discover you</td></tr>
+              <tr><td>Non-branded</td><td>Which competitors appear instead</td></tr>
+              <tr><td>Non-branded</td><td>Where you rank among alternatives</td></tr>
+              <tr><td>Non-branded</td><td>Whether AI cites your website when recommending options</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Neither type is inherently better.</p>
+        <p>They simply answer different business questions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Clear measurement</span><h2>How should you organise both types without confusing the results?</h2></div>
+      <div class="prose">
+        <p>The safest approach is to treat them as <strong>two separate measurement groups</strong>.</p>
+        <p>For example:</p>
+        <h3>Brand understanding</h3>
+        <p>Use branded prompts such as:</p>
+        <p>“What services does ABC Agency provide?”</p>
+        <p>“Who is ABC Agency suitable for?”</p>
+        <p>“What is ABC Agency known for?”</p>
+        <p>Review these for accuracy, completeness and positioning.</p>
+        <h3>Brand discovery</h3>
+        <p>Use non-branded buyer-intent prompts such as:</p>
+        <p>“Which digital marketing agencies in Malaysia work with SMEs?”</p>
+        <p>“What agency can help an ecommerce company improve organic search visibility?”</p>
+        <p>“Which marketing agencies offer SEO and AI visibility services?”</p>
+        <p>Review these for mentions, position, competitors and citations.</p>
+        <p>Do not combine the two groups and then use the overall mention rate as proof that customers are discovering you.</p>
+        <p>A high mention rate from branded prompts could hide weak performance on the questions that actually require AI to choose between businesses.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Competitor context</span><h2>Should competitor names count as branded prompts?</h2></div>
+      <div class="prose">
+        <p>They should usually be treated separately as <strong>comparison or alternative prompts</strong>.</p>
+        <p>For example:</p>
+        <p><strong>“What are alternatives to Competitor X for small businesses?”</strong></p>
+        <p>does not mention your brand, so your company still has to be selected by AI.</p>
+        <p>This can be a useful discovery prompt because it reflects a buyer who already knows one option but is actively looking for alternatives.</p>
+        <p>By contrast:</p>
+        <p><strong>“Is Your Brand better than Competitor X?”</strong></p>
+        <p>is explicitly branded and should not be used as evidence of natural discovery.</p>
+        <p>The important distinction is whether <strong>your own brand was supplied to AI before it produced the answer</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Two stages</span><h2>Can the same business need both prompt types?</h2></div>
+      <div class="prose">
+        <p>Yes, and most businesses probably should.</p>
+        <p>Non-branded prompts tell you whether you are entering the customer's consideration set.</p>
+        <p>Branded prompts tell you what happens once the customer starts researching you specifically.</p>
+        <p>Think of it as two stages:</p>
+        <p><strong>Discovery:<br /></strong>“Which accounting platforms are suitable for SMEs?”</p>
+        <p>Then:</p>
+        <p><strong>Research:<br /></strong>“Is ABC Accounting suitable for a retail company?”</p>
+        <p>A business can perform well at one stage and poorly at the other.</p>
+        <p>AI may recommend you frequently but describe an important service incorrectly. Or AI may understand your brand perfectly when asked directly but rarely recommend you to customers who do not already know your name.</p>
+        <p>Those are very different problems and require different actions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Zicy organisation</span><h2>How can Zicy help you keep branded and non-branded prompts organised?</h2></div>
+      <div class="prose">
+        <p>Zicy's <strong>Prompt Manager</strong> lets you manage the exact questions you monitor, including custom prompts, active and paused prompts, and tags for organising different groups.</p>
+        <p>You can use that structure to keep discovery-focused questions separate from branded research questions rather than interpreting every prompt in the same way.</p>
+        <p>For buyer-focused prompts, Zicy can show metrics such as <strong>Brand Mention Coverage, Position, Share of Voice, and Website Citation Coverage</strong>, with results available by AI engine.</p>
+
+        <PostFigure
+          src={promptManagerImg}
+          alt="Zicy Prompt Manager dashboard"
+        />
+
+        <p>For branded questions about how AI understands your company, Zicy's <strong>Brand Intelligence</strong> is the more relevant diagnostic layer. It examines what AI thinks you are known for, what you want to be known for, and what AI may be missing or getting wrong.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Simple rule</span><h2>What is the simplest rule to follow?</h2></div>
+      <div class="prose">
+        <p>Before interpreting any AI prompt, ask:</p>
+        <p><strong>Did we tell AI which brand to talk about?</strong></p>
+        <p>If yes, use the answer to understand <strong>brand perception or accuracy</strong>.</p>
+        <p>If no, and the question gives AI a genuine reason to recommend businesses, use it to understand <strong>brand discovery and competitive visibility</strong>.</p>
+        <p>Both are valuable.</p>
+        <p>The mistake is using branded prompts to prove that customers who have never heard of you are finding you through AI.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Separate discovery from brand perception,<br />{' '}and use Zicy to measure each with the right prompts.</h2>
+      <p>Zicy tracks brand mentions, website citations, share of voice and average AI ranking across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}
+  .prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+  .table-wrap{overflow-x:auto;margin:24px 0}
+  table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
+  th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}
+  thead th{background:var(--surface);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:170px}}
+</style>

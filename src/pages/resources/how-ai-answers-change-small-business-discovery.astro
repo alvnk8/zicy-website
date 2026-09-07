@@ -1,0 +1,261 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/how-ai-answers-change-small-business-discovery/how-ai-answers-transform-small-business-discovery.png';
+import reportImg from '../../assets/resources/how-ai-answers-change-small-business-discovery/ai-visibility-report.png';
+
+const metaTitle = 'How to Check Your Business Across AI Answer Engines';
+const title = 'How Do AI Answers Change The Way Customers Discover Small Businesses?';
+const description =
+  'Learn how to check your business visibility across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.';
+
+const url = `${SITE.url}/resources/how-ai-answers-change-small-business-discovery`;
+const author = `${SITE.url}/about#ritu-khanna`;
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-09-07',
+      dateModified: '2026-09-07',
+      author: { '@id': author },
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${heroImg.src}`,
+        width: heroImg.width,
+        height: heroImg.height,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout
+  title={metaTitle}
+  description={description}
+  ogTitle={title}
+  ogImage={{
+    url: `${SITE.url}${heroImg.src}`,
+    width: heroImg.width,
+    height: heroImg.height,
+    alt: 'How AI Answers Transform Small Business Discovery',
+    type: 'image/png',
+  }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">How Do AI Answers Change Discovery?</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How Do AI Answers Change The Way Customers Discover Small Businesses?</h1>
+
+      <p class="answer">Learn how to check your business visibility across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+
+      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 7 September 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+      <div class="prose">
+        <ul>
+          <li>AI can introduce, compare and recommend businesses before a customer visits any website.</li>
+          <li>This means discovery is no longer only about Google rankings or website traffic; businesses also need to understand whether AI includes them in relevant answers.</li>
+          <li>A business can be visible in traditional search but still be absent when customers use AI to compare options or make a shortlist.</li>
+          <li>Small businesses should monitor how often they appear, how they are described and which competitors AI recommends instead.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">The discovery shift</span><h2>Introduction</h2></div>
+      <div class="prose">
+        <p>For years, online discovery usually meant searching on Google, reviewing several results and visiting different websites to compare options.</p>
+        <p>AI answer engines add another path to that process.</p>
+        <p>A customer can now ask ChatGPT, Gemini, Perplexity or Google's AI features a detailed question and receive a direct, conversational answer. That answer may mention businesses, compare products or services, explain key differences and sometimes provide links to supporting sources.</p>
+        <p>For a small business, this means <strong>being online is no longer only about whether someone can find your website. It is also about whether AI includes your business when helping someone understand their options and make a decision.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <PostFigure
+        src={heroImg}
+        alt="How AI Answers Transform Small Business Discovery"
+        caption="Customers can move from a question to business recommendations before visiting multiple websites."
+      />
+
+      <div class="shead"><span class="eyebrow">AI-led discovery</span><h2>What changes when a customer asks AI instead of searching?</h2></div>
+      <div class="prose">
+        <p>Consider a customer looking for accounting software.</p>
+        <p>They could search:</p>
+        <p><strong>“accounting software for small businesses”</strong></p>
+        <p>They would then need to open several websites, compare features and decide which options appear relevant.</p>
+        <p>But they could also ask an AI tool:</p>
+        <p><strong>“What accounting software would you recommend for a small retail business that needs invoicing and simple inventory management?”</strong></p>
+        <p>The second question gives AI more context about the customer's situation, priorities and likely requirements. The answer may then narrow the choices, explain the differences between them and name several businesses or products that appear suitable.</p>
+        <p>This means discovery can begin with a <strong>conversation and an answer</strong>, rather than with a list of links that the customer must investigate independently.</p>
+        <p>AI may also shape the customer's shortlist before they visit any business website. If a business is included in that initial answer, it may be considered. If it is left out, the customer may never know it was an option.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Before the click</span><h2>Can customers discover a business without visiting its website?</h2></div>
+      <div class="prose">
+        <p>Yes.</p>
+        <p>An AI answer may introduce your business before the customer has visited your website. It might mention your name, explain what you offer, describe who your services are suitable for or include you among several recommended options.</p>
+        <p>The opposite can also happen.</p>
+        <p>A customer may receive enough information from the AI answer to continue researching another business without ever clicking on your website. They may use the answer to compare providers, understand a product category or decide which companies are worth contacting.</p>
+        <p>This creates an important new question for small businesses:</p>
+        <p><strong>When customers ask AI about the products or services you sell, does your business appear in the answer at all?</strong></p>
+        <p>If it does appear, another question matters: is it presented accurately and prominently, or is it mentioned only briefly while competitors receive more attention?</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">First impressions</span><h2>What can happen before a customer reaches your website?</h2></div>
+      <div class="prose">
+        <p>AI can influence several parts of the discovery process before a website visit happens.</p>
+        <p>A customer may use AI to:</p>
+        <ul>
+          <li>find businesses that could solve their problem;</li>
+          <li>compare several products, providers or service packages;</li>
+          <li>ask about prices, features, availability or service areas;</li>
+          <li>look for alternatives to a business they already know;</li>
+          <li>understand which option may suit a particular budget or need;</li>
+          <li>identify questions they should ask before making contact;</li>
+          <li>create a shortlist of businesses to research further.</li>
+        </ul>
+        <p>Your website still matters because it can provide detailed information, build trust and support the final decision. However, it is no longer necessarily the customer's first interaction with your business.</p>
+        <p>The AI answer itself can become part of that first impression. It may influence what the customer expects from your business, which competitors they compare you with and whether they decide to visit your website at all.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Search and AI</span><h2>Does being visible on Google mean you will appear in AI answers?</h2></div>
+      <div class="prose">
+        <p>Not necessarily.</p>
+        <p>Google search results and AI answers are different discovery environments. Traditional search often presents a ranked list of pages, while an AI answer may combine information from multiple sources and produce a summary or recommendation.</p>
+        <p>A business can perform well in traditional search while still being absent from an AI answer for an important customer question. This may happen because the AI is responding to a different type of query, using different sources or interpreting the customer's needs in a different way.</p>
+        <p>Likewise, AI may mention competitors the business owner was not expecting, including businesses that do not appear to rank prominently for the same traditional search terms.</p>
+        <p>This is why small businesses should avoid assuming that good Google visibility automatically means good visibility everywhere customers search. </p>
+
+        <PostFigure
+          src={reportImg}
+          alt="Zicy AI Visibility Report dashboard"
+          caption="Search rankings remain important, but they do not provide a complete picture of how customers may discover a business through AI."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Measure visibility</span><h2>How can a small business check whether AI is discovering it?</h2></div>
+      <div class="prose">
+        <p>Start with questions that a genuine potential customer might ask <strong>without mentioning your brand name</strong>.</p>
+        <p>These questions should reflect real buying situations, including the customer's location, industry, budget, problem or preferred features.</p>
+        <p>For example:</p>
+        <ul>
+          <li>“What are the best payroll services for a small company in Malaysia?”</li>
+          <li>“Which accounting software is suitable for a growing SME?”</li>
+          <li>“What are some alternatives to [well-known product]?”</li>
+          <li>“Which local providers offer affordable website design for small businesses?”</li>
+          <li>“What should a restaurant consider when choosing a point-of-sale system?”</li>
+        </ul>
+        <p>Then look at the answers across different AI platforms.</p>
+        <p>Check whether your business is mentioned, where it appears compared with competitors, whether the description is accurate, whether your website is cited and which other sources the AI uses. </p>
+        <p>It is also useful to repeat similar questions with slightly different wording, because AI answers can vary depending on the phrasing, location and context.</p>
+        <p>You should monitor this over time rather than relying on a single test. AI systems change their answers, sources and presentation frequently, so one result may not represent your overall visibility.</p>
+        <p><a href="https://www.zicy.com/">Zicy</a> is designed to make this measurable. It tracks buyer-focused questions across <strong>ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode</strong>, then shows whether your brand appears, how prominently it appears and whether your website is cited.</p>
+        <p>This gives small businesses a clearer way to identify gaps. </p>
+        <p>For example, your business may appear for broad questions but not for high-value questions about pricing, location or specific services. It may also be mentioned but linked to an outdated page or described less clearly than competitors.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Key lesson</span><h2>What should small businesses take away from this change?</h2></div>
+      <div class="prose">
+        <p>AI does not make websites or Google search irrelevant. It adds another discovery layer between the customer's question and their eventual decision.</p>
+        <p>That means a small business now has another visibility question to monitor:</p>
+        <p><strong>When AI helps a potential customer choose, is your business part of the answer?</strong></p>
+        <p>The answer may affect whether a customer learns about your business, considers it alongside competitors or visits your website to take the next step.</p>
+        <p>You cannot improve what you never check. Understanding how your business appears across AI answers is the first step towards knowing whether this new discovery journey is helping you — or quietly sending customers somewhere else.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See what AI says about<br />{' '}your business today.</h2>
+      <p>Zicy tracks brand mentions, website citations, share of voice and average AI ranking across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}
+  .prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+</style>
