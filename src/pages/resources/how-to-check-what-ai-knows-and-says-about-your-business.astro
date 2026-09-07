@@ -11,7 +11,7 @@ const description =
   'Learn how to check what AI knows and says about your business, identify inaccurate or missing information, and see how Zicy helps monitor AI perception.';
 
 const url = `${SITE.url}/resources/how-to-check-what-ai-knows-and-says-about-your-business`;
-const author = `${SITE.url}/about#ritu-khanna`;
+const author = { '@type': 'Person', name: 'Vivien Koay' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
@@ -36,7 +36,7 @@ const graph = {
       url,
       datePublished: '2026-09-07',
       dateModified: '2026-09-07',
-      author: { '@id': author },
+      author,
       publisher: { '@id': orgId },
       isPartOf: { '@id': blogId },
       articleSection: 'Guides',
@@ -89,7 +89,7 @@ const graph = {
 
       <p class="answer">Learn how to check what AI knows and says about your business, identify inaccurate or missing information, and see how Zicy helps monitor AI perception.</p>
 
-      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 7 September 2026</p>
+      <p class="byline">By Vivien Koay &middot; 7 September 2026</p>
     </div>
   </section>
 

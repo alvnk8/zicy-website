@@ -11,7 +11,7 @@ const description =
   'Learn how to choose the customer questions worth monitoring in AI, build a balanced prompt set and track the areas that matter most to your business.';
 
 const url = `${SITE.url}/resources/how-to-find-the-right-ai-prompts-to-track-for-your-business`;
-const author = `${SITE.url}/about#ritu-khanna`;
+const author = { '@type': 'Person', name: 'Vivien Koay' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
@@ -36,7 +36,7 @@ const graph = {
       url,
       datePublished: '2026-09-07',
       dateModified: '2026-09-07',
-      author: { '@id': author },
+      author,
       publisher: { '@id': orgId },
       isPartOf: { '@id': blogId },
       articleSection: 'Guides',
@@ -89,7 +89,7 @@ const graph = {
 
       <p class="answer">Learn how to choose the customer questions worth monitoring in AI, build a balanced prompt set and track the areas that matter most to your business.</p>
 
-      <p class="byline">By <a href="/about">Ritu Khanna</a> &middot; 7 September 2026</p>
+      <p class="byline">By Vivien Koay &middot; 7 September 2026</p>
     </div>
   </section>
 
