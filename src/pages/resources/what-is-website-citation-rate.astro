@@ -29,7 +29,7 @@ const graph = {
 <BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: title, type: 'image/png' }}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
 
-  <section class="hero inner"><div class="wrap">
+  <section class="hero inner resource-guide"><div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Website Citation Rate</span></nav>
     <span class="eyebrow">Guides</span>
     <h1>What Is Website Citation Rate and Why Is It Different From a Brand Mention?</h1>
@@ -53,7 +53,7 @@ const graph = {
     <div class="shead"><span class="eyebrow">Two signals</span><h2>Introduction</h2></div>
     <div class="prose">
       <p>Seeing your business mentioned by ChatGPT, Gemini or another AI platform can feel like a win. Your company has made it into the answer and perhaps onto a potential customer's shortlist.</p>
-      <p>But a brand mention does not always mean your website is being cited. AI may name your business while linking to another source. That is why it helps to check whether your own website is also receiving the citation.</p>
+      <p>But a <a href="/resources/what-is-brand-mention-coverage">brand mention</a> does not always mean your website is being cited. AI may name your business while linking to another source. That is why it helps to check whether your own website is also receiving the citation.</p>
     </div>
   </div></section>
 
@@ -71,7 +71,7 @@ const graph = {
   <section style="background:var(--mist)"><div class="wrap">
     <div class="shead"><span class="eyebrow">Side-by-side</span><h2>Website Citation vs Brand Mention: What Is the Difference?</h2></div>
     <div class="prose">
-      <p>A brand mention tells you whether your business made it into the answer. A website citation tells you whether your own website was used as a visible source. Together, they reveal different parts of your AI visibility.</p>
+      <p>In AI search, a brand mention tells you whether your business made it into the answer. A website citation tells you whether your own website was used as a visible source. Together, they reveal different parts of your <a href="/resources/how-is-ai-visibility-different-from-google-rankings">AI visibility</a>.</p>
       <div class="table-wrap"><table><thead><tr><th scope="col"></th><th scope="col">Brand Mention</th><th scope="col">Website Citation</th></tr></thead><tbody>
         <tr><th scope="row">What happens?</th><td>AI names your business in the answer</td><td>AI cites or links to a page on your website</td></tr>
         <tr><th scope="row">Where does it appear?</th><td>In the generated answer itself</td><td>In source cards, references, footnotes or links</td></tr>
@@ -113,7 +113,7 @@ const graph = {
       <h3>High Mentions + High Citations</h3><p>Your brand appears in AI answers and your website is cited regularly. You have both brand visibility and source visibility.</p>
       <h3>High Mentions + Low Citations</h3><p>AI recognises your brand, while other websites receive more of the source links.</p>
       <h3>Low Mentions + High Citations</h3><p>Your content is useful as a source, even though your brand is less prominent in the generated answer.</p>
-      <h3>Low Mentions + Low Citations</h3><p>Your business has limited visibility on both fronts for the questions being tracked.</p>
+      <h3>Low Mentions + Low Citations</h3><p>Your business has limited visibility on both fronts for the <a href="/resources/how-to-find-the-right-ai-prompts-to-track-for-your-business">questions being tracked</a>.</p>
       <p>These combinations show where the gap sits and can point to different fixes.</p>
     </div>
   </div></section>
@@ -121,7 +121,7 @@ const graph = {
   <section style="background:var(--mist)"><div class="wrap">
     <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Zicy Shows Whether AI Is Citing Your Website</h2></div>
     <div class="prose">
-      <p>Zicy uses Web Citation Rate as the headline measure, while Citation Analysis explains what is happening behind it. On the Overview dashboard, Web Citation Rate shows how often responses across the tracked platforms link to your website.</p>
+      <p>Zicy uses Web Citation Rate as the headline measure, while Citation Analysis explains what is happening behind it. On the Overview dashboard, Web Citation Rate shows how often responses across the <a href="/resources/how-to-check-your-business-across-ai-answer-engines">AI platforms you are tracking</a> link to your website.</p>
       <PostFigure src={rateImg} cropLeftPercent={13} alt="Zicy Overview dashboard showing Web Citation Rate across tracked AI responses" caption="Zicy's Web Citation Rate shows how often tracked AI responses link to your website." />
       <p>If BrightSmile Dental has a Web Citation Rate of 41.92%, its website was cited in roughly 42 of every 100 tracked AI responses. This does not mean 42% of people clicked; it describes how often the site appeared as a cited source.</p>
       <h3>Citation Analysis</h3>
@@ -150,8 +150,8 @@ const graph = {
       <h3>Is an AI Citation the Same as a Backlink?</h3>
       <p>No. A backlink is published on another webpage. An AI citation appears inside an AI-generated response and may change with the question, platform or time. Both can provide a route to your website, but they are different types of visibility.</p>
       <h3>Can Website Citation Rate Change Even if My Website Stays the Same?</h3>
-      <p>Yes. AI answers and surfaced sources can change even without website changes. The rate can also shift when you track different questions because the set of measured responses changes.</p>
-      <p>Keep a stable prompt baseline so changes are easier to interpret. <a href="/resources/how-to-keep-stable-ai-prompt-baseline-and-know-when-to-reset-it">Learn when to maintain or reset that baseline</a>.</p>
+      <p>Yes. AI responses and the sources they surface can change over time even if you make no changes to your website.</p>
+      <p>Your rate can also change if you start tracking different questions, because the total set of AI responses being measured changes. Keeping a <a href="/resources/how-to-keep-stable-ai-prompt-baseline-and-know-when-to-reset-it">stable AI prompt baseline</a> makes changes over time easier to interpret.</p>
     </div>
   </div></section>
 
