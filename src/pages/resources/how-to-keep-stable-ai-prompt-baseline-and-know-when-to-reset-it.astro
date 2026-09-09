@@ -1,0 +1,328 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/how-to-keep-stable-ai-prompt-baseline/stable-prompt-baseline-guide.png';
+import tagsImg from '../../assets/resources/how-to-keep-stable-ai-prompt-baseline/prompt-manager-tags.png';
+import trendsImg from '../../assets/resources/how-to-keep-stable-ai-prompt-baseline/performance-trends-marker.png';
+
+const metaTitle = 'How to Keep a Stable AI Prompt Baseline and Know When to Reset It';
+const title = 'How to Keep a Stable AI Prompt Baseline and Know When to Reset It';
+const description =
+  'Learn how to build a stable AI prompt baseline, avoid misleading visibility comparisons and know when your business should reset its tracked prompts.';
+const url = `${SITE.url}/resources/how-to-keep-stable-ai-prompt-baseline-and-know-when-to-reset-it`;
+const author = { '@type': 'Person', name: 'Ritu Khanna' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage', '@id': url, url, name: title,
+      isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` }, inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url,
+      datePublished: '2026-09-09', dateModified: '2026-09-09', author,
+      publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides',
+      inLanguage: 'en', mainEntityOfPage: url,
+      image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height },
+    },
+    {
+      '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout
+  title={metaTitle}
+  description={description}
+  ogTitle={title}
+  ogImage={{
+    url: `${SITE.url}${heroImg.src}`,
+    width: heroImg.width,
+    height: heroImg.height,
+    alt: 'How to keep a stable AI prompt baseline and know when to reset it',
+    type: 'image/png',
+  }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Stable Prompt Baseline</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How to Keep a Stable AI Prompt Baseline and Know When to Reset It</h1>
+      <p class="answer">Learn how to build a stable AI prompt baseline, avoid misleading visibility comparisons and know when your business should reset its tracked prompts.</p>
+      <p class="byline">By Ritu Khanna &middot; 9 September 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <PostFigure src={heroImg} alt="Guide showing how to keep an AI prompt baseline stable and when to reset it" />
+      <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+      <div class="prose"><ul>
+        <li>An AI prompt baseline is the stable set of customer questions you track over time to measure changes in AI visibility.</li>
+        <li>Constantly adding, removing or replacing prompts can change your overall numbers even when actual performance has not changed.</li>
+        <li>A good baseline contains realistic, mainly non-branded questions covering important products, services, markets and stages of buyer intent.</li>
+        <li>Do not reset a baseline merely because the score falls. A fall may be an important signal worth investigating.</li>
+        <li>Reset when the business or measurement has materially changed, such as entering a market, launching a major service or correcting poorly chosen prompts.</li>
+        <li>Record what changed and when so a new measurement set is not mistaken for genuine growth or decline.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Consistent inputs</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>You track your business across AI platforms for three months. Brand Mention Coverage rises from 38% in June to 43% in July and 57% in August.</p>
+      <p>That looks excellent until you discover that someone removed ten difficult prompts in August and added ten easier questions where the brand already appeared.</p>
+      <p>Did visibility improve, or did the measurement change?</p>
+      <p>Adding a new customer question or deleting an unimportant prompt can feel harmless. But before long, September's prompt list may be very different from June's while the results are still compared as though they measure the same thing.</p>
+      <p>This is why an AI visibility programme needs a stable prompt baseline.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Definition</span><h2>What Is an AI Prompt Baseline?</h2></div>
+    <div class="prose">
+      <p>An AI prompt baseline is a defined set of questions you repeatedly track to compare AI visibility over time.</p>
+      <p>A corporate training company might choose five important customer questions about SME training providers, customised sales programmes, leadership training, team building and how to compare providers.</p>
+      <p>It measures those questions across the selected AI platforms this week, next week and the week after. The prompts form the baseline measurement set.</p>
+      <p>You are observing whether visibility changes while the questions remain reasonably consistent. To understand whether something changed, you need a consistent basis for comparison.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Comparable results</span><h2>Why Does a Stable Baseline Matter for AI Visibility?</h2></div>
+    <div class="prose">
+      <p>Your metrics depend on what you choose to measure. Suppose your brand appears in four of ten tracked answers: 40% Brand Mention Coverage.</p>
+      <p>You add ten prompts where the brand already performs strongly and appears in eight answers. The dashboard now shows 12 mentions across 20 answers: 60%.</p>
+      <p>The score moved from 40% to 60%, but performance on the original questions did not improve. The number changed because the measurement set changed.</p>
+      <p>Adding prompts is not inherently bad. You need to distinguish <strong>performance changing</strong> from <strong>measurement changing</strong>.</p>
+      <h3>Think of It Like Weighing Yourself on Different Scales</h3>
+      <p>A weight trend measured on the same scale means something. Switching between a bathroom scale, gym scale and luggage scale makes the trend harder to interpret because the measuring instrument changed.</p>
+      <p>Your prompt set helps define what your visibility score represents. If the portfolio keeps changing, the meaning of the overall score can change with it.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Scope</span><h2>What Exactly Are You Measuring With a Prompt Baseline?</h2></div>
+    <div class="prose">
+      <p>You are not measuring whether “AI knows your company” in a universal sense. You are measuring something specific: <strong>How visible is our business across this defined set of customer questions?</strong></p>
+      <p>A payroll software company's score might represent prompts about recommendations, SME systems, compliance, automation and comparisons. Replacing half of them with general HR management questions changes the slice of AI visibility being measured.</p>
+      <p>The company may still call the result “AI visibility”, but it now represents something different.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Starting point</span><h2>What Should Go Into Your Initial AI Prompt Baseline?</h2></div>
+    <div class="prose">
+      <p>Your initial set should reasonably represent the customer questions that matter to the business.</p>
+      <h3>1. Important products and services</h3>
+      <p>If an accounting firm earns revenue from bookkeeping, payroll, tax advisory and company incorporation, a baseline containing 90% bookkeeping prompts will mostly describe bookkeeping visibility.</p>
+      <h3>2. Questions with genuine customer intent</h3>
+      <p>“Which accounting firms in Kuala Lumpur specialise in SMEs?” is more useful for discovery measurement than “Is ABC Accounting the best accounting company in Kuala Lumpur?” The latter supplies the brand name. Mainly non-branded prompts help measure whether someone unfamiliar with the business might discover it.</p>
+      <h3>3. Different stages of buyer intent</h3>
+      <p>Deliberately include learning, problem or solution research, comparison and provider-search questions. Adding many educational questions to a provider-search baseline may lower mention rates because AI has less reason to name brands in basic informational answers.</p>
+      <p><strong>Also read:</strong> <a href="/resources/how-to-group-ai-prompts-by-product-service-topic-and-buyer-intent">How to Group AI Prompts by Product, Service, Topic and Buyer Intent</a>.</p>
+      <h3>4. Important markets</h3>
+      <p>If 18 prompts concern Malaysia and two concern Singapore, the overall score mostly describes Malaysian visibility. Adding 20 Singapore prompts later can materially change the combined score, so businesses operating in several countries should often examine markets separately.</p>
+      <h3>5. A manageable number of prompts</h3>
+      <p>A small business may learn more from 30 carefully selected questions than 300 loose ones. Ask whether each prompt represents a real customer question and whether consistent appearance or absence would teach you something useful.</p>
+      <p><strong>Also read:</strong> <a href="/resources/how-to-build-simple-prompt-set">How to Build a Simple Prompt Set Around Problems, Comparisons, Reviews, Pricing and Alternatives</a>.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Changing the denominator</span><h2>Why Is Constantly Adding New Prompts a Problem?</h2></div>
+    <div class="prose">
+      <p>Every addition can affect the denominator behind your metrics. A brand appears in 15 of 30 answers, or 50%. You add ten prompts and appear in only one, changing the result to 16 of 40, or 40%.</p>
+      <p>The existing visibility may not have collapsed. The original 15 appearances could be unchanged. You expanded measurement into an area where the brand is weaker.</p>
+      <p>That is valuable information. The mistake is interpreting the fall from 50% to 40% as proof that previous visibility deteriorated.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Keep useful failures</span><h2>Why Can Removing Prompts Be Just as Misleading?</h2></div>
+    <div class="prose">
+      <p>Deleting difficult questions can artificially improve the picture. If you appear in eight of 20 prompts, coverage is 40%. Delete five prompts where the brand never appears and it becomes eight of 15, or 53.3%.</p>
+      <p>Nothing about actual visibility improved. You removed five failures from the measurement.</p>
+      <h3>A Prompt With 0% Visibility Can Be Valuable</h3>
+      <p>Suppose a commercial interior designer never appears for “Which office interior design companies in Malaysia specialise in sustainable workplaces?”</p>
+      <p>If this is a customer question the business wants to win, the zero is a visibility gap. Competitors may have stronger content, the website may not communicate the capability, third-party sources may associate competitors more strongly, or AI may not understand that the company provides the service.</p>
+      <p>A measurement system should help you find problems, not simply produce the nicest-looking score.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Deliberate change</span><h2>Should Your Prompt Baseline Never Change?</h2></div>
+    <div class="prose">
+      <p>No. Stable does not mean frozen forever. Businesses, customers, markets, products and customer language change.</p>
+      <p>The principle is: <strong>Do not change the measurement casually, and document meaningful changes when you make them.</strong></p>
+      <h3>When Should You Keep the Baseline Stable?</h3>
+      <p>Keep it stable when the business and measurement objective have not materially changed. Do not reset simply because visibility declined, a competitor overtook you, some prompts have zero mentions, one platform stopped mentioning you or you want the next report to look better.</p>
+      <p>These are situations where the same measurement is valuable. A fall across the same questions can be a genuine change worth investigating.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Reset triggers</span><h2>When Might You Need to Reset or Redefine the Baseline?</h2></div>
+    <div class="prose">
+      <h3>1. You launch a major new product or service</h3>
+      <p>If an accounting business adds CFO advisory for SMEs to bookkeeping, payroll and tax, the existing baseline no longer fully represents what it wants to measure. Add a prompt group and, if it changes the portfolio significantly, establish a new baseline period.</p>
+      <h3>2. You enter a new market</h3>
+      <p>A Malaysia-only business expanding into Singapore should treat the new market explicitly. It may preserve the Malaysia baseline and create a separate Singapore baseline rather than compare a combined score with the old Malaysia-only number.</p>
+      <h3>3. Your original prompts were poorly chosen</h3>
+      <p>If most prompts are broad informational questions or contain your brand name, fix the baseline. Document that the revised set focuses on non-branded, buyer-relevant questions and avoid treating the previous and new periods as perfectly continuous.</p>
+      <h3>4. Your business positioning changes significantly</h3>
+      <p>A software company refocusing from businesses of all sizes to small retailers may no longer need prompts about enterprise payroll, multinational HR systems and global workforce management.</p>
+      <h3>5. The way customers describe the category changes</h3>
+      <p>Language evolves, technologies appear, products are renamed and customer problems shift. Update a meaningful portion of the set when it no longer reflects how buyers describe their needs.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Scale of change</span><h2>What Is the Difference Between Adding a Prompt and Resetting the Baseline?</h2></div>
+    <div class="prose">
+      <p>Not every new question requires a reset. Adding one useful question to 50 prompts may have a small impact. Replacing 25 prompts, adding a market and removing a major service category means the portfolio is substantially different.</p>
+      <ul><li><strong>Small maintenance:</strong> minor additions or wording corrections.</li><li><strong>Moderate change:</strong> a meaningful new prompt group or service.</li><li><strong>Major reset:</strong> the set now represents something substantially different.</li></ul>
+      <p>The more significant the change, the more careful you should be when comparing before and after.</p>
+      <h3>Can You Have a Core Baseline and Still Test New Prompts?</h3>
+      <p>Yes. Keep stable <strong>core prompts</strong> for important offerings, high-value buyer questions and major markets. Use <strong>exploratory prompts</strong> for new concerns, product categories, competitor comparisons or ways customers describe a problem.</p>
+      <p>If an exploratory prompt proves valuable, decide later whether it belongs in the core set. This supports learning without constantly rebuilding the foundation.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Wording</span><h2>What About Rewording an Existing Prompt?</h2></div>
+    <div class="prose">
+      <p>Compare “What are good payroll providers in Malaysia?” with “Which payroll providers in Malaysia are best for companies with fewer than 50 employees?” The second specifies a customer profile, so the answer may differ.</p>
+      <p>A typo or nonsensical question should be corrected. But a change to the intent or scope should be recorded as meaningful rather than treated as the same prompt.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Diagnose movement</span><h2>Why Do Tags Matter When Maintaining a Baseline?</h2></div>
+    <div class="prose">
+      <p>Without groups, you may only see overall visibility fall from 52% to 45%. With tags, the movement becomes easier to investigate:</p>
+      <div class="table-wrap"><table><thead><tr><th scope="col">Group</th><th scope="col">Previous</th><th scope="col">Current</th></tr></thead><tbody>
+        <tr><td>Payroll</td><td>68%</td><td>69%</td></tr><tr><td>Tax</td><td>55%</td><td>54%</td></tr><tr><td>Bookkeeping</td><td>51%</td><td>50%</td></tr><tr><td>Company Incorporation</td><td>34%</td><td>12%</td></tr>
+      </tbody></table></div>
+      <p>Most of the business is stable. The major movement occurred in company incorporation. An organised baseline distinguishes portfolio-level movement from service-level movement.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Change log</span><h2>Why Should You Record Changes to Your Baseline?</h2></div>
+    <div class="prose">
+      <p>People forget. If Share of Voice rises after the content team publishes new articles, everyone may credit the campaign even though someone also replaced 20 prompts.</p>
+      <p>Without a record, the business may assign the improvement to the wrong cause. <a href="https://support.google.com/analytics/answer/12958241?hl=en">Google Analytics explains attribution</a> as assigning credit across the touchpoints that lead to an important action, and different models distribute that credit differently.</p>
+      <p>For AI visibility, be cautious about claiming that one activity caused a change. First ask whether the measurement stayed consistent.</p>
+      <h3>What Should You Record When the Baseline Changes?</h3>
+      <ul><li>date of change;</li><li>what changed and why;</li><li>how many prompts were added, removed or replaced;</li><li>which product, service or topic groups were affected; and</li><li>whether this is considered a new baseline.</li></ul>
+      <p>Example: “1 September 2026: Added 12 Singapore buyer-intent prompts following market expansion. Malaysia prompts unchanged. Analyse Singapore separately from the historic Malaysia baseline.”</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">External changes</span><h2>Should You Reset the Baseline When AI Platforms Change?</h2></div>
+    <div class="prose">
+      <p>Not automatically. AI platforms evolve constantly, and that is part of what you are trying to observe. A visibility shift across the same prompts may be valuable information.</p>
+      <p>Preserve the questions where possible and annotate significant external changes when they help explain movement. This logic is also used in established analytics systems: <a href="https://support.google.com/webmasters/answer/16530728?hl=en">Search Console annotations</a> add context to charts by marking important events.</p>
+      <p>Preserve enough consistency to recognise change and enough context to interpret it.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Periodic review</span><h2>How Long Should You Keep a Prompt Baseline?</h2></div>
+    <div class="prose">
+      <p>There is no universal rule such as resetting every three months. Keep the baseline while it represents your business, customers, markets, important offerings and the questions you want answered.</p>
+      <p>Review it periodically without automatically changing it. Every quarter, ask whether the questions still represent important customer journeys, whether services or markets are missing and whether customer language has materially changed.</p>
+      <p>A review does not mean a reset. Often the right decision is no change.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Reality check</span><h2>How Do You Know Whether a Score Change Is Real?</h2></div>
+    <div class="prose">
+      <p>When Brand Mention Coverage moves from 42% to 58%, ask:</p>
+      <ul><li>Did the prompt set change?</li><li>Did the market mix change?</li><li>Did the buyer-intent mix change?</li><li>Did the measured platforms change?</li><li>Did the actual AI answers change?</li></ul>
+      <p>The final check matters most. A headline percentage tells you that something moved. The underlying responses help you understand what moved.</p>
+      <h3>A Practical Example: How a Baseline Can Mislead an SME</h3>
+      <p>An HR software company tracks ten prompts each for Payroll, Attendance, Recruitment and Performance Management. It appears in 16 of 40 answers: 40% coverage.</p>
+      <p>The team deletes ten weak Recruitment prompts and replaces them with ten Payroll questions where the brand is strong. The new result is 23 of 40, or 57.5%.</p>
+      <p>The calculation for each month's set is correct, but the implied 17.5-point performance gain is misleading. The company has not solved recruitment visibility. It stopped measuring it.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Can Zicy Help You Maintain a Useful Prompt Baseline?</h2></div>
+    <div class="prose">
+      <p>Zicy's Prompt Manager gives businesses a defined set of questions to track rather than relying on random one-off searches. Tags can organise prompts around products, services, topics, buyer intent and other business categories.</p>
+      <PostFigure src={tagsImg} alt="Zicy Prompt Manager tag library for organising a prompt baseline" caption="Prompt Manager and Tags create a clearer measurement foundation for products, services, topics and intent." />
+      <p>Performance Trends can then show visibility across daily, weekly and monthly periods. A trend is most meaningful when you know whether the questions behind it remained consistent.</p>
+      <p>Zicy also lets you add markers to performance trends for a campaign launch, important page publication or significant website change. A marker provides context; it does not prove that the activity caused the change.</p>
+      <PostFigure src={trendsImg} alt="Zicy Performance Trends chart with the Add marker control" caption="Markers add context to performance trends while the underlying prompts and AI responses provide the evidence." />
+      <p>Prompt Analysis lets you inspect the tracked AI responses behind the metrics: which questions changed, which platforms began mentioning the brand, which competitors gained visibility and whether the website began appearing as a citation.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Checklist</span><h2>A Simple Baseline Checklist for Small Businesses</h2></div>
+    <div class="prose"><ol>
+      <li><strong>Are these real customer questions?</strong> Revise invented or unrealistic prompts before establishing the baseline.</li>
+      <li><strong>Have we avoided putting our brand into most discovery prompts?</strong> Measure whether AI considers the brand without being told to.</li>
+      <li><strong>Are important products and services represented?</strong> Do not let one service dominate accidentally.</li>
+      <li><strong>Have we considered buyer intent?</strong> Know whether the set covers learning, comparison, provider selection or a deliberate mixture.</li>
+      <li><strong>Are important markets represented appropriately?</strong> Consider measuring different markets separately.</li>
+      <li><strong>Can we keep this core set reasonably stable?</strong> Once tracking begins, resist changing the measurement merely because you dislike a result.</li>
+    </ol></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Credible measurement</span><h2>Stable Does Not Mean Perfect</h2></div>
+    <div class="prose">
+      <p>Your first baseline will not be perfect. You will discover missing questions, different customer phrasing, new products and market changes.</p>
+      <p>The goal is to create a credible reference point and change it deliberately. Think of the baseline as a ruler. Replace it when you need a better one, but changing the ruler every time you measure makes it impossible to know whether the object or the ruler changed.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>Final Thoughts</h2></div>
+    <div class="prose">
+      <p>AI visibility metrics can look precise: 42.6% Mention Coverage, 11.8% Share of Voice or an average AI ranking of 2.7. Precision does not automatically make the comparison meaningful.</p>
+      <p>If tracked customer questions constantly change, a rising or falling score may partly reflect the prompt set rather than how AI sees the business.</p>
+      <p>Choose useful questions representing your products, services, markets and customer intentions. Group them clearly, track them consistently and keep weak questions when they reveal gaps.</p>
+      <p>When the business changes enough that the old baseline no longer makes sense, change it deliberately and record what happened. The purpose is to know whether the business is becoming more or less visible where customers ask AI for answers.</p>
+    </div>
+  </div></section>
+
+  <section class="final"><div class="wrap">
+    <h2>Measure real change with<br />{' '}a stable prompt baseline.</h2>
+    <p>Zicy helps you organise prompts, track performance trends and inspect the AI responses behind every movement.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}.prose{max-width:760px}
+  .prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .table-wrap{overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:120px}.prose h3{font-size:19px}}
+</style>

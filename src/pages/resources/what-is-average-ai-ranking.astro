@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/average-ai-ranking/average-ai-ranking-position.jpg';
+import dashboardImg from '../../assets/resources/average-ai-ranking/ai-visibility-dashboard-metrics.png';
+
+const metaTitle = 'What Is Average AI Ranking and How Should a Small Business Read It?';
+const title = 'What Is Average AI Ranking and How Should a Small Business Read It?';
+const description = 'Learn what Average AI Ranking means for your business, why appearing third or fourth in an AI answer is different from appearing first, and how to read it.';
+const url = `${SITE.url}/resources/what-is-average-ai-ranking`;
+const author = { '@type': 'Person', name: 'Deeba Sri' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: title, type: 'image/jpeg' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Average AI Ranking</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>What Is Average AI Ranking and How Should a Small Business Read It?</h1>
+    <p class="answer">Learn what Average AI Ranking means for your business, why appearing third or fourth in an AI answer is different from appearing first, and how to read it.</p>
+    <p class="byline">By Deeba Sri &middot; 9 September 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="Average AI Ranking illustrated with a business appearing fourth in an AI answer" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>Appearing in an AI answer is not enough on its own. Where your business appears matters just as much as whether it appears at all.</li>
+      <li>Average AI Ranking tells you the typical position your business holds when AI lists several businesses together. A lower number is better. Position one means your business is named first.</li>
+      <li>A business ranked third or fourth in every answer is still losing ground to the businesses listed before it. The customer reads from the top.</li>
+      <li>Your ranking can be very different across the five AI platforms. A strong position on ChatGPT does not guarantee the same result on Gemini or Perplexity.</li>
+      <li>A small improvement in ranking, from position four to position two, can matter as much as a large improvement in how often you appear.</li>
+      <li>Read ranking alongside Mention Coverage, Web Citation Rate and Share of Voice for the full picture.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Position changes attention</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>Imagine you run a maths tuition centre near SS15 in Subang Jaya.</p>
+      <p>A parent opens ChatGPT and asks: “Which maths tuition centres near SS15 are good for secondary school students?” ChatGPT lists four tuition centres, and yours is one of them.</p>
+      <p>Good news. You are in the answer.</p>
+      <p>Now imagine your centre is listed fourth, after three competitors. The parent reads the first name. It sounds good. She reads the second. Also promising. By the third, she has already started thinking about which one to call. She may not even reach the fourth name.</p>
+      <p>You appeared. You were not chosen.</p>
+      <p>This is the problem that Average AI Ranking is designed to show you: where your business appears in the answer, as well as whether AI mentions it.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Definition</span><h2>What Is Average AI Ranking and Why Does Position Matter?</h2></div>
+    <div class="prose">
+      <p>Average AI Ranking is one of the four core numbers measured when you track your AI visibility.</p>
+      <p>It tells you the typical position your business holds in an AI answer when your business is listed alongside others. Position one means your business is named first. Position two means it is named second.</p>
+      <p>Think about how you read a list yourself. If three results appear, you read the first one. It looks reasonable, so you may click it straight away. You may glance at the second. You often do not reach the third or fourth unless the first two disappoint you.</p>
+      <p>AI answers work the same way. The business listed first gets the most attention. The business listed second gets less. By position four or five, many readers have already stopped.</p>
+      <p>Being mentioned is a start. Being mentioned first is a very different thing.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Reading the score</span><h2>What the Number Actually Tells You</h2></div>
+    <div class="prose">
+      <p>Suppose your Average AI Ranking is 3.2. Across all the AI answers where your tuition centre was mentioned, your business appeared at position three or slightly above on average. Sometimes second. Sometimes fourth. The average lands at 3.2.</p>
+      <p>Now suppose a competitor's Average AI Ranking is 1.4. That competitor consistently appears near the top of every AI answer. Your centre appears near the middle or lower.</p>
+      <p>Both businesses are being mentioned. One is being seen first.</p>
+      <p>A small change in this number makes a real difference. Moving from position 3.2 to position 2.4 does not sound dramatic. For a parent scanning an AI answer, that difference is everything.</p>
+      <p class="formula"><strong>Lower is better: #1 is the top position.</strong></p>
+      <p>The goal is steady improvement over time: moving closer to a strong position like the competitor's 1.4, even a little at a time.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Four signals</span><h2>The Relationship Between Ranking and the Other Numbers</h2></div>
+    <div class="prose">
+      <p>Average AI Ranking does not tell the full story on its own. Read it alongside the other three numbers.</p>
+      <ul>
+        <li><strong><a href="/resources/what-is-brand-mention-coverage">Mention Coverage</a></strong> tells you how often your business appears at all. If coverage is low, ranking matters less because you are barely in the conversation. Fix coverage first.</li>
+        <li><strong><a href="/resources/what-is-website-citation-rate">Web Citation Rate</a></strong> tells you how often AI links to your website. A high ranking with no website citation means the parent hears your name but has no easy way to reach you.</li>
+        <li><strong><a href="/resources/what-is-ai-share-of-voice">Share of Voice</a></strong> tells you how much of the overall AI conversation your business occupies compared with competitors. You can rank well in a few answers but have low Share of Voice if competitors dominate many others.</li>
+        <li><strong>Average AI Ranking</strong> tells you: when you are in the conversation, how prominent are you?</li>
+      </ul>
+      <p>All four numbers together tell you where you actually stand.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Platform differences</span><h2>Why Your Ranking Can Look Different Across Platforms</h2></div>
+    <div class="prose">
+      <p>Your Average AI Ranking is an average across all five AI platforms. Underneath that average, the platforms can behave very differently.</p>
+      <p>Your tuition centre might appear at position one in ChatGPT answers. Gemini might list you at position three. Perplexity might not mention you at all for the same question.</p>
+      <p>These are three very different situations. They can combine into one average number that tells you very little on its own.</p>
+      <p>This is why looking at the <a href="/resources/how-to-check-your-business-across-ai-answer-engines">platform breakdown</a> matters. A strong overall ranking might hide one platform where you are consistently listed last. A weak average might hide another where you perform well.</p>
+      <p>When your ranking changes, first ask which platform changed. One platform shifting is a different situation from all five moving together.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common mistake</span><h2>Celebrating a Mention Without Checking Where</h2></div>
+    <div class="prose">
+      <p>A business owner sees Mention Coverage at 70%. Seven out of ten answers include the business, so the result feels good.</p>
+      <p>But the Average AI Ranking is 4.1. The business appears in most answers, yet almost always near the bottom. Three or four competitors are consistently listed before it.</p>
+      <p>The 70% coverage looks like success. The 4.1 ranking tells a different story.</p>
+      <p>Being in the room is not the same as being heard. Being mentioned in an AI answer is not the same as being chosen.</p>
+      <p>Both numbers matter. Coverage tells you whether you are present. Ranking tells you whether you are prominent.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Zicy dashboard</span><h2>How Zicy Shows Your Average AI Ranking</h2></div>
+    <PostFigure src={dashboardImg} alt="Zicy AI Visibility Dashboard showing Mention Coverage, Web Citation Rate, Share of Voice and Average Ranking" caption="Zicy's AI Visibility Dashboard shows four core signals and the period-on-period change for each." />
+    <div class="prose">
+      <p>For a small business owner, tracking your position across five AI platforms for every question is not practical to do manually.</p>
+      <p>For ten questions across five platforms, you would need to run, inspect and record 50 separate checks every day.</p>
+      <p>Zicy's AI Visibility Dashboard does that work for you. It shows Avg Ranking alongside Mention Coverage, Web Citation Rate and Share of Voice. Each number includes its change from the previous period, so you can see at a glance whether your ranking is improving or declining.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Five steps</span><h2>What to Do First: A Simple Plan</h2></div>
+    <div class="prose"><ol>
+      <li><strong>Find your current Avg Ranking.</strong> Write it down as your starting point.</li>
+      <li><strong>Check the period-on-period change.</strong> A lower number means improvement. A higher number means you are slipping down the list.</li>
+      <li><strong>Compare Mention Coverage with ranking.</strong> If coverage is already solid, improving ranking is the next priority. If coverage is low, address that first.</li>
+      <li><strong>Read the actual AI answers that shifted.</strong> Check whether a competitor moved up, AI changed the order, or the answer changed in another way.</li>
+      <li><strong>Write down one finding.</strong> One unexpected difference is more useful than the number on its own.</li>
+    </ol></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Side-by-side</span><h2>Your Ranking in Context</h2></div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">How to use it</th><th scope="col">Mention Coverage</th><th scope="col">Average AI Ranking</th></tr></thead><tbody>
+      <tr><th scope="row">What it tells you</th><td>Whether AI mentions your business at all</td><td>Where in the answer your business appears</td></tr>
+      <tr><th scope="row">What a good result looks like</th><td>High percentage, appearing in most answers</td><td>Low number, appearing near the top of the list</td></tr>
+      <tr><th scope="row">What to fix first</th><td>If this is low, start here</td><td>Fix this once your coverage is solid</td></tr>
+      <tr><th scope="row">What it cannot tell you</th><td>Whether you are being seen or chosen</td><td>Whether your website is being linked to</td></tr>
+      <tr><th scope="row">What to do when it changes</th><td>Check which prompts dropped out</td><td>Read the AI answer and find where competitors appear</td></tr>
+    </tbody></table></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>Putting It All Together</h2></div>
+    <div class="prose">
+      <p>The parent searching for a maths tuition centre near SS15 is not going to read every name in the AI answer. She is going to read the first one or two.</p>
+      <p>Your tuition centre being listed is a start. Your tuition centre being listed first is the goal.</p>
+      <p>Average AI Ranking tells you where you stand in that list across all five platforms and every tracked question. A number going down means progress: your business is moving towards the top.</p>
+      <p>A number going up means something changed. A competitor is being listed before you more often, or your position slipped on one platform.</p>
+      <p>Either way, the number is telling you something worth knowing. Read it alongside your other scores. That is where the real picture is.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See where your business appears<br />{' '}when AI recommends your market.</h2>
+    <p>Zicy tracks your Average AI Ranking across platforms and prompts, so you can see where your position is improving and where competitors still lead.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .formula{max-width:640px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:18px;text-align:center}
+  .table-wrap{overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:130px}.prose h3{font-size:19px}.formula{font-size:16px;text-align:left}}
+</style>

@@ -1,0 +1,324 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/track-ai-visibility-across-markets/multi-market-ai-visibility-guide.png';
+import marketTagsImg from '../../assets/resources/track-ai-visibility-across-markets/market-tags.png';
+
+const metaTitle = 'How to Track AI Visibility Across Different Markets';
+const title = 'How to Track AI Visibility Separately Across Different Markets';
+const description =
+  'Learn how to track AI visibility across different markets, compare local competitors and uncover regional gaps hidden by your overall AI score.';
+const url = `${SITE.url}/resources/how-to-track-ai-visibility-separately-across-different-markets`;
+const author = { '@type': 'Person', name: 'Ritu Khanna' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    {
+      '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url,
+      datePublished: '2026-09-09', dateModified: '2026-09-09', author,
+      publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides',
+      inLanguage: 'en', mainEntityOfPage: url,
+      image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height },
+    },
+    {
+      '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout
+  title={metaTitle}
+  description={description}
+  ogTitle={title}
+  ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: title, type: 'image/png' }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Track Markets Separately</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>How to Track AI Visibility Separately Across Different Markets</h1>
+    <p class="answer">Learn how to track AI visibility across different markets, compare local competitors and uncover regional gaps hidden by your overall AI score.</p>
+    <p class="byline">By Ritu Khanna &middot; 9 September 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="Guide to tracking AI visibility separately across different geographic markets" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>AI visibility can differ by market. Frequent mentions in Malaysia do not guarantee the same visibility in Singapore, Australia or another country.</li>
+      <li>A combined score can hide regional gaps when a strong home market offsets a weak growth market.</li>
+      <li>Track market-specific prompts separately to compare mentions, citations, rankings and competitors in each important market.</li>
+      <li>Do not merely change the country name. Local needs, terminology, competitors, prices, regulations and buying considerations may differ.</li>
+      <li>Compare each market primarily with its own baseline and competitive environment.</li>
+      <li>For an expanding SME, the practical question is: Are customers in this market likely to encounter us when they ask AI about businesses like ours?</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Hidden regional gaps</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>A Malaysian software company also sells to Singapore and sees 58% Brand Mention Coverage. That sounds encouraging until it separates the questions by market:</p>
+      <div class="table-wrap"><table><thead><tr><th scope="col">Market</th><th scope="col">Brand Mention Coverage</th></tr></thead><tbody><tr><td>Malaysia</td><td>76%</td></tr><tr><td>Singapore</td><td>22%</td></tr></tbody></table></div>
+      <p>The combined number was not wrong. It hid the information the business needed: strong visibility in its established market and much weaker visibility in its growth market.</p>
+      <p>For a company trying to grow in Singapore, that distinction matters more than the combined number.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Geographic scope</span><h2>What Does “Market” Mean in AI Visibility Tracking?</h2></div>
+    <div class="prose">
+      <p>A market is the geographic area where you want customers to discover and consider your business.</p>
+      <p>For one company, markets may be countries such as Malaysia, Singapore, Indonesia and Australia. For another, they may be Kuala Lumpur, Johor Bahru and Penang. A local business may focus on Petaling Jaya, Subang Jaya, Sri Petaling and Bangsar.</p>
+      <p>A B2B software company selling nationally may care about country visibility. A dental clinic likely cares more about a city or neighbourhood.</p>
+      <p>Measure AI visibility at the geographic level where the customer decision happens.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Local context</span><h2>Why Can AI Visibility Differ Between Markets?</h2></div>
+    <div class="prose">
+      <p>“Which payroll software is suitable for SMEs in Malaysia?” and the same question for Singapore differ by one word, but the commercial meaning may change.</p>
+      <p>Relevant businesses, payroll requirements, pricing, expectations, available sources and locally recognised brands may all differ. AI therefore has reasons to produce different answers.</p>
+      <p>This geographic variation also exists in traditional search. <a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites?hl=en">Google's international site guidance</a> lists locale-specific URLs, hreflang, country domains, local addresses and phone numbers, local language and currency, links from local sites and Business Profile signals as ways to clarify intended audiences.</p>
+      <p>Google distinguishes a multilingual site, which serves multiple languages, from a multi-regional site, which targets users in different countries or regions. Market and language are related, but they are not the same thing.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Relevance</span><h2>Isn't AI Visibility Global?</h2></div>
+    <div class="prose">
+      <p>ChatGPT, Gemini, Perplexity and Google's AI search experiences operate internationally, but a business that is known by AI is not necessarily equally relevant everywhere.</p>
+      <p>“What are some good accounting firms?” is incomplete for a business decision. Good firms where, for which customer, regulatory environment and service?</p>
+      <p>A company relevant to an SME in Kuala Lumpur may be irrelevant in Sydney. Location is one piece of context that shapes a useful answer. Google says AI Mode uses query fan-out to break a question into subtopics and issue multiple searches for relevant supporting content.</p>
+      <p>The useful question is: <strong>Does AI consider us relevant in the markets where we want customers?</strong></p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Averages hide extremes</span><h2>Why Is One Combined AI Visibility Score Potentially Misleading?</h2></div>
+    <div class="prose">
+      <p>A professional services company tracks 20 prompts in each of three countries:</p>
+      <div class="table-wrap"><table><thead><tr><th scope="col">Market</th><th scope="col">Brand Mention Coverage</th></tr></thead><tbody><tr><td>Malaysia</td><td>80%</td></tr><tr><td>Singapore</td><td>45%</td></tr><tr><td>Australia</td><td>15%</td></tr></tbody></table></div>
+      <p>The roughly 47% combined figure makes Malaysia look weaker and Australia stronger than they are. The business has three different situations.</p>
+      <p>Malaysia may need to defend its lead and improve citations. Singapore may offer a competitive growth opportunity. In Australia, the team first needs to understand whether the website, independent sources and offer are relevant to local customers.</p>
+      <p>A global average cannot answer those questions.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">International search</span><h2>How Is This Similar to Traditional International SEO?</h2></div>
+    <div class="prose">
+      <p>International websites have long needed geographic context. Google's multi-regional guidance recommends clear regional targeting through locale-specific URLs, hreflang and locally relevant information because users in different countries may need different pages or results.</p>
+      <p><a href="https://support.google.com/trends/answer/4365533?hl=en">Google Trends documentation</a> also explains that search popularity is normalised by time and geography rather than treating all locations as one audience.</p>
+      <p>If customer context differs by market, AI visibility measurement should show that difference.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Market prompts</span><h2>What Is a Market-Specific AI Prompt?</h2></div>
+    <div class="prose">
+      <p>A market-specific prompt makes the relevant geography clear. Compare “Which corporate training companies work with SMEs?” with versions specifying Malaysia or Singapore.</p>
+      <p>These questions test whether the brands in AI answers change with the market. Good tracking goes further than inserting a country name.</p>
+      <h3>Why Shouldn't You Just Copy the Same Prompts for Every Country?</h3>
+      <p>Comparable questions can be useful when they genuinely apply in both markets. But customer priorities may differ around compliance, price, integrations, competitors, terminology or local support.</p>
+      <p>Balance like-for-like questions with prompts that reflect the actual needs of each market.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Five steps</span><h2>How Do You Build an AI Prompt Set for Each Market?</h2></div>
+    <div class="prose">
+      <h3>Step 1: Decide Which Markets Actually Matter</h3>
+      <p>Start with markets where you have customers, active sales, local operations, strategic growth plans or marketing investment. You might track Malaysia and Singapore now while postponing Australia until expansion becomes concrete.</p>
+      <h3>Step 2: Define What You Want to Learn</h3>
+      <p>In Malaysia, you may ask whether AI still recommends the brand frequently. In Singapore, you may ask whether AI has begun recognising it as credible. These objectives affect how you interpret the metrics.</p>
+      <h3>Step 3: Identify Core Buyer Questions</h3>
+      <p>Begin with recommendations, comparisons, suitability, pricing and industry expertise. Localise common questions to create a comparative foundation.</p>
+      <h3>Step 4: Add Questions Unique to Each Market</h3>
+      <p>Include market-specific compliance, certifications, support expectations or other buyer needs. Customers are not identical simply because the product is.</p>
+      <h3>Step 5: Tag the Prompts by Market</h3>
+      <p>“Which payroll software is suitable for SMEs in Singapore?” could use <strong>Product: Payroll Software</strong>, <strong>Intent: Provider Search</strong> and <strong>Market: Singapore</strong>.</p>
+      <p><strong>Also read:</strong> <a href="/resources/how-to-group-ai-prompts-by-product-service-topic-and-buyer-intent">How to Group AI Prompts by Product, Service, Topic and Buyer Intent</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Balanced reporting</span><h2>Should Every Market Have the Same Number of Prompts?</h2></div>
+    <div class="prose">
+      <p>Not necessarily, but take care with combined scores. If Malaysia has 80 prompts while Singapore and Australia have ten each, the overall score will be heavily influenced by Malaysia.</p>
+      <p>That may reflect the business accurately. It becomes misleading if management reads the number as equal representation of all three markets.</p>
+      <p>Keep market-level reporting visible even when you maintain a combined number. You need to know both how the business performs overall and what is happening inside each market.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Market metrics</span><h2>How Should You Compare AI Visibility Between Markets?</h2></div>
+    <div class="prose">
+      <h3>Brand Mention Coverage</h3><p>This tells you how often your brand appears. Malaysia at 72% and Singapore at 31% immediately reveal a frequency gap.</p>
+      <h3>Website Citation Rate</h3><p>Mentions do not necessarily mean your website is a source. If Singapore citation rate is only 8%, investigate market-specific content and the local source ecosystem.</p>
+      <h3>Average AI Ranking</h3><p>Malaysia at 1.9 and Singapore at 4.2 suggests the company is not completely absent in Singapore but tends to appear below competitors.</p>
+      <h3>AI Share of Voice</h3><p>This shows how much of the competitive AI conversation your brand captures relative to other tracked brands. A local competitor may dominate one market despite a healthy global score.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Local competition</span><h2>Why Should Competitors Be Analysed Separately by Market?</h2></div>
+    <div class="prose">
+      <p>The competitors frequently appearing for a Malaysian web design agency may be entirely different from those appearing in Singapore.</p>
+      <p>A valuable finding may be that the companies AI treats as competitors in the new market are not the companies you expected.</p>
+      <p>Investigate why those businesses appear, which services AI associates with them, which sources cite them, what content supports their visibility and whether their local presence is clearer.</p>
+      <p>“Why does AI repeatedly recommend these three Singapore competitors for our high-value questions?” is more actionable than “How do we improve in Singapore?”</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Search and answers</span><h2>What If You Rank Well on Google in a Market but AI Rarely Mentions You?</h2></div>
+    <div class="prose">
+      <p>This is possible because traditional search visibility and AI visibility are related but not identical.</p>
+      <p>A page may rank for “HR software Singapore” while an AI answer to “Which HR software is suitable for a Singapore company with 40 employees?” recommends other providers.</p>
+      <p>Search rankings show where a webpage appears for a query. AI visibility asks whether a brand or its content becomes part of the generated response. Market-specific tracking adds another layer to SEO reporting.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Market relevance</span><h2>How Can Your Website Support Different Markets?</h2></div>
+    <div class="prose">
+      <p>Tracking tells you where a problem exists. Then investigate why. Make market relevance clear rather than expecting search and AI systems to infer it from vague clues.</p>
+      <p>A Singapore-focused page could explain service availability, local customer types, locally relevant features, pricing or sales process, compliance considerations, customer examples and support arrangements.</p>
+      <h3>Should You Create a Separate Page for Every Market?</h3>
+      <p>Not automatically. Do not produce 30 nearly identical country pages. Create market pages where geography creates meaningful differences in availability, needs, pricing, regulation, examples, terminology, delivery, support, configuration or buying process.</p>
+      <p>The aim is useful information for each market, not manufactured local pages.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Local corroboration</span><h2>What Role Do Third-Party Sources Play in Market Visibility?</h2></div>
+    <div class="prose">
+      <p>Your website is one part of your online presence. If it claims Singapore leadership while independent articles, directories, reviews and industry pages refer only to Malaysia, AI may encounter a mixed picture.</p>
+      <p>Market expansion can require credible local corroboration from relevant business directories, industry associations, media, customer case studies, review platforms, partners, events and professional profiles.</p>
+      <p>The goal is a credible footprint reflecting where the business operates, not hundreds of low-quality directory listings.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Customer evidence</span><h2>How Can You Tell Whether Customers Behave Differently Across Markets?</h2></div>
+    <div class="prose">
+      <p>Start with your own customer data. Talk to sales, customer service, local partners, regional marketing teams and customers. Examine enquiries, site search, Search Console queries, keyword research and interviews.</p>
+      <p>Google Trends can provide directional context. It uses a sample of actual searches and normalises results by time and location, enabling comparisons across regions. Google search data is not the same as AI prompt data, so use it to understand language and regional interest rather than as proof of what people ask ChatGPT.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common pitfalls</span><h2>What Are the Most Common Mistakes in Multi-Market AI Tracking?</h2></div>
+    <div class="prose"><ol>
+      <li><strong>Putting every country into one prompt pool.</strong> Keep market-level analysis visible.</li>
+      <li><strong>Assuming home-market strength transfers automatically.</strong> Measure recognition in the new market.</li>
+      <li><strong>Using exactly the same questions everywhere.</strong> Keep comparable prompts while allowing genuine local differences.</li>
+      <li><strong>Comparing unequal prompt sets without context.</strong> Use reasonably comparable structures when direct comparison is the goal.</li>
+      <li><strong>Mixing market and language.</strong> The same language can span markets, and one market can use several languages.</li>
+      <li><strong>Adding a market without considering the baseline.</strong> A drop after adding weak-market prompts may reflect expanded measurement rather than deterioration.</li>
+    </ol><p><strong>Also read:</strong> <a href="/resources/how-to-keep-stable-ai-prompt-baseline-and-know-when-to-reset-it">How to Keep a Stable AI Prompt Baseline and Know When to Reset It</a>.</p></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Market objectives</span><h2>Should You Aim for the Same AI Visibility Score in Every Market?</h2></div>
+    <div class="prose">
+      <p>Not necessarily. A company established in Malaysia for 15 years should not automatically expect the same visibility three months after entering Singapore.</p>
+      <p>Malaysia's objective may be to defend leadership, Singapore's to grow mentions and citations, and Australia's to establish initial visibility and understand competitors.</p>
+      <p>The metrics are the same, but their business meaning differs. Market measurement should support strategy rather than merely produce a league table.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Patterns over time</span><h2>How Often Should You Review Market-Level AI Visibility?</h2></div>
+    <div class="prose">
+      <p>Maintain a reasonably stable prompt set. Review which brands appear, whether mentions and citations improve, how average ranking changes, which groups remain weak and which competitors gain visibility.</p>
+      <p>Monthly analysis may be sufficient for many SMEs even when tracking happens more frequently. Look for patterns rather than reacting to each individual answer, because generative answers can vary.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Worked example</span><h2>A Practical Example: Malaysia vs Singapore</h2></div>
+    <div class="prose">
+      <p>A Malaysian corporate training provider creates 20 buyer-relevant prompts for each market:</p>
+      <div class="table-wrap"><table><thead><tr><th scope="col">Metric</th><th scope="col">Malaysia</th><th scope="col">Singapore</th></tr></thead><tbody>
+        <tr><td>Brand Mention Coverage</td><td>75%</td><td>30%</td></tr><tr><td>Website Citation Rate</td><td>42%</td><td>10%</td></tr><tr><td>Average AI Ranking</td><td>2.1</td><td>4.0</td></tr><tr><td>Share of Voice</td><td>24%</td><td>8%</td></tr>
+      </tbody></table></div>
+      <p>A 52.5% combined mention figure hides the fact that Malaysia is strong while Singapore appears in fewer than one-third of answers, is rarely cited and tends to sit below competitors.</p>
+      <p>If Singapore results are reasonable for leadership training but weak for sales training and team building, the team can investigate existing local content, proof, case studies, competitor content, cited sources and positioning.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Does Zicy Help You Track AI Visibility Across Markets?</h2></div>
+    <div class="prose">
+      <p>Zicy's Prompt Manager can organise geographically relevant questions using tags such as <strong>Market: Malaysia</strong>, <strong>Market: Singapore</strong> and <strong>Market: Australia</strong>.</p>
+      <p>Combine them with other tags, for example <strong>Market: Singapore</strong>, <strong>Service: Payroll</strong> and <strong>Intent: Provider Search</strong>.</p>
+      <PostFigure src={marketTagsImg} alt="Zicy Prompt Manager using a Location tag to organise market-specific prompts" caption="Organising prompts by market helps separate AI visibility in one country from performance in another." />
+      <p>Zicy tracks Brand Mention Coverage, Website Citation Rate, Average AI Ranking and AI Share of Voice across supported answer engines. Prompt Analysis lets you inspect the answers behind the metrics.</p>
+      <p>If Singapore visibility is weaker, investigate which questions miss the brand, which competitors appear instead, whether the brand ranks below them, whether the website is cited and which sources the platforms use.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Prioritisation</span><h2>What About Businesses With Many Markets?</h2></div>
+    <div class="prose">
+      <p>You probably do not need 100 prompts for each of ten countries. Prioritise:</p>
+      <ul><li><strong>Tier 1: Core markets.</strong> High revenue or strategic importance; track comprehensively.</li><li><strong>Tier 2: Growth markets.</strong> Active investment and meaningful potential; track a smaller representative set.</li><li><strong>Tier 3: Future markets.</strong> Monitor lightly or wait until expansion is concrete.</li></ul>
+      <p>The purpose is useful information, not the largest possible dataset.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Baselines</span><h2>How Does Multi-Market Tracking Connect With Your Prompt Baseline?</h2></div>
+    <div class="prose">
+      <p>If you have tracked Malaysia for six months and then add Singapore, do not compare the new combined result with the previous Malaysia-only result as though nothing changed.</p>
+      <p>Keep the Malaysia baseline intact and establish a Singapore baseline. Then report that Malaysia moved from 62% to 68% while Singapore begins at 24%.</p>
+      <p>That is clearer than saying global visibility fell from 62% to 46% when the business simply began measuring a weaker market.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Two dimensions</span><h2>Market Visibility Is Not the Same as Language Visibility</h2></div>
+    <div class="prose">
+      <p>Customers in Malaysia may ask questions in English, Bahasa Malaysia, Mandarin or Tamil: several languages within one market. Customers in Malaysia and Singapore may both ask in English: one language across different markets.</p>
+      <p><strong>Market answers where the customer is. Language answers how the customer is asking.</strong></p>
+      <p>The two can interact, but should not automatically be treated as the same measurement. Google makes the same distinction between multilingual and multi-regional websites.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>Final Thoughts</h2></div>
+    <div class="prose">
+      <p>Expanding into another market does not mean existing online visibility travels with you. A business can dominate relevant Malaysian AI answers and barely appear in Singapore.</p>
+      <p>Ask: <strong>How visible are we to customers in each market that matters?</strong></p>
+      <p>Build realistic prompts, organise them by market, maintain stable baselines, compare local competitors and look beyond one overall score to mentions, citations, rankings and Share of Voice.</p>
+      <p>When a market underperforms, inspect the actual questions and AI answers. A strong score in one country should never hide that customers in a growth market may still be seeing competitors instead.</p>
+    </div>
+  </div></section>
+
+  <section class="final"><div class="wrap">
+    <h2>See where your brand is<br />{' '}visible market by market.</h2>
+    <p>Zicy helps you organise local prompt sets and compare mentions, citations, rankings and competitors across the markets that matter.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .table-wrap{overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:125px}.prose h3{font-size:19px}}
+</style>

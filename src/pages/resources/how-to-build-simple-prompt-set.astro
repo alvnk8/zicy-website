@@ -1,0 +1,412 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/how-to-build-simple-prompt-set/five-types-of-ai-prompts.png';
+import perPromptImg from '../../assets/resources/how-to-build-simple-prompt-set/per-prompt-results.png';
+import competitiveImg from '../../assets/resources/how-to-build-simple-prompt-set/competitive-ai-performance.png';
+import tagsImg from '../../assets/resources/how-to-build-simple-prompt-set/prompt-tags.png';
+
+const metaTitle = 'How to Build a Simple AI Prompt Set';
+const title = 'How to Build a Simple Prompt Set Around Problems, Comparisons, Reviews, Pricing and Alternatives';
+const description =
+  'Learn how to build a simple AI prompt set around customer problems, comparisons, reviews, pricing and alternatives, with examples for SMEs.';
+
+const url = `${SITE.url}/resources/how-to-build-simple-prompt-set`;
+const author = { '@type': 'Person', name: 'Shangkari Goverdhanlal' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-09-09',
+      dateModified: '2026-09-09',
+      author,
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${heroImg.src}`,
+        width: heroImg.width,
+        height: heroImg.height,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout
+  title={metaTitle}
+  description={description}
+  ogTitle={title}
+  ogImage={{
+    url: `${SITE.url}${heroImg.src}`,
+    width: heroImg.width,
+    height: heroImg.height,
+    alt: 'Five types of AI prompts customers ask before they buy',
+    type: 'image/png',
+  }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Build a Simple Prompt Set</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How to Build a Simple Prompt Set Around Problems, Comparisons, Reviews, Pricing and Alternatives</h1>
+      <p class="answer">Learn how to build a simple AI prompt set around customer problems, comparisons, reviews, pricing and alternatives, with examples for SMEs.</p>
+      <p class="byline">By Shangkari Goverdhanlal &middot; 9 September 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <PostFigure
+        src={heroImg}
+        alt="Five types of AI prompts customers ask before they buy: problems, comparisons, reviews, pricing and alternatives"
+      />
+      <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+      <div class="prose">
+        <ul>
+          <li>Customers ask different questions as they move from recognising a problem to comparing options, checking reviews, considering price and looking for alternatives.</li>
+          <li>An AI prompt set helps SMEs and micro SMEs track whether their business appears across these different customer questions.</li>
+          <li>Start with a focused set of problem, comparison, review, pricing and alternative prompts rather than trying to track every possible question.</li>
+          <li>Keep your core prompts reasonably consistent over time so changes in AI visibility are easier to compare.</li>
+          <li>Zicy's Prompt Manager and Tags can help organise prompts by buying intent, topic, product or service so patterns are easier to spot.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Customer journey</span><h2>Introduction</h2></div>
+      <div class="prose">
+        <p>A customer rarely asks the same question from the moment they realise they have a problem to the moment they buy.</p>
+        <p>Imagine you run an air-conditioning service in Petaling Jaya.</p>
+        <p>At first, someone might ask ChatGPT:</p>
+        <p>“Why is my air conditioner not cooling properly?”</p>
+        <p>Later, they might ask:</p>
+        <p>“Which air-conditioning repair companies are good in Petaling Jaya?”</p>
+        <p>Then:</p>
+        <p>“Which aircond service near me has good reviews?”</p>
+        <p>And finally:</p>
+        <p>“How much does aircond servicing cost in Petaling Jaya?”</p>
+        <p>It is the same customer need, but the questions change as the person gets closer to making a decision.</p>
+        <p>Your business may appear for one question and disappear for another.</p>
+        <p>For a busy SME owner, that is the real reason to build a prompt set.</p>
+        <p>You are not trying to track every possible thing somebody could ask AI. You are trying to understand whether your business appears at different stages of a customer's decision-making process.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Definition</span><h2>What Is an AI Prompt Set?</h2></div>
+      <div class="prose">
+        <p>An AI prompt set is simply a collection of questions that represent the ways your customers may search, compare and decide.</p>
+        <p>Think of it as a small sample of your customers' conversations with AI.</p>
+        <p>Instead of asking only, “Does ChatGPT mention my business?” you track questions such as:</p>
+        <ul>
+          <li>Who can solve this problem?</li>
+          <li>Which option should I choose?</li>
+          <li>Which businesses have good reviews?</li>
+          <li>What can I get within my budget?</li>
+          <li>What other options could I consider?</li>
+        </ul>
+        <p>These questions give you a broader picture of how AI sees your business. They also help avoid a common mistake: tracking only broad educational questions.</p>
+        <p>For example, “What is bookkeeping?” is useful if you want to understand what AI has to say about bookkeeping.</p>
+        <p>But if you want to know whether your accounting firm could be recommended, this is more useful: “Which bookkeeping services are suitable for a small business in Kuala Lumpur?”</p>
+        <p>The second question gives AI a reason to recommend an actual business.</p>
+        <p><strong>Also read:</strong> <a href="/resources/how-to-find-the-right-ai-prompts-to-track-for-your-business">How to Find the Right AI Prompts to Track for Your Business</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Buying stages</span><h2>What Types of AI Prompts Should an SME Track?</h2></div>
+      <div class="prose">
+        <p>A simple prompt set can be built around five common buying situations: <strong>problems, comparisons, reviews, pricing and alternatives</strong>.</p>
+        <p>Each tells you something different about how customers may discover and evaluate your business.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Problems</span><h2>What Are Problem-Based Prompts?</h2></div>
+      <div class="prose">
+        <p>Problem-based prompts are questions customers ask when they know something is wrong, but are not yet sure what solution they need.</p>
+        <p>A café owner might ask:</p>
+        <p>“How can I get more people to find my café online?”</p>
+        <p>A retailer might ask:</p>
+        <p>“How can I keep stock levels accurate across two online stores?”</p>
+        <p>Or a homeowner might ask:</p>
+        <p>“Who can fix a leaking air conditioner near me?”</p>
+        <p>These prompts help you see whether AI connects the customer’s problem with your business or the type of service you offer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Comparisons</span><h2>What Are Comparison Prompts?</h2></div>
+      <div class="prose">
+        <p>Comparison prompts appear when customers are narrowing their choices and asking which option is better for them.</p>
+        <p>For example:</p>
+        <ul>
+          <li>“Which AI visibility tools are best for small businesses?”</li>
+          <li>“Should a small business use AI visibility software or hire an agency?”</li>
+          <li>“Which tools can compare a company's visibility across ChatGPT, Gemini and Google AI?”</li>
+        </ul>
+        <p>These prompts show which businesses AI sees as relevant alternatives, including competitors you may not have expected.</p>
+        <p>There is an important difference between a category comparison and a named-brand comparison.</p>
+        <p>If you ask, “Is Zicy better than Competitor X?” you have already instructed AI to discuss those two brands.</p>
+        <p>That can still be useful research, but it does not tell you whether AI would naturally have selected either company. If your goal is to measure unprompted visibility, a question such as “Which AI visibility tools are suitable for small businesses?” provides a cleaner test.</p>
+        <p>The AI has to decide which businesses belong in the answer.</p>
+        <p><strong>Also read:</strong> <a href="/resources/how-to-use-branded-and-non-branded-prompts-without-distorting-ai-visibility">How to Use Branded and Non-Branded Prompts Without Distorting Your AI Visibility</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Reviews</span><h2>What Are Review-Based Prompts?</h2></div>
+      <div class="prose">
+        <p>Review-based prompts come into play when customers want reassurance from other people’s experiences.</p>
+        <p>Compare “Best plumber in Petaling Jaya” with “Which plumber in Petaling Jaya has good reviews for emergency repairs?”</p>
+        <p>The second question adds an important decision factor: reputation.</p>
+        <p>A local business could therefore track prompts such as:</p>
+        <ul>
+          <li>“Which florist in Kuala Lumpur has good reviews for wedding bouquets?”</li>
+          <li>“Which air-conditioning company in Subang Jaya is well reviewed for emergency repairs?”</li>
+          <li>“What are the most recommended cafés around Bangsar for working during the day?”</li>
+        </ul>
+        <p>These prompts show whether AI connects your business with the reputation customers value. A <a href="https://www.brightlocal.com/research/lcrs-ai-trust/">2026 BrightLocal study</a> found that 88% of AI users check whether a review is legitimate or examine its source before deciding what to do next.</p>
+        <p>With Zicy, you can open a tracked prompt to compare how your brand performs across different AI platforms, including whether it was mentioned, its position and website citation coverage.</p>
+        <PostFigure
+          src={perPromptImg}
+          alt="Zicy per-prompt results comparing brand visibility across AI platforms"
+          caption="Zicy’s Per-Prompt Results show how the same customer question performs across ChatGPT, Gemini, Perplexity, Google AI Mode and AI Overview."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Pricing</span><h2>What Are Pricing Prompts?</h2></div>
+      <div class="prose">
+        <p>Pricing prompts appear when customers start asking, “Can I afford this?” or “Is this good value?”</p>
+        <p>Someone asking, “What is the best CRM for small businesses?” may receive one shortlist.</p>
+        <p>But someone asking, “What is the best CRM under RM500 a month for a five-person company?” may receive a different shortlist because budget is now part of the decision.</p>
+        <p>Examples of pricing prompts include:</p>
+        <ul>
+          <li>“Which AI visibility tools offer good value for a small business?”</li>
+          <li>“What are affordable AI visibility platforms for a small marketing team?”</li>
+          <li>“Which catering companies in Petaling Jaya offer good-value packages for 30 people?”</li>
+          <li>“Where can I order a wedding bouquet in Kuala Lumpur for under RM500?”</li>
+        </ul>
+        <p>The key is to frame the prompt around <strong>choosing an option</strong>, not just asking for general price information.</p>
+        <p>“How much does wedding catering cost?” is mainly informational.</p>
+        <p>But “Which wedding caterers in Petaling Jaya offer packages for under RM5,000?” gives AI a reason to recommend specific businesses.</p>
+        <p>For visibility tracking, that difference matters.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Alternatives</span><h2>What Are Alternative Prompts?</h2></div>
+      <div class="prose">
+        <p>Alternative prompts are questions customers ask when they want to know what else they could choose instead.</p>
+        <p>“What are alternatives to manually checking ChatGPT every week?” could lead AI to recommend software.</p>
+        <p>But “What are alternatives to hiring an AEO agency?” could surface software, consultants, freelancers or in-house approaches.</p>
+        <p>Examples include:</p>
+        <ul>
+          <li>“What can a small business use instead of hiring an AEO specialist?”</li>
+          <li>“Which tools can replace spreadsheets for tracking AI recommendations?”</li>
+          <li>“What are alternatives to manually checking AI platforms for brand mentions?”</li>
+        </ul>
+        <p>These prompts can reveal competitors and substitutes you may not have considered.</p>
+        <p>A software company, for example, may think it only competes with other software platforms, while customers are actually choosing between <strong>software, an agency, a freelancer or doing it themselves</strong>.</p>
+        <p>Zicy’s competitive visibility reporting can also surface brands you may not be tracking yet by showing which businesses repeatedly appear alongside yours in AI answers.</p>
+        <PostFigure
+          src={competitiveImg}
+          alt="Zicy Competitive AI Performance dashboard comparing brands"
+          caption="Zicy’s Competitive AI Performance view can surface brands appearing alongside your business, even when they have not been manually added as competitors."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Starting size</span><h2>How Many AI Prompts Should a Small Business Start With?</h2></div>
+      <div class="prose">
+        <p>You do not need 100 prompts.</p>
+        <p>For many SMEs and micro SMEs, 10 to 20 focused questions are enough to start learning.</p>
+        <p>A simple 15-prompt set could contain:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Buying angle</th><th scope="col">Number of prompts</th><th scope="col">Example prompts</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Problems</td><td>3</td><td>“What tools can help a small business monitor what AI says about it?”<br />“Who can help fix a leaking air conditioner in Petaling Jaya?”</td></tr>
+              <tr><td>Comparisons</td><td>3</td><td>“Which AI visibility tools are best for small businesses?”<br />“Which florist is best for wedding bouquets in Kuala Lumpur?”</td></tr>
+              <tr><td>Reviews</td><td>3</td><td>“Which dentist in Bangsar has good reviews for children?”<br />“Which AI visibility tools are recommended for non-technical users?”</td></tr>
+              <tr><td>Pricing</td><td>3</td><td>“Which bridal florists in KL offer bouquets under RM500?”<br />“What affordable AI visibility tools are suitable for small businesses?”</td></tr>
+              <tr><td>Alternatives</td><td>3</td><td>“What are alternatives to manually checking ChatGPT for brand mentions?”<br />“What can a small business use instead of hiring a digital marketing agency?”</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The exact number matters less than the quality of the questions.</p>
+        <p>Ask yourself: <strong>Would a real customer actually ask this while deciding what to buy?</strong></p>
+        <p>If the answer is no, the prompt may not be worth tracking.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Organisation</span><h2>How Can You Organise Different Prompts Without Making It Complicated?</h2></div>
+      <div class="prose">
+        <p>Once you start tracking problems, comparisons, reviews, pricing and alternatives, it is easy for your prompt list to become difficult to manage.</p>
+        <p>This is where Zicy's <strong>Prompt Manager and Tags</strong> become useful.</p>
+        <p>Instead of keeping every prompt in one long list, you can use Tags to group them by what they test, or by product, service, topic, or buyer intent.</p>
+        <p>For example, you could use Tags such as:</p>
+        <ul><li>Pricing</li><li>Comparisons</li><li>Reviews</li><li>Alternatives</li></ul>
+        <p>You could also create broader topic Tags based on the main products, services or areas your business covers.</p>
+        <p>This makes it easier to answer practical questions such as:</p>
+        <p><strong>Are we visible when customers compare options, but missing when they ask about price?</strong></p>
+        <p>Or:</p>
+        <p><strong>Which topics have the strongest AI visibility, and which ones need more attention?</strong></p>
+        <p>The goal is not to build a complicated tagging system. It is simply to make a growing prompt set easier to organise and understand.</p>
+        <p>In Zicy, each Tag can be assigned to multiple prompts, so you can quickly filter related questions and review them together.</p>
+        <PostFigure
+          src={tagsImg}
+          alt="Zicy Tag Library grouping related AI prompts"
+          caption="Zicy's Tags let you group related prompts by topic or buying intent, making a larger prompt set easier to organise and analyse."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Consistent tracking</span><h2>Should You Keep the Same Prompts Over Time?</h2></div>
+      <div class="prose">
+        <p>Keep your main prompts reasonably consistent.</p>
+        <p>If you rewrite every question each month, it becomes harder to tell whether your visibility changed or the question changed.</p>
+        <p>A better approach is to keep a <strong>core set</strong> and add new prompts when something meaningful happens.</p>
+        <p>For example:</p>
+        <ul>
+          <li>you enter a new location;</li>
+          <li>customers start asking about a new service;</li>
+          <li>price becomes a bigger issue;</li>
+          <li>a new competitor keeps appearing; or</li>
+          <li>AI results reveal a question you had not considered.</li>
+        </ul>
+        <p>This gives you enough consistency to spot trends while still allowing the prompt set to grow with your business.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Content planning</span><h2>Do You Need to Create Content for Every Prompt?</h2></div>
+      <div class="prose">
+        <p>No.</p>
+        <p>If five prompts reveal the same underlying customer concern, you probably do not need five new articles. Use the prompt set first as a way to <strong>listen</strong>.</p>
+        <p>If AI repeatedly struggles to understand your pricing, clearer pricing information may help. If competitors dominate local prompts, check whether your location and service-area information is clear.</p>
+        <p>If your business disappears when customers ask about reviews, look at the reputation information available across the web.</p>
+        <p>The prompt tells you where the gap may be. Then you decide what actually needs fixing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Conclusion</span><h2>Start With the Questions Your Customers Already Ask</h2></div>
+      <div class="prose">
+        <p>The simplest prompt set is not built around keywords. It is built around the customer's decision.</p>
+        <ul>
+          <li>What problem are they trying to solve?</li>
+          <li>What options will they compare?</li>
+          <li>Whose reviews will they trust?</li>
+          <li>What price can they afford?</li>
+          <li>What alternatives might they consider?</li>
+        </ul>
+        <p>For an SME or micro SME, even a small set of questions across these five areas can give you a much clearer view of where AI includes your business and where it leaves you out.</p>
+        <p>Once those questions are organised in Zicy's Prompt Manager, Tags can help separate the different buying stages, locations, or customer needs so you can see the patterns more clearly.</p>
+        <p>The important part is to start with real customer questions, not hundreds of invented prompts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Turn your prompt set into<br />{' '}something measurable with Zicy.</h2>
+      <p>Zicy tracks brand mentions, website citations, share of voice and average AI ranking across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}
+  .prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+  .table-wrap{overflow-x:auto;margin:24px 0}
+  table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
+  th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}
+  thead th{background:var(--lavender);color:var(--ink)}
+  td:nth-child(2){white-space:nowrap;text-align:center}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:150px}}
+</style>

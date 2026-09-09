@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/ai-share-of-voice/ai-share-of-voice-explained.png';
+import landscapeImg from '../../assets/resources/ai-share-of-voice/competitive-landscape.png';
+
+const metaTitle = 'What Is AI Share of Voice? A Simple Guide for Small Businesses';
+const title = 'What Is AI Share of Voice? A Simple Guide for Small Businesses';
+const description = 'Learn what AI Share of Voice (SOV) means, what affects it, and how to compare competitors and see where your brand stands with Zicy.';
+const url = `${SITE.url}/resources/what-is-ai-share-of-voice`;
+const author = { '@type': 'Person', name: 'Nabila Wawan' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: title, type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">AI Share of Voice</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>What Is AI Share of Voice? A Simple Guide for Small Businesses</h1>
+    <p class="answer">Learn what AI Share of Voice (SOV) means, what affects it, and how to compare competitors and see where your brand stands with Zicy.</p>
+    <p class="byline">By Nabila Wawan &middot; 9 September 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="AI Share of Voice explained with a comparison of brand and competitor shares" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>AI Share of Voice (SOV) shows how much of the brand conversation in tracked AI answers belongs to your business compared with competitors.</li>
+      <li>A higher SOV means your business is taking a larger share of the attention, while a lower SOV means competitors are occupying more of the conversation.</li>
+      <li>SOV can vary based on your visibility, competitors' activity, the prompts being tracked, the brands included in the comparison and the AI platforms being measured.</li>
+      <li>The most useful way to read SOV is against relevant competitors and over time, so you can see where you stand, where gaps exist and whether your position is improving.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Competitive context</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p><a href="/resources/how-ai-answers-change-small-business-discovery">AI answers often mention multiple businesses in a single response</a>. That makes it difficult to tell whether your brand is getting a meaningful share of the attention or competitors are dominating the conversation.</p>
+      <p>Without comparing that visibility, it is hard to see where your business really stands. AI Share of Voice gives you a clearer way to compare that attention.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Definition</span><h2>What Is AI Share of Voice?</h2></div>
+    <div class="prose">
+      <p>AI Share of Voice (SOV) measures the share of <a href="/resources/what-is-brand-mention-coverage">brand mentions your business receives across tracked AI-generated answers</a> compared with competing brands.</p>
+      <p>For example, an accounting business could appear alongside several firms in AI answers about bookkeeping, tax services, payroll or e-Invoicing. SOV shows how the brand mentions across those answers are divided among the businesses being compared.</p>
+      <ul>
+        <li><strong>Higher SOV:</strong> Your business receives a larger share of the brand mentions.</li>
+        <li><strong>Lower SOV:</strong> Competitors take a larger share of the conversation.</li>
+      </ul>
+      <p>AI SOV does not measure market share, sales or customer preference. It only reflects your share of brand mentions within the AI answers being tracked.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Why it matters</span><h2>Why Does AI Share of Voice Matter?</h2></div>
+    <div class="prose">
+      <p><a href="/resources/how-is-ai-visibility-different-from-google-rankings">AI Share of Voice gives you a useful competitive benchmark for AI search</a>. It can show where you stand relative to other businesses, where they have an advantage and whether that picture is changing over time.</p>
+      <ul>
+        <li><strong>See who is leading the conversation:</strong> Find out which businesses are taking the largest share of attention across the AI answers you track.</li>
+        <li><strong>Spot competitive gaps:</strong> See where other brands have a stronger presence around the customer needs that matter to your business.</li>
+        <li><strong>Track changes over time:</strong> Monitor whether your position is improving, staying steady or losing ground.</li>
+        <li><strong>Know where to focus:</strong> Use those gaps to prioritise the topics and customer questions that need the most improvement.</li>
+      </ul>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Moving inputs</span><h2>What Can Affect Your AI Share of Voice?</h2></div>
+    <div class="prose">
+      <p>Your AI Share of Voice can rise or fall as the balance of brand mentions changes across the conversations you track.</p>
+      <ul>
+        <li><strong>Your brand mentions:</strong> More appearances across relevant AI answers can increase your share.</li>
+        <li><strong>Competitor mentions:</strong> If competitors start appearing more often, your SOV can fall even when your own visibility stays similar.</li>
+        <li><strong><a href="/resources/how-to-find-the-right-ai-prompts-to-track-for-your-business">The prompts you track</a>:</strong> Different customer questions can bring different brands into the conversation, which changes the overall share.</li>
+        <li><strong>The competitors being compared:</strong> Your SOV depends on the competitive set. Missing relevant competitors can give you an incomplete picture.</li>
+        <li><strong><a href="/resources/how-to-check-your-business-across-ai-answer-engines">The AI platforms and time period</a>:</strong> Each answer engine, like ChatGPT or Gemini, can surface different brands, and their answers can change over time.</li>
+      </ul>
+      <p>This is why SOV is most useful when you compare a <a href="/resources/how-to-keep-stable-ai-prompt-baseline-and-know-when-to-reset-it">consistent set of relevant prompts and competitors over the same period</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">The calculation</span><h2>How Is AI Share of Voice Calculated?</h2></div>
+    <div class="prose">
+      <p>AI Share of Voice is calculated by dividing your brand mentions by the total brand mentions across the tracked AI answers, then multiplying by 100.</p>
+      <p class="formula"><strong>AI SOV = Your Brand Mentions ÷ Total Brand Mentions × 100</strong></p>
+      <p>For example, if your brand receives 40 mentions out of 200 total brand mentions, your SOV is:</p>
+      <p class="formula"><strong>40 ÷ 200 × 100 = 20%</strong></p>
+      <p>That means your business accounts for 20% of the brand mentions across the AI answers being measured. The total includes your own mentions and those of the competing brands within the same tracked set.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Small Businesses Can Improve Their AI Share of Voice with Zicy</h2></div>
+    <PostFigure src={landscapeImg} alt="Zicy Competitive Landscape comparing AI Share of Voice for an accounting business and its competitors" caption="Example of Zicy's Competitive Landscape for an accounting business." />
+    <div class="prose">
+      <p>Zicy's Competitive Landscape gives you a side-by-side view of how your business compares with competitors on the same set of tracked AI answers.</p>
+      <p>Your Share of Voice sits alongside other competitive signals such as how often each brand appears, where it tends to rank, <a href="/resources/what-is-website-citation-rate">the citations it receives</a> and how AI describes it. Together, these give you more context around the differences between your business and competing brands.</p>
+      <p>For SOV, the view helps you see who owns more of the conversation, spot close competitors and larger gaps, and decide what to investigate further.</p>
+      <h3>See Who Owns More of the Conversation</h3>
+      <p>Compare your SOV with other brands that appear in the same tracked AI answers. You can quickly see who holds the largest share, which competitors are close to you and where the biggest gaps are.</p>
+      <h3>Find Your Closest Competitors</h3>
+      <p>The most useful competitor is not always the biggest company in your industry.</p>
+      <p>Competitive Landscape can surface brands that regularly appear alongside yours, including untracked brands not yet in your saved competitor set. This can help you decide which businesses are most useful to benchmark against.</p>
+      <h3>Identify Where Competitors Are Gaining Ground</h3>
+      <p>A lower overall SOV shows that competitors are taking more of the conversation, but not necessarily why.</p>
+      <p>From there, you can <a href="/resources/how-to-choose-buyer-intent-prompts-that-reveal-brand-visibility">investigate related prompts</a> to see which customer questions competitors appear more strongly for and where your brand has less of the conversation.</p>
+      <p>For example, an accounting business may perform well around bookkeeping but have a smaller presence in conversations about e-Invoicing or outsourced payroll.</p>
+      <h3>Turn SOV Gaps Into Content Priorities</h3>
+      <p>Once you know which customer conversations need attention, you have a clearer idea of what to improve.</p>
+      <p>That could mean strengthening an existing service page, answering an important customer question more clearly or creating useful content around a topic where your business has relevant expertise but limited AI visibility.</p>
+      <p>The focus stays on the customer needs that matter, rather than on producing more content for its own sake.</p>
+      <h3>Track Whether Your Share Is Improving</h3>
+      <p>Use consistent prompts and competitors when comparing similar time periods.</p>
+      <p>This lets you see whether your share is growing, whether the gap with a close competitor is narrowing or whether another brand is beginning to take more of the conversation. That makes SOV useful as an ongoing competitive benchmark rather than a one-off percentage.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common questions</span><h2>FAQs</h2></div>
+    <div class="prose">
+      <h3>Can a Small Business Have a Higher SOV Than a Much Larger Competitor?</h3>
+      <p>Yes. Business size does not automatically determine AI visibility. A smaller brand can have a higher SOV if it takes a larger share of the relevant AI conversations being tracked.</p>
+      <h3>Can Two Competitors Have Almost the Same Share of Voice?</h3>
+      <p>Yes. Brands can have very similar SOV percentages when they receive a similar share of attention across the tracked AI answers.</p>
+      <p>A near-tie is worth watching because even a small shift in visibility could change which business holds the larger share.</p>
+      <h3>Should I Compare My SOV With Every Business in My Industry?</h3>
+      <p>No. Focus on competitors that serve similar customers, compete for the same needs or regularly appear alongside your business in relevant AI answers.</p>
+      <p>A smaller, more relevant competitor set usually yields a more meaningful comparison than including every business in the industry.</p>
+      <h3>How Long Does It Take to Improve AI Share of Voice?</h3>
+      <p>There is no fixed timeframe. Changes in AI SOV depend on your brand's broader visibility, competitors' activity and how AI platforms respond to the topics being tracked.</p>
+      <p>It is more useful to monitor the direction of your SOV over time than to expect an immediate change after updating a page or publishing new content.</p>
+      <h3>Can a New Competitor Suddenly Affect My SOV?</h3>
+      <p>Yes. If another business starts taking a larger share of the same AI conversations, your percentage can change even if your own visibility remains relatively stable.</p>
+      <p>This is one reason it is useful to keep an eye on new or previously untracked brands appearing in your competitive space.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>See Your Place in the AI Conversation</h2></div>
+    <div class="prose">
+      <p>AI Share of Voice gives you a simple way to understand how much of the AI conversation your business owns compared with competitors.</p>
+      <p>More importantly, it gives that visibility competitive context. You can see who is taking more of the conversation, where the biggest gaps are and whether your position is changing over time.</p>
+      <p>For a small business, that makes SOV more than another percentage. It becomes a practical way to decide where to direct your AI visibility efforts next.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See how much of the AI conversation<br />{' '}your business owns.</h2>
+    <p>Zicy helps you compare competitors, spot visibility gaps and track whether your Share of Voice is improving over time.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .formula{max-width:640px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:18px;text-align:center}
+  @media (max-width:640px){.prose h3{font-size:19px}.formula{font-size:16px;text-align:left}}
+</style>

@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/read-single-tracked-prompt/score-vs-ai-answer.jpg';
+import analysisImg from '../../assets/resources/read-single-tracked-prompt/prompt-analysis-dashboard.png';
+
+const metaTitle = 'How to Read a Single Tracked Prompt and See the Exact AI Answers Behind Your Scores';
+const title = 'How to Read a Single Tracked Prompt and See the Exact AI Answers Behind Your Scores';
+const description = 'Learn how to stop trusting a dashboard number and start reading the actual AI answers behind your scores so you can see exactly what changed and why.';
+const url = `${SITE.url}/resources/how-to-read-a-single-tracked-prompt-and-see-the-exact-ai-answers-behind-your-scores`;
+const author = { '@type': 'Person', name: 'Deeba Sri' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: title, type: 'image/jpeg' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Read a Tracked Prompt</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>How to Read a Single Tracked Prompt and See the Exact AI Answers Behind Your Scores</h1>
+    <p class="answer">Learn how to stop trusting a dashboard number and start reading the actual AI answers behind your scores so you can see exactly what changed and why.</p>
+    <p class="byline">By Deeba Sri &middot; 9 September 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="A Brand Mention Coverage score falling from 60 percent to 42 percent across five AI platforms" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>A dashboard score tells you that something changed. It does not tell you what AI actually said.</li>
+      <li>Every tracked prompt is one customer question tested across five AI platforms daily. Reading one prompt result shows exactly what happened for that question.</li>
+      <li>Different platforms can give very different answers to the same question. A score of 3 out of 5 does not mean all platforms behaved the same way.</li>
+      <li>The raw AI answer shows whether your brand was mentioned, where it appeared and whether a competitor took its place.</li>
+      <li>You do not need to read every prompt every day. Start with the question where your score changed the most.</li>
+      <li>Reading the answer turns a confusing number into something you can understand and act on.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">The score is the start</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>Imagine you own an aircon servicing company in Petaling Jaya. You open your dashboard on Monday morning. Last week, Brand Mention Coverage was 60%. This week, it is 42%.</p>
+      <p>Something changed, but the number does not tell you what.</p>
+      <p>Did a competitor start appearing? Did AI stop recommending any businesses? Did your website stop being cited? Did the answer change completely?</p>
+      <p>A score is useful because it tells you whether things are moving in the right direction. When something shifts, the score is just the beginning. The useful information is in the full AI answer, platform by platform, for that customer question.</p>
+      <p>This guide shows you how to find and read that answer.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Definition</span><h2>What Is a Tracked Prompt?</h2></div>
+    <div class="prose">
+      <p>A prompt is one specific customer question tracked across all five AI platforms every day. It is the kind of question a real buyer would type into ChatGPT or Gemini before choosing a business like yours.</p>
+      <p>For an aircon servicing company in Petaling Jaya, a tracked prompt might be:</p>
+      <p class="prompt"><strong>“What are some reliable aircon servicing companies in Petaling Jaya for a small office?”</strong></p>
+      <p>That question is tested across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode every day. Each platform creates its own answer, and each answer is recorded.</p>
+      <p>Your dashboard scores are calculated from those recorded answers. When a score changes, something changed in one or more of them. The only way to find out what changed is to read the answer.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Inside one result</span><h2>What Does a Single Prompt Result Show?</h2></div>
+    <div class="prose">
+      <p>When you open one tracked prompt, you see more than a number:</p>
+      <ul>
+        <li><strong><a href="/resources/what-is-brand-mention-coverage">Brand Mention Coverage</a>:</strong> How many of the five platforms mentioned your business, shown as a score such as 3/5 or 5/5.</li>
+        <li><strong><a href="/resources/what-is-website-citation-rate">Website Citation Coverage</a>:</strong> How many platforms linked to your website. AI can name your business without linking to your site.</li>
+        <li><strong><a href="/resources/what-is-average-ai-ranking">Average Position</a>:</strong> When your business was mentioned, did it appear first, second or third?</li>
+        <li><strong><a href="/resources/what-is-ai-share-of-voice">Share of Voice</a>:</strong> Across all five platforms, how much of the competitive conversation was about your business?</li>
+        <li><strong>Per-platform results:</strong> Whether your brand was mentioned, at what position, how often, whether your website was cited and the complete AI answer.</li>
+        <li><strong>Ranked Brand Mentions:</strong> Every business named in the answer, in order, with a “You” label beside your business.</li>
+        <li><strong>Website Citations:</strong> Which websites each platform linked to while answering the question.</li>
+      </ul>
+      <p>Reading these together tells you exactly what happened.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Platform differences</span><h2>Why Do Results Differ Across AI Platforms?</h2></div>
+    <div class="prose">
+      <p>One of the most useful things about reading a single prompt result is seeing how different the answers can be across platforms.</p>
+      <p>Your aircon company might appear first in ChatGPT. Gemini might not mention it. Perplexity might mention it but link to a directory instead of your website.</p>
+      <p>Average Position is measured only across the platforms where you were mentioned. Appearing first on ChatGPT and appearing with a poor citation on Perplexity can average into a number that hides both situations.</p>
+      <p>Each AI platform works differently. They use different sources and methods for deciding which businesses to include and how to build an answer. A question answered well on one platform does not guarantee the same result on another.</p>
+      <p>When a score drops, first ask which platform changed. A drop on one platform is a different problem from a drop across all five. The <a href="/resources/how-to-compare-ai-visibility-across-chatgpt-gemini-perplexity-and-google-ai">per-platform view</a> shows which one moved.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">The story behind the number</span><h2>What Does the Raw AI Answer Tell You?</h2></div>
+    <div class="prose">
+      <p>The score gives you a number. The raw AI answer gives you the story behind it.</p>
+      <p>Suppose Brand Mention Coverage drops from 5/5 to 3/5 for the aircon servicing question. The score tells you two platforms stopped mentioning you.</p>
+      <p>The raw answers may show that one platform now lists three competitors before mentioning you near the end. Another might give general advice without naming any business.</p>
+      <p>These are different situations. The first means a competitor is gaining ground. The second means the question is no longer producing business recommendations.</p>
+      <p>The answer also shows whether the description of your business is accurate. AI may describe you as serving a different area, offering a different service or leave out something important. None of that is visible in the score.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common mistake</span><h2>Reacting to the Number Without Reading the Answer</h2></div>
+    <div class="prose">
+      <p>Many business owners check the score, see a drop, worry, change something and check again. They never read the actual AI answer.</p>
+      <p>That is like counting how many people walked past your shop without looking outside to see what was happening on the street.</p>
+      <p>A score drop can mean:</p>
+      <ul><li>one platform changed while the others stayed the same;</li><li>a competitor moved higher in the answer;</li><li>AI stopped recommending any businesses for that question; or</li><li>your website changed and AI now uses a different source.</li></ul>
+      <p>Each requires a different response. The score does not tell you which one happened. Reading the raw answer does.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Zicy Prompt Analysis Shows You This</h2></div>
+    <PostFigure src={analysisImg} alt="Zicy Prompt Analysis showing mention coverage, citation coverage, platform results and citation sources" caption="Zicy's Prompt Analysis brings the scores and complete recorded answers for one tracked customer question into a single view." />
+    <div class="prose">
+      <p>Finding and comparing AI answers manually is not practical. For one question, you would need to open ChatGPT, Gemini, Perplexity, Google AI Mode and Google AI Overviews separately. For ten questions, that becomes 50 answers to find, read and compare.</p>
+      <p>Zicy Prompt Analysis captures the complete answer automatically every day and shows it platform by platform for one tracked question.</p>
+      <p>You can see Brand Mention Coverage and Website Citation Coverage as an x/5 score, then inspect whether your brand was mentioned, at what position and whether your site was cited on each platform. You can read the full response in one click or copy it with the Copy Full Response button.</p>
+      <p>When a number changes, Prompt Analysis is where you go to find out what happened.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Five steps</span><h2>What to Do First: A Simple Plan</h2></div>
+    <div class="prose"><ol>
+      <li><strong>Find the prompt where your score changed the most this week.</strong></li>
+      <li><strong>Open that prompt in Prompt Analysis.</strong></li>
+      <li><strong>Check the per-platform results.</strong> Which platform showed the biggest change?</li>
+      <li><strong>Read the full AI answer for that platform.</strong> Is your business mentioned? Where does it appear? If it is absent, which businesses appear instead?</li>
+      <li><strong>Write down one finding.</strong> Record one thing that differs from what you expected or saw last week.</li>
+    </ol><p>That one finding is more useful than any score on its own.</p></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Side-by-side</span><h2>Your Score vs the Answer Behind It</h2></div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">How to use it</th><th scope="col">Your score</th><th scope="col">The answer behind it</th></tr></thead><tbody>
+      <tr><th scope="row">What it shows</th><td>Whether things moved up or down</td><td>What AI actually said</td></tr>
+      <tr><th scope="row">What it tells you</th><td>That something changed</td><td>What changed and how</td></tr>
+      <tr><th scope="row">When to check it</th><td>Every week</td><td>When a score changes</td></tr>
+      <tr><th scope="row">What it cannot tell you</th><td>Which platform changed or why</td><td>The full picture is here</td></tr>
+      <tr><th scope="row">What to do with it</th><td>Notice the movement</td><td>Read it and find one finding</td></tr>
+    </tbody></table></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>Putting It All Together</h2></div>
+    <div class="prose">
+      <p>The aircon servicing company owner who sees a score drop from 60% to 42% has two choices.</p>
+      <p>They can close the dashboard and hope it recovers next week. Or they can open the prompt that changed, read the AI answer and find out exactly what happened.</p>
+      <p>The score tells you something moved. The answer tells you what to do about it.</p>
+      <p>When a number changes, do not stop at the score. Open the prompt and read what AI actually said. That is where the real picture is.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>Move from a changing score<br />{' '}to the answer behind it.</h2>
+    <p>Zicy records each tracked question across five AI platforms, helping you see exactly what changed and where to investigate next.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt{max-width:680px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:18px}
+  .table-wrap{overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:130px}.prose h3{font-size:19px}.prompt{font-size:16px}}
+</style>

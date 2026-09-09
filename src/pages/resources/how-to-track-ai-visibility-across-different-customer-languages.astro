@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/track-ai-visibility-across-customer-languages/multilingual-ai-visibility-guide.png';
+import promptManagerImg from '../../assets/resources/track-ai-visibility-across-customer-languages/prompt-manager-language-tracking.png';
+
+const metaTitle = 'How to Track AI Visibility Across Different Customer Languages';
+const title = 'How to Track AI Visibility Across Different Customer Languages';
+const description = 'Learn how to track AI visibility across customer languages, build multilingual prompts and uncover brand, citation and competitor gaps hidden by English-only tracking.';
+const url = `${SITE.url}/resources/how-to-track-ai-visibility-across-different-customer-languages`;
+const author = { '@type': 'Person', name: 'Ritu Khanna' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: title, type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Track Customer Languages</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>How to Track AI Visibility Across Different Customer Languages</h1>
+    <p class="answer">Learn how to track AI visibility across customer languages, build multilingual prompts and uncover brand, citation and competitor gaps hidden by English-only tracking.</p>
+    <p class="byline">By Ritu Khanna &middot; 9 September 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="Guide to tracking AI visibility across different customer languages" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>AI visibility can change by language. Strong English visibility does not guarantee the same result in Bahasa Malaysia, Mandarin or another language.</li>
+      <li>A literal translation of one English prompt may not reflect how customers naturally describe the same need.</li>
+      <li>Track important questions separately by language to compare mentions, citations, ranking, competitors and how AI describes your business.</li>
+      <li>Keep language and market separate: one market may use several languages, and one language can span several markets.</li>
+      <li>Multilingual tracking can reveal incomplete, outdated or different brand information as well as missing mentions.</li>
+      <li>Prioritise the languages actual and target customers use when researching or choosing businesses like yours.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">The blind spot</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>A Malaysian home renovation company tests several English questions about condo renovation contractors in Kuala Lumpur. The company appears regularly, so the team concludes that AI visibility is strong.</p>
+      <p>But potential customers ask similar questions in Bahasa Malaysia and Mandarin. Will AI show the same businesses, describe the services accurately and cite the same sources?</p>
+      <p>Measuring only one language cannot answer those questions. A brand can be highly visible in one language and much less visible in another.</p>
+      <p>For an SME serving a multilingual audience, the practical question is: <strong>Are we visible in the languages our customers use when asking AI for help?</strong></p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Definition</span><h2>What Is Multilingual AI Visibility?</h2></div>
+    <div class="prose">
+      <p>Multilingual AI visibility is the extent to which a business appears and is represented in relevant AI answers across the languages its customers use.</p>
+      <p>A Malaysian training provider may appear for the English prompt “Which leadership training companies in Malaysia work with SMEs?” A similar Bahasa Malaysia question still concerns leadership training in Malaysia, but the resulting brands, sources, descriptions and ordering may differ.</p>
+      <p><strong>English visibility is not total AI visibility.</strong> If customers research businesses in another language, you need to understand what happens there too.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Different answers</span><h2>Why Can AI Give Different Answers in Different Languages?</h2></div>
+    <div class="prose">
+      <p>Multilingual AI is not always a simple translation system. A question translated into another language may lead to different interpretation, retrieved information, sources, brand mentions, recommendations, wording or detail.</p>
+      <p>This does not mean an AI platform always performs worse in a particular language. It means businesses should measure rather than assume equivalence.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Real customer behaviour</span><h2>What Does “Customer Language” Actually Mean?</h2></div>
+    <div class="prose">
+      <p>Customer language is not simply the official language of a country. In Malaysia, customers may research products and services in English, Bahasa Malaysia, Mandarin, Tamil or combinations of languages.</p>
+      <p>Someone may speak Bahasa Malaysia socially but research B2B software in English. Another customer may ask broad questions in Mandarin and switch to English for technical specifications. Industry terms may remain in English inside an otherwise Bahasa Malaysia question.</p>
+      <p>Ask which languages customers use when researching your type of product or service, not merely which languages are spoken in the country.</p>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Separate dimensions</span><h2>Is Language the Same as Market?</h2></div>
+    <div class="prose">
+      <p>No. Malaysia and Singapore are two markets, but customers across them may use English, Bahasa Malaysia and Mandarin.</p>
+      <p>An English prompt only establishes visibility for that English question. It does not automatically establish Malaysian Bahasa Malaysia visibility, Malaysian Mandarin visibility, Singaporean English visibility or Singaporean Mandarin visibility.</p>
+      <p>A prompt can therefore use several tags:</p>
+      <ul><li>Market: Malaysia</li><li>Language: Bahasa Malaysia</li><li>Service: Payroll</li><li>Intent: Provider Search</li></ul>
+      <p><strong>Also read:</strong> <a href="/resources/how-to-track-ai-visibility-separately-across-different-markets">How to Track AI Visibility Separately Across Different Markets</a>.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Customer discovery</span><h2>Why Does Multilingual AI Visibility Matter for SMEs?</h2></div>
+    <div class="prose">
+      <p>A customer can discover you through AI only if your business becomes part of the answer they receive. A tuition centre may appear when someone asks for maths tuition in Petaling Jaya in English but disappear from a similar Mandarin answer.</p>
+      <p>The English score cannot reveal that gap. Multilingual tracking matters when customer groups use different languages, you operate in a multilingual country, you have localised content, your sales team handles several languages, language use differs by product or you are entering another market.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Search and answers</span><h2>How Is Multilingual AI Visibility Different From Multilingual SEO?</h2></div>
+    <div class="prose">
+      <p>Multilingual SEO asks whether search engines can find the correct language page, whether that page ranks and whether internationalisation is implemented correctly.</p>
+      <p><a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites?hl=en">Google recommends</a> separate URLs for language versions, hreflang where appropriate and user-controlled language links. It also warns that automatic language redirects may prevent users and crawlers from seeing every version.</p>
+      <p>Multilingual AI visibility adds another question: when someone asks an AI system in that language, does your business become part of the generated answer?</p>
+      <p>A translated page may be indexed and rank while the brand still has weak visibility in AI recommendations. AEO adds another measurement layer to SEO.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Natural wording</span><h2>Why Shouldn't You Simply Translate Your English AI Prompts?</h2></div>
+    <div class="prose">
+      <p>A literal translation may be grammatical without reflecting how people ask the question. Customers may retain English loanwords such as “payroll” or “SME”, use different industry terms or prefer “Which payroll system is suitable for an SME?” over a direct translation of “best payroll solutions for small businesses”.</p>
+      <p>Google makes a related point for web content: it determines a page's language from visible content rather than a language code alone. For prompt tracking, measure how customers communicate rather than how English copy translates.</p>
+      <h3>Translation vs Localisation</h3>
+      <p>Translation changes a sentence into another language while preserving meaning. Localisation adapts vocabulary, sentence structure, examples, currency, units, terminology, references and buying concerns so it feels natural to the audience.</p>
+      <p>For multilingual prompt tracking, natural customer language often matters more than literal symmetry.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Evidence first</span><h2>How Do You Find Which Languages Your Customers Actually Use?</h2></div>
+    <div class="prose">
+      <h3>Talk to Sales and Customer Service</h3><p>Ask what language enquiries arrive in, whether it changes by product, whether customers switch during technical discussions and which terms they use.</p>
+      <h3>Look at Customer Messages</h3><p>Where appropriate and privacy-compliant, review WhatsApp enquiries, live chat, contact forms, email and social comments for recurring language patterns.</p>
+      <h3>Examine Search Console</h3><p>Query-level data can reveal languages people use to find your website. <a href="https://support.google.com/webmasters/answer/17011259?hl=en">Google notes</a> that some queries are omitted for privacy, and Search Console does not represent AI prompts directly, so treat it as one source of customer-language evidence.</p>
+      <h3>Use Keyword and Market Research</h3><p>Search demand can reveal terminology, but turn it into natural customer questions rather than copying keyword lists into AI prompts.</p>
+      <h3>Speak to Native or Fluent Users</h3><p>A translation can be grammatically perfect and still sound unnatural. Involve someone who understands how customers use a commercially important language.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Five steps</span><h2>How Do You Build a Multilingual AI Prompt Set?</h2></div>
+    <div class="prose">
+      <h3>Step 1: Start With Customer Intent</h3><p>Define what each question should measure, such as finding an SME accounting firm. Then ask how English-, Bahasa Malaysia- and Mandarin-speaking customers would naturally express that intent.</p>
+      <h3>Step 2: Create a Core Comparable Set</h3><p>Keep some prompts conceptually comparable across languages. The sentences need not be literal copies, but they should test the same provider-search, comparison or problem-solving objective.</p>
+      <h3>Step 3: Add Language-Specific Questions</h3><p>Include a question that reflects genuine behaviour in one language even when it has no exact equivalent elsewhere. The goal is real discovery behaviour, not perfectly symmetrical spreadsheets.</p>
+      <h3>Step 4: Tag Prompts by Language</h3><p>Use tags such as <strong>Language: English</strong>, <strong>Language: Bahasa Malaysia</strong> and <strong>Language: Mandarin</strong>, then combine them with market, service and intent.</p>
+      <h3>Step 5: Keep a Stable Baseline Within Each Language</h3><p>Maintain a stable core set. If one language portfolio is materially rebuilt, record the change so measurement changes are not mistaken for AI performance changes.</p>
+      <p><strong>Also read:</strong> <a href="/resources/how-to-keep-stable-ai-prompt-baseline-and-know-when-to-reset-it">How to Keep a Stable AI Prompt Baseline and Know When to Reset It</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Language metrics</span><h2>What Metrics Should You Compare Across Languages?</h2></div>
+    <div class="prose">
+      <h3>Brand Mention Coverage</h3><p>If English appears in 14 of 20 answers, Bahasa Malaysia in seven and Mandarin in four, the split reveals a gap hidden by the combined result.</p>
+      <h3>Website Citation Rate</h3><p>English citation at 48% and Bahasa Malaysia at 14% may indicate missing or incomplete language content or a source ecosystem dominated by others.</p>
+      <h3>Average AI Ranking</h3><p>An average ranking of 1.8 in English and 4.1 in Bahasa Malaysia means the brand is present in both but tends to sit behind competitors in the latter.</p>
+      <h3>AI Share of Voice</h3><p>A competitor may dominate local-language answers even when your brand leads in English.</p>
+      <h3>Should You Compare Percentages Directly?</h3><p>Only carefully. Comparable sets should be reasonably similar in size, intent, product or service coverage and market context. Provider-search prompts naturally create more reason to mention brands than broad educational questions.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Representation</span><h2>Multilingual Visibility Is Not Just About Whether You Are Mentioned</h2></div>
+    <div class="prose">
+      <p>A business may appear in every language but be described differently. An English answer may correctly call ABC a payroll and HR software provider, while another language describes it primarily as accounting software.</p>
+      <p>AI may also attach an old service, location, product, target market or similarly named company. Multilingual monitoring should assess representation as well as presence.</p>
+      <p>A mention is valuable only if the information attached to the name is reasonably accurate.</p>
+      <h3>Can AI Confuse Your Brand More Easily in Another Language?</h3>
+      <p>Potentially, especially when the name has another meaning, similar businesses exist, localised names differ, external sources use inconsistent naming or transliteration varies.</p>
+      <p>Clear, consistent business information across languages helps build a more coherent evidence trail.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Useful local content</span><h2>How Can Your Website Support Multilingual AI Visibility?</h2></div>
+    <div class="prose">
+      <p>If Bahasa Malaysia matters commercially, ask whether that content helps a Bahasa Malaysia-speaking customer make a decision. A translated homepage alone may not be enough.</p>
+      <p>Prioritise useful product and service descriptions, pricing where appropriate, FAQs, support details, company information, case studies, contact information and buying guidance.</p>
+      <h3>Should Every Page Be Translated?</h3><p>No. Begin with the homepage, core service or product pages, conversion pages, high-value FAQs and major educational resources. Expand based on demand. Quality matters more than publishing hundreds of poor automated translations.</p>
+      <h3>What Technical Setup Matters?</h3><p>Use separate language URLs, hreflang where appropriate, clear language-switch links and page content that is mainly in one language. Avoid relying only on browser-language redirects.</p>
+      <h3>What About Schema Markup?</h3><p>Structured data can clarify page and entity information, but it does not guarantee an AI recommendation. Google's <a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies">structured-data guidance</a> says markup should accurately represent visible page content.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Source ecosystem</span><h2>Do Third-Party Sources Matter in Different Languages?</h2></div>
+    <div class="prose">
+      <p>Yes. A rich English presence across articles, reviews, partners, directories and media may contrast with almost no coverage in another important language.</p>
+      <p>Investigate which sources AI cites in each language, which competitor sources appear, whether local-language publications discuss the category, whether directory information is accurate and whether reviews exist in relevant languages.</p>
+      <p>The aim is to understand the real source environment, not create artificial mentions.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Worked example</span><h2>A Practical Example: One Malaysian Business, Three Languages</h2></div>
+    <div class="prose">
+      <p>A Malaysian tuition provider tracks 15 comparable provider and comparison prompts in English, Bahasa Malaysia and Mandarin:</p>
+      <div class="table-wrap"><table><thead><tr><th scope="col">Metric</th><th scope="col">English</th><th scope="col">Bahasa Malaysia</th><th scope="col">Mandarin</th></tr></thead><tbody>
+        <tr><td>Brand Mention Coverage</td><td>73%</td><td>47%</td><td>27%</td></tr><tr><td>Website Citation Rate</td><td>40%</td><td>20%</td><td>7%</td></tr><tr><td>Average AI Ranking</td><td>2.0</td><td>3.1</td><td>4.4</td></tr><tr><td>Share of Voice</td><td>22%</td><td>14%</td><td>6%</td></tr>
+      </tbody></table></div>
+      <p>English is established, Bahasa Malaysia has meaningful but weaker visibility, and Mandarin rarely appears or earns citations.</p>
+      <p>The business can investigate content depth, local-language reviews and directories, competitor sources, brand representation and whether the prompts sound natural. “Why is our Mandarin visibility weaker?” is more useful than one combined score.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common pitfalls</span><h2>What Are the Most Common Multilingual AI Tracking Mistakes?</h2></div>
+    <div class="prose"><ol>
+      <li><strong>Tracking only English because the website is mainly English.</strong> Investigate how customers actually ask questions.</li>
+      <li><strong>Translating prompts word for word.</strong> Localise the underlying customer intent.</li>
+      <li><strong>Treating market and language as identical.</strong> Track both dimensions where they matter.</li>
+      <li><strong>Comparing different prompt portfolios.</strong> Maintain a comparable core set.</li>
+      <li><strong>Measuring mentions while ignoring accuracy.</strong> Inspect what AI says.</li>
+      <li><strong>Assuming one platform represents all AI visibility.</strong> Compare the relevant answer engines.</li>
+      <li><strong>Adding every possible language.</strong> Track languages tied to customers and strategy.</li>
+    </ol></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Prioritisation</span><h2>How Many Languages Should a Small Business Track?</h2></div>
+    <div class="prose">
+      <p>Start with commercial importance. If 80% of enquiries are English and 15% Bahasa Malaysia, begin with those two rather than immediately building six language portfolios.</p>
+      <ul><li><strong>Tier 1: Core customer language.</strong> Track comprehensively.</li><li><strong>Tier 2: Meaningful secondary language.</strong> Track a representative set.</li><li><strong>Tier 3: Emerging opportunity.</strong> Test before expanding.</li></ul>
+      <p>The objective is useful data rather than maximum data.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Does Zicy Help With Multilingual AI Prompt Tracking?</h2></div>
+    <div class="prose">
+      <p>Zicy's Prompt Manager provides a central place for questions in the customer languages that matter to a business. Language tags can be combined with service, intent and market tags.</p>
+      <PostFigure src={promptManagerImg} alt="Zicy Prompt Manager showing multilingual prompt visibility metrics" caption="Prompt Manager keeps multilingual questions and their visibility metrics in one structured view." />
+      <p>The wider workflow lets you compare Brand Mention Coverage, Website Citation Rate, Average AI Ranking, Share of Voice and platform performance.</p>
+      <p>Prompt Analysis helps determine whether the brand is missing, competitors appear instead, information is inaccurate, the website is cited and the pattern occurs across every engine or only one.</p>
+      <p>The goal is to understand which questions are missing, what AI says instead and what the business should investigate.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Diagnose first</span><h2>What Should You Do If One Language Has Weak AI Visibility?</h2></div>
+    <div class="prose">
+      <p>Do not immediately translate another 100 articles. First ask whether the prompts are natural, whether weakness spans every topic, whether useful pages exist in that language, whether core business facts are consistent, which competitors appear, which sources AI uses and whether the issue is visibility or inaccurate perception.</p>
+      <p>Choose an action only after diagnosing the gap.</p>
+      <h3>Do You Need Perfect Visibility in Every Language?</h3>
+      <p>No. Objectives should reflect the business. English may need strong visibility defended, Bahasa Malaysia may need better mentions and citations for high-intent questions, and Mandarin may first need a baseline and competitor analysis.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Listen first</span><h2>Multilingual AI Visibility Starts With Listening to Customers</h2></div>
+    <div class="prose">
+      <p>Before translations, tags, dashboards and structured data, listen to how customers speak. Which language do they use when discovering the category? Do they switch for technical details? Which words and English terms remain inside another language?</p>
+      <p>Those observations should shape the prompt portfolio. The goal is to understand whether the business appears when real customers ask AI for help in the language that feels natural to them.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>Final Thoughts</h2></div>
+    <div class="prose">
+      <p>Customers in the same city seeking the same service may ask ChatGPT, Gemini or another platform in different languages and receive different answers.</p>
+      <p>Start with languages that matter to customers. Build natural questions, keep market and language separate, maintain a comparable core set and track mentions, citations, ranking and Share of Voice.</p>
+      <p>Most importantly, examine what AI actually says in each language. The question is not simply “Can AI find us?” It is “Can the customers we want to reach find us through AI in the languages they use?”</p>
+    </div>
+  </div></section>
+
+  <section class="final"><div class="wrap">
+    <h2>Measure how customers find you<br />{' '}in every language that matters.</h2>
+    <p>Zicy helps you organise multilingual prompts and inspect the mentions, citations, competitors and descriptions behind each result.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .table-wrap{overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:130px}.prose h3{font-size:19px}}
+</style>

@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/website-citation-rate/brand-mention-vs-website-citation.png';
+import rateImg from '../../assets/resources/website-citation-rate/web-citation-rate-dashboard.png';
+import analysisImg from '../../assets/resources/website-citation-rate/citation-analysis.png';
+
+const metaTitle = 'What Is Website Citation Rate and Why Is It Different From a Brand Mention?';
+const title = 'What Is Website Citation Rate and Why Is It Different From a Brand Mention?';
+const description = 'Learn what Website Citation Rate means, how it differs from a brand mention, and how Zicy helps your business track both to understand its AI visibility.';
+const url = `${SITE.url}/resources/what-is-website-citation-rate`;
+const author = { '@type': 'Person', name: 'Nabila Wawan' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: title, type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Website Citation Rate</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>What Is Website Citation Rate and Why Is It Different From a Brand Mention?</h1>
+    <p class="answer">Learn what Website Citation Rate means, how it differs from a brand mention, and how Zicy helps your business track both to understand its AI visibility.</p>
+    <p class="byline">By Nabila Wawan &middot; 9 September 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="Brand mention compared with website citation in AI answers" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>Website Citation Rate shows how often AI answers cite your website as a source.</li>
+      <li>A brand mention means AI names your business. A website citation means AI points to your website.</li>
+      <li>You can be mentioned without being cited, and cited without being clearly mentioned.</li>
+      <li>For SMEs, mentions show brand visibility, while citations show whether your own website is gaining source visibility.</li>
+      <li>A citation can create a route to your website, but it does not guarantee a click or customer.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Two signals</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>Seeing your business mentioned by ChatGPT, Gemini or another AI platform can feel like a win. Your company has made it into the answer and perhaps onto a potential customer's shortlist.</p>
+      <p>But a brand mention does not always mean your website is being cited. AI may name your business while linking to another source. That is why it helps to check whether your own website is also receiving the citation.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Definition</span><h2>What Is Website Citation Rate?</h2></div>
+    <div class="prose">
+      <p>Website Citation Rate is the percentage of AI responses that cite your website as a source. A website citation happens when an AI-generated answer includes a link or visible source reference to a page on your site.</p>
+      <p>If your website is cited in 20 out of 100 AI responses, your Website Citation Rate is 20%. The rate gives the count context: 20 citations from 50 responses means something very different from 20 citations from 500.</p>
+      <h3>Why Does a Website Citation Matter?</h3>
+      <p>A website citation gives your site source visibility and a possible route back to your business. If it is clickable, someone can follow it to learn more about your products, services or expertise.</p>
+      <p>A citation is not the same as a visit. It creates an opportunity for someone to reach your website, not proof that they did.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Side-by-side</span><h2>Website Citation vs Brand Mention: What Is the Difference?</h2></div>
+    <div class="prose">
+      <p>A brand mention tells you whether your business made it into the answer. A website citation tells you whether your own website was used as a visible source. Together, they reveal different parts of your AI visibility.</p>
+      <div class="table-wrap"><table><thead><tr><th scope="col"></th><th scope="col">Brand Mention</th><th scope="col">Website Citation</th></tr></thead><tbody>
+        <tr><th scope="row">What happens?</th><td>AI names your business in the answer</td><td>AI cites or links to a page on your website</td></tr>
+        <tr><th scope="row">Where does it appear?</th><td>In the generated answer itself</td><td>In source cards, references, footnotes or links</td></tr>
+        <tr><th scope="row">Is a link required?</th><td>No</td><td>Yes, or another visible source reference</td></tr>
+        <tr><th scope="row">What does it tell you?</th><td>Whether your brand is part of the AI conversation</td><td>Whether your website is receiving source credit</td></tr>
+        <tr><th scope="row">What can it lead to?</th><td>Awareness and consideration</td><td>A route back to your owned website</td></tr>
+        <tr><th scope="row">What doesn't it prove?</th><td>That AI used your website as the source</td><td>That your brand was prominently recommended</td></tr>
+      </tbody></table></div>
+      <p>AI answers effectively have two layers: what the AI says, where brands can be mentioned, and what it cites, where websites receive source credit. A business can appear in one layer without appearing in the other.</p>
+      <p>Imagine a dental clinic called BrightSmile Dental. If an answer names it among clinics to consider for teeth whitening, that is a brand mention. If the sources link to its teeth-whitening page, that is a website citation. The response could do both, recommend the clinic while citing another site, or cite its article without naming the clinic prominently.</p>
+      <p><strong>Also read:</strong> <a href="/resources/what-is-brand-mention-coverage">What Is Brand Mention Coverage and How Do You Measure It?</a></p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">One without the other</span><h2>When Mentions and Citations Do Not Match</h2></div>
+    <div class="prose">
+      <h3>When Your Brand Is Mentioned but Your Website Isn't Cited</h3>
+      <p>Your business can appear in an AI answer while the supporting links point to an industry publication, comparison website, business directory, review platform or competitor website. Your brand is visible, but your site is not receiving the citation.</p>
+      <h3>When Your Website Is Cited Without Your Brand Being Mentioned</h3>
+      <p>AI can cite your website without clearly naming your business. An article on a dental clinic's site about teeth whitening may appear as a source even if the answer never mentions the clinic by name. The website has source visibility, but the brand may be less prominent.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Owned visibility</span><h2>Why Website Citation Rate Matters for SMEs</h2></div>
+    <div class="prose">
+      <p>Website Citation Rate shows whether your own website is being surfaced as a source in AI answers. Your site is where you control what customers see next.</p>
+      <p>If AI mentions your business but links to a competitor, directory or another third party, that source becomes the customer's next possible destination. A visitor reaching a dental clinic's website can read about treatment, check pricing or payment options, learn about dentists, view opening hours and location details, or make an appointment.</p>
+      <p><strong>Mention → Citation → Visit</strong></p>
+      <ul><li><strong>Mention:</strong> AI talks about your business.</li><li><strong>Citation:</strong> AI points to your website.</li><li><strong>Visit:</strong> Someone follows that link.</li></ul>
+      <p>A mention creates visibility, while a citation gives potential customers a path back to your owned website.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Four patterns</span><h2>What Different Citation and Mention Patterns Can Tell You</h2></div>
+    <div class="prose">
+      <h3>High Mentions + High Citations</h3><p>Your brand appears in AI answers and your website is cited regularly. You have both brand visibility and source visibility.</p>
+      <h3>High Mentions + Low Citations</h3><p>AI recognises your brand, while other websites receive more of the source links.</p>
+      <h3>Low Mentions + High Citations</h3><p>Your content is useful as a source, even though your brand is less prominent in the generated answer.</p>
+      <h3>Low Mentions + Low Citations</h3><p>Your business has limited visibility on both fronts for the questions being tracked.</p>
+      <p>These combinations show where the gap sits and can point to different fixes.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Zicy Shows Whether AI Is Citing Your Website</h2></div>
+    <div class="prose">
+      <p>Zicy uses Web Citation Rate as the headline measure, while Citation Analysis explains what is happening behind it. On the Overview dashboard, Web Citation Rate shows how often responses across the tracked platforms link to your website.</p>
+      <PostFigure src={rateImg} cropLeftPercent={13} alt="Zicy Overview dashboard showing Web Citation Rate across tracked AI responses" caption="Zicy's Web Citation Rate shows how often tracked AI responses link to your website." />
+      <p>If BrightSmile Dental has a Web Citation Rate of 41.92%, its website was cited in roughly 42 of every 100 tracked AI responses. This does not mean 42% of people clicked; it describes how often the site appeared as a cited source.</p>
+      <h3>Citation Analysis</h3>
+      <p>Citation Analysis breaks eligible analyses into three signals:</p>
+      <ul>
+        <li><strong>Narrative Control:</strong> how often your own website appears in the citations.</li>
+        <li><strong>Competitor Share:</strong> how often a competitor is cited while your website is not.</li>
+        <li><strong>Uncited Rate:</strong> how often another source is cited, but neither your site nor a competitor's site receives the citation.</li>
+      </ul>
+      <PostFigure src={analysisImg} cropLeftPercent={13} alt="Zicy Citation Analysis showing source credit across owned, competitor and other domains" caption="Citation Analysis shows who receives the source credit, including your own site, competitors and other cited domains." />
+      <p>You can then examine the wider mix of owned, earned and competitor sources, the domains cited most often, and the questions where competitors are cited instead of you.</p>
+      <p>BrightSmile Dental might discover that another clinic is repeatedly cited for dental-implant questions, while health publications and directories dominate teeth-whitening questions.</p>
+      <ul><li><strong>Web Citation Rate:</strong> How often is AI linking to my website?</li><li><strong>Citation Analysis:</strong> When AI cites sources around my brand, who gets the credit and on which questions?</li></ul>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common questions</span><h2>FAQs</h2></div>
+    <div class="prose">
+      <h3>Can AI Cite a Page Other Than My Homepage?</h3>
+      <p>Yes. AI can cite relevant blog articles, product pages, service pages or FAQs. A specific page may be more useful than the homepage when the user asks a detailed question.</p>
+      <h3>Why Might a Competitor Be Cited Instead of My Website?</h3>
+      <p>A competitor may have a page that better matches the question, or the platform may surface its content for that response. Look at which page was cited and what question triggered it to make a useful comparison.</p>
+      <h3>Does a Website Citation Mean Someone Visited My Site?</h3>
+      <p>No. A citation gives someone a route to your website; it does not mean they clicked. Measure citation visibility and website traffic separately.</p>
+      <h3>Is an AI Citation the Same as a Backlink?</h3>
+      <p>No. A backlink is published on another webpage. An AI citation appears inside an AI-generated response and may change with the question, platform or time. Both can provide a route to your website, but they are different types of visibility.</p>
+      <h3>Can Website Citation Rate Change Even if My Website Stays the Same?</h3>
+      <p>Yes. AI answers and surfaced sources can change even without website changes. The rate can also shift when you track different questions because the set of measured responses changes.</p>
+      <p>Keep a stable prompt baseline so changes are easier to interpret. <a href="/resources/how-to-keep-stable-ai-prompt-baseline-and-know-when-to-reset-it">Learn when to maintain or reset that baseline</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>Check Who Gets the Citation</h2></div>
+    <div class="prose">
+      <p>A brand mention tells you that AI is talking about your business. A website citation tells you that AI is also pointing back to your site.</p>
+      <p>For SMEs, both matter because they reveal different parts of AI visibility. When your business appears in an answer, do not stop at spotting your name. Check who gets the citation too.</p>
+      <p><strong>Continue with:</strong> <a href="/resources/how-to-find-the-right-ai-prompts-to-track-for-your-business">How to Find the Right AI Prompts to Track for Your Business</a> and <a href="/resources/how-to-check-your-business-across-ai-answer-engines">How to Check Your Business Across AI Answer Engines</a>.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>Measure who gets the source credit<br />{' '}when AI answers customer questions.</h2>
+    <p>Zicy helps you track Website Citation Rate and inspect the owned, competitor and third-party sources behind each result.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .table-wrap{overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:130px}.prose h3{font-size:19px}}
+</style>

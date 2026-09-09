@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/ai-visibility-trends/daily-noise-vs-trend.jpg';
+import trendsImg from '../../assets/resources/ai-visibility-trends/performance-trends-dashboard.png';
+
+const metaTitle = 'How to Read Daily, Weekly and Monthly AI Visibility Trends';
+const title = 'How to Read Daily, Weekly and Monthly AI Visibility Trends';
+const description = "Learn how to stop reacting to one day's number and start reading your AI visibility data correctly so you can see whether your business is actually improving over time.";
+const url = `${SITE.url}/resources/how-to-read-daily-weekly-and-monthly-ai-visibility-trends`;
+const author = { '@type': 'Person', name: 'Deeba Sri' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: title, type: 'image/jpeg' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">AI Visibility Trends</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>How to Read Daily, Weekly and Monthly AI Visibility Trends</h1>
+    <p class="answer">Learn how to stop reacting to one day's number and start reading your AI visibility data correctly so you can see whether your business is actually improving over time.</p>
+    <p class="byline">By Deeba Sri &middot; 9 September 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="AI visibility trend rising from 45 percent to 53 percent over four weeks" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>One day's number tells you almost nothing. What matters is whether your business shows up more in AI answers over weeks and months.</li>
+      <li>AI answers change from day to day. A drop today does not always mean something went wrong.</li>
+      <li>Use daily numbers to spot unusual changes, weekly numbers to see direction and monthly numbers to measure real progress.</li>
+      <li>Compare this week with last week and this month with last month, rather than today with yesterday.</li>
+      <li>When a number changes, find the specific question that caused it and read what the AI said.</li>
+      <li>Small, steady improvement over three months means more than one good day followed by a drop.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Wait for the pattern</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>Imagine you own a small bakery in Subang Jaya. One Tuesday morning, your sales are double what they normally are.</p>
+      <p>You feel great, but you would not call your landlord and ask for a bigger space yet. Maybe it was the school holidays. Maybe someone shared your post. Maybe it was just a good day. You would wait before making a big decision.</p>
+      <p>Reading your AI visibility numbers works the same way.</p>
+      <p>AI visibility means how often your business appears when someone asks an AI app a question related to your type of business. When someone asks ChatGPT “Which bakeries in Subang Jaya are good for custom cakes?”, does your bakery get mentioned?</p>
+      <p>Business owners often check the number every day and react to every small change. This guide explains what daily, weekly and monthly numbers mean and how to use all three together.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Four signals</span><h2>What Is Being Measured?</h2></div>
+    <div class="prose">
+      <p>When you track AI visibility, four things are measured:</p>
+      <ul>
+        <li><strong><a href="/resources/what-is-brand-mention-coverage">Mention Coverage</a>:</strong> Out of all tracked questions, how often does your business get named? If it appears in 6 of 10 answers, Mention Coverage is 60%.</li>
+        <li><strong><a href="/resources/what-is-website-citation-rate">Web Citation Rate</a>:</strong> How often does AI also include a link to your website? Being named is one thing. Having AI point people to your site is another.</li>
+        <li><strong><a href="/resources/what-is-ai-share-of-voice">Share of Voice</a>:</strong> Compared with competitors, how much space does your business get in the AI conversation?</li>
+        <li><strong><a href="/resources/what-is-average-ai-ranking">Average AI Ranking</a>:</strong> When your business is listed with others, where does it tend to appear? A lower number means your business appears earlier.</li>
+      </ul>
+      <p>These four numbers are checked automatically every day across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. Daily updates do not make each day's number a final verdict.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Normal movement</span><h2>Why Your Numbers Go Up and Down Every Day</h2></div>
+    <div class="prose">
+      <p>AI apps do not keep a fixed list of businesses to recommend. Each time someone asks a question, the AI generates a fresh answer. The same question can get slightly different answers on different days.</p>
+      <p>Think of asking a friend for a recommendation on Monday. They suggest three places. Ask again on Friday and they might mention a fourth they just heard about. AI behaves in a similar way: generally consistent, but not perfectly identical every day.</p>
+      <p>It is also why <a href="/resources/how-to-compare-ai-visibility-across-chatgpt-gemini-perplexity-and-google-ai">one platform can show different results from another</a>. Your business might appear in ChatGPT but not Gemini for the same question on the same day.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Spot anomalies</span><h2>How to Read Daily Numbers</h2></div>
+    <div class="prose">
+      <p>Daily numbers are useful for one thing: spotting something very unusual.</p>
+      <p>If Mention Coverage drops sharply overnight and stays low the next day, that is worth investigating. A source that used to mention your business may no longer be available, or a competitor may be receiving new attention.</p>
+      <p>If the number moves slightly up one day and slightly down the next, that is normal. There is nothing to fix.</p>
+      <p class="rule"><strong>Daily rule:</strong> Look for large, sudden changes that last more than one day. Ignore small movements up and down.</p>
+      <p>Do not change your business or website based on a single bad day. Wait to see whether the change sticks.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">See direction</span><h2>How to Read Weekly Numbers</h2></div>
+    <div class="prose">
+      <p>Weekly numbers are where you start to see whether things are moving in the right direction.</p>
+      <p>If Mention Coverage moves from 45% to 48%, 51% and then 53% over four weeks, the picture is clear even with daily ups and downs: your business is appearing in more AI answers.</p>
+      <p>If it moves from 55% to 52%, 49% and then 46%, each week looks close to the previous one, but the four-week pattern is moving in the wrong direction.</p>
+      <p class="rule"><strong>Weekly rule:</strong> Compare this week with last week. Direction matters more than the exact number.</p>
+      <p>Pick one consistent day each week to check.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Measure progress</span><h2>How to Read Monthly Numbers</h2></div>
+    <div class="prose">
+      <p>Monthly numbers are where you measure real progress.</p>
+      <p>A full month gives enough time for real changes to start showing in results. If you updated your website in January, February's numbers may begin to show whether the pattern changed.</p>
+      <p class="rule"><strong>Monthly rule:</strong> Compare this month with last month. This is your real progress check.</p>
+      <p>Monthly comparisons only become useful after at least two full months of data. In your first month, focus on weekly direction.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Three-month example</span><h2>What Steady Progress Looks Like</h2></div>
+    <div class="prose"><p>Suppose you run a small HR training company in Kuala Lumpur and start tracking AI visibility in January.</p></div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">Month</th><th scope="col">Mention Coverage</th><th scope="col">Web Citation Rate</th><th scope="col">Share of Voice</th></tr></thead><tbody>
+      <tr><td>January</td><td>30%</td><td>12%</td><td>8%</td></tr><tr><td>February</td><td>38%</td><td>16%</td><td>11%</td></tr><tr><td>March</td><td>45%</td><td>22%</td><td>15%</td></tr>
+    </tbody></table></div>
+    <div class="prose">
+      <p>In January, your business appeared in 30 out of every 100 tracked AI answers. By March, it appeared in 45. Your website is being linked more often, and you are gaining a larger share of the conversation compared with competitors.</p>
+      <p>Steady progress over three months is more meaningful than one great day followed by a slow decline.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Find the cause</span><h2>What to Do When Your Numbers Drop</h2></div>
+    <div class="prose">
+      <p>The headline number alone does not tell you what to do. Look at the specific questions that make up that number.</p>
+      <p>Suppose 10 questions are tracked. Last month, your business appeared in 6 answers. This month, it appears in only 4. The two questions where your business stopped appearing are where the explanation is hiding.</p>
+      <p>Read what AI said and ask:</p>
+      <ul><li>Did a competitor start appearing instead?</li><li>Did AI stop recommending any businesses for those questions?</li><li>Did the answer change completely?</li></ul>
+      <p>That is where the useful information is.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Your baseline</span><h2>What to Record Before Anything Else</h2></div>
+    <div class="prose">
+      <p>In your first two to four weeks, let the numbers collect. You need a starting point before you can read a trend.</p>
+      <p>Write down these four numbers at the end of week one:</p>
+      <ul><li>Mention Coverage: what percentage?</li><li>Web Citation Rate: what percentage?</li><li>Share of Voice: what percentage?</li><li>Average AI Ranking: what position?</li></ul>
+      <p>These are your starting numbers. When results improve from here, your efforts may be working. When they drop below here, something needs attention.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Zicy Helps You See Trends in One Place</h2></div>
+    <PostFigure src={trendsImg} alt="Zicy Performance Trends showing Share of Voice and Brand Mentions over time" caption="Zicy's Performance Trends shows Share of Voice and Brand Mentions with Daily, Weekly and Monthly views." />
+    <div class="prose">
+      <p>For a small business owner, checking five different AI apps every week is not realistic. Zicy's Performance Trends feature does that work for you.</p>
+      <p>Zicy tracks your questions across all five AI apps every day and shows the results in Daily, Weekly and Monthly views.</p>
+      <p>The trend chart shows how often your business is mentioned and how much of the conversation it captures compared with competitors.</p>
+      <p>Add Marker lets you tag the date you made a website change and see whether numbers moved afterwards. When a number changes, you can open an individual question and read its most recent AI answer.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Three steps</span><h2>What to Do First</h2></div>
+    <div class="prose"><ol>
+      <li><strong>First two to four weeks:</strong> Let the numbers collect. Record your starting figures at the end of week one and avoid reacting yet.</li>
+      <li><strong>End of your first month:</strong> Compare week one with week four. Even a small improvement is a useful early sign.</li>
+      <li><strong>End of month two and beyond:</strong> Compare month to month. Ask which questions include or miss your business, whether citation rate is rising, whether you are gaining ground against competitors, and whether changes you made coincide with movement.</li>
+    </ol></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Side-by-side</span><h2>Daily, Weekly and Monthly: The Simple Difference</h2></div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">How to use it</th><th scope="col">Daily numbers</th><th scope="col">Weekly numbers</th><th scope="col">Monthly numbers</th></tr></thead><tbody>
+      <tr><th scope="row">What to use them for</th><td>Spotting big sudden changes</td><td>Seeing if things are moving up or down</td><td>Measuring real progress</td></tr>
+      <tr><th scope="row">How often to check</th><td>Only when something looks very different</td><td>Once a week, on the same day</td><td>At the start of each new month</td></tr>
+      <tr><th scope="row">What to compare</th><td>Today versus the past few days</td><td>This week versus last week</td><td>This month versus last month</td></tr>
+      <tr><th scope="row">What to do if numbers drop</th><td>Wait a day or two before reacting</td><td>Look for a pattern over several weeks</td><td>Find which questions changed and why</td></tr>
+      <tr><th scope="row">What to ignore</th><td>Small up-and-down movements</td><td>One bad week in an otherwise improving month</td><td>One bad month after steady improvement</td></tr>
+    </tbody></table></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>Putting It All Together</h2></div>
+    <div class="prose">
+      <p>Your AI visibility number is not fixed. It moves. Some days go up and others go down. That is normal.</p>
+      <p>What matters is the same thing that matters for any small business: the pattern over weeks and months, rather than what happened on one Tuesday morning.</p>
+      <p>The bakery owner who sees double sales on a Tuesday does not call the landlord that afternoon. She waits, looks for the pattern and asks whether it happened again.</p>
+      <p>Read your AI visibility numbers the same way.</p>
+      <p>When a number changes, do not stop at the score. Go to the specific question behind it and read what the AI actually said.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See the direction behind<br />{' '}your daily AI visibility data.</h2>
+    <p>Zicy turns daily results into weekly and monthly trends, helping you spot lasting changes and investigate the questions behind them.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .rule{max-width:680px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink)}
+  .table-wrap{overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:130px}.prose h3{font-size:19px}}
+</style>

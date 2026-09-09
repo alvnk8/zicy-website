@@ -1,5 +1,5 @@
 // Single source of truth for the /resources post listing and the Blog node's blogPost
-// members. Generated from the 19 migrated post pages under src/pages/resources/*.astro.
+// members. Generated from the migrated post pages under src/pages/resources/*.astro.
 // resources.astro asserts at build time that this list matches the actual page files
 // (import.meta.glob), so it cannot silently drift. One entry per live post.
 export interface ResourcePost {
@@ -12,6 +12,102 @@ export interface ResourcePost {
 }
 
 export const RESOURCE_POSTS: ResourcePost[] = [
+  {
+    "slug": "how-to-read-a-single-tracked-prompt-and-see-the-exact-ai-answers-behind-your-scores",
+    "title": "How to Read a Single Tracked Prompt and See the Exact AI Answers Behind Your Scores",
+    "description": "Learn how to stop trusting a dashboard number and start reading the actual AI answers behind your scores so you can see exactly what changed and why.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-09",
+    "authorName": "Deeba Sri"
+  },
+  {
+    "slug": "how-to-read-daily-weekly-and-monthly-ai-visibility-trends",
+    "title": "How to Read Daily, Weekly and Monthly AI Visibility Trends",
+    "description": "Learn how to stop reacting to one day's number and start reading your AI visibility data correctly so you can see whether your business is actually improving over time.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-09",
+    "authorName": "Deeba Sri"
+  },
+  {
+    "slug": "how-to-compare-ai-visibility-across-chatgpt-gemini-perplexity-and-google-ai",
+    "title": "How to Compare Your AI Visibility Across ChatGPT, Gemini, Perplexity and Google AI",
+    "description": "Learn how to compare your AI visibility across ChatGPT, Gemini, Perplexity and Google AI using mentions, citations, rankings and Share of Voice.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-09",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "what-is-average-ai-ranking",
+    "title": "What Is Average AI Ranking and How Should a Small Business Read It?",
+    "description": "Learn what Average AI Ranking means for your business, why appearing third or fourth in an AI answer is different from appearing first, and how to read it.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-09",
+    "authorName": "Deeba Sri"
+  },
+  {
+    "slug": "what-is-ai-share-of-voice",
+    "title": "What Is AI Share of Voice? A Simple Guide for Small Businesses",
+    "description": "Learn what AI Share of Voice (SOV) means, what affects it, and how to compare competitors and see where your brand stands with Zicy.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-09",
+    "authorName": "Nabila Wawan"
+  },
+  {
+    "slug": "what-is-website-citation-rate",
+    "title": "What Is Website Citation Rate and Why Is It Different From a Brand Mention?",
+    "description": "Learn what Website Citation Rate means, how it differs from a brand mention, and how Zicy helps your business track both to understand its AI visibility.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-09",
+    "authorName": "Nabila Wawan"
+  },
+  {
+    "slug": "what-is-brand-mention-coverage",
+    "title": "What Is Brand Mention Coverage and How Do You Measure It?",
+    "description": "Discover how Brand Mention Coverage measures your presence in AI answers, and how Zicy helps you monitor prompts, platforms and visibility trends daily.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-09",
+    "authorName": "Nabila Wawan"
+  },
+  {
+    "slug": "how-to-track-ai-visibility-across-different-customer-languages",
+    "title": "How to Track AI Visibility Across Different Customer Languages",
+    "description": "Learn how to track AI visibility across customer languages, build multilingual prompts and uncover brand, citation and competitor gaps hidden by English-only tracking.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-09",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "how-to-track-ai-visibility-separately-across-different-markets",
+    "title": "How to Track AI Visibility Separately Across Different Markets",
+    "description": "Learn how to track AI visibility across different markets, compare local competitors and uncover regional gaps hidden by your overall AI score.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-09",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "how-to-keep-stable-ai-prompt-baseline-and-know-when-to-reset-it",
+    "title": "How to Keep a Stable AI Prompt Baseline and Know When to Reset It",
+    "description": "Learn how to build a stable AI prompt baseline, avoid misleading visibility comparisons and know when your business should reset its tracked prompts.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-09",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "how-to-group-ai-prompts-by-product-service-topic-and-buyer-intent",
+    "title": "How to Group AI Prompts by Product, Service, Topic and Buyer Intent",
+    "description": "Learn how to group AI prompts by product, service, topic and buyer intent so you can measure the AI visibility that matters to your business.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-09",
+    "authorName": "Ritu Khanna"
+  },
+  {
+    "slug": "how-to-build-simple-prompt-set",
+    "title": "How to Build a Simple Prompt Set Around Problems, Comparisons, Reviews, Pricing and Alternatives",
+    "description": "Learn how to build a simple AI prompt set around customer problems, comparisons, reviews, pricing and alternatives, with examples for SMEs.",
+    "articleSection": "Guides",
+    "datePublished": "2026-09-09",
+    "authorName": "Shangkari Goverdhanlal"
+  },
   {
     "slug": "how-to-use-branded-and-non-branded-prompts-without-distorting-ai-visibility",
     "title": "How To Use Branded And Non-Branded Prompts Without Distorting Your AI Visibility",

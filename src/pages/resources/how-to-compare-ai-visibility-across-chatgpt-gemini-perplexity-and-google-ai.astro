@@ -1,0 +1,275 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/compare-ai-visibility-platforms/compare-ai-visibility-platforms.png';
+import dashboardImg from '../../assets/resources/compare-ai-visibility-platforms/platform-filter-dashboard.png';
+
+const metaTitle = 'How to Compare Your AI Visibility Across ChatGPT, Gemini, Perplexity & Google AI';
+const title = 'How to Compare Your AI Visibility Across ChatGPT, Gemini, Perplexity and Google AI';
+const description = 'Learn how to compare your AI visibility across ChatGPT, Gemini, Perplexity and Google AI using mentions, citations, rankings and Share of Voice.';
+const url = `${SITE.url}/resources/how-to-compare-ai-visibility-across-chatgpt-gemini-perplexity-and-google-ai`;
+const author = { '@type': 'Person', name: 'Ritu Khanna' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: title, type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Compare AI Platforms</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>How to Compare Your AI Visibility Across ChatGPT, Gemini, Perplexity and Google AI</h1>
+    <p class="answer">Learn how to compare your AI visibility across ChatGPT, Gemini, Perplexity and Google AI using mentions, citations, rankings and Share of Voice.</p>
+    <p class="byline">By Ritu Khanna &middot; 9 September 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="Comparison of brand visibility across ChatGPT, Gemini, Perplexity and Google AI" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>Your AI visibility varies across platforms. A business that appears frequently in ChatGPT may be much less visible in Gemini, Perplexity or Google AI.</li>
+      <li>Compare platforms using the same tracked prompts, market and language wherever possible. Otherwise, you may be comparing different customer journeys rather than different AI platforms.</li>
+      <li>Look beyond whether your brand appears. Compare Brand Mention Coverage, Website Citation Rate, Average AI Ranking and Share of Voice across platforms.</li>
+      <li>A weak result on one platform does not automatically mean something is wrong with your website. Look at the actual answers, competitors and cited sources before deciding what needs fixing.</li>
+      <li>Do not rely on a handful of manual searches. Individual AI answers can vary, so a consistent tracked prompt set gives you a much more useful view.</li>
+      <li>The goal is to understand where your business is visible, where competitors are stronger and which gaps matter commercially.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Different engines, different answers</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>You ask ChatGPT: “Which accounting software is suitable for a small business in Malaysia?” Your brand appears. Excellent.</p>
+      <p>Then you ask Gemini the same question. Your brand is missing. You try Perplexity. This time, your brand appears, but your website is not cited. Then Google AI shows two competitors prominently while your company is nowhere to be seen.</p>
+      <p>Which result tells you your “real” AI visibility? All of them do.</p>
+      <p>Customers may discover businesses through ChatGPT, Gemini, Perplexity, Google AI Overviews or Google AI Mode, and those experiences do not necessarily produce the same answer.</p>
+      <p>For an SME, checking ChatGPT once and seeing a mention is not enough. You need to understand where you are visible, where you are weak, who appears instead, and what those differences can tell you.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">The comparison</span><h2>What Does It Mean to Compare AI Visibility Across Platforms?</h2></div>
+    <div class="prose">
+      <p>It means measuring how your brand performs for a defined set of customer questions across different AI answer experiences.</p>
+      <p>Suppose you track 50 important questions customers may ask about your category. You then examine how your brand performs across:</p>
+      <ul><li>ChatGPT;</li><li>Gemini;</li><li>Perplexity;</li><li>Google AI Overviews; and</li><li>Google AI Mode.</li></ul>
+      <p>You are measuring whether each platform surfaces your business when customers ask commercially relevant questions, not simply whether it knows your company exists.</p>
+      <p>An AI system may know plenty about Nike. But if Nike never appears for the particular questions being measured, its visibility for that prompt set would still be weak.</p>
+      <p>For an SME, ask: “Does my business appear when potential customers ask relevant questions about products and services like mine?” Then ask that question across the different AI platforms.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Platform differences</span><h2>Why Can Your Visibility Differ Between ChatGPT, Gemini, Perplexity and Google AI?</h2></div>
+    <div class="prose">
+      <p>These are different products. They do not all find, process and present information in exactly the same way.</p>
+      <p>ChatGPT Search can search the web for current information and provide citations and links to relevant sources. Search results and citations can sometimes be incomplete, outdated or incorrect, which is one reason important information should be checked against the underlying sources.</p>
+      <p>Perplexity describes itself as an AI-powered search engine that searches the web and produces conversational answers backed by citations to original sources.</p>
+      <p>Google's AI Mode uses what Google calls query fan-out. It can divide a question into subtopics, issue multiple searches and bring the information together into an AI-powered response. It can also draw on Google's broader information systems, including web content, Knowledge Graph information and other data sources.</p>
+      <p>The useful point for a small business is simpler: different AI experiences can arrive at different answers, so visibility needs to be measured across them rather than assumed from one.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Two Google experiences</span><h2>What Is the Difference Between Google AI Overviews and Google AI Mode?</h2></div>
+    <div class="prose">
+      <p>Businesses often treat Google AI as a single category, but there are two experiences worth distinguishing.</p>
+      <h3>Google AI Overviews</h3>
+      <p>AI Overviews can appear within regular Google Search results and provide an AI-generated summary for searches where Google determines an AI response may be helpful.</p>
+      <h3>Google AI Mode</h3>
+      <p>AI Mode is a more conversational AI search experience. Users can ask longer or more complex questions and continue with follow-ups. Google says it uses query fan-out to break questions into subtopics and search across them.</p>
+      <p>When comparing platforms, do not automatically treat every Google AI experience as identical.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Consistent measurement</span><h2>Why Isn't Checking Your Brand Manually Enough?</h2></div>
+    <div class="prose">
+      <p>Manual checks are useful, but they answer a narrow question: “What happened when I asked this particular question this particular time?” That is not the same as measuring AI visibility.</p>
+      <p>If you ask ChatGPT three questions and appear in two, you might conclude that ChatGPT visibility is excellent. But customers may ask dozens of important questions involving recommendations, comparisons, prices, alternatives, problems, reviews, specific products and specific services.</p>
+      <p>You could be visible for general questions but absent from high-value buying questions. Or you may have chosen three prompts where you already perform well. A <a href="/resources/how-to-keep-stable-ai-prompt-baseline-and-know-when-to-reset-it">defined, stable prompt set</a> reduces this cherry-picking.</p>
+      <p>Instead of asking, “Can I make my brand appear?”, ask, “How consistently does my brand appear across the customer questions we decided were important?”</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Fair comparisons</span><h2>What Should Stay the Same When You Compare AI Platforms?</h2></div>
+    <div class="prose">
+      <p>Where you want a fair platform comparison, keep the measurement conditions reasonably consistent.</p>
+      <p>Tracking “Which payroll software is suitable for Malaysian SMEs?” across ChatGPT, Gemini, Perplexity and Google AI gives you a useful comparison.</p>
+      <p>Measuring 30 Malaysian payroll prompts on ChatGPT, 20 Singapore HR prompts on Gemini and 15 general accounting prompts on Perplexity does not. The scores cannot tell you whether the difference comes from the platform or the questions.</p>
+      <p>Keep these consistent where appropriate:</p>
+      <ul><li>Prompt set</li><li>Market</li><li>Language</li><li>Measurement period</li><li>Brand and competitor definitions</li></ul>
+      <p>You want the main changing variable to be the AI platform.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Four measurements</span><h2>Which AI Visibility Metrics Should You Compare?</h2></div>
+    <div class="prose">
+      <h3>1. Brand Mention Coverage</h3>
+      <p><a href="/resources/what-is-brand-mention-coverage">Brand Mention Coverage</a> answers: how often did this platform mention my brand across the tracked answers?</p>
+      <p>Imagine you track 100 prompts:</p>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">Platform</th><th scope="col">Brand Mention Coverage</th></tr></thead><tbody>
+      <tr><td>ChatGPT</td><td>68%</td></tr><tr><td>Gemini</td><td>51%</td></tr><tr><td>Perplexity</td><td>62%</td></tr><tr><td>Google AI Overviews</td><td>39%</td></tr><tr><td>Google AI Mode</td><td>55%</td></tr>
+    </tbody></table></div>
+    <div class="prose">
+      <p>Your brand appears more consistently in ChatGPT than in Google AI Overviews for this tracked set. The figures do not yet explain why; that requires deeper investigation.</p>
+      <h3>2. Website Citation Rate</h3>
+      <p>A brand mention and a <a href="/resources/what-is-website-citation-rate">website citation</a> are not the same thing. An answer may name your company while linking to a competitor, an industry article or a review site.</p>
+      <p>Perplexity explicitly builds source citations into its search experience, while ChatGPT Search can also provide citations and a Sources panel for web-search answers.</p>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">Platform</th><th scope="col">Mention Coverage</th><th scope="col">Website Citation Rate</th></tr></thead><tbody>
+      <tr><td>ChatGPT</td><td>68%</td><td>31%</td></tr><tr><td>Gemini</td><td>51%</td><td>25%</td></tr><tr><td>Perplexity</td><td>62%</td><td>48%</td></tr><tr><td>Google AI</td><td>44%</td><td>36%</td></tr>
+    </tbody></table></div>
+    <div class="prose">
+      <p>ChatGPT gives you the strongest mention visibility, while Perplexity gives your website the strongest citation visibility. Both are useful findings.</p>
+      <h3>3. Average AI Ranking</h3>
+      <p>When several brands appear in an answer, where does yours tend to appear? Suppose your <a href="/resources/what-is-average-ai-ranking">Average AI Ranking</a> is 1.9 on ChatGPT, 3.6 on Gemini and 2.4 on Perplexity.</p>
+      <p>Your brand appears across all three, but Gemini tends to position competitors ahead of you. That is a different problem from being absent entirely. Remember: a lower Average AI Ranking is better.</p>
+      <h3>4. AI Share of Voice</h3>
+      <p><a href="/resources/what-is-ai-share-of-voice">Share of Voice</a> adds competitive context. It asks how much of the tracked competitive AI conversation your brand captures relative to others.</p>
+      <p>If ChatGPT SOV is 18%, Gemini is 9% and Perplexity is 16%, your Gemini weakness is visible in another metric. The next question is which competitors are taking that Share of Voice.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Example review</span><h2>What Does a Good Platform Comparison Actually Look Like?</h2></div>
+    <div class="prose"><p>Consider a Malaysian HR software company tracking the same 60 buyer-relevant prompts across its major AI platforms.</p></div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">Platform</th><th scope="col">Mention Coverage</th><th scope="col">Citation Rate</th><th scope="col">Avg. Rank</th><th scope="col">SOV</th></tr></thead><tbody>
+      <tr><td>ChatGPT</td><td>72%</td><td>38%</td><td>2.0</td><td>21%</td></tr><tr><td>Gemini</td><td>43%</td><td>19%</td><td>3.5</td><td>10%</td></tr><tr><td>Perplexity</td><td>65%</td><td>52%</td><td>2.3</td><td>18%</td></tr><tr><td>Google AI Overviews</td><td>36%</td><td>29%</td><td>3.1</td><td>9%</td></tr><tr><td>Google AI Mode</td><td>54%</td><td>35%</td><td>2.7</td><td>14%</td></tr>
+    </tbody></table></div>
+    <div class="prose">
+      <p>There is no single conclusion such as “Our AI visibility is good.” Instead:</p>
+      <ul><li><strong>ChatGPT:</strong> Strongest overall brand presence.</li><li><strong>Perplexity:</strong> Strong visibility and particularly strong website citation performance.</li><li><strong>Gemini:</strong> The brand appears less frequently and tends to sit behind more competitors.</li><li><strong>Google AI Overviews:</strong> Weakest mention visibility in this tracked set.</li><li><strong>Google AI Mode:</strong> Middle of the pack.</li></ul>
+      <p>Now the business knows where to investigate. That is more useful than one combined visibility percentage.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Diagnose first</span><h2>What Should You Do When One Platform Is Much Weaker?</h2></div>
+    <div class="prose">
+      <p>Do not immediately start “optimising for Gemini” or “optimising for ChatGPT”. First diagnose the difference.</p>
+      <h3>Check Which Prompts Are Weak</h3>
+      <p>Your Gemini score may be low overall, but a topic breakdown could reveal strong payroll prompts, moderate leave-management prompts and very weak HR compliance prompts. Now you have a topic-level gap rather than a vague “Gemini problem”.</p>
+      <h3>Check Which Competitors Appear</h3>
+      <p>Find which competitor appears most often, what the platform associates it with, whether the same competitor dominates elsewhere, and whether different competitors win on different platforms.</p>
+      <h3>Check the Cited Sources</h3>
+      <p>Perplexity may repeatedly cite your guides, while Gemini surfaces industry publications and Google AI links to comparison sites. These are clues about the source environment surrounding each answer set.</p>
+      <p>Ask what sources seem to shape the conversation and why your brand is represented well in some but not others. That leads to a more useful investigation.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Underlying gaps</span><h2>Should You Optimise Separately for Every AI Platform?</h2></div>
+    <div class="prose">
+      <p>Not in the simplistic sense of creating a ChatGPT page, Gemini page, Perplexity page or Google AI page for the same topic. That quickly becomes unmanageable and can create overlapping content.</p>
+      <p>Look for the underlying visibility gap. If your company is weak across several platforms for “best payroll software for restaurants”, perhaps your website barely explains its restaurant payroll capabilities. The useful action may be to improve the relevant product or industry content.</p>
+      <p>If platforms repeatedly use inaccurate information about your company, the problem may involve unclear or inconsistent business information rather than one AI engine.</p>
+      <p>Platform comparison helps you diagnose. It should not encourage you to create content purely for machines.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Material differences</span><h2>What If You Are Strong on One Platform and Weak on Another?</h2></div>
+    <div class="prose">
+      <p>Ask whether the difference is consistent, substantial and commercially important.</p>
+      <p>A ChatGPT Mention Coverage of 61% and Gemini coverage of 57% may not deserve an emergency strategy. A difference of 74% versus 19% across a stable set of buyer prompts deserves investigation.</p>
+      <p>Likewise, being weak on low-priority informational prompts may matter less than being absent from high-intent questions such as:</p>
+      <ul><li>“Which providers should I shortlist?”</li><li>“What are the best alternatives to X?”</li><li>“Which solution is suitable for a 50-person company?”</li></ul>
+      <p>Prioritise the gaps closest to real business opportunities.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Answers explain</span><h2>Why Should You Compare the Actual AI Answers Too?</h2></div>
+    <div class="prose">
+      <p>Metrics summarise. Answers explain. A Gemini Mention Coverage of 35% tells you there is a gap, but the underlying answers might reveal different situations:</p>
+      <ul>
+        <li><strong>You are completely absent:</strong> AI recommends competitors instead.</li>
+        <li><strong>You appear only occasionally:</strong> Your brand may have a weak association with the topic.</li>
+        <li><strong>You appear but rank low:</strong> AI recognises your relevance but tends to prioritise competitors.</li>
+        <li><strong>You are mentioned but not cited:</strong> The platform knows the brand but relies on other sources.</li>
+        <li><strong>You are mentioned incorrectly:</strong> The visibility exists, but the information itself is problematic.</li>
+      </ul>
+      <p>These require different responses. AI visibility measurement should never stop at the score.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Does Zicy Help You Compare AI Visibility Across Platforms?</h2></div>
+    <PostFigure src={dashboardImg} alt="Zicy Prompt Manager platform filters for ChatGPT, Gemini, Perplexity, Google AI Mode and AI Overview" caption="Zicy lets you filter tracked prompts by AI platform and investigate the answers behind each result." />
+    <div class="prose">
+      <p>Zicy consolidates ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode into a single measurement workflow, eliminating the need to repeatedly run manual searches.</p>
+      <p>The visibility dashboard compares Brand Mention Coverage, Website Citation Rate, Average AI Ranking and AI Share of Voice across the tracked prompt set.</p>
+      <p>The more useful step comes when you move beyond the summary. With Prompt Analysis, you can examine a specific tracked question and see what happened across different engines.</p>
+      <p>For “Which HR software is suitable for SMEs in Malaysia?”, you can investigate whether your brand appeared, its position, whether your website was cited and the underlying AI answer for each engine.</p>
+      <p>Instead of saying “Our Gemini score is bad”, you can ask which questions are missing, which competitors appear instead, whether Gemini understands the business correctly, whether mentions lack citations, and whether the weakness is concentrated around one product or topic.</p>
+      <p>That turns platform comparison into a diagnostic process rather than another dashboard number.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Monthly review</span><h2>A Simple Monthly AI Platform Review for SMEs</h2></div>
+    <div class="prose">
+      <p>A useful monthly review can answer five questions:</p>
+      <ol><li>Which AI platform gives us the strongest Brand Mention Coverage?</li><li>Which gives us the strongest Website Citation Rate?</li><li>Where do we tend to rank highest and lowest?</li><li>Which competitors dominate the platforms where we are weak?</li><li>Which commercially important prompts explain the biggest gaps?</li></ol>
+      <p>Then identify perhaps three actions, not thirty.</p>
+      <ul>
+        <li><strong>Finding:</strong> Gemini visibility is particularly weak for payroll compliance questions.<br /><strong>Action:</strong> Review whether existing payroll content adequately covers those customer needs.</li>
+        <li><strong>Finding:</strong> Perplexity frequently mentions the brand but rarely cites the website for pricing prompts.<br /><strong>Action:</strong> Review whether pricing and product information is sufficiently clear and accessible.</li>
+        <li><strong>Finding:</strong> Competitor X dominates Google AI for SME comparison prompts.<br /><strong>Action:</strong> Examine the relevant answers, cited sources and competitor positioning to understand the gap.</li>
+      </ul>
+      <p>Now the report leads somewhere.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Avoid false certainty</span><h2>What Should You Avoid When Comparing AI Platforms?</h2></div>
+    <div class="prose">
+      <p>The biggest mistake is treating every movement as a conclusion. If ChatGPT visibility rises after you update a page, you can say visibility increased after the change. Be much more cautious about saying the page change caused the increase.</p>
+      <p>Many things can change around an AI answer ecosystem. Avoid:</p>
+      <ul><li>declaring one platform “better” from a handful of prompts;</li><li>changing your prompt set whenever results look poor;</li><li>comparing different markets or languages as though they were identical;</li><li>assuming a mention automatically means a citation;</li><li>treating every platform gap as a content problem; and</li><li>chasing identical scores across every engine.</li></ul>
+      <p>Use the data to find patterns worth investigating, not to manufacture certainty.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Final thoughts</span><h2>Build the Full Platform Picture</h2></div>
+    <div class="prose">
+      <p>There is no single place where your business “ranks in AI”. One customer might ask ChatGPT and see your company first. Another might ask Gemini and never see you. A third might use Perplexity, where your brand appears and your website is cited. Google AI may surface an entirely different competitive set.</p>
+      <p>All of those experiences form part of your AI visibility.</p>
+      <p>Track the same meaningful customer questions across platforms. Compare Brand Mention Coverage, citations, rankings and Share of Voice. Then examine the answers behind the numbers.</p>
+      <p>You do not need identical performance everywhere. You need to know where commercially important gaps exist, why they may be happening and which ones deserve attention first.</p>
+      <p>That is when platform-level AI visibility stops being another marketing metric and starts becoming useful business intelligence.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>Compare the AI platforms<br />{' '}your customers use.</h2>
+    <p>Zicy brings mentions, citations, rankings and Share of Voice into one view, so you can find the platform gaps that matter.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .table-wrap{overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:130px}.prose h3{font-size:19px}}
+</style>

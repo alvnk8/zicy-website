@@ -11,7 +11,7 @@ const description =
 // Drift guard: the post listing and the Blog node's blogPost members are generated from
 // RESOURCE_POSTS. Assert at build time that RESOURCE_POSTS matches the actual post files under
 // src/pages/resources/*.astro, so the two can never silently diverge. import.meta.glob is a
-// single-level glob, so it matches the 19 post pages but not the glossary subdirectory.
+// single-level glob, so it matches the post pages but not the glossary subdirectory.
 const fileSlugs = Object.keys(import.meta.glob('./resources/*.astro'))
   .map((p) => p.split('/').pop()!.replace(/\.astro$/, ''))
   .sort();

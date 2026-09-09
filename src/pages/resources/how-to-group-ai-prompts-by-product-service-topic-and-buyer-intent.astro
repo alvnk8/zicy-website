@@ -1,0 +1,481 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/how-to-group-ai-prompts/prompt-grouping-guide.png';
+import trackedPromptsImg from '../../assets/resources/how-to-group-ai-prompts/tracked-prompts.png';
+import manageTagsImg from '../../assets/resources/how-to-group-ai-prompts/manage-tags.png';
+import addPromptImg from '../../assets/resources/how-to-group-ai-prompts/add-custom-prompt.png';
+
+const metaTitle = 'How to Group AI Prompts by Product, Service, Topic and Buyer Intent';
+const title = 'How to Group AI Prompts by Product, Service, Topic and Buyer Intent';
+const description =
+  'Learn how to group AI prompts by product, service, topic and buyer intent so you can measure the AI visibility that matters to your business.';
+
+const url = `${SITE.url}/resources/how-to-group-ai-prompts-by-product-service-topic-and-buyer-intent`;
+const author = { '@type': 'Person', name: 'Ritu Khanna' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: title,
+      isPartOf: { '@id': blogId },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+      mainEntity: { '@id': `${url}#article` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: title,
+      description,
+      url,
+      datePublished: '2026-09-09',
+      dateModified: '2026-09-09',
+      author,
+      publisher: { '@id': orgId },
+      isPartOf: { '@id': blogId },
+      articleSection: 'Guides',
+      inLanguage: 'en',
+      mainEntityOfPage: url,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}${heroImg.src}`,
+        width: heroImg.width,
+        height: heroImg.height,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+        { '@type': 'ListItem', position: 3, name: title, item: url },
+      ],
+    },
+  ],
+};
+---
+<BaseLayout
+  title={metaTitle}
+  description={description}
+  ogTitle={title}
+  ogImage={{
+    url: `${SITE.url}${heroImg.src}`,
+    width: heroImg.width,
+    height: heroImg.height,
+    alt: 'How to group AI prompts by product, service, topic and buyer intent',
+    type: 'image/png',
+  }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Group AI Prompts</span>
+      </nav>
+      <span class="eyebrow">Guides</span>
+      <h1>How to Group AI Prompts by Product, Service, Topic and Buyer Intent</h1>
+      <p class="answer">Learn how to group AI prompts by product, service, topic and buyer intent so you can measure the AI visibility that matters to your business.</p>
+      <p class="byline">By Ritu Khanna &middot; 9 September 2026</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <PostFigure src={heroImg} alt="Guide to grouping AI prompts by product, service, topic and buyer intent" />
+      <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+      <div class="prose">
+        <ul>
+          <li>An AI prompt is a question or request a potential customer may ask an AI platform such as ChatGPT, Gemini, Perplexity or Google AI.</li>
+          <li>One large prompt list can provide an overall AI visibility score, but it may not show which product, service or part of your business is performing well or poorly.</li>
+          <li>Tags let you analyse related prompts together, such as all questions about one service, product category or buying stage.</li>
+          <li>Product and service tags show where individual offerings gain or lose visibility, while topic tags reveal the subjects AI associates with your business.</li>
+          <li>Buyer-intent tags separate people who are learning from those comparing options or moving closer to a purchase.</li>
+          <li>Keep the system simple. Start with broad groups that answer real business questions.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Why grouping matters</span><h2>Introduction</h2></div>
+      <div class="prose">
+        <p>Imagine you run an accounting firm offering five services. You add 50 questions that potential customers might ask ChatGPT, Gemini and other AI platforms. A month later, your dashboard says your overall AI visibility improved.</p>
+        <p>But what actually improved: bookkeeping, tax advisory, payroll or company incorporation? Are you appearing for general accounting questions while remaining invisible when people are looking for a provider?</p>
+        <p>If all 50 questions sit inside one long list, these questions become difficult to answer. Grouping related prompts can show where your business is visible, where competitors are stronger and where your biggest opportunities may be.</p>
+        <p>For an SME or MSME, this does not require a complicated data system. A few well-chosen groups can turn a messy list of AI questions into useful business intelligence.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Definition</span><h2>First, What Is an AI Prompt?</h2></div>
+      <div class="prose">
+        <p>A prompt is the question or instruction someone gives an AI system. “What is payroll outsourcing?”, “What should I look for when choosing a payroll provider?” and “Which payroll outsourcing companies in Malaysia are suitable for SMEs?” are all prompts.</p>
+        <p>People can ask search and AI systems questions in a natural, conversational way. In May 2026, <a href="https://blog.google/products-and-platforms/products/search/ai-mode-us-insights/">Google reported</a> that the average AI Mode search was three times the length of a traditional Search query. Google also explains that AI Mode uses query fan-out to break a question into subtopics and run several related searches.</p>
+        <p>This is one reason AI visibility measurement needs to go beyond a small collection of traditional SEO keywords.</p>
+        <p>A keyword might be “payroll services Malaysia”. A realistic AI prompt might be: “Which payroll service providers in Malaysia are suitable for a company with fewer than 50 employees?”</p>
+        <p>The second contains much more information about what the person wants.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Measurement</span><h2>Why Do Businesses Track AI Prompts?</h2></div>
+      <div class="prose">
+        <p>You need a consistent way to measure whether your business appears when potential customers ask relevant questions.</p>
+        <p>An HR consultancy could track:</p>
+        <ul>
+          <li>“Which HR consulting firms in Malaysia work with SMEs?”</li>
+          <li>“What are some good HR outsourcing companies for a small business?”</li>
+          <li>“Which companies provide payroll and HR outsourcing in Kuala Lumpur?”</li>
+          <li>“What should I compare when choosing an HR outsourcing company?”</li>
+          <li>“What are alternatives to hiring a full internal HR team?”</li>
+        </ul>
+        <p>You can then examine whether your company appears, which competitors appear, whether AI cites your website and where your business is positioned when several companies are mentioned.</p>
+        <p>Tracking the same useful questions over time lets you observe your AI visibility. As the list grows from 10 questions to 30, 50 or 100, however, the overall number becomes less informative.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Hidden differences</span><h2>Why Does a Long AI Prompt List Become Difficult to Understand?</h2></div>
+      <div class="prose">
+        <p>Imagine a digital agency offering SEO, web design, social media marketing and branding. It tracks 40 prompts and sees 45% <a href="/resources/glossary/ai-mention-coverage">Brand Mention Coverage</a>, meaning the brand appeared in 45% of the tracked AI answers.</p>
+        <div class="table-wrap"><table><thead><tr><th scope="col">Service</th><th scope="col">Prompts tracked</th><th scope="col">Brand appeared</th></tr></thead><tbody>
+          <tr><td>SEO</td><td>10</td><td>8</td></tr><tr><td>Web design</td><td>10</td><td>7</td></tr><tr><td>Social media</td><td>10</td><td>2</td></tr><tr><td>Branding</td><td>10</td><td>1</td></tr>
+        </tbody></table></div>
+        <p>Across all 40 prompts, the agency appeared 18 times. But the overall number hides the useful story: the agency is visible for SEO and web design, while social media and branding are much weaker.</p>
+        <p>“We need to improve our AI visibility” is too broad. “We need to investigate why our social media and branding services rarely appear” gives the business something it can act on.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Tags</span><h2>What Does It Mean to Group AI Prompts?</h2></div>
+      <div class="prose">
+        <p>Grouping means putting prompts that share an important characteristic into the same category, often with tags.</p>
+        <p>Consider three prompts:</p>
+        <ol>
+          <li>“Which accounting firms in Malaysia provide payroll outsourcing?”</li>
+          <li>“What should an SME compare when choosing a payroll outsourcing provider?”</li>
+          <li>“What does payroll outsourcing normally include?”</li>
+        </ol>
+        <p>All three could receive <strong>Service: Payroll</strong>. A fourth prompt about corporate tax could receive <strong>Service: Tax</strong>.</p>
+        <p>A prompt can also tell you more than one thing. The first could be tagged <strong>Service: Payroll</strong> and <strong>Intent: Provider Search</strong>; the second <strong>Intent: Comparison</strong>; and the third <strong>Intent: Learning</strong>.</p>
+        <p>Now you can ask two different questions: Which services are visible, and at which stages of customer decision-making are we visible?</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Four lenses</span><h2>What Are the Four Main Ways to Group AI Prompts?</h2></div>
+      <div class="prose">
+        <p>There is no universal tagging structure. For most SMEs, four types provide a practical starting point:</p>
+        <ul><li>Product</li><li>Service</li><li>Topic</li><li>Buyer intent</li></ul>
+        <p>You may not need all four. A retailer may rely heavily on product tags, a consultancy on service and buyer-intent tags, and a content-heavy business on topic tags.</p>
+        <p>The goal is to organise your data around questions your business wants answered.</p>
+        <p><strong>Also read:</strong> <a href="/resources/how-to-build-simple-prompt-set">How to Build a Simple Prompt Set Around Problems, Comparisons, Reviews, Pricing and Alternatives</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Products</span><h2>1. How Do You Group AI Prompts by Product?</h2></div>
+      <div class="prose">
+        <p>Product grouping is useful when a business sells several distinct products or categories. An office technology supplier might sell printers, scanners, projectors and interactive displays.</p>
+        <p>Its tracked prompts could ask which printer suits a small company, which scanner can digitise many documents, which projector suits a meeting room or which interactive display works for corporate training.</p>
+        <p>Tags such as <strong>Product: Printers</strong>, <strong>Product: Scanners</strong>, <strong>Product: Projectors</strong> and <strong>Product: Interactive Displays</strong> let the company ask:</p>
+        <ul>
+          <li>Are we visible for printers but not projectors?</li>
+          <li>Which product category has the highest AI visibility?</li>
+          <li>Which category is dominated by competitors?</li>
+          <li>Did scanner visibility improve after we updated our content?</li>
+          <li>Are AI platforms citing our projector pages?</li>
+        </ul>
+        <p>Strong printer performance can make an overall score look respectable while hiding weak visibility for a strategic growth product such as interactive displays. Product grouping makes that difference visible.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Services</span><h2>2. How Do You Group AI Prompts by Service?</h2></div>
+      <div class="prose">
+        <p>The same principle applies to service businesses. A digital marketing agency may group questions under SEO, social media, web development, branding and paid advertising.</p>
+        <p>If the agency appears in 70% of SEO answers, 55% of web development answers, 20% of social media answers and 10% of branding answers, that is more useful than knowing only that overall mention coverage is 39%.</p>
+        <p>Ask: <strong>If this part of my business performed badly in AI, would I want to know?</strong> If yes, it probably deserves a group.</p>
+        <p>A law firm might use Corporate Law, Employment Law, Intellectual Property and Conveyancing. A training company might use Leadership Training, Sales Training, Team Building and Communication Training. A software company might use Payroll, HR Management, Attendance and Recruitment.</p>
+        <p>Your tagging structure should resemble how you already think about the business.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Topics</span><h2>What Is the Difference Between a Service Tag and a Topic Tag?</h2></div>
+      <div class="prose">
+        <p>A service is something you sell. A topic is something people discuss or ask about that is relevant to what you sell.</p>
+        <p>An HR consultancy may sell <strong>Service: HR Outsourcing</strong>, while relevant topics include <strong>Employee Retention</strong>, <strong>Labour Compliance</strong>, <strong>Payroll Errors</strong> and <strong>HR Costs</strong>.</p>
+        <p>The business may not sell “employee retention” as a standalone product, but customers may discuss it while researching HR problems and solutions. This distinction is especially useful for content-heavy businesses.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Associations</span><h2>3. How Do You Group AI Prompts by Topic?</h2></div>
+      <div class="prose">
+        <p>Topic tags help you understand which subjects your brand appears around. A cybersecurity company may offer <strong>Service: Cybersecurity Consulting</strong>, while customers ask about ransomware, phishing, data breaches, compliance, cloud security and employee security training.</p>
+        <p><strong>Topic: Ransomware</strong> could group questions about reducing ransomware risk, responding to an attack and finding protection providers. <strong>Topic: Phishing</strong> could group questions about reducing attacks, training employees and finding phishing simulation services.</p>
+        <p>Customers do not always begin by searching for the service you sell. They may start with “Why do our employees keep falling for phishing emails?”, then ask what training reduces the risk, and eventually ask which companies provide that training.</p>
+        <p>Topic grouping explains what the conversation is about. Buyer-intent grouping explains what the customer is trying to do next.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Intent</span><h2>4. What Is Buyer Intent?</h2></div>
+      <div class="prose">
+        <p>Buyer intent describes what the person asking a question is trying to achieve. Are they learning about a problem, exploring solutions, comparing providers, checking prices, looking for reviews, searching for alternatives or ready to choose a business?</p>
+        <p>“What is payroll outsourcing?” and “Which payroll outsourcing provider is best for a 30-person company in Malaysia?” relate to the same service, but the second person appears much closer to choosing a provider.</p>
+        <p>That difference matters when analysing AI visibility.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Buying journey</span><h2>How Should You Group Prompts by Buyer Intent?</h2></div>
+      <div class="prose">
+        <p>For many SMEs, four simple groups are enough.</p>
+        <h3>Learning</h3>
+        <p>The customer wants to understand something: “What is payroll outsourcing?”, “How does outsourced bookkeeping work?” or “Why do SMEs use HR software?” AI can answer some educational questions without naming a provider, so a lack of brand mentions here does not automatically mean your strategy is failing.</p>
+        <h3>Problem or Solution Research</h3>
+        <p>The customer understands the problem and is exploring solutions: “How can a small company manage payroll without an internal HR team?”, “What is the easiest way for an SME to automate employee attendance?” or “Should a small company outsource payroll or use payroll software?”</p>
+        <h3>Comparison and Evaluation</h3>
+        <p>The customer is weighing choices: “What should I compare when choosing payroll software?”, “Payroll software vs payroll outsourcing: which is better?” or “What are the alternatives to a known provider?” These questions sit closer to a decision.</p>
+        <h3>Provider or Purchase Intent</h3>
+        <p>The customer is actively looking for a company, product or service: “Which payroll providers in Malaysia are suitable for SMEs?”, “Recommend HR software for a company with 40 employees” or “Which accounting firms in Kuala Lumpur provide payroll outsourcing?”</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Fair measurement</span><h2>Why Should You Separate Informational and Buyer-Intent Prompts?</h2></div>
+      <div class="prose">
+        <p>Otherwise, your overall AI visibility can be misleading. Suppose you track 10 informational questions and 10 provider-search questions. Your brand appears in one informational answer and seven provider-search answers, producing 40% overall mention coverage.</p>
+        <p>You might conclude that visibility is poor. But there may be little reason for AI to name your company when someone asks what payroll means. On questions where a recommendation is relevant, you appear 70% of the time.</p>
+        <p>Traditional search measurement has a parallel. <a href="https://developers.google.com/search/blog/2025/11/search-console-branded-filter">Google Search Console's branded queries filter</a> separates branded and non-branded traffic because they represent different search behaviour. Branded searches generally come from people already familiar with a business, while non-branded searches can show how new users discover it.</p>
+        <p>Grouping AI prompts by intent similarly prevents unlike questions from being treated as though they mean the same thing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Multiple lenses</span><h2>Can One AI Prompt Belong to More Than One Group?</h2></div>
+      <div class="prose">
+        <p>Yes. “Which payroll outsourcing companies in Malaysia are suitable for SMEs?” could be tagged:</p>
+        <ul><li>Service: Payroll Outsourcing</li><li>Topic: Payroll Management</li><li>Intent: Provider Search</li><li>Market: Malaysia</li></ul>
+        <p>You do not need four copies of the prompt. It is one prompt viewed through different business lenses.</p>
+        <p>“What should I compare when choosing accounting software for a small retail business?” might be tagged <strong>Product: Accounting Software</strong>, <strong>Topic: Small Business Accounting</strong> and <strong>Intent: Comparison</strong>.</p>
+        <p>The same data can then answer questions about accounting software, small-business accounting or every comparison prompt.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Explain the score</span><h2>What Can Grouped Prompts Tell You That an Overall Score Cannot?</h2></div>
+      <div class="prose">
+        <p>Imagine a software company with overall AI Mention Coverage of 52%. Once prompts are grouped, it discovers:</p>
+        <div class="table-wrap"><table><thead><tr><th scope="col">Prompt group</th><th scope="col">Mention coverage</th></tr></thead><tbody>
+          <tr><td>Payroll</td><td>78%</td></tr><tr><td>Attendance</td><td>61%</td></tr><tr><td>Recruitment</td><td>24%</td></tr><tr><td>Performance Management</td><td>18%</td></tr>
+        </tbody></table></div>
+        <p>The company is visible around payroll, while recruitment and performance management are weaker. Filtering by intent reveals another story:</p>
+        <div class="table-wrap"><table><thead><tr><th scope="col">Buyer intent</th><th scope="col">Mention coverage</th></tr></thead><tbody>
+          <tr><td>Learning</td><td>29%</td></tr><tr><td>Solution Research</td><td>43%</td></tr><tr><td>Comparison</td><td>57%</td></tr><tr><td>Provider Search</td><td>72%</td></tr>
+        </tbody></table></div>
+        <p>The business appears particularly well when customers actively look for providers, even though broad educational visibility is lower. These views do not replace the overall metric. They explain it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Competition</span><h2>How Can Prompt Groups Reveal Competitor Strengths?</h2></div>
+      <div class="prose">
+        <p>A corporate training company's overall <a href="/resources/glossary/ai-share-of-voice">AI Share of Voice</a> may look competitive, while service groups reveal four different situations:</p>
+        <ul><li><strong>Leadership Training:</strong> You lead.</li><li><strong>Sales Training:</strong> You and Competitor A are close.</li><li><strong>Team Building:</strong> Competitor B dominates.</li><li><strong>Communication Training:</strong> Your brand rarely appears.</li></ul>
+        <p>The business may defend its leadership visibility, make a focused improvement to overtake Competitor A, investigate why Competitor B dominates team building and determine why communication training is barely associated with the brand.</p>
+        <p>One company and one overall score can require four different actions. Prompt grouping can influence what you work on next.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Content gaps</span><h2>How Can Grouping Help You Find Content Gaps?</h2></div>
+      <div class="prose">
+        <p>Suppose your business rarely appears for <strong>Service: Corporate Tax</strong>. The prompts within that group show you are missing on questions about SME tax deductions, when to hire a tax consultant and how to prepare for an audit.</p>
+        <p>That is more useful than “Our tax visibility is low.” You have identified the specific questions around which visibility is weak.</p>
+        <p>Before creating new content, examine your website:</p>
+        <ul><li>Do you already have useful pages answering these questions?</li><li>Are the answers clear?</li><li>Are important facts current?</li><li>Is there an existing page that should be improved?</li><li>Or is genuinely new content needed?</li></ul>
+        <p>Grouping connects measurement with action.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Keep it practical</span><h2>How Many Prompt Groups Should a Small Business Create?</h2></div>
+      <div class="prose">
+        <p>As few as you need to make useful decisions. Do not begin with 14 buyer stages, 32 topic tags, 19 service subcategories and eight custom labels.</p>
+        <p>A small accounting firm might start with four services: Bookkeeping, Payroll, Tax and Company Incorporation, plus three intent groups: Learning, Comparison and Provider Search.</p>
+        <p>A furniture retailer might start with Sofas, Dining Tables, Beds and Office Furniture, plus Research, Comparison and Purchase intent.</p>
+        <p>Add more groups when a real business question requires them.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Avoid complexity</span><h2>What Are the Most Common Prompt-Grouping Mistakes?</h2></div>
+      <div class="prose">
+        <ol>
+          <li><strong>Creating too many tags.</strong> If every prompt has a unique tag, nothing has been grouped.</li>
+          <li><strong>Mixing product, topic and intent in one name.</strong> Replace a vague tag such as “Payroll Best SME Malaysia” with clear labels such as <strong>Service: Payroll</strong> and <strong>Intent: Provider Search</strong>.</li>
+          <li><strong>Grouping only by your website structure.</strong> Customers may ask “How can I reduce employee turnover?” even when your navigation calls the service “People Solutions”. Build groups around how customers think.</li>
+          <li><strong>Treating every prompt as equally commercial.</strong> A definition and a provider recommendation do not necessarily have the same business value.</li>
+          <li><strong>Changing the structure constantly.</strong> Renaming and rebuilding groups every week makes trend comparisons harder. Start simple and make deliberate changes.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Five steps</span><h2>How Do You Build a Simple Prompt-Grouping System From Scratch?</h2></div>
+      <div class="prose">
+        <h3>Step 1: List the main things you sell</h3>
+        <p>Begin with the business, not AI. Payroll Outsourcing, Bookkeeping, Tax Advisory and Company Incorporation could become your first groups.</p>
+        <h3>Step 2: List the main customer problems and topics</h3>
+        <p>Ask what customers want help with before they realise they need your service. An accounting firm might choose Payroll Compliance, Tax Filing, Cash Flow and Business Registration. Create a topic tag only if you intend to analyse it.</p>
+        <h3>Step 3: Think about the buying journey</h3>
+        <p>Move from learning (“What is payroll outsourcing?”) through problem research and comparison to provider search (“Which payroll outsourcing companies in Malaysia work with SMEs?”).</p>
+        <h3>Step 4: Tag each prompt</h3>
+        <div class="table-wrap"><table><thead><tr><th scope="col">Prompt</th><th scope="col">Service</th><th scope="col">Topic</th><th scope="col">Intent</th></tr></thead><tbody>
+          <tr><td>What is payroll outsourcing?</td><td>Payroll</td><td>Payroll Management</td><td>Learning</td></tr>
+          <tr><td>Should an SME outsource payroll or use software?</td><td>Payroll</td><td>Payroll Management</td><td>Comparison</td></tr>
+          <tr><td>Which payroll providers work with SMEs?</td><td>Payroll</td><td>Payroll Management</td><td>Provider Search</td></tr>
+          <tr><td>When should a small company hire a tax adviser?</td><td>Tax</td><td>Tax Planning</td><td>Solution Research</td></tr>
+          <tr><td>Which tax firms work with Malaysian SMEs?</td><td>Tax</td><td>Tax Planning</td><td>Provider Search</td></tr>
+        </tbody></table></div>
+        <h3>Step 5: Check whether each group answers a useful question</h3>
+        <p>For every tag, ask what decision you will make from it. “Service: Payroll” and “Intent: Provider Search” answer useful questions. “Miscellaneous Interesting Questions” probably will not.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Stable measurement</span><h2>How Often Should You Review Your Prompt Groups?</h2></div>
+      <div class="prose">
+        <p>Do not rebuild groups every time you notice an interesting question. AI visibility becomes more meaningful when you can compare like with like over time.</p>
+        <p>Review your groups when something meaningful changes:</p>
+        <ul><li>you launch a new service;</li><li>you enter a new product category;</li><li>customer research reveals a major buying concern;</li><li>a minor service becomes strategically important;</li><li>you expand into a new market; or</li><li>the original grouping no longer reflects the business.</li></ul>
+        <p>The objective is to remain stable enough to measure and flexible enough to stay useful.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Does Zicy Help You Group and Manage AI Prompts?</h2></div>
+      <div class="prose">
+        <p>Zicy's Prompt Manager helps businesses define and organise the questions they want to track.</p>
+        <PostFigure src={trackedPromptsImg} alt="Zicy tracked prompts table showing AI visibility metrics for each prompt" caption="Prompt Manager keeps tracked questions and their visibility metrics in one structured view." />
+        <p>Instead of treating AI visibility as random searches, you can maintain a structured prompt set and use tags for groups such as SEO, Web Design, Branding and Social Media, or intent groups such as Learning, Comparison and Provider Search.</p>
+        <PostFigure src={manageTagsImg} alt="Zicy Prompt Manager Manage Tags screen" caption="Manage Tags lets you group prompts by the categories that matter to your business." />
+        <p>Zicy also lets businesses add custom prompts and organise them with tags, so the tracked set reflects the questions that matter to that company.</p>
+        <PostFigure src={addPromptImg} alt="Zicy Prompt Manager Add custom Prompt control" caption="Add a custom prompt, then apply the relevant product, service, topic and intent tags." />
+        <p>Once prompts are tracked, you can investigate the actual AI responses, see whether your brand was mentioned, examine citations and compare visibility with competitors.</p>
+        <p>The objective is to answer practical questions: Which services is AI most likely to recommend? Which product category are competitors beating us on? Do we appear when customers compare providers? Which topics are we barely visible for?</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Business intelligence</span><h2>From a Messy Prompt List to Useful Business Intelligence</h2></div>
+      <div class="prose">
+        <p>Tracking AI prompts is an important first step, but adding more questions does not necessarily produce better insight. A spreadsheet with 100 prompts and 100 answers contains plenty of data, yet it may not quickly tell you which service improved, which product lost visibility, where competitors are strongest or whether you appear when customers are ready to buy.</p>
+        <p>Grouping organises the data around the decisions your business needs to make:</p>
+        <ul><li><strong>Products</strong> tell you what you sell.</li><li><strong>Services</strong> tell you where your business competes.</li><li><strong>Topics</strong> tell you what customers and AI are discussing.</li><li><strong>Buyer intent</strong> tells you what the customer is trying to accomplish.</li></ul>
+        <p>Together, these groups turn a prompt list into a clearer picture of your AI visibility.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Conclusion</span><h2>Final Thoughts</h2></div>
+      <div class="prose">
+        <p>You do not need hundreds of prompts or hundreds of tags. You need relevant customer questions organised in a way that reflects your business.</p>
+        <p>Start with your most important products or services. Add topics where they help you understand customer needs. Separate questions by buyer intent so you can distinguish someone learning about a problem from someone asking AI which company to choose.</p>
+        <p>Most importantly, do not look only at the overall number. An overall AI visibility score can show that something changed. Good prompt grouping helps you understand what changed, where it changed and why that part of the business deserves attention.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Turn grouped prompts into<br />{' '}useful decisions with Zicy.</h2>
+      <p>Zicy helps you organise prompts and track brand mentions, citations, share of voice and AI ranking across the platforms your customers use.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href="/platform">Explore the platform</a>
+        <a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}
+  .byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}
+  .prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}
+  .prose li{margin-bottom:6px}
+  .prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .table-wrap{overflow-x:auto;margin:24px 0}
+  table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
+  th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}
+  thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:140px}.prose h3{font-size:19px}}
+</style>
