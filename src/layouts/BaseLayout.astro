@@ -124,6 +124,17 @@ const ogImg = ogImage
     </main>
     <Footer />
     <CookieConsent />
+    <div class="gtranslate_wrapper"></div>
+    <script is:inline>
+      window.gtranslateSettings = {
+        default_language: 'en',
+        native_language_names: true,
+        url_structure: 'sub_domain',
+        languages: ['en', 'zh-CN'],
+        wrapper_selector: '.gtranslate_wrapper'
+      };
+    </script>
+    <script is:inline src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
     <!-- Reveal-on-scroll: single observer, sitewide. Honours prefers-reduced-motion via CSS. -->
     <script>
       const io = new IntersectionObserver(
