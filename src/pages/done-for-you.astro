@@ -4,6 +4,7 @@ import FaqAccordion from '../components/FaqAccordion.astro';
 import Screenshot from '../components/Screenshot.astro';
 import dfyActionPlan from '../assets/screenshots/dfy-action-plan.png';
 import { SITE } from '../data/site';
+import { ORG_ID } from '../lib/schema';
 
 const title = 'Done-for-you AI visibility, run for you by Growth.pro, the consultancy that built Zicy';
 const description =
@@ -82,21 +83,20 @@ const faqPage = {
   })),
 };
 
-// Service schema for the managed offering. Provider is Growth.pro (the consultancy that built
-// Zicy); the service is delivered on the Zicy platform.
+// Service schema for the managed offering, delivered on the Zicy platform.
+// Entity-graph fix 2026-09: provider now references the canonical Zicy Organization by @id
+// (per brief) instead of an inline, anonymous Growth.pro Organization literal. Service also has
+// its own @id.
 const service = {
   '@context': 'https://schema.org',
   '@type': 'Service',
+  '@id': `${SITE.url}/done-for-you#service`,
   name: 'Done-for-you AI visibility',
   serviceType: 'Managed AI visibility programme',
   description:
     'A managed AI visibility programme run by Growth.pro on the Zicy platform, strategy, execution and proof, operated for enterprise brands.',
   url: `${SITE.url}/done-for-you`,
-  provider: {
-    '@type': 'Organization',
-    name: 'Growth.pro',
-    url: 'https://www.growth.pro/',
-  },
+  provider: { '@id': ORG_ID },
   areaServed: 'Worldwide',
 };
 ---

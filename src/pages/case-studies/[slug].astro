@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import { CASES } from '../../data/cases';
+import { CASE_ENTITY_MAP } from '../../data/case-entity-map';
 
 export function getStaticPaths() {
   return CASES.map((c) => ({ params: { slug: c.slug }, props: { c } }));
@@ -9,17 +10,22 @@ export function getStaticPaths() {
 
 const { c } = Astro.props;
 const url = `${SITE.url}/case-studies/${c.slug}`;
+const entity = CASE_ENTITY_MAP[c.slug];
 
 const article = {
   '@context': 'https://schema.org',
   '@type': 'Article',
+  '@id': `${url}#article`,
   headline: c.h1,
   description: c.metaDescription,
   author: { '@type': 'Organization', name: SITE.name, '@id': `${SITE.url}/#org` },
   publisher: { '@id': `${SITE.url}/#org` },
   mainEntityOfPage: url,
+  isPartOf: { '@id': `${SITE.url}/case-studies#collection` },
   datePublished: c.datePublished,
   dateModified: c.dateModified,
+  ...(entity ? { about: { '@id': `${SITE.url}/solutions/${entity.icp}#service` } } : {}),
+  ...(entity ? { mentions: { '@id': `${SITE.url}/resources/glossary/${entity.term}#term` } } : {}),
 };
 
 const breadcrumb = {

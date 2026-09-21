@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import { SITE } from '../../data/site';
+import { GROWTH_PRO_ORG_ID } from '../../lib/schema';
 
 const title = "The PAVA Framework, Growth.pro's model for AI visibility";
 const description =
@@ -118,7 +119,7 @@ const articleGraph = {
       url,
       inLanguage: 'en',
       datePublished,
-      author: { '@type': 'Organization', name: 'Growth.pro', url: 'https://www.growth.pro/' },
+      author: { '@id': GROWTH_PRO_ORG_ID },
       publisher: { '@id': `${SITE.url}/#org` },
       mainEntityOfPage: url,
       about: { '@id': `${url}#term` },
@@ -128,11 +129,7 @@ const articleGraph = {
       '@id': `${url}#term`,
       name: 'PAVA Framework',
       description: definition,
-      inDefinedTermSet: {
-        '@type': 'DefinedTermSet',
-        name: 'Growth.pro AI Visibility Frameworks',
-        url: `${SITE.url}/about`,
-      },
+      inDefinedTermSet: { '@id': `${SITE.url}/about#doctrine` },
     },
   ],
 };

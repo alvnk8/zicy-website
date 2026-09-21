@@ -4,7 +4,7 @@ import path from 'node:path';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { SITE } from '../data/site';
-import { orgNode } from '../lib/schema';
+import { ORG_ID, GROWTH_PRO_ORG_ID } from '../lib/schema';
 import { LOGO_SCALE_WALL } from '../data/press-logo-scale.mjs';
 
 const title = 'Zicy in the press | Media coverage and press kit';
@@ -33,6 +33,7 @@ const dnaQuote =
 // every one of them rather than emitting a broken <img>.
 const coverage = [
   {
+    slug: 'digital-news-asia-ai-rewritten-rules',
     publication: 'Digital News Asia',
     date: '2026-07-12',
     headline: "GrowthPro's Alvin Koay: Google's AI has rewritten the rules of search",
@@ -45,6 +46,7 @@ const coverage = [
     thumb: null,
   },
   {
+    slug: 'biz-bio-rebuilding-in-the-age-of-ai',
     publication: 'Biz.bio',
     date: '2026-03-18',
     headline: 'Alvin Koay and Zicy: Rebuilding in the Age of AI',
@@ -57,6 +59,7 @@ const coverage = [
     thumb: null,
   },
   {
+    slug: 'e27-ai-share-of-voice',
     publication: 'e27',
     date: '2026-03-16',
     headline: 'The new growth metric: AI Share of Voice',
@@ -69,6 +72,7 @@ const coverage = [
     thumb: null,
   },
   {
+    slug: 'e27-biggest-competitor-is-the-ai-answer',
     publication: 'e27',
     date: '2026-03-12',
     headline: 'Your biggest competitor might be the AI answer itself',
@@ -81,6 +85,7 @@ const coverage = [
     thumb: null,
   },
   {
+    slug: 'malaysia-sme-answer-engines',
     publication: 'Malaysia SME+',
     date: null,
     headline:
@@ -94,6 +99,7 @@ const coverage = [
     thumb: null,
   },
   {
+    slug: 'bfm-open-for-business-growthpro-strategy',
     publication: 'BFM 89.9',
     programme: 'Open For Business',
     date: '2026-03-03',
@@ -107,6 +113,7 @@ const coverage = [
     thumb: null,
   },
   {
+    slug: 'bfm-marketing-mojo-is-seo-dead',
     publication: 'BFM 89.9',
     programme: 'Marketing Mojo',
     date: '2026-02-10',
@@ -175,6 +182,21 @@ const DISPLAY_HEADLINES: Record<string, string> = {
     "Answer engines are your customers' new best friends",
 };
 
+const mediaPageUrl = `${SITE.url}/media`;
+
+// Entity-graph fix 2026-09: each item's `scope` ('zicy' or 'founder', set on the coverage array
+// above) decides which organization the coverage is genuinely about. The five 'zicy'-scope items
+// are explicitly about the platform (about: #org). Of the two 'founder'-scope BFM podcast
+// episodes: "The Growthpro Strategy to Combat Traditional SEOs" is explicitly about Growth.pro's
+// agency business (about: growth.pro/#org) — clear. "Is SEO Dead? The AI Search Shake-Up" never
+// names either Zicy or Growth.pro in its own headline/summary, it's general market commentary
+// with Alvin as spokesperson; defaulted to growth.pro/#org for consistency with the other
+// founder-scope/BFM item, but this one is a genuine judgement call, flagged here and in
+// docs/entity-graph/implementation-2026-09.md.
+function aboutIdFor(item: (typeof coverage)[number]) {
+  return item.scope === 'zicy' ? ORG_ID : GROWTH_PRO_ORG_ID;
+}
+
 // JSON-LD is generated from `coverage` (via sortedCoverage, already newest-first with any
 // undated item last) so it can never drift from the visible list. headline uses each item's
 // full original text, not the shortened on-page display override, since structured data should
@@ -183,25 +205,24 @@ const DISPLAY_HEADLINES: Record<string, string> = {
 function toNewsOrPodcastNode(item: (typeof coverage)[number]) {
   return {
     '@type': item.type === 'Podcast' ? 'PodcastEpisode' : 'NewsArticle',
+    '@id': `${mediaPageUrl}#item-${item.slug}`,
     headline: item.headline,
     url: item.href,
     ...(item.date ? { datePublished: item.date } : {}),
     publisher: { '@type': 'Organization', name: item.publication },
+    about: { '@id': aboutIdFor(item) },
   };
 }
 
-const mediaPageUrl = `${SITE.url}/media`;
-
-// about: the site's single canonical Organization node (src/lib/schema.ts), referenced whole
-// rather than hand-typed, so name/url/logo/founder/sameAs can never drift from every other page's
-// copy of the same entity.
+// about: the sitewide canonical Organization node now renders in full on every page (see
+// Schema.astro), so this page references it by @id instead of re-embedding the full node.
 const collectionPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   '@id': `${mediaPageUrl}#webpage`,
   name: 'Zicy in the press',
   url: mediaPageUrl,
-  about: orgNode,
+  about: { '@id': ORG_ID },
   mainEntity: {
     '@type': 'ItemList',
     itemListElement: sortedCoverage.map((item, i) => ({

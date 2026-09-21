@@ -5,6 +5,8 @@ import Screenshot from '../../components/Screenshot.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import FaqUniversal from '../../components/FaqUniversal.astro';
 import { prFaqs, faqPageJsonLd } from '../../data/faqs';
+import { serviceSchema } from '../../lib/schema';
+import { caseSlugsForIcp } from '../../data/case-entity-map';
 // No-chrome product exports — topbar + content only, no left module-nav rail or in-frame
 // Zicy logo. Demo brand "Acme Pickleball Fashion" is illustrative, not a real client.
 // Citation Analysis uses the URL drill-down export (citation-analysis-urls.png), which carries
@@ -93,11 +95,30 @@ const breadcrumb = {
     { '@type': 'ListItem', position: 2, name: 'For PR agencies', item: 'https://www.zicy.com/solutions/pr' },
   ],
 };
+
+// Entity finding f-005 pattern (see /solutions/smb). name = the page's own H1, description = the
+// hero lead paragraph, serviceType = "AI visibility" as it appears verbatim in the hero
+// screenshot's alt text below. All verbatim, not invented.
+// Reciprocal edge: every case study whose Article.about points at this Service (see
+// case-studies/[slug].astro + data/case-entity-map.ts), in one place so the two can't drift.
+const serviceNode = {
+  ...serviceSchema(
+    '/solutions/pr',
+    'Prove your earned work moved the AI answer.',
+    'When a journalist, analyst, or buyer asks ChatGPT, Gemini, Perplexity, Google AI Overviews, or Google AI Mode about your client, the coverage you earned is either shaping that answer or it isn’t. Zicy measures which, and shows you which sources to earn next.',
+    'AI visibility',
+    'public relations agency'
+  ),
+  subjectOf: caseSlugsForIcp('pr').map((slug) => ({
+    '@id': `https://www.zicy.com/case-studies/${slug}#article`,
+  })),
+};
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
-  <SegmentSchema slot="head" url="https://www.zicy.com/solutions/pr" name={title} audienceType="public relations agency" />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceNode)} />
+  <SegmentSchema slot="head" url="https://www.zicy.com/solutions/pr" name={title} audienceType="public relations agency" serviceId={serviceNode['@id']} />
 
   <!-- 1. Hero -->
   <section class="hero inner">

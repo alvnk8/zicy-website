@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { webPageSchema } from '../../lib/schema';
 
 // Bahasa Malaysia translation of src/pages/legal/privacy.astro, required alongside the
 // English version under Malaysian law. This translation has NOT been reviewed by a
@@ -32,6 +33,7 @@ const sections = [
 ];
 ---
 <BaseLayout title={title} description={description} lang="ms">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/legal/privacy-bm', title, undefined, undefined, 'ms-MY'))} />
   <link rel="alternate" hreflang="en" href="https://www.zicy.com/legal/privacy" slot="head" />
   <link rel="alternate" hreflang="ms-MY" href="https://www.zicy.com/legal/privacy-bm" slot="head" />
   <link rel="alternate" hreflang="x-default" href="https://www.zicy.com/legal/privacy" slot="head" />

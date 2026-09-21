@@ -1,7 +1,8 @@
 ---
 // The live pricing page (/pricing). Every price and count comes from src/data/pricing.ts and the
-// pricing/* components; nothing is hard-coded on this page. The sitewide SoftwareApplication offers
-// live in src/components/Schema.astro and must stay in sync with the tiers in data/pricing.ts.
+// pricing/* components; nothing is hard-coded on this page. The four Offer nodes below are the
+// canonical ones; the sitewide SoftwareApplication (Schema.astro) references them by @id instead
+// of repeating the data.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import TierCard from '../components/pricing/TierCard.astro';
 import AnnualToggle from '../components/pricing/AnnualToggle.astro';
@@ -10,7 +11,7 @@ import ContentModule from '../components/pricing/ContentModule.astro';
 import MultiMarket from '../components/pricing/MultiMarket.astro';
 import ComparisonTable from '../components/pricing/ComparisonTable.astro';
 import PricingFAQ from '../components/pricing/PricingFAQ.astro';
-import { CORE_TIERS, AGENCY_TIERS, PRICING_FAQS } from '../data/pricing';
+import { CORE_TIERS, PRICING_FAQS } from '../data/pricing';
 import { SITE } from '../data/site';
 import { ORG_ID, webPageSchema } from '../lib/schema';
 
@@ -18,25 +19,26 @@ const title = 'Zicy pricing, all five AI engines on every plan';
 const description =
   'All five AI engines, every plan. No per-engine add-ons. Scale from Starter to Enterprise, plus an agency track with pooled prompts. For small and mid-sized businesses, no AEO specialist required.';
 
-// Offer schema: one Product node listing the four core plus two agency tiers as Offers. Tiers with a
-// fixed monthly price carry price + priceCurrency; Enterprise and the agency tiers are contact-only
-// Offers with a sales URL and no fixed price. isRelatedTo points at the sitewide SoftwareApplication
-// (@id from Schema.astro) instead of duplicating it. No aggregateRating, no review.
+// Entity-graph fix 2026-09: four real Offer nodes, one per core tier, each with its own @id
+// (/pricing#offer-{id}) instead of being anonymous entries inside a Product node. itemOffered
+// points at the sitewide SoftwareApplication (#app), which references these same four @ids back
+// (see Schema.astro) — no more duplicated/unlinked offer data. Tiers with a fixed monthly price
+// carry price + priceCurrency; Enterprise is a contact-only Offer with a sales URL and no fixed
+// price. Prices are read straight from data/pricing.ts, unchanged from what renders.
 const pageUrl = `${SITE.url}/pricing`;
-const toOffer = (t: (typeof CORE_TIERS)[number]) =>
-  t.priceMonthly !== null
-    ? { '@type': 'Offer', name: t.name, price: String(t.priceMonthly), priceCurrency: 'USD', url: pageUrl }
-    : { '@type': 'Offer', name: t.name, priceCurrency: 'USD', url: t.cta.href, availability: 'https://schema.org/InStock' };
-const offerSchema = {
+const appId = `${SITE.url}/#app`;
+const toOffer = (t: (typeof CORE_TIERS)[number]) => ({
   '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: 'Zicy plans',
-  description:
-    'Zicy pricing plans. All five AI engines on every plan, with no per-engine add-ons.',
-  brand: { '@id': ORG_ID },
-  isRelatedTo: { '@id': `${SITE.url}/#app` },
-  offers: [...CORE_TIERS, ...AGENCY_TIERS].map(toOffer),
-};
+  '@type': 'Offer',
+  '@id': `${pageUrl}#offer-${t.id}`,
+  name: t.name,
+  itemOffered: { '@id': appId },
+  offeredBy: { '@id': ORG_ID },
+  ...(t.priceMonthly !== null
+    ? { price: String(t.priceMonthly), priceCurrency: 'USD', url: pageUrl }
+    : { priceCurrency: 'USD', url: t.cta.href, availability: 'https://schema.org/InStock' }),
+});
+const offerSchemas = CORE_TIERS.map(toOffer);
 
 // FAQPage from the same array the visible accordion renders, so the text mirrors it verbatim.
 const faqSchema = {
@@ -124,7 +126,7 @@ const displayTiers = CORE_TIERS.map((t) =>
   <!--SLOT:schema-->
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/pricing', title))} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(offerSchema)} />
+  {offerSchemas.map((o) => <script type="application/ld+json" slot="head" set:html={JSON.stringify(o)} />)}
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
 </BaseLayout>
 

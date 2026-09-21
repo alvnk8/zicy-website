@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import { rituPersonNode } from '../../lib/schema';
 import PostFigure from '../../components/PostFigure.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import featuredImg from '../../assets/resources/effective-prompts-ai-tracking/add-effective-prompts-to-your-ai-tracking.jpg';
@@ -108,6 +109,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/jpeg' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(rituPersonNode)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
 
   <section class="hero inner resource-guide">

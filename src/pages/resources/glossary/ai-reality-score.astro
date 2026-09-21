@@ -15,7 +15,6 @@ const description = t.definition;
 
 const LABELS: Record<string, string> = Object.fromEntries(GLOSSARY_TERMS.map((g) => [g.slug, g.term]));
 
-// Only a BreadcrumbList here; the canonical DefinedTerm + FAQ live on the platform page.
 const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -27,9 +26,24 @@ const breadcrumb = {
     { '@type': 'ListItem', position: 4, name: t.term, item: url },
   ],
 };
+
+// Entity-graph fix 2026-09: this page is now the glossary DefinedTermSet's actual member for AI
+// Reality Score (see /resources/glossary#glossary's hasDefinedTerm) — full methodology, FAQ and
+// prose still live on the canonical /platform page, which now records the relationship the other
+// way, via sameAs, instead of also claiming set membership.
+const definedTerm = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTerm',
+  '@id': `${url}#term`,
+  name: t.term,
+  description: t.definition,
+  inDefinedTermSet: { '@id': `${SITE.url}/resources/glossary#glossary` },
+  sameAs: `${canonical}#term`,
+};
 ---
 <BaseLayout title={title} description={description} noindex={true}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(definedTerm)} />
 
   <section class="hero inner">
     <div class="wrap">

@@ -1,13 +1,19 @@
 ---
 // Single owner for ALL sitewide JSON-LD. Imported once by BaseLayout, so this graph
-// renders identically on every page. Page-level nodes (FAQPage, Article, Service, the
+// renders identically on every page (all 82 routes, including the /legal pages, which
+// previously emitted no JSON-LD at all). Page-level nodes (FAQPage, Article, Service, the
 // Chrome-extension app, per-page product entity pages) live in their own pages and are
 // deliberately NOT defined here.
 //
-// The canonical Organization node (orgNode, from ../lib/schema) is only spliced into the graph
-// on the homepage — every other page's WebPage node references it by @id instead (see
-// webPageSchema in ../lib/schema). Emitting the full node on every page would put one node with
-// the same @id in every file under dist/, which is the entity fragmentation this guards against.
+// The canonical Organization and Brand nodes (orgNode/brandNode, from ../lib/schema) are
+// spliced into every page's graph. Repeating the same @id and content on every page is the
+// documented pattern for a sitewide entity — it is not fragmentation; fragmentation is
+// conflicting descriptions of the same @id, which byte-identical repetition cannot produce.
+//
+// Person nodes (Ritu, Peter) are NOT emitted here — see lib/schema.ts's comment on
+// rituPersonNode/peterPersonNode: full node on /about plus any article page that names them as
+// byline author, @id reference only elsewhere. Alvin's full node is likewise confined to his own
+// /about/alvin-koay page (see alvinPersonNode's comment).
 //
 // Still omitted on purpose (do not add without confirmation):
 //  - featureList / module count: live count unreconciled. Omitted (absent beats wrong).
@@ -15,24 +21,18 @@
 // House style: human-readable strings in sentence case, no em dash, no banned vocab. Engine
 // names are kept out of the descriptions so the canonical-five fixed-order rule does not apply.
 import { SITE } from '../data/site';
-import { ORG_ID, PERSON_IDS, orgNode, alvinPersonNode } from '../lib/schema';
+import { orgNode, brandNode, alvinPersonNode } from '../lib/schema';
 
-const orgId = ORG_ID;
 const appId = `${SITE.url}/#app`;
 const siteId = `${SITE.url}/#site`;
-const person = PERSON_IDS;
-const isHome = Astro.url.pathname === '/';
+const orgId = orgNode['@id'];
 // Alvin's full Person node is emitted only on his dedicated entity page (see alvinPersonNode's
 // comment in lib/schema); every other page keeps referencing him by @id only.
 const isAlvinPage = Astro.url.pathname === '/about/alvin-koay';
-
-const monthly = (price: string) => ({
-  '@type': 'UnitPriceSpecification',
-  price,
-  priceCurrency: 'USD',
-  unitCode: 'MON',
-  unitText: 'month',
-});
+// Entity-graph fix 2026-09: these four Offer nodes now live at /pricing#offer-{id} (see
+// pricing.astro), each with a real @id, itemOffered and offeredBy — not repeated here as
+// anonymous inline objects. #app just references them.
+const pricingUrl = `${SITE.url}/pricing`;
 
 const graph = {
   '@context': 'https://schema.org',
@@ -44,7 +44,8 @@ const graph = {
       name: SITE.name,
       publisher: { '@id': orgId },
     },
-    ...(isHome ? [orgNode] : []),
+    orgNode,
+    brandNode,
     {
       '@type': 'SoftwareApplication',
       '@id': appId,
@@ -62,55 +63,13 @@ const graph = {
         'Zicy is an AI visibility platform to measure how AI describes your brand, prove what is working, and improve where you appear.',
       publisher: { '@id': orgId },
       offers: [
-        {
-          '@type': 'Offer',
-          name: 'Starter',
-          price: '79',
-          priceCurrency: 'USD',
-          url: `${SITE.url}/pricing`,
-          priceSpecification: monthly('79'),
-        },
-        {
-          '@type': 'Offer',
-          name: 'Growth',
-          price: '199',
-          priceCurrency: 'USD',
-          url: `${SITE.url}/pricing`,
-          priceSpecification: monthly('199'),
-        },
-        {
-          '@type': 'Offer',
-          name: 'Scale',
-          price: '449',
-          priceCurrency: 'USD',
-          url: `${SITE.url}/pricing`,
-          priceSpecification: monthly('449'),
-        },
-        {
-          '@type': 'Offer',
-          name: 'Enterprise',
-          url: `${SITE.url}/contact`,
-          availability: 'https://schema.org/InStock',
-        },
+        { '@id': `${pricingUrl}#offer-starter` },
+        { '@id': `${pricingUrl}#offer-growth` },
+        { '@id': `${pricingUrl}#offer-scale` },
+        { '@id': `${pricingUrl}#offer-enterprise` },
       ],
     },
     ...(isAlvinPage ? [alvinPersonNode] : []),
-    {
-      '@type': 'Person',
-      '@id': person.ritu,
-      name: 'Ritu Khanna',
-      jobTitle: 'Co-founder',
-      description:
-        'Over 15 years in the corporate sector leading environmental-industry projects, plus a decade in SEO strategy and content planning. At Zicy, Ritu applies that experience to develop practical AI-first optimisation methods that help businesses become visible in AI-generated answers.',
-      worksFor: { '@id': orgId },
-    },
-    {
-      '@type': 'Person',
-      '@id': person.peter,
-      name: 'Peter Kua',
-      jobTitle: 'Chief Data Officer',
-      worksFor: { '@id': orgId },
-    },
   ],
 };
 ---

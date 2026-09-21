@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
+import { rituPersonNode } from '../../lib/schema';
 import PostFigure from '../../components/PostFigure.astro';
 import featuredImg from '../../assets/resources/measuring-ai-visibility-search-halo/the-search-halo.png';
 import figNarrowLens from '../../assets/resources/measuring-ai-visibility-search-halo/direct-roi-is-a-dangerously-narrow-lens.png';
@@ -80,6 +81,7 @@ const graph = {
   ogImage={{ url: `${SITE.url}${featuredImg.src}`, width: featuredImg.width, height: featuredImg.height, alt: featuredAlt, type: 'image/png' }}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(rituPersonNode)} />
 
   <section class="hero inner">
     <div class="wrap">

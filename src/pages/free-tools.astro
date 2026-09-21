@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { webPageSchema } from '../lib/schema';
+import { SITE } from '../data/site';
+import { webPageSchema, ORG_ID } from '../lib/schema';
 
 const title = 'Zicy free tools, AEO/GEO Consultant & Chrome extension';
 const description =
@@ -10,9 +11,31 @@ const tools = [
   { eyebrow: 'AI consultant', h: 'AEO/GEO Consultant', p: 'Ask anything about AEO or GEO, or audit a page on the spot. Powered by Growth.pro’s proprietary framework.', link: 'Open the consultant →', href: '/consultant' },
   { eyebrow: 'Chrome extension', h: 'Audit any page in your browser', p: 'Instant AI-readiness score, AI bot-access checker, and one-click schema generator. Free.', link: 'See the extension →', href: '/chrome-extension' },
 ];
+
+// CollectionPage for the two free-tool entries above, naming each tool's own entity node
+// (consultant's Service, the Chrome extension's SoftwareApplication) rather than re-describing them.
+const collectionUrl = `${SITE.url}/free-tools`;
+const collectionPage = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': `${collectionUrl}#collection`,
+  url: collectionUrl,
+  name: title,
+  isPartOf: { '@id': `${SITE.url}/#site` },
+  about: { '@id': ORG_ID },
+  publisher: { '@id': ORG_ID },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, item: { '@id': `${SITE.url}/consultant#service` } },
+      { '@type': 'ListItem', position: 2, item: { '@id': `${SITE.url}/chrome-extension#extension` } },
+    ],
+  },
+};
 ---
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/free-tools', title))} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionPage)} />
   <section class="hero inner">
     <div class="wrap">
       <span class="eyebrow">Free tools</span>

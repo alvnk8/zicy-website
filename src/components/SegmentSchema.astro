@@ -14,8 +14,11 @@ interface Props {
   audienceType: string;
   /** Emit the Starter Offer node (SMB page only). */
   starterOffer?: boolean;
+  /** @id of this page's Service node (serviceSchema()'s '@id'), if it has one. Wires the
+   * WebPage's mainEntity to it. */
+  serviceId?: string;
 }
-const { url, name, audienceType, starterOffer = false } = Astro.props;
+const { url, name, audienceType, starterOffer = false, serviceId } = Astro.props;
 
 const webpage = {
   '@type': 'WebPage',
@@ -25,6 +28,7 @@ const webpage = {
   isPartOf: { '@id': 'https://www.zicy.com/#site' },
   about: { '@id': 'https://www.zicy.com/#app' },
   audience: { '@type': 'BusinessAudience', audienceType },
+  ...(serviceId ? { mainEntity: { '@id': serviceId } } : {}),
 };
 
 const starter = {

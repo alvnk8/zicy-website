@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
 import { webPageSchema } from '../lib/schema';
 
 const title = 'Zicy Chrome extension, AEO/GEO audit & AI consultant in your browser';
@@ -16,14 +17,18 @@ const features = [
   { h: 'Built-in AI assistant', p: 'Personalised, actionable recommendations based on your scores. Available in 12 languages.' },
 ];
 
+// Entity-graph fix 2026-09: was anonymous (no @id), an unlinked second SoftwareApplication
+// alongside the sitewide #app node. Now has its own @id and isPartOf back to #app.
 const softwareApp = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
+  '@id': `${SITE.url}/chrome-extension#extension`,
   name: 'Zicy Chrome extension',
   applicationCategory: 'BrowserApplication',
   operatingSystem: 'Chrome',
   description:
     'Analyse any webpage’s readiness to be cited by AI answer engines, AI readiness score, bot-access checker, schema generator.',
+  isPartOf: { '@id': `${SITE.url}/#app` },
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.5', ratingCount: '427' },
 };
