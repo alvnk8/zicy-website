@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import { CASES } from '../../data/cases';
+import { ORG_ID } from '../../lib/schema';
 
 export function getStaticPaths() {
   return CASES.map((c) => ({ params: { slug: c.slug }, props: { c } }));
@@ -10,13 +11,20 @@ export function getStaticPaths() {
 const { c } = Astro.props;
 const url = `${SITE.url}/case-studies/${c.slug}`;
 
+// Entity finding f-006 (2026-09-21): @id/url/isPartOf so each Article resolves to a stable node
+// and links back to the case-studies collection page; about points at the existing Organization
+// entity rather than inventing a per-case Service mapping (owner decision).
 const article = {
   '@context': 'https://schema.org',
   '@type': 'Article',
+  '@id': `${url}#article`,
+  url,
   headline: c.h1,
   description: c.metaDescription,
-  author: { '@type': 'Organization', name: SITE.name, '@id': `${SITE.url}/#org` },
-  publisher: { '@id': `${SITE.url}/#org` },
+  author: { '@type': 'Organization', name: SITE.name, '@id': ORG_ID },
+  publisher: { '@id': ORG_ID },
+  isPartOf: { '@id': `${SITE.url}/case-studies#webpage` },
+  about: { '@id': ORG_ID },
   mainEntityOfPage: url,
   datePublished: c.datePublished,
   dateModified: c.dateModified,

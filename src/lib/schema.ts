@@ -5,7 +5,9 @@
 import { SITE } from '../data/site';
 
 export const ORG_ID = `${SITE.url}/#org`;
-const GROWTH_PRO_ORG_ID = 'https://www.growth.pro/#org';
+// Entity finding f-003 (2026-09-21): growth.pro's live site publishes its Organization node at
+// #organization, not #org (verified) — corrected so parentOrganization actually resolves.
+const GROWTH_PRO_ORG_ID = 'https://www.growth.pro/#organization';
 
 export const PERSON_IDS = {
   alvin: `${SITE.url}/about/alvin-koay#alvin-koay`,
@@ -14,14 +16,15 @@ export const PERSON_IDS = {
 } as const;
 
 // Byte-identical everywhere it appears. Do not fork a per-page copy.
+// Entity finding f-003 (2026-09-21): sameAs asserts identity ("this is the same entity"), so it
+// must list only Zicy's own profiles. Growth.pro's site and Alvin's LinkedIn/Person node were
+// wrongly declaring Zicy to be Growth.pro and Alvin; that relationship is already correctly
+// expressed via parentOrganization (Growth.pro) and founder (Alvin) below, so they're removed here.
 export const ORG_SAME_AS = [
   SITE.linkedin,
   'https://www.facebook.com/askzicy',
   'https://www.instagram.com/askzicy/',
   'https://www.youtube.com/@askzicy',
-  'https://www.growth.pro/',
-  'https://www.linkedin.com/in/alvinkoay/',
-  'https://www.growth.pro/#alvin-koay',
 ] as const;
 
 // Entity finding f-003 (2026-08-25): plain strings only, no Wikipedia/Wikidata URLs (unverified).
