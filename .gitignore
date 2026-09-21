@@ -9,6 +9,7 @@ node_modules/
 .env.production
 # logs
 npm-debug.log*
+firebase-debug.log*
 # os
 .DS_Store
 Thumbs.db
