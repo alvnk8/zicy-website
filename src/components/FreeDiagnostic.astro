@@ -1,12 +1,12 @@
 ---
 // The free diagnostic — a public lead magnet. Minimal input (brand name + website),
 // a bot fills the rest server-side, then a background job queries ChatGPT, Gemini,
-// Perplexity, Google AI Overviews and Google AI Mode and scores factual accuracy.
-// Two-stage output: an ungated teaser, then a work-email-gated full report.
+// Google AI Overviews and Google AI Mode and scores factual accuracy.
+// Two-stage output: an ungated teaser, then an email-gated full report.
 //
 // Calls same-origin /api routes so local/prod deployments can proxy to the
 // diagnostic backend without browser-side CORS issues.
-const ENGINES = ['ChatGPT', 'Gemini', 'Perplexity', 'Google AI Overviews', 'Google AI Mode'];
+const ENGINES = ['ChatGPT', 'Gemini', 'Google AI Overviews', 'Google AI Mode'];
 const ENGINES_TEXT = ENGINES.slice(0, -1).join(', ') + ' and ' + ENGINES[ENGINES.length - 1];
 ---
 
@@ -71,7 +71,7 @@ const ENGINES_TEXT = ENGINES.slice(0, -1).join(', ') + ' and ' + ENGINES[ENGINES
 
     <form id="fdUnlockForm" class="fd-unlock-form" hidden>
       <div class="fd-field">
-        <label for="fdEmail">Work email</label>
+        <label for="fdEmail">Email</label>
         <input id="fdEmail" name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
       </div>
       <label class="fd-consent">
@@ -238,7 +238,7 @@ const ENGINES_TEXT = ENGINES.slice(0, -1).join(', ') + ' and ' + ENGINES[ENGINES
 <script is:inline>
   (function () {
     var API_BASE = '';
-    var ENGINE_ORDER = ['ChatGPT', 'Gemini', 'Perplexity', 'Google AI Overviews', 'Google AI Mode'];
+    var ENGINE_ORDER = ['ChatGPT', 'Gemini', 'Google AI Overviews', 'Google AI Mode'];
     var POLL_INTERVAL_MS = 2500;
     var PROGRESS_TOTAL_STEPS = 5;
 

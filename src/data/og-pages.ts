@@ -96,7 +96,7 @@ const pages: Record<string, OgPage> = {
     eyebrow: 'Free diagnostic',
     title: 'See your free AI reality score',
     description:
-      'Enter your brand name and website to see how ChatGPT, Gemini, Perplexity, Google AI Overviews, and Google AI Mode describe you, checked against the facts.',
+      'Enter your brand name and website to see how ChatGPT, Gemini, Google AI Overviews, and Google AI Mode describe you, checked against the facts.',
     alt: 'Zicy · free diagnostic',
   },
   resources: {
