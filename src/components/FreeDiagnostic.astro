@@ -70,12 +70,14 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       <p class="fd-inaccuracy-line" id="fdInaccuracyLine"></p>
       <p class="fd-engine-line" id="fdEngineLine"></p>
       <button type="button" class="btn btn-primary btn-lg" id="fdUnlockBtn">See the full report</button>
+      <a class="btn btn-primary btn-lg fd-teaser-cta" id="fdTeaserCta" href="https://app.zicy.com/register">Start free: paste your website</a>
     </div>
 
     <form id="fdUnlockForm" class="fd-unlock-form" hidden>
       <div class="fd-field">
         <label for="fdEmail">Email</label>
         <input id="fdEmail" name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
+        <p class="fd-privacy">We'll email your report. See our <a href="/legal/privacy">privacy policy</a>.</p>
       </div>
       <label class="fd-consent">
         <input id="fdConsent" name="consent" type="checkbox" />
@@ -109,6 +111,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         <h3>What to fix first</h3>
         <div class="fd-recommendations" id="fdRecommendationsList"></div>
       </div>
+
+      <a class="btn btn-primary btn-lg fd-report-cta" id="fdReportCta" href="https://app.zicy.com/register">Start free: paste your website</a>
     </div>
   </div>
 </section>
@@ -186,18 +190,21 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   #zicy-free-diagnostic .fd-inaccuracy-line,
   #zicy-free-diagnostic .fd-engine-line { font-size: 15.5px; color: var(--ink-2); line-height: 1.6; margin-bottom: 6px; }
   #zicy-free-diagnostic .fd-teaser .btn { margin-top: 18px; }
+  #zicy-free-diagnostic .fd-teaser-cta { margin-left: 10px; }
 
   /* unlock form */
   #zicy-free-diagnostic .fd-unlock-form {
     margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg);
     padding: 24px; display: flex; flex-direction: column; gap: 14px;
   }
+  #zicy-free-diagnostic .fd-privacy { font-size: 13px; color: var(--muted); margin-top: 6px; }
   #zicy-free-diagnostic .fd-consent { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: var(--ink-2); cursor: pointer; }
   #zicy-free-diagnostic .fd-consent input { margin-top: 3px; flex-shrink: 0; }
 
   /* full report */
   #zicy-free-diagnostic .fd-full-report { margin-top: 40px; }
   #zicy-free-diagnostic .fd-section { margin-top: 32px; }
+  #zicy-free-diagnostic .fd-report-cta { margin-top: 32px; }
   #zicy-free-diagnostic .fd-section h3 { font-family: var(--display); font-weight: 500; font-size: 20px; color: var(--ink); margin-bottom: 14px; }
 
   #zicy-free-diagnostic .fd-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-lg); }
@@ -269,6 +276,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     var engineTableBody = document.querySelector('#fdEngineTable tbody');
     var inaccuraciesList = document.getElementById('fdInaccuraciesList');
     var recommendationsList = document.getElementById('fdRecommendationsList');
+    var teaserCta = document.getElementById('fdTeaserCta');
+    var reportCta = document.getElementById('fdReportCta');
 
     var currentJobId = null;
     var pollTimer = null;
@@ -279,9 +288,19 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     function showEl(el) { el.hidden = false; }
     function hideEl(el) { el.hidden = true; }
 
-    // stage identifies which step the error came from (e.g. 'start', 'poll', 'unlock');
-    // unused for now, kept so A7's GTM tracking can hook in without changing this signature.
-    function showError(message, _stage) { errorEl.textContent = message; showEl(errorEl); }
+    // Pushes an event to the GTM dataLayer. GTM owns consent gating for tags fired off
+    // these events, so pushing here (even before consent) is fine under Consent Mode v2.
+    function track(event, data) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: event }, data));
+    }
+
+    // stage identifies which step the error came from ('start', 'poll' or 'unlock').
+    function showError(message, stage) {
+      errorEl.textContent = message;
+      showEl(errorEl);
+      track('diagnostic_error', { stage: stage });
+    }
     function clearError() { errorEl.textContent = ''; hideEl(errorEl); }
 
     function detailMessage(detail) {
@@ -351,6 +370,13 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       return params;
     }
 
+    // Builds the CTA href with the page's UTMs passed through (no other params, e.g. job).
+    function buildRegisterHref() {
+      var utm = getUtmParams();
+      var qs = new URLSearchParams(utm).toString();
+      return 'https://app.zicy.com/register' + (qs ? '?' + qs : '');
+    }
+
     // Puts ?job=<id> in the URL (replacing any existing job param) so a refresh
     // resumes the same run. Other query params (e.g. UTMs) are left untouched.
     function setJobInUrl(jobId) {
@@ -400,9 +426,11 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       engineLineEl.textContent = teaser.engineHighlight
         ? teaser.engineHighlight + ' has the clearest read on ' + teaser.brandName + '.'
         : '';
+      teaserCta.href = buildRegisterHref();
       showEl(teaserEl);
       hideEl(introEl);
       hideEl(form);
+      track('diagnostic_complete', { score: Math.round(teaser.realityScore) });
     }
 
     // Starts (or restarts) the poll loop for a job. Bumps pollGeneration so any timer or
@@ -508,6 +536,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
       currentJobId = result.data && result.data.jobId;
       setJobInUrl(currentJobId);
+      track('diagnostic_start', { cached: !!(result.data && result.data.cached) });
       startPolling(currentJobId);
     });
 
@@ -642,8 +671,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       renderEngineTable(data.perEngine || [], data.mentionCoveragePerEngine || []);
       renderInaccuracies(data.inaccuracies || []);
       renderRecommendations(data.recommendations || []);
+      reportCta.href = buildRegisterHref();
       showEl(fullReportEl);
       fullReportEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      track('diagnostic_unlock', { consent: consent });
     });
 
     // Resume a run from ?job=<uuid> (a reload, or a link shared/reopened from the
