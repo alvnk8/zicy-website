@@ -4,13 +4,16 @@
 // Google AI Overviews and Google AI Mode and scores factual accuracy.
 // Two-stage output: an ungated teaser, then an email-gated full report.
 //
-// Calls same-origin /api routes so local/prod deployments can proxy to the
-// diagnostic backend without browser-side CORS issues.
+// Calls the diagnostic API directly (CORS) using PUBLIC_DIAGNOSTIC_API_BASE, so
+// Cloudflare's CF-Connecting-IP stays the real visitor IP for the backend's rate
+// limiter. In dev, where the var is unset, requests fall back to same-origin and
+// are handled by the local proxy in astro.config.mjs.
 const ENGINES = ['ChatGPT', 'Gemini', 'Google AI Overviews', 'Google AI Mode'];
 const ENGINES_TEXT = ENGINES.slice(0, -1).join(', ') + ' and ' + ENGINES[ENGINES.length - 1];
+const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$/, '');
 ---
 
-<section id="zicy-free-diagnostic">
+<section id="zicy-free-diagnostic" data-api-base={apiBase}>
   <div class="wrap fd-wrap">
     <div class="fd-intro">
       <span class="eyebrow">Free tool · Brand intelligence</span>
@@ -237,7 +240,7 @@ const ENGINES_TEXT = ENGINES.slice(0, -1).join(', ') + ' and ' + ENGINES[ENGINES
 
 <script is:inline>
   (function () {
-    var API_BASE = '';
+    var API_BASE = document.getElementById('zicy-free-diagnostic').getAttribute('data-api-base') || '';
     var ENGINE_ORDER = ['ChatGPT', 'Gemini', 'Google AI Overviews', 'Google AI Mode'];
     var POLL_INTERVAL_MS = 2500;
     var PROGRESS_TOTAL_STEPS = 5;
