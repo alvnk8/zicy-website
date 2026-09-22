@@ -274,6 +274,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     var pollTimer = null;
     var pollGeneration = 0;
 
+    var UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
     function showEl(el) { el.hidden = false; }
     function hideEl(el) { el.hidden = true; }
 
@@ -349,6 +351,16 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       return params;
     }
 
+    // Puts ?job=<id> in the URL (replacing any existing job param) so a refresh
+    // resumes the same run. Other query params (e.g. UTMs) are left untouched.
+    function setJobInUrl(jobId) {
+      try {
+        var url = new URL(window.location.href);
+        url.searchParams.set('job', jobId);
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+    }
+
     function sortByEngineOrder(items, keyFn) {
       return items.slice().sort(function (a, b) {
         var ai = ENGINE_ORDER.indexOf(keyFn(a));
@@ -366,6 +378,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     function pollFailed(message) {
       stopPolling();
       hideEl(progressEl);
+      showEl(form);
       showError(message, 'poll');
       submitBtn.disabled = false;
     }
@@ -437,9 +450,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
           return;
         }
 
-        // A 404 (expired/unknown job) is not retried.
+        // A 404 (expired/unknown job) is not retried. Fixed copy, independent of the
+        // backend's detail text, since this also covers a resumed ?job= link.
         if (result.status === 404) {
-          pollFailed(result.message);
+          pollFailed('This report link has expired. Run a new check below.');
           return;
         }
 
@@ -493,6 +507,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       }
 
       currentJobId = result.data && result.data.jobId;
+      setJobInUrl(currentJobId);
       startPolling(currentJobId);
     });
 
@@ -630,5 +645,29 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       showEl(fullReportEl);
       fullReportEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+
+    // Resume a run from ?job=<uuid> (a reload, or a link shared/reopened from the
+    // report email). The brand/domain fields aren't needed here; the unlock form
+    // works as-is since it posts to currentJobId, which this sets below.
+    function resumeFromUrl() {
+      var params;
+      try {
+        params = new URLSearchParams(window.location.search);
+      } catch (e) {
+        return;
+      }
+      var job = params.get('job');
+      if (!job || !UUID_RE.test(job)) return;
+
+      currentJobId = job;
+      hideEl(form);
+      progressText.textContent = 'Checking your report';
+      progressFill.style.width = '4%';
+      progressPct.textContent = '4%';
+      showEl(progressEl);
+      startPolling(job);
+    }
+
+    resumeFromUrl();
   })();
 </script>
