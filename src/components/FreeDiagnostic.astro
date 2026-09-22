@@ -27,7 +27,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       <div class="fd-row">
         <div class="fd-field">
           <label for="fdBrand">Brand name</label>
-          <input id="fdBrand" name="brandName" type="text" required autocomplete="organization" placeholder="e.g. Zicy" />
+          <input id="fdBrand" name="brandName" type="text" required autocomplete="organization" maxlength="100" placeholder="e.g. Zicy" />
         </div>
         <div class="fd-field">
           <label for="fdDomain">Website domain</label>
@@ -40,24 +40,24 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         <div class="fd-row">
           <div class="fd-field">
             <label for="fdCategory">Category</label>
-            <input id="fdCategory" name="category" type="text" placeholder="e.g. AI visibility platform" />
+            <input id="fdCategory" name="category" type="text" maxlength="100" placeholder="e.g. AI visibility platform" />
           </div>
           <div class="fd-field">
             <label for="fdMarket">Market</label>
-            <input id="fdMarket" name="market" type="text" placeholder="e.g. Singapore" />
+            <input id="fdMarket" name="market" type="text" maxlength="100" placeholder="e.g. Singapore" />
           </div>
         </div>
       </details>
 
       <button type="submit" class="btn btn-primary btn-lg fd-submit" id="fdSubmitBtn">Get my free AI reality score</button>
-      <!-- TODO C2: set measured run time -->
+      {/* TODO C2: set measured run time */}
       <p class="fd-disclaimer">No credit card. Takes about a minute. One free run per brand and domain every 30 days.</p>
     </form>
 
     <div id="fdProgress" class="fd-progress" hidden>
       <div class="fd-progress-container">
-        <span class="fd-progress-text" id="fdProgressText">Starting</span>
-        <div class="fd-progress-bar-wrapper"><div class="fd-progress-bar-fill" id="fdProgressFill"></div></div>
+        <span class="fd-progress-text" id="fdProgressText" role="status" aria-live="polite" aria-atomic="true">Starting</span>
+        <div class="fd-progress-bar-wrapper"><div class="fd-progress-bar-fill" id="fdProgressFill" role="progressbar" aria-label="Diagnostic progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="4"></div></div>
         <span class="fd-progress-pct" id="fdProgressPct">0%</span>
       </div>
     </div>
@@ -75,6 +75,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     </div>
 
     <form id="fdUnlockForm" class="fd-unlock-form" hidden>
+      <div id="fdUnlockError" class="fd-error" hidden role="alert"></div>
       <div class="fd-field">
         <label for="fdEmail">Email</label>
         <input id="fdEmail" name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
@@ -82,7 +83,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       </div>
       <label class="fd-consent">
         <input id="fdConsent" name="consent" type="checkbox" />
-        <span>Send me the full report and occasional AI visibility tips from Zicy.</span>
+        <span>Send me occasional AI visibility tips from Zicy.</span>
       </label>
       <button type="submit" class="btn btn-primary btn-lg" id="fdUnlockSubmitBtn">Unlock the full report</button>
     </form>
@@ -119,7 +120,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 </section>
 
 <style is:global>
-  #zicy-free-diagnostic { width: 100%; padding: clamp(48px, 8vw, 88px) 0; }
+  #zicy-free-diagnostic { width: 100%; padding: clamp(48px, 8vw, 88px) 0; overflow-wrap: anywhere; }
   #zicy-free-diagnostic .fd-wrap { max-width: 760px; }
 
   #zicy-free-diagnostic .fd-intro { text-align: center; margin-bottom: 40px; }
@@ -264,6 +265,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     var progressFill = document.getElementById('fdProgressFill');
     var progressPct = document.getElementById('fdProgressPct');
     var errorEl = document.getElementById('fdError');
+    var unlockErrorEl = document.getElementById('fdUnlockError');
     var teaserEl = document.getElementById('fdTeaser');
     var scoreValueEl = document.getElementById('fdScoreValue');
     var visibilityLineEl = document.getElementById('fdVisibilityLine');
@@ -283,6 +285,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     var currentJobId = null;
     var pollTimer = null;
     var pollGeneration = 0;
+    // True only when this job came from a ?job= resume on page load, not a start() in this session.
+    var resumedFromUrl = false;
 
     var UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -298,11 +302,17 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
     // stage identifies which step the error came from ('start', 'poll' or 'unlock').
     function showError(message, stage) {
-      errorEl.textContent = message;
-      showEl(errorEl);
+      var target = stage === 'unlock' ? unlockErrorEl : errorEl;
+      target.textContent = message;
+      showEl(target);
       track('diagnostic_error', { stage: stage });
     }
-    function clearError() { errorEl.textContent = ''; hideEl(errorEl); }
+    function clearError() {
+      errorEl.textContent = '';
+      hideEl(errorEl);
+      unlockErrorEl.textContent = '';
+      hideEl(unlockErrorEl);
+    }
 
     function detailMessage(detail) {
       if (typeof detail === 'string' && detail) return detail;
@@ -415,6 +425,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       var pct = Math.max(4, Math.min(96, Math.round(((status.step || 0) / PROGRESS_TOTAL_STEPS) * 100)));
       progressText.textContent = label;
       progressFill.style.width = pct + '%';
+      progressFill.setAttribute('aria-valuenow', pct);
       progressPct.textContent = pct + '%';
     }
 
@@ -431,7 +442,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       showEl(teaserEl);
       hideEl(introEl);
       hideEl(form);
-      track('diagnostic_complete', { score: Math.round(teaser.realityScore) });
+      track('diagnostic_complete', { score: Math.round(teaser.realityScore), resumed: resumedFromUrl });
     }
 
     // Starts (or restarts) the poll loop for a job. Bumps pollGeneration so any timer or
@@ -517,6 +528,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       submitBtn.disabled = true;
       progressText.textContent = 'Starting';
       progressFill.style.width = '4%';
+      progressFill.setAttribute('aria-valuenow', 4);
       progressPct.textContent = '4%';
       showEl(progressEl);
 
@@ -538,6 +550,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       currentJobId = result.data && result.data.jobId;
       setJobInUrl(currentJobId);
       track('diagnostic_start', { cached: !!(result.data && result.data.cached) });
+      resumedFromUrl = false;
       startPolling(currentJobId);
     });
 
@@ -691,10 +704,12 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       var job = params.get('job');
       if (!job || !UUID_RE.test(job)) return;
 
+      resumedFromUrl = true;
       currentJobId = job;
       hideEl(form);
       progressText.textContent = 'Checking your report';
       progressFill.style.width = '4%';
+      progressFill.setAttribute('aria-valuenow', 4);
       progressPct.textContent = '4%';
       showEl(progressEl);
       startPolling(job);
