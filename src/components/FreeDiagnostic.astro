@@ -243,7 +243,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     var API_BASE = document.getElementById('zicy-free-diagnostic').getAttribute('data-api-base') || '';
     var ENGINE_ORDER = ['ChatGPT', 'Gemini', 'Google AI Overviews', 'Google AI Mode'];
     var POLL_INTERVAL_MS = 2500;
+    var POLL_RETRY_DELAYS_MS = [2500, 5000, 10000];
+    var POLL_TIMEOUT_MS = 20 * 60 * 1000;
     var PROGRESS_TOTAL_STEPS = 5;
+    var GENERIC_ERROR_MESSAGE = 'Something went wrong on our side. Please try again.';
 
     var form = document.getElementById('fdForm');
     var introEl = document.querySelector('#zicy-free-diagnostic .fd-intro');
@@ -269,12 +272,70 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
     var currentJobId = null;
     var pollTimer = null;
+    var pollGeneration = 0;
 
     function showEl(el) { el.hidden = false; }
     function hideEl(el) { el.hidden = true; }
 
-    function showError(message) { errorEl.textContent = message; showEl(errorEl); }
+    // stage identifies which step the error came from (e.g. 'start', 'poll', 'unlock');
+    // unused for now, kept so A7's GTM tracking can hook in without changing this signature.
+    function showError(message, _stage) { errorEl.textContent = message; showEl(errorEl); }
     function clearError() { errorEl.textContent = ''; hideEl(errorEl); }
+
+    function detailMessage(detail) {
+      if (typeof detail === 'string' && detail) return detail;
+      if (Array.isArray(detail) && detail.length) {
+        var parts = detail.map(function (item) {
+          var msg = item && typeof item === 'object' ? item.msg : item;
+          if (typeof msg !== 'string' || !msg) return '';
+          return msg.replace(/^Value error,\s*/, '');
+        }).filter(function (m) { return m; });
+        return parts.length ? parts.join(' ') : GENERIC_ERROR_MESSAGE;
+      }
+      if (detail && typeof detail === 'object' && typeof detail.message === 'string' && detail.message) {
+        return detail.message;
+      }
+      return GENERIC_ERROR_MESSAGE;
+    }
+
+    function messageForStatus(status, data) {
+      if (status === 429) return 'Too many requests. Please wait a minute and try again.';
+      if (status === 0 || status >= 500) return GENERIC_ERROR_MESSAGE;
+      return detailMessage(data && typeof data === 'object' ? data.detail : undefined);
+    }
+
+    // Single fetch helper for all API calls. Never rejects: a network failure resolves
+    // to {ok: false, status: 0, ...} so callers don't need try/catch. Reads the body as
+    // text first so a non-JSON response (e.g. an HTML error page from a proxy) can't throw.
+    async function api(method, path, body) {
+      var options = { method: method };
+      if (body !== undefined) {
+        options.headers = { 'Content-Type': 'application/json' };
+        options.body = JSON.stringify(body);
+      }
+
+      var res, text;
+      try {
+        res = await fetch(API_BASE + path, options);
+        text = await res.text();
+      } catch (e) {
+        // Covers a network failure and a body read that fails mid-stream (e.g. a
+        // dropped connection while the response is still arriving).
+        return { ok: false, status: 0, data: null, message: GENERIC_ERROR_MESSAGE };
+      }
+
+      var data = null;
+      if (text) {
+        try { data = JSON.parse(text); } catch (e) { data = null; }
+      }
+
+      return {
+        ok: res.ok,
+        status: res.status,
+        data: data,
+        message: res.ok ? '' : messageForStatus(res.status, data)
+      };
+    }
 
     function getUtmParams() {
       var params = {};
@@ -302,6 +363,13 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       if (pollTimer) { clearTimeout(pollTimer); pollTimer = null; }
     }
 
+    function pollFailed(message) {
+      stopPolling();
+      hideEl(progressEl);
+      showError(message, 'poll');
+      submitBtn.disabled = false;
+    }
+
     function updateProgress(status) {
       var label = status.label || 'Working';
       var pct = Math.max(4, Math.min(96, Math.round(((status.step || 0) / PROGRESS_TOTAL_STEPS) * 100)));
@@ -324,35 +392,70 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       hideEl(form);
     }
 
-    async function pollStatus(jobId) {
-      try {
-        var res = await fetch(API_BASE + '/api/brand-intelligence/public/diagnostic/' + jobId, { method: 'GET' });
-        if (!res.ok) throw new Error('Status check failed (' + res.status + ')');
-        var data = await res.json();
+    // Starts (or restarts) the poll loop for a job. Bumps pollGeneration so any timer or
+    // in-flight request from a previous loop (e.g. a re-submit while polling) becomes a
+    // no-op instead of racing with this one.
+    function startPolling(jobId) {
+      stopPolling();
+      pollGeneration += 1;
+      runPoll(jobId, pollGeneration, Date.now(), 0);
+    }
 
-        if (data.status === 'failed') {
-          stopPolling();
-          hideEl(progressEl);
-          showError(data.error || 'The diagnostic could not be completed. Please try again.');
-          submitBtn.disabled = false;
-          return;
-        }
-
-        if (data.status === 'completed' && data.teaser) {
-          stopPolling();
-          hideEl(progressEl);
-          renderTeaser(data.teaser);
-          return;
-        }
-
-        updateProgress(data);
-        pollTimer = setTimeout(function () { pollStatus(jobId); }, POLL_INTERVAL_MS);
-      } catch (err) {
-        stopPolling();
-        hideEl(progressEl);
-        showError('Lost connection while checking your report. Please try again.');
-        submitBtn.disabled = false;
+    function scheduleNextPoll(jobId, generation, startedAt, retryCount, delay) {
+      if (Date.now() - startedAt >= POLL_TIMEOUT_MS) {
+        pollFailed('This is taking longer than usual. Please try again later.');
+        return;
       }
+      pollTimer = setTimeout(function () {
+        runPoll(jobId, generation, startedAt, retryCount);
+      }, delay);
+    }
+
+    function runPoll(jobId, generation, startedAt, retryCount) {
+      if (generation !== pollGeneration) return;
+
+      api('GET', '/api/brand-intelligence/public/diagnostic/' + jobId).then(function (result) {
+        if (generation !== pollGeneration) return;
+
+        if (result.ok) {
+          var data = result.data || {};
+
+          if (data.status === 'failed') {
+            pollFailed(data.error || 'The diagnostic could not be completed. Please try again.');
+            return;
+          }
+
+          if (data.status === 'completed' && data.teaser) {
+            stopPolling();
+            hideEl(progressEl);
+            renderTeaser(data.teaser);
+            return;
+          }
+
+          updateProgress(data);
+          scheduleNextPoll(jobId, generation, startedAt, 0, POLL_INTERVAL_MS);
+          return;
+        }
+
+        // A 404 (expired/unknown job) is not retried.
+        if (result.status === 404) {
+          pollFailed(result.message);
+          return;
+        }
+
+        // Network failure, 5xx or 429: retry with backoff before giving up.
+        if (retryCount < POLL_RETRY_DELAYS_MS.length) {
+          scheduleNextPoll(jobId, generation, startedAt, retryCount + 1, POLL_RETRY_DELAYS_MS[retryCount]);
+          return;
+        }
+
+        pollFailed(result.message);
+      }).catch(function () {
+        // Defence in depth: api() itself shouldn't reject, but a bug in a success
+        // handler above (e.g. rendering the teaser) must not kill the loop silently.
+        if (generation !== pollGeneration) return;
+        pollFailed(GENERIC_ERROR_MESSAGE);
+      });
     }
 
     form.addEventListener('submit', async function (e) {
@@ -374,27 +477,23 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       progressPct.textContent = '4%';
       showEl(progressEl);
 
-      try {
-        var res = await fetch(API_BASE + '/api/brand-intelligence/public/diagnostic/start', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            brandName: brandName,
-            domain: domain,
-            category: category,
-            market: market,
-            utm: getUtmParams()
-          })
-        });
-        var data = await res.json();
-        if (!res.ok) throw new Error((data && data.detail) || 'Could not start the diagnostic. Please try again.');
-        currentJobId = data.jobId;
-        pollStatus(currentJobId);
-      } catch (err) {
+      var result = await api('POST', '/api/brand-intelligence/public/diagnostic/start', {
+        brandName: brandName,
+        domain: domain,
+        category: category,
+        market: market,
+        utm: getUtmParams()
+      });
+
+      if (!result.ok) {
         hideEl(progressEl);
-        showError(err.message || 'Could not start the diagnostic. Please try again.');
+        showError(result.message, 'start');
         submitBtn.disabled = false;
+        return;
       }
+
+      currentJobId = result.data && result.data.jobId;
+      startPolling(currentJobId);
     });
 
     unlockBtn.addEventListener('click', function () {
@@ -509,27 +608,27 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
       unlockSubmitBtn.disabled = true;
 
-      try {
-        var res = await fetch(API_BASE + '/api/brand-intelligence/public/diagnostic/' + currentJobId + '/unlock', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, consent: consent, utm: getUtmParams() })
-        });
-        var data = await res.json();
-        if (!res.ok) throw new Error((data && data.detail) || 'Could not unlock the report. Please try again.');
+      var result = await api('POST', '/api/brand-intelligence/public/diagnostic/' + currentJobId + '/unlock', {
+        email: email,
+        consent: consent,
+        utm: getUtmParams()
+      });
 
-        hideEl(unlockForm);
-        reportHeadingEl.textContent = 'How AI sees ' + data.brandName;
-        renderEngineTable(data.perEngine || [], data.mentionCoveragePerEngine || []);
-        renderInaccuracies(data.inaccuracies || []);
-        renderRecommendations(data.recommendations || []);
-        showEl(fullReportEl);
-        fullReportEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } catch (err) {
-        showError(err.message || 'Could not unlock the report. Please try again.');
-      } finally {
-        unlockSubmitBtn.disabled = false;
+      unlockSubmitBtn.disabled = false;
+
+      if (!result.ok) {
+        showError(result.message, 'unlock');
+        return;
       }
+
+      var data = result.data || {};
+      hideEl(unlockForm);
+      reportHeadingEl.textContent = 'How AI sees ' + data.brandName;
+      renderEngineTable(data.perEngine || [], data.mentionCoveragePerEngine || []);
+      renderInaccuracies(data.inaccuracies || []);
+      renderRecommendations(data.recommendations || []);
+      showEl(fullReportEl);
+      fullReportEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   })();
 </script>
