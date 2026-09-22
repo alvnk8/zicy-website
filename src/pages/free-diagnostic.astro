@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FreeDiagnostic from '../components/FreeDiagnostic.astro';
+import { webPageSchema } from '../lib/schema';
 
 const title = 'Free AI reality score: see how AI describes your brand';
 const description =
@@ -17,6 +18,7 @@ const breadcrumb = {
 };
 ---
 <BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/free-diagnostic', title))} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
   <FreeDiagnostic />
 </BaseLayout>
