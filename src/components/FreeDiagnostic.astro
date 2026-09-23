@@ -50,8 +50,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       </details>
 
       <button type="submit" class="btn btn-primary btn-lg fd-submit" id="fdSubmitBtn">Get my free AI reality score</button>
-      {/* TODO C2: set measured run time */}
-      <p class="fd-disclaimer">No credit card. Takes about a minute. One free run per brand and domain every 30 days.</p>
+      <p class="fd-disclaimer">No credit card. Takes about 5 minutes. One free run per brand and domain every 30 days.</p>
     </form>
 
     <div id="fdProgress" class="fd-progress" hidden>
@@ -255,6 +254,16 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     var POLL_RETRY_DELAYS_MS = [2500, 5000, 10000];
     var POLL_TIMEOUT_MS = 20 * 60 * 1000;
     var PROGRESS_TOTAL_STEPS = 5;
+    // The backend reports step 0 for the whole "querying AI platforms" phase (the bulk
+    // of a run), but its label carries real progress as "Querying AI platforms (7/9)".
+    // When that fraction is present, map it into this span instead of using step/total.
+    var QUERY_PHASE_START_PCT = 10;
+    var QUERY_PHASE_END_PCT = 80;
+    var QUERY_FRACTION_RE = /(\d+)\s*\/\s*(\d+)/;
+    // Steps 2-4 (consolidating, evaluating, generating) have no fraction in their label
+    // and would otherwise compute below 80% via step/PROGRESS_TOTAL_STEPS, pinning the
+    // bar flat at the query phase's ceiling for the rest of the run.
+    var POST_QUERY_STEP_FLOOR = 2;
     var GENERIC_ERROR_MESSAGE = 'Something went wrong on our side. Please try again.';
 
     var form = document.getElementById('fdForm');
@@ -285,6 +294,9 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     var currentJobId = null;
     var pollTimer = null;
     var pollGeneration = 0;
+    // Tracks the highest percentage shown so far in the current run, so the bar
+    // never moves backwards even if a later status maps to a lower percentage.
+    var lastProgressPct = 4;
     // True only when this job came from a ?job= resume on page load, not a start() in this session.
     var resumedFromUrl = false;
 
@@ -422,7 +434,26 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
     function updateProgress(status) {
       var label = status.label || 'Working';
-      var pct = Math.max(4, Math.min(96, Math.round(((status.step || 0) / PROGRESS_TOTAL_STEPS) * 100)));
+      var step = status.step || 0;
+      var fractionMatch = QUERY_FRACTION_RE.exec(label);
+      var rawPct;
+      if (fractionMatch) {
+        var done = parseInt(fractionMatch[1], 10);
+        var total = parseInt(fractionMatch[2], 10);
+        var frac = total > 0 ? done / total : 0;
+        rawPct = QUERY_PHASE_START_PCT + frac * (QUERY_PHASE_END_PCT - QUERY_PHASE_START_PCT);
+      } else if (step >= POST_QUERY_STEP_FLOOR) {
+        // Consolidating/evaluating/generating (steps 2-4): map into the bar's tail so
+        // it keeps advancing past the querying phase's 80% ceiling instead of sitting
+        // pinned there for the run's final ~60s.
+        rawPct = QUERY_PHASE_END_PCT + ((step - 1) / (PROGRESS_TOTAL_STEPS - 1)) * (96 - QUERY_PHASE_END_PCT);
+      } else {
+        rawPct = (step / PROGRESS_TOTAL_STEPS) * 100;
+      }
+      var pct = Math.max(4, Math.min(96, Math.round(rawPct)));
+      // Never let the bar go backwards or past 100, whatever the source status reports.
+      pct = Math.min(100, Math.max(pct, lastProgressPct));
+      lastProgressPct = pct;
       progressText.textContent = label;
       progressFill.style.width = pct + '%';
       progressFill.setAttribute('aria-valuenow', pct);
@@ -526,6 +557,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       if (!brandName || !domain) return;
 
       submitBtn.disabled = true;
+      lastProgressPct = 4;
       progressText.textContent = 'Starting';
       progressFill.style.width = '4%';
       progressFill.setAttribute('aria-valuenow', 4);
@@ -707,6 +739,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       resumedFromUrl = true;
       currentJobId = job;
       hideEl(form);
+      lastProgressPct = 4;
       progressText.textContent = 'Checking your report';
       progressFill.style.width = '4%';
       progressFill.setAttribute('aria-valuenow', 4);
