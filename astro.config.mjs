@@ -66,5 +66,19 @@ export default defineConfig({
         return item;
       },
     }),
+    {
+      name: 'zicy-local-diagnostic-api-proxy',
+      hooks: {
+        'astro:config:setup': ({ command, injectRoute }) => {
+          if (command !== 'dev') return;
+
+          injectRoute({
+            pattern: '/api/brand-intelligence/[...path]',
+            entrypoint: './src/dev/diagnostic-api-proxy.ts',
+            prerender: false,
+          });
+        },
+      },
+    },
   ],
 });
