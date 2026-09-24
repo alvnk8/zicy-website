@@ -2,12 +2,26 @@
 // The free diagnostic: a public lead magnet. Minimal input (brand name + website),
 // a bot fills the rest server-side, then a background job queries ChatGPT, Gemini,
 // Google AI Overviews and Google AI Mode and scores factual accuracy.
-// Two-stage output: an ungated teaser, then an email-gated full report.
+// Output: the score and the full report together, with no email step.
 //
 // Calls the diagnostic API directly (CORS) using PUBLIC_DIAGNOSTIC_API_BASE, so
 // Cloudflare's CF-Connecting-IP stays the real visitor IP for the backend's rate
 // limiter. In dev, where the var is unset, requests fall back to same-origin and
 // are handled by the local proxy in astro.config.mjs.
+import {
+  compareEyebrow,
+  compareHeading,
+  compareIntro,
+  compareColumns,
+  compareRows,
+  QUESTIONS_ROW_FALLBACK,
+  QUESTIONS_ROW_TEMPLATE,
+  signupHeadingTemplate,
+  signupBody,
+  signupButtonLabel,
+  signupSmallPrint,
+} from '../data/free-diagnostic';
+
 const ENGINES = ['ChatGPT', 'Gemini', 'Google AI Overviews', 'Google AI Mode'];
 const ENGINES_TEXT = ENGINES.slice(0, -1).join(', ') + ' and ' + ENGINES[ENGINES.length - 1];
 const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$/, '');
@@ -69,27 +83,11 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       <p class="fd-score-line" id="fdVisibilityLine"></p>
       <p class="fd-inaccuracy-line" id="fdInaccuracyLine"></p>
       <p class="fd-engine-line" id="fdEngineLine"></p>
-      <button type="button" class="btn btn-primary btn-lg" id="fdUnlockBtn">See the full report</button>
-      <a class="btn btn-primary btn-lg fd-teaser-cta" id="fdTeaserCta" href="https://app.zicy.com/register">Start free: paste your website</a>
     </div>
-
-    <form id="fdUnlockForm" class="fd-unlock-form" hidden>
-      <div id="fdUnlockError" class="fd-error" hidden role="alert"></div>
-      <div class="fd-field">
-        <label for="fdEmail">Email</label>
-        <input id="fdEmail" name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
-        <p class="fd-privacy">We'll email your report. See our <a href="/legal/privacy">privacy policy</a>.</p>
-      </div>
-      <label class="fd-consent">
-        <input id="fdConsent" name="consent" type="checkbox" />
-        <span>Send me occasional AI visibility tips from Zicy.</span>
-      </label>
-      <button type="submit" class="btn btn-primary btn-lg" id="fdUnlockSubmitBtn">Unlock the full report</button>
-    </form>
 
     <div id="fdFullReport" class="fd-full-report" hidden>
       <div class="shead">
-        <span class="eyebrow">Full report</span>
+        <span class="eyebrow">Your report</span>
         <h2 id="fdReportHeading">How AI sees your brand</h2>
       </div>
 
@@ -112,8 +110,39 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         <h3>What to fix first</h3>
         <div class="fd-recommendations" id="fdRecommendationsList"></div>
       </div>
+    </div>
 
-      <a class="btn btn-primary btn-lg fd-report-cta" id="fdReportCta" href="https://app.zicy.com/register">Start free: paste your website</a>
+    <div id="fdCompare" class="fd-compare" hidden data-questions-fallback={QUESTIONS_ROW_FALLBACK} data-questions-template={QUESTIONS_ROW_TEMPLATE}>
+      <div class="shead">
+        <span class="eyebrow">{compareEyebrow}</span>
+        <h2 id="fdCompareHeading">{compareHeading}</h2>
+      </div>
+      <p class="fd-compare-intro">{compareIntro}</p>
+      <div class="fd-compare-table" role="table" aria-labelledby="fdCompareHeading">
+        <div class="fd-compare-row fd-compare-head" role="row">
+          <div role="columnheader">{compareColumns.what}</div>
+          <div role="columnheader">{compareColumns.free}</div>
+          <div class="fd-compare-full" role="columnheader">{compareColumns.full}</div>
+        </div>
+        {compareRows.map((row, i) => (
+          <div class="fd-compare-row" role="row">
+            <div class="fd-compare-what" role="rowheader">{row.what}</div>
+            <div
+              class:list={['fd-compare-free', { 'fd-compare-muted': row.free === 'Not included' || row.free === 'One run' }]}
+              role="cell"
+              id={i === 0 ? 'fdCompareQuestions' : undefined}
+            >{row.free}</div>
+            <div class="fd-compare-full" role="cell">{row.full}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div id="fdSignup" class="fd-signup" hidden data-heading-template={signupHeadingTemplate}>
+      <h2 id="fdSignupHeading">{signupHeadingTemplate.replace('{brandName}', 'your brand')}</h2>
+      <p>{signupBody}</p>
+      <a class="btn btn-primary btn-lg" id="fdSignupBtn" href="https://app.zicy.com/register">{signupButtonLabel}</a>
+      <small>{signupSmallPrint}</small>
     </div>
   </div>
 </section>
@@ -190,22 +219,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   #zicy-free-diagnostic .fd-score-line,
   #zicy-free-diagnostic .fd-inaccuracy-line,
   #zicy-free-diagnostic .fd-engine-line { font-size: 15.5px; color: var(--ink-2); line-height: 1.6; margin-bottom: 6px; }
-  #zicy-free-diagnostic .fd-teaser .btn { margin-top: 18px; }
-  #zicy-free-diagnostic .fd-teaser-cta { margin-left: 10px; }
-
-  /* unlock form */
-  #zicy-free-diagnostic .fd-unlock-form {
-    margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg);
-    padding: 24px; display: flex; flex-direction: column; gap: 14px;
-  }
-  #zicy-free-diagnostic .fd-privacy { font-size: 13px; color: var(--muted); margin-top: 6px; }
-  #zicy-free-diagnostic .fd-consent { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: var(--ink-2); cursor: pointer; }
-  #zicy-free-diagnostic .fd-consent input { margin-top: 3px; flex-shrink: 0; }
 
   /* full report */
   #zicy-free-diagnostic .fd-full-report { margin-top: 40px; }
   #zicy-free-diagnostic .fd-section { margin-top: 32px; }
-  #zicy-free-diagnostic .fd-report-cta { margin-top: 32px; }
   #zicy-free-diagnostic .fd-section h3 { font-family: var(--display); font-weight: 500; font-size: 20px; color: var(--ink); margin-bottom: 14px; }
 
   #zicy-free-diagnostic .fd-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-lg); }
@@ -239,10 +256,52 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   #zicy-free-diagnostic .fd-rec-card h4 { font-family: var(--display); font-weight: 500; font-size: 16px; color: var(--ink); margin: 8px 0 6px; }
   #zicy-free-diagnostic .fd-rec-card p { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
 
+  /* comparison */
+  #zicy-free-diagnostic .fd-compare { margin-top: 40px; }
+  #zicy-free-diagnostic .fd-compare .shead { margin-bottom: 0; }
+  #zicy-free-diagnostic .fd-compare-intro { font-size: 15.5px; color: var(--ink-2); line-height: 1.6; max-width: 60ch; margin-top: 14px; }
+  #zicy-free-diagnostic .fd-compare-table {
+    margin-top: 24px; display: grid; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--surface);
+  }
+  #zicy-free-diagnostic .fd-compare-row {
+    display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.3fr); border-top: 1px solid var(--line);
+  }
+  #zicy-free-diagnostic .fd-compare-row:first-child { border-top: 0; }
+  #zicy-free-diagnostic .fd-compare-row > div { padding: 12px 14px; font-size: 14px; }
+  #zicy-free-diagnostic .fd-compare-head > div {
+    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--mist);
+  }
+  #zicy-free-diagnostic .fd-compare-what { font-weight: 600; color: var(--ink); }
+  #zicy-free-diagnostic .fd-compare-free { color: var(--ink-2); }
+  #zicy-free-diagnostic .fd-compare-muted { color: var(--muted); }
+  #zicy-free-diagnostic .fd-compare-full { background: var(--violet-50); color: var(--ink-2); }
+  #zicy-free-diagnostic .fd-compare-head .fd-compare-full { background: var(--violet); color: #fff; }
+
+  /* sign-up */
+  #zicy-free-diagnostic .fd-signup {
+    margin-top: 40px; text-align: center; display: grid; gap: 12px; justify-items: center;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 22px;
+  }
+  #zicy-free-diagnostic .fd-signup[hidden] { display: none; }
+  #zicy-free-diagnostic .fd-signup h2 { font-size: clamp(26px, 4vw, 30px); color: var(--ink); }
+  #zicy-free-diagnostic .fd-signup p { color: var(--ink-2); font-size: 16px; max-width: 46ch; }
+  #zicy-free-diagnostic .fd-signup .btn { margin-top: 6px; }
+  #zicy-free-diagnostic .fd-signup small { color: var(--muted); font-size: 12px; }
+
   @media (max-width: 640px) {
     #zicy-free-diagnostic .fd-row { grid-template-columns: 1fr; }
     #zicy-free-diagnostic .fd-form { padding: 20px; }
     #zicy-free-diagnostic .fd-teaser { padding: 28px 18px; }
+  }
+
+  @media (max-width: 560px) {
+    #zicy-free-diagnostic .fd-compare-row { grid-template-columns: 1fr; }
+    #zicy-free-diagnostic .fd-compare-head { display: none; }
+    #zicy-free-diagnostic .fd-compare-row > div { padding: 6px 14px; }
+    #zicy-free-diagnostic .fd-compare-what { padding-top: 12px; }
+    #zicy-free-diagnostic .fd-compare-free::before { content: "Free: "; font-weight: 500; color: var(--muted); }
+    #zicy-free-diagnostic .fd-compare-full { background: transparent; padding-bottom: 12px; }
+    #zicy-free-diagnostic .fd-compare-full::before { content: "Full report: "; font-weight: 600; color: var(--violet-700); }
   }
 </style>
 
@@ -274,22 +333,24 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     var progressFill = document.getElementById('fdProgressFill');
     var progressPct = document.getElementById('fdProgressPct');
     var errorEl = document.getElementById('fdError');
-    var unlockErrorEl = document.getElementById('fdUnlockError');
     var teaserEl = document.getElementById('fdTeaser');
     var scoreValueEl = document.getElementById('fdScoreValue');
     var visibilityLineEl = document.getElementById('fdVisibilityLine');
     var inaccuracyLineEl = document.getElementById('fdInaccuracyLine');
     var engineLineEl = document.getElementById('fdEngineLine');
-    var unlockBtn = document.getElementById('fdUnlockBtn');
-    var unlockForm = document.getElementById('fdUnlockForm');
-    var unlockSubmitBtn = document.getElementById('fdUnlockSubmitBtn');
     var fullReportEl = document.getElementById('fdFullReport');
     var reportHeadingEl = document.getElementById('fdReportHeading');
     var engineTableBody = document.querySelector('#fdEngineTable tbody');
     var inaccuraciesList = document.getElementById('fdInaccuraciesList');
     var recommendationsList = document.getElementById('fdRecommendationsList');
-    var teaserCta = document.getElementById('fdTeaserCta');
-    var reportCta = document.getElementById('fdReportCta');
+    var compareEl = document.getElementById('fdCompare');
+    var compareQuestionsEl = document.getElementById('fdCompareQuestions');
+    var compareQuestionsFallback = compareEl.getAttribute('data-questions-fallback') || '';
+    var compareQuestionsTemplate = compareEl.getAttribute('data-questions-template') || '';
+    var signupEl = document.getElementById('fdSignup');
+    var signupHeadingEl = document.getElementById('fdSignupHeading');
+    var signupBtn = document.getElementById('fdSignupBtn');
+    var signupHeadingTemplate = signupEl.getAttribute('data-heading-template') || '';
 
     var currentJobId = null;
     var pollTimer = null;
@@ -305,25 +366,22 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     function showEl(el) { el.hidden = false; }
     function hideEl(el) { el.hidden = true; }
 
-    // Pushes an event to the GTM dataLayer. GTM owns consent gating for tags fired off
-    // these events, so pushing here (even before consent) is fine under Consent Mode v2.
+    // Pushes an event to the GTM dataLayer. GTM gates the tags fired off these events
+    // under Consent Mode v2, so pushing here before the visitor accepts cookies is fine.
     function track(event, data) {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push(Object.assign({ event: event }, data));
     }
 
-    // stage identifies which step the error came from ('start', 'poll' or 'unlock').
+    // stage identifies which step the error came from ('start' or 'poll').
     function showError(message, stage) {
-      var target = stage === 'unlock' ? unlockErrorEl : errorEl;
-      target.textContent = message;
-      showEl(target);
+      errorEl.textContent = message;
+      showEl(errorEl);
       track('diagnostic_error', { stage: stage });
     }
     function clearError() {
       errorEl.textContent = '';
       hideEl(errorEl);
-      unlockErrorEl.textContent = '';
-      hideEl(unlockErrorEl);
     }
 
     function detailMessage(detail) {
@@ -400,6 +458,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       return 'https://app.zicy.com/register' + (qs ? '?' + qs : '');
     }
 
+    signupBtn.addEventListener('click', function () {
+      track('diagnostic_signup_click', {});
+    });
+
     // Puts ?job=<id> in the URL (replacing any existing job param) so a refresh
     // resumes the same run. Other query params (e.g. UTMs) are left untouched.
     function setJobInUrl(jobId) {
@@ -469,7 +531,6 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       engineLineEl.textContent = teaser.engineHighlight
         ? teaser.engineHighlight + ' has the clearest read on ' + teaser.brandName + '.'
         : '';
-      teaserCta.href = buildRegisterHref();
       showEl(teaserEl);
       hideEl(introEl);
       hideEl(form);
@@ -513,6 +574,15 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
             stopPolling();
             hideEl(progressEl);
             renderTeaser(data.teaser);
+            if (data.report) {
+              try {
+                renderReport(data.report);
+              } catch (e) {
+                hideEl(fullReportEl);
+                hideEl(compareEl);
+                hideEl(signupEl);
+              }
+            }
             return;
           }
 
@@ -547,8 +617,9 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       e.preventDefault();
       clearError();
       hideEl(teaserEl);
-      hideEl(unlockForm);
       hideEl(fullReportEl);
+      hideEl(compareEl);
+      hideEl(signupEl);
 
       var brandName = document.getElementById('fdBrand').value.trim();
       var domain = document.getElementById('fdDomain').value.trim();
@@ -586,11 +657,6 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       startPolling(currentJobId);
     });
 
-    unlockBtn.addEventListener('click', function () {
-      hideEl(unlockBtn);
-      showEl(unlockForm);
-    });
-
     function renderEngineTable(perEngine, mentionCoverage) {
       engineTableBody.innerHTML = '';
       var coverageByPlatform = {};
@@ -618,6 +684,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
         engineTableBody.appendChild(tr);
       });
+    }
+
+    function isMissingValue(value) {
+      return value === null || value === undefined || String(value).trim() === '' || String(value).trim() === 'None';
     }
 
     function renderInaccuracies(inaccuracies) {
@@ -652,13 +722,15 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
         var said = document.createElement('p');
         said.className = 'fd-inaccuracy-said';
-        said.textContent = 'AI says: ' + item.aiSaid;
+        said.textContent = 'AI says: ' + (isMissingValue(item.aiSaid) ? 'Not mentioned' : item.aiSaid);
         card.appendChild(said);
 
-        var correction = document.createElement('p');
-        correction.className = 'fd-inaccuracy-correction';
-        correction.textContent = 'Correct: ' + item.correction;
-        card.appendChild(correction);
+        if (!isMissingValue(item.correction)) {
+          var correction = document.createElement('p');
+          correction.className = 'fd-inaccuracy-correction';
+          correction.textContent = 'Correct: ' + item.correction;
+          card.appendChild(correction);
+        }
 
         inaccuraciesList.appendChild(card);
       });
@@ -687,45 +759,38 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       });
     }
 
-    unlockForm.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      clearError();
-      if (!currentJobId) return;
-
-      var email = document.getElementById('fdEmail').value.trim();
-      var consent = document.getElementById('fdConsent').checked;
-      if (!email) return;
-
-      unlockSubmitBtn.disabled = true;
-
-      var result = await api('POST', '/api/brand-intelligence/public/diagnostic/' + currentJobId + '/unlock', {
-        email: email,
-        consent: consent,
-        utm: getUtmParams()
+    // Fills the comparison section's "Questions asked" free-report cell with the
+    // live query count: the highest queryCount above 0 across engines, or the
+    // build-time fallback wording if none is above 0.
+    function renderCompareQuestions(mentionCoverage) {
+      var maxQueryCount = 0;
+      (mentionCoverage || []).forEach(function (c) {
+        if (typeof c.queryCount === 'number' && c.queryCount > maxQueryCount) maxQueryCount = c.queryCount;
       });
+      compareQuestionsEl.textContent = maxQueryCount > 0
+        ? compareQuestionsTemplate.replace('{n}', maxQueryCount)
+        : compareQuestionsFallback;
+    }
 
-      unlockSubmitBtn.disabled = false;
-
-      if (!result.ok) {
-        showError(result.message, 'unlock');
-        return;
-      }
-
-      var data = result.data || {};
-      hideEl(unlockForm);
-      reportHeadingEl.textContent = 'How AI sees ' + data.brandName;
-      renderEngineTable(data.perEngine || [], data.mentionCoveragePerEngine || []);
-      renderInaccuracies(data.inaccuracies || []);
-      renderRecommendations(data.recommendations || []);
-      reportCta.href = buildRegisterHref();
+    // Renders the full report from the completed status's report field, alongside
+    // the teaser. Called from the same completed path for both a fresh run and a
+    // ?job= resume.
+    function renderReport(report) {
+      reportHeadingEl.textContent = 'How AI sees ' + report.brandName;
+      renderEngineTable(report.perEngine || [], report.mentionCoveragePerEngine || []);
+      renderInaccuracies(report.inaccuracies || []);
+      renderRecommendations(report.recommendations || []);
+      renderCompareQuestions(report.mentionCoveragePerEngine || []);
+      signupHeadingEl.textContent = signupHeadingTemplate.split('{brandName}').join(report.brandName);
+      signupBtn.href = buildRegisterHref();
       showEl(fullReportEl);
-      fullReportEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      track('diagnostic_unlock', { consent: consent });
-    });
+      showEl(compareEl);
+      showEl(signupEl);
+    }
 
-    // Resume a run from ?job=<uuid> (a reload, or a link shared/reopened from the
-    // report email). The brand/domain fields aren't needed here; the unlock form
-    // works as-is since it posts to currentJobId, which this sets below.
+    // Resume a run from ?job=<uuid> (a reload, or a link shared/reopened from an
+    // earlier report email). The brand/domain fields aren't needed here; this sets
+    // currentJobId and polls it through the same completed path as a fresh run.
     function resumeFromUrl() {
       var params;
       try {
