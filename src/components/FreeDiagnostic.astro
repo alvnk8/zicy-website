@@ -165,6 +165,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg);
     padding: 28px; display: flex; flex-direction: column; gap: 16px;
   }
+  #zicy-free-diagnostic .fd-form[hidden] { display: none; }
   #zicy-free-diagnostic .fd-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   #zicy-free-diagnostic .fd-field { display: flex; flex-direction: column; gap: 6px; }
   #zicy-free-diagnostic .fd-field label { font-size: 13px; font-weight: 500; color: var(--ink-2); }
