@@ -16,6 +16,10 @@ import {
   compareRows,
   QUESTIONS_ROW_FALLBACK,
   QUESTIONS_ROW_TEMPLATE,
+  signupHeadingTemplate,
+  signupBody,
+  signupButtonLabel,
+  signupSmallPrint,
 } from '../data/free-diagnostic';
 
 const ENGINES = ['ChatGPT', 'Gemini', 'Google AI Overviews', 'Google AI Mode'];
@@ -132,6 +136,13 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
           </div>
         ))}
       </div>
+    </div>
+
+    <div id="fdSignup" class="fd-signup" hidden data-heading-template={signupHeadingTemplate}>
+      <h2 id="fdSignupHeading">{signupHeadingTemplate.replace('{brandName}', 'your brand')}</h2>
+      <p>{signupBody}</p>
+      <a class="btn btn-primary btn-lg" id="fdSignupBtn" href="https://app.zicy.com/register">{signupButtonLabel}</a>
+      <small>{signupSmallPrint}</small>
     </div>
   </div>
 </section>
@@ -265,6 +276,17 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   #zicy-free-diagnostic .fd-compare-full { background: var(--violet-50); color: var(--ink-2); }
   #zicy-free-diagnostic .fd-compare-head .fd-compare-full { background: var(--violet); color: #fff; }
 
+  /* sign-up */
+  #zicy-free-diagnostic .fd-signup {
+    margin-top: 40px; text-align: center; display: grid; gap: 12px; justify-items: center;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 22px;
+  }
+  #zicy-free-diagnostic .fd-signup[hidden] { display: none; }
+  #zicy-free-diagnostic .fd-signup h2 { font-size: clamp(26px, 4vw, 30px); color: var(--ink); }
+  #zicy-free-diagnostic .fd-signup p { color: var(--ink-2); font-size: 16px; max-width: 46ch; }
+  #zicy-free-diagnostic .fd-signup .btn { margin-top: 6px; }
+  #zicy-free-diagnostic .fd-signup small { color: var(--muted); font-size: 12px; }
+
   @media (max-width: 640px) {
     #zicy-free-diagnostic .fd-row { grid-template-columns: 1fr; }
     #zicy-free-diagnostic .fd-form { padding: 20px; }
@@ -324,6 +346,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     var compareQuestionsEl = document.getElementById('fdCompareQuestions');
     var compareQuestionsFallback = compareEl.getAttribute('data-questions-fallback') || '';
     var compareQuestionsTemplate = compareEl.getAttribute('data-questions-template') || '';
+    var signupEl = document.getElementById('fdSignup');
+    var signupHeadingEl = document.getElementById('fdSignupHeading');
+    var signupBtn = document.getElementById('fdSignupBtn');
+    var signupHeadingTemplate = signupEl.getAttribute('data-heading-template') || '';
 
     var currentJobId = null;
     var pollTimer = null;
@@ -430,6 +456,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       var qs = new URLSearchParams(utm).toString();
       return 'https://app.zicy.com/register' + (qs ? '?' + qs : '');
     }
+
+    signupBtn.addEventListener('click', function () {
+      track('diagnostic_signup_click', {});
+    });
 
     // Puts ?job=<id> in the URL (replacing any existing job param) so a refresh
     // resumes the same run. Other query params (e.g. UTMs) are left untouched.
@@ -580,6 +610,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       hideEl(teaserEl);
       hideEl(fullReportEl);
       hideEl(compareEl);
+      hideEl(signupEl);
 
       var brandName = document.getElementById('fdBrand').value.trim();
       var domain = document.getElementById('fdDomain').value.trim();
@@ -735,8 +766,11 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       renderInaccuracies(report.inaccuracies || []);
       renderRecommendations(report.recommendations || []);
       renderCompareQuestions(report.mentionCoveragePerEngine || []);
+      signupHeadingEl.textContent = signupHeadingTemplate.replace('{brandName}', report.brandName);
+      signupBtn.href = buildRegisterHref();
       showEl(fullReportEl);
       showEl(compareEl);
+      showEl(signupEl);
     }
 
     // Resume a run from ?job=<uuid> (a reload, or a link shared/reopened from an

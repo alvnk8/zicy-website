@@ -82,3 +82,11 @@ export const compareRows: CompareRow[] = [
     full: 'Score trends across every run, plus PDF export',
   },
 ];
+
+// Copy for the sign-up section that follows the comparison. The heading is filled
+// at runtime with the report's brand name (the page replaces "{brandName}").
+export const signupHeadingTemplate = 'Get the full report for {brandName}';
+export const signupBody =
+  'Start your 7-day free trial and run the full brand intelligence report on the four engines above.';
+export const signupButtonLabel = 'Start your 7-day free trial';
+export const signupSmallPrint = 'No card required.';
