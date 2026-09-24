@@ -2,7 +2,7 @@
 // The free diagnostic: a public lead magnet. Minimal input (brand name + website),
 // a bot fills the rest server-side, then a background job queries ChatGPT, Gemini,
 // Google AI Overviews and Google AI Mode and scores factual accuracy.
-// Two-stage output: an ungated teaser, then an email-gated full report.
+// Output: the score and the full report together, with no email step.
 //
 // Calls the diagnostic API directly (CORS) using PUBLIC_DIAGNOSTIC_API_BASE, so
 // Cloudflare's CF-Connecting-IP stays the real visitor IP for the backend's rate
@@ -69,27 +69,11 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       <p class="fd-score-line" id="fdVisibilityLine"></p>
       <p class="fd-inaccuracy-line" id="fdInaccuracyLine"></p>
       <p class="fd-engine-line" id="fdEngineLine"></p>
-      <button type="button" class="btn btn-primary btn-lg" id="fdUnlockBtn">See the full report</button>
-      <a class="btn btn-primary btn-lg fd-teaser-cta" id="fdTeaserCta" href="https://app.zicy.com/register">Start free: paste your website</a>
     </div>
-
-    <form id="fdUnlockForm" class="fd-unlock-form" hidden>
-      <div id="fdUnlockError" class="fd-error" hidden role="alert"></div>
-      <div class="fd-field">
-        <label for="fdEmail">Email</label>
-        <input id="fdEmail" name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
-        <p class="fd-privacy">We'll email your report. See our <a href="/legal/privacy">privacy policy</a>.</p>
-      </div>
-      <label class="fd-consent">
-        <input id="fdConsent" name="consent" type="checkbox" />
-        <span>Send me occasional AI visibility tips from Zicy.</span>
-      </label>
-      <button type="submit" class="btn btn-primary btn-lg" id="fdUnlockSubmitBtn">Unlock the full report</button>
-    </form>
 
     <div id="fdFullReport" class="fd-full-report" hidden>
       <div class="shead">
-        <span class="eyebrow">Full report</span>
+        <span class="eyebrow">Your report</span>
         <h2 id="fdReportHeading">How AI sees your brand</h2>
       </div>
 
@@ -112,8 +96,6 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         <h3>What to fix first</h3>
         <div class="fd-recommendations" id="fdRecommendationsList"></div>
       </div>
-
-      <a class="btn btn-primary btn-lg fd-report-cta" id="fdReportCta" href="https://app.zicy.com/register">Start free: paste your website</a>
     </div>
   </div>
 </section>
@@ -190,22 +172,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   #zicy-free-diagnostic .fd-score-line,
   #zicy-free-diagnostic .fd-inaccuracy-line,
   #zicy-free-diagnostic .fd-engine-line { font-size: 15.5px; color: var(--ink-2); line-height: 1.6; margin-bottom: 6px; }
-  #zicy-free-diagnostic .fd-teaser .btn { margin-top: 18px; }
-  #zicy-free-diagnostic .fd-teaser-cta { margin-left: 10px; }
-
-  /* unlock form */
-  #zicy-free-diagnostic .fd-unlock-form {
-    margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg);
-    padding: 24px; display: flex; flex-direction: column; gap: 14px;
-  }
-  #zicy-free-diagnostic .fd-privacy { font-size: 13px; color: var(--muted); margin-top: 6px; }
-  #zicy-free-diagnostic .fd-consent { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: var(--ink-2); cursor: pointer; }
-  #zicy-free-diagnostic .fd-consent input { margin-top: 3px; flex-shrink: 0; }
 
   /* full report */
   #zicy-free-diagnostic .fd-full-report { margin-top: 40px; }
   #zicy-free-diagnostic .fd-section { margin-top: 32px; }
-  #zicy-free-diagnostic .fd-report-cta { margin-top: 32px; }
   #zicy-free-diagnostic .fd-section h3 { font-family: var(--display); font-weight: 500; font-size: 20px; color: var(--ink); margin-bottom: 14px; }
 
   #zicy-free-diagnostic .fd-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-lg); }
@@ -274,22 +244,16 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     var progressFill = document.getElementById('fdProgressFill');
     var progressPct = document.getElementById('fdProgressPct');
     var errorEl = document.getElementById('fdError');
-    var unlockErrorEl = document.getElementById('fdUnlockError');
     var teaserEl = document.getElementById('fdTeaser');
     var scoreValueEl = document.getElementById('fdScoreValue');
     var visibilityLineEl = document.getElementById('fdVisibilityLine');
     var inaccuracyLineEl = document.getElementById('fdInaccuracyLine');
     var engineLineEl = document.getElementById('fdEngineLine');
-    var unlockBtn = document.getElementById('fdUnlockBtn');
-    var unlockForm = document.getElementById('fdUnlockForm');
-    var unlockSubmitBtn = document.getElementById('fdUnlockSubmitBtn');
     var fullReportEl = document.getElementById('fdFullReport');
     var reportHeadingEl = document.getElementById('fdReportHeading');
     var engineTableBody = document.querySelector('#fdEngineTable tbody');
     var inaccuraciesList = document.getElementById('fdInaccuraciesList');
     var recommendationsList = document.getElementById('fdRecommendationsList');
-    var teaserCta = document.getElementById('fdTeaserCta');
-    var reportCta = document.getElementById('fdReportCta');
 
     var currentJobId = null;
     var pollTimer = null;
@@ -305,25 +269,22 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     function showEl(el) { el.hidden = false; }
     function hideEl(el) { el.hidden = true; }
 
-    // Pushes an event to the GTM dataLayer. GTM owns consent gating for tags fired off
-    // these events, so pushing here (even before consent) is fine under Consent Mode v2.
+    // Pushes an event to the GTM dataLayer. GTM gates the tags fired off these events
+    // under Consent Mode v2, so pushing here before the visitor accepts cookies is fine.
     function track(event, data) {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push(Object.assign({ event: event }, data));
     }
 
-    // stage identifies which step the error came from ('start', 'poll' or 'unlock').
+    // stage identifies which step the error came from ('start' or 'poll').
     function showError(message, stage) {
-      var target = stage === 'unlock' ? unlockErrorEl : errorEl;
-      target.textContent = message;
-      showEl(target);
+      errorEl.textContent = message;
+      showEl(errorEl);
       track('diagnostic_error', { stage: stage });
     }
     function clearError() {
       errorEl.textContent = '';
       hideEl(errorEl);
-      unlockErrorEl.textContent = '';
-      hideEl(unlockErrorEl);
     }
 
     function detailMessage(detail) {
@@ -469,7 +430,6 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       engineLineEl.textContent = teaser.engineHighlight
         ? teaser.engineHighlight + ' has the clearest read on ' + teaser.brandName + '.'
         : '';
-      teaserCta.href = buildRegisterHref();
       showEl(teaserEl);
       hideEl(introEl);
       hideEl(form);
@@ -513,6 +473,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
             stopPolling();
             hideEl(progressEl);
             renderTeaser(data.teaser);
+            if (data.report) renderReport(data.report);
             return;
           }
 
@@ -547,7 +508,6 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       e.preventDefault();
       clearError();
       hideEl(teaserEl);
-      hideEl(unlockForm);
       hideEl(fullReportEl);
 
       var brandName = document.getElementById('fdBrand').value.trim();
@@ -584,11 +544,6 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       track('diagnostic_start', { cached: !!(result.data && result.data.cached) });
       resumedFromUrl = false;
       startPolling(currentJobId);
-    });
-
-    unlockBtn.addEventListener('click', function () {
-      hideEl(unlockBtn);
-      showEl(unlockForm);
     });
 
     function renderEngineTable(perEngine, mentionCoverage) {
@@ -687,45 +642,20 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       });
     }
 
-    unlockForm.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      clearError();
-      if (!currentJobId) return;
-
-      var email = document.getElementById('fdEmail').value.trim();
-      var consent = document.getElementById('fdConsent').checked;
-      if (!email) return;
-
-      unlockSubmitBtn.disabled = true;
-
-      var result = await api('POST', '/api/brand-intelligence/public/diagnostic/' + currentJobId + '/unlock', {
-        email: email,
-        consent: consent,
-        utm: getUtmParams()
-      });
-
-      unlockSubmitBtn.disabled = false;
-
-      if (!result.ok) {
-        showError(result.message, 'unlock');
-        return;
-      }
-
-      var data = result.data || {};
-      hideEl(unlockForm);
-      reportHeadingEl.textContent = 'How AI sees ' + data.brandName;
-      renderEngineTable(data.perEngine || [], data.mentionCoveragePerEngine || []);
-      renderInaccuracies(data.inaccuracies || []);
-      renderRecommendations(data.recommendations || []);
-      reportCta.href = buildRegisterHref();
+    // Renders the full report from the completed status's report field, alongside
+    // the teaser. Called from the same completed path for both a fresh run and a
+    // ?job= resume.
+    function renderReport(report) {
+      reportHeadingEl.textContent = 'How AI sees ' + report.brandName;
+      renderEngineTable(report.perEngine || [], report.mentionCoveragePerEngine || []);
+      renderInaccuracies(report.inaccuracies || []);
+      renderRecommendations(report.recommendations || []);
       showEl(fullReportEl);
-      fullReportEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      track('diagnostic_unlock', { consent: consent });
-    });
+    }
 
-    // Resume a run from ?job=<uuid> (a reload, or a link shared/reopened from the
-    // report email). The brand/domain fields aren't needed here; the unlock form
-    // works as-is since it posts to currentJobId, which this sets below.
+    // Resume a run from ?job=<uuid> (a reload, or a link shared/reopened from an
+    // earlier report email). The brand/domain fields aren't needed here; this sets
+    // currentJobId and polls it through the same completed path as a fresh run.
     function resumeFromUrl() {
       var params;
       try {
