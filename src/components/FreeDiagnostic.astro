@@ -8,6 +8,16 @@
 // Cloudflare's CF-Connecting-IP stays the real visitor IP for the backend's rate
 // limiter. In dev, where the var is unset, requests fall back to same-origin and
 // are handled by the local proxy in astro.config.mjs.
+import {
+  compareEyebrow,
+  compareHeading,
+  compareIntro,
+  compareColumns,
+  compareRows,
+  QUESTIONS_ROW_FALLBACK,
+  QUESTIONS_ROW_TEMPLATE,
+} from '../data/free-diagnostic';
+
 const ENGINES = ['ChatGPT', 'Gemini', 'Google AI Overviews', 'Google AI Mode'];
 const ENGINES_TEXT = ENGINES.slice(0, -1).join(', ') + ' and ' + ENGINES[ENGINES.length - 1];
 const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$/, '');
@@ -95,6 +105,32 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       <div class="fd-section">
         <h3>What to fix first</h3>
         <div class="fd-recommendations" id="fdRecommendationsList"></div>
+      </div>
+    </div>
+
+    <div id="fdCompare" class="fd-compare" hidden data-questions-fallback={QUESTIONS_ROW_FALLBACK} data-questions-template={QUESTIONS_ROW_TEMPLATE}>
+      <div class="shead">
+        <span class="eyebrow">{compareEyebrow}</span>
+        <h2>{compareHeading}</h2>
+      </div>
+      <p class="fd-compare-intro">{compareIntro}</p>
+      <div class="fd-compare-table" role="table">
+        <div class="fd-compare-row fd-compare-head" role="row">
+          <div role="columnheader">{compareColumns.what}</div>
+          <div role="columnheader">{compareColumns.free}</div>
+          <div class="fd-compare-full" role="columnheader">{compareColumns.full}</div>
+        </div>
+        {compareRows.map((row, i) => (
+          <div class="fd-compare-row" role="row">
+            <div class="fd-compare-what" role="cell">{row.what}</div>
+            <div
+              class:list={['fd-compare-free', { 'fd-compare-muted': row.free === 'Not included' || row.free === 'One run' }]}
+              role="cell"
+              id={i === 0 ? 'fdCompareQuestions' : undefined}
+            >{row.free}</div>
+            <div class="fd-compare-full" role="cell">{row.full}</div>
+          </div>
+        ))}
       </div>
     </div>
   </div>
@@ -209,10 +245,40 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   #zicy-free-diagnostic .fd-rec-card h4 { font-family: var(--display); font-weight: 500; font-size: 16px; color: var(--ink); margin: 8px 0 6px; }
   #zicy-free-diagnostic .fd-rec-card p { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
 
+  /* comparison */
+  #zicy-free-diagnostic .fd-compare { margin-top: 40px; }
+  #zicy-free-diagnostic .fd-compare-intro { font-size: 15.5px; color: var(--ink-2); line-height: 1.6; max-width: 60ch; margin-top: 14px; }
+  #zicy-free-diagnostic .fd-compare-table {
+    margin-top: 24px; display: grid; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--surface);
+  }
+  #zicy-free-diagnostic .fd-compare-row {
+    display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.3fr); border-top: 1px solid var(--line);
+  }
+  #zicy-free-diagnostic .fd-compare-row:first-child { border-top: 0; }
+  #zicy-free-diagnostic .fd-compare-row > div { padding: 12px 14px; font-size: 14px; }
+  #zicy-free-diagnostic .fd-compare-head > div {
+    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--mist);
+  }
+  #zicy-free-diagnostic .fd-compare-what { font-weight: 600; color: var(--ink); }
+  #zicy-free-diagnostic .fd-compare-free { color: var(--ink-2); }
+  #zicy-free-diagnostic .fd-compare-muted { color: var(--muted); }
+  #zicy-free-diagnostic .fd-compare-full { background: var(--violet-50); color: var(--ink-2); }
+  #zicy-free-diagnostic .fd-compare-head .fd-compare-full { background: var(--violet); color: #fff; }
+
   @media (max-width: 640px) {
     #zicy-free-diagnostic .fd-row { grid-template-columns: 1fr; }
     #zicy-free-diagnostic .fd-form { padding: 20px; }
     #zicy-free-diagnostic .fd-teaser { padding: 28px 18px; }
+  }
+
+  @media (max-width: 560px) {
+    #zicy-free-diagnostic .fd-compare-row { grid-template-columns: 1fr; }
+    #zicy-free-diagnostic .fd-compare-head { display: none; }
+    #zicy-free-diagnostic .fd-compare-row > div { padding: 6px 14px; }
+    #zicy-free-diagnostic .fd-compare-what { padding-top: 12px; }
+    #zicy-free-diagnostic .fd-compare-free::before { content: "Free: "; font-weight: 500; color: var(--muted); }
+    #zicy-free-diagnostic .fd-compare-full { background: transparent; padding-bottom: 12px; }
+    #zicy-free-diagnostic .fd-compare-full::before { content: "Full report: "; font-weight: 600; color: var(--violet-700); }
   }
 </style>
 
@@ -254,6 +320,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     var engineTableBody = document.querySelector('#fdEngineTable tbody');
     var inaccuraciesList = document.getElementById('fdInaccuraciesList');
     var recommendationsList = document.getElementById('fdRecommendationsList');
+    var compareEl = document.getElementById('fdCompare');
+    var compareQuestionsEl = document.getElementById('fdCompareQuestions');
+    var compareQuestionsFallback = compareEl.getAttribute('data-questions-fallback') || '';
+    var compareQuestionsTemplate = compareEl.getAttribute('data-questions-template') || '';
 
     var currentJobId = null;
     var pollTimer = null;
@@ -509,6 +579,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       clearError();
       hideEl(teaserEl);
       hideEl(fullReportEl);
+      hideEl(compareEl);
 
       var brandName = document.getElementById('fdBrand').value.trim();
       var domain = document.getElementById('fdDomain').value.trim();
@@ -642,6 +713,19 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       });
     }
 
+    // Fills the comparison section's "Questions asked" free-report cell with the
+    // live query count: the highest queryCount above 0 across engines, or the
+    // build-time fallback wording if none is above 0.
+    function renderCompareQuestions(mentionCoverage) {
+      var maxQueryCount = 0;
+      (mentionCoverage || []).forEach(function (c) {
+        if (typeof c.queryCount === 'number' && c.queryCount > maxQueryCount) maxQueryCount = c.queryCount;
+      });
+      compareQuestionsEl.textContent = maxQueryCount > 0
+        ? compareQuestionsTemplate.replace('{n}', maxQueryCount)
+        : compareQuestionsFallback;
+    }
+
     // Renders the full report from the completed status's report field, alongside
     // the teaser. Called from the same completed path for both a fresh run and a
     // ?job= resume.
@@ -650,7 +734,9 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       renderEngineTable(report.perEngine || [], report.mentionCoveragePerEngine || []);
       renderInaccuracies(report.inaccuracies || []);
       renderRecommendations(report.recommendations || []);
+      renderCompareQuestions(report.mentionCoveragePerEngine || []);
       showEl(fullReportEl);
+      showEl(compareEl);
     }
 
     // Resume a run from ?job=<uuid> (a reload, or a link shared/reopened from an
