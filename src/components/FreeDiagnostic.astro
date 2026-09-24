@@ -115,10 +115,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     <div id="fdCompare" class="fd-compare" hidden data-questions-fallback={QUESTIONS_ROW_FALLBACK} data-questions-template={QUESTIONS_ROW_TEMPLATE}>
       <div class="shead">
         <span class="eyebrow">{compareEyebrow}</span>
-        <h2>{compareHeading}</h2>
+        <h2 id="fdCompareHeading">{compareHeading}</h2>
       </div>
       <p class="fd-compare-intro">{compareIntro}</p>
-      <div class="fd-compare-table" role="table">
+      <div class="fd-compare-table" role="table" aria-labelledby="fdCompareHeading">
         <div class="fd-compare-row fd-compare-head" role="row">
           <div role="columnheader">{compareColumns.what}</div>
           <div role="columnheader">{compareColumns.free}</div>
@@ -126,7 +126,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         </div>
         {compareRows.map((row, i) => (
           <div class="fd-compare-row" role="row">
-            <div class="fd-compare-what" role="cell">{row.what}</div>
+            <div class="fd-compare-what" role="rowheader">{row.what}</div>
             <div
               class:list={['fd-compare-free', { 'fd-compare-muted': row.free === 'Not included' || row.free === 'One run' }]}
               role="cell"
@@ -258,6 +258,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
   /* comparison */
   #zicy-free-diagnostic .fd-compare { margin-top: 40px; }
+  #zicy-free-diagnostic .fd-compare .shead { margin-bottom: 0; }
   #zicy-free-diagnostic .fd-compare-intro { font-size: 15.5px; color: var(--ink-2); line-height: 1.6; max-width: 60ch; margin-top: 14px; }
   #zicy-free-diagnostic .fd-compare-table {
     margin-top: 24px; display: grid; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--surface);
@@ -573,7 +574,15 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
             stopPolling();
             hideEl(progressEl);
             renderTeaser(data.teaser);
-            if (data.report) renderReport(data.report);
+            if (data.report) {
+              try {
+                renderReport(data.report);
+              } catch (e) {
+                hideEl(fullReportEl);
+                hideEl(compareEl);
+                hideEl(signupEl);
+              }
+            }
             return;
           }
 
@@ -766,7 +775,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       renderInaccuracies(report.inaccuracies || []);
       renderRecommendations(report.recommendations || []);
       renderCompareQuestions(report.mentionCoveragePerEngine || []);
-      signupHeadingEl.textContent = signupHeadingTemplate.replace('{brandName}', report.brandName);
+      signupHeadingEl.textContent = signupHeadingTemplate.split('{brandName}').join(report.brandName);
       signupBtn.href = buildRegisterHref();
       showEl(fullReportEl);
       showEl(compareEl);
