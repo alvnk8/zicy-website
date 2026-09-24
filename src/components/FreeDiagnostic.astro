@@ -687,7 +687,9 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     }
 
     function isMissingValue(value) {
-      return value === null || value === undefined || String(value).trim() === '' || String(value).trim() === 'None';
+      if (value === null || value === undefined) return true;
+      var trimmed = String(value).trim();
+      return trimmed === '' || trimmed === 'None' || trimmed.toLowerCase() === 'unknown';
     }
 
     function renderInaccuracies(inaccuracies) {
@@ -738,6 +740,13 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
     function renderRecommendations(recommendations) {
       recommendationsList.innerHTML = '';
+      if (!recommendations.length) {
+        var p = document.createElement('p');
+        p.className = 'fd-empty';
+        p.textContent = 'No priority fixes to show for this run.';
+        recommendationsList.appendChild(p);
+        return;
+      }
       recommendations.forEach(function (rec) {
         var card = document.createElement('div');
         card.className = 'fd-rec-card';
