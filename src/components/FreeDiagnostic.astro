@@ -686,6 +686,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       });
     }
 
+    function isMissingValue(value) {
+      return value === null || value === undefined || String(value).trim() === '' || String(value).trim() === 'None';
+    }
+
     function renderInaccuracies(inaccuracies) {
       inaccuraciesList.innerHTML = '';
       if (!inaccuracies.length) {
@@ -718,13 +722,15 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
         var said = document.createElement('p');
         said.className = 'fd-inaccuracy-said';
-        said.textContent = 'AI says: ' + item.aiSaid;
+        said.textContent = 'AI says: ' + (isMissingValue(item.aiSaid) ? 'Not mentioned' : item.aiSaid);
         card.appendChild(said);
 
-        var correction = document.createElement('p');
-        correction.className = 'fd-inaccuracy-correction';
-        correction.textContent = 'Correct: ' + item.correction;
-        card.appendChild(correction);
+        if (!isMissingValue(item.correction)) {
+          var correction = document.createElement('p');
+          correction.className = 'fd-inaccuracy-correction';
+          correction.textContent = 'Correct: ' + item.correction;
+          card.appendChild(correction);
+        }
 
         inaccuraciesList.appendChild(card);
       });
