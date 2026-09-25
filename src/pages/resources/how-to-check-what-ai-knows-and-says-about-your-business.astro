@@ -3,12 +3,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
 import heroImg from '../../assets/resources/how-to-check-what-ai-knows-and-says-about-your-business/ai-business-understanding-accuracy-check.png';
-import brandIntelligenceImg from '../../assets/resources/how-to-check-what-ai-knows-and-says-about-your-business/brand-intelligence.png';
 
 const metaTitle = 'How to Check What AI Knows About Your Business';
 const title = 'How To Check What AI Knows And Says About Your Business';
 const description =
-  'Learn how to check what AI knows and says about your business, identify inaccurate or missing information, and see how Zicy helps monitor AI perception.';
+  'Learn how to check what AI knows and says about your business, identify inaccurate or missing information, and monitor AI perception over time.';
 
 const url = `${SITE.url}/resources/how-to-check-what-ai-knows-and-says-about-your-business`;
 const author = { '@type': 'Person', name: 'Vi Vien Koay' };
@@ -254,26 +253,18 @@ const graph = {
 
   <section>
     <div class="wrap">
-      <div class="shead"><span class="eyebrow">Zicy Brand Intelligence</span><h2>How can Zicy check AI perception more efficiently?</h2></div>
+      <div class="shead"><span class="eyebrow">Compare perception</span><h2>How can you compare AI perception with your actual business information?</h2></div>
       <div class="prose">
-        <p>Manual checking is useful for an initial review. It becomes harder when you need to compare many questions, engines and changes over time.</p>
-        <p>Zicy's <strong>Brand Intelligence</strong> is designed for this problem.</p>
-        <p>It compares how AI perceives your business with the business information you provide as ground truth.</p>
-        <p>Its Brand Analysis helps you understand:</p>
+        <p>Once you have collected several answers, compare what AI says with the information you know to be current.</p>
+        <p>Look at what AI appears to think your business is known for, then compare that with how you actually describe your services, audiences, locations and positioning.</p>
+        <p>The most useful findings usually fall into three groups:</p>
         <ul>
-          <li>what AI thinks you are known for;</li>
-          <li>what you want to be known for; and</li>
-          <li>what AI may be missing or getting wrong.</li>
+          <li>what AI understands correctly;</li>
+          <li>what AI is missing; and</li>
+          <li>what AI appears to have wrong.</li>
         </ul>
-        <p>Its <strong>Gaps</strong> view can then highlight conflicts between AI responses and your business information so they can be reviewed rather than automatically assumed to be true.</p>
-
-        <PostFigure
-          src={brandIntelligenceImg}
-          alt="Zicy Brand Intelligence dashboard"
-          caption="Zicy Brand Intelligence compares AI perception with your actual business information to highlight where the two may not align."
-        />
-
-        <p>If you need to investigate a particular answer in more detail, <strong>Prompt Analysis</strong> provides the underlying responses from individual AI engines. </p>
+        <p>A platform like <a href="https://www.zicy.com/">Zicy</a> can make this comparison easier by checking what AI says against the business information you provide.</p>
+        <p>It can then highlight what AI may be missing or getting wrong, while letting you review the actual responses behind each finding.</p>
       </div>
     </div>
   </section>

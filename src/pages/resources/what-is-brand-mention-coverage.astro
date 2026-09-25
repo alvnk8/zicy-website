@@ -3,13 +3,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
 import heroImg from '../../assets/resources/brand-mention-coverage/brand-mention-coverage-measurement-guide.png';
-import reportImg from '../../assets/resources/brand-mention-coverage/ai-visibility-report.png';
-import platformImg from '../../assets/resources/brand-mention-coverage/platform-coverage-performance-trends.png';
-import promptsImg from '../../assets/resources/brand-mention-coverage/tracked-prompts-brand-mention-coverage-dashboard.png';
+import platformPromptImg from '../../assets/resources/brand-mention-coverage/tracked-prompts-brand-mention-coverage-dashboard.png';
 
 const metaTitle = 'What Is Brand Mention Coverage and How Do You Measure It?';
 const title = 'What Is Brand Mention Coverage and How Do You Measure It?';
-const description = 'Discover how Brand Mention Coverage measures your presence in AI answers, and how Zicy helps you monitor prompts, platforms and visibility trends daily.';
+const description = 'Discover how brand mention coverage measures your presence in AI answers, and how to track mentions across prompts, platforms, and visibility trends daily!';
 const url = `${SITE.url}/resources/what-is-brand-mention-coverage`;
 const author = { '@type': 'Person', name: 'Nabila Wawan' };
 const orgId = `${SITE.url}/#org`;
@@ -119,12 +117,16 @@ const graph = {
       <h3>4. Track It Consistently Over Time</h3>
       <p>AI responses can change, so repeated tracking is more useful than a one-off check. Keep a stable prompt baseline where possible and compare coverage over time. This turns isolated answers into a trend and prevents one unusually good or bad response from shaping your whole view.</p>
       <p><strong>Also read:</strong> <a href="/resources/how-to-keep-stable-ai-prompt-baseline-and-know-when-to-reset-it">How to Keep a Stable AI Prompt Baseline and Know When to Reset It</a>.</p>
+      <p>If you are tracking many prompts across several AI platforms, a platform like <a href="https://www.zicy.com/">Zicy</a> can automate those repeated checks and show your Brand Mention Coverage by prompt, platform and over time.</p>
     </div>
   </div></section>
 
   <section style="background:var(--mist)"><div class="wrap">
     <div class="shead"><span class="eyebrow">Reading the metric</span><h2>What Does Your Brand Mention Coverage Tell You?</h2></div>
     <div class="prose">
+      <p>The overall percentage gives you the headline.</p>
+      <p>The more useful insights often appear when you look at the results by prompt and platform, where you can see whether visibility is consistent or where gaps appear.</p>
+      <PostFigure src={platformPromptImg} alt="Brand Mention Coverage results for the same tracked prompt across ChatGPT, Gemini, Perplexity, Google AI Mode and AI Overview" caption="The same prompt can perform differently on each AI platform." />
       <h3>1. Consistent Visibility</h3><p>Your brand appears across many relevant prompts, suggesting that AI platforms regularly connect it to the topics, products or services being discussed.</p>
       <h3>2. Prompt-Specific Gaps</h3><p>You may appear for some prompts and disappear from others. The total percentage can hide these differences, so inspect individual questions.</p>
       <h3>3. Platform-Specific Gaps</h3><p>Strong coverage on one platform can coexist with weak coverage on another. A healthy total can still mask an engine where your brand is rarely mentioned.</p>
@@ -141,23 +143,6 @@ const graph = {
       <h3>Consistency</h3><p>Does your brand appear across several platforms and important prompts, or only in isolated cases?</p>
       <h3>Trend</h3><p>Is coverage improving, declining or staying flat? Your own history is often more informative than a generic industry benchmark.</p>
       <p>The goal is to understand whether your brand is consistently present in the AI conversations where it should reasonably be considered.</p>
-    </div>
-  </div></section>
-
-  <section style="background:var(--mist)"><div class="wrap">
-    <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Zicy Helps You Track Brand Mention Coverage</h2></div>
-    <div class="prose">
-      <p>Manual tracking quickly grows once you monitor dozens of prompts, several platforms and changes over time. Zicy automates the process. You set up the Tracked Prompts you want to follow, and Zicy analyses them daily across ChatGPT, Gemini, Perplexity, AI Overviews and Google AI Mode.</p>
-      <h3>Mention Coverage</h3>
-      <PostFigure src={reportImg} alt="Zicy AI Visibility Report showing overall Mention Coverage" caption="Zicy's AI Visibility Report shows the share of analysed AI responses that mention your brand." />
-      <p>The AI Visibility Report gives you the overall view first, showing how widely your brand appears across the responses being monitored.</p>
-      <h3>Platform Coverage</h3>
-      <PostFigure src={platformImg} alt="Zicy Platform Coverage and Performance Trends across five AI platforms" caption="Platform Coverage and Performance Trends show visibility across five AI platforms over time." />
-      <p>Platform Coverage shows whether your brand appears more consistently on ChatGPT, Gemini, Perplexity, Google AI Mode or AI Overviews. Performance Trends shows how measures such as brand mentions change over time.</p>
-      <h3>Brand Mention Coverage by Tracked Prompt</h3>
-      <PostFigure src={promptsImg} alt="Zicy Tracked Prompts table showing Brand Mention Coverage for individual prompts" caption="The Tracked Prompts table shows the Brand Mention Coverage behind each monitored question." />
-      <p>Each prompt has its own result. A score of 5/5 means the brand appeared across all five monitored platforms for that prompt; 3/5 means it appeared on three. This makes individual gaps easier to inspect without relying only on the overall percentage.</p>
-      <p>The score does not replace the underlying response. It provides a structured view of many prompts, platforms and repeated analyses so the details are easier to investigate.</p>
     </div>
   </div></section>
 

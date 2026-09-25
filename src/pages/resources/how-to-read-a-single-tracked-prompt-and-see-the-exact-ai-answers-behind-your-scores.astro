@@ -3,7 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
 import heroImg from '../../assets/resources/read-single-tracked-prompt/single-tracked-prompt-exact-ai-answers-score-guide.png';
-import analysisImg from '../../assets/resources/read-single-tracked-prompt/prompt-analysis-dashboard.png';
 
 const metaTitle = 'How to Read a Single Tracked Prompt and See the Exact AI Answers Behind Your Scores';
 const title = 'How to Read a Single Tracked Prompt and See the Exact AI Answers Behind Your Scores';
@@ -121,17 +120,6 @@ const graph = {
     </div>
   </div></section>
 
-  <section style="background:var(--mist)"><div class="wrap">
-    <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Zicy Prompt Analysis Shows You This</h2></div>
-    <PostFigure src={analysisImg} alt="Zicy Prompt Analysis showing mention coverage, citation coverage, platform results and citation sources" caption="Zicy's Prompt Analysis brings the scores and complete recorded answers for one tracked customer question into a single view." />
-    <div class="prose">
-      <p>Finding and comparing AI answers manually is not practical. For one question, you would need to open ChatGPT, Gemini, Perplexity, Google AI Mode and Google AI Overviews separately. For ten questions, that becomes 50 answers to find, read and compare.</p>
-      <p>Zicy Prompt Analysis captures the complete answer automatically every day and shows it platform by platform for one tracked question.</p>
-      <p>You can see Brand Mention Coverage and Website Citation Coverage as an x/5 score, then inspect whether your brand was mentioned, at what position and whether your site was cited on each platform. You can read the full response in one click or copy it with the Copy Full Response button.</p>
-      <p>When a number changes, Prompt Analysis is where you go to find out what happened.</p>
-    </div>
-  </div></section>
-
   <section><div class="wrap">
     <div class="shead"><span class="eyebrow">Five steps</span><h2>What to Do First: A Simple Plan</h2></div>
     <div class="prose"><ol>
@@ -140,7 +128,12 @@ const graph = {
       <li><strong>Check the per-platform results.</strong> Which platform showed the biggest change?</li>
       <li><strong>Read the full AI answer for that platform.</strong> Is your business mentioned? Where does it appear? If it is absent, which businesses appear instead?</li>
       <li><strong>Write down one finding.</strong> Record one thing that differs from what you expected or saw last week.</li>
-    </ol><p>That one finding is more useful than any score on its own.</p></div>
+    </ol>
+      <p>That one finding is more useful than any score on its own.</p>
+      <p>Finding and reading these answers by hand means opening ChatGPT, Gemini, Perplexity, and both Google AI surfaces for every question — fifty answers to track down for ten questions.</p>
+      <p>A platform like <a href="https://www.zicy.com/">Zicy</a> records the full answer from each platform automatically every day.</p>
+      <p>When a score moves, you can open that one question and read what each AI actually said.</p>
+    </div>
   </div></section>
 
   <section style="background:var(--mist)"><div class="wrap">

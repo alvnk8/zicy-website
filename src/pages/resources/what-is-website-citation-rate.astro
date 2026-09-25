@@ -3,12 +3,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/site';
 import PostFigure from '../../components/PostFigure.astro';
 import heroImg from '../../assets/resources/website-citation-rate/brand-mention-vs-website-citation.png';
-import rateImg from '../../assets/resources/website-citation-rate/web-citation-rate-dashboard.png';
-import analysisImg from '../../assets/resources/website-citation-rate/citation-analysis.png';
 
 const metaTitle = 'What Is Website Citation Rate and Why Is It Different From a Brand Mention?';
 const title = 'What Is Website Citation Rate and Why Is It Different From a Brand Mention?';
-const description = 'Learn what Website Citation Rate means, how it differs from a brand mention, and how Zicy helps your business track both to understand its AI visibility.';
+const description = 'Learn what website citation rate means, how it differs from a brand mention, and how your business can track both to understand its AI visibility.';
 const url = `${SITE.url}/resources/what-is-website-citation-rate`;
 const author = { '@type': 'Person', name: 'Nabila Wawan' };
 const orgId = `${SITE.url}/#org`;
@@ -115,26 +113,9 @@ const graph = {
       <h3>Low Mentions + High Citations</h3><p>Your content is useful as a source, even though your brand is less prominent in the generated answer.</p>
       <h3>Low Mentions + Low Citations</h3><p>Your business has limited visibility on both fronts for the <a href="/resources/how-to-find-the-right-ai-prompts-to-track-for-your-business">questions being tracked</a>.</p>
       <p>These combinations show where the gap sits and can point to different fixes.</p>
-    </div>
-  </div></section>
-
-  <section style="background:var(--mist)"><div class="wrap">
-    <div class="shead"><span class="eyebrow">Zicy workflow</span><h2>How Zicy Shows Whether AI Is Citing Your Website</h2></div>
-    <div class="prose">
-      <p>Zicy uses Web Citation Rate as the headline measure, while Citation Analysis explains what is happening behind it. On the Overview dashboard, Web Citation Rate shows how often responses across the <a href="/resources/how-to-check-your-business-across-ai-answer-engines">AI platforms you are tracking</a> link to your website.</p>
-      <PostFigure src={rateImg} cropLeftPercent={13} alt="Zicy Overview dashboard showing Web Citation Rate across tracked AI responses" caption="Zicy's Web Citation Rate shows how often tracked AI responses link to your website." />
-      <p>If BrightSmile Dental has a Web Citation Rate of 41.92%, its website was cited in roughly 42 of every 100 tracked AI responses. This does not mean 42% of people clicked; it describes how often the site appeared as a cited source.</p>
-      <h3>Citation Analysis</h3>
-      <p>Citation Analysis breaks eligible analyses into three signals:</p>
-      <ul>
-        <li><strong>Narrative Control:</strong> how often your own website appears in the citations.</li>
-        <li><strong>Competitor Share:</strong> how often a competitor is cited while your website is not.</li>
-        <li><strong>Uncited Rate:</strong> how often another source is cited, but neither your site nor a competitor's site receives the citation.</li>
-      </ul>
-      <PostFigure src={analysisImg} cropLeftPercent={13} alt="Zicy Citation Analysis showing source credit across owned, competitor and other domains" caption="Citation Analysis shows who receives the source credit, including your own site, competitors and other cited domains." />
-      <p>You can then examine the wider mix of owned, earned and competitor sources, the domains cited most often, and the questions where competitors are cited instead of you.</p>
-      <p>BrightSmile Dental might discover that another clinic is repeatedly cited for dental-implant questions, while health publications and directories dominate teeth-whitening questions.</p>
-      <ul><li><strong>Web Citation Rate:</strong> How often is AI linking to my website?</li><li><strong>Citation Analysis:</strong> When AI cites sources around my brand, who gets the credit and on which questions?</li></ul>
+      <p>With a platform like <a href="https://www.zicy.com/">Zicy</a>, you can look beyond your Website Citation Rate.</p>
+      <p>You can see whether citations are going to your own site, competitors or other sources.</p>
+      <p>You can also identify which questions are driving those citation gaps.</p>
     </div>
   </div></section>
 
