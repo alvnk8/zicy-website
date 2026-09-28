@@ -4,7 +4,10 @@
 // site's design system (theme.css tokens: Schibsted Grotesk / Inter / Space Mono,
 // indigo + orange + lavender). The shell (heading, subtitle, suggestions, tagline)
 // is server-rendered and crawlable; the chat hydrates client-side and streams from
-// https://chatapi.zicy.com/chat/stream (SSE, mode "consultant").
+// the public Ask Zicy backend, POST {PUBLIC_DIAGNOSTIC_API_BASE}/public-chat/stream
+// (SSE), through window.askZicy (set by the bundled script at the bottom, which
+// wraps src/scripts/askZicy.ts). In dev, with the var unset, requests go
+// same-origin and the dev proxy forwards them.
 //
 // On first message the wrapper expands to an immersive fullscreen overlay that sits
 // below the sticky site header (footer is hidden via body.fullscreen).
@@ -20,18 +23,19 @@ const AI_ENGINES = [
   { src: '/ai-icons/Perplexity_icon.png', alt: 'Perplexity' },
 ];
 
-const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strategies'];
+const SUGGESTIONS = ["Why isn't my brand in ChatGPT?", 'What is AEO?', 'Top 3 AEO Strategies'];
+const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$/, '');
 ---
 
-<section id="zicy-consultant">
+<section id="zicy-consultant" data-api-base={apiBase}>
   <div class="consultant-wrapper">
     <span class="eyebrow zc-eyebrow">Free tool · AI consultant</span>
     <h1 class="main-heading">Your AEO/GEO Consultant</h1>
 
     <p class="subtitle">
       Ask Zicy anything <strong>AEO or GEO</strong> <em>(Answer/Generative Engine Optimization)</em><br />
-      Audit your webpage or ask for tactics to get cited/mentioned in<br />
-      <strong>ChatGPT, Google Gemini, Perplexity</strong> and other answer engines.
+      Get tips to help your brand get found and cited in<br />
+      <strong>ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode</strong>.
     </p>
 
     <div class="ai-icons">
@@ -89,7 +93,7 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
           </div>
 
           <div class="input-container">
-            <textarea class="chat-input" placeholder="Ask Zicy about AEO..." rows="1" aria-label="Message"></textarea>
+            <textarea class="chat-input" placeholder="Ask Zicy about AEO..." rows="1" aria-label="Message" maxlength="500"></textarea>
             <button class="send-button" type="button" title="Send" aria-label="Send">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
@@ -297,7 +301,7 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
   #zicy-consultant .action-button.copied .copy-icon { display: none; }
   #zicy-consultant .action-button.copied .checkmark { display: block; }
 
-  /* loading + progress */
+  /* loading */
   #zicy-consultant .loading-indicator {
     display: inline-flex; align-items: center; gap: 10px; padding: 13px 17px;
     background: var(--lavender); border: 0.5px solid var(--line); border-radius: 18px;
@@ -309,20 +313,6 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
   #zicy-consultant .loading-dots span:nth-child(1) { animation-delay: 0s; }
   #zicy-consultant .loading-dots span:nth-child(2) { animation-delay: .2s; }
   #zicy-consultant .loading-dots span:nth-child(3) { animation-delay: .4s; }
-
-  #zicy-consultant .progress-container {
-    display: flex; flex-direction: column; gap: 7px; padding: 12px 16px;
-    background: var(--lavender); border: 0.5px solid var(--line); border-radius: 18px;
-    width: min(80%, 420px);
-  }
-  #zicy-consultant .progress-text { font-size: 14px; color: var(--ink); line-height: 1.4; font-weight: 500; }
-  #zicy-consultant .progress-bar-wrapper { width: 100%; height: 6px; background: #e6e6f0; border-radius: 3px; overflow: hidden; }
-  #zicy-consultant .progress-bar-fill { height: 100%; width: 0; border-radius: 3px; background: linear-gradient(90deg, var(--indigo), var(--indigo-bright)); transition: width .5s ease-out; }
-  #zicy-consultant .progress-percentage { font-size: 12px; color: var(--muted); text-align: right; font-family: var(--mono); }
-
-  /* URL audits: horizontally-centered progress card, in normal flow (not pinned to screen). */
-  #zicy-consultant .messages-container.active .message.zc-loading-center { justify-content: center; }
-  #zicy-consultant .message.zc-loading-center .progress-container { width: min(92%, 600px); max-width: 600px; }
 
   @keyframes zcSlideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes zcSpin { to { transform: rotate(360deg); } }
@@ -399,9 +389,16 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
   var convGeneration = 0;   // bumped on restart to invalidate in-flight requests
   var activeController = null;
 
-  var progressInterval = null;
-  var progressStartTime = null;
-  var isProgressBarActive = false;
+  var TRIAL_URL = 'https://app.zicy.com/register';
+  var REQUEST_TIMEOUT_MS = 90000; // the backend's own turn deadline is 45 s
+  var MAX_MESSAGE_CHARS = 500; // the backend rejects longer messages with 422
+
+  // Pushes an event to the GTM dataLayer (FreeDiagnostic's pattern). GTM gates the
+  // tags under Consent Mode v2, so pushing before consent is fine. Never message text.
+  function track(event, data) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({ event: event }, data));
+  }
 
   // ---- layout helpers ----
   function updateHeaderHeight() {
@@ -492,103 +489,16 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
     });
   }
 
-  // ---- markdown (verbatim from the live consultant) ----
-  function parseMarkdown(text) {
+  // ---- markdown ----
+  // window.askZicy is set by the bundled module script below this one, which runs
+  // later (module scripts are deferred). By the time anything is rendered it is
+  // there; the escape-only fallback just keeps text visible if it failed to load.
+  function renderMarkdown(text) {
     if (!text) return '';
-    var html = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$2</a>');
-    html = html.split(/(<a\s+[^>]*>.*?<\/a>)/gi).map(function (part, index) {
-      if (index % 2 === 1) return part;
-      return part.replace(/(^|[\s\n>])((?:https?:\/\/|www\.)[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=%]+)/gi, function (match, prefix, url) {
-        var finalUrl = url.startsWith('www.') ? 'https://' + url : url;
-        return prefix + '<a href="' + finalUrl + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
-      });
-    }).join('');
-    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/([^*]|^)\*([^*]+?)\*([^*]|$)/g, '$1<em>$2</em>$3');
-    html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
-    html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
-    html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
-    var blocks = html.split(/\n\n+/);
-    var mergedBlocks = [];
-    var i = 0;
-    while (i < blocks.length) {
-      var block = blocks[i].trim();
-      if (!block) { i++; continue; }
-      var lines = block.split('\n');
-      var hasListItems = lines.some(function (line) { return /^[•\-\*]\s/.test(line.trim()) || /^\d+[\.\)]\s/.test(line.trim()); });
-      if (hasListItems) {
-        var firstListLine = lines.find(function (line) { return /^[•\-\*]\s/.test(line.trim()) || /^\d+[\.\)]\s/.test(line.trim()); });
-        var isNumbered = /^\d+[\.\)]\s/.test(firstListLine.trim());
-        var mergedList = block;
-        var j = i + 1;
-        while (j < blocks.length) {
-          var nextBlock = blocks[j].trim();
-          if (!nextBlock) { j++; continue; }
-          var nextLines = nextBlock.split('\n');
-          var nextHasListItems = nextLines.some(function (line) { return /^[•\-\*]\s/.test(line.trim()) || /^\d+[\.\)]\s/.test(line.trim()); });
-          if (nextHasListItems) {
-            var nextFirstListLine = nextLines.find(function (line) { return /^[•\-\*]\s/.test(line.trim()) || /^\d+[\.\)]\s/.test(line.trim()); });
-            var nextIsNumbered = /^\d+[\.\)]\s/.test(nextFirstListLine.trim());
-            if (nextIsNumbered === isNumbered) { mergedList += '\n' + nextBlock; j++; } else { break; }
-          } else { break; }
-        }
-        mergedBlocks.push(mergedList);
-        i = j;
-      } else { mergedBlocks.push(block); i++; }
-    }
-    html = mergedBlocks.map(function (block) {
-      block = block.trim();
-      if (!block) return '';
-      if (block.startsWith('<h1') || block.startsWith('<h2') || block.startsWith('<h3')) return block;
-      var lines = block.split('\n');
-      var hasListItems = lines.some(function (line) { return /^[•\-\*]\s/.test(line.trim()) || /^\d+[\.\)]\s/.test(line.trim()); });
-      if (hasListItems) {
-        var firstListLine = lines.find(function (line) { return /^[•\-\*]\s/.test(line.trim()) || /^\d+[\.\)]\s/.test(line.trim()); });
-        var isNumbered = /^\d+[\.\)]\s/.test(firstListLine.trim());
-        var tag = isNumbered ? 'ol' : 'ul';
-        var items = lines.map(function (line) {
-          line = line.trim();
-          if (!line) return '';
-          var cleaned = line.replace(/^[•\-\*]\s+/, '').replace(/^\d+[\.\)]\s+/, '');
-          return cleaned ? '<li>' + cleaned + '</li>' : '';
-        }).filter(function (item) { return item; }).join('');
-        return '<' + tag + '>' + items + '</' + tag + '>';
-      }
-      return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
-    }).filter(function (block) { return block; }).join('');
-    return html;
-  }
-
-  function formatAPIResponse(text) {
-    if (!text) return text;
-    var formatted = text;
-    formatted = formatted.replace(/^([^>\n]+)\s*>>\s*(.+)$/gm, function (match, header, content) {
-      header = header.trim(); content = content.trim();
-      if (!header.startsWith('#')) header = '## ' + header;
-      return header + '\n\n' + content;
-    });
-    formatted = formatted.replace(/^>>\s*/gm, '');
-    formatted = formatted.replace(/>>/g, '');
-    formatted = formatted.replace(/\s*<p>\s*/gi, '\n\n');
-    formatted = formatted.replace(/<\/p>\s*/gi, '');
-    formatted = formatted.replace(/^[\s]*[-◦○▪▫–, ]\s+(?=\S)/gm, '• ');
-    formatted = formatted.replace(/^[\s]*(\d+)[\)\.]\s+/gm, '$1. ');
-    formatted = formatted.replace(/^(#{1,3})\s*(.+)$/gm, '$1 $2');
-    formatted = formatted.replace(/([^\n])\n([•\d][\.\s])/g, '$1\n\n$2');
-    formatted = formatted.replace(/([•\d][\.\s][^\n]+)\n([^\n•\d])/g, '$1\n\n$2');
-    formatted = formatted.replace(/\n{3,}/g, '\n\n');
-    return formatted.trim();
-  }
-
-  // ---- URL detection (drives progress bar vs spinner) ----
-  function containsURL(message) {
-    // Generic detector: explicit http(s)://, www., or any domain.tld token
-    // (2+ letter TLD). Broader and simpler than the source's enumerated TLD list,
-    // so no valid domain is missed when choosing the progress-bar vs spinner UI.
-    var urlPattern = /(https?:\/\/[^\s]+)|(\bwww\.[^\s]+)|(\b[a-z0-9][a-z0-9-]*\.[a-z]{2,24}\b)/i;
-    return urlPattern.test(message);
+    if (window.askZicy) return window.askZicy.render(text);
+    var div = document.createElement('div');
+    div.textContent = text;
+    return '<p>' + div.innerHTML + '</p>';
   }
 
   // ---- message rendering ----
@@ -616,7 +526,7 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
 
     var messageContent = document.createElement('div');
     messageContent.className = 'message-content';
-    messageContent.innerHTML = parseMarkdown(content);
+    messageContent.innerHTML = renderMarkdown(content);
     messageContent.setAttribute('data-original-content', content);
 
     if (type === 'ai') {
@@ -634,50 +544,6 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
     messagesContainer.appendChild(messageDiv);
     ensureSpacerLast();
     return messageId;
-  }
-
-  async function addSplitMessages(fullResponse, delay) {
-    delay = delay || 300;
-    fullResponse = fullResponse.replace(/---+/g, '--');
-    var bubbles = fullResponse.split(/\s+--\s+(?=##)|\n\s*--\s*\n/).map(function (b) { return b.trim(); }).filter(function (b) { return b.length > 0; });
-
-    if (bubbles.length <= 1) { addMessage(fullResponse, 'ai'); return; }
-
-    var messageDiv = document.createElement('div');
-    messageDiv.className = 'message ai';
-    var messageId = newMessageId();
-    messageDiv.id = messageId;
-    var contentWrapper = document.createElement('div');
-    contentWrapper.className = 'message-content-wrapper';
-    messageDiv.appendChild(contentWrapper);
-    messagesContainer.appendChild(messageDiv);
-    ensureSpacerLast();
-
-    for (var i = 0; i < bubbles.length; i++) {
-      var messageContent = document.createElement('div');
-      messageContent.className = 'message-content';
-      messageContent.innerHTML = parseMarkdown(bubbles[i]);
-      messageContent.setAttribute('data-original-content', bubbles[i]);
-      messageContent.style.opacity = '0';
-      messageContent.style.transform = 'translateY(10px)';
-      contentWrapper.appendChild(messageContent);
-      (function (el) {
-        setTimeout(function () {
-          el.style.transition = 'opacity .35s ease-out, transform .35s ease-out';
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        }, 50);
-      })(messageContent);
-      ensureSpacerLast();
-      if (i < bubbles.length - 1) { await new Promise(function (r) { setTimeout(r, delay); }); }
-    }
-
-    contentWrapper.setAttribute('data-full-content', bubbles.join('\n\n--\n\n'));
-    var actionsDiv = document.createElement('div');
-    actionsDiv.className = 'message-actions';
-    actionsDiv.innerHTML = actionsMarkup(messageId);
-    contentWrapper.appendChild(actionsDiv);
-    ensureSpacerLast();
   }
 
   function createStreamingMessage(isSubsequent) {
@@ -720,7 +586,7 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
     contentWrapper.appendChild(actionsDiv);
   }
 
-  // ---- loading + progress ----
+  // ---- loading ----
   function addLoadingIndicator() {
     var messageDiv = document.createElement('div');
     messageDiv.className = 'message ai';
@@ -741,96 +607,6 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
   function removeLoadingIndicator() {
     var loadingMessage = document.getElementById('loading-message');
     if (loadingMessage) loadingMessage.remove();
-    if (progressInterval) { clearInterval(progressInterval); progressInterval = null; }
-    isProgressBarActive = false;
-  }
-
-  function addProgressBarIndicator(isUrlQuery) {
-    var messageDiv = document.createElement('div');
-    messageDiv.className = 'message ai' + (isUrlQuery ? ' zc-loading-center' : '');
-    messageDiv.id = 'loading-message';
-    var initialText = isUrlQuery ? 'Examining content' : 'Zicy is thinking';
-    var progressContainer = document.createElement('div');
-    progressContainer.className = 'progress-container';
-    progressContainer.innerHTML =
-      '<span class="progress-text" id="progressText">' + initialText + '<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span></span>' +
-      '<div class="progress-bar-wrapper"><div class="progress-bar-fill" id="progressBarFill"></div></div>' +
-      '<span class="progress-percentage" id="progressPercentage">0%</span>';
-    messageDiv.appendChild(progressContainer);
-    messagesContainer.appendChild(messageDiv);
-    ensureSpacerLast();
-    isProgressBarActive = true;
-    progressStartTime = Date.now();
-    startProgressAnimation(isUrlQuery);
-  }
-
-  function setProgressText(text, includeDots) {
-    var progressText = document.getElementById('progressText');
-    if (!progressText) return;
-    if (includeDots) {
-      progressText.innerHTML = text + '<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>';
-    } else {
-      progressText.textContent = text;
-    }
-  }
-
-  var urlProgressStages = [
-    { text: 'Examining content', minProgress: 0, maxProgress: 25, duration: function () { return 5000 + Math.random() * 15000; } },
-    { text: 'Gathering insights', minProgress: 25, maxProgress: 60, duration: function () { return 15000 + Math.random() * 10000; } },
-    { text: 'Compiling recommendations', minProgress: 60, maxProgress: 95, duration: function () { return 10000 + Math.random() * 5000; } },
-    { text: 'Compiling recommendations', minProgress: 95, maxProgress: 99, duration: function () { return 999999; } }
-  ];
-  var generalProgressStages = [
-    { text: 'Zicy is thinking', minProgress: 0, maxProgress: 30, duration: function () { return 5000 + Math.random() * 10000; } },
-    { text: 'Analyzing your query', minProgress: 30, maxProgress: 65, duration: function () { return 10000 + Math.random() * 10000; } },
-    { text: 'Preparing response', minProgress: 65, maxProgress: 95, duration: function () { return 8000 + Math.random() * 7000; } },
-    { text: 'Preparing response', minProgress: 95, maxProgress: 99, duration: function () { return 999999; } }
-  ];
-  var extraStage = { text: 'Almost there, finalizing', minProgress: 99, maxProgress: 99, duration: function () { return 999999; } };
-
-  function startProgressAnimation(isUrlQuery) {
-    var progressBarFill = document.getElementById('progressBarFill');
-    var progressPercentage = document.getElementById('progressPercentage');
-    if (!progressBarFill || !progressPercentage) return;
-    var progressStages = isUrlQuery ? urlProgressStages : generalProgressStages;
-    var currentProgress = 0, maxProgressReached = 0, currentStage = 0, stageStartTime = Date.now();
-    setProgressText(progressStages[currentStage].text, true);
-    progressInterval = setInterval(function () {
-      if (!isProgressBarActive) { clearInterval(progressInterval); return; }
-      var elapsedTime = Date.now() - stageStartTime;
-      var totalElapsedTime = Date.now() - progressStartTime;
-      var stage = progressStages[currentStage];
-      if (totalElapsedTime > 120000 && currentStage < progressStages.length - 1) {
-        currentStage = progressStages.length - 1;
-        stageStartTime = Date.now();
-        setProgressText(extraStage.text, true);
-      }
-      var stageDuration = stage.duration();
-      var stageProgress = Math.min(elapsedTime / stageDuration, 1);
-      var progressRange = stage.maxProgress - stage.minProgress;
-      var calculatedProgress = stage.minProgress + (stageProgress * progressRange);
-      currentProgress = Math.max(calculatedProgress, maxProgressReached);
-      maxProgressReached = currentProgress;
-      progressBarFill.style.width = currentProgress + '%';
-      progressPercentage.textContent = Math.floor(currentProgress) + '%';
-      if (stageProgress >= 1 && currentStage < progressStages.length - 1) {
-        currentStage++;
-        stageStartTime = Date.now();
-        setProgressText(progressStages[currentStage].text, true);
-      }
-    }, 100);
-  }
-
-  function completeProgressBar(callback) {
-    if (!isProgressBarActive) { if (callback) callback(); return; }
-    var progressBarFill = document.getElementById('progressBarFill');
-    var progressPercentage = document.getElementById('progressPercentage');
-    if (!progressBarFill || !progressPercentage) { if (callback) callback(); return; }
-    setProgressText('Complete!', false);
-    progressBarFill.style.width = '100%';
-    progressPercentage.textContent = '100%';
-    setTimeout(function () { if (callback) callback(); }, 350);
-    if (progressInterval) { clearInterval(progressInterval); progressInterval = null; }
   }
 
   // ---- clipboard / feedback ----
@@ -851,7 +627,7 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
     var htmlContent, plainContent;
     if (fullContent) {
       plainContent = fullContent;
-      htmlContent = parseMarkdown(formatAPIResponse(fullContent));
+      htmlContent = renderMarkdown(fullContent);
     } else {
       var messageContent = messageDiv.querySelector('.message-content');
       if (!messageContent) return;
@@ -908,101 +684,48 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
   }
 
   // ---- API (SSE stream) ----
+  // Waits briefly for window.askZicy (the deferred module script), then streams
+  // through it. Resolves to the AskZicyResult shape documented in askZicy.ts, or a
+  // network-style error if the client never loaded. Sets activeController so a
+  // restart can abort the request.
+  function waitForAskZicy() {
+    return new Promise(function (resolve) {
+      var waited = 0;
+      (function check() {
+        if (window.askZicy) return resolve(window.askZicy);
+        if (waited >= 5000) return resolve(null);
+        waited += 50;
+        setTimeout(check, 50);
+      })();
+    });
+  }
+
   async function sendMessageToAPI(message, onChunk) {
-    try {
-      var apiUrl = 'https://chatapi.zicy.com/chat/stream';
-      var controller = new AbortController();
-      activeController = controller;
-      var timeoutId = setTimeout(function () { controller.abort(); }, 600000);
-      var response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: message,
-          sessionId: sessionId,
-          source: 'zicy_landing_page',
-          mode: 'consultant',
-          temperature: 0.5,
-          use_cache: false,
-          similarity_threshold: 0.85
-        }),
-        signal: controller.signal
-      });
-      clearTimeout(timeoutId);
-      if (!response.ok) throw new Error('API returned status ' + response.status);
-      var reader = response.body.getReader();
-      var decoder = new TextDecoder();
-      var fullContent = '';
-      var buffer = '';
-      var raw = '';
+    var client = await waitForAskZicy();
+    if (!client) return { ok: false, kind: 'network', partialText: '' };
+    var controller = new AbortController();
+    activeController = controller;
+    var timeoutId = setTimeout(function () { controller.abort(); }, REQUEST_TIMEOUT_MS);
+    var result = await client.stream({ message: message, sessionId: sessionId, onChunk: onChunk, signal: controller.signal });
+    clearTimeout(timeoutId);
+    if (activeController === controller) activeController = null;
+    return result;
+  }
 
-      var pushPiece = function (p) {
-        if (p && typeof p === 'string') {
-          fullContent += p;
-          if (onChunk && typeof onChunk === 'function') onChunk(p);
-        }
-      };
-      // Accept the streaming delta shape {type:"content", content} AND a single
-      // whole payload like {message, suggest_mode} / {text} (some answers arrive
-      // un-tokenised). metadata/done/error events carry no text.
-      var handleEvent = function (jsonStr) {
-        try {
-          var data = JSON.parse(jsonStr);
-          if (data.type === 'metadata' || data.type === 'done' || data.type === 'error') return;
-          var piece = typeof data.content === 'string' ? data.content
-                    : typeof data.message === 'string' ? data.message
-                    : typeof data.text === 'string' ? data.text : '';
-          pushPiece(piece);
-        } catch (e) { /* not a JSON event */ }
-      };
-
-      while (true) {
-        var chunk = await reader.read();
-        if (chunk.done) break;
-        var decoded = decoder.decode(chunk.value, { stream: true });
-        raw += decoded;
-        buffer += decoded;
-        var lines = buffer.split('\n');
-        buffer = lines.pop() || '';
-        for (var k = 0; k < lines.length; k++) {
-          var line = lines[k].trim();
-          if (line.indexOf('data:') === 0) handleEvent(line.slice(5).trim());
-        }
-      }
-      // flush a trailing SSE line with no final newline
-      var lastLine = buffer.trim();
-      if (lastLine.indexOf('data:') === 0) handleEvent(lastLine.slice(5).trim());
-
-      // Fallback: the whole body was a plain JSON object (not SSE), e.g.
-      // {"message":"...","suggest_mode":null} — extract message so the raw JSON
-      // never leaks into the bubble.
-      if (!fullContent) {
-        var body = raw.trim();
-        if (body.indexOf('data:') === 0) body = body.slice(body.indexOf('data:') + 5).trim();
-        try {
-          var obj = JSON.parse(body);
-          var msg = typeof obj.message === 'string' ? obj.message
-                  : typeof obj.content === 'string' ? obj.content
-                  : typeof obj.text === 'string' ? obj.text : '';
-          if (msg) fullContent = msg;
-        } catch (e) { /* leave empty -> friendly error below */ }
-      }
-
-      activeController = null;
-      return formatAPIResponse(fullContent || 'The AI service returned an empty response. Please try again or rephrase your question.');
-    } catch (error) {
-      activeController = null;
-      if (error.name === 'AbortError') return 'The request took longer than expected. Please try again or contact support if this persists.';
-      if (error.message && error.message.indexOf('Failed to fetch') !== -1) return 'Network error: unable to reach the chat service. Please check your connection or try again later.';
-      console.error('API Error:', error);
-      return 'Sorry, I encountered an error processing your request. Please try again.';
-    }
+  // Friendly copy for a failed turn, as markdown for the shared renderer. Each one
+  // carries the trial link. A restart abort never gets here (handleSend drops it),
+  // so 'abort' means the request timed out.
+  function errorReply(result) {
+    var trial = '[start a free trial](' + TRIAL_URL + ')';
+    if (result.kind === 'visitor') return "You've reached today's message limit. To keep going, " + trial + '.';
+    if (result.kind === 'global') return 'Ask Zicy is very busy right now. Please try again later, or ' + trial + ' to use Zicy today.';
+    return 'Sorry, something went wrong on our side. Please try again in a moment, or ' + trial + ' to explore Zicy.';
   }
 
   // ---- send flow ----
   async function handleSend() {
     if (isProcessing) return;
-    var message = chatInput.value.trim();
+    var message = chatInput.value.trim().slice(0, MAX_MESSAGE_CHARS).trim();
     if (!message) return;
 
     var myGen = convGeneration;
@@ -1030,16 +753,13 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
     chatInput.value = '';
     chatInput.style.height = '52px';
 
-    var hasURL = containsURL(message);
-    if (hasURL) { addProgressBarIndicator(true); } else { addLoadingIndicator(); }
+    track('ask_zicy_message', { page: window.location.pathname });
+    addLoadingIndicator();
 
     // ---- streaming display state ----
     var aiMessageId = null;
     var aiMessageContent = null;
     var streamedText = '';
-    var isFirstBubble = true;
-    var isBuffering = true;
-    var allMessageIds = [];
     var started = false;
 
     // Follow the streaming answer: once the turn is taller than the viewport, keep its
@@ -1054,46 +774,18 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
       }
     }
 
-    // Render a revealed slice exactly like a streamed chunk (>> header buffering + -- bubble splits).
+    // Render the reply so far as plain markdown, re-rendering the whole text each time
+    // (the renderer is safe on partial input). One bubble per reply.
     function feed(text) {
       if (!started) {
         started = true;
-        if (isProgressBarActive) { completeProgressBar(function () { removeLoadingIndicator(); }); }
-        else { removeLoadingIndicator(); }
+        removeLoadingIndicator();
         aiMessageId = createStreamingMessage(false);
         aiMessageContent = document.querySelector('#' + aiMessageId + ' .message-content');
-        allMessageIds.push(aiMessageId);
       }
       streamedText += text;
-      streamedText = streamedText.replace(/---+/g, '--');
-      if (isFirstBubble) {
-        if (streamedText.indexOf('#') !== -1 || streamedText.indexOf('>>') !== -1) {
-          isFirstBubble = false;
-        } else if (streamedText.trim().length > 10) {
-          streamedText = '>> ' + streamedText;
-          isFirstBubble = false;
-        }
-      }
-      var splitMarkerRegex = /\s+--\s+(?=##)|\n\s*--\s*\n/;
-      var splitMatch;
-      while ((splitMatch = streamedText.match(splitMarkerRegex)) !== null) {
-        isFirstBubble = false;
-        var textBeforeMarker = streamedText.substring(0, splitMatch.index);
-        var textAfterMarker = streamedText.substring(splitMatch.index + splitMatch[0].length);
-        if (aiMessageContent && textBeforeMarker.trim()) {
-          var finalText = textBeforeMarker.trim();
-          aiMessageContent.innerHTML = parseMarkdown(formatAPIResponse(finalText));
-          aiMessageContent.setAttribute('data-original-content', finalText);
-        }
-        aiMessageId = createStreamingMessage(true);
-        aiMessageContent = document.querySelector('#' + aiMessageId + ' .message-content');
-        allMessageIds.push(aiMessageId);
-        streamedText = textAfterMarker.trim();
-        isBuffering = true;
-      }
-      if (isBuffering && streamedText.indexOf('>>') !== -1) { isBuffering = false; }
-      if (!isBuffering && aiMessageContent) {
-        aiMessageContent.innerHTML = parseMarkdown(formatAPIResponse(streamedText));
+      if (aiMessageContent) {
+        aiMessageContent.innerHTML = renderMarkdown(streamedText);
         aiMessageContent.setAttribute('data-original-content', streamedText);
         followStream();
       }
@@ -1124,7 +816,7 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
     }
     requestAnimationFrame(tick);
 
-    var response = await sendMessageToAPI(message, function (chunk) { target += chunk; });
+    var result = await sendMessageToAPI(message, function (chunk) { target += chunk; });
     netDone = true;
     await revealDone;
 
@@ -1134,32 +826,16 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
     }
 
     if (!started) {
-      // No streamed content (e.g. an error/empty string) — render it as a normal message.
-      if (isProgressBarActive) {
-        await new Promise(function (resolve) { completeProgressBar(function () { removeLoadingIndicator(); resolve(); }); });
-      } else {
-        removeLoadingIndicator();
-      }
-      await addSplitMessages(response);
+      removeLoadingIndicator();
     } else if (aiMessageId) {
       var messageDiv = document.getElementById(aiMessageId);
       var hasActions = messageDiv && messageDiv.querySelector('.message-actions');
-      if (!hasActions) {
-        var fullContent = '';
-        if (allMessageIds.length > 1) {
-          allMessageIds.forEach(function (msgId) {
-            var msg = document.getElementById(msgId);
-            if (msg) {
-              var content = msg.querySelector('.message-content');
-              if (content) {
-                var oc = content.getAttribute('data-original-content');
-                if (oc) { if (fullContent) fullContent += '\n\n--\n\n'; fullContent += oc; }
-              }
-            }
-          });
-        }
-        finalizeStreamingMessage(aiMessageId, fullContent);
-      }
+      if (!hasActions) finalizeStreamingMessage(aiMessageId, '');
+    }
+
+    if (!result.ok) {
+      if (result.kind === 'visitor' || result.kind === 'global') track('ask_zicy_limit', { kind: result.kind });
+      addMessage(errorReply(result), 'ai');
     }
 
     settleSpacer(userMsgEl);
@@ -1217,8 +893,6 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
     // Invalidate + abort any in-flight request so a late response can't inject a ghost message.
     convGeneration++;
     if (activeController) { try { activeController.abort(); } catch (e) {} activeController = null; }
-    if (progressInterval) { clearInterval(progressInterval); progressInterval = null; }
-    isProgressBarActive = false;
     isProcessing = false;
     sendButton.disabled = false;
 
@@ -1294,6 +968,12 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
   // ---- wiring ----
   sendButton.addEventListener('click', handleSend);
 
+  // Trial links in replies and error messages (the renderer opens them in a new tab).
+  messagesContainer.addEventListener('click', function (e) {
+    var link = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (link && link.getAttribute('href').indexOf(TRIAL_URL) === 0) track('ask_zicy_trial_click', { page: window.location.pathname });
+  });
+
   chatInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
   });
@@ -1319,4 +999,17 @@ const SUGGESTIONS = ['Can you audit my page?', 'What is AEO?', 'Top 3 AEO Strate
       chatMenuDropdown.classList.remove('active');
     }
   });
+</script>
+
+<script>
+  // Exposes the shared Ask Zicy client and renderer to the inline script above,
+  // which can't import modules (its functions are called from inline onclick).
+  // Module scripts are deferred, so the inline script waits for this at send time.
+  import { streamAskZicy, renderSafeMarkdown } from '../scripts/askZicy';
+
+  const apiBase = document.getElementById('zicy-consultant')?.dataset.apiBase ?? '';
+  window.askZicy = {
+    stream: (opts) => streamAskZicy({ ...opts, apiBase: opts.apiBase ?? apiBase }),
+    render: renderSafeMarkdown,
+  };
 </script>
