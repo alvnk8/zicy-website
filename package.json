@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "dev:local-api": "DIAGNOSTIC_API_TARGET=http://localhost:8000 astro dev",
     "dev:prod-api": "DIAGNOSTIC_API_TARGET=https://api.zicy.com astro dev",
+    "dev:chat-stub": "node scripts/dev-public-chat-stub.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",

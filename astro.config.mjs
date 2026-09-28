@@ -77,6 +77,12 @@ export default defineConfig({
             entrypoint: './src/dev/diagnostic-api-proxy.ts',
             prerender: false,
           });
+
+          injectRoute({
+            pattern: '/public-chat/[...path]',
+            entrypoint: './src/dev/diagnostic-api-proxy.ts',
+            prerender: false,
+          });
         },
       },
     },

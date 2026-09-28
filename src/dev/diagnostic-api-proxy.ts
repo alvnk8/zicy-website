@@ -1,4 +1,11 @@
-const DIAGNOSTIC_API_MOUNT_PATH = '/api/brand-intelligence';
+// Local dev proxy: forwards same-origin requests under a mounted path to the real
+// backend at DIAGNOSTIC_API_TARGET, so requests made without PUBLIC_DIAGNOSTIC_API_BASE
+// (the FreeDiagnostic pattern) still reach a backend. Also used for /public-chat/*
+// (Ask Zicy), following the same convention.
+const MOUNTS = [
+  { path: '/api/brand-intelligence', prefixEnv: 'DIAGNOSTIC_API_PREFIX' },
+  { path: '/public-chat', prefixEnv: 'PUBLIC_CHAT_API_PREFIX' },
+];
 
 export const prerender = false;
 
@@ -11,9 +18,12 @@ function joinPaths(prefix: string, suffix: string) {
 
 async function proxyDiagnosticRequest(request: Request) {
   const requestUrl = new URL(request.url);
+  const mount = MOUNTS.find((m) => requestUrl.pathname.startsWith(m.path));
+  if (!mount) return new Response('Not found', { status: 404 });
+
   const targetUrl = new URL(import.meta.env.DIAGNOSTIC_API_TARGET || 'http://localhost:8000');
-  const upstreamPrefix = import.meta.env.DIAGNOSTIC_API_PREFIX ?? DIAGNOSTIC_API_MOUNT_PATH;
-  const suffix = `${requestUrl.pathname.slice(DIAGNOSTIC_API_MOUNT_PATH.length)}${requestUrl.search}`;
+  const upstreamPrefix = import.meta.env[mount.prefixEnv] ?? mount.path;
+  const suffix = `${requestUrl.pathname.slice(mount.path.length)}${requestUrl.search}`;
   const targetBasePath = targetUrl.pathname === '/' ? '' : targetUrl.pathname;
   const upstreamPath = joinPaths(upstreamPrefix, suffix);
 
@@ -35,6 +45,9 @@ async function proxyDiagnosticRequest(request: Request) {
     init.body = await request.arrayBuffer();
   }
 
+  // Returning the upstream fetch's Response directly (rather than buffering it into
+  // text/JSON first) keeps its body a streaming ReadableStream, so SSE responses
+  // (Content-Type: text/event-stream) pass through to the client unbuffered.
   return fetch(targetUrl, init);
 }
 
