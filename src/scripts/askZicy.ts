@@ -1,6 +1,5 @@
-// Shared client and renderer for the public Ask Zicy chat (spec R9). Used by
-// /consultant (through window.askZicy, set by a bundled script in Consultant.astro)
-// and by the site-wide widget. No dependencies.
+// Shared client and renderer for the public Ask Zicy chat (spec R9). Used by the
+// site-wide widget. No dependencies.
 //
 // Backend contract (spec R2/R3): POST {apiBase}/public-chat/stream with
 // {message, sessionId}. The response is SSE; each event's data is JSON:
@@ -38,17 +37,6 @@ export interface StreamAskZicyOptions {
   sessionId: string;
   onChunk?: (delta: string, fullText: string) => void;
   signal?: AbortSignal;
-}
-
-export interface AskZicyGlobal {
-  stream: (opts: Omit<StreamAskZicyOptions, 'apiBase'> & { apiBase?: string }) => Promise<AskZicyResult>;
-  render: (text: string) => string;
-}
-
-declare global {
-  interface Window {
-    askZicy?: AskZicyGlobal;
-  }
 }
 
 function isAbort(err: unknown, signal?: AbortSignal): boolean {

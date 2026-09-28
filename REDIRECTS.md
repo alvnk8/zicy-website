@@ -50,7 +50,8 @@ to the index. Only `/case-studies/page/:n*` → `/case-studies` (pagination) is 
 
 | Old | New | Code | Note |
 |---|---|---|---|
-| `/aeo-geo-consultant` | `/consultant` | 301 | page **removed**; `/consultant` is the canonical consultant page (sitemap + llms.txt + free-tools repointed) |
+| `/consultant` | `/` | 301 | page **removed**; the site-wide Ask Zicy widget (every page) replaces it. Sitemap, llms.txt, free-tools, nav and internal links repointed or dropped |
+| `/aeo-geo-consultant` | `/` | 301 | page removed long ago; previously pointed at `/consultant`, which is now also gone |
 | `/agency` | `/solutions/agencies` | 301 | |
 | `/join-list`, `/book-a-demo` | `/pricing` | 301 | commercial intent |
 | `/terms-and-conditions` | `/legal/terms` | 301 | |
@@ -62,10 +63,10 @@ to the index. Only `/case-studies/page/:n*` → `/case-studies` (pagination) is 
 |---|---|---|---|
 | `/about-us`, `/jobs`, `/website-design-client-portfolio`, `/website-assets-portfolio` | `/about` | 301 | firm/portfolio pages retired |
 | `/contact-us` | `/contact` | 301 | `/contact` page created in this repo |
-| `/seo-audit` | `/audit` | 301 | |
+| `/audit`, `/seo-audit` | `/free-diagnostic` | 301 | `/audit` page retired; both previously pointed at `/consultant`, which is now removed, so they go straight to the free AI reality score, the closest live equivalent |
 | `/seo-pricing`, `/seo-pricing-malaysia`, `/professional-aeo-geo-content-writing-services`, `/professional-seo-content-writing-services`, `/web-design-development-pricing`, `/white-label-seo-services` | `/pricing` | 301 | commercial intent |
 | `/seo-malaysia` | `/` | 301 | MY-market landing = homepage |
-| `/zicy` | `/consultant` | 301 | methodology/consultant hub |
+| `/zicy` | `/` | 301 | former methodology/consultant hub; previously pointed at `/consultant`, which is now removed |
 | `/seo-case-study`, `/seo-case-study/:path*` | `/case-studies` | 301 | ~150 old agency case-study URLs → index |
 | `/feed`, `/comments/feed` | `/` | 301 | legacy WordPress RSS |
 | `/about-for-llms` | `/about` | **302** | interim — recreate AEO asset, then drop redirect |

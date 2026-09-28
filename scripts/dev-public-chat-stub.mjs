@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Dev-only stub for the public-chat backend (POST /public-chat/stream), used with
 // the dev proxy in astro.config.mjs (DIAGNOSTIC_API_TARGET pointed at this server)
-// so the site's Ask Zicy widget and /consultant page have something to stream from
-// before the real zicy-tools backend exists. Plain Node, no dependencies.
+// so the site's Ask Zicy widget has something to stream from before the real
+// zicy-tools backend exists. Plain Node, no dependencies.
 //
 // Run: npm run dev:chat-stub
 // Port: PUBLIC_CHAT_STUB_PORT (default 8787)

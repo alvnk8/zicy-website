@@ -125,10 +125,7 @@ const ogImg = ogImage
     </main>
     <Footer />
     <CookieConsent />
-    {/* Site-wide chat, skipped on /consultant, which already has its own full-page
-        chat (spec R8). trailingSlash is 'never', so the pathname is exactly
-        '/consultant' with no trailing slash to account for. */}
-    {Astro.url.pathname !== '/consultant' && <AskZicyWidget />}
+    <AskZicyWidget />
     <div class="gtranslate_wrapper"></div>
     <script is:inline>
       window.gtranslateSettings = {

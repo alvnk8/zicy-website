@@ -77,14 +77,8 @@ const pages: Record<string, OgPage> = {
     eyebrow: 'Free tools',
     title: 'See how AI reads your brand',
     description:
-      'Free ways to check your AI visibility: the AEO and GEO consultant and the Chrome extension.',
+      'Free ways to check your AI visibility: a free AI reality score and the Chrome extension.',
     alt: 'Zicy · free tools',
-  },
-  consultant: {
-    eyebrow: 'AEO and GEO consultant',
-    title: 'Free guidance on AI search visibility',
-    description: 'Ask anything about getting found and cited across major AI engines.',
-    alt: 'Zicy · AEO and GEO consultant',
   },
   'chrome-extension': {
     eyebrow: 'Chrome extension',

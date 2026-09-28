@@ -5,26 +5,19 @@ import { SITE } from '../data/site';
 
 const title = 'Contact Zicy, talk to the AI visibility team';
 const description =
-  'Get in touch with Zicy. Run a free AI visibility audit, ask the AEO/GEO consultant anything, or talk to Growth.pro about a done-for-you programme.';
+  'Get in touch with Zicy. Run a free AI visibility audit, ask Zicy anything, or talk to Growth.pro about a done-for-you programme.';
 
-// Real channels only — the site funnels contact intent to the audit, the live
-// consultant chat, the done-for-you enquiry and registration. No standalone
-// support inbox is published, so none is invented here.
+// Real channels only — the site funnels contact intent to the audit, the
+// done-for-you enquiry and registration. No standalone support inbox is
+// published, so none is invented here.
 const channels = [
   {
     eyebrow: 'Start here',
     h: 'Run a free AI visibility audit',
     p: 'See how every major AI engine describes your brand, whether it’s right, and where the gaps are, benchmarked against rivals. No call required.',
     cta: 'Get the free audit',
-    href: '/audit',
+    href: '/free-diagnostic',
     primary: true,
-  },
-  {
-    eyebrow: 'Ask anything',
-    h: 'Talk to the AEO/GEO consultant',
-    p: "A free AI consultant powered by Growth.pro's framework. Ask any answer-engine optimisation question and get an answer in seconds.",
-    cta: 'Open the consultant',
-    href: '/consultant',
   },
   {
     eyebrow: 'Enterprise',
@@ -63,9 +56,9 @@ const contactGraph = {
       <span class="eyebrow">Contact</span>
       <h1>Let’s talk about how AI sees your brand.</h1>
       <p class="lead">
-        The fastest way to reach us is to start with a free audit or ask the consultant directly,
-        you’ll get something useful back before a conversation even starts. Prefer a human? Every
-        route below reaches the team.
+        The fastest way to reach us is to start with a free audit or ask Zicy, the chat in the
+        corner of every page, you’ll get something useful back before a conversation even starts.
+        Prefer a human? Every route below reaches the team.
       </p>
     </div>
   </section>
@@ -112,9 +105,9 @@ const contactGraph = {
   <CtaBand
     eyebrow="No forms, no waiting"
     heading="See what AI says about you, free."
-    sub="Run the audit now, or open the consultant and ask your first question."
+    sub="Run the audit now, or ask Zicy your first question in the chat."
     ctaLabel="Run the free audit"
-    ctaHref="/audit"
+    ctaHref="/free-diagnostic"
   />
 </BaseLayout>
 
