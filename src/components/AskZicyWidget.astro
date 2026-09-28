@@ -597,11 +597,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
     let isStreaming = false;
     // Bumped on "new chat" so a reply still streaming from the previous conversation
-    // can't land in the fresh one — same pattern as Consultant.astro's convGeneration.
+    // can't land in the fresh one.
     let generation = 0;
     // Reachable from the "new chat" handler so it can cancel the in-flight request,
-    // not just invalidate it via `generation` — same pattern as Consultant.astro's
-    // activeController.
+    // not just invalidate it via `generation`.
     let activeController: AbortController | null = null;
 
     function track(event: string, data?: Record<string, unknown>) {
@@ -821,9 +820,9 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       void sendMessage(input.value);
     });
 
-    // Friendly copy for a failed turn, reusing /consultant's errorReply strings
-    // (spec R8: "reuse B1's copy for consistency"). Rendered as markdown so the
-    // trial link opens in a new tab through the same safe renderer.
+    // Friendly copy for a failed turn (spec R8: "reuse B1's copy for consistency").
+    // Rendered as markdown so the trial link opens in a new tab through the same
+    // safe renderer.
     //
     // 429s are usually the burst/hourly rate limit rather than a hard daily cap, and
     // a 503 can be an outage rather than a capacity issue, so when the server sent
