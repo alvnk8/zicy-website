@@ -373,7 +373,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
 <script is:inline>
   // ---- session ----
-  var sessionId = 'zicy-' + Date.now() + '-' + Math.random().toString(36).substring(2, 15);
+  function generateSessionId() {
+    return 'zicy-' + Date.now() + '-' + Math.random().toString(36).substring(2, 15);
+  }
+  var sessionId = generateSessionId();
 
   var messagesContainer = document.getElementById('messagesContainer');
   var chatInput = document.querySelector('#zicy-consultant .chat-input');
@@ -715,10 +718,24 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   // Friendly copy for a failed turn, as markdown for the shared renderer. Each one
   // carries the trial link. A restart abort never gets here (handleSend drops it),
   // so 'abort' means the request timed out.
+  //
+  // 429s are usually the burst/hourly rate limit rather than a hard daily cap, and a
+  // 503 can be an outage rather than a capacity issue, so when the server sent its
+  // own detail message, show that (it's rendered through the shared markdown
+  // renderer, which linkifies a bare trial URL) instead of assuming which limit was
+  // hit. Same behaviour and strings as the widget's errorReply.
   function errorReply(result) {
     var trial = '[start a free trial](' + TRIAL_URL + ')';
-    if (result.kind === 'visitor') return "You've reached today's message limit. To keep going, " + trial + '.';
-    if (result.kind === 'global') return 'Ask Zicy is very busy right now. Please try again later, or ' + trial + ' to use Zicy today.';
+    if (result.kind === 'visitor' || result.kind === 'global') {
+      var detail = result.detail;
+      if (typeof detail === 'string' && detail.trim() && detail.length <= 300) {
+        var text = detail.trim();
+        if (text.indexOf('app.zicy.com/register') === -1) text += ' Or ' + trial + ' to keep going.';
+        return text;
+      }
+      if (result.kind === 'visitor') return "You've sent a lot of messages. Please wait a little, or " + trial + ' to keep going.';
+      return 'Ask Zicy is very busy right now. Please try again later, or ' + trial + ' to use Zicy today.';
+    }
     return 'Sorry, something went wrong on our side. Please try again in a moment, or ' + trial + ' to explore Zicy.';
   }
 
@@ -895,6 +912,11 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     if (activeController) { try { activeController.abort(); } catch (e) {} activeController = null; }
     isProcessing = false;
     sendButton.disabled = false;
+
+    // Rotate the session id so the server's 24h history key starts fresh (R4):
+    // the backend keeps history per sessionId, so reusing the old id would let the
+    // restarted conversation see the cleared messages' context again.
+    sessionId = generateSessionId();
 
     messagesContainer.querySelectorAll('.message').forEach(function (msg) { msg.remove(); });
     scrollSpacer.style.height = '0px';

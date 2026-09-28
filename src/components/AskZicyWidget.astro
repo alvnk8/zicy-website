@@ -418,6 +418,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     text-decoration: underline;
     word-break: break-word;
   }
+  #az-widget .az-partial-note {
+    color: var(--az-ink-3);
+    font-size: 12px;
+  }
   #az-widget .az-msg-error .az-agent-content {
     display: flex;
     gap: 8px;
@@ -563,6 +567,14 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     role: 'user' | 'assistant';
     text: string;
     error?: boolean;
+    // Set while an assistant reply is still streaming and cleared once the turn
+    // completes (success or error). If the page is closed/navigated away mid-stream,
+    // this is what's left in storage, so a restore can tell "still typing" apart
+    // from "done" and show a cut-off note instead of stuck typing dots.
+    partial?: boolean;
+    // The friendly error text, shown after any partial reply text that streamed in
+    // before the failure (kept alongside `text` rather than overwriting it).
+    errorText?: string;
   }
   interface StoredState {
     sessionId: string;
@@ -587,6 +599,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     // Bumped on "new chat" so a reply still streaming from the previous conversation
     // can't land in the fresh one — same pattern as Consultant.astro's convGeneration.
     let generation = 0;
+    // Reachable from the "new chat" handler so it can cancel the in-flight request,
+    // not just invalidate it via `generation` — same pattern as Consultant.astro's
+    // activeController.
+    let activeController: AbortController | null = null;
 
     function track(event: string, data?: Record<string, unknown>) {
       (window as any).dataLayer = (window as any).dataLayer || [];
@@ -626,6 +642,15 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     }
 
     const state = loadState();
+
+    // A stored transcript can end with an assistant message that was still
+    // streaming when the tab was closed/navigated away. If it never got a single
+    // token (empty text, left mid-stream before the first chunk), there's nothing
+    // to show, so drop it rather than restore it as stuck typing dots.
+    {
+      const last = state.messages[state.messages.length - 1];
+      if (last && last.role === 'assistant' && !last.error && !last.text) state.messages.pop();
+    }
 
     function persist() {
       try {
@@ -718,12 +743,25 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
     const dotsHtml = '<span class="az-dots"><span></span><span></span><span></span></span>';
 
+    const PARTIAL_NOTE = '<p class="az-partial-note">This reply was cut off. Ask again to get the full answer.</p>';
+
     function renderTranscript() {
       messagesEl.innerHTML = '';
       for (const msg of state.messages) {
-        if (msg.role === 'user') appendUserMessage(msg.text);
-        else if (msg.error) appendAssistantMessage(errorHtml(msg.text), true);
-        else appendAssistantMessage(msg.text ? renderSafeMarkdown(msg.text) : dotsHtml, false);
+        if (msg.role === 'user') {
+          appendUserMessage(msg.text);
+        } else if (msg.error) {
+          // Partial text that streamed in before the failure (if any), kept alongside
+          // the error instead of being replaced by it.
+          const partial = msg.text ? renderSafeMarkdown(msg.text) : '';
+          appendAssistantMessage(partial + errorHtml(msg.errorText ?? msg.text), true);
+        } else {
+          // The empty-trailing-message case was already dropped on load, so any
+          // remaining `partial: true` message here streamed at least some text before
+          // the page was closed — show it plus a cut-off note, never typing dots.
+          const note = msg.partial && msg.text ? PARTIAL_NOTE : '';
+          appendAssistantMessage(renderSafeMarkdown(msg.text) + note, false);
+        }
       }
     }
 
@@ -786,10 +824,22 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     // Friendly copy for a failed turn, reusing /consultant's errorReply strings
     // (spec R8: "reuse B1's copy for consistency"). Rendered as markdown so the
     // trial link opens in a new tab through the same safe renderer.
+    //
+    // 429s are usually the burst/hourly rate limit rather than a hard daily cap, and
+    // a 503 can be an outage rather than a capacity issue, so when the server sent
+    // its own detail message, show that instead of assuming which limit was hit.
     function errorReply(result: Extract<AskZicyResult, { ok: false }>): string {
       const trial = `[start a free trial](${TRIAL_URL})`;
-      if (result.kind === 'visitor') return `You've reached today's message limit. To keep going, ${trial}.`;
-      if (result.kind === 'global') return `Ask Zicy is very busy right now. Please try again later, or ${trial} to use Zicy today.`;
+      if (result.kind === 'visitor' || result.kind === 'global') {
+        const detail = result.detail;
+        if (typeof detail === 'string' && detail.trim() && detail.length <= 300) {
+          let text = detail.trim();
+          if (text.indexOf('app.zicy.com/register') === -1) text += ` Or ${trial} to keep going.`;
+          return text;
+        }
+        if (result.kind === 'visitor') return `You've sent a lot of messages. Please wait a little, or ${trial} to keep going.`;
+        return `Ask Zicy is very busy right now. Please try again later, or ${trial} to use Zicy today.`;
+      }
       return `Sorry, something went wrong on our side. Please try again in a moment, or ${trial} to explore Zicy.`;
     }
 
@@ -809,12 +859,17 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
       setStreaming(true);
       const content = appendAssistantMessage(dotsHtml, false);
-      state.messages.push({ role: 'assistant', text: '' });
+      // `partial: true` marks this as still-streaming; cleared below on completion
+      // (success replaces it outright, error keeps it off the new message object).
+      // If the page is closed/navigated away before either happens, this is what's
+      // left in storage for the next load to detect (see renderTranscript).
+      state.messages.push({ role: 'assistant', text: '', partial: true });
       const idx = state.messages.length - 1;
       persist();
       scrollToBottom();
 
       const controller = new AbortController();
+      activeController = controller;
       const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
       const result = await streamAskZicy({
@@ -831,6 +886,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         },
       });
       window.clearTimeout(timeoutId);
+      if (activeController === controller) activeController = null;
 
       if (myGen !== generation) return; // conversation was reset mid-stream — drop this result
 
@@ -842,9 +898,13 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       } else {
         if (result.kind === 'visitor' || result.kind === 'global') track('ask_zicy_limit', { kind: result.kind });
         const errText = errorReply(result);
+        // Keep whatever text had already streamed in (state.messages[idx].text, kept
+        // up to date by onChunk above) and append the error after it, instead of
+        // replacing it — a burst limit or dropped connection can hit mid-reply.
+        const partial = state.messages[idx].text;
         content.parentElement?.classList.add('az-msg-error');
-        content.innerHTML = errorHtml(errText);
-        state.messages[idx] = { role: 'assistant', text: errText, error: true };
+        content.innerHTML = (partial ? renderSafeMarkdown(partial) : '') + errorHtml(errText);
+        state.messages[idx] = { role: 'assistant', text: partial, error: true, errorText: errText };
       }
       persist();
       scrollToBottom();
@@ -865,14 +925,18 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     });
 
     // ---- open / close ----
-    function openPanel(focusInput: boolean) {
+    // `userInitiated` is false only for the page-load restore of an already-open
+    // panel (see the bottom of this script) so that restore doesn't inflate
+    // ask_zicy_open — the event means "someone opened the widget", not "the panel is
+    // visible on this pageview".
+    function openPanel(focusInput: boolean, userInitiated = true) {
       panel.hidden = false;
       launcher.classList.add('az-hidden');
       launcher.setAttribute('aria-expanded', 'true');
       state.open = true;
       persist();
       syncLayoutState();
-      track('ask_zicy_open');
+      if (userInitiated) track('ask_zicy_open');
       scrollToBottom();
       if (focusInput) window.requestAnimationFrame(() => input.focus());
     }
@@ -894,6 +958,14 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
     newChatBtn.addEventListener('click', () => {
       generation++; // invalidate any in-flight turn from the old conversation
+      if (activeController) {
+        try {
+          activeController.abort();
+        } catch {
+          /* ignore */
+        }
+        activeController = null;
+      }
       setStreaming(false);
       state.sessionId = generateSessionId();
       state.messages = [];
@@ -903,6 +975,6 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       input.focus();
     });
 
-    if (state.open) openPanel(false);
+    if (state.open) openPanel(false, false);
   }
 </script>
