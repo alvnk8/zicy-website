@@ -1,0 +1,979 @@
+---
+// Site-wide Ask Zicy chat widget (spec public-ask-zicy.md R8, R10, R12, R13).
+// Mirrors the in-app Ask Zicy (zicy-dashboard/src/chatbot/ui/) in layout, sizes and
+// behaviour, rebuilt in plain JS since the site has no React:
+//   - ChatLauncher.tsx:48        -> .az-launcher (48px pill, 24px from the corner,
+//                                    widens to 136px on hover, same bolt/zap icon)
+//   - ChatShell.tsx panel layout -> .az-panel (floating panel sized like the docked
+//                                    default width, 400px; the site has no reserved
+//                                    layout column to dock into like the app does, so
+//                                    it floats above the launcher instead of docking
+//                                    to the viewport edge)
+//   - ChatHeader.tsx             -> .az-header ("Ask Zicy" + new chat + close)
+//   - EmptyState.tsx             -> .az-empty (greeting + 3 suggested questions)
+//   - MessageList.tsx            -> #az-messages (notranslate, aria-live polite)
+//   - UserMessage.tsx            -> .az-bubble (accent-weak bubble, 14px/1.55)
+//   - AgentMessage.tsx           -> .az-agent-content (no bubble, 14px/1.6)
+//   - Composer.tsx               -> .az-composer (grows to 6 rows, 500-char cap)
+// Values per R10 (widget-scoped --az- tokens; theme.css's --r-*/--dur/--shadow are
+// never read or overridden here).
+//
+// Streams through the shared client (src/scripts/askZicy.ts, spec R9): streamAskZicy
+// + renderSafeMarkdown. API base via data-api-base from PUBLIC_DIAGNOSTIC_API_BASE
+// (relative in dev, hitting the B0 proxy).
+//
+// Session + transcript persist in sessionStorage under one key, zicy_ask_session
+// (R13), so the conversation survives navigating to another page on this static
+// multi-page site.
+const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$/, '');
+---
+
+<div id="az-widget" data-api-base={apiBase}>
+  <button id="az-launcher" class="az-launcher" type="button" aria-expanded="false" aria-controls="az-panel" aria-label="Ask Zicy">
+    <span class="az-launcher-icon" aria-hidden="true">
+      <img src="/images/icons/zicy-thunder.png" width="10" height="19" alt="" aria-hidden="true" class="az-thunder-icon" />
+    </span>
+    <span class="az-launcher-label">Ask Zicy</span>
+  </button>
+
+  <div id="az-panel" class="az-panel" role="dialog" aria-label="Ask Zicy" hidden>
+    <header class="az-header">
+      <div class="az-header-title">
+        <span class="az-badge" aria-hidden="true">
+          <img src="/images/icons/zicy-thunder.png" width="10" height="19" alt="" aria-hidden="true" class="az-thunder-icon" />
+        </span>
+        <span>Ask Zicy</span>
+      </div>
+      <div class="az-header-actions">
+        <button id="az-new-chat" class="az-icon-btn" type="button" aria-label="New chat">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </button>
+        <button id="az-close" class="az-icon-btn" type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="az-body">
+      <div id="az-empty">
+        <p class="az-empty-title">Hi, I'm Zicy. Ask me about pricing, AI visibility or your brand.</p>
+        <div class="az-suggestions">
+          <button type="button" class="az-suggestion" data-prompt="What does Zicy cost?">What does Zicy cost?</button>
+          <button type="button" class="az-suggestion" data-prompt="Can I track multiple brands with multiple seats?">Can I track multiple brands with multiple seats?</button>
+          <button type="button" class="az-suggestion" data-prompt="Why isn't my brand in ChatGPT?">Why isn't my brand in ChatGPT?</button>
+        </div>
+      </div>
+      <div id="az-messages" class="notranslate" aria-live="polite" aria-relevant="additions" hidden></div>
+    </div>
+
+    <form id="az-composer" class="az-composer">
+      <div class="az-composer-inner">
+        <textarea id="az-input" class="az-input" rows="1" maxlength="500" placeholder="Ask about AI visibility, pricing or your brand..." aria-label="Message"></textarea>
+        <button id="az-send" class="az-send" type="submit" aria-label="Send" disabled>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style is:global>
+  #az-widget {
+    --az-accent: #83c9eb;
+    --az-accent-2: #3e8fc2;
+    --az-accent-text: #1f6d8c;
+    --az-accent-weak: #eaf5fc;
+    --az-on-accent: #12333f;
+    --az-r-xs: 6px;
+    --az-r-sm: 8px;
+    --az-r-md: 10px;
+    --az-r-lg: 14px;
+    --az-r-pill: 999px;
+    --az-ease: cubic-bezier(0.22, 0.7, 0.26, 1);
+    --az-dur: 0.2s;
+    --az-shadow: 0 4px 14px rgba(21, 19, 42, 0.08);
+    --az-shadow-lg: 0 18px 44px rgba(21, 19, 42, 0.12);
+    --az-surface: #ffffff;
+    --az-surface-2: #f7f8fb;
+    --az-line: #e6e8ef;
+    --az-line-2: #d6dae4;
+    --az-ink: #15151f;
+    --az-ink-2: #515768;
+    --az-ink-3: #9aa0b4;
+    --az-flag: #d6453b;
+    --az-flag-text: #9e2c24;
+    --az-flag-bg: #fbe5e3;
+    --az-focus: #6e63ac;
+    /* Same bolt PNG as the dashboard's ThunderIcon (thunder-icon.tsx), recoloured with
+       a filter since it's a flat asset rather than an SVG that could take
+       currentColor. Matches the dashboard's light-theme --chat-bolt-filter: on the
+       accent it reads white (the widget is light-only, no dark variant). */
+    --az-bolt-filter: brightness(0) invert(1);
+    font-family: 'Inter Tight', system-ui, sans-serif;
+  }
+
+  /* --az-cookie-lift (banner height + 12px gap) and --az-cookie-banner-h (the
+     banner's exact height, used by .az-fullscreen) are written onto :root by the
+     script below while the cookie banner (z-index 200) is visible, so they're left
+     un-shadowed here (no local declaration on #az-widget) to inherit them, with a 0px
+     fallback. */
+
+  #az-widget .az-launcher {
+    position: fixed;
+    right: 24px;
+    bottom: calc(24px + var(--az-cookie-lift, 0px));
+    z-index: 250;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 48px;
+    width: 48px;
+    padding: 0 14px;
+    overflow: hidden;
+    border: none;
+    border-radius: var(--az-r-pill);
+    background: var(--az-accent);
+    color: var(--az-on-accent);
+    box-shadow: var(--az-shadow);
+    cursor: pointer;
+    transition: width var(--az-dur) var(--az-ease), bottom var(--az-dur) var(--az-ease);
+  }
+  #az-widget .az-launcher:hover,
+  #az-widget .az-launcher:focus-visible {
+    width: 136px;
+  }
+  #az-widget .az-launcher.az-hidden {
+    display: none;
+  }
+  #az-widget .az-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+  /* ChatLauncher.tsx / ChatHeader.tsx render ThunderIcon at h-4 w-auto (16px tall,
+     width following the asset's own aspect ratio) inside a 24px wrapper; the intrinsic
+     width/height attributes above (the source PNG's own 10x19) reserve that aspect
+     ratio so setting a fixed height here doesn't shift layout while the image loads. */
+  #az-widget .az-thunder-icon {
+    display: block;
+    height: 16px;
+    width: auto;
+    filter: var(--az-bolt-filter);
+  }
+  #az-widget .az-launcher-label {
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0;
+    transition: max-width var(--az-dur) var(--az-ease), opacity var(--az-dur) var(--az-ease);
+  }
+  #az-widget .az-launcher:hover .az-launcher-label,
+  #az-widget .az-launcher:focus-visible .az-launcher-label {
+    max-width: 100px;
+    opacity: 1;
+  }
+
+  #az-widget .az-panel {
+    position: fixed;
+    right: 24px;
+    bottom: calc(24px + 60px + var(--az-cookie-lift, 0px));
+    z-index: 260;
+    width: 400px;
+    max-width: calc(100vw - 32px);
+    /* Available height = viewport height minus the bottom offset above (24px corner
+       gap + 60px launcher clearance + cookie lift) minus a 16px top margin, capped at
+       640px. Overlapping the site header is acceptable for a floating dialog, so
+       there's no separate top-anchored term — this only has to keep the panel from
+       extending above the viewport. dvh is the real measurement on mobile browser
+       chrome; vh is declared first as the fallback for browsers without dvh support
+       (an unsupported value leaves the prior declaration in place). The script below
+       measures the same viewport/lift figures to decide when this would be too small
+       to use and switches to .az-fullscreen instead (see that rule). */
+    height: min(640px, calc(100vh - 24px - 60px - var(--az-cookie-lift, 0px) - 16px));
+    height: min(640px, calc(100dvh - 24px - 60px - var(--az-cookie-lift, 0px) - 16px));
+    display: flex;
+    flex-direction: column;
+    background: var(--az-surface);
+    border: 1px solid var(--az-line);
+    border-radius: var(--az-r-lg);
+    box-shadow: var(--az-shadow-lg);
+    overflow: hidden;
+    transition: bottom var(--az-dur) var(--az-ease);
+  }
+  /* Set by the script (syncLayoutState) whenever the floating layout above wouldn't
+     fit: viewport width under 560px, or the available height it computes drops under
+     420px. Reused as-is for both cases per the fix-round-1 decision, instead of a
+     separate rule per trigger. Declared before the [hidden] rule below so, on the
+     specificity tie between "#az-widget .az-panel.az-fullscreen" and
+     "#az-widget .az-panel[hidden]", [hidden] always wins if the class is ever left
+     on a closed panel.
+     bottom is the cookie banner's exact height (0 once it's dismissed), so the
+     full-screen panel stops directly above the banner and never covers the
+     Accept/Reject controls; height is auto so top + bottom decide it. The header and
+     composer are flex-shrink: 0 and the message list is a min-height: 0 flex child,
+     so a short panel only shrinks (and scrolls) the message list. */
+  #az-widget .az-panel.az-fullscreen {
+    right: 0;
+    left: 0;
+    bottom: var(--az-cookie-banner-h, 0px);
+    top: 0;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    max-height: none;
+    border-radius: 0;
+    border: none;
+  }
+  #az-widget .az-panel[hidden] {
+    display: none;
+  }
+
+  #az-widget .az-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    padding: 0 12px;
+    border-bottom: 1px solid var(--az-line);
+    flex-shrink: 0;
+  }
+  #az-widget .az-header-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--az-ink);
+  }
+  #az-widget .az-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--az-r-sm);
+    background: var(--az-accent);
+    color: var(--az-on-accent);
+    flex-shrink: 0;
+  }
+  #az-widget .az-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  #az-widget .az-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    border-radius: var(--az-r-sm);
+    color: var(--az-ink-2);
+    cursor: pointer;
+    transition: background var(--az-dur) var(--az-ease);
+  }
+  #az-widget .az-icon-btn:hover {
+    background: var(--az-surface-2);
+  }
+  #az-widget .az-icon-btn:focus-visible,
+  #az-widget .az-launcher:focus-visible,
+  #az-widget .az-suggestion:focus-visible,
+  #az-widget .az-send:focus-visible,
+  #az-widget .az-input:focus-visible {
+    outline: 2px solid var(--az-focus);
+    outline-offset: 2px;
+  }
+
+  #az-widget .az-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  /* min-height: 0 + overflow-y: auto keep the empty state inside .az-body when the
+     full-screen panel is short (e.g. 1024x450 with the cookie banner, ~70px of body);
+     without them it overflows and, since .az-body is positioned, paints over and
+     swallows clicks meant for the composer. "safe center" falls back to start
+     alignment on overflow so the top of the content stays scrollable-to. */
+  #az-widget #az-empty {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-content: safe center;
+    gap: 16px;
+    padding: 24px;
+    text-align: center;
+  }
+  #az-widget #az-empty[hidden] {
+    display: none;
+  }
+  #az-widget .az-empty-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--az-ink);
+    margin: 0;
+  }
+  #az-widget .az-suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 320px;
+  }
+  #az-widget .az-suggestion {
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    border: 1px solid var(--az-line);
+    border-radius: var(--az-r-md);
+    background: var(--az-surface-2);
+    color: var(--az-ink-2);
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: border-color var(--az-dur) var(--az-ease);
+  }
+  #az-widget .az-suggestion:hover:not(:disabled) {
+    border-color: var(--az-line-2);
+  }
+  #az-widget .az-suggestion:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  #az-widget #az-messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 12px 16px 16px;
+  }
+  #az-widget #az-messages[hidden] {
+    display: none;
+  }
+
+  #az-widget .az-msg {
+    display: flex;
+  }
+  #az-widget .az-msg-user {
+    justify-content: flex-end;
+  }
+  #az-widget .az-msg-agent {
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  #az-widget .az-bubble {
+    max-width: 80%;
+    padding: 10px 14px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--az-ink);
+    background: var(--az-accent-weak);
+    border-radius: var(--az-r-lg) var(--az-r-lg) var(--az-r-xs) var(--az-r-lg);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  #az-widget .az-agent-content {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--az-ink);
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  #az-widget .az-agent-content p {
+    margin: 0 0 8px;
+  }
+  #az-widget .az-agent-content p:last-child {
+    margin-bottom: 0;
+  }
+  #az-widget .az-agent-content ul,
+  #az-widget .az-agent-content ol {
+    margin: 0 0 8px;
+    padding-left: 20px;
+  }
+  #az-widget .az-agent-content li {
+    margin: 2px 0;
+  }
+  #az-widget .az-agent-content strong {
+    font-weight: 600;
+  }
+  #az-widget .az-agent-content a {
+    color: var(--az-accent-text);
+    text-decoration: underline;
+    word-break: break-word;
+  }
+  #az-widget .az-partial-note {
+    color: var(--az-ink-3);
+    font-size: 12px;
+  }
+  #az-widget .az-msg-error .az-agent-content {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 10px 14px;
+    border-radius: var(--az-r-md);
+    background: var(--az-flag-bg);
+    color: var(--az-flag-text);
+  }
+  #az-widget .az-msg-error .az-agent-content p {
+    margin: 0;
+  }
+  #az-widget .az-error-icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  #az-widget .az-dots {
+    display: inline-flex;
+    gap: 4px;
+    padding: 6px 0;
+  }
+  #az-widget .az-dots span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--az-ink-3);
+    animation: az-pulse 1.2s infinite ease-in-out;
+  }
+  #az-widget .az-dots span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  #az-widget .az-dots span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  @keyframes az-pulse {
+    0%,
+    60%,
+    100% {
+      opacity: 0.3;
+    }
+    30% {
+      opacity: 1;
+    }
+  }
+
+  #az-widget .az-composer {
+    border-top: 1px solid var(--az-line);
+    padding: 12px;
+    flex-shrink: 0;
+  }
+  #az-widget .az-composer-inner {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 6px 6px 6px 12px;
+    border: 1px solid var(--az-line);
+    border-radius: var(--az-r-lg);
+    background: var(--az-surface-2);
+    transition: border-color var(--az-dur) var(--az-ease);
+  }
+  #az-widget .az-composer-inner:focus-within {
+    border-color: var(--az-accent-2);
+  }
+  #az-widget .az-input {
+    flex: 1;
+    resize: none;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--az-ink);
+    padding: 6px 0;
+    max-height: 128px;
+  }
+  #az-widget .az-input::placeholder {
+    color: var(--az-ink-3);
+  }
+  #az-widget .az-send {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--az-accent);
+    color: var(--az-on-accent);
+    transition: background var(--az-dur) var(--az-ease);
+  }
+  #az-widget .az-send:disabled {
+    background: var(--az-line-2);
+    color: var(--az-ink-3);
+    cursor: not-allowed;
+  }
+
+  /* Under 560px the panel is full screen (spec R8, folded into .az-fullscreen above
+     by the script) and the launcher is not shown while it's open (see the script's
+     openPanel/closePanel, which toggles az-hidden on the launcher regardless of
+     width). */
+
+  /* #gt_float_wrapper is GTranslate's own floating widget, injected outside
+     #az-widget, so it can't be reached by a #az-widget-scoped rule — this is the one
+     deliberate exception to that scoping. The script toggles this class on <html>
+     whenever the panel is open in full-screen mode (mobile width or the height
+     floor), so GTranslate's launcher doesn't sit on top of / under the panel. */
+  html.az-fullscreen-open #gt_float_wrapper {
+    display: none !important;
+  }
+  /* Second deliberate unscoped exception, keyed off the same class: while the panel
+     is open full screen, lock the page scroll behind it so wheel/touch scrolling
+     doesn't move the hidden page. Removing the class on close (or on switching back
+     to the floating layout) restores the page's own overflow. */
+  html.az-fullscreen-open,
+  html.az-fullscreen-open body {
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #az-widget * {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<script>
+  import { streamAskZicy, renderSafeMarkdown, type AskZicyResult } from '../scripts/askZicy';
+
+  const TRIAL_URL = 'https://app.zicy.com/register';
+  const MAX_MESSAGE_CHARS = 500;
+  const STORAGE_KEY = 'zicy_ask_session';
+  const MOBILE_BREAKPOINT = 560;
+  const MAX_ROWS = 6;
+  const LINE_HEIGHT_PX = 20;
+  const VERTICAL_PADDING_PX = 8;
+  const REQUEST_TIMEOUT_MS = 90000; // the backend's own turn deadline is 45s (spec R3)
+
+  interface StoredMessage {
+    role: 'user' | 'assistant';
+    text: string;
+    error?: boolean;
+    // Set while an assistant reply is still streaming and cleared once the turn
+    // completes (success or error). If the page is closed/navigated away mid-stream,
+    // this is what's left in storage, so a restore can tell "still typing" apart
+    // from "done" and show a cut-off note instead of stuck typing dots.
+    partial?: boolean;
+    // The friendly error text, shown after any partial reply text that streamed in
+    // before the failure (kept alongside `text` rather than overwriting it).
+    errorText?: string;
+  }
+  interface StoredState {
+    sessionId: string;
+    messages: StoredMessage[];
+    open: boolean;
+  }
+
+  const root = document.getElementById('az-widget');
+  if (root) {
+    const apiBase = root.dataset.apiBase ?? '';
+    const launcher = document.getElementById('az-launcher') as HTMLButtonElement;
+    const panel = document.getElementById('az-panel') as HTMLDivElement;
+    const closeBtn = document.getElementById('az-close') as HTMLButtonElement;
+    const newChatBtn = document.getElementById('az-new-chat') as HTMLButtonElement;
+    const emptyEl = document.getElementById('az-empty') as HTMLDivElement;
+    const messagesEl = document.getElementById('az-messages') as HTMLDivElement;
+    const form = document.getElementById('az-composer') as HTMLFormElement;
+    const input = document.getElementById('az-input') as HTMLTextAreaElement;
+    const sendBtn = document.getElementById('az-send') as HTMLButtonElement;
+
+    let isStreaming = false;
+    // Bumped on "new chat" so a reply still streaming from the previous conversation
+    // can't land in the fresh one.
+    let generation = 0;
+    // Reachable from the "new chat" handler so it can cancel the in-flight request,
+    // not just invalidate it via `generation`.
+    let activeController: AbortController | null = null;
+
+    function track(event: string, data?: Record<string, unknown>) {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push(Object.assign({ event }, data));
+    }
+
+    function generateSessionId(): string {
+      try {
+        if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+      } catch {
+        /* fall through */
+      }
+      return 'az-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+    }
+
+    function isValidSessionId(id: unknown): id is string {
+      return typeof id === 'string' && /^[A-Za-z0-9_-]{8,64}$/.test(id);
+    }
+
+    function loadState(): StoredState {
+      try {
+        const raw = sessionStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object' && isValidSessionId(parsed.sessionId)) {
+            return {
+              sessionId: parsed.sessionId,
+              messages: Array.isArray(parsed.messages) ? parsed.messages : [],
+              open: parsed.open === true,
+            };
+          }
+        }
+      } catch {
+        /* sessionStorage unavailable (private mode) or corrupt JSON — start fresh */
+      }
+      return { sessionId: generateSessionId(), messages: [], open: false };
+    }
+
+    const state = loadState();
+
+    // A stored transcript can end with an assistant message that was still
+    // streaming when the tab was closed/navigated away. If it never got a single
+    // token (empty text, left mid-stream before the first chunk), there's nothing
+    // to show, so drop it rather than restore it as stuck typing dots.
+    {
+      const last = state.messages[state.messages.length - 1];
+      if (last && last.role === 'assistant' && !last.error && !last.text) state.messages.pop();
+    }
+
+    function persist() {
+      try {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch {
+        /* ignore — private mode / storage full */
+      }
+    }
+    persist();
+
+    // ---- cookie banner lift + full-screen floor (R8, fix-round-1) ----
+    // Both the launcher/panel's --az-cookie-lift offset and the .az-fullscreen /
+    // az-fullscreen-open toggle depend on the same two real measurements (viewport
+    // size, cookie banner height), so one function recomputes both from live
+    // numbers on every trigger instead of each keeping its own stale assumption.
+    const FULLSCREEN_MIN_HEIGHT_PX = 420;
+    const LAUNCHER_BOTTOM_OFFSET_PX = 24 + 60; // matches .az-panel's bottom: calc(24px + 60px + ...)
+    const PANEL_TOP_MARGIN_PX = 16;
+
+    function getCookieBannerHeightPx(): number {
+      const banner = document.getElementById('cookie-consent') as HTMLElement | null;
+      if (!banner || banner.hidden) return 0;
+      return banner.offsetHeight;
+    }
+    function getCookieLiftPx(): number {
+      const bannerHeightPx = getCookieBannerHeightPx();
+      return bannerHeightPx ? bannerHeightPx + 12 : 0;
+    }
+    function isFullscreenLayout(cookieLiftPx: number): boolean {
+      if (window.innerWidth < MOBILE_BREAKPOINT) return true;
+      const availableHeight = window.innerHeight - LAUNCHER_BOTTOM_OFFSET_PX - cookieLiftPx - PANEL_TOP_MARGIN_PX;
+      return availableHeight < FULLSCREEN_MIN_HEIGHT_PX;
+    }
+    function syncLayoutState() {
+      const cookieLiftPx = getCookieLiftPx();
+      document.documentElement.style.setProperty('--az-cookie-lift', cookieLiftPx + 'px');
+      document.documentElement.style.setProperty('--az-cookie-banner-h', getCookieBannerHeightPx() + 'px');
+      const fullscreen = isFullscreenLayout(cookieLiftPx);
+      panel.classList.toggle('az-fullscreen', fullscreen);
+      // #gt_float_wrapper is GTranslate's own element, outside #az-widget, hidden via
+      // the html.az-fullscreen-open rule (see the <style> block) rather than JS
+      // save/restore of its inline style.
+      document.documentElement.classList.toggle('az-fullscreen-open', fullscreen && !panel.hidden);
+    }
+    (function setupBannerObserver() {
+      const banner = document.getElementById('cookie-consent');
+      syncLayoutState();
+      if (!banner) return;
+      new MutationObserver(syncLayoutState).observe(banner, { attributes: true, attributeFilter: ['hidden'] });
+      if (typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(syncLayoutState).observe(banner);
+      } else {
+        window.addEventListener('resize', syncLayoutState);
+      }
+    })();
+    window.addEventListener('resize', syncLayoutState);
+
+    // ---- rendering ----
+    // Error replies carry a markdown trial link (spec R8: "each with the trial
+    // link"), so they go through the same safe renderer as a normal reply, not a
+    // plain-text escape — otherwise "[start a free trial](...)" would show as
+    // literal text instead of a clickable link.
+    const ERROR_ICON =
+      '<svg class="az-error-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+    function errorHtml(text: string): string {
+      const body = renderSafeMarkdown(text).replace(/^<p>/, '').replace(/<\/p>$/, '');
+      return ERROR_ICON + '<span>' + body + '</span>';
+    }
+
+    function appendUserMessage(text: string) {
+      const wrap = document.createElement('div');
+      wrap.className = 'az-msg az-msg-user';
+      const bubble = document.createElement('div');
+      bubble.className = 'az-bubble';
+      bubble.textContent = text; // raw text, never HTML — matches UserMessage.tsx
+      wrap.appendChild(bubble);
+      messagesEl.appendChild(wrap);
+    }
+
+    function appendAssistantMessage(html: string, isError: boolean): HTMLDivElement {
+      const wrap = document.createElement('div');
+      wrap.className = 'az-msg az-msg-agent' + (isError ? ' az-msg-error' : '');
+      const content = document.createElement('div');
+      content.className = 'az-agent-content';
+      content.innerHTML = html;
+      wrap.appendChild(content);
+      messagesEl.appendChild(wrap);
+      return content;
+    }
+
+    const dotsHtml = '<span class="az-dots"><span></span><span></span><span></span></span>';
+
+    const PARTIAL_NOTE = '<p class="az-partial-note">This reply was cut off. Ask again to get the full answer.</p>';
+
+    function renderTranscript() {
+      messagesEl.innerHTML = '';
+      for (const msg of state.messages) {
+        if (msg.role === 'user') {
+          appendUserMessage(msg.text);
+        } else if (msg.error) {
+          // Partial text that streamed in before the failure (if any), kept alongside
+          // the error instead of being replaced by it.
+          const partial = msg.text ? renderSafeMarkdown(msg.text) : '';
+          appendAssistantMessage(partial + errorHtml(msg.errorText ?? msg.text), true);
+        } else {
+          // The empty-trailing-message case was already dropped on load, so any
+          // remaining `partial: true` message here streamed at least some text before
+          // the page was closed — show it plus a cut-off note, never typing dots.
+          const note = msg.partial && msg.text ? PARTIAL_NOTE : '';
+          appendAssistantMessage(renderSafeMarkdown(msg.text) + note, false);
+        }
+      }
+    }
+
+    function showEmpty() {
+      emptyEl.hidden = false;
+      messagesEl.hidden = true;
+    }
+    function showMessages() {
+      emptyEl.hidden = true;
+      messagesEl.hidden = false;
+    }
+    function scrollToBottom() {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    if (state.messages.length > 0) {
+      renderTranscript();
+      showMessages();
+    } else {
+      showEmpty();
+    }
+
+    // ---- composer ----
+    function autoGrow() {
+      input.style.height = 'auto';
+      if (input.scrollHeight === 0) return; // detached/hidden subtree — see Composer.tsx
+      input.style.height = Math.min(input.scrollHeight, MAX_ROWS * LINE_HEIGHT_PX + VERTICAL_PADDING_PX) + 'px';
+    }
+    function updateSendState() {
+      sendBtn.disabled = isStreaming || input.value.trim().length === 0;
+    }
+    function setStreaming(streaming: boolean) {
+      isStreaming = streaming;
+      updateSendState();
+      document.querySelectorAll<HTMLButtonElement>('#az-widget .az-suggestion').forEach((b) => {
+        b.disabled = streaming;
+      });
+      // Observable hook for tests/automation: the dots placeholder disappears on the
+      // first chunk, well before the turn actually finishes, so anything that needs
+      // to know "the reply is fully in" (not just "started") should read this instead.
+      root!.dataset.azStreaming = streaming ? '1' : '0';
+    }
+
+    input.addEventListener('input', () => {
+      if (input.value.length > MAX_MESSAGE_CHARS) input.value = input.value.slice(0, MAX_MESSAGE_CHARS);
+      autoGrow();
+      updateSendState();
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        void sendMessage(input.value);
+      }
+    });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      void sendMessage(input.value);
+    });
+
+    // Friendly copy for a failed turn (spec R8: "reuse B1's copy for consistency").
+    // Rendered as markdown so the trial link opens in a new tab through the same
+    // safe renderer.
+    //
+    // 429s are usually the burst/hourly rate limit rather than a hard daily cap, and
+    // a 503 can be an outage rather than a capacity issue, so when the server sent
+    // its own detail message, show that instead of assuming which limit was hit.
+    function errorReply(result: Extract<AskZicyResult, { ok: false }>): string {
+      const trial = `[start a free trial](${TRIAL_URL})`;
+      if (result.kind === 'visitor' || result.kind === 'global') {
+        const detail = result.detail;
+        if (typeof detail === 'string' && detail.trim() && detail.length <= 300) {
+          let text = detail.trim();
+          if (text.indexOf('app.zicy.com/register') === -1) text += ` Or ${trial} to keep going.`;
+          return text;
+        }
+        if (result.kind === 'visitor') return `You've sent a lot of messages. Please wait a little, or ${trial} to keep going.`;
+        return `Ask Zicy is very busy right now. Please try again later, or ${trial} to use Zicy today.`;
+      }
+      return `Sorry, something went wrong on our side. Please try again in a moment, or ${trial} to explore Zicy.`;
+    }
+
+    async function sendMessage(raw: string) {
+      if (isStreaming) return;
+      const text = raw.trim().slice(0, MAX_MESSAGE_CHARS).trim();
+      if (!text) return;
+
+      const myGen = generation;
+      showMessages();
+      appendUserMessage(text);
+      state.messages.push({ role: 'user', text });
+      persist();
+      input.value = '';
+      autoGrow();
+      track('ask_zicy_message', { page: window.location.pathname });
+
+      setStreaming(true);
+      const content = appendAssistantMessage(dotsHtml, false);
+      // `partial: true` marks this as still-streaming; cleared below on completion
+      // (success replaces it outright, error keeps it off the new message object).
+      // If the page is closed/navigated away before either happens, this is what's
+      // left in storage for the next load to detect (see renderTranscript).
+      state.messages.push({ role: 'assistant', text: '', partial: true });
+      const idx = state.messages.length - 1;
+      persist();
+      scrollToBottom();
+
+      const controller = new AbortController();
+      activeController = controller;
+      const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+      const result = await streamAskZicy({
+        apiBase,
+        message: text,
+        sessionId: state.sessionId,
+        signal: controller.signal,
+        onChunk: (_delta, full) => {
+          if (myGen !== generation) return;
+          content.innerHTML = full ? renderSafeMarkdown(full) : dotsHtml;
+          state.messages[idx].text = full;
+          persist();
+          scrollToBottom();
+        },
+      });
+      window.clearTimeout(timeoutId);
+      if (activeController === controller) activeController = null;
+
+      if (myGen !== generation) return; // conversation was reset mid-stream — drop this result
+
+      setStreaming(false);
+
+      if (result.ok) {
+        content.innerHTML = renderSafeMarkdown(result.text);
+        state.messages[idx] = { role: 'assistant', text: result.text };
+      } else {
+        if (result.kind === 'visitor' || result.kind === 'global') track('ask_zicy_limit', { kind: result.kind });
+        const errText = errorReply(result);
+        // Keep whatever text had already streamed in (state.messages[idx].text, kept
+        // up to date by onChunk above) and append the error after it, instead of
+        // replacing it — a burst limit or dropped connection can hit mid-reply.
+        const partial = state.messages[idx].text;
+        content.parentElement?.classList.add('az-msg-error');
+        content.innerHTML = (partial ? renderSafeMarkdown(partial) : '') + errorHtml(errText);
+        state.messages[idx] = { role: 'assistant', text: partial, error: true, errorText: errText };
+      }
+      persist();
+      scrollToBottom();
+    }
+
+    // ---- suggestions ----
+    document.querySelectorAll<HTMLButtonElement>('#az-widget .az-suggestion').forEach((btn) => {
+      btn.addEventListener('click', () => void sendMessage(btn.dataset.prompt ?? btn.textContent ?? ''));
+    });
+
+    // ---- trial link clicks anywhere in a reply (R12) ----
+    messagesEl.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement | null;
+      const link = target?.closest?.('a[href]') as HTMLAnchorElement | null;
+      if (link && link.getAttribute('href')?.indexOf(TRIAL_URL) === 0) {
+        track('ask_zicy_trial_click', { page: window.location.pathname });
+      }
+    });
+
+    // ---- open / close ----
+    // `userInitiated` is false only for the page-load restore of an already-open
+    // panel (see the bottom of this script) so that restore doesn't inflate
+    // ask_zicy_open — the event means "someone opened the widget", not "the panel is
+    // visible on this pageview".
+    function openPanel(focusInput: boolean, userInitiated = true) {
+      panel.hidden = false;
+      launcher.classList.add('az-hidden');
+      launcher.setAttribute('aria-expanded', 'true');
+      state.open = true;
+      persist();
+      syncLayoutState();
+      if (userInitiated) track('ask_zicy_open');
+      scrollToBottom();
+      if (focusInput) window.requestAnimationFrame(() => input.focus());
+    }
+    function closePanel() {
+      panel.hidden = true;
+      launcher.classList.remove('az-hidden');
+      launcher.setAttribute('aria-expanded', 'false');
+      state.open = false;
+      persist();
+      syncLayoutState();
+      launcher.focus();
+    }
+
+    launcher.addEventListener('click', () => openPanel(true));
+    closeBtn.addEventListener('click', closePanel);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) closePanel();
+    });
+
+    newChatBtn.addEventListener('click', () => {
+      generation++; // invalidate any in-flight turn from the old conversation
+      if (activeController) {
+        try {
+          activeController.abort();
+        } catch {
+          /* ignore */
+        }
+        activeController = null;
+      }
+      setStreaming(false);
+      state.sessionId = generateSessionId();
+      state.messages = [];
+      persist();
+      messagesEl.innerHTML = '';
+      showEmpty();
+      input.focus();
+    });
+
+    if (state.open) openPanel(false, false);
+  }
+</script>

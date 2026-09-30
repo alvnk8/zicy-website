@@ -12,7 +12,8 @@
     }
   ],
   "redirects": [
-    { "source": "/aeo-geo-consultant", "destination": "/consultant", "statusCode": 301 },
+    { "source": "/consultant", "destination": "/", "statusCode": 301 },
+    { "source": "/aeo-geo-consultant", "destination": "/", "statusCode": 301 },
     { "source": "/agency", "destination": "/solutions/agencies", "statusCode": 301 },
     { "source": "/join-list", "destination": "/pricing", "statusCode": 301 },
     { "source": "/book-a-demo", "destination": "/pricing", "statusCode": 301 },
@@ -42,8 +43,8 @@
 
     { "source": "/contact-us", "destination": "/contact", "statusCode": 301 },
 
-    { "source": "/audit", "destination": "/consultant", "statusCode": 301 },
-    { "source": "/seo-audit", "destination": "/consultant", "statusCode": 301 },
+    { "source": "/audit", "destination": "/free-diagnostic", "statusCode": 301 },
+    { "source": "/seo-audit", "destination": "/free-diagnostic", "statusCode": 301 },
 
     { "source": "/seo-pricing", "destination": "/pricing", "statusCode": 301 },
     { "source": "/seo-pricing-malaysia", "destination": "/pricing", "statusCode": 301 },
@@ -53,7 +54,7 @@
     { "source": "/white-label-seo-services", "destination": "/pricing", "statusCode": 301 },
 
     { "source": "/seo-malaysia", "destination": "/", "statusCode": 301 },
-    { "source": "/zicy", "destination": "/consultant", "statusCode": 301 },
+    { "source": "/zicy", "destination": "/", "statusCode": 301 },
 
     { "source": "/seo-case-study", "destination": "/case-studies", "statusCode": 301 },
     { "source": "/seo-case-study/:path*", "destination": "/case-studies", "statusCode": 301 },

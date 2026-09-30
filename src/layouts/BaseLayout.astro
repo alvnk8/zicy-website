@@ -13,6 +13,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Schema from '../components/Schema.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import AskZicyWidget from '../components/AskZicyWidget.astro';
 import { SITE } from '../data/site';
 import { ogImageMeta } from '../data/og-pages';
 import Analytics from '@vercel/analytics/astro';
@@ -124,6 +125,7 @@ const ogImg = ogImage
     </main>
     <Footer />
     <CookieConsent />
+    <AskZicyWidget />
     <div class="gtranslate_wrapper"></div>
     <script is:inline>
       window.gtranslateSettings = {

@@ -56,6 +56,7 @@ Which confirms: **Firebase Authentication** for sign-in, **Stripe** for payments
 | Name | Provider | Category | Purpose | Lifetime | Provenance |
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | `zicy-consent` | Zicy, first party, localStorage | Strictly necessary | Stores your cookie choice so the banner does not ask again | Until you clear site data; browser storage has no expiry | Observed |
+| `zicy_ask_session` | Zicy, first party, sessionStorage | Strictly necessary | Holds the Ask Zicy chat session ID and the current conversation, so the chat keeps its history as you move between pages on www.zicy.com | Until you close the tab; sessionStorage is cleared automatically then | Added with the site-wide Ask Zicy widget (public-ask-zicy B2), not from the 6 August 2026 inspection pass |
 | `currentToken` | Zicy, first party | Strictly necessary | Keeps you signed in to the Zicy app | Until you sign out or the session expires | Observed, described not measured |
 | `firebase:authUser` | Google Firebase, first party, localStorage | Strictly necessary | Holds your sign-in session for the Zicy app | Until you sign out | Observed, described not measured |
 | `__stripe_mid` | Stripe | Strictly necessary | Fraud prevention on payment pages | 1 year | Observed; lifetime vendor-published |

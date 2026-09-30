@@ -28,6 +28,5 @@ export const SOLUTIONS = [
 
 export const FREE_TOOLS = [
   { label: 'Free AI reality score', href: '/free-diagnostic' },
-  { label: 'AEO/GEO Consultant', href: '/consultant' },
   { label: 'Chrome extension', href: '/chrome-extension' },
 ] as const;
