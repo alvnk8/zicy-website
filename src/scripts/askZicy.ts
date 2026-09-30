@@ -2,7 +2,8 @@
 // site-wide widget. No dependencies.
 //
 // Backend contract (spec R2/R3): POST {apiBase}/public-chat/stream with
-// {message, sessionId}. The response is SSE; each event's data is JSON:
+// {message, sessionId} plus an optional page: {path, title} (the address and title
+// of the page the visitor is on, capped at 200/150 chars). The response is SSE; each event's data is JSON:
 //   {"type":"content","content":"<delta>"}  one per token
 //   {"type":"done"}                          exactly once at the end
 //   {"type":"error","message":"<friendly>"}  on a fatal failure, then close
@@ -35,6 +36,7 @@ export interface StreamAskZicyOptions {
   apiBase: string;
   message: string;
   sessionId: string;
+  page?: { path: string; title: string };
   onChunk?: (delta: string, fullText: string) => void;
   signal?: AbortSignal;
 }
@@ -57,6 +59,7 @@ export async function streamAskZicy({
   apiBase,
   message,
   sessionId,
+  page,
   onChunk,
   signal,
 }: StreamAskZicyOptions): Promise<AskZicyResult> {
@@ -70,7 +73,11 @@ export async function streamAskZicy({
     response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
-      body: JSON.stringify({ message, sessionId }),
+      body: JSON.stringify(
+        page
+          ? { message, sessionId, page: { path: page.path.slice(0, 200), title: page.title.slice(0, 150) } }
+          : { message, sessionId }
+      ),
       signal,
     });
   } catch (err) {
@@ -235,7 +242,19 @@ function safeHref(escapedUrl: string): string | null {
   return escapeHtml(raw);
 }
 
+// Links to our own marketing site (https, exact host) open in the same tab so a
+// guided click keeps the visitor in one tab; everything else opens a new one.
+function isSiteLink(escapedHref: string): boolean {
+  try {
+    const u = new URL(unescapeHtml(escapedHref));
+    return u.protocol === 'https:' && (u.hostname === 'www.zicy.com' || u.hostname === 'zicy.com');
+  } catch {
+    return false;
+  }
+}
+
 function anchor(href: string, label: string): string {
+  if (isSiteLink(href)) return `<a href="${href}">${label}</a>`;
   return `<a href="${href}" target="_blank" rel="noopener">${label}</a>`;
 }
 

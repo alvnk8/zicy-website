@@ -20,8 +20,11 @@
 //   !xss-js    -> a markdown link with a javascript: URL
 //   !xss-attr  -> a markdown link whose URL breaks out of its href attribute
 //   !xss-img   -> a raw <img onerror=...> tag
+//   !link      -> a reply with a link to https://www.zicy.com/case-studies (same tab)
+//                 and one to https://app.zicy.com/register (new tab)
 //   !json      -> a non-SSE whole-JSON {"message": "..."} fallback response
-//   (default)  -> a normal markdown reply with bold, a list and a link
+//   (default)  -> a normal markdown reply with bold, a list and a link; when the
+//                 request carries a page, ends with "You are on `<path>`."
 //
 // Everything else about the request (headers, method) is ignored; this is a test
 // double, not a faithful reimplementation of the real endpoint's limits or agent.
@@ -111,6 +114,8 @@ async function handleStream(req, res, body) {
     await streamDeltas(res, '## Title\n\nBody text that follows a markdown heading.');
   } else if (message.includes('!hr')) {
     await streamDeltas(res, 'Some intro text.\n\n---\n\nText after the horizontal rule.');
+  } else if (message.includes('!link')) {
+    await streamDeltas(res, 'Same tab: [case studies](https://www.zicy.com/case-studies). New tab: [register](https://app.zicy.com/register).');
   } else if (message.includes('!xss-js')) {
     await streamDeltas(res, '[x](javascript:alert(1))');
   } else if (message.includes('!xss-attr')) {
@@ -124,7 +129,8 @@ async function handleStream(req, res, body) {
         '- Seats and brands depend on your plan\n' +
         '- Pricing is on our [pricing page](https://www.zicy.com/pricing)\n' +
         '- The 7 day free trial needs no credit card\n\n' +
-        'Start the [free trial](https://app.zicy.com/register) whenever you are ready.'
+        'Start the [free trial](https://app.zicy.com/register) whenever you are ready.' +
+        (typeof body.page?.path === 'string' ? `\n\nYou are on \`${body.page.path}\`.` : '')
     );
   }
 

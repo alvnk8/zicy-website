@@ -1110,6 +1110,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         apiBase,
         message: text,
         sessionId: state.sessionId,
+        page: { path: location.pathname, title: document.title },
         signal: controller.signal,
         onChunk: (_delta, full) => {
           if (myGen !== generation) return;
