@@ -3,7 +3,7 @@
 // Mirrors the in-app Ask Zicy (zicy-dashboard/src/chatbot/ui/) in layout, sizes and
 // behaviour, rebuilt in plain JS since the site has no React:
 //   - ChatLauncher.tsx:48        -> .az-launcher (48px pill, 24px from the corner,
-//                                    widens to 136px on hover, same bolt/zap icon)
+//                                    widens to 114px on hover, same bolt/zap icon)
 //   - ChatShell.tsx panel layout -> .az-panel (floating panel sized like the docked
 //                                    default width, 400px; the site has no reserved
 //                                    layout column to dock into like the app does, so
@@ -35,6 +35,31 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     </span>
     <span class="az-launcher-label">Ask Zicy</span>
   </button>
+  <!-- Unread dot. A sibling of the launcher, not a child: the launcher is overflow: hidden
+       (needed for the hover label clip), which would cut off a dot poking past its edge. -->
+  <span id="az-launcher-dot" class="az-launcher-dot" aria-hidden="true" hidden></span>
+
+  <!-- Proactive teaser (Intercom/Drift-style preview). Hidden until the script decides
+       to show it. No live region: it appears unprompted, so announcing it would
+       interrupt screen reader users mid-task; it is reachable in tab order instead. -->
+  <div id="az-teaser" class="az-teaser" hidden>
+    <div class="az-teaser-head">
+      <div class="az-teaser-title">
+        <span class="az-badge" aria-hidden="true">
+          <img src="/images/icons/zicy-thunder.png" width="10" height="19" alt="" aria-hidden="true" class="az-thunder-icon" />
+        </span>
+        <span>Zicy</span>
+      </div>
+      <button id="az-teaser-close" class="az-icon-btn az-teaser-close" type="button" aria-label="Dismiss">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <button id="az-teaser-msg" class="az-teaser-msg" type="button" aria-label="Open Ask Zicy chat">Hi, I'm Zicy. Want to know what AI says about your brand? Ask me anything.</button>
+    <div class="az-teaser-chips">
+      <button type="button" class="az-chip" data-prompt="What does Zicy cost?">What does Zicy cost?</button>
+      <button type="button" class="az-chip" data-prompt="Why isn't my brand in ChatGPT?">Why isn't my brand in ChatGPT?</button>
+    </div>
+  </div>
 
   <div id="az-panel" class="az-panel" role="dialog" aria-label="Ask Zicy" hidden>
     <header class="az-header">
@@ -79,11 +104,16 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
 <style is:global>
   #az-widget {
-    --az-accent: #83c9eb;
-    --az-accent-2: #3e8fc2;
-    --az-accent-text: #1f6d8c;
-    --az-accent-weak: #eaf5fc;
-    --az-on-accent: #12333f;
+    /* Accent follows the site's violet palette (theme.css --violet, --violet-700,
+       --violet-100) rather than the dashboard's sky accent, so the widget matches the
+       site's buttons and links. Copied as literals, not var()s, to keep the widget's
+       tokens self-contained (see the header comment). */
+    --az-accent: #6e63ac;
+    --az-accent-hover: #4b4375;
+    --az-accent-2: #6e63ac;
+    --az-accent-text: #4b4375;
+    --az-accent-weak: #e5e3f0;
+    --az-on-accent: #ffffff;
     --az-r-xs: 6px;
     --az-r-sm: 8px;
     --az-r-md: 10px;
@@ -106,8 +136,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     --az-focus: #6e63ac;
     /* Same bolt PNG as the dashboard's ThunderIcon (thunder-icon.tsx), recoloured with
        a filter since it's a flat asset rather than an SVG that could take
-       currentColor. Matches the dashboard's light-theme --chat-bolt-filter: on the
-       accent it reads white (the widget is light-only, no dark variant). */
+       currentColor. White on the violet accent, matching the white launcher label
+       (the widget is light-only, no dark variant). */
     --az-bolt-filter: brightness(0) invert(1);
     font-family: 'Inter Tight', system-ui, sans-serif;
   }
@@ -128,19 +158,29 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     gap: 8px;
     height: 48px;
     width: 48px;
-    padding: 0 14px;
+    /* 12px each side leaves a 24px content box, exactly the icon wrapper, so the bolt
+       sits centred while collapsed. */
+    padding: 0 12px;
     overflow: hidden;
+    /* <button>s don't inherit font-family, so without this the label renders in the
+       UA font instead of #az-widget's Inter Tight. */
+    font-family: inherit;
     border: none;
     border-radius: var(--az-r-pill);
     background: var(--az-accent);
     color: var(--az-on-accent);
     box-shadow: var(--az-shadow);
     cursor: pointer;
-    transition: width var(--az-dur) var(--az-ease), bottom var(--az-dur) var(--az-ease);
+    transition: width var(--az-dur) var(--az-ease), bottom var(--az-dur) var(--az-ease),
+      background var(--az-dur) var(--az-ease), box-shadow var(--az-dur) var(--az-ease);
   }
+  /* 12px padding + 24px icon + 8px gap + ~49px label + ~21px trailing, measured so
+     the space after the label matches the space before the bolt glyph. */
   #az-widget .az-launcher:hover,
   #az-widget .az-launcher:focus-visible {
-    width: 136px;
+    width: 114px;
+    background: var(--az-accent-hover);
+    box-shadow: var(--az-shadow-lg);
   }
   #az-widget .az-launcher.az-hidden {
     display: none;
@@ -178,6 +218,112 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     opacity: 1;
   }
 
+
+  /* Unread dot, top-right of the 48px launcher circle. The launcher widens leftwards
+     on hover (right-anchored), so this corner never moves. Sits above the launcher
+     (250) and ignores pointer events so the launcher stays fully clickable. */
+  #az-widget .az-launcher-dot {
+    position: fixed;
+    right: 22px;
+    bottom: calc(24px + 48px - 8px + var(--az-cookie-lift, 0px));
+    z-index: 251;
+    width: 10px;
+    height: 10px;
+    box-sizing: content-box;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background: var(--az-flag);
+    pointer-events: none;
+    transition: bottom var(--az-dur) var(--az-ease);
+  }
+  #az-widget .az-launcher-dot[hidden] {
+    display: none;
+  }
+
+  /* Teaser card: fixed above the launcher (48px + 12px gap), right-aligned with it,
+     and lifted by the cookie banner the same way the launcher is. */
+  #az-widget .az-teaser {
+    position: fixed;
+    right: 24px;
+    bottom: calc(24px + 48px + 12px + var(--az-cookie-lift, 0px));
+    z-index: 250;
+    width: 300px;
+    max-width: calc(100vw - 48px);
+    padding: 12px;
+    background: var(--az-surface);
+    border: 1px solid var(--az-line);
+    border-radius: var(--az-r-lg);
+    box-shadow: var(--az-shadow-lg);
+    animation: az-teaser-in var(--az-dur) var(--az-ease);
+    transition: bottom var(--az-dur) var(--az-ease);
+  }
+  #az-widget .az-teaser[hidden] {
+    display: none;
+  }
+  @keyframes az-teaser-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  #az-widget .az-teaser-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  #az-widget .az-teaser-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--az-ink);
+  }
+  #az-widget .az-teaser-close {
+    width: 24px;
+    height: 24px;
+    margin: -2px -4px 0 0;
+  }
+  #az-widget .az-teaser-msg {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+    color: var(--az-ink);
+    cursor: pointer;
+  }
+  #az-widget .az-teaser-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  #az-widget .az-chip {
+    padding: 6px 12px;
+    border: none;
+    border-radius: var(--az-r-pill);
+    background: var(--az-accent-weak);
+    color: var(--az-accent-text);
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: background var(--az-dur) var(--az-ease);
+  }
+  #az-widget .az-chip:hover {
+    background: #d6d2e8;
+  }
+
   #az-widget .az-panel {
     position: fixed;
     right: 24px;
@@ -189,11 +335,11 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
        gap + 60px launcher clearance + cookie lift) minus a 16px top margin, capped at
        640px. Overlapping the site header is acceptable for a floating dialog, so
        there's no separate top-anchored term — this only has to keep the panel from
-       extending above the viewport. dvh is the real measurement on mobile browser
+       extending above the viewport (on short viewports .az-compact below takes over). dvh is the real measurement on mobile browser
        chrome; vh is declared first as the fallback for browsers without dvh support
        (an unsupported value leaves the prior declaration in place). The script below
-       measures the same viewport/lift figures to decide when this would be too small
-       to use and switches to .az-fullscreen instead (see that rule). */
+       measures the same viewport/lift figures to decide when this would be too short
+       and switches to .az-compact instead (see that rule). */
     height: min(640px, calc(100vh - 24px - 60px - var(--az-cookie-lift, 0px) - 16px));
     height: min(640px, calc(100dvh - 24px - 60px - var(--az-cookie-lift, 0px) - 16px));
     display: flex;
@@ -205,10 +351,18 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     overflow: hidden;
     transition: bottom var(--az-dur) var(--az-ease);
   }
-  /* Set by the script (syncLayoutState) whenever the floating layout above wouldn't
-     fit: viewport width under 560px, or the available height it computes drops under
-     420px. Reused as-is for both cases per the fix-round-1 decision, instead of a
-     separate rule per trigger. Declared before the [hidden] rule below so, on the
+  /* Short desktop viewport (script: available height under 420px, e.g. a laptop with
+     the cookie banner showing): keep the right-docked 400px panel but stretch it
+     between the top margin and the banner. The launcher is hidden while the panel is
+     open, so the 60px launcher clearance isn't needed. Mutually exclusive with
+     .az-fullscreen (the script never sets both). */
+  #az-widget .az-panel.az-compact {
+    top: 16px;
+    bottom: calc(var(--az-cookie-banner-h, 0px) + 16px);
+    height: auto;
+  }
+  /* Set by the script (syncLayoutState) only when the viewport width is under 560px.
+     Declared before the [hidden] rule below so, on the
      specificity tie between "#az-widget .az-panel.az-fullscreen" and
      "#az-widget .az-panel[hidden]", [hidden] always wins if the class is ever left
      on a closed panel.
@@ -272,6 +426,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     justify-content: center;
     width: 32px;
     height: 32px;
+    font-family: inherit;
     border: none;
     background: transparent;
     border-radius: var(--az-r-sm);
@@ -285,8 +440,9 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   #az-widget .az-icon-btn:focus-visible,
   #az-widget .az-launcher:focus-visible,
   #az-widget .az-suggestion:focus-visible,
-  #az-widget .az-send:focus-visible,
-  #az-widget .az-input:focus-visible {
+  #az-widget .az-teaser-msg:focus-visible,
+  #az-widget .az-chip:focus-visible,
+  #az-widget .az-send:focus-visible {
     outline: 2px solid var(--az-focus);
     outline-offset: 2px;
   }
@@ -422,7 +578,9 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     color: var(--az-ink-3);
     font-size: 12px;
   }
-  #az-widget .az-msg-error .az-agent-content {
+  /* The error is its own block inside .az-agent-content so any partial reply text
+     above it renders as normal text instead of a second flex column. */
+  #az-widget .az-error {
     display: flex;
     gap: 8px;
     align-items: flex-start;
@@ -431,7 +589,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     background: var(--az-flag-bg);
     color: var(--az-flag-text);
   }
-  #az-widget .az-msg-error .az-agent-content p {
+  #az-widget .az-agent-content > * + .az-error {
+    margin-top: 8px;
+  }
+  #az-widget .az-error p {
     margin: 0;
   }
   #az-widget .az-error-icon {
@@ -498,6 +659,13 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     padding: 6px 0;
     max-height: 128px;
   }
+  /* iOS Safari zooms the page on focusing any input under 16px; the 560px matches
+     MOBILE_BREAKPOINT in the script. */
+  @media (max-width: 559.98px) {
+    #az-widget .az-input {
+      font-size: 16px;
+    }
+  }
   #az-widget .az-input::placeholder {
     color: var(--az-ink-3);
   }
@@ -505,6 +673,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     flex-shrink: 0;
     width: 32px;
     height: 32px;
+    font-family: inherit;
     border-radius: 50%;
     border: none;
     cursor: pointer;
@@ -529,8 +698,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   /* #gt_float_wrapper is GTranslate's own floating widget, injected outside
      #az-widget, so it can't be reached by a #az-widget-scoped rule — this is the one
      deliberate exception to that scoping. The script toggles this class on <html>
-     whenever the panel is open in full-screen mode (mobile width or the height
-     floor), so GTranslate's launcher doesn't sit on top of / under the panel. */
+     whenever the panel is open in full-screen mode (viewport under 560px wide),
+     so GTranslate's launcher doesn't sit on top of / under the panel. */
   html.az-fullscreen-open #gt_float_wrapper {
     display: none !important;
   }
@@ -544,6 +713,9 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   }
 
   @media (prefers-reduced-motion: reduce) {
+    #az-widget .az-teaser {
+      animation: none;
+    }
     #az-widget * {
       transition-duration: 0.01ms !important;
       animation-duration: 0.01ms !important;
@@ -557,6 +729,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   const TRIAL_URL = 'https://app.zicy.com/register';
   const MAX_MESSAGE_CHARS = 500;
   const STORAGE_KEY = 'zicy_ask_session';
+  const TEASER_KEY = 'zicy_ask_teaser_dismissed';
+  const TEASER_DELAY_MS = 4000;
   const MOBILE_BREAKPOINT = 560;
   const MAX_ROWS = 6;
   const LINE_HEIGHT_PX = 20;
@@ -594,6 +768,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     const form = document.getElementById('az-composer') as HTMLFormElement;
     const input = document.getElementById('az-input') as HTMLTextAreaElement;
     const sendBtn = document.getElementById('az-send') as HTMLButtonElement;
+    const teaser = document.getElementById('az-teaser') as HTMLDivElement;
+    const teaserDot = document.getElementById('az-launcher-dot') as HTMLSpanElement;
+    const teaserMsg = document.getElementById('az-teaser-msg') as HTMLButtonElement;
+    const teaserClose = document.getElementById('az-teaser-close') as HTMLButtonElement;
 
     let isStreaming = false;
     // Bumped on "new chat" so a reply still streaming from the previous conversation
@@ -660,11 +838,56 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     }
     persist();
 
-    // ---- cookie banner lift + full-screen floor (R8, fix-round-1) ----
+    // ---- proactive teaser ----
+    // Declared before syncLayoutState's first call below, which retries the teaser
+    // whenever the cookie banner changes.
+    let teaserDue = false; // the 4s delay has elapsed; show as soon as conditions allow
+    let teaserShown = false; // shown (or ruled out) this page view; never re-arms
+
+    function teaserDismissedThisSession(): boolean {
+      try {
+        return sessionStorage.getItem(TEASER_KEY) === '1';
+      } catch {
+        return false; // storage unavailable: worst case it re-shows next page
+      }
+    }
+    function markTeaserDismissed() {
+      try {
+        sessionStorage.setItem(TEASER_KEY, '1');
+      } catch {
+        /* ignore — private mode / storage full */
+      }
+    }
+    function hideTeaser() {
+      teaser.hidden = true;
+      teaserDot.hidden = true;
+    }
+    // If the cookie banner is up when the delay elapses this waits (teaserDue stays
+    // true) and syncLayoutState calls it again once the banner's hidden attribute
+    // flips, rather than stacking the teaser on the banner or skipping the page view.
+    function maybeShowTeaser() {
+      if (!teaserDue || teaserShown) return;
+      if (!panel.hidden || state.messages.length > 0 || teaserDismissedThisSession()) {
+        teaserShown = true; // ruled out for this page view
+        return;
+      }
+      if (getCookieBannerHeightPx() > 0) return;
+      teaserShown = true;
+      teaser.hidden = false;
+      teaserDot.hidden = false;
+      track('ask_zicy_teaser_shown', { page: window.location.pathname });
+    }
+    window.setTimeout(() => {
+      teaserDue = true;
+      maybeShowTeaser();
+    }, TEASER_DELAY_MS);
+
+    // ---- cookie banner lift + layout modes (R8, fix-round-1) ----
     // Both the launcher/panel's --az-cookie-lift offset and the .az-fullscreen /
-    // az-fullscreen-open toggle depend on the same two real measurements (viewport
-    // size, cookie banner height), so one function recomputes both from live
-    // numbers on every trigger instead of each keeping its own stale assumption.
+    // .az-compact / az-fullscreen-open toggles depend on the same two real
+    // measurements (viewport size, cookie banner height), so one function recomputes
+    // them from live numbers on every trigger instead of each keeping its own stale
+    // assumption.
     const FULLSCREEN_MIN_HEIGHT_PX = 420;
     const LAUNCHER_BOTTOM_OFFSET_PX = 24 + 60; // matches .az-panel's bottom: calc(24px + 60px + ...)
     const PANEL_TOP_MARGIN_PX = 16;
@@ -678,8 +901,12 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       const bannerHeightPx = getCookieBannerHeightPx();
       return bannerHeightPx ? bannerHeightPx + 12 : 0;
     }
-    function isFullscreenLayout(cookieLiftPx: number): boolean {
-      if (window.innerWidth < MOBILE_BREAKPOINT) return true;
+    // Full screen is width-only. A short but wide viewport (laptop + cookie banner)
+    // gets the compact right-docked panel instead, never a full-width one.
+    function isFullscreenLayout(): boolean {
+      return window.innerWidth < MOBILE_BREAKPOINT;
+    }
+    function isCompactLayout(cookieLiftPx: number): boolean {
       const availableHeight = window.innerHeight - LAUNCHER_BOTTOM_OFFSET_PX - cookieLiftPx - PANEL_TOP_MARGIN_PX;
       return availableHeight < FULLSCREEN_MIN_HEIGHT_PX;
     }
@@ -687,12 +914,14 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       const cookieLiftPx = getCookieLiftPx();
       document.documentElement.style.setProperty('--az-cookie-lift', cookieLiftPx + 'px');
       document.documentElement.style.setProperty('--az-cookie-banner-h', getCookieBannerHeightPx() + 'px');
-      const fullscreen = isFullscreenLayout(cookieLiftPx);
+      const fullscreen = isFullscreenLayout();
       panel.classList.toggle('az-fullscreen', fullscreen);
+      panel.classList.toggle('az-compact', !fullscreen && isCompactLayout(cookieLiftPx));
       // #gt_float_wrapper is GTranslate's own element, outside #az-widget, hidden via
       // the html.az-fullscreen-open rule (see the <style> block) rather than JS
       // save/restore of its inline style.
       document.documentElement.classList.toggle('az-fullscreen-open', fullscreen && !panel.hidden);
+      maybeShowTeaser();
     }
     (function setupBannerObserver() {
       const banner = document.getElementById('cookie-consent');
@@ -716,7 +945,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       '<svg class="az-error-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
     function errorHtml(text: string): string {
       const body = renderSafeMarkdown(text).replace(/^<p>/, '').replace(/<\/p>$/, '');
-      return ERROR_ICON + '<span>' + body + '</span>';
+      return '<div class="az-error">' + ERROR_ICON + '<span>' + body + '</span></div>';
     }
 
     function appendUserMessage(text: string) {
@@ -833,7 +1062,13 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         const detail = result.detail;
         if (typeof detail === 'string' && detail.trim() && detail.length <= 300) {
           let text = detail.trim();
-          if (text.indexOf('app.zicy.com/register') === -1) text += ` Or ${trial} to keep going.`;
+          if (text.indexOf('app.zicy.com/register') === -1) {
+            // A detail that already offers a free trial gets its own phrase turned into
+            // the link instead of a second offer appended (still plain markdown, so
+            // it goes through the safe renderer like everything else).
+            if (/free trial/i.test(text)) text = text.replace(/free trial/i, `[$&](${TRIAL_URL})`);
+            else text += ` Or ${trial} to keep going.`;
+          }
           return text;
         }
         if (result.kind === 'visitor') return `You've sent a lot of messages. Please wait a little, or ${trial} to keep going.`;
@@ -930,6 +1165,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     // visible on this pageview".
     function openPanel(focusInput: boolean, userInitiated = true) {
       panel.hidden = false;
+      // Any way of opening the panel retires the teaser for the session; the
+      // page-load restore of an already-open panel just hides it without the flag.
+      hideTeaser();
+      if (userInitiated) markTeaserDismissed();
       launcher.classList.add('az-hidden');
       launcher.setAttribute('aria-expanded', 'true');
       state.open = true;
@@ -950,6 +1189,22 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     }
 
     launcher.addEventListener('click', () => openPanel(true));
+    teaserMsg.addEventListener('click', () => {
+      track('ask_zicy_teaser_click', { source: 'message' });
+      openPanel(true);
+    });
+    teaser.querySelectorAll<HTMLButtonElement>('.az-chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        track('ask_zicy_teaser_click', { source: 'chip' });
+        openPanel(false);
+        void sendMessage(chip.dataset.prompt ?? chip.textContent ?? '');
+      });
+    });
+    teaserClose.addEventListener('click', () => {
+      hideTeaser();
+      markTeaserDismissed();
+      track('ask_zicy_teaser_dismiss');
+    });
     closeBtn.addEventListener('click', closePanel);
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !panel.hidden) closePanel();
