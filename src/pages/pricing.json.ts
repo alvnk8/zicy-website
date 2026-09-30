@@ -1,10 +1,10 @@
-// Machine-readable pricing feed, served at https://www.zicy.com/pricing.json.
+// Machine-readable pricing feed, published at https://www.zicy.com/pricing.json for other
+// consumers.
 //
-// Both Zicy chatbots read this file: the public Ask Zicy widget (site) and the in-app Ask Zicy,
-// each through a shared `get_pricing` tool (see specs/active/public-ask-zicy.md, R6). It is the
-// only source either bot uses for prices, plans, seats, trials or billing, so treat the shape as
-// an API contract: add fields, never rename or remove one, and only bump `version` on a breaking
-// change.
+// This is no longer the chatbots' pricing source: zicy-tools PR #1232 moved `get_pricing` to
+// render from the backend's own plan config instead. The shape should still stay
+// backwards-compatible for whoever else reads this feed: add fields, never rename or remove one,
+// and only bump `version` on a breaking change.
 //
 // Built entirely from src/data/pricing.ts, src/data/faqs.ts and (site URL only) src/data/site.ts,
 // the same data src/pages/pricing.astro and its components (TierCard.astro, AgencyBlock.astro,
