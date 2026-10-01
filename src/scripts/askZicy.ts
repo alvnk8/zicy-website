@@ -4,6 +4,7 @@
 // Backend contract (spec R2/R3): POST {apiBase}/public-chat/stream with
 // {message, sessionId} plus an optional page: {path, title} (the address and title
 // of the page the visitor is on, capped at 200/150 chars). The response is SSE; each event's data is JSON:
+//   {"type":"stage","label":"<text>"}        progress label while waiting (optional)
 //   {"type":"content","content":"<delta>"}  one per token
 //   {"type":"done"}                          exactly once at the end
 //   {"type":"error","message":"<friendly>"}  on a fatal failure, then close
@@ -37,6 +38,7 @@ export interface StreamAskZicyOptions {
   message: string;
   sessionId: string;
   page?: { path: string; title: string };
+  onStage?: (label: string) => void;
   onChunk?: (delta: string, fullText: string) => void;
   signal?: AbortSignal;
 }
@@ -60,6 +62,7 @@ export async function streamAskZicy({
   message,
   sessionId,
   page,
+  onStage,
   onChunk,
   signal,
 }: StreamAskZicyOptions): Promise<AskZicyResult> {
@@ -126,7 +129,7 @@ export async function streamAskZicy({
     if (dataLines.length === 0) return;
     const data = dataLines.join('\n');
     dataLines = [];
-    let evt: { type?: unknown; content?: unknown; message?: unknown };
+    let evt: { type?: unknown; content?: unknown; message?: unknown; label?: unknown };
     try {
       evt = JSON.parse(data);
     } catch {
@@ -134,6 +137,7 @@ export async function streamAskZicy({
     }
     if (!evt || typeof evt !== 'object') return;
     if (evt.type === 'content' && typeof evt.content === 'string') push(evt.content);
+    else if (evt.type === 'stage' && typeof evt.label === 'string' && evt.label.trim()) onStage?.(evt.label.trim());
     else if (evt.type === 'done') done = true;
     else if (evt.type === 'error') streamError = typeof evt.message === 'string' ? evt.message : '';
   };

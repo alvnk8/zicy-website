@@ -56,8 +56,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     </div>
     <button id="az-teaser-msg" class="az-teaser-msg" type="button" aria-label="Open Ask Zicy chat">Hi, I'm Zicy. Want to know what AI says about your brand? Ask me anything.</button>
     <div class="az-teaser-chips">
-      <button type="button" class="az-chip" data-prompt="What does Zicy cost?">What does Zicy cost?</button>
-      <button type="button" class="az-chip" data-prompt="Why isn't my brand in ChatGPT?">Why isn't my brand in ChatGPT?</button>
+      <button type="button" class="az-chip" data-prompt="Why isn't my brand showing up in ChatGPT?">Why isn't my brand showing up in ChatGPT?</button>
+      <button type="button" class="az-chip" data-prompt="What is AEO and do I need it?">What is AEO and do I need it?</button>
     </div>
   </div>
 
@@ -81,11 +81,11 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
     <div class="az-body">
       <div id="az-empty">
-        <p class="az-empty-title">Hi, I'm Zicy. Ask me about pricing, AI visibility or your brand.</p>
+        <p class="az-empty-title">Hi, I'm Zicy. Ask me about AI visibility, your brand or how Zicy works.</p>
         <div class="az-suggestions">
-          <button type="button" class="az-suggestion" data-prompt="What does Zicy cost?">What does Zicy cost?</button>
-          <button type="button" class="az-suggestion" data-prompt="Can I track multiple brands with multiple seats?">Can I track multiple brands with multiple seats?</button>
-          <button type="button" class="az-suggestion" data-prompt="Why isn't my brand in ChatGPT?">Why isn't my brand in ChatGPT?</button>
+          <button type="button" class="az-suggestion" data-prompt="Why isn't my brand showing up in ChatGPT?">Why isn't my brand showing up in ChatGPT?</button>
+          <button type="button" class="az-suggestion" data-prompt="What is AEO and do I need it?">What is AEO and do I need it?</button>
+          <button type="button" class="az-suggestion" data-prompt="How does Zicy track AI visibility?">How does Zicy track AI visibility?</button>
         </div>
       </div>
       <div id="az-messages" class="notranslate" aria-live="polite" aria-relevant="additions" hidden></div>
@@ -93,7 +93,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
     <form id="az-composer" class="az-composer">
       <div class="az-composer-inner">
-        <textarea id="az-input" class="az-input" rows="1" maxlength="500" placeholder="Ask about AI visibility, pricing or your brand..." aria-label="Message"></textarea>
+        <textarea id="az-input" class="az-input" rows="1" maxlength="500" placeholder="Ask about AI visibility or your brand..." aria-label="Message"></textarea>
         <button id="az-send" class="az-send" type="submit" aria-label="Send" disabled>
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
         </button>
@@ -618,6 +618,18 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   #az-widget .az-dots span:nth-child(3) {
     animation-delay: 0.3s;
   }
+  #az-widget .az-stage-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  #az-widget .az-stage {
+    font-size: 12px;
+    color: var(--az-ink-2);
+  }
+  #az-widget .az-stage:empty {
+    display: none;
+  }
   @keyframes az-pulse {
     0%,
     60%,
@@ -944,10 +956,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     window.addEventListener('resize', syncLayoutState);
 
     // ---- rendering ----
-    // Error replies carry a markdown trial link (spec R8: "each with the trial
-    // link"), so they go through the same safe renderer as a normal reply, not a
-    // plain-text escape — otherwise "[start a free trial](...)" would show as
-    // literal text instead of a clickable link.
+    // Error replies go through the same safe renderer as a normal reply.
     const ERROR_ICON =
       '<svg class="az-error-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
     function errorHtml(text: string): string {
@@ -977,6 +986,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     }
 
     const dotsHtml = '<span class="az-dots"><span></span><span></span><span></span></span>';
+    // Live turn only: dots plus a polite status line for the backend's stage labels.
+    const waitingHtml = '<span class="az-stage-wrap">' + dotsHtml + '<span class="az-stage" role="status" aria-live="polite"></span></span>';
 
     const PARTIAL_NOTE = '<p class="az-partial-note">This reply was cut off. Ask again to get the full answer.</p>';
 
@@ -1087,32 +1098,17 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       void sendMessage(input.value);
     });
 
-    // Friendly copy for a failed turn (spec R8: "reuse B1's copy for consistency").
-    // Rendered as markdown so the trial link opens in a new tab through the same
-    // safe renderer.
-    //
-    // 429s are usually the burst/hourly rate limit rather than a hard daily cap, and
-    // a 503 can be an outage rather than a capacity issue, so when the server sent
-    // its own detail message, show that instead of assuming which limit was hit.
+    // Plain, apologetic copy for a failed turn. When the server sent its own detail
+    // message for a 429/503 (burst limit vs daily cap vs outage), show that instead of
+    // guessing which limit was hit. No sign-up pitch in any of these.
     function errorReply(result: Extract<AskZicyResult, { ok: false }>): string {
-      const trial = `[start a free trial](${TRIAL_URL})`;
       if (result.kind === 'visitor' || result.kind === 'global') {
         const detail = result.detail;
-        if (typeof detail === 'string' && detail.trim() && detail.length <= 300) {
-          let text = detail.trim();
-          if (text.indexOf('app.zicy.com/register') === -1) {
-            // A detail that already offers a free trial gets its own phrase turned into
-            // the link instead of a second offer appended (still plain markdown, so
-            // it goes through the safe renderer like everything else).
-            if (/free trial/i.test(text)) text = text.replace(/free trial/i, `[$&](${TRIAL_URL})`);
-            else text += ` Or ${trial} to keep going.`;
-          }
-          return text;
-        }
-        if (result.kind === 'visitor') return `You've sent a lot of messages. Please wait a little, or ${trial} to keep going.`;
-        return `Ask Zicy is very busy right now. Please try again later, or ${trial} to use Zicy today.`;
+        if (typeof detail === 'string' && detail.trim() && detail.length <= 300) return detail.trim();
+        if (result.kind === 'visitor') return "Sorry, you've sent a lot of messages. Please wait a little and try again.";
+        return 'Sorry, Ask Zicy is very busy right now. Please try again in a little while.';
       }
-      return `Sorry, something went wrong on our side. Please try again in a moment, or ${trial} to explore Zicy.`;
+      return 'Sorry, something went wrong on our side. Please try again in a moment.';
     }
 
     async function sendMessage(raw: string) {
@@ -1130,7 +1126,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       track('ask_zicy_message', { page: window.location.pathname });
 
       setStreaming(true);
-      const content = appendAssistantMessage(dotsHtml, false);
+      const content = appendAssistantMessage(waitingHtml, false);
       followReplyEl = content.parentElement;
       // `partial: true` marks this as still-streaming; cleared below on completion
       // (success replaces it outright, error keeps it off the new message object).
@@ -1151,6 +1147,11 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         sessionId: state.sessionId,
         page: { path: location.pathname, title: document.title },
         signal: controller.signal,
+        onStage: (label) => {
+          if (myGen !== generation) return;
+          const el = content.querySelector('.az-stage');
+          if (el) el.textContent = label;
+        },
         onChunk: (_delta, full) => {
           if (myGen !== generation) return;
           content.innerHTML = full ? renderSafeMarkdown(full) : dotsHtml;

@@ -23,6 +23,8 @@
 //   !link      -> a reply with a link to https://www.zicy.com/case-studies (same tab)
 //                 and one to https://app.zicy.com/register (new tab)
 //   !json      -> a non-SSE whole-JSON {"message": "..."} fallback response
+// Every SSE reply starts with two stage events (start, then a tool label ~800 ms
+// later) before any content.
 //   (default)  -> a normal markdown reply with bold, a list and a link; when the
 //                 request carries a page, ends with "You are on `<path>`."
 //
@@ -94,7 +96,7 @@ async function handleStream(req, res, body) {
   const cors = corsHeaders(req);
 
   if (message.includes('!429')) {
-    return sendJson(res, 429, { detail: "Today's message limit has been reached. Start a free trial to keep going." }, cors);
+    return sendJson(res, 429, { detail: "Today's message limit has been reached. Please try again tomorrow." }, cors);
   }
   if (message.includes('!503')) {
     return sendJson(res, 503, { detail: "Ask Zicy is over capacity right now. Please try again shortly." }, cors);
@@ -104,6 +106,12 @@ async function handleStream(req, res, body) {
   }
 
   res.writeHead(200, { ...SSE_HEADERS, ...cors });
+
+  // Stage labels, like the real backend: one at the start, one per tool call.
+  res.write(`data: ${JSON.stringify({ type: 'stage', label: 'Thinking about your question' })}\n\n`);
+  await sleep(800);
+  res.write(`data: ${JSON.stringify({ type: 'stage', label: "Checking Zicy's documentation" })}\n\n`);
+  await sleep(800);
 
   if (message.includes('!error')) {
     await streamDeltas(res, 'Here is the start of an answer, then something goes wrong.');
