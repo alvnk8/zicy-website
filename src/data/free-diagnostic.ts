@@ -182,7 +182,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'How long does it take, what does it cost, and how often can I run it?',
-    a: 'About five minutes. It is free with no account or credit card. Each brand and domain can run one free audit every 30 days. Rerunning after you fix something shows you whether the engines picked up the change.',
+    a: 'About five minutes. It is free with no account or credit card. Each domain can run one free audit every 30 days. Rerunning after you fix something shows you whether the engines picked up the change.',
   },
   {
     q: 'Is this an AI brand monitoring or tracking tool?',
