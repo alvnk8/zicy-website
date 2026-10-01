@@ -8,7 +8,7 @@ import promptManager from '../assets/screenshots/platform-prompt-manager.png';
 import aiVisibility from '../assets/screenshots/platform-ai-visibility.png';
 import brandIntelligenceReport from '../assets/screenshots/platform-brand-intelligence.png';
 import citationOverview from '../assets/screenshots/platform-citation-analysis.png';
-import actionCenter from '../assets/screenshots/platform-action-center.png';
+import takeAction from '../assets/screenshots/platform-take-action.png';
 import siteTraffic from '../assets/screenshots/platform-site-traffic.png';
 // Hero screenshot — the prioritised fix backlog (diagnose to act) for demo brand "Cobalt".
 import heroActionPlan from '../assets/screenshots/platform-hero-action-plan.png';
@@ -44,7 +44,7 @@ const moduleGroups = [
   {
     stage: 'Act',
     modules: [
-      { name: 'Action Center', desc: 'The do-it-now toolbox: llms.txt and schema generators, content optimisation, and new citation-ready content.' },
+      { name: 'Take Action', desc: 'The do-it-now toolbox: llms.txt and schema generators, content optimisation, and new citation-ready content.' },
     ],
   },
   {
@@ -69,7 +69,7 @@ const MODULE_DOC: Record<string, string> = {
   'Citation Analysis': 'm-10-citation-analysis',
   'Site Audit': 'm-11-site-audit',
   'Visibility Gaps': 'm-12-visibility-gaps',
-  'Action Center': 'm-13-action-center',
+  'Take Action': 'm-22-content-studio',
   'Site Traffic': 'm-14-site-traffic',
 };
 
@@ -109,7 +109,7 @@ const faqs = [
   },
   {
     q: 'Does Zicy change my site, or only report on it?',
-    a: 'Zicy both reports and remediates. It measures and diagnoses, then the Action Center generates schema, llms.txt and citation-ready content so you can fix what it finds, without a hand-off to another tool.',
+    a: 'Zicy both reports and remediates. It measures and diagnoses, then the Take Action tools generate schema, llms.txt and citation-ready content so you can fix what it finds, without a hand-off to another tool.',
   },
   {
     q: 'How often does Zicy update?',
@@ -134,7 +134,7 @@ const faqPage = {
 const loop = [
   { k: '01 · Measure', name: 'AI Visibility', desc: 'The core scoreboard, brand mention coverage, citation rate, AI share of voice and average ranking, per engine, over time.' },
   { k: '02 · Diagnose', name: 'Brand Intelligence', desc: 'Perception, the AI Reality Score (fact-check / hallucination), the entity graph, and a prioritised action plan.' },
-  { k: '03 · Act', name: 'Action Center', desc: 'llms.txt and schema generators, content optimisation, and new citation-ready content.' },
+  { k: '03 · Act', name: 'Take Action', desc: 'llms.txt and schema generators, content optimisation, and new citation-ready content.' },
   { k: '04 · Prove', name: 'Site Traffic', desc: 'AI-referred sessions and downstream engagement from GA4 and Search Console, connected to the work.' },
 ];
 
@@ -267,9 +267,9 @@ const breadcrumb = {
           caption="Citation Analysis: narrative control, competitor share, and uncited rate."
         />
         <Screenshot
-          src={actionCenter}
-          alt="Zicy Action Center with the llms.txt generator, schema generator and content optimisation tools."
-          caption="Action Center: llms.txt + schema generators, content tooling."
+          src={takeAction}
+          alt="Zicy Content Studio in the Take Action section, listing optimised and generated content with Content Optimizer and New Content actions."
+          caption="Take Action: Content Studio, optimiser and generators."
         />
       </div>
     </div>
