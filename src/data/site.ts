@@ -27,6 +27,6 @@ export const SOLUTIONS = [
 ] as const;
 
 export const FREE_TOOLS = [
-  { label: 'Free AI reality score', href: '/free-diagnostic' },
+  { label: 'Free AI brand audit', href: '/ai-brand-audit' },
   { label: 'Chrome extension', href: '/chrome-extension' },
 ] as const;

@@ -401,7 +401,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'An AI answer states that a software company was founded in 2009 and offers a feature it has never built. Neither claim appears anywhere in the company’s published information. Both are hallucinations, distinct from an outdated claim such as citing a price the company charged last year.',
     related: ['entity-gap', 'ai-reality-score', 'ai-visibility', 'citation-coverage', 'aeo'],
     zicy:
-      'Zicy’s AI Reality Score flags hallucinations and outdated claims per engine before a buyer sees them. Read how it works on the <a href="/platform/ai-reality-score">AI Reality Score</a> page.',
+      'Zicy’s AI Reality Score flags hallucinations and outdated claims per engine before a buyer sees them. Read how it works on the <a href="/platform/ai-reality-score">AI Reality Score</a> page. Zicy\'s <a href="/ai-brand-audit">free AI brand audit</a> flags hallucinated facts by engine.',
     sameAs: 'https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)',
     faqs: [
       {

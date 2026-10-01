@@ -77,7 +77,7 @@ const pages: Record<string, OgPage> = {
     eyebrow: 'Free tools',
     title: 'See how AI reads your brand',
     description:
-      'Free ways to check your AI visibility: a free AI reality score and the Chrome extension.',
+      'Free ways to check your AI visibility: a free AI brand audit and the Chrome extension.',
     alt: 'Zicy · free tools',
   },
   'chrome-extension': {
@@ -86,12 +86,12 @@ const pages: Record<string, OgPage> = {
     description: 'An on-page AI-readiness check, a bot-access checker, and a one-click schema generator.',
     alt: 'Zicy · Chrome extension',
   },
-  'free-diagnostic': {
-    eyebrow: 'Free diagnostic',
-    title: 'See your free AI reality score',
+  'ai-brand-audit': {
+    eyebrow: 'Free AI brand audit',
+    title: 'See what AI gets wrong about your brand',
     description:
       'Enter your brand name and website to see how ChatGPT, Gemini, Google AI Overviews, and Google AI Mode describe you, checked against the facts.',
-    alt: 'Zicy · free diagnostic',
+    alt: 'Zicy · free AI brand audit',
   },
   resources: {
     eyebrow: 'Resources',

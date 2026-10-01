@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FreeDiagnostic from '../components/FreeDiagnostic.astro';
+import { ORG_ID } from '../lib/schema';
+import { SITE } from '../data/site';
+import { ENGINES_TEXT, ENGINE_COUNT_WORD, faqs, faqPlainText, buildDateIso } from '../data/free-diagnostic';
+
+const title = 'Free AI brand audit: see what AI gets wrong about your brand';
+const description =
+  `See what ${ENGINES_TEXT} say about your brand, checked against your website and scored. Free, no account.`;
+
+const url = `${SITE.url}/ai-brand-audit`;
+const toolId = `${url}#tool`;
+// Original publish date: first commit of this page (git history of the pre-rename file).
+const datePublished = '2026-07-09';
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Free tools', item: `${SITE.url}/free-tools` },
+    { '@type': 'ListItem', position: 3, name: 'AI brand audit', item: url },
+  ],
+};
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${url}#webpage`,
+      url,
+      name: title,
+      description: `Zicy's free AI brand audit checks what ${ENGINES_TEXT} say about a brand, compares it with the facts on the brand's website, and returns an AI Reality Score.`,
+      datePublished,
+      dateModified: buildDateIso,
+      inLanguage: 'en',
+      isPartOf: { '@id': `${SITE.url}/#site` },
+      publisher: { '@id': ORG_ID },
+      mainEntity: { '@id': toolId },
+      mentions: [{ '@id': `${SITE.url}/platform/ai-reality-score#article` }],
+    },
+    {
+      '@type': 'WebApplication',
+      '@id': toolId,
+      name: 'Zicy free AI brand audit',
+      alternateName: 'Free AI Reality Score check',
+      url,
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      browserRequirements: 'Requires JavaScript',
+      isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      provider: { '@id': ORG_ID },
+      isPartOf: { '@id': `${SITE.url}/#app` },
+      featureList: [
+        'AI Reality Score',
+        `Accuracy by engine for ${ENGINES_TEXT}`,
+        'Brand recognition check',
+        'Hallucination risk',
+        'Top three incorrect or missing facts',
+        'Top three fixes',
+      ],
+      description: `Enter a brand name and website. Zicy asks ${ENGINE_COUNT_WORD} AI engines what they know about the brand, checks the answers against the facts, and scores how close AI gets to the truth.`,
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${url}#faq`,
+      // Same strings as the visible accordion; only inline link tags are stripped.
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: faqPlainText(f.a) },
+      })),
+    },
+  ],
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <FreeDiagnostic />
+</BaseLayout>

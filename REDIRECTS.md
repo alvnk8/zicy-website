@@ -63,7 +63,8 @@ to the index. Only `/case-studies/page/:n*` → `/case-studies` (pagination) is 
 |---|---|---|---|
 | `/about-us`, `/jobs`, `/website-design-client-portfolio`, `/website-assets-portfolio` | `/about` | 301 | firm/portfolio pages retired |
 | `/contact-us` | `/contact` | 301 | `/contact` page created in this repo |
-| `/audit`, `/seo-audit` | `/free-diagnostic` | 301 | `/audit` page retired; both previously pointed at `/consultant`, which is now removed, so they go straight to the free AI reality score, the closest live equivalent |
+| `/free-diagnostic` | `/ai-brand-audit` | 301 | free tool renamed to "free AI brand audit"; the page moved to `/ai-brand-audit` |
+| `/audit`, `/seo-audit` | `/ai-brand-audit` | 301 | `/audit` page retired; both previously pointed at `/consultant`, which is now removed, so they go straight to the free AI brand audit, the closest live equivalent (pointed at the final URL, not via `/free-diagnostic`, to avoid a redirect chain) |
 | `/seo-pricing`, `/seo-pricing-malaysia`, `/professional-aeo-geo-content-writing-services`, `/professional-seo-content-writing-services`, `/web-design-development-pricing`, `/white-label-seo-services` | `/pricing` | 301 | commercial intent |
 | `/seo-malaysia` | `/` | 301 | MY-market landing = homepage |
 | `/zicy` | `/` | 301 | former methodology/consultant hub; previously pointed at `/consultant`, which is now removed |

@@ -20,20 +20,41 @@ import {
   signupBody,
   signupButtonLabel,
   signupSmallPrint,
+  auditLede,
+  knowEyebrow,
+  knowHeading,
+  knowParagraphs,
+  knowListIntro,
+  knowList,
+  knowCtaLabel,
+  howEyebrow,
+  howHeading,
+  howSteps,
+  revealEyebrow,
+  revealHeading,
+  revealIntro,
+  revealList,
+  revealClosing,
+  revealCtaLabel,
+  faqEyebrow,
+  faqHeading,
+  faqs,
+  closingHeading,
+  closingBody,
+  buildDateLabel,
 } from '../data/free-diagnostic';
+import FaqAccordion from './FaqAccordion.astro';
 
-const ENGINES = ['ChatGPT', 'Gemini', 'Google AI Overviews', 'Google AI Mode'];
-const ENGINES_TEXT = ENGINES.slice(0, -1).join(', ') + ' and ' + ENGINES[ENGINES.length - 1];
 const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$/, '');
 ---
 
 <section id="zicy-free-diagnostic" data-api-base={apiBase}>
   <div class="wrap fd-wrap">
     <div class="fd-intro">
-      <span class="eyebrow">Free tool · Brand intelligence</span>
+      <span class="eyebrow">Free tool · AI brand audit</span>
       <h1 class="fd-heading">Be the brand AI gets right.</h1>
       <p class="fd-sub">
-        Enter your brand name and website. We ask {ENGINES_TEXT} what they know about you, check it against the facts, and score how close AI gets to the truth.
+        {auditLede}
       </p>
     </div>
 
@@ -63,7 +84,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         </div>
       </details>
 
-      <button type="submit" class="btn btn-primary btn-lg fd-submit" id="fdSubmitBtn">Get my free AI reality score</button>
+      <button type="submit" class="btn btn-primary btn-lg fd-submit" id="fdSubmitBtn">Run my free AI brand audit</button>
       <p class="fd-disclaimer">No credit card. Takes about 5 minutes. One free run per brand and domain every 30 days.</p>
     </form>
 
@@ -144,6 +165,53 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       <a class="btn btn-primary btn-lg" id="fdSignupBtn" href="https://app.zicy.com/register">{signupButtonLabel}</a>
       <small>{signupSmallPrint}</small>
     </div>
+
+    <div class="fd-section fd-info">
+      <div class="shead">
+        <span class="eyebrow">{knowEyebrow}</span>
+        <h2>{knowHeading}</h2>
+      </div>
+      {knowParagraphs.map((p) => <p class="fd-compare-intro">{p}</p>)}
+      <p class="fd-compare-intro">{knowListIntro}</p>
+      <ul class="checklist">{knowList.map((li) => <li>{li}</li>)}</ul>
+      <p class="fd-info-cta"><a class="btn btn-primary" href="#fdForm">{knowCtaLabel}</a></p>
+    </div>
+
+    <div class="fd-section fd-info">
+      <div class="shead">
+        <span class="eyebrow">{howEyebrow}</span>
+        <h2>{howHeading}</h2>
+      </div>
+      <ol class="fd-info-steps">{howSteps.map((li) => <li>{li}</li>)}</ol>
+    </div>
+
+    <div class="fd-section fd-info">
+      <div class="shead">
+        <span class="eyebrow">{revealEyebrow}</span>
+        <h2>{revealHeading}</h2>
+      </div>
+      <p class="fd-compare-intro">{revealIntro}</p>
+      <ul class="checklist">{revealList.map((li) => <li>{li}</li>)}</ul>
+      <p class="fd-compare-intro">{revealClosing}</p>
+      <p class="fd-info-cta"><a class="btn btn-primary" href="#fdForm">{revealCtaLabel}</a></p>
+    </div>
+
+    <div class="fd-section fd-info">
+      <div class="shead">
+        <span class="eyebrow">{faqEyebrow}</span>
+        <h2>{faqHeading}</h2>
+      </div>
+      <FaqAccordion items={faqs} defaultOpen={-1} />
+    </div>
+
+    <div class="fd-signup fd-signup-static">
+      <h2>{closingHeading}</h2>
+      <p>{closingBody}</p>
+      <a class="btn btn-primary btn-lg" href="https://app.zicy.com/register">{signupButtonLabel}</a>
+      <small>{signupSmallPrint}</small>
+    </div>
+
+    <p class="fd-updated">Last updated {buildDateLabel}. Engines checked and question set reviewed quarterly.</p>
   </div>
 </section>
 
@@ -277,6 +345,15 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   #zicy-free-diagnostic .fd-compare-muted { color: var(--muted); }
   #zicy-free-diagnostic .fd-compare-full { background: var(--violet-50); color: var(--ink-2); }
   #zicy-free-diagnostic .fd-compare-head .fd-compare-full { background: var(--violet); color: #fff; }
+
+  /* info sections (know / how / reveal / FAQ) */
+  #zicy-free-diagnostic .fd-info { margin-top: 56px; }
+  #zicy-free-diagnostic .fd-info .shead { margin-bottom: 0; }
+  #zicy-free-diagnostic .fd-info .checklist { margin-top: 14px; }
+  #zicy-free-diagnostic .fd-info-steps { margin: 14px 0 0 20px; display: grid; gap: 10px; font-size: 15.5px; color: var(--ink-2); line-height: 1.6; max-width: 60ch; }
+  #zicy-free-diagnostic .fd-info-cta { margin-top: 20px; }
+  #zicy-free-diagnostic .fd-info .faq { margin-top: 14px; }
+  #zicy-free-diagnostic .fd-updated { margin-top: 24px; font-size: 13px; color: var(--muted); text-align: center; }
 
   /* sign-up */
   #zicy-free-diagnostic .fd-signup {
