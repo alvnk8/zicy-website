@@ -115,7 +115,7 @@ export const ICPS: Icp[] = [
       'AEO/GEO is the brief no one on the roster owns yet. Zicy gives your team the intelligence, the remediation tooling and the reporting to own it, without building a platform.',
     modules: [
       { name: 'AI Visibility + Competitive Performance', desc: 'A clear scoreboard you can put in front of any client.' },
-      { name: 'Visibility Gaps + Action Center', desc: 'The prioritised fix list, plus the schema, llms.txt and content tooling to close it.' },
+      { name: 'Visibility Gaps + Take Action tools', desc: 'The prioritised fix list, plus the schema, llms.txt and content tooling to close it.' },
       { name: 'White-label reporting', desc: 'Your brand on the dashboard and the deliverables.' },
     ],
     screenshots: [],

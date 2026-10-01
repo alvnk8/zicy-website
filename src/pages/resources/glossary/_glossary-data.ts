@@ -77,7 +77,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'A company with accurate, well-structured product pages, a clean schema definition and an llms.txt that states its facts plainly is easier for an answer engine to cite than a competitor with the same products but thin, inconsistent or unstructured information.',
     related: ['geo', 'ai-visibility', 'entity-gap', 'citation-coverage', 'ai-reality-score'],
     zicy:
-      'Zicy supports AEO end to end: it audits technical readiness, diagnoses what to fix, and generates schema, llms.txt and citation-ready content in the <a href="/platform">Action Center</a>.',
+      'Zicy supports AEO end to end: it audits technical readiness, diagnoses what to fix, and generates schema, llms.txt and citation-ready content with the <a href="/platform">Take Action tools</a>.',
     faqs: [
       {
         q: 'What is answer engine optimisation?',
@@ -365,7 +365,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'A manufacturer is one of the few in its region certified for a specific safety standard, but AI answers about that standard never mention the company. The missing association is an entity gap: the credential is real but not surfaced, usually because it is not stated in machine-readable form or corroborated widely enough.',
     related: ['hallucination', 'ai-mention-coverage', 'citation-coverage', 'aeo', 'ai-reality-score'],
     zicy:
-      'Zicy’s Brand Intelligence surfaces entity gaps, and the Action Center generates the schema and llms.txt that help close them. See <a href="/platform">the platform</a>.',
+      'Zicy’s Brand Intelligence surfaces entity gaps, and the Take Action tools generate the schema and llms.txt that help close them. See <a href="/platform">the platform</a>.',
     faqs: [
       {
         q: 'What is an entity gap?',
