@@ -605,10 +605,11 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     padding: 6px 0;
   }
   #az-widget .az-dots span {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: var(--az-ink-3);
+    /* --az-ink-3 was too faint to notice during the ~3s wait for the first token. */
+    background: var(--az-ink-2);
     animation: az-pulse 1.2s infinite ease-in-out;
   }
   #az-widget .az-dots span:nth-child(2) {
@@ -621,7 +622,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     0%,
     60%,
     100% {
-      opacity: 0.3;
+      opacity: 0.4;
     }
     30% {
       opacity: 1;
@@ -715,6 +716,12 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   @media (prefers-reduced-motion: reduce) {
     #az-widget .az-teaser {
       animation: none;
+    }
+    /* Static dots at full opacity instead of a pulse (the blanket 0.01ms rule below
+       would turn the infinite pulse into a flicker). */
+    #az-widget .az-dots span {
+      animation: none;
+      opacity: 1;
     }
     #az-widget * {
       transition-duration: 0.01ms !important;
@@ -1001,8 +1008,39 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       emptyEl.hidden = true;
       messagesEl.hidden = false;
     }
+    // Auto-scroll bookkeeping for the reply currently streaming. `lastSetTop` is the
+    // scrollTop we last wrote (read back after the write, since the browser clamps it);
+    // a scroll event landing anywhere else was the visitor (wheel/touch/keyboard/
+    // scrollbar), which ends auto-follow for that reply.
+    const REPLY_TOP_GAP_PX = 12;
+    let followReplyEl: HTMLElement | null = null;
+    let lastSetTop = 0;
+    function setScrollTop(top: number) {
+      messagesEl.scrollTop = top;
+      lastSetTop = messagesEl.scrollTop;
+    }
     function scrollToBottom() {
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+      setScrollTop(messagesEl.scrollHeight);
+    }
+    messagesEl.addEventListener('scroll', () => {
+      if (followReplyEl && Math.abs(messagesEl.scrollTop - lastSetTop) > 2) followReplyEl = null;
+    });
+    // Follow the growing reply down until its top reaches the top of the visible list
+    // (minus a small gap), then stop for the rest of that reply so its first line stays
+    // in view. Only messagesEl.scrollTop is touched, never scrollIntoView, which could
+    // scroll the page behind the floating panel.
+    function followReply() {
+      if (!followReplyEl) return;
+      const replyTop =
+        followReplyEl.getBoundingClientRect().top - messagesEl.getBoundingClientRect().top + messagesEl.scrollTop;
+      const stopAt = Math.max(0, replyTop - REPLY_TOP_GAP_PX);
+      const bottom = messagesEl.scrollHeight - messagesEl.clientHeight;
+      if (bottom >= stopAt) {
+        setScrollTop(stopAt);
+        followReplyEl = null;
+      } else {
+        setScrollTop(bottom);
+      }
     }
 
     if (state.messages.length > 0) {
@@ -1093,6 +1131,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
       setStreaming(true);
       const content = appendAssistantMessage(dotsHtml, false);
+      followReplyEl = content.parentElement;
       // `partial: true` marks this as still-streaming; cleared below on completion
       // (success replaces it outright, error keeps it off the new message object).
       // If the page is closed/navigated away before either happens, this is what's
@@ -1100,7 +1139,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       state.messages.push({ role: 'assistant', text: '', partial: true });
       const idx = state.messages.length - 1;
       persist();
-      scrollToBottom();
+      scrollToBottom(); // new user bubble + typing dots in view
 
       const controller = new AbortController();
       activeController = controller;
@@ -1110,13 +1149,14 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         apiBase,
         message: text,
         sessionId: state.sessionId,
+        page: { path: location.pathname, title: document.title },
         signal: controller.signal,
         onChunk: (_delta, full) => {
           if (myGen !== generation) return;
           content.innerHTML = full ? renderSafeMarkdown(full) : dotsHtml;
           state.messages[idx].text = full;
           persist();
-          scrollToBottom();
+          followReply();
         },
       });
       window.clearTimeout(timeoutId);
@@ -1141,7 +1181,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         state.messages[idx] = { role: 'assistant', text: partial, error: true, errorText: errText };
       }
       persist();
-      scrollToBottom();
+      followReply();
+      followReplyEl = null;
     }
 
     // ---- suggestions ----
@@ -1211,6 +1252,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     });
 
     newChatBtn.addEventListener('click', () => {
+      followReplyEl = null;
       generation++; // invalidate any in-flight turn from the old conversation
       if (activeController) {
         try {
