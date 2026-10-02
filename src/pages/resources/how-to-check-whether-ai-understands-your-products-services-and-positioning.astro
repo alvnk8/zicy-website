@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/check-ai-understands-products-services-positioning/check-ai-understands-products-services-positioning.jpg';
+
+const metaTitle = 'How to Check Whether AI Understands Your Products, Services and Positioning';
+const title = 'How to Check Whether AI Understands Your Products, Services and Positioning';
+const description = 'Learn how to check whether AI understands your products, services and positioning, and whether a brand mention is helping or misleading customers.';
+const url = `${SITE.url}/resources/how-to-check-whether-ai-understands-your-products-services-and-positioning`;
+const author = { '@type': 'Person', name: 'Deeba Sri' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'How to check whether AI understands your products, services and positioning', type: 'image/jpeg' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Check How AI Understands Your Business</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Deeba Sri &middot; 1 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>Being mentioned in an AI answer is not the same as being understood correctly. AI can name your business while describing it in a way that sends the wrong customers.</li>
+      <li>AI builds its understanding of your business from whatever it finds online, including your website, directories, reviews and articles. If that information is outdated or inconsistent, AI works from the wrong picture.</li>
+      <li>AI can misread your business in four ways: the products or services you are known for, the location you serve, the type of customer you work with, and the reason customers choose you.</li>
+      <li>You can check what AI understands about your business right now by asking two types of questions on each platform: one using your business name, one without it.</li>
+      <li>A mention that describes you incorrectly can cost you the right customer just as easily as not appearing at all.</li>
+      <li>Checking once is not enough. AI answers change over time. What was accurate last month may have drifted by now.</li>
+    </ul></div>
+    <PostFigure src={heroImg} alt="How to check whether AI understands your business, including its services, location, customer type and positioning" />
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>Imagine you run a renovation contractor business in Kuala Lumpur. Two years ago you moved into commercial fit-outs. Your website reflects this. When a corporate client asks ChatGPT for a commercial fit-out contractor in KL, it describes you as a residential company.</p>
+      <p>The client moves on. They needed a commercial specialist. What they read about you did not match what they needed.</p>
+      <p>You were mentioned. You were not understood.</p>
+      <p>This is the gap that <a href="/resources/how-to-understand-your-ai-brand-perception-and-associations">brand perception</a> (what AI thinks your business is) creates. A mention only tells you AI knows your name exists. It says nothing about whether AI understands what you sell, who you serve, or what makes you the right choice.</p>
+      <p>This guide shows you how to find out what AI actually understands about your business.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Mentions and meaning</span><h2>What a Brand Mention Actually Tells You</h2></div>
+    <div class="prose">
+      <p>Your <a href="/resources/what-is-brand-mention-coverage">Brand Mention Coverage</a> score tells you how often AI names your business across tracked questions. A score of 60% means your business appeared in 6 out of 10 answers.</p>
+      <p>That is useful. It only tells you one thing: AI knows your name is connected to your industry.</p>
+      <p>It does not tell you what AI said about you after naming you. It does not tell you whether the description was accurate. It does not tell you whether the customer who read that answer would recognise the business you actually run today.</p>
+      <p>A mention is the starting point. What AI says next is what matters.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Perception gaps</span><h2>Four Ways AI Can Misread Your Business</h2></div>
+    <div class="prose">
+      <p>AI does not always describe a business the way that business would describe itself. Here are four ways the description can drift.</p>
+      <p><strong>The wrong products or services.</strong> AI names something you used to offer, or a minor part of your business, as your main one. Your renovation company gets described as a home interior specialist, even though you now focus on commercial fit-outs.</p>
+      <p><strong>The wrong location.</strong> AI says you serve an area you no longer cover, or misses the area where most of your work actually happens. A contractor based in Cheras gets described as serving Subang Jaya.</p>
+      <p><strong>The wrong customer.</strong> AI describes your typical customer as a homeowner when your business now works almost entirely with property developers and corporate clients.</p>
+      <p><strong>The wrong reason to choose you.</strong> This is your positioning: why a customer should pick you over someone else. You are a design-and-build specialist for corporate offices. AI describes you as an affordable, budget-friendly renovator.</p>
+      <p>None of these happen on purpose. AI works from whatever it finds online, and sometimes what it finds is incomplete or out of date. Together, these four gaps shape how AI positions your business in a customer's mind.</p>
+      <p class="future-link"><strong><em>Read: How to Find Wrong or Outdated Business Facts in AI Answers.</em></strong></p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Source signals</span><h2>Why AI Ends Up With the Wrong Picture</h2></div>
+    <div class="prose">
+      <p>AI builds its understanding of a business from multiple sources: your website, your Google Business Profile, directories and listing sites, reviews, articles that mention your business and social media profiles.</p>
+      <p>It reads all of these and tries to piece together one picture of who you are and what you do.</p>
+      <p>When those sources say different things, or when they have not been updated to reflect how your business has changed, AI works with an incomplete or outdated version. That is why it helps to <a href="/resources/how-to-keep-your-business-facts-consistent-across-the-web-so-ai-can-identify-you-correctly">keep your business facts consistent across the web</a>.</p>
+      <p>An old article that describes your business from three years ago can still shape what AI says, even next to your current website. A directory that still lists your old address pulls in a different direction from your updated Google Business Profile.</p>
+      <p>AI can also fill gaps with details that are simply wrong. The question is whether what AI says still matches who you are today.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Answer review</span><h2>What to Look for When You Read AI Answers</h2></div>
+    <div class="prose">
+      <p>You are looking for the gap between what AI says and what is actually true about your business today.</p>
+      <p>On each platform, read the full answer. Check it against four things: does AI describe the right products or services, the right location, the right customer type, and the right reason customers should choose you?</p>
+      <p>Read every sentence. Gaps often appear in the detail, not the headline.</p>
+      <p>Write down every difference you find. Even small ones. These are the starting points for your check.</p>
+      <p><strong><em>Read: <a href="/resources/how-to-check-what-ai-knows-and-says-about-your-business">How to Check What AI Knows and Says About Your Business</a>.</em></strong></p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common mistake</span><h2>The Most Common Mistake: Stopping at the Name</h2></div>
+    <div class="prose">
+      <p>Many business owners who check AI visibility look for one thing: is my name there?</p>
+      <p>When they see it, they stop.</p>
+      <p>They never read what comes after the name. They never check whether the description matches their business today. They count the mention as a win and move on.</p>
+      <p>That is like checking whether your shop sign is up without stepping inside to see whether the products on display are the right ones.</p>
+      <p>A mention that describes you incorrectly can send a customer to a competitor just as easily as not appearing at all. The customer read something about you. It did not match what they needed. They chose someone else.</p>
+      <p>The mention happened. The business did not.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Ongoing review</span><h2>Why Checking Once Is Not Enough</h2></div>
+    <div class="prose">
+      <p>AI answers are not fixed. They change as AI platforms update their information, as new sources appear online, and as competitors publish new content.</p>
+      <p>What AI says about your business today may be different from what it said three months ago.</p>
+      <p>A business that checked in January and found everything accurate may find a different picture by April. A competitor published a detailed comparison article. An old directory listing resurfaced. A review mentioned a service you stopped offering.</p>
+      <p>Checking your brand perception occasionally is better than not checking. A single check does not tell you whether things have drifted since.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Action plan</span><h2>What to Do First: A Simple Plan</h2></div>
+    <div class="prose">
+      <p><strong>Step 1:</strong> Write down four things you most want AI to say about your business. Your main products or services. Your primary location. Your ideal customer. The reason customers choose you over others. This is your ground truth: the version of your business that is accurate today.</p>
+      <p><strong>Step 2:</strong> Open ChatGPT and type “Tell me about [your business name].” Read every sentence. Compare it to your ground truth. Note every difference.</p>
+      <p><strong>Step 3:</strong> Repeat on Gemini, Perplexity, Google AI Overviews and Google AI Mode. Each platform may say something different. Note the differences on each one.</p>
+      <p><strong>Step 4:</strong> On at least two platforms, ask without your name: “Which [your business type] in [your city] would you recommend?” See whether you appear and what the description says.</p>
+      <p><strong>Step 5:</strong> Write down one gap: one specific thing AI says about you that is not accurate. Start there.</p>
+      <p>You can do this manually for a small set of checks.</p>
+      <p>Checking five platforms for ten different questions means fifty separate searches, each one read and noted by hand.</p>
+      <p>A platform like <a href="https://www.zicy.com/">Zicy's</a> Brand Intelligence does this comparison automatically across all five platforms.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Comparison</span><h2>What a Brand Mention Shows vs What You Need to Check</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th scope="col">What a mention shows</th><th scope="col">What it tells you</th><th scope="col">What you need to check</th></tr></thead>
+      <tbody>
+        <tr><td>AI knows your business name</td><td>Yes</td><td>Whether AI describes the right products or services</td></tr>
+        <tr><td>Brand Mention Coverage score</td><td>How often you appear</td><td>Whether the location AI mentions is accurate</td></tr>
+        <tr><td>Five platforms tracked</td><td>Which platforms name you</td><td>Whether AI describes the right customer type</td></tr>
+        <tr><td>A starting point</td><td>That you are in the conversation</td><td>Whether AI describes the right reason customers should choose you</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Summary</span><h2>Putting It All Together</h2></div>
+    <div class="prose">
+      <p>The renovation contractor in Kuala Lumpur found out that ChatGPT was describing them as a residential company. Gemini described them as a budget-friendly renovator. Perplexity did not mention their commercial work at all.</p>
+      <p>None of that was visible in their Brand Mention Coverage score. The score looked fine. The description was not.</p>
+      <p>Now they know where to start. Not with the score. With what AI said after the name.</p>
+      <p>A mention tells you AI knows you exist. Reading what AI says after the name tells you whether AI knows what you actually do.</p>
+      <p>That is the check worth making.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See whether AI understands<br />{' '}what your business actually does.</h2>
+    <p>Compare how major AI platforms describe your products, services, customers and positioning, then review the answers behind each result.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.future-link{color:var(--ink)}
+  .table-wrap{max-width:900px;overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:145px}}
+</style>

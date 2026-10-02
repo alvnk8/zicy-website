@@ -1,0 +1,254 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/find-ai-brand-alignment-gap/find-ai-brand-alignment-gap.png';
+
+const metaTitle = 'How to Find the Gap Between What You Want to Be Known For and What AI Knows You For';
+const title = 'How to Find the Gap Between What You Want to Be Known For and What AI Knows You For';
+const description = 'See how to identify gaps between your desired brand positioning and AI’s current view, including missing, outdated and misaligned associations.';
+const url = `${SITE.url}/resources/how-to-find-the-gap-between-what-you-want-to-be-known-for-and-what-ai-knows-you-for`;
+const author = { '@type': 'Person', name: 'Nabila Wawan' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'The AI brand alignment gap between intended positioning and current AI associations', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Find Your AI Brand Alignment Gap</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Nabila Wawan &middot; 1 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>An AI brand alignment gap appears when what you want to be known for differs from what AI currently associates with your business.</li>
+      <li>The gap does not always mean AI is wrong. The information may be accurate but focused on an older service, audience or part of the business.</li>
+      <li>Compare your intended positioning with the products, services, customers and qualities AI repeatedly connects to your brand.</li>
+      <li>Separate wrong, outdated and misaligned information before deciding what needs to change.</li>
+      <li>Strengthen the missing association with clear, consistent information across your website and other credible sources.</li>
+      <li>Track whether the association you want starts appearing more consistently across relevant AI answers.</li>
+    </ul></div>
+    <PostFigure src={heroImg} alt="AI brand alignment gap comparing desired brand positioning with what AI currently associates with a business" />
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>Your business may be known for something different from what you are trying to sell.</p>
+      <p>You may want to grow your corporate catering service, but AI still describes you mainly as a neighbourhood restaurant.</p>
+      <p>Or you may have moved into larger commercial projects, while AI still associates your business with smaller jobs.</p>
+      <p>The information may not be wrong.</p>
+      <p>The problem is that AI may be emphasising a different part of your business from the one you want customers to notice.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">The concept</span><h2>What Is an AI Brand Alignment Gap?</h2></div>
+    <div class="prose">
+      <p>An AI brand alignment gap is the difference between:</p>
+      <ul><li>what you want your business to be known for; and</li><li>what AI currently associates with your business.</li></ul>
+      <p>For example:</p>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th scope="col">What You Want to Be Known For</th><th scope="col">What AI Associates With You</th></tr></thead>
+      <tbody><tr><td>Corporate catering</td><td>Local restaurant</td></tr><tr><td>Commercial interior design</td><td>Home renovation</td></tr><tr><td>Premium skincare</td><td>Affordable beauty products</td></tr><tr><td>B2B software</td><td>Software for small teams</td></tr></tbody>
+    </table></div>
+    <div class="prose">
+      <p>Both sides can be true.</p>
+      <p>The gap appears when the association you want to grow is missing, weak or overshadowed by something else.</p>
+      <p>Before looking for that gap, it helps to understand what AI currently associates with your brand.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Business impact</span><h2>Why Does This Gap Matter?</h2></div>
+    <div class="prose">
+      <p>Customers may use AI to understand what your business does before they ever visit your website.</p>
+      <p>They might ask:</p>
+      <ul><li>Which companies provide this service?</li><li>Who is this company suitable for?</li><li>What is this brand known for?</li><li>Does this business offer what I need?</li></ul>
+      <p>If AI associates you with a different service, customer group or market, you may be less likely to appear when someone asks about the area you are trying to grow.</p>
+      <p>You can therefore have AI visibility without having the right visibility.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Possible causes</span><h2>Why Might AI Know You for Something Else?</h2></div>
+    <div class="prose">
+      <p>Usually, there is more than one reason.</p>
+      <h3>Your Older Offering Has More Information Around It</h3>
+      <p>If you sold one service for ten years and launched another recently, the older service may have a much larger online footprint.</p>
+      <p>There could be years of:</p>
+      <ul><li>website pages;</li><li>customer reviews;</li><li>directory listings;</li><li>articles;</li><li>partner pages; and</li><li>online discussions.</li></ul>
+      <p>Your newer service may only have one or two pages supporting it.</p>
+      <p>AI may therefore have much more information connecting your brand with the older offering.</p>
+      <h3>Your New Positioning Is Not Clear</h3>
+      <p>You may know which part of the business you want to grow, but your website may not communicate it clearly.</p>
+      <p>For example:</p>
+      <div class="prompt">We provide complete solutions for modern businesses.</div>
+      <p>This does not tell a customer much about what you actually specialise in.</p>
+      <p>Clearer information explains:</p>
+      <ul><li>what you provide;</li><li>who it is for;</li><li>what need it serves; and</li><li>where it is available.</li></ul>
+      <p>If the positioning is difficult for a customer to understand, it can also be difficult for AI to form a clear association.</p>
+      <h3>Other Websites Still Tell the Old Story</h3>
+      <p>Directories, reviews, media coverage, partner websites and other third-party pages may still describe an older version of the company.</p>
+      <p>When different sources describe the business differently, it is also worth checking whether <a href="/resources/how-to-keep-your-business-facts-consistent-across-the-web-so-ai-can-identify-you-correctly">your business facts are consistent across the web</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Correct versus aligned</span><h2>An Alignment Gap Does Not Always Mean AI Is Wrong</h2></div>
+    <div class="prose">
+      <p>Suppose AI says:</p>
+      <div class="prompt">ABC Furniture is an affordable office furniture supplier.</div>
+      <p>That may be completely accurate.</p>
+      <p>But ABC Furniture may now be trying to grow its ergonomic workplace design service for larger companies.</p>
+      <p>The issue is not necessarily wrong information.</p>
+      <p>AI may simply have an incomplete picture of what the business wants to be known for today.</p>
+      <p>If the problem is factual rather than positional, first <a href="/resources/how-to-find-wrong-outdated-business-facts-ai-answers">check for wrong or outdated business facts in AI answers</a>.</p>
+      <p>Knowing which problem you have matters because each one needs a different response.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Step-by-step review</span><h2>How Do You Find Your AI Brand Alignment Gap?</h2></div>
+    <div class="prose">
+      <p>Start by defining what you actually want customers to associate with your business.</p>
+      <h3>Define What You Want to Be Known For</h3>
+      <p>Avoid broad ideas such as:</p>
+      <div class="prompt">We want to be known for quality.</div>
+      <p>Make the association specific.</p>
+      <p>Examples:</p>
+      <div class="prompt">We want to be known for custom event production for corporate events.</div>
+      <div class="prompt">We want to be known for accounting services for growing ecommerce businesses.</div>
+      <p>Choose a few associations that matter to what the business is trying to sell.</p>
+      <p>You do not need to describe everything the company does.</p>
+      <p>You are identifying the parts that should be clear when customers research your brand.</p>
+
+      <h3>Check How AI Describes Your Business</h3>
+      <p>Use branded questions such as:</p>
+      <ul><li>What does [Brand] do?</li><li>What is [Brand] known for?</li><li>Who is [Brand] suitable for?</li><li>What services does [Brand] provide?</li><li>What type of customers does [Brand] serve?</li></ul>
+      <p>Branded prompts are useful here because the goal is not to measure whether AI discovers your business naturally.</p>
+      <p>The goal is to understand what AI already believes and says about it.</p>
+      <p>This also helps you <a href="/resources/how-to-check-whether-ai-understands-your-products-services-and-positioning">check whether AI correctly understands your products, services and positioning</a> before you compare that picture with the position you want to build.</p>
+      <p>If you are unsure how to separate brand-perception questions from discovery questions, see <a href="/resources/how-to-use-branded-and-non-branded-prompts-without-distorting-ai-visibility">how to use branded and non-branded prompts without distorting your AI visibility</a>.</p>
+      <p>Look for ideas that appear repeatedly rather than reacting to one unusual answer.</p>
+      <p>This type of comparison can also form part of an <a href="/resources/brand-audits-ai-search">AI-era brand audit</a>, where you compare your intended brand narrative with the version AI presents.</p>
+
+      <h3>Check the Questions Your Customers Ask</h3>
+      <p>Next, look beyond questions that contain your brand name.</p>
+      <p>If you want to grow corporate catering, for example, check customer questions around:</p>
+      <ul><li>office catering;</li><li>catering for company events;</li><li>business lunch catering; and</li><li>catering for large corporate functions.</li></ul>
+      <p>Now AI has to decide which businesses are relevant.</p>
+      <p>This tells you whether the association exists strongly enough for your brand to surface when customers ask about that need.</p>
+      <p>Your brand might be well understood when someone asks about it directly but absent when customers ask about the service you want to grow.</p>
+      <p>That is an important alignment gap.</p>
+
+      <h3>Compare the Two Sides</h3>
+      <p>Write down the associations you want and the ones that repeatedly appear in AI answers.</p>
+      <p>Together, those associations form a broader brand narrative: the picture AI builds of what your business does, who it serves and what it is known for.</p>
+      <p>For example:</p>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th scope="col">Desired Association</th><th scope="col">AI Association</th></tr></thead>
+      <tbody><tr><td>Corporate catering</td><td>Restaurant</td></tr><tr><td>Business events</td><td>Family celebrations</td></tr><tr><td>Custom menus</td><td>Set meals</td></tr><tr><td>Large orders</td><td>Individual dining</td></tr></tbody>
+    </table></div>
+    <div class="prose">
+      <p>Now the problem becomes easier to see.</p>
+      <p>Instead of saying:</p>
+      <div class="prompt">“AI doesn't understand our business.”</div>
+      <p>you can say:</p>
+      <div class="prompt">“AI understands that we are a restaurant, but it does not strongly associate us with corporate catering.”</div>
+      <p>That gives you something specific to investigate.</p>
+
+      <h3>Check Whether the Gap Actually Matters</h3>
+      <p>Not every difference needs fixing.</p>
+      <p>Ask:</p>
+      <ul><li>Is the AI description wrong?</li><li>Is it outdated?</li><li>Is an important service missing?</li><li>Is AI connecting us with the wrong type of customer?</li><li>Does our own website clearly support the association we want?</li><li>Is the older association still useful to the business?</li></ul>
+      <p>Focus on the differences that affect what you are actually trying to sell.</p>
+      <p>Some AI visibility platforms can make this comparison easier.</p>
+      <p><a href="https://www.zicy.com/">Zicy</a>’s Brand Intelligence brings together the brand narrative, AI perception and alignment so businesses can see where AI’s current picture differs from the position they intend to communicate.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Next steps</span><h2>What Should You Do After Finding the Gap?</h2></div>
+    <div class="prose">
+      <p>Do not start by rewriting your entire website.</p>
+      <p>Start with the missing association.</p>
+      <p>If you want customers to associate your business with a particular service, check whether your website clearly explains:</p>
+      <ul><li>what the service is;</li><li>who it is for;</li><li>what problem it solves;</li><li>where it is available; and</li><li>why your business is relevant to that need.</li></ul>
+      <p>Then check the wider sources around your business.</p>
+      <p>An old directory description or partner page may still be presenting the company as it looked several years ago.</p>
+      <p>The goal is not to repeat the same marketing sentence everywhere.</p>
+      <p>It is to make the important facts about your current business clear enough that your website and other credible sources support the same basic picture.</p>
+      <p>Stronger evidence can also help when you're trying to <a href="/resources/get-cited-chatgpt-perplexity">get your brand mentioned or cited in AI answers</a>.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Growing your positioning</span><h2>Do You Need AI to Forget What You Were Previously Known For?</h2></div>
+    <div class="prose">
+      <p>Usually, no.</p>
+      <p>A bakery known for sourdough doesn't need AI to stop associating it with sourdough if it wants to grow its catering business.</p>
+      <p>It needs AI to understand both:</p>
+      <div class="prompt">This bakery is known for sourdough.</div>
+      <p>And:</p>
+      <div class="prompt">This bakery also provides catering.</div>
+      <p>The same applies when a business expands into a new service, customer group or market.</p>
+      <p>Your goal is often to strengthen a new association, not erase every useful association you already have.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Measuring progress</span><h2>How Do You Know the Gap Is Getting Smaller?</h2></div>
+    <div class="prose">
+      <p>Look at whether the association you want starts appearing more consistently.</p>
+      <p>If your goal is corporate catering, you might begin seeing:</p>
+      <ul><li>corporate catering mentioned when AI describes the business;</li><li>your brand appearing for relevant catering questions;</li><li>more references to office and business events;</li><li>fewer outdated descriptions; and</li><li>external sources mentioning the service correctly.</li></ul>
+      <p>Do not judge progress from one answer.</p>
+      <p>Different platforms and prompts can produce different responses.</p>
+      <p>Look for a repeated change in how your business is described and where it appears.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Summary</span><h2>Check What AI Knows You For</h2></div>
+    <div class="prose">
+      <p>AI can know your business and still associate it with the wrong part of what you do.</p>
+      <p>If you want to grow a particular service, product or customer segment, compare that position with what AI repeatedly says about your brand. Look for what is missing, what is outdated and which older associations are stronger than the ones you want to build.</p>
+      <p>The goal is not to remove every existing association. It is to make sure AI also understands the part of your business you want customers to find and consider.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>Know What AI Associates With Your Brand</h2>
+    <p>Zicy helps you see how AI describes your business and identify where that picture differs from what you want to be known for.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt{max-width:700px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}
+  .table-wrap{max-width:900px;overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:145px}.prose h3{font-size:19px}.prompt{font-size:16px}}
+</style>

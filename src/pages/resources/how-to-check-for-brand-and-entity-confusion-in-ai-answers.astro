@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/check-brand-entity-confusion/check-brand-entity-confusion-ai-answers.jpg';
+
+const metaTitle = 'How to Check for Brand and Entity Confusion in AI Answers';
+const title = 'How to Check for Brand and Entity Confusion in AI Answers';
+const description = 'Learn how to check whether AI is confusing your business with a similarly named company, and what entity confusion means for your brand visibility.';
+const url = `${SITE.url}/resources/how-to-check-for-brand-and-entity-confusion-in-ai-answers`;
+const author = { '@type': 'Person', name: 'Deeba Sri' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'How to check for brand and entity confusion in AI answers', type: 'image/jpeg' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Check Brand and Entity Confusion</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Deeba Sri &middot; 1 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>AI does not always know the difference between two businesses with similar names. It can describe the wrong company when a customer asks about yours.</li>
+      <li>AI tries to build a connected picture of your business: what it is, what it does and where it operates. When that picture is thin or inconsistent, entity confusion can happen.</li>
+      <li>Entity confusion is not always obvious. AI may name your business correctly but describe a different company's services, location or history.</li>
+      <li>You can check for entity confusion by asking AI direct questions about your business and reading every sentence of the answer, not just whether your name appeared.</li>
+      <li>The same question can produce different results across platforms. One platform may identify you correctly while another confuses you with a different business.</li>
+      <li>The risk is higher when another business with a similar name has a stronger or more consistent online presence. AI may weight their information more heavily than yours.</li>
+    </ul></div>
+    <PostFigure src={heroImg} alt="Brand and entity confusion in AI answers, including wrong descriptions, failed identification and blended information" />
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>Imagine you run an accounting firm in Subang Jaya. You have been operating for six years. Your clients are small businesses across Selangor.</p>
+      <p>One morning, a potential client asks ChatGPT about your firm. ChatGPT describes a similarly named property development company instead. The potential client was looking for an accountant. They assume they have the wrong company and move on.</p>
+      <p>Your business was named. A different business was described.</p>
+      <p>An entity is simply a business that AI recognises as one unique, real thing. Entity confusion happens when AI cannot reliably tell your business apart from another with a similar name, and may pull information from the wrong source.</p>
+      <p>This guide shows you how to check whether AI is confusing your business with another, and where to look for the signs.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">The concept</span><h2>What Entity Confusion Actually Means</h2></div>
+    <div class="prose">
+      <p>AI tries to build a connected picture of your business: what it is, what it does, who runs it and where it operates.</p>
+      <p>When AI has a clear, consistent picture built from multiple reliable sources, it can identify your business correctly and describe it accurately.</p>
+      <p>When that picture is thin or inconsistent, AI may struggle to tell your business apart from another with a similar name. The result is entity confusion. Keeping <a href="/resources/how-to-keep-your-business-facts-consistent-across-the-web-so-ai-can-identify-you-correctly">your business facts consistent across the web</a> can make that identity clearer.</p>
+      <p>AI may blend information from two different businesses. It may describe the wrong company entirely. It may fail to identify your business at all when asked directly.</p>
+      <p>None of this is deliberate. AI is working from whatever it found. If what it found points in two directions, the answer reflects that uncertainty.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common patterns</span><h2>Three Ways Entity Confusion Shows Up</h2></div>
+    <div class="prose">
+      <p>Entity confusion does not always look the same. Here are three ways it appears in AI answers.</p>
+      <p><strong>Wrong description.</strong> AI names your business correctly but describes a different company. Your accounting firm gets described as a property developer because another business with a similar name dominates the available information.</p>
+      <p><strong>Failed identification.</strong> AI cannot identify your business at all when asked directly. A question like “Tell me about [your business name]” returns “I could not find reliable information about this business,” even though your business exists and has an online presence.</p>
+      <p><strong>Blended information.</strong> AI combines details from two different businesses. It gets your name right and your industry right, but uses the founding year, location or services of a similarly named company operating in a different city.</p>
+      <p>Start by asking yourself: when a potential customer asks AI about your business, which of these three does the answer look like?</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Source signals</span><h2>Why Entity Confusion Happens</h2></div>
+    <div class="prose">
+      <p>AI builds this picture from whatever it finds across the web: your website, your Google Business Profile, directories, articles, reviews and social media profiles.</p>
+      <p>If another business with a similar name has a stronger or more consistent online presence, AI may weight their information more heavily. If your business name appears alongside another in directories or comparison articles, AI may connect the two.</p>
+      <p>Location adds another layer. Two businesses with similar names in nearby cities may appear close together in local directories. AI reading those directories may not always separate them correctly.</p>
+      <p>The thinner your online presence, the higher the risk. A business with a detailed, consistent presence across multiple sources gives AI a stronger signal to work with. This does not mean you need to publish content every day. It means the information that already exists about your business should say the same thing everywhere it appears.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Warning signs</span><h2>What to Look for When Checking for Entity Confusion</h2></div>
+    <div class="prose">
+      <p>You are looking for three signs that entity confusion may be present.</p>
+      <p>The first sign is a <strong>wrong description</strong>. AI names your business but describes a different company. The industry, services or location in the answer do not match yours.</p>
+      <p>The second sign is <strong>failed identification</strong>. AI cannot identify your business at all when asked directly. It says it could not find reliable information, even though your business exists.</p>
+      <p>The third sign is <strong>platform inconsistency</strong>. One platform describes you correctly while another describes a different company entirely.</p>
+      <p>Read every sentence of every answer. Write down every discrepancy. A wrong industry, a wrong location, a wrong service. These are the gaps to investigate. If the problem is factual rather than a mixed identity, follow the process for <a href="/resources/how-to-find-wrong-outdated-business-facts-ai-answers">finding wrong or outdated business facts in AI answers</a>.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common mistake</span><h2>The Most Common Mistake: Trusting the Name</h2></div>
+    <div class="prose">
+      <p>Many business owners who check AI visibility look for one thing: did my name appear?</p>
+      <p>When they see it, they stop reading.</p>
+      <p>They never check whether the description that follows is actually about their business. They assume that because the name is correct, everything else must be too.</p>
+      <p>That assumption is exactly where entity confusion hides.</p>
+      <p>AI can name your business in the first sentence and describe a completely different company in the second. The name is a label. The description is where the confusion lives.</p>
+      <p>Read every sentence. Not just the first one.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Cross-platform checks</span><h2>Why Entity Confusion Varies Across Platforms</h2></div>
+    <div class="prose">
+      <p>Each AI platform builds its picture of the world from different sources and uses different methods to identify entities.</p>
+      <p>Each platform reads different sources and weights them differently. One may rely more on your website. Another may pull from recent web results. A third may draw more heavily from your business profiles.</p>
+      <p>This is why the same question can produce very different results across platforms.</p>
+      <p>Check all five platforms. Do not assume that appearing correctly on one means you appear correctly on all.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Action plan</span><h2>What to Do First: A Simple Plan</h2></div>
+    <div class="prose">
+      <p><strong>Step 1:</strong> Write down your business name, your industry, your primary location and your main service. This is your ground truth: the version of your business that is accurate today.</p>
+      <p><strong>Step 2:</strong> Open ChatGPT and type “Tell me about [your business name].” Read every sentence. Does the description match your ground truth or a different business?</p>
+      <p><strong>Step 3:</strong> Repeat on Gemini, Perplexity, Google AI Overviews and Google AI Mode. Note any platform that fails to identify your business or describes a different company.</p>
+      <p><strong>Step 4:</strong> On each platform, also ask “What does [your business name] specialise in?” and “Where is [your business name] located?” These specific questions surface confusion that a general question might miss.</p>
+      <p><strong>Step 5:</strong> Write down one specific discrepancy. One platform. One wrong detail. Start there.</p>
+      <p>You can do this manually for a small set of checks.</p>
+      <p>Checking five platforms across three questions means fifteen separate searches, each one read and compared by hand.</p>
+      <p>A platform like <a href="https://www.zicy.com/">Zicy's</a> Brand Intelligence does this check automatically across all five platforms.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Comparison</span><h2>What Entity Confusion Looks Like vs What You Need to Check</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th scope="col">Type of confusion</th><th scope="col">What entity confusion looks like</th><th scope="col">What you need to check</th></tr></thead>
+      <tbody>
+        <tr><td>Wrong description</td><td>AI names you but describes a different business</td><td>Whether the industry, services and location are correct</td></tr>
+        <tr><td>Failed identification</td><td>AI cannot find your business at all</td><td>Whether all five platforms can identify your business</td></tr>
+        <tr><td>Blended information</td><td>AI mixes details from two different businesses</td><td>Whether the founding year, location and services match your business</td></tr>
+        <tr><td>Platform inconsistency</td><td>One platform describes you correctly, another does not</td><td>Whether the confusion is isolated or appears across multiple platforms</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Summary</span><h2>Putting It All Together</h2></div>
+    <div class="prose">
+      <p>The accounting firm in Subang Jaya discovered that ChatGPT was describing a property developer when asked about them. Gemini could not identify the business at all. Perplexity described the right industry but the wrong location.</p>
+      <p>None of that was visible from a simple name check. The name appeared in some answers. The description behind the name was wrong.</p>
+      <p>Now they know where to start. Not with whether the name appeared. With whether the description was actually about their business.</p>
+      <p>Entity confusion is a risk for any business whose name resembles another.</p>
+      <p>The check is simple. Read what AI says after the name. That is where the confusion lives.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>Find out whether AI is<br />{' '}describing the right business.</h2>
+    <p>Compare how major AI platforms identify your brand, then review the descriptions behind each answer for signs of confusion.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}
+  .table-wrap{max-width:900px;overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:145px}}
+</style>

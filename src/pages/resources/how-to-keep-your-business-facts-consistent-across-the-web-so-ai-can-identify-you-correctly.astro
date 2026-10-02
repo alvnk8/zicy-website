@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/keep-business-facts-consistent/keep-business-facts-consistent-for-ai.jpg';
+
+const metaTitle = 'How to Keep Your Business Facts Consistent Across the Web So AI Can Identify You Correctly';
+const title = 'How to Keep Your Business Facts Consistent Across the Web So AI Can Identify You Correctly';
+const description = 'Learn how to check your business facts for consistency across the web so AI can build one accurate picture of your business and describe it correctly.';
+const url = `${SITE.url}/resources/how-to-keep-your-business-facts-consistent-across-the-web-so-ai-can-identify-you-correctly`;
+const author = { '@type': 'Person', name: 'Deeba Sri' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'How to keep business facts consistent across the web so AI can identify the business correctly', type: 'image/jpeg' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Keep Business Facts Consistent</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Deeba Sri &middot; 1 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>AI builds its understanding of your business from multiple sources at once. When those sources say different things, AI may report a version of your business that does not match reality.</li>
+      <li>Inconsistency in your business facts (your founding year, your location, your services, your industry) is one reason AI may describe a business inaccurately.</li>
+      <li>Four facts come up regularly in AI questions about a business: your name, your founding year, your location, and your industry and primary service. If any of these differs across your sources, AI may surface the wrong version.</li>
+      <li>You can audit your own consistency right now by searching for your business name and comparing what each source says against your own ground truth.</li>
+      <li>A single outdated directory listing can pull AI's picture of your business in the wrong direction, even if everything else is correct.</li>
+      <li>Updating one source is not enough. AI reads everything it finds and may use the version that appears most often, even if that version belongs to an old directory.</li>
+    </ul></div>
+    <PostFigure src={heroImg} alt="Business fact consistency guide covering business name, founding year, location, industry and primary service" />
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>Imagine you run an HR consulting firm in Petaling Jaya. Two years ago you shifted your focus from general HR services to specialised recruitment for the technology sector. You updated your website. You updated your Google Business Profile.</p>
+      <p>You never updated your LinkedIn company page. You forgot about the three industry directories that still describe you as a general HR firm. An old press release from 2021 still calls you a broad-based HR provider.</p>
+      <p>One evening you search your own business name. Three of the first five results describe a business you no longer are. AI platforms read those same results and piece together their picture from everything they find.</p>
+      <p>When your sources disagree, AI does not know which version is true.</p>
+      <p>This is what consistency means in the context of AI visibility: when every source that describes your business says the same thing, AI has one clear picture to work from. When they disagree, AI has to guess which version is right.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conflicting signals</span><h2>What AI Does When Your Sources Disagree</h2></div>
+    <div class="prose">
+      <p>AI does not visit your website alone. It reads whatever it can find about your business across the web: your website, your Google Business Profile, your social media profiles, business directories, press articles, review platforms and any other pages that mention you.</p>
+      <p>When all of these say the same thing, AI builds a clear, consistent picture. It knows your industry, your location, your services and your founding year.</p>
+      <p>When they say different things, AI does not know which version to trust. It may average them out. It may weight the source with the most information. It may surface the version that appears most often, even if that version is outdated. In some cases, this can contribute to <a href="/resources/how-to-check-for-brand-and-entity-confusion-in-ai-answers">brand and entity confusion in AI answers</a>.</p>
+      <p>The result is an AI description of your business that is a mixture of what you are now and what you used to be.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Ground truth</span><h2>Four Facts Worth Checking First</h2></div>
+    <div class="prose">
+      <p>Not all business information carries the same weight. These four facts come up regularly in AI questions about a business. If any of them is inconsistent across your sources, AI may surface the conflict.</p>
+      <p><strong>Your business name.</strong> If some sources use your trading name and others use your registered company name, AI may treat them as two different businesses. Check whether every source that mentions your business uses exactly the same name.</p>
+      <p><strong>Your founding year.</strong> Old directories often carry the wrong year. If your website says 2019 and a directory says 2016, AI may use either.</p>
+      <p><strong>Your location.</strong> If you moved premises and updated your website but not your Google Business Profile or your directory listings, AI may describe you as operating from your old address. Location inconsistency is one reason AI may describe a business inaccurately.</p>
+      <p><strong>Your industry and primary service.</strong> This inconsistency can do the most harm. If you pivoted your business but did not update all your sources, AI may still describe you using your old positioning. A recruitment firm described as a general HR provider may miss customers looking specifically for recruitment.</p>
+      <p>Check whether every source that describes your business uses the same industry and service description you use today.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Source drift</span><h2>Why Consistency Is Harder Than It Sounds</h2></div>
+    <div class="prose">
+      <p>Business directories are often filled in once and forgotten. Old press releases stay on the web indefinitely. Review platforms may carry old descriptions submitted years ago.</p>
+      <p>Each of these is a source AI reads.</p>
+      <p>One outdated description in a directory that ranks well in search results can pull AI's understanding of your business in the wrong direction, even if every other source is correct.</p>
+      <p>The longer your business has been operating, the more sources there are that may carry outdated information. Start by assuming at least some of what is written about you has not been updated recently.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Source audit</span><h2>How to Find Inconsistencies in Your Sources</h2></div>
+    <div class="prose">
+      <p>The check is simpler than it sounds. You are not auditing your entire online presence. You are looking for one thing: places where what is written about your business does not match what is actually true today.</p>
+      <p>Start with the sources people see first when they search your name. Your website. Your Google Business Profile. Directories that appear on the first page of Google results when someone searches your business name. Your LinkedIn company page. Any press articles or industry listings that mention you.</p>
+      <p>Not every source. Just the ones people actually find.</p>
+      <p>Before moving to the steps below, write down which two or three sources outside your website are most likely to carry outdated information about your business.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common mistake</span><h2>The Most Common Mistake: Updating One Source and Assuming the Rest</h2></div>
+    <div class="prose">
+      <p>Many business owners who update their information do it once, in one place.</p>
+      <p>They update their website and assume that is enough. They change their Google Business Profile and move on.</p>
+      <p>They never check whether the directories, the old press releases, the social profiles and the review platforms are still saying the same thing.</p>
+      <p>AI does not know which source is your official one. It reads everything it finds and tries to build one picture. If your website says one thing and several directories say another, the directories may win simply because there are more of them.</p>
+      <p>Updating one source is a start. Checking all of them is the actual work.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Priorities</span><h2>Why Some Facts Matter More Than Others</h2></div>
+    <div class="prose">
+      <p>Not every piece of inconsistent information causes the same problem.</p>
+      <p>A minor inconsistency, such as a slightly different tagline on an old profile, is unlikely to cause significant confusion. AI may simply ignore it.</p>
+      <p>A major inconsistency, such as a wrong industry classification, a wrong location or a wrong founding year, can produce a clearly wrong AI description of your business. Use the guide to <a href="/resources/how-to-find-wrong-outdated-business-facts-ai-answers">finding wrong or outdated business facts</a> to verify the details AI repeats.</p>
+      <p>The facts that matter most are the ones AI uses to answer specific questions. When a potential client asks “which recruitment firms in Petaling Jaya specialise in tech hiring,” AI uses your industry, your services and your location to decide whether to include you. If any of these is wrong in a significant source, you may be excluded from answers you should appear in, or included in answers where you should not.</p>
+      <p>Focus your check on the facts that appear in the kinds of questions your customers are likely to ask AI.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Action plan</span><h2>What to Do First: A Source-by-Source Plan</h2></div>
+    <div class="prose">
+      <p><strong>Step 1:</strong> Write down your four ground truth facts: business name, founding year, official location, and industry and primary service. This is the version that is accurate today.</p>
+      <p><strong>Step 2:</strong> Search for your business name in Google. Open every result that includes a description of your business.</p>
+      <p><strong>Step 3:</strong> For each source, check your four ground truth facts. Note any difference.</p>
+      <p><strong>Step 4:</strong> Once you have a list of sources, prioritise these first: your Google Business Profile, your LinkedIn company page and any directory that appears on the first page of Google results for your business name.</p>
+      <p><strong>Step 5:</strong> Ask one AI platform: “When was [your business name] founded and where is it based?” See which version of your facts it repeats.</p>
+      <p><strong>Step 6:</strong> Write down one specific inconsistency. One source. One wrong fact. Start there.</p>
+      <p>You can do this manually for a small set of sources.</p>
+      <p>Checking your website, Google Business Profile, five directories, your LinkedIn page and your Facebook page means reviewing at least nine separate sources by hand.</p>
+      <p>Platforms like <a href="https://www.zicy.com/">Zicy</a> store your ground truth facts in one place and show where what AI repeats no longer matches them.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Comparison</span><h2>Where Each Fact Is Most Likely to Go Wrong</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th scope="col">Fact to check</th><th scope="col">Where it is most often wrong</th><th scope="col">Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td>Business name</td><td>Old directories, social profiles</td><td>AI may treat two name variants as two different businesses</td></tr>
+        <tr><td>Founding year</td><td>Directories, old press releases</td><td>AI may cite the wrong year when asked about your history</td></tr>
+        <tr><td>Location</td><td>Google Business Profile, old directories</td><td>AI may describe you as operating from an old address</td></tr>
+        <tr><td>Industry and service</td><td>Old profiles, press releases, directories</td><td>AI may describe your old positioning instead of your current one</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Summary</span><h2>Putting It All Together</h2></div>
+    <div class="prose">
+      <p>The HR consulting firm in Petaling Jaya found that one platform was describing them as a general HR provider. Another gave the right location but the wrong services. A third cited a press release from 2021 that still carried their old positioning.</p>
+      <p>None of those sources were wrong when they were written. They were just never updated.</p>
+      <p>Now the firm knows where to start. Not with rewriting their website. With finding every source that still describes them the way they used to be.</p>
+      <p>Consistency is not about being everywhere. It is about every source that describes your business saying the same true thing.</p>
+      <p>When AI reads multiple sources and they all agree, it has one clear picture. When they disagree, it has to choose. The business that controls that choice is the one that keeps all its sources consistent.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>Give AI one clear, consistent<br />{' '}picture of your business.</h2>
+    <p>Compare the facts AI repeats with your current business information and find the sources that still carry an outdated version.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}
+  .table-wrap{max-width:900px;overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:145px}}
+</style>

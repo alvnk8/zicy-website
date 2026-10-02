@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/check-ai-brand-sentiment/check-ai-brand-sentiment.png';
+import dashboardImg from '../../assets/resources/check-ai-brand-sentiment/brand-sentiment-dashboard.png';
+
+const metaTitle = 'How to Check Whether AI Describes Your Brand Positively, Neutrally or Negatively';
+const title = 'How to Check Whether AI Describes Your Brand Positively, Neutrally or Negatively';
+const description = 'Learn how to read positive, neutral and negative AI descriptions of your brand, spot recurring sentiment patterns, and separate perception from factual errors.';
+const url = `${SITE.url}/resources/how-to-check-whether-ai-describes-your-brand-positively-neutrally-or-negatively`;
+const author = { '@type': 'Person', name: 'Nabila Wawan' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'AI brand sentiment guide to positive, neutral and negative descriptions', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Check AI Brand Sentiment</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Nabila Wawan &middot; 1 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>A brand mention tells you that AI is talking about your business. Sentiment tells you how that mention sounds.</li>
+      <li>Positive, neutral and negative descriptions should be read separately from visibility metrics such as mentions or rankings.</li>
+      <li>Neutral language is not automatically a problem. AI often uses factual or descriptive language without expressing a strong opinion.</li>
+      <li>Repeated words and phrases can reveal how AI currently frames your brand.</li>
+      <li>A negative description may come from incorrect information rather than genuine negative perception.</li>
+      <li>Read the actual AI answers before deciding what needs to change.</li>
+    </ul></div>
+    <PostFigure src={heroImg} alt="AI brand sentiment infographic explaining positive, neutral and negative brand descriptions" />
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>Your business may appear in AI answers, but that doesn't automatically mean the mention helps you.</p>
+      <p>AI might describe your brand as:</p>
+      <ul><li>reliable and easy to use;</li><li>a practical option for small businesses;</li><li>expensive compared with alternatives; or</li><li>difficult to learn.</li></ul>
+      <p>All four are brand mentions.</p>
+      <p>But they create very different impressions.</p>
+      <p>That is why checking whether AI mentions your business is only part of the picture. You also need to understand <strong>how AI describes you when it mentions you.</strong></p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">The concept</span><h2>What Is AI Brand Sentiment?</h2></div>
+    <div class="prose">
+      <p>AI brand sentiment is the tone AI uses to describe your business.</p>
+      <p>In simple terms, the language can be:</p>
+      <ul><li><strong>Positive:</strong> favourable or reassuring</li><li><strong>Neutral:</strong> mainly factual or descriptive</li><li><strong>Negative:</strong> critical, limiting or unfavourable</li></ul>
+    </div>
+    <PostFigure src={dashboardImg} alt="Brand Sentiment dashboard showing positive, neutral and negative descriptors" caption="Recurring descriptors show which qualities AI most often associates with the brand and help explain the overall sentiment score." />
+    <div class="prose">
+      <p>For example, AI might describe the same software company in different ways:</p>
+      <div class="prompt"><strong>Positive:</strong><br />“Easy to use and suitable for growing teams.”</div>
+      <div class="prompt"><strong>Neutral:</strong><br />“A cloud-based accounting platform for SMEs.”</div>
+      <div class="prompt"><strong>Negative:</strong><br />“May have a steep learning curve for first-time users.”</div>
+      <p>The brand is mentioned in every example.</p>
+      <p>What changes is the language around it.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Visibility and perception</span><h2>Why Is a Brand Mention Not Enough?</h2></div>
+    <div class="prose">
+      <p>A business owner may see their company appear in an AI answer and consider that a win.</p>
+      <p>But the mention could still carry a message that affects how a customer sees the business.</p>
+      <p>Imagine someone asks:</p>
+      <div class="prompt">“Which project management tools are suitable for a small construction company?”</div>
+      <p>AI mentions your brand but describes it as:</p>
+      <div class="prompt">“A capable platform, although smaller teams may find the setup complex.”</div>
+      <p>Your business appeared.</p>
+      <p>But the customer also received a possible reason not to choose it.</p>
+      <p>That does not mean every negative phrase causes a lost sale. It does mean visibility and perception answer different questions.</p>
+      <p><a href="/resources/what-is-brand-mention-coverage">Brand Mention Coverage</a> asks whether your business appears.</p>
+      <p>Sentiment asks what AI says once it does.</p>
+      <p>If the description itself seems inaccurate or incomplete, look more closely at <a href="/resources/how-to-check-whether-ai-understands-your-products-services-and-positioning">how AI understands your products, services and positioning</a>.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Favourable descriptions</span><h2>What Does Positive AI Sentiment Look Like?</h2></div>
+    <div class="prose">
+      <p>Positive sentiment appears when AI uses favourable language about the business, its products or the experience around them.</p>
+      <p>Examples might include:</p>
+      <ul><li>reliable;</li><li>practical;</li><li>easy to use;</li><li>flexible;</li><li>well suited to SMEs; and</li><li>strong customer support.</li></ul>
+      <p>The exact wording matters because these descriptions can reveal what AI currently associates with your brand.</p>
+      <p>That does not mean you should immediately copy every positive word into your marketing.</p>
+      <p>First ask whether the description is:</p>
+      <ul><li>accurate;</li><li>relevant to your positioning; and</li><li>supported by what the business actually offers.</li></ul>
+      <p>A positive association only helps if it reflects the business you want customers to understand.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Factual descriptions</span><h2>Is Neutral Sentiment a Bad Thing?</h2></div>
+    <div class="prose">
+      <p>No.</p>
+      <p>Neutral descriptions are often simply factual.</p>
+      <p>For example:</p>
+      <div class="prompt">“ABC Systems provides payroll and HR software for Malaysian businesses.”</div>
+      <p>That sentence is not strongly positive or negative.</p>
+      <p>It tells the reader what the company does.</p>
+      <p>Don't treat neutral wording as a failure just because it lacks praise.</p>
+      <p>Instead, check whether the neutral description is accurate and complete.</p>
+      <p>A neutral answer becomes more important when it leaves out something commercially significant.</p>
+      <p>For example:</p>
+      <div class="prompt">“ABC Systems provides payroll software.”</div>
+      <p>may be accurate, but incomplete if HR management is now one of the company's main services.</p>
+      <p>If AI describes the business accurately but emphasises the wrong service, audience or strength, the issue may be <a href="/resources/how-to-find-the-gap-between-what-you-want-to-be-known-for-and-what-ai-knows-you-for">a gap between your intended positioning and what AI knows you for</a>.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Unfavourable descriptions</span><h2>What Does Negative AI Sentiment Look Like?</h2></div>
+    <div class="prose">
+      <p>Negative sentiment appears when AI uses language that makes the business, product, or service sound less attractive.</p>
+      <p>Examples could include:</p>
+      <ul><li>expensive;</li><li>limited;</li><li>difficult to use;</li><li>slow;</li><li>complicated; and</li><li>lacking certain features.</li></ul>
+      <p>But do not react to the word alone.</p>
+      <p>You first need to understand why AI is saying it.</p>
+      <p>A phrase such as:</p>
+      <div class="prompt">“The platform has limited integrations.”</div>
+      <p>could reflect a real perception.</p>
+      <p>Or it could be based on outdated information about which integrations the product supports.</p>
+      <p>Those are two very different problems.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Branded questions</span><h2>How Do You Check How AI Describes Your Brand?</h2></div>
+    <div class="prose">
+      <p>Start by looking at branded questions.</p>
+      <p>These are questions that contain your business or brand name directly.</p>
+      <p>For example:</p>
+      <ul><li>What is [Brand] known for?</li><li>Is [Brand] good for small businesses?</li><li>What are the strengths of [Brand]?</li><li>What are the drawbacks of [Brand]?</li><li>Who is [Brand] best suited for?</li><li>How does [Brand] compare with alternatives?</li></ul>
+      <p>Branded questions are useful here because you are deliberately asking AI to describe the business.</p>
+      <p>Don't confuse them with non-branded questions used to measure natural discovery.</p>
+      <p>If you are unsure about that distinction, see <a href="/resources/how-to-use-branded-and-non-branded-prompts-without-distorting-ai-visibility">how to use branded and non-branded prompts without distorting your AI visibility</a>.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Accuracy check</span><h2>Is a Negative Description Actually Wrong Information?</h2></div>
+    <div class="prose">
+      <p>This is one of the most important checks.</p>
+      <p>Imagine AI says:</p>
+      <div class="prompt">“ABC Software may be expensive for smaller companies.”</div>
+      <p>Before treating that as negative brand perception, check the facts.</p>
+      <p>Perhaps AI is quoting an old pricing model.</p>
+      <p>Or it may have confused your brand with another product.</p>
+      <p>The same can happen with:</p>
+      <ul><li>old service limitations;</li><li>outdated locations;</li><li>discontinued products;</li><li>incorrect pricing;</li><li>missing features; or</li><li>old customer policies.</li></ul>
+      <p>If the underlying information is wrong, fix the factual problem first.</p>
+      <p>That may mean <a href="/resources/how-to-find-wrong-outdated-business-facts-ai-answers">tracing wrong or outdated business facts in AI answers</a> before treating the issue as a sentiment problem.</p>
+      <p>If the information is correct but customers or AI repeatedly describe it negatively, then you are dealing with a genuine perception issue.</p>
+      <p>Do not try to solve a factual error with better marketing language.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Review process</span><h2>How Should You Review Sentiment?</h2></div>
+    <div class="prose">
+      <p>A simple process is enough.</p>
+      <h3>1. Check Whether the Brand Is Mentioned</h3>
+      <p>If the answer does not mention your business, there is no brand sentiment to assess.</p>
+      <p>That is a visibility problem instead.</p>
+      <h3>2. Read the Description Around the Mention</h3>
+      <p>Look at the sentence or paragraph where your brand appears.</p>
+      <p>Ask:</p>
+      <ul><li>Does it sound favourable?</li><li>Is it mainly factual?</li><li>Does it highlight a weakness?</li></ul>
+      <h3>3. Record the Words That Repeat</h3>
+      <p>Do not collect every adjective.</p>
+      <p>Focus on recurring descriptions across relevant answers.</p>
+      <h3>4. Check the Fact Behind Any Negative Description</h3>
+      <p>Ask whether the criticism is based on information that is:</p>
+      <ul><li>correct;</li><li>outdated;</li><li>incomplete; or</li><li>completely wrong.</li></ul>
+      <h3>5. Separate Perception From Accuracy</h3>
+      <p>If the fact is wrong, correct the information.</p>
+      <p>If the fact is right but the perception is negative, investigate why that perception exists and whether the business needs clearer explanation, stronger evidence or an actual product or service improvement.</p>
+      <p>A platform such as <a href="https://www.zicy.com/">Zicy</a> can bring this together by analysing mentions of your brand, separating positive, neutral, and negative descriptors, and showing the recurring language AI uses.</p>
+      <p>Its <a href="https://docs.zicy.com/module-reference/m-07-brand-sentiment/">documentation</a> also warns against over-reading thin samples, because a small number of mentions can make sentiment less stable.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Practical goal</span><h2>Should You Try to Make Every AI Mention Positive?</h2></div>
+    <div class="prose">
+      <p>No.</p>
+      <p>That would be the wrong goal.</p>
+      <p>Customers need accurate information, not artificial praise.</p>
+      <p>A useful AI description may be neutral.</p>
+      <p>A genuine limitation may also deserve mention.</p>
+      <p>The practical goal is to understand whether AI is describing your business <strong>fairly and accurately</strong>, and whether recurring perceptions match the experience and positioning you want customers to understand.</p>
+      <p>Google's current guidance for generative AI search also continues to emphasise established search fundamentals and useful, reliable information rather than special AI-only optimisation tricks.</p>
+      <p>Do not try to manufacture positive sentiment.</p>
+      <p>Make sure the information supporting your brand is accurate, clear and useful.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Summary</span><h2>Read the Words, Not Just the Mention</h2></div>
+    <div class="prose">
+      <p>Seeing your brand in an AI answer tells you that you are present.</p>
+      <p>It does not tell you what impression the customer receives.</p>
+      <p>Read how AI describes your business. Look for the positive qualities it repeats, the neutral facts it relies on and the negative descriptions that may need investigation.</p>
+      <p>Most importantly, separate a real perception problem from incorrect information.</p>
+      <p>A mention tells you <strong>AI talked about you</strong>.</p>
+      <p>The words around that mention tell you <strong>what it told the customer about you</strong>.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See How AI Describes Your Brand</h2>
+    <p>Zicy helps you track the positive, neutral and negative language AI uses around your brand so you can see which descriptions repeat and which ones deserve a closer look.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt{max-width:700px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}
+  @media (max-width:640px){.prose h3{font-size:19px}.prompt{font-size:16px}}
+</style>

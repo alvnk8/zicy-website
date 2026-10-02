@@ -1,0 +1,214 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/spot-untracked-competitors/untracked-competitors-ai-answers-workflow.png';
+import competitiveImg from '../../assets/resources/spot-untracked-competitors/competitive-landscape-untracked-brands.jpg';
+
+const metaTitle = 'How to Spot Untracked Competitors in AI Answers | Zicy';
+const title = 'How To Spot Untracked Competitors Appearing in AI Answers';
+const description = 'Learn how to spot unfamiliar competitors appearing in AI answers, prioritise which brands deserve attention and trace them back to the customer questions where they appeared.';
+const url = `${SITE.url}/resources/how-to-spot-untracked-competitors-appearing-in-ai-answers`;
+const author = { '@type': 'Person', name: 'Vi Vien Koay' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'How to spot unfamiliar competitors in AI answers', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Spot Untracked Competitors</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Vi Vien Koay &middot; 1 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="Five-step workflow to spot unfamiliar competitors, remove noise, prioritise repeated appearances, read the AI answer and record the discovery" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>AI can surface businesses that are missing from your existing competitor list.</li>
+      <li>An <strong>untracked competitor</strong> is simply a business appearing in relevant AI answers that you are not currently monitoring.</li>
+      <li>The first task is to identify <strong>who appeared and where</strong>, rather than immediately deciding whether the business is a real competitor.</li>
+      <li>If several unfamiliar brands appear, start with the ones showing the strongest or most repeated visibility signals rather than investigating every name equally.</li>
+      <li>Trace unfamiliar brands back to the customer questions and AI answers where they appeared.</li>
+      <li>Once a brand has been spotted, validate whether it genuinely competes for the same customer decision before adding it to your ongoing competitor set.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Competitor discovery</span><h2>How can competitors appear without being on your radar?</h2></div>
+    <div class="prose">
+      <p>Your competitor list usually reflects the businesses you already know from Google searches, customer comparisons, local advertising, sales conversations or past research. But AI answers can introduce other brands that were never added to that list.</p>
+      <p>Imagine you run a commercial cleaning company in Kuala Lumpur and already monitor four competitors you regularly see in Google results, sales pitches and local tenders.</p>
+      <p>Then a potential customer asks an AI platform:</p>
+      <p class="prompt">“Best office cleaning companies in Kuala Lumpur”</p>
+      <p>Your company appears alongside two businesses you recognise — and one you do not.</p>
+      <p>That unfamiliar company was never part of your competitor list, but AI has still placed it into an answer a potential customer could use to create a shortlist.</p>
+      <h3>Why does spotting untracked competitors matter?</h3>
+      <p>If AI is already presenting an unfamiliar business as an option, your potential customers may be seeing it even though you are not monitoring it.</p>
+      <p>That makes early discovery useful. You cannot decide whether a business is a genuine competitor, track its visibility or compare its performance until you know it exists.</p>
+      <p>Spotting an unfamiliar name doesn't automatically mean it's an important competitor. It simply gives you the opportunity to investigate it before it becomes an established competitor you notice much later.</p>
+      <p>The purpose is simple: spot unfamiliar brands early enough to decide whether they deserve further investigation.</p>
+      <p>At this stage, you are answering one simple question:</p>
+      <p class="prompt">“Who is AI surfacing that we are not already watching?”</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">A fragmented picture</span><h2>Why are untracked competitors easy to miss?</h2></div>
+    <div class="prose">
+      <p>There is no single fixed AI results page showing every business competing for your customers.</p>
+      <p>A company may appear in one customer question but not another. It may appear in ChatGPT but be absent from Gemini. In a longer recommendation, an unfamiliar name can also be buried among several businesses you already recognise.</p>
+      <p>As you track more questions across more AI platforms, manually spotting unfamiliar company names quickly becomes impractical. That is why it helps to separate businesses you already monitor from unfamiliar brands newly surfaced in AI answers.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Definition</span><h2>What does an untracked competitor actually mean?</h2></div>
+    <div class="prose">
+      <p>An untracked competitor is a business that appears in AI answers to your customers' questions but isn't in the competitor set you monitor.</p>
+      <p>Its appearance alone doesn't prove it competes with you. What it does show is that AI placed this business in a customer conversation that may overlap with yours, so treat it as a lead to check before you add it to your list.</p>
+      <p>The brand could be:</p>
+      <ul><li>an established rival you overlooked;</li><li>a smaller or newer business;</li><li>a provider that solves the same customer problem in a different way;</li><li>a company relevant to only one of your services or audiences; or</li><li>a one-off mention.</li></ul>
+      <p>The useful question to ask is:</p>
+      <p class="prompt">“Why did this business appear in the same customer conversation as us?”</p>
+      <p>How often it appears, and for which questions, usually gives you the answer.</p>
+      <p>Some AI visibility tools make this distinction explicit. For example, <a href="https://www.zicy.com/">Zicy</a> labels brands that appear in analysed AI answers but are not yet part of your saved competitor set as <strong>Untracked</strong>, making them easier to investigate.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Prioritisation</span><h2>What if you find several untracked brands at once?</h2></div>
+    <div class="prose">
+      <p>You may review your AI answers and find five, ten or more unfamiliar business names.</p>
+      <p>Do not investigate every name equally. Start with businesses that:</p>
+      <ul><li>appear repeatedly;</li><li>show stronger visibility;</li><li>surface in commercially important questions; or</li><li>appear across multiple AI platforms.</li></ul>
+      <p>At this stage, you are simply asking:</p>
+      <p class="prompt">“Which unfamiliar name should I inspect first?”</p>
+      <p>For example:</p>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th scope="col">Untracked brand</th><th scope="col">What you notice</th><th scope="col">Discovery priority</th></tr></thead>
+      <tbody><tr><th scope="row">Brand A</th><td>Appeared briefly with low coverage</td><td>Lower</td></tr><tr><th scope="row">Brand B</th><td>High coverage and stronger ranking</td><td>Check first</td></tr><tr><th scope="row">Brand C</th><td>Appears in several relevant questions</td><td>Check first</td></tr><tr><th scope="row">Brand D</th><td>Weak visibility and little presence</td><td>Watch for now</td></tr></tbody>
+    </table></div>
+    <div class="prose">
+      <p>This turns a long list of unfamiliar brands into a manageable investigation queue.</p>
+      <h3>What can you deprioritise quickly?</h3>
+      <p>Some surfaced names may clearly not need immediate investigation.</p>
+      <p>You may be able to deprioritise:</p>
+      <ul><li>a generic category or product term rather than a company;</li><li>one of your own sub-brands or brand variations;</li><li>a manufacturer mentioned because its product is part of the answer;</li><li>a directory or marketplace that is influencing discovery rather than directly competing;</li><li>a business from an irrelevant market or location;</li><li>another name clearly incidental to the answer.</li></ul>
+      <p>The purpose is not to classify every entity perfectly. Remove the obvious noise and keep uncertain businesses for further investigation.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Record the discovery</span><h2>What should you capture when an unfamiliar brand appears?</h2></div>
+    <div class="prose">
+      <p>You do not need a detailed competitor report yet.</p>
+      <p>Capture five basic pieces of information:</p>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th scope="col">What to record</th><th scope="col">Example</th></tr></thead>
+      <tbody><tr><th scope="row">Brand</th><td>CleanCo</td></tr><tr><th scope="row">Customer question</th><td>“Best office cleaning companies in Kuala Lumpur”</td></tr><tr><th scope="row">AI platform</th><td>Gemini</td></tr><tr><th scope="row">Date spotted</th><td>9 September</td></tr><tr><th scope="row">Why it stood out</th><td>Appeared prominently and was unfamiliar</td></tr></tbody>
+    </table></div>
+    <div class="prose"><p>This gives you enough context to recognise whether the same business appears again and whether a one-off discovery is becoming a pattern.</p></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Efficient review</span><h2>How can you spot unfamiliar competitors more efficiently?</h2></div>
+    <div class="prose">
+      <p>A competitive view can bring the competitors you already monitor together with unfamiliar brands surfaced in analysed AI answers.</p>
+      <PostFigure src={competitiveImg} alt="Competitive Landscape Analysis showing tracked and untracked brands across visibility, ranking, citations, share of voice, sentiment and descriptors" caption="Newly surfaced brands can then be reviewed alongside your existing competitor set before you decide whether they are worth investigating further." />
+      <p>Rather than treating every unfamiliar name as a competitor, use this as a starting point for investigation.</p>
+      <p>The next question is:</p>
+      <p class="prompt">“Where did this business appear, and why?”</p>
+      <h3>Trace the unfamiliar brand back to the actual AI answer</h3>
+      <p>Finding the unfamiliar brand tells you who appeared. Next, find out where and why it appeared.</p>
+      <p>Go back to the customer question and read the actual AI response.</p>
+      <p>Check:</p>
+      <ul><li>which AI platform produced the answer;</li><li>whether the business was recommended or merely mentioned;</li><li>how it was described;</li><li>which other brands appeared alongside it; and</li><li>whether the question reflects a real buying decision.</li></ul>
+      <p>For example:</p>
+      <p class="prompt">“CleanCo appeared in Gemini when a customer asked for the best office cleaning companies in Kuala Lumpur.”</p>
+      <p>That is more useful than simply recording:</p>
+      <p class="prompt">“CleanCo appeared in AI.”</p>
+      <p>The workflow is:</p>
+      <p class="prompt">Unfamiliar brand → customer question → actual AI answer</p>
+      <p>This gives you enough context to decide whether the appearance is worth investigating further.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Step-by-step guide</span><h2>How to spot untracked competitors in AI Answers</h2></div>
+    <div class="prose">
+      <h3>Step 1: Start with commercially relevant AI answers</h3>
+      <p>Review customer questions where AI is likely to recommend or compare businesses. Note unfamiliar names appearing alongside your business or known competitors.</p>
+      <h3>Step 2: Filter out obvious non-competitors</h3>
+      <p>Remove the obvious noise identified earlier, such as generic terms, your own brand variations and clearly irrelevant entities.</p>
+      <p>Keep uncertain names for investigation.</p>
+      <h3>Step 3: Prioritise what to inspect first</h3>
+      <p>Use the visibility and recurrence signals above to decide which unfamiliar brands deserve attention first.</p>
+      <p>The aim is only to prioritise your investigation, not to decide whether the business is a genuine competitor.</p>
+      <p>That avoids repeating the four criteria.</p>
+      <h3>Step 4: Open the customer question</h3>
+      <p>Trace the unfamiliar business back to the question where it appeared.</p>
+      <p>Ask: “What customer need caused this company to appear?”</p>
+      <h3>Step 5: Read the actual AI answer</h3>
+      <p>Check how the business was presented and whether its appearance is commercially relevant.</p>
+      <h3>Step 6: Record the discovery</h3>
+      <p>Capture the five details above so you can recognise whether the same business appears again.</p>
+      <p>Do not add it to your competitor set yet. The next stage is validation.</p>
+      <p>Also distinguish a newly surfaced business from a competitor you already track that simply did not appear during the selected period. The first is a discovery; the second is an absence of visibility data for that period.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Validate the discovery</span><h2>What should you do after spotting an unfamiliar brand?</h2></div>
+    <div class="prose">
+      <p>Once you have spotted an unfamiliar business, the next stage is validation.</p>
+      <p>The key question is:</p>
+      <p class="prompt">“Does this business genuinely compete for the same customer decision as us?”</p>
+      <p>Consider whether it serves the same customers, solves the same problem, operates in the same market and could realistically win the same business.</p>
+      <p>For the full validation process, see <strong><a href="/resources/how-to-find-your-real-competitors-inside-ai-answers">How To Find Your Real Competitors Inside AI Answers</a></strong>.</p>
+      <p>If the business does belong in your competitor set, continue with <strong><a href="/resources/how-to-compare-your-ai-performance-with-competitors">How To Compare Your AI Performance With Competitors Across The Metrics That Matter</a></strong> to benchmark its visibility against yours.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Practical conclusion</span><h2>What spotting an untracked competitor should tell you</h2></div>
+    <div class="prose">
+      <p>A good discovery process should tell you:</p>
+      <ul><li>who appeared;</li><li>where they appeared;</li><li>whether the pattern is repeating; and</li><li>whether the business deserves validation.</li></ul>
+      <p>The sequence is simple:</p>
+      <p class="prompt">Spot first → validate second → compare after that.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See who AI is surfacing<br />{' '}outside your competitor list</h2>
+    <p>AI answers can introduce businesses that may not yet be part of your existing competitor research. Spot unfamiliar brands early, trace them back to the customer questions where they appeared and validate whether they are worth monitoring before adding them to your competitor set.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt{max-width:700px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}
+  .table-wrap{max-width:900px;overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}tbody th{color:var(--ink);font-weight:650}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:145px}.prose h3{font-size:19px}.prompt{font-size:16px}}
+</style>

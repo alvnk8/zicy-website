@@ -1,0 +1,251 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/find-wrong-outdated-business-facts/wrong-outdated-business-facts-ai-answers.png';
+import mismatchImg from '../../assets/resources/find-wrong-outdated-business-facts/ai-business-information-mismatch-review.png';
+
+const metaTitle = 'How to Find Wrong or Outdated Business Facts in AI Answers';
+const title = 'How to Find Wrong or Outdated Business Facts in AI Answers';
+const description = 'Learn how to spot hallucinations, outdated facts, mismatched business information and other errors in AI answers, then verify what is actually true.';
+const url = `${SITE.url}/resources/how-to-find-wrong-outdated-business-facts-ai-answers`;
+const author = { '@type': 'Person', name: 'Vi Vien Koay' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'How to find wrong or outdated business facts in AI answers', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Find Wrong Business Facts</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Vi Vien Koay &middot; 1 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>Wrong AI information can come from hallucinations, outdated facts, conflicting sources, <a href="/resources/how-to-check-for-brand-and-entity-confusion-in-ai-answers">entity confusion</a> or missing context.</li>
+      <li>Red flags include overly specific claims, details that clash with your website or Google Business Profile, and citations that do not support what the AI says.</li>
+      <li>Check one claim at a time against the source most likely to hold the current information, rather than judging the whole answer at once.</li>
+      <li>Prioritise facts customers act on, such as opening hours, address, phone number, services and service area.</li>
+      <li>If the same wrong fact appears across several AI platforms, check whether an older or conflicting version still exists online.</li>
+    </ul></div>
+    <PostFigure src={heroImg} alt="Guide to the types, red flags, priorities and verification process for wrong or outdated business facts in AI answers" />
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>AI can get your business mostly right and still give a customer one detail that changes what they do next.</p>
+      <p>An old opening time, wrong address, outdated service or mixed-up business description can be enough to send someone elsewhere.</p>
+      <p>The important thing is that not every wrong AI answer comes from the same problem. Some details are invented, some are outdated, and others come from conflicting or incomplete information.</p>
+      <p>This article explains how to recognise those differences, spot the main red flags and verify what is actually true without overcomplicating the process.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Business impact</span><h2>Why Do Wrong Business Facts in AI Answers Matter?</h2></div>
+    <div class="prose">
+      <p>An AI answer can get your business mostly right and still give a customer the one detail that changes their decision.</p>
+      <p>It might say you are closed when you are open. It might show an old address, describe a service you stopped offering or send someone to a phone number you no longer use.</p>
+      <p>That matters because customers asking AI about a business are often looking for a quick answer. They may not visit your website afterwards to double-check it.</p>
+      <p>The first thing to understand is that not every incorrect AI answer is the same kind of error.</p>
+      <p>Some details are invented. Others are simply old. Sometimes the AI has found two versions of the same fact, or confused one business with another.</p>
+      <p>Knowing which problem you are looking at makes it much easier to investigate.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Error types</span><h2>What Types of Wrong Business Information Can Appear in AI Answers?</h2></div>
+    <div class="prose">
+      <h3>Hallucinated Information</h3>
+      <p>A hallucination happens when an AI model generates information that sounds plausible but is not actually true.</p>
+      <p>For a business, that could mean AI invents:</p>
+      <ul><li>a service you never offered;</li><li>a branch that does not exist;</li><li>a certification you do not hold;</li><li>a price or statistic that was never published.</li></ul>
+      <p>The main clue is that you cannot find a reliable source for the claim because the information may never have existed in the first place.</p>
+
+      <h3>Outdated Information</h3>
+      <p>This information was once correct, but the business has changed.</p>
+      <p>Common examples include:</p>
+      <ul><li>old opening hours;</li><li>a previous address;</li><li>a former phone number;</li><li>a discontinued service;</li><li>a closed branch;</li><li>an old business description.</li></ul>
+      <p>This can be harder to spot than a complete hallucination because the old information may still appear on older pages or listings.</p>
+
+      <h3>Conflicting or Mismatched Information</h3>
+      <p>Sometimes AI is not dealing with one clearly correct fact.</p>
+      <p>Your website might say one thing while your Google Business Profile or another listing says something different.</p>
+      <p>Google explains that Business Profile information can come from several sources, including information supplied by the business, publicly available web content, licensed third-party data and user contributions.</p>
+      <p>If those sources disagree, different versions of the same business fact can exist online at the same time.</p>
+
+      <h3>Entity Confusion</h3>
+      <p>AI can also mix one business up with another.</p>
+      <p>This is more likely when businesses have similar names, operate in the same category or are located in the same area.</p>
+      <p>The answer may look believable because some of the details are correct, just not for your business.</p>
+      <p>If the name is right but the address, services or company description seem unfamiliar, it is worth checking whether AI has combined information from two different entities.</p>
+      <p class="future-link"><strong><em>Also read: How to Check for Brand and Entity Confusion in AI Answers</em></strong></p>
+
+      <h3>Correct Information Without Enough Context</h3>
+      <p>Not every misleading answer is technically false.</p>
+      <p>A statement can be partly correct but leave out an important condition.</p>
+      <p>For example, AI might say a business offers delivery when that service is only available in selected areas.</p>
+      <p>The information is not entirely wrong, but it can still give the customer the wrong impression.</p>
+      <p>This is why it helps to check the exact wording rather than simply deciding whether an answer is broadly “right” or “wrong”.</p>
+      <p>If AI keeps describing your business too broadly or misses important parts of what you offer, it may be worth <a href="/resources/how-to-check-whether-ai-understands-your-products-services-and-positioning">checking whether it understands your products, services and positioning correctly</a>.</p>
+      <p class="future-link"><strong><em>Also read: How to Check Whether AI Understands Your Products, Services and Positioning</em></strong></p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Quick review</span><h2>How Can You Spot a Wrong AI Business Fact Quickly?</h2></div>
+    <div class="prose">
+      <p>You do not need to fact-check every sentence in an AI answer. Start with details that look unusual, inconsistent or difficult to verify.</p>
+      <p>Watch for these common red flags:</p>
+      <p><strong>Overly specific numbers or claims:</strong> Be cautious when AI gives an exact price, percentage, customer count, year, opening time, distance or service limit that you do not recognise. A precise answer can sound convincing even when the underlying information is wrong or outdated.</p>
+      <p><strong>Details that conflict with your current business information:</strong> If AI shows a different address, opening hour, service or contact detail from your website or Google Business Profile, check which version is actually current. The inconsistency may exist in your own sources as well.</p>
+      <p><strong>Different facts across AI platforms:</strong> If one AI platform gives one answer and another gives something different, the fact is worth verifying. You do not need to decide which platform is “right” until you check the information against a reliable source.</p>
+      <p><strong>Information that seems to belong to another business:</strong> A correct business name paired with an unfamiliar location, service or description can be a sign that AI has mixed your business up with a similarly named company.</p>
+      <p><strong>Citations that do not support the statement:</strong> If a source is provided, open it and check whether it actually says what the AI claims. A citation can help you investigate an answer, but it does not guarantee that the information was interpreted correctly.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Fast verification</span><h2>How Can You Quickly Check Whether an AI Business Fact Is Wrong?</h2></div>
+    <div class="prose">
+      <p>The fastest approach is to stop looking at the whole answer and isolate the questionable claim.</p>
+      <p>Suppose AI says:</p>
+      <p class="prompt">“ABC Dental closes at 6 pm.”</p>
+      <p>You now have one fact to verify.</p>
+      <h3>Start With the Source Closest to the Fact</h3>
+      <p>Use the source most likely to hold the current information.</p>
+      <p>For example:</p>
+      <ul><li><strong>Opening hours or address:</strong> Google Business Profile and official website</li><li><strong>Service offered:</strong> official service or product page</li><li><strong>Phone number:</strong> contact page and Business Profile</li><li><strong>Service area:</strong> location or service-area information</li><li><strong>Price:</strong> current pricing or product page</li><li><strong>Company history:</strong> official About page or reliable company documentation</li></ul>
+      <p>For local businesses, Google Business Profile is particularly important, but it should not be treated as automatically correct.</p>
+      <p>Google lets businesses edit opening hours and service areas, and advises them to keep those details specific and accurate.</p>
+      <h3>Then Search for the Wrong Version</h3>
+      <p>Once you know the correct fact, search for the incorrect version.</p>
+      <p>An old telephone number or address can often reveal where stale information is still being published.</p>
+      <p>You are not trying to audit every website that mentions your company.</p>
+      <p>You are trying to work out whether the strange AI answer came from information that still exists somewhere online, or whether there appears to be no source for it at all.</p>
+      <p>That distinction can help separate an outdated-data problem from a possible hallucination.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Risk first</span><h2>Which Business Facts Should You Check First?</h2></div>
+    <div class="prose">
+      <p>Not every incorrect detail carries the same business risk.</p>
+      <p>For a small or local business, prioritise information that can immediately affect whether someone visits, calls or buys.</p>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th scope="col">Priority</th><th scope="col">Business facts</th><th scope="col">Why they matter</th></tr></thead>
+      <tbody><tr><th scope="row">High</th><td>Opening hours, address, phone number</td><td>Can directly stop a visit or enquiry</td></tr><tr><th scope="row">High</th><td>Main services or products</td><td>May cause customers to rule you out</td></tr><tr><th scope="row">High</th><td>Service area</td><td>Important for local and “near me” questions</td></tr><tr><th scope="row">Medium</th><td>Branch details, booking methods</td><td>Can send customers to the wrong place or process</td></tr><tr><th scope="row">Medium</th><td>Prices and packages</td><td>Can create the wrong expectation before enquiry</td></tr><tr><th scope="row">Lower</th><td>General company descriptions</td><td>Still worth correcting, but often less urgent</td></tr></tbody>
+    </table></div>
+    <div class="prose">
+      <p>Google's Business Profile guidance similarly emphasises accurate addresses, service areas, hours and other core business details.</p>
+      <p>The useful principle is simple:</p>
+      <p class="prompt">Check the facts customers are most likely to act on first.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conflicting sources</span><h2>Where Should You Look for Conflicting Business Information?</h2></div>
+    <div class="prose">
+      <p>Once you know a fact is wrong, check the places where different versions of that information may still exist:</p>
+      <p><strong>Google Business Profile:</strong> Review your address, opening hours, phone number, website, category and service area. Also check for any Google-suggested updates, as Google may change profile information when other sources indicate that existing details are outdated or incorrect.</p>
+      <p><strong>Your website:</strong> Look beyond the homepage. Old branch pages, contact pages, service pages or location pages may still contain previous information even after the main site has been updated.</p>
+      <p><strong>Third-party listings:</strong> Check directories, booking platforms, review sites and other local listings that may still show older business details. Public web content, licensed third-party data and user contributions can all contribute to business information shown across Google services.</p>
+      <p>The aim is not to make every mention of your business identical across the internet. It is to make sure the most important facts customers rely on are clear, current and consistent wherever they are most likely to appear.</p>
+      <p class="future-link"><strong><em>Also read: How to Keep Your Business Facts Consistent Across the Web So AI Can Identify You Correctly</em></strong></p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Look for repetition</span><h2>How Can You Tell If Wrong AI Information Is a One-Off or a Pattern?</h2></div>
+    <div class="prose">
+      <p>Run the same factual question through more than one AI platform.</p>
+      <p>You are not looking for a majority vote on what is true. You establish that from your own business sources.</p>
+      <p>Instead, look at the pattern.</p>
+      <p><strong>One platform is wrong:</strong><br />This may be an isolated response.</p>
+      <p><strong>Several platforms repeat the same old fact:</strong><br />Look for an outdated source that may still be widely available.</p>
+      <p><strong>Every platform gives a different answer:</strong><br />Your public business information may be inconsistent or difficult to interpret.</p>
+      <p>Keep the question as similar as possible when comparing results.</p>
+      <p>If you change the wording significantly, you also change what the AI is being asked to find or explain.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Ongoing monitoring</span><h2>How Can You Check AI Business Facts Without Reviewing Everything Manually?</h2></div>
+    <div class="prose">
+      <p>Manual checking is manageable when you only have a few important questions.</p>
+      <p>It gets harder when you want to compare several customer questions across multiple AI platforms and track which facts keep changing.</p>
+      <p>A practical approach is to keep a clear record of your current business information and compare AI answers against that reference.</p>
+      <p>For businesses checking this regularly, platforms like <a href="https://www.zicy.com/">Zicy</a> can bring these comparisons together by showing possible mismatches between AI answers and the business information provided.</p>
+      <PostFigure src={mismatchImg} alt="Possible AI mismatch reviewed against the business information supplied as the correct reference" caption="Example of a possible AI mismatch being reviewed against the business information used as the reference." />
+      <p>This keeps the focus on the same principle whether you use a tool or check manually: surface the questionable fact first, then verify what is actually true.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Correct the source</span><h2>What Should You Do Once You Confirm an AI Fact Is Wrong?</h2></div>
+    <div class="prose">
+      <p>What happens next depends on the type of error.</p>
+      <p>If the outdated information still appears on your website, Google Business Profile or an important third-party listing, update that source.</p>
+      <p>If several of your own pages disagree, make the current version consistent.</p>
+      <p>If the claim appears to be completely invented and you cannot find any supporting source, there may be nothing specific to remove from your website. In that case, make sure the correct information is clearly published and keep monitoring whether the false claim appears again.</p>
+      <p>For local businesses, focus first on the information customers use to make immediate decisions.</p>
+      <p>You do not need to chase every unusual sentence AI produces.</p>
+      <p>The goal is to remove genuine confusion around the facts that matter.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Long-term accuracy</span><h2>How Can You Reduce Wrong Business Information in AI Answers Over Time?</h2></div>
+    <div class="prose">
+      <p>There is no way to guarantee that every AI answer about your business will always be correct.</p>
+      <p>AI models can still generate false information, even as they become more capable.</p>
+      <p>What a business can do is make its own information easier to verify.</p>
+      <p>Keep the important facts current. Remove obvious contradictions. Check major listings after something changes. And periodically ask AI the same questions customers are likely to ask.</p>
+      <p>Most importantly, do not treat every strange AI answer as the same problem.</p>
+      <p>A hallucination, an old address, a mismatched listing and a confused business identity each point to something different.</p>
+      <p>Once you know what kind of error you are looking at, finding the real issue becomes much easier.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Summary</span><h2>Conclusion</h2></div>
+    <div class="prose">
+      <p>Wrong AI information is easier to deal with once you know what kind of error you are looking at.</p>
+      <p>A hallucination, an outdated fact, a mismatched listing and entity confusion each point to a different problem. Instead of checking everything, focus on the facts customers are most likely to act on, verify them against reliable sources and correct any conflicting information you control.</p>
+      <p>The goal is not to make every AI answer perfect. It is to make your business information clear enough that wrong or outdated details are easier to spot and less likely to mislead customers.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>Find the business facts<br />{' '}AI may be getting wrong.</h2>
+    <p>Compare AI answers with your current business information, identify possible mismatches and investigate the sources behind the facts customers may act on.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}.future-link{color:var(--ink)}
+  .prompt{max-width:700px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}
+  .table-wrap{max-width:900px;overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}tbody th{color:var(--ink);font-weight:650}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:145px}.prose h3{font-size:19px}.prompt{font-size:16px}}
+</style>

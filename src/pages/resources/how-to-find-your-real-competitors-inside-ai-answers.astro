@@ -1,0 +1,431 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/how-to-find-real-competitors/real-competitors-inside-ai-answers.png';
+import competitiveLandscapeImg from '../../assets/resources/how-to-find-real-competitors/competitive-landscape-analysis.jpg';
+import promptAnalysisImg from '../../assets/resources/how-to-find-real-competitors/prompt-analysis-overview.jpg';
+import aiResponseImg from '../../assets/resources/how-to-find-real-competitors/ai-response-brand-mentions.jpg';
+
+const metaTitle = 'How to Find Your Real Competitors Inside AI Answers';
+const title = 'How To Find Your Real Competitors Inside AI Answers';
+const description = 'Discover which brands AI is putting in front of your customers, identify untracked competitors and decide which businesses are worth monitoring.';
+const url = `${SITE.url}/resources/how-to-find-your-real-competitors-inside-ai-answers`;
+const author = { '@type': 'Person', name: 'Vi Vien Koay' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'How to know who your real competitors are inside AI answers', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Find Your Real Competitors</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>How To Find Your Real Competitors Inside AI Answers</h1>
+    <p class="answer">Discover which brands AI is putting in front of your customers, identify untracked competitors and decide which businesses are worth monitoring.</p>
+    <p class="byline">By Vi Vien Koay &middot; 1 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="Four-step process for finding real competitors inside AI answers: spot untracked brands, check buyer questions, validate commercially and decide what to track" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>Your real AI competitors are not always the businesses already on your competitor list.</li>
+      <li>AI can introduce unfamiliar companies into the same recommendation and comparison answers as your brand.</li>
+      <li>One unfamiliar mention does not automatically make a company a competitor. Look for repetition across commercially relevant buyer questions.</li>
+      <li>The strongest test is whether a customer could realistically choose that business instead of yours.</li>
+      <li>AI monitoring can surface unfamiliar brands appearing alongside yours, giving you competitor candidates to investigate.</li>
+      <li>Visibility metrics can help you prioritise which candidates deserve attention, but they do not decide whether a business is a genuine commercial rival.</li>
+      <li>The goal is not to build the longest competitor list. It is to identify who AI is actually putting in front of your potential customers.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">A hidden rival</span><h2>How Can AI Reveal Competitors You Did Not Know You Had?</h2></div>
+    <div class="prose">
+      <p>Imagine you run an aircon servicing company in Kuala Lumpur.</p>
+      <p>You already know your main local competitors. You see their vans, Google listings and ads. These are the companies you normally compare yourself against.</p>
+      <p>Then you start looking at AI answers.</p>
+      <p>A potential customer asks:</p>
+      <p class="prompt"><strong>“Best aircon servicing companies near me”</strong></p>
+      <p>ChatGPT recommends one of your known competitors, your business and another company you barely know.</p>
+      <p>A different customer asks:</p>
+      <p class="prompt"><strong>“Reliable aircon company for a small office in Kuala Lumpur”</strong></p>
+      <p>The unfamiliar company appears again. Then Gemini includes it. Perplexity places it above you.</p>
+      <p>At that point, whether the company was on your original competitor spreadsheet becomes less important.</p>
+      <p>AI is placing it into the same customer consideration set as you. That makes it worth investigating.</p>
+      <p>Traditional competitor research usually starts with businesses you already know. AI answers can expose the businesses your customers are being shown instead.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Definition</span><h2>What Does a Real Competitor Inside AI Answers Mean?</h2></div>
+    <div class="prose">
+      <p>A real AI competitor is a business that keeps appearing as an alternative to you when customers ask relevant buying questions.</p>
+      <p>The key word is “keeps”. A name that turns up in one answer, on one platform, isn’t a competitor yet. If it appears across several related questions, or across more than one AI platform, it probably is.</p>
+      <p>Not every name in an AI answer is a business you compete with. You’ll usually find a mix of these:</p>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">What AI mentions</th><th scope="col">Aircon example</th><th scope="col">Competing for the same customer?</th></tr></thead><tbody>
+      <tr><th scope="row">Direct competitor</th><td>Another aircon servicing company in Petaling Jaya</td><td>Yes</td></tr>
+      <tr><th scope="row">Business with overlapping services</th><td>A general contractor that also services aircon</td><td>Often</td></tr>
+      <tr><th scope="row">Local or regional company you overlooked</th><td>A small aircon specialist in Subang Jaya</td><td>Often</td></tr>
+      <tr><th scope="row">Marketplace or booking platform</th><td>A home-services app that books technicians</td><td>Sometimes</td></tr>
+      <tr><th scope="row">Manufacturer or product brand</th><td>An aircon brand mentioned for its own service centres</td><td>Sometimes</td></tr>
+      <tr><th scope="row">Directory or review site</th><td>A listings site ranking local technicians</td><td>No, but it’s a source AI relies on</td></tr>
+      <tr><th scope="row">Generic category term</th><td>“Licensed HVAC technicians”</td><td>No</td></tr>
+    </tbody></table></div>
+    <div class="prose">
+      <p>To decide which names belong on your list, ask:</p>
+      <p class="prompt"><strong>“Is this business competing for the same customer decision as we are?”</strong></p>
+      <p>Keep the ones that are, and set the rest aside. That keeps your competitor list short enough to be useful. A directory still deserves a second look even if it isn’t a competitor, because it can shape which businesses AI names.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Context changes the set</span><h2>Why Can Your AI Competitor Set Differ From Your Traditional Competitor List?</h2></div>
+    <div class="prose">
+      <p>Your traditional competitor list is usually based on what you already observe:</p>
+      <ul>
+        <li>businesses operating nearby;</li>
+        <li>companies your sales team encounters;</li>
+        <li>brands ranking in Google;</li>
+        <li>names customers mention;</li>
+        <li>competitors your management team already watches.</li>
+      </ul>
+      <p>AI does not have to stay within that list.</p>
+      <p>It may produce a different competitive set depending on the customer’s need.</p>
+      <p>For example:</p>
+      <p class="prompt"><strong>“Best aircon maintenance company for a small office”</strong></p>
+      <p>may produce one set of businesses.</p>
+      <p>While:</p>
+      <p class="prompt"><strong>“Affordable aircon servicing near me”</strong></p>
+      <p>may produce another.</p>
+      <p>The first question may favour businesses associated with commercial maintenance. The second may surface smaller residential providers.</p>
+      <p>Your AI competitor set is therefore contextual.</p>
+      <p>A company can be a serious competitor for one service or customer need without competing with you across your entire business.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Four tests</span><h2>What Makes an Unfamiliar Brand Worth Investigating?</h2></div>
+    <div class="prose">
+      <p>You do not need to investigate every new name with equal urgency.</p>
+      <p>Use four simple tests.</p>
+      <h3>Does It Serve the Same Customer?</h3>
+      <p>Competitive overlap is stronger when both businesses serve the same type of buyer.</p>
+      <p>For an aircon servicing company, another provider serving homes and small offices in Kuala Lumpur may be a direct competitor.</p>
+      <p>A global air-conditioner manufacturer appearing in the same answer is different.</p>
+      <h3>Does It Solve the Same Customer Problem?</h3>
+      <p>Two companies do not need to offer identical services to compete for the same decision.</p>
+      <p>Someone looking for office aircon maintenance might choose:</p>
+      <ul><li>a specialist aircon company;</li><li>a facilities-management provider;</li><li>a broader home or office services platform.</li></ul>
+      <p>They may sit in different categories, but the customer could still choose one instead of another.</p>
+      <h3>Does It Appear Repeatedly?</h3>
+      <p>One appearance may be noise.</p>
+      <p>Repeated appearances across relevant buyer questions are more meaningful.</p>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">Unfamiliar brand</th><th scope="col">Where it appears</th><th scope="col">Initial interpretation</th></tr></thead><tbody>
+      <tr><th scope="row">Company A</th><td>Once in 30 prompts</td><td>Watch, but do not overreact</td></tr>
+      <tr><th scope="row">Company B</th><td>8 commercial prompts</td><td>Worth investigating</td></tr>
+      <tr><th scope="row">Company C</th><td>5 prompts, mainly office servicing</td><td>Possible topic-specific competitor</td></tr>
+      <tr><th scope="row">Company D</th><td>Repeatedly across several AI platforms</td><td>Stronger competitive signal</td></tr>
+    </tbody></table></div>
+    <div class="prose">
+      <p>There is no universal number that automatically turns a business into a competitor.</p>
+      <p>The commercial context matters more than an arbitrary threshold.</p>
+      <h3>Does It Appear in Questions That Matter to Your Business?</h3>
+      <p>This is often the most important test.</p>
+      <p>An unfamiliar company appearing for:</p>
+      <p class="prompt"><strong>“What is aircon maintenance?”</strong></p>
+      <p>may matter less if AI is simply explaining the topic.</p>
+      <p>But repeated appearances for questions such as:</p>
+      <ul>
+        <li>“Best aircon servicing company in Kuala Lumpur”</li>
+        <li>“Reliable aircon maintenance company for an office”</li>
+        <li>“Affordable aircon servicing near me”</li>
+      </ul>
+      <p>are closer to an actual buying decision.</p>
+      <p>Those appearances deserve more attention.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Candidates first</span><h2>Not Every Unfamiliar Name Is a Direct Competitor</h2></div>
+    <div class="prose">
+      <p>Seeing an unfamiliar brand in AI answers does not mean you should immediately add it to your competitor list.</p>
+      <p>AI monitoring tools can surface brands that appear alongside yours across relevant customer questions.</p>
+      <p>Think of unfamiliar names as competitor candidates, not confirmed rivals.</p>
+      <p>AI visibility platforms can make these candidates easier to spot by identifying brands that appear in AI answers but are not yet on your competitor list.</p>
+      <p>Before adding one, ask:</p>
+      <ul>
+        <li>Does it serve the same type of customer?</li>
+        <li>Does it solve the same problem?</li>
+        <li>Does it operate in the same market or location?</li>
+        <li>Could a customer realistically choose it instead of you?</li>
+        <li>Does it appear repeatedly in commercially important buyer questions?</li>
+      </ul>
+      <p>For an aircon servicing company, another local provider repeatedly appearing for:</p>
+      <p class="prompt"><strong>“Best aircon servicing companies near me”</strong></p>
+      <p>is likely to be commercially relevant.</p>
+      <p>An aircon manufacturer, directory or broader home-services platform might appear in the same AI answer without being a direct competitor.</p>
+      <p>A simple way to assess surfaced brands is:</p>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">What AI surfaced</th><th scope="col">How to treat it initially</th></tr></thead><tbody>
+      <tr><th scope="row">Business serving the same buyers and need</th><td>Likely competitor — investigate</td></tr>
+      <tr><th scope="row">Business solving a similar problem differently</th><td>Possible adjacent competitor</td></tr>
+      <tr><th scope="row">Manufacturer or product brand</th><td>Usually not a direct service competitor</td></tr>
+      <tr><th scope="row">Marketplace or directory</th><td>Influences discovery, but may not compete directly</td></tr>
+      <tr><th scope="row">One-off or irrelevant brand</th><td>Usually do not add</td></tr>
+    </tbody></table></div>
+    <div class="prose">
+      <p>The most useful question is:</p>
+      <p class="prompt"><strong>“Could a customer realistically choose this business instead of mine?”</strong></p>
+      <p>If the answer is yes—and the business keeps appearing across important buyer questions—it becomes a stronger candidate for your tracked competitor set.</p>
+      <p>The practical workflow is:</p>
+      <p class="rule"><strong>AI surfaces candidates → you validate them commercially → you decide who to track.</strong></p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Where the overlap happens</span><h2>Why Do Buyer Questions and AI Platforms Matter?</h2></div>
+    <div class="prose">
+      <p>Finding an unfamiliar brand is only the first step. You still need to understand where it is competing with you.</p>
+      <p>The buyer question tells you what customer need is creating the overlap.</p>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">Buyer question</th><th scope="col">Unfamiliar company</th></tr></thead><tbody>
+      <tr><td>Best aircon servicing company near me</td><td>Appears</td></tr>
+      <tr><td>Affordable residential aircon cleaning</td><td>Not mentioned</td></tr>
+      <tr><td>Aircon maintenance for small offices</td><td>#1</td></tr>
+      <tr><td>Emergency aircon repair</td><td>Not mentioned</td></tr>
+      <tr><td>Annual commercial aircon maintenance</td><td>#2</td></tr>
+    </tbody></table></div>
+    <div class="prose">
+      <p>This does not suggest the company is your main competitor across every service.</p>
+      <p>A better conclusion is:</p>
+      <p class="prompt"><strong>“This company is a strong competitor for commercial office maintenance.”</strong></p>
+      <p>Then check whether the same pattern appears across several AI platforms.</p>
+      <p>If the company appears only in one engine, the signal may be platform-specific. If it appears across ChatGPT, Gemini, Perplexity and Google’s AI experiences, the competitive overlap is broader.</p>
+      <p>The useful question becomes:</p>
+      <p class="prompt"><strong>“Where does this business compete with us, and how consistently is AI putting it into that customer decision?”</strong></p>
+      <p>For a deeper comparison, <a href="/resources/how-to-compare-ai-visibility-across-chatgpt-gemini-perplexity-and-google-ai">look at whether the same competitive pattern appears across ChatGPT, Gemini, Perplexity and Google’s AI experiences</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Commercial judgement</span><h2>When Should You Add an Unfamiliar Brand as a Competitor?</h2></div>
+    <div class="prose">
+      <p>There is no fixed Mention Coverage, ranking or Share of Voice threshold that automatically makes an unfamiliar business a real competitor.</p>
+      <p>Instead, combine the AI evidence with your own market knowledge.</p>
+      <p>A candidate becomes more worth tracking when it:</p>
+      <ul>
+        <li>serves the same buyers;</li>
+        <li>competes for the same customer need;</li>
+        <li>appears across multiple commercially relevant prompts;</li>
+        <li>shows enough visibility that benchmarking against it would be useful;</li>
+        <li>is a business you could realistically lose a customer or deal to.</li>
+      </ul>
+      <p>The AI data tells you which brands deserve investigation. Your commercial judgement tells you which ones belong in the competitor set.</p>
+      <p class="rule"><strong>A useful rule is: Discover → validate → track → benchmark.</strong></p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common mistake</span><h2>Adding Every Unfamiliar Brand</h2></div>
+    <div class="prose">
+      <p>If AI surfaces ten unfamiliar names, they might include two genuine rivals, several adjacent businesses, a manufacturer, directories or marketplaces, and a business that appeared only once.</p>
+      <p>Adding all of them would make your competitor list larger, but not more useful.</p>
+      <p>Treat surfaced brands as candidates. Validate whether they compete for the same customers and buying decisions before deciding who deserves ongoing tracking.</p>
+      <p>The principle is simple:</p>
+      <p class="rule"><strong>Do not track every brand AI finds. Track the businesses that matter commercially.</strong></p>
+      <p>Once you have confirmed who belongs in your competitor set, the next step is to benchmark where each competitor is stronger or weaker across visibility, ranking, Share of Voice, citations and AI platforms.</p>
+      <p>For the full comparison workflow, see <strong><a href="/resources/how-to-compare-your-ai-performance-with-competitors">How to Compare Your AI Performance With Competitors Across the Metrics That Matter</a></strong>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Work efficiently</span><h2>How Can You Investigate Unfamiliar Competitors More Efficiently?</h2></div>
+    <div class="prose">
+      <p>Finding unfamiliar brands manually is possible when you are checking only a few AI answers. It becomes harder when you need to review many customer questions, AI platforms and competitors over time.</p>
+      <p>A useful starting point is to bring known competitors and newly surfaced brands into one view so you can identify which unfamiliar names deserve investigation.</p>
+      <PostFigure
+        src={competitiveLandscapeImg}
+        alt="Competitive Landscape Analysis comparing tracked and untracked brands across mention coverage, average ranking, citations, share of voice, sentiment and descriptors"
+        caption="A competitive view can surface unfamiliar brands appearing alongside the businesses you already track and help you decide which ones deserve further investigation."
+      />
+      <p>The screenshot uses an electrical-software account as an illustrative example, but the same approach applies to local and service businesses.</p>
+      <p>To decide which unfamiliar brands to investigate first, look at signals such as:</p>
+      <ul><li>Mention Coverage;</li><li>Average Ranking;</li><li>Citations;</li><li>Share of Voice;</li><li>repeated appearances across relevant questions.</li></ul>
+      <p>A brand with relatively high Mention Coverage, a stronger Average Ranking, meaningful Share of Voice or repeated appearances may deserve investigation before a business that appeared only occasionally.</p>
+      <p>These metrics are useful for prioritising where to look first. They do not determine whether the business is genuinely competing for the same customers.</p>
+      <p>That requires commercial judgement.</p>
+      <p>The next step is to find out which customer questions caused the unfamiliar brand to appear and what role it played in the actual AI answer.</p>
+      <h3>Move From the Unfamiliar Brand to the Buyer Questions</h3>
+      <p>Once you identify a brand worth investigating, trace it back to the customer questions where it appeared.</p>
+      <p>This matters because an overall visibility metric cannot tell you whether the company appeared for an important buying question, an informational query or something only loosely related to your business.</p>
+      <p>This becomes easier when competitor visibility data can be connected back to the individual customer questions behind it.</p>
+      <PostFigure
+        src={promptAnalysisImg}
+        alt="Prompt Analysis overview showing brand mention coverage, website citation coverage, platform coverage, average position, share of voice and citation sources"
+        caption="Prompt-level analysis helps connect an unfamiliar brand to the specific customer question and AI platforms where it appeared."
+      />
+      <p>Then read the actual platform response rather than relying only on the summary metrics.</p>
+      <PostFigure
+        src={aiResponseImg}
+        alt="Expanded AI platform response with brand mentions and website citations shown beneath the full answer"
+        caption="The actual AI response provides the context behind the numbers: which brands were included, how they were positioned and why an unfamiliar business may have entered the customer’s consideration set."
+      />
+      <p>Now ask:</p>
+      <ul>
+        <li>What question caused this business to appear?</li>
+        <li>Is the question commercially important?</li>
+        <li>Is the business being recommended or merely mentioned?</li>
+        <li>Is it competing directly with your brand in the answer?</li>
+        <li>Does the same pattern appear across several AI platforms?</li>
+        <li>Does the brand keep appearing across other relevant buyer questions?</li>
+      </ul>
+      <p>This moves you from:</p>
+      <p class="prompt"><strong>“AI mentioned an unfamiliar company.”</strong></p>
+      <p>to:</p>
+      <p class="prompt"><strong>“AI repeatedly recommends this company when customers ask about office aircon maintenance.”</strong></p>
+      <p>That is a much stronger competitive signal.</p>
+      <p>A platform like <a href="https://www.zicy.com/">Zicy</a> can bring this workflow together, making it easier to investigate unfamiliar brands across tracked questions and AI answers.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Step-by-step guide</span><h2>How to Find Your Real Competitors Inside AI Answers</h2></div>
+    <div class="prose steps">
+      <h3>Step 1: Identify Unfamiliar Brands</h3>
+      <p>Look across the AI answers relevant to your business and note unfamiliar companies that appear alongside your brand or known competitors.</p>
+      <p>Do not assume every unfamiliar name is a competitor.</p>
+      <h3>Step 2: Prioritise Which Candidates to Investigate</h3>
+      <p>Start with brands that:</p>
+      <ul><li>appear repeatedly;</li><li>show stronger visibility;</li><li>appear across several AI platforms; or</li><li>appear in commercially important customer questions.</li></ul>
+      <p>These signals tell you where to investigate first. They do not confirm that the business is a genuine competitor.</p>
+      <h3>Step 3: Open the Buyer Questions Where They Appear</h3>
+      <p>Read the actual AI answers and identify what customer need caused the overlap.</p>
+      <p>Ask: <strong>“Why is AI putting this company into this particular customer decision?”</strong></p>
+      <p>A candidate might appear frequently for office maintenance but rarely for residential servicing. That distinction matters.</p>
+      <h3>Step 4: Apply Your Commercial Judgement</h3>
+      <p>Ask:</p>
+      <ul><li>Same customer?</li><li>Same problem?</li><li>Same geography or market?</li><li>Same buying situation?</li><li>Could you realistically lose business to them?</li></ul>
+      <p>If the answers mostly point to yes, the company is a stronger candidate for your competitor set.</p>
+      <h3>Step 5: Check Where the Overlap Occurs</h3>
+      <p>Determine whether the business competes with you:</p>
+      <ul><li>across most of your services;</li><li>around one particular service;</li><li>for one customer segment;</li><li>in one location;</li><li>or only occasionally.</li></ul>
+      <p>Not every genuine competitor matters equally across the entire business.</p>
+      <h3>Step 6: Decide Whether to Track It</h3>
+      <p>Add the business to your ongoing competitor monitoring if it repeatedly competes for commercially important customer decisions.</p>
+      <p>Monitor it selectively if it matters only around a particular service or topic.</p>
+      <p>Do not add it if it is irrelevant, incidental or something customers would not realistically choose instead of you.</p>
+      <h3>Step 7: Benchmark Confirmed Competitors</h3>
+      <p>Once a business has been validated as a genuine competitor, compare:</p>
+      <ul>
+        <li>how often it appears;</li><li>where it tends to rank;</li><li>how much Share of Voice it captures;</li><li>which AI platforms favour it;</li><li>which buyer questions it performs strongly on;</li><li>which sources support its visibility;</li><li>whether its advantage persists over time.</li>
+      </ul>
+      <p>For the full benchmarking workflow, see <strong><a href="/resources/how-to-compare-your-ai-performance-with-competitors">How to Compare Your AI Performance With Competitors Across the Metrics That Matter</a></strong>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Decision guide</span><h2>How Should You Treat an Unfamiliar Brand?</h2></div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">What you find</th><th scope="col">What it suggests</th><th scope="col">What to do</th></tr></thead><tbody>
+      <tr><td>Appears once in one answer</td><td>Weak signal</td><td>Watch for recurrence</td></tr>
+      <tr><td>Repeated across buying prompts</td><td>Possible real competitor</td><td>Investigate</td></tr>
+      <tr><td>Appears across several AI platforms</td><td>Broader competitive signal</td><td>Prioritise review</td></tr>
+      <tr><td>Strong mainly around one use case</td><td>Topic-specific competitor</td><td>Monitor that service/topic</td></tr>
+      <tr><td>Same buyers, problem and market</td><td>Strong direct-rival signal</td><td>Consider tracking</td></tr>
+      <tr><td>Similar solution but weaker commercial overlap</td><td>Adjacent competitor</td><td>Monitor selectively</td></tr>
+      <tr><td>Manufacturer or product brand</td><td>May only be part of the answer</td><td>Do not add automatically</td></tr>
+      <tr><td>Directory or marketplace</td><td>Influences customer discovery</td><td>Monitor separately if useful</td></tr>
+      <tr><td>Irrelevant or one-off entity</td><td>Little commercial value</td><td>Exclude</td></tr>
+    </tbody></table></div>
+    <div class="prose">
+      <p>The aim is not to label every entity perfectly. It is to decide:</p>
+      <p class="prompt"><strong>“Does comparing our AI performance against this business help us understand who we are actually competing with for customers?”</strong></p>
+      <p>If yes, it probably deserves a place in your competitor analysis.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Look for persistence</span><h2>Do Not Treat One AI Answer as a Market Shift</h2></div>
+    <div class="prose">
+      <p>AI answers change.</p>
+      <p>A new company appearing once does not mean your competitive landscape has suddenly changed.</p>
+      <p>Look for repetition. The signal becomes stronger when the same unfamiliar company:</p>
+      <ul>
+        <li>appears across several commercially important prompts;</li>
+        <li>remains visible over several analysis periods;</li>
+        <li>appears across more than one AI platform;</li>
+        <li>repeatedly ranks ahead of your business.</li>
+      </ul>
+      <p>A pattern that persists across important prompts, platforms and analysis periods deserves more attention.</p>
+      <p>If you are unsure whether the pattern is temporary or persistent, see <a href="/resources/how-to-read-daily-weekly-and-monthly-ai-visibility-trends">How to Read Daily, Weekly and Monthly AI Visibility Trends</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Next step</span><h2>What Should You Do After Finding a Real Competitor?</h2></div>
+    <div class="prose">
+      <p>Once you decide a business genuinely belongs in your competitor set, the question changes from <strong>“Is this company a competitor?”</strong> to <strong>“Where is this competitor stronger than us?”</strong></p>
+      <p>Now compare:</p>
+      <ul>
+        <li>where it appears more often;</li>
+        <li>which AI platforms favour it;</li>
+        <li>which buyer questions it wins;</li>
+        <li>whether AI cites its website more often;</li>
+        <li>whether its advantage is broad or topic-specific;</li>
+        <li>whether that advantage persists over time.</li>
+      </ul>
+      <p>Do not jump straight to copying the competitor’s content or changing your website. First establish where the competitive advantage actually exists.</p>
+      <p>If the investigation instead shows that AI is confusing your business with another company or describing your services incorrectly, move to <strong><a href="/resources/how-to-find-wrong-outdated-business-facts-ai-answers">How to Find Wrong or Outdated Business Facts in AI Answers</a></strong>.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">A useful conclusion</span><h2>What a Strong AI Competitor Discovery Process Should Tell You</h2></div>
+    <div class="prose">
+      <p>Return to the aircon servicing company.</p>
+      <p>At first, the owner sees an unfamiliar business appearing in AI recommendations. The easy conclusion is: <strong>“We have a new competitor.”</strong></p>
+      <p>A proper investigation reveals something more useful.</p>
+      <p>The unfamiliar company:</p>
+      <ul>
+        <li>repeatedly appears for small-office maintenance questions;</li>
+        <li>rarely appears for residential servicing;</li>
+        <li>appears across several AI platforms;</li>
+        <li>serves the same local business customers;</li>
+        <li>frequently ranks above the owner’s company on commercial-maintenance prompts.</li>
+      </ul>
+      <p>The conclusion becomes:</p>
+      <p class="prompt"><strong>“This is a real competitor for our office-maintenance business, even though it is not a major competitor across every service we offer.”</strong></p>
+      <p>That is what strong competitor discovery should produce: not the longest possible list of brands, but a clearer picture of who AI puts in front of your customers, where they compete with you and whether they genuinely belong in your competitor set.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See who AI puts next<br />{' '}to your business.</h2>
+    <p>Zicy helps you surface tracked and untracked brands inside AI answers, investigate where they appear and decide which businesses are worth monitoring and benchmarking.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt,.rule{max-width:700px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}.rule{background:#f5f8ff}
+  .table-wrap{overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}tbody th{color:var(--ink);font-weight:650}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:145px}.prose h3{font-size:19px}.prompt,.rule{font-size:16px}}
+</style>

@@ -1,0 +1,407 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/compare-ai-performance-with-competitors/benchmark-ai-performance-against-competitors.png';
+import citationImg from '../../assets/resources/compare-ai-performance-with-competitors/prompt-analysis-citation-sources.jpg';
+import competitiveImg from '../../assets/resources/compare-ai-performance-with-competitors/competitive-landscape-analysis.jpg';
+
+const metaTitle = 'How to Compare Your AI Performance With Competitors';
+const title = 'How To Compare Your AI Performance With Competitors Across The Metrics That Matter';
+const description = 'Benchmark your AI visibility against competitors using Mention Coverage, Average Ranking, Share of Voice and citations across major AI platforms.';
+const url = `${SITE.url}/resources/how-to-compare-your-ai-performance-with-competitors`;
+const author = { '@type': 'Person', name: 'Vi Vien Koay' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'How to benchmark your AI performance against competitors', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Compare AI Performance</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Vi Vien Koay &middot; 1 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose">
+      <PostFigure src={heroImg} alt="How to benchmark AI performance against competitors using core metrics, platform comparisons, buyer questions, sources and actionable findings" />
+      <ul><li>Mention Coverage shows how consistently your brand appears in relevant AI answers.</li><li>Average Ranking shows how prominently you tend to appear when AI recommends several businesses. Lower is better.</li><li>Share of Voice measures how much of the competitive brand conversation you capture.</li><li>Citations show which websites and other sources AI surfaces when answering.</li><li>A competitor can lead on one metric and still be weaker on another.</li><li>Overall averages can hide major differences between ChatGPT, Gemini, Perplexity and Google’s AI experiences.</li><li>The goal is not to declare one universal winner. It is to identify where competitors have an advantage that matters to your business.</li></ul>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Competitive context</span><h2>How do you know if your brand is outperforming competitors in AI answers?</h2></div>
+    <div class="prose">
+      <p>Imagine you run an aircon servicing company in Petaling Jaya.</p>
+      <p>A customer asks ChatGPT:</p>
+      <p class="prompt">“Best aircon servicing companies near me”</p>
+      <p>Your company appears in the answer, which sounds positive.</p>
+      <p>But another company appears first, receives a longer description and has its website linked. Your business appears third with no link.</p>
+      <p>Did you perform well because you were mentioned?</p>
+      <p>Or poorly because the competitor received more prominence and stronger citation support?</p>
+      <p>This is why simply asking “Does AI mention my business?” is not enough.</p>
+      <p>A competitor may appear more frequently but usually rank lower. Another may appear less often but dominate questions closer to a buying decision. A third may have similar visibility but receive far more citations.</p>
+      <p>There is no single “AI ranking” that settles who is ahead.</p>
+      <p>A useful comparison looks at several metrics together, then asks where the differences occur — by AI platform and by customer question.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Core metrics</span><h2>What should you compare between your brand and competitors?</h2></div>
+    <div class="prose">
+      <p>Four metrics give you a useful starting point.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Metric</th><th scope="col">What it tells you</th><th scope="col">The question it answers</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Mention Coverage</th><td>How often your business appears</td><td>Are we getting into the answer?</td></tr>
+          <tr><th scope="row">Average AI Ranking</th><td>Where you tend to appear when named</td><td>How prominent are we?</td></tr>
+          <tr><th scope="row">Share of Voice</th><td>Your share of total brand mentions</td><td>How much of the conversation do we capture?</td></tr>
+          <tr><th scope="row">Citations</th><td>Which websites or other sources AI surfaces</td><td>What information is supporting the answer?</td></tr>
+        </tbody></table></div>
+      <p>These signals can be compared across major AI platforms such as ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <p>The important part is not deciding which metric matters most. It is understanding what each tells you — and what it does not.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Mention coverage</span><h2>What does mention coverage tell you?</h2></div>
+    <div class="prose">
+      <p>Mention Coverage tells you how consistently your business appears across the AI answers being analysed.</p>
+      <p>Suppose your aircon business tracks questions such as:</p>
+      <p class="prompt">“Best aircon servicing companies near me”</p>
+      <p class="prompt">“Reliable aircon servicing company in Petaling Jaya for a small office”</p>
+      <p class="prompt">“Affordable aircon maintenance near me”</p>
+      <p>If your business appears in 60% of the analysed answers while Competitor A appears in 80%, Competitor A is entering more relevant conversations.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Brand</th><th scope="col">Mention Coverage</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Your business</th><td>60%</td></tr>
+          <tr><th scope="row">Competitor A</th><td>80%</td></tr>
+          <tr><th scope="row">Competitor B</th><td>45%</td></tr>
+        </tbody></table></div>
+      <p>That matters because you cannot be considered if you do not enter the answer.</p>
+      <p>But Mention Coverage tells you only whether you appeared.</p>
+      <p>It does not tell you where you appeared, how much attention you received or whether your website was cited.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Average ranking</span><h2>What does average ranking tell you?</h2></div>
+    <div class="prose">
+      <p>Average Ranking shows where your business tends to appear when AI names several brands.</p>
+      <p>If an answer lists:</p>
+      <ol><li>Competitor A</li><li>Your business</li><li>Competitor B</li></ol>
+      <p>your position is #2.</p>
+      <p>Across many answers, those positions can be averaged. In most AI visibility monitoring, a lower Average Ranking means the brand tends to appear closer to the top of recommendation lists.</p>
+      <p>Now compare:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Brand</th><th scope="col">Mention Coverage</th><th scope="col">Average Ranking</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Brand A</th><td>80%</td><td>#3.1</td></tr>
+          <tr><th scope="row">Brand B</th><td>55%</td><td>#1.8</td></tr>
+        </tbody></table></div>
+      <p>Brand A appears more often.</p>
+      <p>Brand B appears less often, but tends to be placed more prominently when it does.</p>
+      <p>That is why Mention Coverage and Average Ranking should be read together.</p>
+      <p>One tells you how often you enter the conversation. The other tells you how strongly you are positioned once you are there.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Share of voice</span><h2>What does share of voice tell you?</h2></div>
+    <div class="prose">
+      <p>Share of Voice looks at how much of the overall brand conversation your business captures.</p>
+      <p>Imagine AI produces 100 total brand mentions across the customer questions you track.</p>
+      <p>If 20 belong to your business, your Share of Voice is 20%.</p>
+      <p>Now compare:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Brand</th><th scope="col">Mention Coverage</th><th scope="col">Share of Voice</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Your business</th><td>75%</td><td>14%</td></tr>
+          <tr><th scope="row">Competitor A</th><td>62%</td><td>25%</td></tr>
+        </tbody></table></div>
+      <p>Your business appears in more answers.</p>
+      <p>Yet Competitor A captures more of the overall brand conversation.</p>
+      <p>The useful question therefore changes from:</p>
+      <p class="prompt">“Are we being mentioned?”</p>
+      <p>to:</p>
+      <p class="prompt">“When AI discusses businesses in our category, how much of that conversation belongs to us?”</p>
+      <p>Share of Voice helps quantify the competitive gap, but it does not explain why that gap exists.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Citation context</span><h2>What do citations tell you about competitor performance?</h2></div>
+    <div class="prose">
+      <p>Being mentioned and being cited are different.</p>
+      <p>AI might name your business without linking to it. In another answer, it may recommend a competitor and link directly to that competitor’s website.</p>
+      <p>Both businesses were mentioned, but only one had its website surfaced as a source.</p>
+      <p>That matters because citations help you understand which sources AI is using or presenting alongside its answer.</p>
+      <p>If your business has healthy Mention Coverage but competitors receive more citations, do not immediately assume their website is better.</p>
+      <p>Instead ask:</p>
+      <p class="prompt">“Which sources are appearing when AI talks about them?”</p>
+      <p>AI may be citing the competitor’s own website, a review platform, an industry directory, a local publication or another third-party source.</p>
+      <h3>How should you interpret website citations?</h3>
+      <p>For an individual customer question, check two separate things:</p>
+      <ol><li>Was your brand mentioned?</li><li>Was your website actually cited or linked?</li></ol>
+      <p>These are not the same signal.</p>
+      <p>For example, your business may appear in an AI recommendation without your website being cited. Another business might appear in the same answer and have its service page linked directly.</p>
+      <p>The distinction is:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Signal</th><th scope="col">What it means</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Brand mention</th><td>AI names your business</td></tr>
+          <tr><th scope="row">Website citation</th><td>AI cites or links to your website</td></tr>
+          <tr><th scope="row">Citation source</th><td>The actual source surfaced, which could be your site, a competitor site or a third party</td></tr>
+        </tbody></table></div>
+      <h3>Example: looking beyond the citation percentage</h3>
+      <p>A citation percentage tells you how often AI linked to your website. It doesn't tell you which other sources AI used for the same question, and that is often where the useful detail is.</p>
+      <p>In the example below, the brand scored:</p>
+      <ul><li>Brand Mention Coverage: 5/5 platforms</li><li>Website Citation Coverage: 5/5 platforms</li></ul>
+      <p>The analysis also surfaced 29 unique citation URLs: 10 owned, 10 earned and 9 competitor sources.</p>
+      <PostFigure src={citationImg} alt="Prompt Analysis showing mention coverage, website citation coverage and owned, earned and competitor citation sources" caption="A prompt-level view can show brand mentions, website citations and the owned, earned and competitor sources surfaced for one tracked question." />
+      <p>So even with a perfect citation score, nearly a third of the sources AI drew on belonged to competitors. That leads to a better question:</p>
+      <p class="prompt">"What types of sources do AI platforms use when they answer this customer question?"</p>
+      <p>For your own business, you might find AI relies mainly on:</p>
+      <ul><li>your own website;</li><li>third-party reviews;</li><li>industry publications;</li><li>directories; or</li><li>competitor websites.</li></ul>
+      <p>If competitor URLs keep appearing and yours don't, their higher citation score is only the symptom. The cause is usually in the pages themselves, so ask:</p>
+      <p class="prompt">"What information is AI finding on those pages that it can't find on ours?"</p>
+      <p>For a closer look, see <a href="/resources/how-to-read-a-single-tracked-prompt-and-see-the-exact-ai-answers-behind-your-scores">how to read a single tracked prompt and the exact AI answers behind your scores</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Read metrics together</span><h2>Why can one competitor look stronger on one metric but weaker on another?</h2></div>
+    <div class="prose">
+      <p>Because each metric measures a different part of the same competitive picture.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Pattern</th><th scope="col">What it may mean</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">High Mention Coverage + weaker ranking</th><td>AI knows the business but rarely places it first</td></tr>
+          <tr><th scope="row">Lower Mention Coverage + strong ranking</th><td>Strong when relevant, but relevant to fewer questions</td></tr>
+          <tr><th scope="row">High Mention Coverage + low Share of Voice</th><td>Frequently included, but competitors receive more attention</td></tr>
+          <tr><th scope="row">Strong mentions + weak citations</th><td>AI knows the brand but often surfaces other sources</td></tr>
+        </tbody></table></div>
+      <p>None of these patterns proves the cause by itself.</p>
+      <p>A weak citation rate does not automatically mean your content is poor. A competitor ranking above you does not automatically mean it has “better SEO”.</p>
+      <p>Treat the numbers as signals telling you where to investigate next.</p>
+      <p>A useful competitor analysis moves from:</p>
+      <p class="prompt">metric → platform → customer question → AI answer → source</p>
+      <p>That sequence keeps you from guessing.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Platform differences</span><h2>Why should you compare AI platforms separately?</h2></div>
+    <div class="prose">
+      <p>AI isn't one platform. The same buyer question can produce different results in ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <p>Your aircon company might be named first in ChatGPT. Gemini might list two competitors and leave you out. Perplexity might include you but cite a directory instead of your website.</p>
+      <p>A single overall score hides those differences. In one <a href="/case-studies/b2b-logistics-ai-procurement-filter">B2B logistics case study</a>, overall Brand Mention Coverage was 67.4%. Broken down by platform, it was very uneven:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">AI platform</th><th scope="col">Brand Mention Coverage</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Google AI Overviews</th><td>93.9%</td></tr>
+          <tr><th scope="row">Perplexity</th><td>92.9%</td></tr>
+          <tr><th scope="row">Google AI Mode</th><td>91.1%</td></tr>
+          <tr><th scope="row">Gemini</th><td>44.6%</td></tr>
+          <tr><th scope="row">ChatGPT</th><td>17.9%</td></tr>
+        </tbody></table></div>
+      <p>Source: Zicy, anonymised B2B logistics client, 140+ buying prompts tracked over five weeks, August 2026.</p>
+      <p class="prompt">"Our coverage is 67.4%" doesn't give the team anything to act on. "We're already strong across Google's AI features and Perplexity, and ChatGPT is the gap" does, because it tells them where to look first.</p>
+      <p>The same applies to competitors. Instead of asking who is strongest overall, ask:</p>
+      <p class="prompt">"Where does each competitor have an advantage, and on which platform?"</p>
+      <p>A rival that leads in ChatGPT but barely appears in Google AI Overviews is a different problem from one that leads everywhere.</p>
+      <p>To go further, see <a href="/resources/how-to-compare-ai-visibility-across-chatgpt-gemini-perplexity-and-google-ai">how to compare your AI visibility across ChatGPT, Gemini, Perplexity and Google AI</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Prompt-level detail</span><h2>Why should you look at individual buyer questions?</h2></div>
+    <div class="prose">
+      <p>An overall average tells you a gap exists. The individual buyer questions tell you where it is.</p>
+      <p>Say your AI Share of Voice is 18% and your closest competitor's is 20%. On its own, a two-point difference tells you very little. The picture changes when you look at the questions underneath it:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Customer question</th><th scope="col">Your business</th><th scope="col">Competitor A</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Best aircon servicing companies near me</th><td>#3</td><td>#1</td></tr>
+          <tr><th scope="row">Affordable aircon servicing in Petaling Jaya</th><td>#1</td><td>#3</td></tr>
+          <tr><th scope="row">Aircon servicing for a small office</th><td>Not mentioned</td><td>#1</td></tr>
+        </tbody></table></div>
+      <p>Illustrative example.</p>
+      <p>Your business does well when customers ask about price. Competitor A takes over when they ask about servicing an office, and on that question you don't appear at all. Almost all of that two-point difference could come from one type of customer.</p>
+      <p class="prompt">"Increase Share of Voice" isn't something a team can act on. This question is:</p>
+      <p class="prompt">"Why does Competitor A keep appearing for small-office aircon servicing when we don't?"</p>
+      <p>From there you can read the answers AI gave, see what it says about Competitor A's office services, and check whether your own website explains yours.</p>
+      <p>To investigate one question in detail, see <a href="/resources/how-to-read-a-single-tracked-prompt-and-see-the-exact-ai-answers-behind-your-scores">how to read a single tracked prompt and see the exact AI answers behind your scores</a>.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Competitor discovery</span><h2>What if an unfamiliar competitor keeps appearing?</h2></div>
+    <div class="prose">
+      <p>Your competitor list is based on businesses you already know.</p>
+      <p>AI does not have to follow that list.</p>
+      <p>You may discover another local aircon company repeatedly appearing in the same recommendations even though you never considered it a major competitor.</p>
+      <p>AI monitoring may surface businesses that are not already part of your competitor list. Treat these as competitor candidates until you have checked whether they genuinely compete for the same customers and buying decisions.</p>
+      <p>If an unfamiliar business keeps appearing in commercially important answers, investigate it before adding it as a competitor.</p>
+      <p>The next step is to determine whether it is a genuine direct rival, an adjacent alternative or simply an occasional mention.</p>
+      <p>Some monitoring platforms can surface brands that are not yet part of your competitor list, making them easier to investigate.</p>
+      <p>Related detailed guide: <a href="/resources/how-to-spot-untracked-competitors-appearing-in-ai-answers">How to Spot Untracked Competitors Appearing in AI Answers</a></p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Diagnosis workflow</span><h2>How should you investigate a competitor performance gap?</h2></div>
+    <div class="prose">
+      <p>Once you identify a difference between your brand and a competitor, do not stop at the headline metric.</p>
+      <p>Start with the overall comparison and ask:</p>
+      <p class="prompt">“Where is this gap actually happening?”</p>
+      <p>A side-by-side view can help you identify which difference deserves attention first.</p>
+      <p>For example, a competitive view can bring your brand, known competitors and newly surfaced brands into one comparison across the main visibility metrics.</p>
+      <PostFigure src={competitiveImg} alt="Competitive Landscape Analysis comparing brands across mention coverage, average ranking, citations, share of voice, sentiment and descriptors" caption="A competitive comparison can show differences in Mention Coverage, Average Ranking, citations and Share of Voice across the brands being analysed." />
+      <p>Do not try to interpret every number at once.</p>
+      <p>Look for a meaningful pattern, such as:</p>
+      <ul><li>one competitor appearing much more consistently;</li><li>another appearing less often but tending to rank higher;</li><li>similar Mention Coverage but different Share of Voice;</li><li>a large difference in citations; or</li><li>an unfamiliar brand appearing often enough to investigate.</li></ul>
+      <p>The purpose of the overall comparison is to identify where to investigate next, not to declare one business the overall winner.</p>
+      <p class="prompt">Once you identify a meaningful difference, drill down from the metric → AI platform → buyer question → actual answer → source.</p>
+      <p>The step-by-step process below shows how.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Step-by-step guide</span><h2>How to compare your AI performance with competitors</h2></div>
+    <div class="prose">
+      <h3>Step 1: Start with the overall competitive picture</h3>
+      <p>Compare your business with the competitors appearing alongside it.</p>
+      <p>Look for a meaningful difference in Mention Coverage, Average Ranking, Share of Voice or citations.</p>
+      <p>Your first finding might simply be:</p>
+      <p class="prompt">“Competitor A appears much more often than us.”</p>
+      <p>Or:</p>
+      <p class="prompt">“Our Mention Coverage is similar, but Competitor B usually appears higher.”</p>
+      <p>That is enough to begin.</p>
+      <h3>Step 2: Identify the metric behind the gap</h3>
+      <p>Ask what the difference represents:</p>
+      <ul><li>Mention Coverage: are you absent from too many relevant answers?</li><li>Average Ranking: do competitors tend to appear above you?</li><li>Share of Voice: are competitors capturing more of the brand conversation?</li><li>Citations: are other sources being surfaced more often?</li></ul>
+      <p>Do not try to fix anything yet. First understand the type of gap.</p>
+      <h3>Step 3: Check whether the gap is platform-specific</h3>
+      <p>Compare the result across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <p>Ask:</p>
+      <p class="prompt">“Is this happening everywhere?”</p>
+      <p>If the gap appears on only one platform, investigate that platform first.</p>
+      <p>If the same pattern appears across several, the competitive difference is broader.</p>
+      <h3>Step 4: Open the buyer questions behind the difference</h3>
+      <p>Choose a commercially important question where the competitor clearly performs better.</p>
+      <p>Check:</p>
+      <p>whether your business appears;</p>
+      <p>where both businesses are positioned;</p>
+      <p>which brands appear above you;</p>
+      <p>whether your website is cited; and</p>
+      <p>what the AI actually says.</p>
+      <p>Do not inspect every question at once.</p>
+      <p>Start with the questions that matter most commercially.</p>
+      <h3>Step 5: Check the sources behind the answer</h3>
+      <p>If the competitor appears more strongly, inspect the sources AI surfaces alongside it.</p>
+      <p>For example:</p>
+      <p>Is AI citing the competitor’s service page?</p>
+      <p>A local directory?</p>
+      <p>A review platform?</p>
+      <p>An industry article?</p>
+      <p>A third-party comparison?</p>
+      <p>A citation tells you what information surfaced in the answer. It does not prove that copying the source or page will improve your own visibility.</p>
+      <h3>Step 6: Write down one specific competitive finding</h3>
+      <p>Do not stop at:</p>
+      <p class="prompt">“Competitor A has higher Share of Voice.”</p>
+      <p>Turn the metric into a specific observation about where the difference occurs and what evidence is behind it.</p>
+      <p>For example:</p>
+      <p class="prompt">“Competitor A appears more consistently on office-aircon servicing questions, while our business performs more strongly on residential and affordability questions.”</p>
+      <p>A platform like <a href="https://www.zicy.com/">Zicy</a> can bring this comparison and drill-down process together, making it easier to move from a competitive gap to the platforms, buyer questions, answers and sources behind it.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Actionable insight</span><h2>What does a useful competitor finding look like?</h2></div>
+    <div class="prose">
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Weak conclusion</th><th scope="col">Useful finding</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Competitor A has better AI visibility</th><td>Competitor A appears more consistently on office-servicing questions</td></tr>
+          <tr><th scope="row">Our ranking is worse</th><td>We rank below Competitor B on three local comparison prompts</td></tr>
+          <tr><th scope="row">Our citations are low</th><td>AI repeatedly surfaces a competitor service page instead of ours</td></tr>
+          <tr><th scope="row">Our Share of Voice fell</th><td>The loss is concentrated on one platform and a small group of prompts</td></tr>
+          <tr><th scope="row">Another company appeared</th><td>An untracked local provider is repeatedly entering buyer recommendations</td></tr>
+        </tbody></table></div>
+      <p>The goal is to turn a dashboard difference into something you can investigate.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Next action</span><h2>What should you do with the competitor gap you find?</h2></div>
+    <div class="prose">
+      <p>The next step depends on what the evidence shows.</p>
+      <p>If an unfamiliar company repeatedly appears, first determine whether it genuinely belongs in your competitor set. See <a href="/resources/how-to-spot-untracked-competitors-appearing-in-ai-answers">How to Spot Untracked Competitors Appearing in AI Answers</a>.</p>
+      <p>If AI is describing your own business incorrectly, investigate the inaccurate information before focusing on competitor performance. See <a href="/resources/how-to-find-wrong-outdated-business-facts-ai-answers">How to Find Wrong or Outdated Business Facts in AI Answers</a>.</p>
+      <p>If competitor metrics suddenly change, look at the longer-term pattern before reacting. See  <a href="/resources/how-to-read-daily-weekly-and-monthly-ai-visibility-trends">How To Read Daily, Weekly And Monthly Ai Visibility Trends</a>.</p>
+      <p>A useful AI visibility workflow is:</p>
+      <p class="prompt">Measure → Diagnose → Act → Prove</p>
+      <p>Measure what is happening first. Diagnose the specific gap second. Only then decide what is worth changing.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Validate the pattern</span><h2>Confirm the pattern before you act</h2></div>
+    <div class="prose">
+      <p>AI answers can change.</p>
+      <p>A competitor may move above you once and disappear again, while citations and rankings can change between analyses.</p>
+      <p>Do not make a major website or content decision from one answer.</p>
+      <p>Look for repetition across:</p>
+      <ul><li>commercially important prompts;</li><li>multiple AI platforms;</li><li>several analysis periods.</li></ul>
+      <p>Also keep the comparison set reasonably consistent.</p>
+      <p>If you add many new prompts or change markets, the numbers may move simply because you are now measuring something different.</p>
+      <p>For cleaner comparisons:</p>
+      <ul><li>keep your core buyer questions stable;</li><li>compare similar periods;</li><li>record major changes to what you track;</li><li>investigate the prompts behind large movements.</li></ul>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Practical conclusion</span><h2>What a strong competitor analysis should tell you</h2></div>
+    <div class="prose">
+      <p>Go back to the aircon servicing company. The headline figure says Competitor A has higher Brand Mention Coverage. That's accurate, but it gives you nothing to act on.</p>
+      <p>The more detailed comparison tells you much more:</p>
+      <ul><li>your business performs well when customers ask about affordable servicing;</li><li>Competitor A appears more consistently when they ask about servicing an office;</li><li>most of the gap comes from one or two AI platforms, not all five; and</li><li>AI keeps citing Competitor A's office-maintenance page when it answers those questions.</li></ul>
+      <p>Put together, those four findings point to one question:</p>
+      <p class="prompt">"Why doesn't AI connect our business with office aircon servicing as strongly as it connects Competitor A?"</p>
+      <p>That question has somewhere to start. You can compare Competitor A's office-maintenance page with your own and check whether your website says clearly that you service offices.</p>
+      <p>That's what a competitor comparison should give you: where the gap is, and which evidence to look at first.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See where competitors are<br />{' '}winning the AI answer.</h2>
+    <p>Benchmark your brand across Mention Coverage, Average Ranking, Share of Voice and citations, then trace the gaps back to the AI platforms, buyer questions and sources behind them.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt{max-width:700px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}
+  .table-wrap{overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}tbody th{color:var(--ink);font-weight:650}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:145px}.prose h3{font-size:19px}.prompt{font-size:16px}}
+</style>

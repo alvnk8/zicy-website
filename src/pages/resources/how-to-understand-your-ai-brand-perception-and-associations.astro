@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/understand-ai-brand-perception-associations/understand-ai-brand-perception-associations.jpg';
+
+const metaTitle = 'How to Understand Your AI Brand Perception and Associations';
+const title = 'How to Understand Your AI Brand Perception and Associations';
+const description = 'Learn how to find what AI associates your brand with, whether those associations match your positioning, and where the gaps are across all five platforms.';
+const url = `${SITE.url}/resources/how-to-understand-your-ai-brand-perception-and-associations`;
+const author = { '@type': 'Person', name: 'Deeba Sri' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'How to understand AI brand perception and associations', type: 'image/jpeg' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Understand AI Brand Perception</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Deeba Sri &middot; 1 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>AI does not just name your business. It connects your brand to ideas, qualities and use cases every time it mentions you. Those connections are your brand associations.</li>
+      <li>You may not know what AI is associating with your brand. The associations AI has formed may not match what you want to be known for.</li>
+      <li>There are two types of <a href="/resources/how-to-find-the-gap-between-what-you-want-to-be-known-for-and-what-ai-knows-you-for">association gap</a>: things AI connects to your brand that you did not intend, and things you want to be known for that AI is not picking up.</li>
+      <li>You can check your brand associations by asking AI open questions about your business and reading what it places alongside your name.</li>
+      <li>What AI associates with your brand may look very different from one platform to the next. Check all five before drawing conclusions.</li>
+      <li>AI forms associations from whatever it finds, including reviews, third-party articles and directory categories. You did not write those sources but AI may use them to describe you.</li>
+    </ul></div>
+    <PostFigure src={heroImg} alt="AI brand perception guide comparing what AI associates with a brand and what the business wants to be known for" />
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Introduction</h2></div>
+    <div class="prose">
+      <p>Imagine you run a dental clinic in Sri Petaling. You have built your practice around family dentistry and children's dental care. Your website talks about gentle treatment, nervous patients and family appointments.</p>
+      <p>One evening a parent searches for a dentist for their child. AI recommends several clinics. When it mentions yours, it describes you as a cosmetic dentistry specialist.</p>
+      <p>You were recommended. For something you do not focus on.</p>
+      <p>The parent moves on. They needed a family dentist who is good with children. What AI said about you did not match what they needed.</p>
+      <p>This is the associations problem. Your brand perception is what AI understands your brand to be. The associations AI has built around your name shape that perception. Those connections may not match what you actually want to be known for.</p>
+      <p>This guide shows you how to find out what AI is associating with your brand, and whether those associations are working for you or against you.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">The concept</span><h2>What Brand Associations Actually Are</h2></div>
+    <div class="prose">
+      <p>Every time AI mentions your business, it does not just name you. It places your name alongside other things.</p>
+      <p>Words that describe you. Qualities it connects to your brand. The type of customer it thinks you serve. The situations where it recommends you. The competitors it places you next to.</p>
+      <p>These are your brand associations: the connected ideas AI has built around your name.</p>
+      <p>Some associations you intended. You wanted AI to connect your clinic to gentle treatment and family care. If it does, those are working associations.</p>
+      <p>Some associations you did not intend. If AI connects your clinic to cosmetic procedures or to a competitor you never considered a rival, those are associations that formed without your knowledge.</p>
+      <p>Both matter. Intended associations that AI picks up correctly help the right customers find you. Unintended associations may be sending the wrong customers to you, or steering the right ones away. It also helps to <a href="/resources/how-to-check-whether-ai-describes-your-brand-positively-neutrally-or-negatively">check whether AI describes your brand positively, neutrally or negatively</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Perception gaps</span><h2>Two Types of Association Gap</h2></div>
+    <div class="prose">
+      <p>Not all association problems look the same. There are two types to check for.</p>
+      <p><strong>Associations AI has but you did not intend.</strong> AI is connecting your brand to something you did not plan. Your family dental clinic is associated with cosmetic dentistry. Your clinic is described as serving adults seeking aesthetic treatment when your focus is on children and family care. These associations exist in AI's picture of you. They did not come from your positioning.</p>
+      <p><strong>Associations you intended but AI is not picking up.</strong> You want to be known for gentle treatment and children's dentistry. AI mentions you but never connects you to those qualities. The association you want most is the one AI is missing.</p>
+      <p>Both gaps affect how customers understand your business before they visit your website or contact you.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Source signals</span><h2>Why AI Forms Associations Without Your Input</h2></div>
+    <div class="prose">
+      <p>AI learns from whatever it finds about your business across the web. Your website. Reviews. Press articles. Directories. Social media. Third-party comparisons.</p>
+      <p>If a review mentions cosmetic work you did once, AI may connect you to cosmetic dentistry. If a comparison article places you next to a premium clinic, AI may associate you with that positioning. If your Google Business Profile uses broad category labels, AI may use those labels to describe you.</p>
+      <p>None of these connections were deliberate on your part. AI formed them from the information it found.</p>
+      <p>The associations you intend are the ones your positioning makes clear, repeatedly, across multiple reliable sources. The associations AI forms by accident are the ones that come from inconsistent, incomplete or incidental sources.</p>
+      <p>Your facts can all be correct while the impression they create is not. That impression is your brand perception.</p>
+      <p>Start by asking yourself: what does the most prominent source about your business actually say about you?</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Answer review</span><h2>What to Look for When Checking Brand Associations</h2></div>
+    <div class="prose">
+      <p>You are looking for three things in AI answers about your business.</p>
+      <p>The first is <strong>what AI says you are known for</strong>. When asked to describe your business, what qualities does AI place alongside your name? Are they the ones you intended?</p>
+      <p>The second is <strong>who AI says you serve</strong>. What customer type does AI associate with your business? Does that match your actual target customer?</p>
+      <p>The third is <strong>when AI recommends you</strong>. What situations or problems prompt AI to suggest your business? Are those the situations where you actually want to be found?</p>
+      <p>Read every sentence of every AI answer. Associations hide in the detail. AI may name you correctly in the first sentence and place you in the wrong category in the second.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common mistake</span><h2>The Most Common Mistake: Assuming Mentions Equal Understanding</h2></div>
+    <div class="prose">
+      <p>Many business owners check whether AI mentions them. When they see their name in an answer, they count it as a win.</p>
+      <p>They never read what AI placed alongside their name.</p>
+      <p>A mention is not the same as the right association. AI can name your clinic in a list of recommended dentists and associate you with a service you rarely offer. The customer reads the association, not just the name.</p>
+      <p>The mention happened. The association did the damage.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Cross-platform checks</span><h2>Why Associations Differ Across Platforms</h2></div>
+    <div class="prose">
+      <p>Each AI platform builds its picture of your brand from different sources and uses different methods to form associations.</p>
+      <p>This is why the same question can produce different associations across platforms.</p>
+      <p>One platform may connect you to family dentistry. Another may connect you to cosmetic procedures. A third may associate you with a competitor's positioning.</p>
+      <p>Check all five platforms. Do not assume that one correct association means all platforms have the right picture.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Action plan</span><h2>What to Do First: An Associations Check</h2></div>
+    <div class="prose">
+      <p><strong>Step 1:</strong> Write down three things you most want AI to associate with your brand. The quality you are known for. The customer you serve. The situation where you want to be recommended.</p>
+      <p><strong>Step 2:</strong> Open ChatGPT and ask: “What is [your business name] known for?” Read every sentence. What did AI connect to your name?</p>
+      <p><strong>Step 3:</strong> Ask on the same platform: “Who would you recommend [your business name] to?” Note the customer type AI associates with you.</p>
+      <p><strong>Step 4:</strong> Ask: “When would someone choose [your business name]?” Note the situations AI connects to your brand.</p>
+      <p><strong>Step 5:</strong> Repeat Steps 2, 3 and 4 on Gemini, Perplexity, Google AI Overviews and Google AI Mode. Note every difference across platforms.</p>
+      <p><strong>Step 6:</strong> Compare what you found against what you wrote in Step 1. Write down one association that does not match. Start there.</p>
+      <p>You can do this manually for a small set of questions.</p>
+      <p>Checking three questions across five platforms means fifteen separate answers to read and compare by hand.</p>
+      <p>A platform like <a href="https://www.zicy.com/">Zicy's</a> Brand Intelligence does this automatically across all five platforms.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Comparison</span><h2>What Brand Associations Look Like vs What to Check</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th scope="col">Type of association gap</th><th scope="col">What AI may show</th><th scope="col">What to check</th></tr></thead>
+      <tbody>
+        <tr><td>Unintended association</td><td>AI connects your brand to a service or quality you did not plan</td><td>Whether those associations came from old content, reviews or incidental mentions</td></tr>
+        <tr><td>Missing association</td><td>AI never connects your brand to your key differentiator</td><td>Whether your website and profiles clearly state what you want to be known for</td></tr>
+        <tr><td>Wrong customer type</td><td>AI describes your customer incorrectly</td><td>Whether AI consistently describes the right type of customer across all five platforms</td></tr>
+        <tr><td>Wrong use case</td><td>AI recommends you for situations that do not match your positioning</td><td>Whether the situations AI recommends you for match the problems you actually solve</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Summary</span><h2>Putting It All Together</h2></div>
+    <div class="prose">
+      <p>The dental clinic in Sri Petaling found that two platforms connected them to cosmetic dentistry. One platform described their typical customer as an adult seeking aesthetic treatment. Their family focus and children's dentistry never appeared in any of the five answers.</p>
+      <p>None of that was visible in their brand mention numbers. The score looked healthy. The associations were not.</p>
+      <p>Now they know where to start. Not with whether AI mentions them. With what AI says alongside their name.</p>
+      <p>A mention tells you AI knows you exist. The associations tell you whether AI knows what you actually do and who you actually serve.</p>
+      <p>Those are the associations worth finding.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See what AI connects<br />{' '}to your brand.</h2>
+    <p>Compare brand associations across major AI platforms and find where the picture customers see differs from your intended positioning.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}
+  .table-wrap{max-width:900px;overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{padding:14px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:var(--lavender);color:var(--ink)}
+  @media (max-width:640px){th,td{padding:11px 12px;min-width:145px}}
+</style>

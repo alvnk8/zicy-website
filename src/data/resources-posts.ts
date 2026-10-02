@@ -13,6 +13,86 @@ export interface ResourcePost {
 
 export const RESOURCE_POSTS: ResourcePost[] = [
   {
+    "slug": "how-to-check-whether-ai-describes-your-brand-positively-neutrally-or-negatively",
+    "title": "How to Check Whether AI Describes Your Brand Positively, Neutrally or Negatively",
+    "description": "Learn how to read positive, neutral and negative AI descriptions of your brand, spot recurring sentiment patterns, and separate perception from factual errors.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-01",
+    "authorName": "Nabila Wawan"
+  },
+  {
+    "slug": "how-to-find-the-gap-between-what-you-want-to-be-known-for-and-what-ai-knows-you-for",
+    "title": "How to Find the Gap Between What You Want to Be Known For and What AI Knows You For",
+    "description": "See how to identify gaps between your desired brand positioning and AI’s current view, including missing, outdated and misaligned associations.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-01",
+    "authorName": "Nabila Wawan"
+  },
+  {
+    "slug": "how-to-understand-your-ai-brand-perception-and-associations",
+    "title": "How to Understand Your AI Brand Perception and Associations",
+    "description": "Learn how to find what AI associates your brand with, whether those associations match your positioning, and where the gaps are across all five platforms.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-01",
+    "authorName": "Deeba Sri"
+  },
+  {
+    "slug": "how-to-keep-your-business-facts-consistent-across-the-web-so-ai-can-identify-you-correctly",
+    "title": "How to Keep Your Business Facts Consistent Across the Web So AI Can Identify You Correctly",
+    "description": "Learn how to check your business facts for consistency across the web so AI can build one accurate picture of your business and describe it correctly.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-01",
+    "authorName": "Deeba Sri"
+  },
+  {
+    "slug": "how-to-check-for-brand-and-entity-confusion-in-ai-answers",
+    "title": "How to Check for Brand and Entity Confusion in AI Answers",
+    "description": "Learn how to check whether AI is confusing your business with a similarly named company, and what entity confusion means for your brand visibility.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-01",
+    "authorName": "Deeba Sri"
+  },
+  {
+    "slug": "how-to-check-whether-ai-understands-your-products-services-and-positioning",
+    "title": "How to Check Whether AI Understands Your Products, Services and Positioning",
+    "description": "Learn how to check whether AI understands your products, services and positioning, and whether a brand mention is helping or misleading customers.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-01",
+    "authorName": "Deeba Sri"
+  },
+  {
+    "slug": "how-to-find-wrong-outdated-business-facts-ai-answers",
+    "title": "How to Find Wrong or Outdated Business Facts in AI Answers",
+    "description": "Learn how to spot hallucinations, outdated facts, mismatched business information and other errors in AI answers, then verify what is actually true.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-01",
+    "authorName": "Vi Vien Koay"
+  },
+  {
+    "slug": "how-to-spot-untracked-competitors-appearing-in-ai-answers",
+    "title": "How To Spot Untracked Competitors Appearing in AI Answers",
+    "description": "Learn how to spot unfamiliar competitors appearing in AI answers, prioritise which brands deserve attention and trace them back to the customer questions where they appeared.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-01",
+    "authorName": "Vi Vien Koay"
+  },
+  {
+    "slug": "how-to-compare-your-ai-performance-with-competitors",
+    "title": "How To Compare Your AI Performance With Competitors Across The Metrics That Matter",
+    "description": "Benchmark your AI visibility against competitors using Mention Coverage, Average Ranking, Share of Voice and citations across major AI platforms.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-01",
+    "authorName": "Vi Vien Koay"
+  },
+  {
+    "slug": "how-to-find-your-real-competitors-inside-ai-answers",
+    "title": "How To Find Your Real Competitors Inside AI Answers",
+    "description": "Discover which brands AI is putting in front of your customers, identify untracked competitors and decide which businesses are worth monitoring.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-01",
+    "authorName": "Vi Vien Koay"
+  },
+  {
     "slug": "how-to-read-a-single-tracked-prompt-and-see-the-exact-ai-answers-behind-your-scores",
     "title": "How to Read a Single Tracked Prompt and See the Exact AI Answers Behind Your Scores",
     "description": "Learn how to stop trusting a dashboard number and start reading the actual AI answers behind your scores so you can see exactly what changed and why.",
