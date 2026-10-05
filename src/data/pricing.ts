@@ -208,16 +208,10 @@ export interface ContentBundle {
   save: string;
 }
 export const CONTENT_MODULE = {
-  payg: { credits: 5, priceUsd: 15 },
-  packs: [
-    { name: 'Content Lite', credits: 5, priceUsd: 35 },
-    { name: 'Content Plus', credits: 30, priceUsd: 69 },
-    { name: 'Content Pro', credits: 100, priceUsd: 199 },
-  ] as ContentPack[],
-  bundles: [
-    { name: 'Growth + Content Plus', priceUsd: 239, save: 'save 11%' },
-    { name: 'Scale + Content Pro', priceUsd: 569, save: 'save 12%' },
-  ] as ContentBundle[],
+  // Pay as you go matches the app's +5-credit top-up. Packs and bundles are parked (none sold in the app).
+  payg: { credits: 5, priceUsd: 35 },
+  packs: [] as ContentPack[],
+  bundles: [] as ContentBundle[],
   includedNote:
     'Every plan includes content credits, from 1 on Starter to 50 on Enterprise, so the loop reads as one product from the start. Add capacity below only when you want to publish more.',
 };
@@ -287,7 +281,7 @@ export const PRICING_FAQS: PricingFaq[] = [
   },
   {
     q: 'How do content credits work?',
-    a: 'Content is a separate module you can activate, the Act layer. Buy it pay as you go, in monthly packs, or as a discounted bundle. Every plan includes content credits, from 1 on Starter to 50 on Enterprise.',
+    a: 'Content is a separate module you can activate, the Act layer. Every plan includes content credits, from 1 on Starter to 50 on Enterprise. Need more? Top up pay as you go, 5 credits for $35.',
   },
   {
     q: 'How many seats do I get?',

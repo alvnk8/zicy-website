@@ -20,7 +20,7 @@ const { payg, packs, bundles, includedNote } = CONTENT_MODULE;
     <p class="cm-included mono">{includedNote}</p>
 
     <!-- Packs: credits that do not expire. -->
-    <div class="cm-grid">
+    {packs.length > 0 && <div class="cm-grid">
       {packs.map((p) => (
         <article class="card cm-card">
           <h3>{p.name}</h3>
@@ -28,14 +28,14 @@ const { payg, packs, bundles, includedNote } = CONTENT_MODULE;
           <p class="cm-price"><span class="mono">${p.priceUsd}</span></p>
         </article>
       ))}
-    </div>
+    </div>}
 
     <p class="cm-payg mono">
       Pay as you go: <span>${payg.priceUsd}</span> per {payg.credits} credits.
     </p>
 
     <!-- Bundles: tier plus a pack, priced below the sum of the parts. -->
-    <div class="cm-bundles">
+    {bundles.length > 0 && <div class="cm-bundles">
       <span class="cm-bundles-label eyebrow" style="justify-content:center">Bundles</span>
       <div class="cm-bundle-grid">
         {bundles.map((b) => (
@@ -46,7 +46,7 @@ const { payg, packs, bundles, includedNote } = CONTENT_MODULE;
           </article>
         ))}
       </div>
-    </div>
+    </div>}
   </div>
 </section>
 
