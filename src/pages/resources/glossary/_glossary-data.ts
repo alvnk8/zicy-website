@@ -534,7 +534,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'A cafe\'s listing shows a name that shares no words with the business name on its website, and it has no reviews yet. An audit flags the name mismatch as the more serious finding and the review count as one to note.',
     related: ['ai-visibility', 'entity-gap', 'hallucination'],
     zicy:
-      'Zicy\'s GBP Audit runs seven checks on a connected listing and compares it with up to four competitors you track. Nothing is written back to Google. See <a href="/solutions/smb">Zicy for small businesses</a>.',
+      'Zicy\'s GBP Audit runs nine checks on a connected listing and the website it links to, and compares it with up to four competitors you track. Nothing is written back to Google. See <a href="/solutions/smb">Zicy for small businesses</a>.',
     faqs: [
       {
         q: 'What is a Google Business Profile audit?',
@@ -542,11 +542,11 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       },
       {
         q: 'What does Zicy\'s GBP Audit check?',
-        a: 'Seven things: business hours, website link, phone number, business description, review volume, listed category, and whether the name, address and website domain agree with what is on file.',
+        a: 'Nine things. Seven read the listing: business hours, website link, phone number, business description, review volume, listed category, and whether the name, address and phone agree with the business\'s website, or what is on file. Two look at the website: whether the listing\'s link points to this location\'s own page, and whether the site has a page for this location.',
       },
       {
         q: 'Does an audit change my listing?',
-        a: 'No. Every fix is an instruction you carry into business.google.com yourself.',
+        a: 'No. Every fix is an instruction you carry out yourself, in business.google.com or on your own website.',
       },
     ],
   },
