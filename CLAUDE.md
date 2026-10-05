@@ -49,4 +49,4 @@ These rules are repeated as comments across the data files — apply them to any
 
 ## Screenshots
 
-Real product screenshots used on marketing pages must be the privacy-cleared `anonymised/` variants under `src/assets/screenshots/anonymised/` (these carry a "SAMPLE DASHBOARD" banner and blur brand/competitor/URL regions). See the comment in `src/data/icps.ts` for the privacy-gate rule before adding a new screenshot embed.
+Product screenshots used on marketing pages must be captured ONLY from the demo test account (the three demo profiles MenuPilot, GreenGrid Media and NorthStar Digital) and must carry the mandatory "SAMPLE DASHBOARD" banner, as defined in `vocab/redaction-rules.json` in zicy-tests. Never capture from a real customer account. The old `anonymised/` image set was deleted on 2026-08-05 and must not be referenced. See the comment in `src/data/icps.ts` for the privacy-gate rule before adding a new screenshot embed.
