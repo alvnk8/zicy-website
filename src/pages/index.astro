@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: 'Which engines does Zicy track?',
-    a: 'Zicy tracks the five engines that decide most answers: ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. Enterprise plans can add others, such as Grok and DeepSeek. Every tracked prompt runs across each engine, so one prompt returns a reading from all five.',
+    a: 'Zicy tracks the five engines that decide most answers: ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. Every tracked prompt runs across each engine, so one prompt returns a reading from all five.',
   },
   {
     q: 'How is Zicy different from a rank tracker or a mention monitor?',
@@ -44,6 +44,10 @@ const faqs = [
   {
     q: 'How much does Zicy cost?',
     a: 'Zicy starts at $79 per month on Starter, with Growth at $199, Scale at $449, and custom Enterprise plans. Starter and Growth include a 7-day free trial, and the annual plan gives you 13 months for the price of 12.',
+  },
+  {
+    q: 'Can I use Zicy from an AI assistant?',
+    a: 'Yes, on Growth, Scale and Enterprise. Zicy connects to AI assistants that support the Model Context Protocol (MCP), so you can reach your Zicy data without leaving the assistant. Each successful tool call counts toward a monthly allowance: 3,000 on Growth, 10,000 on Scale and unlimited on Enterprise.',
   },
   {
     q: 'Who is Zicy for?',
@@ -99,7 +103,7 @@ const loopCards = [
   {
     k: '04 · Prove',
     h: 'Prove',
-    p: 'See whether the fix actually moved traffic and demand, not just the score.',
+    p: 'See what moved after each dated change, in traffic and demand as well as the score.',
   },
 ];
 
@@ -390,13 +394,13 @@ const solutionCards = [
           </div>
         </div>
         <div class="card">
-          <span class="k">Take Action</span>
-          <h3>Fix what&rsquo;s broken.</h3>
-          <p>Schema, llms.txt and content tooling, built to current AEO/GEO best practice.</p>
+          <span class="k">Impact Tracker</span>
+          <h3>The change you made, and what moved.</h3>
+          <p>Pin each change to a date and compare the week before with the latest week. Shown as change that coincided, not proven cause.</p>
           <ul class="checklist" style="margin-top:14px;max-width:none">
-            <li>Schema generator</li>
-            <li>llms.txt builder</li>
-            <li>Content optimiser</li>
+            <li>Content update</li>
+            <li>Technical fix</li>
+            <li>PR / campaign</li>
           </ul>
         </div>
       </div>

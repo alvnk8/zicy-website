@@ -71,7 +71,9 @@ export const CORE_TIERS: Tier[] = [
       { label: 'Audit pages', value: '500' },
       { label: 'Brand Intelligence runs', value: '5' },
       { label: 'Brands', value: '1' },
+      { label: 'Seats', value: '2' },
       { label: 'Content credits', value: '1' },
+      { label: 'AI apps (MCP)', value: 'Not included' },
     ],
     features: [
       'All five AI engines, flat',
@@ -92,7 +94,9 @@ export const CORE_TIERS: Tier[] = [
       { label: 'Audit pages', value: '1,500' },
       { label: 'Brand Intelligence runs', value: '20' },
       { label: 'Brands', value: '3' },
+      { label: 'Seats', value: '5' },
       { label: 'Content credits', value: '5' },
+      { label: 'AI apps (MCP)', value: '3,000 tool calls/mo' },
     ],
     features: [
       'Everything in Starter',
@@ -113,7 +117,9 @@ export const CORE_TIERS: Tier[] = [
       { label: 'Audit pages', value: '4,000' },
       { label: 'Brand Intelligence runs', value: '50' },
       { label: 'Brands', value: '5' },
+      { label: 'Seats', value: '10' },
       { label: 'Content credits', value: '10' },
+      { label: 'AI apps (MCP)', value: '10,000 tool calls/mo' },
     ],
     features: [
       'Everything in Growth',
@@ -132,7 +138,9 @@ export const CORE_TIERS: Tier[] = [
       { label: 'Audit pages', value: 'Custom' },
       { label: 'Brand Intelligence runs', value: 'Custom' },
       { label: 'Brands', value: 'Unlimited' },
+      { label: 'Seats', value: 'Unlimited' },
       { label: 'Content credits', value: '50' },
+      { label: 'AI apps (MCP)', value: 'Unlimited tool calls' },
     ],
     features: [
       'Everything in Scale',
@@ -284,5 +292,13 @@ export const PRICING_FAQS: PricingFaq[] = [
   {
     q: 'How do content credits work?',
     a: 'Content is a separate module you can activate, the Act layer. Buy it pay as you go, in monthly packs, or as a discounted bundle. Every plan includes content credits, from 1 on Starter to 50 on Enterprise.',
+  },
+  {
+    q: 'How many seats do I get?',
+    a: 'Two on Starter, five on Growth, ten on Scale and unlimited on Enterprise. Every active member takes a seat, the Owner included, and so does each pending invitation until it is accepted, revoked or expires. Roles are Owner, Member and Viewer, and Members and Viewers only see the brand profiles assigned to them.',
+  },
+  {
+    q: 'What is AI apps (MCP)?',
+    a: 'AI apps lets you reach your Zicy data from an AI assistant that supports the Model Context Protocol (MCP). Each successful tool call the assistant makes to Zicy counts toward a monthly allowance: 3,000 on Growth, 10,000 on Scale and unlimited on Enterprise. Starter does not include it. Account and quota checks are free, and the allowance resets at the start of each billing period.',
   },
 ];

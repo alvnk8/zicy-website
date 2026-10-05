@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { SITE } from '../../data/site';
+
+const title = `Entity Audit and Internal Linking: why AI mixes you up, and the fix`;
+const description =
+  `Entity Audit reads your website the way an AI engine does and reports what stops it seeing one clear company, its people and its offerings. Internal Linking turns the result into the links to add between your pages.`;
+
+const url = `${SITE.url}/platform/entity-audit`;
+const registerUrl = 'https://app.zicy.com/register';
+
+const readSite = [
+  `Each page is read twice: once as raw HTML with no JavaScript, then fully rendered.`,
+  `It respects robots.txt and paces itself.`,
+  `50 pages by default, and up to 100 in one run.`,
+  `One audit runs at a time per profile.`,
+  `Runs don't use your analysis credits.`,
+  `The crawler identifies itself as entity-graph-auditor.`,
+];
+const reportShows = [
+  `Findings ranked Blocking, High or Medium. Each one says what goes wrong, which layer it sits in, whether it affects the whole site or one page, and which entities it affects.`,
+  `A Blocking finding holds back the fixes below it until it is cleared, so you work in the right order.`,
+  `Fixes as markup to publish: a target page, the problem it closes, and a block you can copy. Some are marked "Dependency, not a fix" when they rely on something outside your site, such as creating a Wikidata item.`,
+  `An entity registry of every entity found, with its identity, type, sameAs links, status and ownership. Export it as CSV.`,
+  `A graph view of how the entities connect.`,
+  `Export findings and fixes as PDF, Word (.docx) or Markdown (.md).`,
+];
+
+const faqs = [
+  {
+    q: `Does it cost analysis credits?`,
+    a: `No. Entity Audit runs don't use your analysis credits, and opening Internal Linking only reads an audit that has already finished.`,
+  },
+  {
+    q: `How often should I run it?`,
+    a: `When your site has changed: after a rebrand, a domain move or new pages, or once you have published the fixes. Every past run stays in your history, so you don't need a new run to look back.`,
+  },
+  {
+    q: `How is it different from Site Audit?`,
+    a: `Site Audit checks whether AI systems can technically read your site: bot access, llms.txt, schema, sitemap and speed. Entity Audit checks whether what they read describes one clear company.`,
+  },
+  {
+    q: `How is Internal Linking different from the link finder in Pages Summary?`,
+    a: `Pages Summary finds pages that share words with text you paste in. Internal Linking works from the Entity Audit's map of your business and tells you which page should link to which.`,
+  },
+  {
+    q: `Which profiles can use it?`,
+    a: `Entity Audit and Internal Linking are for profiles set up as a Business. Profiles set up as Micro SME don't include them.`,
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Platform', item: `${SITE.url}/platform` },
+    { '@type': 'ListItem', position: 3, name: `Entity Audit`, item: url },
+  ],
+};
+
+const closingLinks = `Read the help-centre guides for <a href="https://docs.zicy.com/module-reference/m-18-entity-audit/">Entity Audit</a> and <a href="https://docs.zicy.com/module-reference/m-28-internal-linking/">Internal Linking</a>, the glossary entry on <a href="/resources/glossary/entity-gap">entity gaps</a>, and <a href="/resources/how-to-check-for-brand-and-entity-confusion-in-ai-answers">how to check for brand and entity confusion in AI answers</a>.`;
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/platform">Platform</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Entity Audit</span>
+      </nav>
+      <span class="pill">Platform</span>
+      <h1>AI mixes you up with someone else. Find out why, on your own site.</h1>
+      <p class="def">Before an AI engine can describe your business, it has to work out which pages, names and people belong to it. Entity Audit shows where that breaks down on your own site and gives you the markup to fix it.</p>
+      <div class="hcta" style="margin-top:28px">
+        <a class="btn btn-p" href={registerUrl}>Try for free</a>
+        <a class="btn btn-o" href="/pricing">See pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- screenshot: entity audit report, registry, link map, pending zicy-sync -->
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">01</span> What an entity audit is</span>
+        <h2>What an entity audit is</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">Before ChatGPT, Gemini, Perplexity, Google AI Overviews or Google AI Mode can cite a business with confidence, each has to work out which pages, name variants and people describe the same real organisation. It does that by reading the site.</p>
+        <p style="margin-top:16px">An entity audit is that read, made visible. Zicy crawls your domain, builds a map of the entities it finds, and reports where an AI engine would get the picture wrong.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">02</span> How Zicy reads your site</span>
+        <h2>How Zicy reads your site</h2>
+      </div>
+      <ul class="checklist" style="max-width:760px">
+        {readSite.map((d) => <li>{d}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">03</span> What the report shows</span>
+        <h2>What the report shows</h2>
+      </div>
+      <ul class="checklist" style="max-width:760px">
+        {reportShows.map((d) => <li>{d}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">04</span> Internal Linking</span>
+        <h2>Internal Linking</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">Internal Linking reads your latest finished Entity Audit, so there is no new crawl. It shows which of your pages should link to which, with the link placed inside a sentence on a page you already have.</p>
+        <p style="margin-top:16px">The map has two columns: pages you edit on the left, and pages that gain links on the right. Each arrow is one link to add. A page shown in amber has no other page linking to it today. AI engines tend to read a page like that on its own, so an answer about your business can leave it out.</p>
+        <p style="margin-top:16px">Switch between Today and After the fixes to see the difference. Menu and footer links are counted but never recommended, because a menu link says nothing about how two pages relate. When there are links to add, you can export the list as PDF, Word (.docx) or Markdown (.md).</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">05</span> Nothing changes until you publish it</span>
+        <h2>Nothing changes until you publish it</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">Zicy doesn't change your website. Each fix and each link names the page to edit. You or your web person make the change, then run a fresh Entity Audit to confirm it landed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions about Entity Audit.</h2>
+      </div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
+      <p style="margin-top:24px" set:html={closingLinks}></p>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See how AI reads your site.</h2>
+      <div class="hcta">
+        <a class="btn btn-p" href={registerUrl}>Try for free</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb: tokens only, no hardcoded hex. */
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+
+  /* Pill label. */
+  .pill{
+    display:inline-block;margin-bottom:16px;padding:6px 14px;border-radius:999px;
+    background:var(--lavender);border:0.5px solid var(--line);
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--indigo);font-weight:500;
+  }
+
+  /* Lead sentence under the H1. */
+  .def{font-family:var(--display);font-size:clamp(20px,2.4vw,26px);line-height:1.45;color:var(--ink);max-width:820px;letter-spacing:-0.01em}
+</style>

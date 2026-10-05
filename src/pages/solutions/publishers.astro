@@ -36,7 +36,7 @@ const shiftStats = [
 // §03 — what you can prove (capability framing only; no delivered-uplift numbers).
 const proofBullets = [
   "A pre-campaign baseline of the advertiser's AI Share of Voice and branded search.",
-  'Continuous tracking across the campaign window.',
+  'Continuous tracking across the campaign window. Impact Tracker marks the campaign on the chart and compares the week before with the latest week.',
   'A post-campaign read your sales team can put in a renewal conversation.',
 ];
 
@@ -73,6 +73,11 @@ const modules = [
     desc: 'Branded-search movement from public search data, the first link in the chain made visible.',
   },
   {
+    group: 'Media sales',
+    name: 'Impact Tracker',
+    desc: "Mark the campaign window on the advertiser's metrics. The change table compares the week before with the latest week and labels the result as change that coincided, not proven cause, so your sales team can show it without overclaiming.",
+  },
+  {
     group: 'Your journalism',
     name: 'Citation Analysis',
     desc: 'Attribution, paraphrase-without-credit and the uncited rate, down to domain and URL.',
@@ -86,6 +91,16 @@ const modules = [
     group: 'Your journalism',
     name: 'Key Topics Analysis',
     desc: 'Leaders, Battlegrounds and Blind Spots against competing outlets.',
+  },
+  {
+    group: 'Your journalism',
+    name: 'Internal Linking',
+    desc: 'Articles that nothing links to are marked in amber. AI tends to read a page like that on its own, so an answer about your beat can skip it. The list shows the links to add inside your copy.',
+  },
+  {
+    group: 'Your journalism',
+    name: 'Entity Audit',
+    desc: 'Whether an AI engine reading your pages can see your title, sections and authors as one clear set of entities. Where it cannot, you get the markup to publish.',
   },
 ];
 

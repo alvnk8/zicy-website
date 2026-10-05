@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { SITE } from '../../data/site';
+
+const title = `Impact Tracker: see what moved after each change you made`;
+const description =
+  `Put every change you ship on the same timeline as Share of Voice, Citation Coverage, Brand Mention Coverage and Sentiment, then compare the week before with the latest week. Shown as change that coincided, not proven cause.`;
+
+const url = `${SITE.url}/platform/impact-tracker`;
+const registerUrl = 'https://app.zicy.com/register';
+
+const howItWorks = [
+  `Add a marker: what changed, the date, and a type (Content update, Technical fix, PR / campaign, External / algorithm or Other), with an optional page URL, tags and notes. You can also click the chart to pin a note to that day.`,
+  `Tags narrow the read. A marker tagged to your pricing prompts is measured against those prompts only. Leave it untagged and it is measured against all of them.`,
+  `Four lines by default: Share of Voice, Citation Coverage, Brand Mention Coverage and Sentiment.`,
+  `Connect Google Analytics and you can add AI Sessions and AI Conversions to the chart.`,
+  `Index to 100 starts every line at 100, so small and large metrics share one axis.`,
+  `Switch between daily, weekly and monthly views.`,
+  `Adding, editing or removing a marker doesn't use your analysis quota.`,
+];
+const cards = [
+  {
+    h: `Brands`,
+    p: `Bring the dates to the budget review: each change you shipped, beside the metrics that moved after it.`,
+  },
+  {
+    h: `PR and comms`,
+    p: `Mark the day coverage lands as PR / campaign, tag it to the prompts the campaign targeted, and compare the week before with what came after.`,
+  },
+  {
+    h: `Agencies`,
+    p: `Add a marker for each fix you ship for a client, and show the table in the monthly review.`,
+  },
+  {
+    h: `Publishers`,
+    p: `Mark an advertiser's campaign window and show what moved, without claiming the campaign caused it.`,
+  },
+];
+
+const faqs = [
+  {
+    q: `Does adding a marker use my quota?`,
+    a: `No. A marker is a note on the timeline, not another AI call.`,
+  },
+  {
+    q: `What if I make two changes in the same week?`,
+    a: `The table flags markers whose week-before windows overlap, because the movement can't be pinned on either change alone.`,
+  },
+  {
+    q: `How long before I see a result?`,
+    a: `A full week after the change date. Until then the row reads Not measurable yet. There is no partial-week estimate.`,
+  },
+  {
+    q: `Do I need Google Analytics?`,
+    a: `No. The chart, markers and change table work without it. Connecting Google Analytics adds AI Sessions, AI Conversions and AI conversion rate.`,
+  },
+  {
+    q: `Does Impact Tracker prove a change caused the result?`,
+    a: `No. It shows what moved around a change, not why. Treat every result as a lead worth checking.`,
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Platform', item: `${SITE.url}/platform` },
+    { '@type': 'ListItem', position: 3, name: `Impact Tracker`, item: url },
+  ],
+};
+
+const closingLinks = `Read the <a href="https://docs.zicy.com/module-reference/m-19-impact-tracker/">Impact Tracker guide</a> in the help centre, see <a href="/platform">the whole platform</a>, or read <a href="/resources/measuring-ai-visibility-direct-roi">how to measure the direct ROI of AI visibility</a>.`;
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/platform">Platform</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="here" aria-current="page">Impact Tracker</span>
+      </nav>
+      <span class="pill">Platform</span>
+      <h1>You shipped five changes last month. Which one moved the answer?</h1>
+      <p class="def">Without a dated record, the budget conversation runs on memory. Impact Tracker puts every change you make on the same chart as your AI visibility, so you can see what moved after it.</p>
+      <div class="hcta" style="margin-top:28px">
+        <a class="btn btn-p" href={registerUrl}>Try for free</a>
+        <a class="btn btn-o" href="/pricing">See pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- screenshot: impact tracker chart and change impact table, pending zicy-sync -->
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">01</span> How it works</span>
+        <h2>How it works</h2>
+      </div>
+      <ul class="checklist" style="max-width:760px">
+        {howItWorks.map((d) => <li>{d}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">02</span> The change impact table</span>
+        <h2>The change impact table</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">Under the chart, the change impact table compares the latest week with the week before each change, for every brand metric. With Google Analytics connected, it adds AI Sessions, AI Conversions and AI conversion rate.</p>
+        <p style="margin-top:16px">A row reads Not measurable yet until a full week has passed. If another marker falls inside a change's week-before window, the table flags the overlap, because the movement can't be credited to either change alone.</p>
+        <p style="margin-top:16px">The table's own caption says it shows change that coincided with each note, not proven cause. That honesty is the point: a dated record you can check is worth more than a claim you can't.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">03</span> Who uses it</span>
+        <h2>Who uses it</h2>
+      </div>
+      <div class="grid-2">
+        {cards.map((c) => (
+          <div class="card">
+            <h3>{c.h}</h3>
+            <p>{c.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">04</span> One change at a time</span>
+        <h2>One change at a time</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">Ship one change, let its full week run, then ship the next. Stack two changes into the same week and their windows overlap, so neither can be credited alone. The table tells you when that happens.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions about Impact Tracker.</h2>
+      </div>
+      <FaqAccordion items={faqs} defaultOpen={0} />
+      <p style="margin-top:24px" set:html={closingLinks}></p>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>See what moved after your last change.</h2>
+      <div class="hcta">
+        <a class="btn btn-p" href={registerUrl}>Try for free</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb: tokens only, no hardcoded hex. */
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .crumbs a{color:var(--muted)}
+  .crumbs a:hover{color:var(--indigo)}
+  .crumbs .sep{color:var(--line-2)}
+  .crumbs .here{color:var(--ink)}
+
+  /* Pill label. */
+  .pill{
+    display:inline-block;margin-bottom:16px;padding:6px 14px;border-radius:999px;
+    background:var(--lavender);border:0.5px solid var(--line);
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--indigo);font-weight:500;
+  }
+
+  /* Lead sentence under the H1. */
+  .def{font-family:var(--display);font-size:clamp(20px,2.4vw,26px);line-height:1.45;color:var(--ink);max-width:820px;letter-spacing:-0.01em}
+</style>
