@@ -111,6 +111,12 @@ const pages: Record<string, OgPage> = {
     description: 'Practical AEO and GEO guidance, and how AI search is changing brand discovery.',
     alt: 'Zicy · resources',
   },
+  'solutions/local-business': {
+    eyebrow: 'For local businesses',
+    title: 'No website? Start from your Google listing',
+    description: 'Connect your Google Business Profile and see what AI says about your business.',
+    alt: 'Zicy · for local businesses',
+  },
   'solutions/brands': {
     eyebrow: 'For brands',
     title: 'Own your answer in AI search',
