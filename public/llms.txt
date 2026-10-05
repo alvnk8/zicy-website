@@ -133,7 +133,6 @@
 - Google Business Profile audit: https://www.zicy.com/resources/glossary/google-business-profile-audit
 - Hallucination: https://www.zicy.com/resources/glossary/hallucination
 - Internal linking (for AI): https://www.zicy.com/resources/glossary/internal-linking
-- MCP (Model Context Protocol): https://www.zicy.com/resources/glossary/mcp
 - Prompt tracking: https://www.zicy.com/resources/glossary/prompt-tracking
 
 ## Documentation
