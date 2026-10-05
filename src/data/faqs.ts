@@ -94,7 +94,7 @@ export const universalFaqs: Faq[] = [
 export const brandsFaqs: Faq[] = [
   {
     q: `How do I know what AI is saying about us right now?`,
-    a: `You start a free trial and see it in minutes, where you're named, cited, described inaccurately, or replaced by a rival, across all five engines. It surfaces the conversation that never touches your analytics, because it happens before the buyer reaches your site.`,
+    a: `You start a free trial and see it in minutes, where you're named, cited or replaced by a rival across all five engines, and where AI describes you inaccurately. It surfaces the conversation that never touches your analytics, because it happens before the buyer reaches your site.`,
   },
   {
     q: `Do our buyers really choose this way, or is this overstated?`,
