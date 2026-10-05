@@ -12,20 +12,12 @@ export const URLS = {
   contactSales: '/contact',
 } as const;
 
-// Annual billing is Zicy's own commitment: 13 months for the price of 12. The toggle shows the
-// annual-equivalent monthly price, price * 12/13, rounded to the nearest dollar.
+// Annual billing is arranged through sales on request; checkout itself is monthly. No annual
+// prices are published.
 export const ANNUAL = {
-  monthsBilled: 12,
-  monthsGranted: 13,
-  factor: 12 / 13,
-  note: '13 months for the price of 12',
+  note: 'Annual billing on request through sales',
   labels: { monthly: 'Monthly', annual: 'Annual' },
 } as const;
-
-/** Annual-equivalent monthly price for a monthly price, rounded to the nearest dollar. */
-export function annualMonthly(monthly: number): number {
-  return Math.round(monthly * ANNUAL.factor);
-}
 
 export interface Cta {
   label: string;
@@ -273,7 +265,7 @@ export const PRICING_FAQS: PricingFaq[] = [
   },
   {
     q: 'Do you offer annual billing?',
-    a: 'Yes. Annual billing gives you 13 months for the price of 12.',
+    a: 'Yes, on request through sales. Checkout itself is monthly.',
   },
   {
     q: 'Can Zicy track multiple markets and languages?',

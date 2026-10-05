@@ -69,7 +69,7 @@ export const universalFaqs: Faq[] = [
   },
   {
     q: `What does it cost, and what are we locked into?`,
-    a: `Plans run from $79 a month (Starter) to $449 (Scale), with custom Enterprise; Starter and Growth include a 7-day trial, the annual plan gives thirteen months for twelve. The platform is self-serve with no lock-in.`,
+    a: `Plans run from $79 a month (Starter) to $449 (Scale), with custom Enterprise; Starter and Growth include a 7-day trial, annual billing is available on request through sales. The platform is self-serve with no lock-in.`,
   },
   {
     q: `Why a tool built in Penang rather than a US platform?`,

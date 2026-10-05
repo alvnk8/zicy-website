@@ -12,13 +12,8 @@
 // or hand-typed here; every price, count and feature line comes from those files at build time.
 //
 // Field notes:
-// - priceAnnualMonthlyUsd: the annual-equivalent monthly price (annualMonthly() from pricing.ts,
-//   i.e. priceMonthly * ANNUAL.factor, rounded), the figure the page's annual toggle displays.
-// - priceAnnualTotalUsd: what that tier is actually billed for the year, priceMonthly *
-//   ANNUAL.monthsBilled. Both are null when priceMonthly is null (quote-only tiers), and both are
-//   null for every agency tier regardless of price, because /pricing never surfaces a per-tier
-//   annual price for the agency track (AgencyBlock.astro has no annual toggle, only a footnote);
-//   tierToJson takes a `showAnnual` flag so that's an explicit switch, not a name match.
+// - annualBilling: annual billing is arranged through sales on request; checkout is monthly, so
+//   no annual prices are published here.
 // - cta.ctaUrl: an absolute URL built from cta.href + SITE.url, added only when href is relative
 //   (site-internal, e.g. "/contact"); href itself is left untouched for compatibility, and ctaUrl
 //   is null when href is already absolute (external register links).
@@ -27,7 +22,7 @@
 //   bundles only; packs and payg show a price with no period; MultiMarket.astro's pack line shows
 //   "per market / month"). Nothing here invents a period the page doesn't show.
 import type { APIRoute } from 'astro';
-import { annualMonthly, ANNUAL, CORE_TIERS, AGENCY_TIERS, CONTENT_MODULE, MULTI_MARKET, MULTI_MARKET_PACK, PRICING_FAQS, type Tier } from '../data/pricing';
+import { ANNUAL, CORE_TIERS, AGENCY_TIERS, CONTENT_MODULE, MULTI_MARKET, MULTI_MARKET_PACK, PRICING_FAQS, type Tier } from '../data/pricing';
 import { universalFaqs, brandsFaqs, prFaqs, agenciesFaqs, publishersFaqs, type Faq } from '../data/faqs';
 import { SITE } from '../data/site';
 
@@ -54,20 +49,13 @@ function absoluteCtaUrl(href: string): string | null {
 
 // A tier's own cta.label is the data that drives whether TierCard shows a trial note at all
 // ("Try for free" vs "Contact sales"); trialEligible mirrors that same check rather than hard-coding
-// which tier names get a trial. `showAnnual` mirrors what /pricing actually renders: the core ladder
-// has an annual toggle (AnnualToggle target=core grid), the agency track does not.
-function tierToJson(tier: Tier, { showAnnual }: { showAnnual: boolean }) {
-  const priceAnnualMonthlyUsd =
-    showAnnual && tier.priceMonthly !== null ? annualMonthly(tier.priceMonthly) : null;
-  const priceAnnualTotalUsd =
-    showAnnual && tier.priceMonthly !== null ? tier.priceMonthly * ANNUAL.monthsBilled : null;
+// which tier names get a trial.
+function tierToJson(tier: Tier) {
   return {
     id: tier.id,
     name: tier.name,
     label: tier.label ?? null,
     priceMonthlyUsd: tier.priceMonthly,
-    priceAnnualMonthlyUsd,
-    priceAnnualTotalUsd,
     priceDisplay: tier.priceDisplay ?? null,
     badge: tier.badge ?? null,
     default: tier.default ?? false,
@@ -94,25 +82,15 @@ const trialFaqs = allFaqs
 // The /pricing page's own FAQ block (PricingFAQ.astro), same array its FAQPage JSON-LD mirrors.
 const pricingFaqs = PRICING_FAQS.map((f) => ({ q: stripHtml(f.q), a: stripHtml(f.a) }));
 
-const annualBillingRule =
-  `Annual billing: pay for ${ANNUAL.monthsBilled} months, get ${ANNUAL.monthsGranted}. ` +
-  `The annual per-month figure is the monthly equivalent over ${ANNUAL.monthsGranted} months.`;
-
 export const GET: APIRoute = () => {
   const body = {
     version: 1,
     generatedAt: new Date().toISOString(),
     currency: 'USD',
-    annualBilling: {
-      monthsBilled: ANNUAL.monthsBilled,
-      monthsGranted: ANNUAL.monthsGranted,
-      factor: ANNUAL.factor,
-      note: ANNUAL.note,
-      rule: annualBillingRule,
-    },
+    annualBilling: { note: ANNUAL.note, checkout: 'monthly' },
     plans: {
-      core: CORE_TIERS.map((t) => tierToJson(t, { showAnnual: true })),
-      agency: AGENCY_TIERS.map((t) => tierToJson(t, { showAnnual: false })),
+      core: CORE_TIERS.map((t) => tierToJson(t)),
+      agency: AGENCY_TIERS.map((t) => tierToJson(t)),
     },
     contentCredits: {
       includedNote: CONTENT_MODULE.includedNote,
