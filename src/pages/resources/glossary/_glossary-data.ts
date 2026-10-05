@@ -550,37 +550,6 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       },
     ],
   },
-  {
-    slug: 'mcp',
-    term: 'MCP (Model Context Protocol)',
-    short: 'An open standard that lets an AI assistant call a tool and use its data during a conversation.',
-    definition:
-      'MCP (Model Context Protocol) is an open standard that lets an AI assistant connect to an outside tool, call it, and use the data it returns during a conversation.',
-    body: [
-      'Without a connection, an AI assistant can only use what it was trained on and what you paste in. MCP gives it a standard way to ask a tool for data and use the answer.',
-      'Each request the assistant makes to the tool is called a tool call. Tools that support MCP often meter these calls.',
-      'For AI visibility work, MCP means you can ask an assistant about your own tracking data instead of opening a dashboard.',
-    ],
-    example:
-      'Inside an AI assistant connected to an AI visibility tool, a marketer asks how share of voice changed this month. The assistant makes a tool call, gets the numbers, and answers with them.',
-    related: ['ai-visibility', 'prompt-tracking', 'ai-share-of-voice'],
-    zicy:
-      'Zicy calls this AI apps. On Growth, Scale and Enterprise, each successful tool call counts toward a monthly allowance: 3,000 on Growth, 10,000 on Scale and unlimited on Enterprise. See <a href="/pricing">pricing</a>.',
-    faqs: [
-      {
-        q: 'What is MCP?',
-        a: 'MCP (Model Context Protocol) is an open standard that lets an AI assistant connect to an outside tool, call it, and use the data it returns during a conversation.',
-      },
-      {
-        q: 'What is a tool call?',
-        a: 'One request an AI assistant makes to a connected tool. In Zicy, each successful tool call counts toward your plan\'s monthly allowance, and account and quota checks are free.',
-      },
-      {
-        q: 'Which Zicy plans include it?',
-        a: 'Growth, Scale and Enterprise. Starter does not include it. The allowance resets at the start of each billing period.',
-      },
-    ],
-  },
 ];
 
 // AI Reality Score is canonical on /platform/ai-reality-score (owned by another page). In the

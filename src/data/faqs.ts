@@ -162,7 +162,7 @@ export const prFaqs: Faq[] = [
 export const agenciesFaqs: Faq[] = [
   {
     q: `Can we resell Zicy under our own brand?`,
-    a: `Yes. White label is available on Agency and Enterprise agreements, and Zicy sets it up for your workspace. Your logo, app name, accent colour and own domain replace ours on the dashboard, so the audit and the fixes are presented as your agency's service. The platform and methodology sit behind your brand, with no build cost and no specialist hire.`,
+    a: `Yes, through a custom agency arrangement, usually alongside an Enterprise or Scale plan. Our team sets it up for you. Your logo, app name, accent colour and own domain replace ours on the dashboard, so the audit and the fixes are presented as your agency's service. The platform and methodology sit behind your brand, with no build cost and no specialist hire.`,
   },
   {
     q: `Clients are raising AI search in reviews and we're improvising, how do we have the answer?`,

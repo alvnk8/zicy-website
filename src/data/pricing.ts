@@ -73,7 +73,6 @@ export const CORE_TIERS: Tier[] = [
       { label: 'Brands', value: '1' },
       { label: 'Seats', value: '2' },
       { label: 'Content credits', value: '1' },
-      { label: 'AI apps (MCP)', value: 'Not included' },
     ],
     features: [
       'All five AI engines, flat',
@@ -96,7 +95,6 @@ export const CORE_TIERS: Tier[] = [
       { label: 'Brands', value: '3' },
       { label: 'Seats', value: '5' },
       { label: 'Content credits', value: '5' },
-      { label: 'AI apps (MCP)', value: '3,000 tool calls/mo' },
     ],
     features: [
       'Everything in Starter',
@@ -119,7 +117,6 @@ export const CORE_TIERS: Tier[] = [
       { label: 'Brands', value: '5' },
       { label: 'Seats', value: '10' },
       { label: 'Content credits', value: '10' },
-      { label: 'AI apps (MCP)', value: '10,000 tool calls/mo' },
     ],
     features: [
       'Everything in Growth',
@@ -140,7 +137,6 @@ export const CORE_TIERS: Tier[] = [
       { label: 'Brands', value: 'Unlimited' },
       { label: 'Seats', value: 'Unlimited' },
       { label: 'Content credits', value: '50' },
-      { label: 'AI apps (MCP)', value: 'Unlimited tool calls' },
     ],
     features: [
       'Everything in Scale',
@@ -166,7 +162,7 @@ export const AGENCY_TIERS: Tier[] = [
     ],
     features: [
       'All five AI engines on every pooled prompt',
-      'White-label reporting',
+      'White label by custom arrangement',
       'Pitch and audit workspaces',
       'Unlimited seats',
     ],
@@ -184,7 +180,7 @@ export const AGENCY_TIERS: Tier[] = [
     ],
     features: [
       'All five AI engines on every pooled prompt',
-      'White-label reporting',
+      'White label by custom arrangement',
       'Unlimited seats',
     ],
     cta: { label: 'Contact sales', href: URLS.contactSales, primary: false, external: false },
@@ -212,16 +208,10 @@ export interface ContentBundle {
   save: string;
 }
 export const CONTENT_MODULE = {
-  payg: { credits: 5, priceUsd: 15 },
-  packs: [
-    { name: 'Content Lite', credits: 10, priceUsd: 29 },
-    { name: 'Content Plus', credits: 30, priceUsd: 69 },
-    { name: 'Content Pro', credits: 100, priceUsd: 199 },
-  ] as ContentPack[],
-  bundles: [
-    { name: 'Growth + Content Plus', priceUsd: 239, save: 'save 11%' },
-    { name: 'Scale + Content Pro', priceUsd: 569, save: 'save 12%' },
-  ] as ContentBundle[],
+  // Pay as you go matches the app's +5-credit top-up. Packs and bundles are parked (none sold in the app).
+  payg: { credits: 5, priceUsd: 35 },
+  packs: [] as ContentPack[],
+  bundles: [] as ContentBundle[],
   includedNote:
     'Every plan includes content credits, from 1 on Starter to 50 on Enterprise, so the loop reads as one product from the start. Add capacity below only when you want to publish more.',
 };
@@ -291,14 +281,10 @@ export const PRICING_FAQS: PricingFaq[] = [
   },
   {
     q: 'How do content credits work?',
-    a: 'Content is a separate module you can activate, the Act layer. Buy it pay as you go, in monthly packs, or as a discounted bundle. Every plan includes content credits, from 1 on Starter to 50 on Enterprise.',
+    a: 'Content is a separate module you can activate, the Act layer. Every plan includes content credits, from 1 on Starter to 50 on Enterprise. Need more? Top up pay as you go, 5 credits for $35.',
   },
   {
     q: 'How many seats do I get?',
     a: 'Two on Starter, five on Growth, ten on Scale and unlimited on Enterprise. Every active member takes a seat, the Owner included, and so does each pending invitation until it is accepted, revoked or expires. Roles are Owner, Member and Viewer, and Members and Viewers only see the brand profiles assigned to them.',
-  },
-  {
-    q: 'What is AI apps (MCP)?',
-    a: 'AI apps lets you reach your Zicy data from an AI assistant that supports the Model Context Protocol (MCP). Each successful tool call the assistant makes to Zicy counts toward a monthly allowance: 3,000 on Growth, 10,000 on Scale and unlimited on Enterprise. Starter does not include it. Account and quota checks are free, and the allowance resets at the start of each billing period.',
   },
 ];
