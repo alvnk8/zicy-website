@@ -44,7 +44,7 @@ const stakeStats = [
 const usps = [
   {
     h: 'Truth, not just mentions.',
-    p: 'Most trackers tell you whether you were named. Zicy tells you whether what AI said was true. The <a href="/platform/ai-reality-score">AI Reality Score</a> flags hallucinations, outdated claims and wrong facts before a buyer ever sees them. Each flagged issue can be verified or rejected, then escalated straight into a prioritised fix backlog. Detection is table stakes: Zicy routes it to remediation.',
+    p: 'Most trackers tell you whether you were named. Zicy tells you whether what AI said was true. The <a href="/platform/ai-reality-score">AI Reality Score</a> flags hallucinations, outdated claims and wrong facts before a buyer ever sees them. Each flagged issue can be verified or rejected, then escalated straight into a prioritised fix backlog. Detection is table stakes: Zicy routes it to remediation. Brand Intelligence checks ChatGPT, Gemini, Google AI Overviews and Google AI Mode in about 2 to 3 minutes; Perplexity is covered by prompt tracking.',
   },
   {
     h: 'Every engine, every language.',
@@ -61,6 +61,7 @@ const wiifm = [
   'Know exactly where a competitor is winning the answer, and why.',
   'One board-ready number, your AI share of voice, tracked over time.',
   'Start every quarter knowing what AI says about you, not hoping.',
+  'Find out why AI mixes you up with another company, and publish the markup that fixes it.',
 ];
 
 const modules = [
@@ -81,12 +82,16 @@ const modules = [
     desc: 'Mention coverage, citation rate, share of voice and average ranking, against the competitors you actually worry about.',
   },
   {
-    name: 'Brand Sentiment',
-    desc: 'The language AI attaches to your brand, and the sources moving it.',
+    name: 'Entity Audit',
+    desc: 'When AI blends you with a sister brand or a namesake, buyers get the wrong facts under your name. Entity Audit finds the cause on your own site, ranks it Blocking, High or Medium, and gives you the markup that fixes it.',
   },
   {
-    name: 'Take Action',
-    desc: 'Schema and llms.txt generators, content fixes, built to current best practice.',
+    name: 'Take Action tools',
+    desc: 'Schema and llms.txt generators, content fixes, built to current best practice. Internal Linking lists the links to add between your own pages, so AI reads them as one business.',
+  },
+  {
+    name: 'Impact Tracker',
+    desc: 'Pin each change to a date and compare the week before with the latest week. The table labels the result as change that coincided, not proven cause, which is the standard a finance team will hold you to.',
   },
   {
     name: 'Site Traffic',

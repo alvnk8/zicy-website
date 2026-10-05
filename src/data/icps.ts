@@ -60,7 +60,6 @@ export const ICPS: Icp[] = [
     modules: [
       { name: 'Brand Intelligence', desc: 'How AI describes you across engines, where it’s wrong, and the entity gaps behind low confidence.' },
       { name: 'AI Visibility', desc: 'Your mention coverage, citation rate and share of voice against the competitors you actually worry about.' },
-      { name: 'Brand Sentiment', desc: 'The language AI attaches to your brand, and the sources moving it.' },
     ],
     screenshots: [],
     whyHeading: 'Why brands choose Zicy',

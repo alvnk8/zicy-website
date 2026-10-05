@@ -31,9 +31,38 @@
 ## Frameworks and concepts
 
 - The AI Reality Score, Zicy's per-engine accuracy metric: https://www.zicy.com/platform/ai-reality-score
+- Entity Audit and Internal Linking, why AI mixes a business up and the fix: https://www.zicy.com/platform/entity-audit
+- Impact Tracker, what moved after each change you made: https://www.zicy.com/platform/impact-tracker
 - The PAVA Framework, Growth.pro's model for AI visibility: https://www.zicy.com/about/pava-framework
 - The AI Visibility Operating System, Growth.pro's operating model: https://www.zicy.com/about/ai-visibility-operating-system
 - AI Citation Enablement (AICE), Growth.pro's citation practice: https://www.zicy.com/about/ai-citation-enablement
+
+## Modules
+
+- Prompt Manager: https://docs.zicy.com/module-reference/m-02-prompt-manager/
+- AI Visibility Dashboard: https://docs.zicy.com/module-reference/m-04-ai-visibility-dashboard/
+- Competitive AI Performance: https://docs.zicy.com/module-reference/m-05-competitive-ai-performance/
+- Brand Intelligence: https://docs.zicy.com/module-reference/m-06-brand-intelligence/
+- Competitor Sentiment Profiles: https://docs.zicy.com/module-reference/m-08-competitor-sentiment-profiles/
+- Key Topics Analysis: https://docs.zicy.com/module-reference/m-09-key-topics-analysis/
+- Citation Analysis: https://docs.zicy.com/module-reference/m-10-citation-analysis/
+- Site Audit: https://docs.zicy.com/module-reference/m-11-site-audit/
+- Entity Audit: https://docs.zicy.com/module-reference/m-18-entity-audit/
+- Internal Linking: https://docs.zicy.com/module-reference/m-28-internal-linking/
+- GBP Audit: https://docs.zicy.com/module-reference/m-20-gbp-audit/
+- Visibility Gaps: https://docs.zicy.com/module-reference/m-12-visibility-gaps/
+- GBP Optimizer: https://docs.zicy.com/module-reference/m-21-gbp-optimizer/
+- Content Studio: https://docs.zicy.com/module-reference/m-22-content-studio/
+- Content Generator: https://docs.zicy.com/module-reference/m-23-content-generator/
+- Content Optimizer: https://docs.zicy.com/module-reference/m-24-content-optimizer/
+- Schema Generator: https://docs.zicy.com/module-reference/m-25-schema-generator/
+- LLMs Generator: https://docs.zicy.com/module-reference/m-26-llms-generator/
+- Pages Summary: https://docs.zicy.com/module-reference/m-27-pages-summary/
+- Site Traffic: https://docs.zicy.com/module-reference/m-14-site-traffic/
+- Impact Tracker: https://docs.zicy.com/module-reference/m-19-impact-tracker/
+- Exporting client reports: https://docs.zicy.com/module-reference/m-15-exporting-client-reports/
+- Team, settings and white label: https://docs.zicy.com/module-reference/m-16-team-settings-white-label/
+- Ask Zicy: https://docs.zicy.com/module-reference/m-17-ask-zicy/
 
 ## Case studies
 
@@ -95,11 +124,16 @@
 - Answer engine optimisation (AEO): https://www.zicy.com/resources/glossary/aeo
 - Answer-intent query: https://www.zicy.com/resources/glossary/answer-intent-query
 - Average AI ranking: https://www.zicy.com/resources/glossary/average-ai-ranking
+- Change impact tracking: https://www.zicy.com/resources/glossary/impact-tracker
 - Citation coverage: https://www.zicy.com/resources/glossary/citation-coverage
+- Entity audit: https://www.zicy.com/resources/glossary/entity-audit
 - Entity collapse, when AI flattens a brand to one thing: https://www.zicy.com/resources/glossary/entity-collapse
 - Entity gap: https://www.zicy.com/resources/glossary/entity-gap
 - Generative engine optimisation (GEO): https://www.zicy.com/resources/glossary/geo
+- Google Business Profile audit: https://www.zicy.com/resources/glossary/google-business-profile-audit
 - Hallucination: https://www.zicy.com/resources/glossary/hallucination
+- Internal linking (for AI): https://www.zicy.com/resources/glossary/internal-linking
+- MCP (Model Context Protocol): https://www.zicy.com/resources/glossary/mcp
 - Prompt tracking: https://www.zicy.com/resources/glossary/prompt-tracking
 
 ## Documentation

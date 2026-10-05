@@ -49,7 +49,7 @@ const shiftCards = [
 const modules = [
   {
     name: 'Brand Intelligence: your reputation-risk audit.',
-    desc: 'Per-engine view of misaligned sentiment, hallucinations, and not-associated signals across ChatGPT, Gemini, Perplexity, Google AI Overviews, and Google AI Mode. Shows where to concentrate earned media before a campaign, not after. That includes entity confusion, when AI mixes your client up with a similarly named company, flagged per engine before a journalist repeats it.',
+    desc: 'Per-engine view of misaligned sentiment, hallucinations, and not-associated signals across ChatGPT, Gemini, Google AI Overviews and Google AI Mode, in about 2 to 3 minutes; Perplexity is covered by prompt tracking. Shows where to concentrate earned media before a campaign, not after. That includes entity confusion, when AI mixes your client up with a similarly named company, flagged per engine before a journalist repeats it. Entity Audit then finds the cause on the client\'s own site, such as a missing sameAs link, and gives you the markup that fixes it.',
   },
   {
     name: 'Key Topics: your narrative-control map.',
@@ -65,11 +65,15 @@ const modules = [
   },
   {
     name: 'Prompt Manager: per-engine reputational monitoring.',
-    desc: "Track the exact questions that shape your client's reputation, per engine, with the full AI response and the sources it leaned on. Because weighting differs across the five engines, you can target the outlets that move a specific engine, and prove the narrative shifted after you did. Every tracked question keeps the full AI answer per engine, week by week, with every source it cited. Copy or download it as evidence for the client report, or documentation when something goes wrong. Weekly tracking is standard; daily tracking is available on Enterprise for campaign windows and reputation incidents.",
+    desc: "Track the exact questions that shape your client's reputation, per engine, with the full AI response and the sources it leaned on. Because weighting differs across the five engines, you can target the outlets that move a specific engine, and prove the narrative shifted after you did. Every tracked question keeps the full AI answer per engine, day by day, with every source it cited. Copy or download it as evidence for the client report, or documentation when something goes wrong. Tracking is daily on every plan, which matters most during a campaign window or a reputation incident.",
   },
   {
     name: 'Content Generator: citation-backed thought leadership, fast.',
     desc: 'Turn approved messaging into source-grounded, on-record thought leadership with a research step that makes it genuinely pitchable. Human-reviewed and brand-tone aware; never scaled, anonymous, or fabricated content.',
+  },
+  {
+    name: 'Impact Tracker: the coverage ran. Did the answer change?',
+    desc: 'Add a PR / campaign marker on the day coverage lands and tag it to the prompts the campaign targeted. Impact Tracker compares Citation Coverage, Brand Mention Coverage, Share of Voice and Sentiment for the week before with the latest week, flags campaigns whose windows overlap, and labels every result as change that coincided, not proven cause. That is a before and after a client can check.',
   },
   {
     name: 'Prove: earned work, answered.',
@@ -190,12 +194,12 @@ const breadcrumb = {
     </div>
   </section>
 
-  <!-- 4. 03 · How PR teams use Zicy — seven module touchpoints + three product shots -->
+  <!-- 4. 03 · How PR teams use Zicy, eight module touchpoints + three product shots -->
   <section>
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow"><span class="ix">03</span> How PR teams use Zicy</span>
-        <h2>Seven touchpoints, in the order the work runs: measure, diagnose, act, prove.</h2>
+        <h2>Eight touchpoints, in the order the work runs: measure, diagnose, act, prove.</h2>
       </div>
       <div class="grid-3">
         {modules.map((m) => (
@@ -209,7 +213,7 @@ const breadcrumb = {
       <div class="grid-3" style="margin-top:28px">
         <Screenshot
           src={brandIntelligenceShot}
-          alt="Zicy Brand Intelligence, per-engine sentiment, an AI Reality Score fact-check, and entity signals across the five engines."
+          alt="Zicy Brand Intelligence, per-engine sentiment, an AI Reality Score fact-check, and entity signals for each engine it covers."
           caption="Brand Intelligence: your per-engine reputation-risk audit."
         />
         <Screenshot

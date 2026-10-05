@@ -323,13 +323,13 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'Prompt tracking turns AI visibility from a one-off check into a measurement programme. You define a set of answer-intent queries, run them across the engines on a recurring schedule, and record how the brand performs each time.',
       'Repetition is essential because AI outputs are probabilistic. The same prompt can return slightly different answers depending on phrasing and the moment it is asked, so a single response is not reliable evidence. Tracking the same prompt set over time reveals the stable pattern beneath the variation.',
       'A prompt set differs from a single snapshot in the same way a time series differs from a single data point. A snapshot tells you what one answer said once; a tracked prompt set tells you the trend, and whether a change you made moved it.',
-      'Tracking is usually run on a regular cadence, weekly for most programmes, because answer engines evolve gradually rather than by the hour, so weekly tracking surfaces meaningful shifts without reacting to noise.',
+      'Tracking runs on a regular cadence, daily or weekly depending on the tool, because answer engines evolve gradually rather than by the hour. A steady cadence surfaces meaningful shifts without reacting to noise.',
     ],
     example:
       'Rather than asking an AI "best running shoes for flat feet" once and drawing a conclusion, prompt tracking runs that prompt and dozens like it across the engines every week, so the brand can see whether its presence is rising, falling or holding.',
     related: ['answer-intent-query', 'ai-mention-coverage', 'ai-share-of-voice', 'average-ai-ranking', 'ai-visibility'],
     zicy:
-      'Zicy runs your tracked prompt set across all five engines on a weekly cadence by default and records coverage, citations, share of voice and ranking each cycle. See <a href="/platform">the platform</a>.',
+      'Zicy runs your tracked prompt set across all five engines daily by default and records coverage, citations, share of voice and ranking each run. See <a href="/platform">the platform</a>.',
     faqs: [
       {
         q: 'What is prompt tracking?',
@@ -345,7 +345,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       },
       {
         q: 'How often should prompts be tracked?',
-        a: 'Most programmes track weekly, because answer engines evolve gradually rather than by the hour. Weekly tracking surfaces meaningful shifts without overreacting to short-term noise.',
+        a: 'Daily or weekly, depending on the tool. Zicy tracks daily by default, and its weekly and monthly views roll the daily results into a smoother trend, so you don\'t overreact to short-term noise.',
       },
     ],
   },
@@ -363,7 +363,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     ],
     example:
       'A manufacturer is one of the few in its region certified for a specific safety standard, but AI answers about that standard never mention the company. The missing association is an entity gap: the credential is real but not surfaced, usually because it is not stated in machine-readable form or corroborated widely enough.',
-    related: ['hallucination', 'ai-mention-coverage', 'citation-coverage', 'aeo', 'ai-reality-score'],
+    related: ['hallucination', 'ai-mention-coverage', 'citation-coverage', 'entity-audit', 'ai-reality-score'],
     zicy:
       'Zicy’s Brand Intelligence surfaces entity gaps, and the Take Action tools generate the schema and llms.txt that help close them. See <a href="/platform">the platform</a>.',
     faqs: [
@@ -419,6 +419,165 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       {
         q: 'Why are hallucinations a business risk?',
         a: 'They are a buyer-decision risk, not just a data-quality issue. A confident, false claim read mid-decision can move a buyer away from a brand before anyone on the brand’s side knows it exists.',
+      },
+    ],
+  },
+  {
+    slug: 'entity-audit',
+    term: 'Entity audit',
+    short: 'A crawl of a brand\'s own website that checks whether AI engines can see one clear company behind it.',
+    definition:
+      'An entity audit is a crawl of a brand\'s own website, read the way an AI engine reads it, that reports what stops the engine from resolving one clear company, its people and its offerings.',
+    body: [
+      'Before an AI engine can cite a business with confidence, it has to work out which pages, name variants and people describe the same real organisation. It does this largely by reading the business\'s own site.',
+      'An entity audit makes that read visible. It crawls the site, builds a map of the entities it finds, such as the company, its founders, its services and its social profiles, and reports where the picture breaks down.',
+      'Typical findings include a weak sameAs set, an ambiguous name, or visible questions with no matching markup. Fixes are usually structured data and wording changes on specific pages.',
+      'An entity audit is different from a technical site audit. A site audit asks whether AI crawlers can read the site at all. An entity audit asks whether what they read describes one clear company.',
+    ],
+    example:
+      'A consultancy shares its name with an unrelated software firm. An entity audit of its site finds no sameAs links to its own company profiles, so an engine has nothing to separate the two. Adding those links to the Organization markup is the fix.',
+    related: ['entity-gap', 'hallucination', 'internal-linking', 'ai-reality-score'],
+    zicy:
+      'Zicy\'s Entity Audit reads each page twice, raw and rendered, ranks findings Blocking, High or Medium, and gives each fix as markup to publish. See <a href="/platform/entity-audit">Entity Audit and Internal Linking</a>.',
+    faqs: [
+      {
+        q: 'What is an entity audit?',
+        a: 'An entity audit is a crawl of a brand\'s own website, read the way an AI engine reads it, that reports what stops the engine from resolving one clear company, its people and its offerings.',
+      },
+      {
+        q: 'How is an entity audit different from a site audit?',
+        a: 'A site audit checks whether AI crawlers can read a website: bot access, llms.txt, schema, sitemap and speed. An entity audit checks whether what they read describes one clear company.',
+      },
+      {
+        q: 'Does an entity audit change my website?',
+        a: 'No. It reports problems and gives you markup to publish. Someone still has to add it to the site.',
+      },
+    ],
+  },
+  {
+    slug: 'internal-linking',
+    term: 'Internal linking (for AI)',
+    short: 'Links between pages of the same website, placed inside sentences, that show search and AI engines how the pages relate.',
+    definition:
+      'Internal linking is linking one page of a website to another page of the same site, ideally inside a sentence, so search engines and AI engines can see how the two pages relate.',
+    body: [
+      'Search engines find pages by following links, and the words around a link tell them what the page it points to is about. A page that nothing links to is hard for them to find.',
+      'AI engines use the same signals to work out how the parts of a business fit together. A link inside a sentence says two pages are related, and the sentence says how. A page that stands alone tends to be read alone, so an answer about the business can leave it out.',
+      'A page no other page links to is often called an orphan page. Orphan pages are usually the first ones worth fixing.',
+      'Menu and footer links still count, because crawlers follow them, but they carry no sentence around them, so they say little about how two pages relate.',
+    ],
+    example:
+      'A clinic has a page for each treatment, but only the menu links to them. Adding a link from a sentence on the about page that mentions skin treatments to the main treatment page tells an engine the two belong together.',
+    related: ['entity-audit', 'entity-gap', 'aeo'],
+    zicy:
+      'Zicy\'s Internal Linking reads your latest Entity Audit and lists the links to add, page by page, with orphan pages marked. See <a href="/platform/entity-audit">Entity Audit and Internal Linking</a>.',
+    faqs: [
+      {
+        q: 'What is internal linking?',
+        a: 'Internal linking is linking one page of a website to another page of the same site, ideally inside a sentence, so search engines and AI engines can see how the two pages relate.',
+      },
+      {
+        q: 'What is an orphan page?',
+        a: 'A page that no other page on the site links to. Crawlers find it late or not at all, and AI engines tend to read it on its own, without the context of the rest of the site.',
+      },
+      {
+        q: 'Do menu and footer links count?',
+        a: 'They count because crawlers follow them, but a link inside a sentence says more, because the sentence explains how the two pages relate.',
+      },
+    ],
+  },
+  {
+    slug: 'impact-tracker',
+    term: 'Change impact tracking',
+    short: 'Placing dated changes on the same timeline as AI visibility metrics to see what moved after each one.',
+    definition:
+      'Change impact tracking is placing each dated change, such as a content update, a technical fix or a PR campaign, on the same timeline as AI visibility metrics, and comparing the period before each change with the period after it.',
+    body: [
+      'Teams ship many changes in a month. Without a dated record, nobody can say later which one came before a rise or a fall in visibility.',
+      'Change impact tracking pins each change to a date and reads the metrics on either side of it. A common comparison is the week before a change against a full week after it.',
+      'It shows what moved around a change, not why. A metric that rises after a change is consistent with the change working, but it is not proof the change caused it.',
+      'Changes made close together blur the result, because their before and after windows overlap. Shipping one change at a time keeps each one readable.',
+    ],
+    example:
+      'A brand publishes a new comparison page on a Monday and starts a PR campaign that Thursday. Because the two windows overlap, a rise in citations the following week cannot be credited to either change alone.',
+    related: ['ai-share-of-voice', 'citation-coverage', 'ai-mention-coverage', 'prompt-tracking'],
+    zicy:
+      'Zicy\'s Impact Tracker puts each change on the same chart as Share of Voice, Citation Coverage, Brand Mention Coverage and Sentiment, flags overlapping changes, and labels results as change that coincided, not proven cause. See <a href="/platform/impact-tracker">Impact Tracker</a>.',
+    faqs: [
+      {
+        q: 'What is change impact tracking?',
+        a: 'Change impact tracking is placing each dated change, such as a content update, a technical fix or a PR campaign, on the same timeline as AI visibility metrics, and comparing the period before each change with the period after it.',
+      },
+      {
+        q: 'Does it prove a change worked?',
+        a: 'No. It shows what moved around a change, not why. Treat a result as a lead worth checking, not a verdict.',
+      },
+      {
+        q: 'How long should you wait before reading a result?',
+        a: 'At least a full week after the change. A partial week is not a fair comparison with the week before.',
+      },
+    ],
+  },
+  {
+    slug: 'google-business-profile-audit',
+    term: 'Google Business Profile audit',
+    short: 'A check of a Google Business Profile listing against the business\'s own records and against competitors.',
+    definition:
+      'A Google Business Profile audit is a check of a business\'s Google listing, field by field, against what the business holds on record and against competing listings.',
+    body: [
+      'A Google Business Profile is the listing a business manages on Google: its hours, phone number, website, description, category and reviews.',
+      'An audit checks those fields for gaps and mismatches, such as a missing phone number, a thin description, or a name and address that don\'t match the business\'s own records.',
+      'Comparing the listing with competitors shows where it falls behind on the same fields, such as category, listed hours, website link and review count.',
+      'The audit only reports. Changes to the listing are made by the business in Google itself.',
+    ],
+    example:
+      'A cafe\'s listing shows a name that shares no words with the business name on its website, and it has no reviews yet. An audit flags the name mismatch as the more serious finding and the review count as one to note.',
+    related: ['ai-visibility', 'entity-gap', 'hallucination'],
+    zicy:
+      'Zicy\'s GBP Audit runs seven checks on a connected listing and compares it with up to four competitors you track. Nothing is written back to Google. See <a href="/solutions/smb">Zicy for small businesses</a>.',
+    faqs: [
+      {
+        q: 'What is a Google Business Profile audit?',
+        a: 'A Google Business Profile audit is a check of a business\'s Google listing, field by field, against what the business holds on record and against competing listings.',
+      },
+      {
+        q: 'What does Zicy\'s GBP Audit check?',
+        a: 'Seven things: business hours, website link, phone number, business description, review volume, listed category, and whether the name, address and website domain agree with what is on file.',
+      },
+      {
+        q: 'Does an audit change my listing?',
+        a: 'No. Every fix is an instruction you carry into business.google.com yourself.',
+      },
+    ],
+  },
+  {
+    slug: 'mcp',
+    term: 'MCP (Model Context Protocol)',
+    short: 'An open standard that lets an AI assistant call a tool and use its data during a conversation.',
+    definition:
+      'MCP (Model Context Protocol) is an open standard that lets an AI assistant connect to an outside tool, call it, and use the data it returns during a conversation.',
+    body: [
+      'Without a connection, an AI assistant can only use what it was trained on and what you paste in. MCP gives it a standard way to ask a tool for data and use the answer.',
+      'Each request the assistant makes to the tool is called a tool call. Tools that support MCP often meter these calls.',
+      'For AI visibility work, MCP means you can ask an assistant about your own tracking data instead of opening a dashboard.',
+    ],
+    example:
+      'Inside an AI assistant connected to an AI visibility tool, a marketer asks how share of voice changed this month. The assistant makes a tool call, gets the numbers, and answers with them.',
+    related: ['ai-visibility', 'prompt-tracking', 'ai-share-of-voice'],
+    zicy:
+      'Zicy calls this AI apps. On Growth, Scale and Enterprise, each successful tool call counts toward a monthly allowance: 3,000 on Growth, 10,000 on Scale and unlimited on Enterprise. See <a href="/pricing">pricing</a>.',
+    faqs: [
+      {
+        q: 'What is MCP?',
+        a: 'MCP (Model Context Protocol) is an open standard that lets an AI assistant connect to an outside tool, call it, and use the data it returns during a conversation.',
+      },
+      {
+        q: 'What is a tool call?',
+        a: 'One request an AI assistant makes to a connected tool. In Zicy, each successful tool call counts toward your plan\'s monthly allowance, and account and quota checks are free.',
+      },
+      {
+        q: 'Which Zicy plans include it?',
+        a: 'Growth, Scale and Enterprise. Starter does not include it. The allowance resets at the start of each billing period.',
       },
     ],
   },

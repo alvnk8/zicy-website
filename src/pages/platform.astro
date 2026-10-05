@@ -15,9 +15,9 @@ import heroActionPlan from '../assets/screenshots/platform-hero-action-plan.png'
 import { SITE } from '../data/site';
 import { webPageSchema } from '../lib/schema';
 
-const title = 'Zicy Platform, twelve modules across one loop: measure, diagnose, act, prove';
+const title = 'Zicy Platform, every module across one loop: measure, diagnose, act, prove';
 const description =
-  'Zicy is the truth layer for AI visibility, twelve modules across one loop (measure, diagnose, act, prove) that show what AI says about your brand, why, how to fix it, and whether it moved demand. Every engine, every language; built to current AEO/GEO best practice. For small and mid-sized businesses, no AEO specialist required.';
+  'Zicy is the truth layer for AI visibility, with modules across one loop (measure, diagnose, act, prove) that show what AI says about your brand, why, how to fix it, and whether it moved demand. Every engine, every language; built to current AEO/GEO best practice. For small and mid-sized businesses, no AEO specialist required.';
 
 // Module set — single source of truth. Drives the rendered module set AND the ItemList schema.
 const moduleGroups = [
@@ -25,32 +25,41 @@ const moduleGroups = [
     stage: 'Measure',
     modules: [
       { name: 'Prompt Manager', desc: 'Choose and own the exact questions AI is judged on; build and tag a prompt set across segments, topics and languages, run across all five engines.' },
-      { name: 'AI Visibility', desc: 'The core scoreboard: brand mention coverage, citation rate, AI share of voice and average ranking, per engine, over time.' },
+      { name: 'AI Visibility', desc: 'The core scoreboard: brand mention coverage, citation rate, AI share of voice and average ranking, per engine, over time, plus a sentiment score out of 100.' },
       { name: 'Competitive AI Performance', desc: 'Your standing against named competitors, side by side, on coverage, ranking, citations, share of voice and sentiment.' },
     ],
   },
   {
     stage: 'Diagnose',
     modules: [
-      { name: 'Brand Intelligence', desc: 'Perception, the AI Reality Score (fact-check / hallucination), the entity graph, and a prioritised action plan.' },
-      { name: 'Brand Sentiment', desc: 'The language AI attaches to your brand, and the sources driving it.' },
-      { name: 'Competitor Sentiment Profiles', desc: 'How AI frames each rival, from positive to negative.' },
+      { name: 'Brand Intelligence', desc: 'How ChatGPT, Gemini, Google AI Overviews and Google AI Mode describe you, fact-checked: the AI Reality Score, the gaps you confirm, and a prioritised action plan. Perplexity is covered by prompt tracking.' },
+      { name: 'Competitor Sentiment Profiles', desc: 'How AI frames each rival, with a sentiment score out of 100 and the words it uses most.' },
       { name: 'Key Topics Analysis', desc: 'Where you lead the answer, where you are in a fight, and where you are invisible, by topic.' },
       { name: 'Citation Analysis', desc: 'Which sources AI cites about you, owned vs. earned vs. competitor vs. uncited, with narrative control and competitor share, down to the URL.' },
       { name: 'Site Audit', desc: 'Technical AI-readiness: llms.txt, AI-bot access, schema and page health.' },
+      { name: 'Entity Audit', desc: 'Reads your own site the way an AI engine does and reports what stops it seeing one clear company. Findings are ranked Blocking, High or Medium, and each fix is markup you publish.' },
+      { name: 'Internal Linking', desc: 'The links to add between your own pages, inside the page copy, read from your latest Entity Audit. Pages that nothing links to are marked, because AI tends to read them on their own.' },
+      { name: 'GBP Audit', desc: 'Seven checks on your connected Google Business Profile, compared with up to four competitors you track. Each finding comes with a fix you paste into Google yourself.' },
       { name: 'Visibility Gaps', desc: 'The prioritised list of what to fix and what to publish, ranked by impact.' },
     ],
   },
   {
     stage: 'Act',
     modules: [
-      { name: 'Take Action', desc: 'The do-it-now toolbox: llms.txt and schema generators, content optimisation, and new citation-ready content.' },
+      { name: 'GBP Optimizer', desc: 'A new business description, within Google\'s 750-character limit, and a category suggestion, written from your GBP Audit findings. You paste them into Google.' },
+      { name: 'Content Studio', desc: 'One library for everything Content Generator writes and Content Optimizer scores.' },
+      { name: 'Content Generator', desc: 'Turns a topic into a finished article, as one instant draft or step by step with your approval at each stage.' },
+      { name: 'Content Optimizer', desc: 'Scores a page you already have and rewrites the sections that will lift the score. Every rewrite waits for your review.' },
+      { name: 'Schema Generator', desc: 'Reads one page, works out what structured data is missing, and writes the JSON-LD to add.' },
+      { name: 'LLMs Generator', desc: 'Builds your llms.txt, a plain-text summary of your business and key pages for AI systems to read.' },
+      { name: 'Pages Summary', desc: 'Every page on record for your site, with tools to find overlapping pages and pages worth linking to.' },
     ],
   },
   {
     stage: 'Prove',
     modules: [
       { name: 'Site Traffic', desc: 'AI-referred sessions and downstream engagement from GA4 and Search Console, connected to the visibility work: the line from AI visibility to demand.' },
+      { name: 'Impact Tracker', desc: 'Put each change you ship on the same timeline as your AI visibility metrics. A table compares the week before each change with the latest week, and labels the result as change that coincided, not proven cause.' },
     ],
   },
 ];
@@ -63,13 +72,22 @@ const MODULE_DOC: Record<string, string> = {
   'AI Visibility': 'm-04-ai-visibility-dashboard',
   'Competitive AI Performance': 'm-05-competitive-ai-performance',
   'Brand Intelligence': 'm-06-brand-intelligence',
-  'Brand Sentiment': 'm-07-brand-sentiment',
   'Competitor Sentiment Profiles': 'm-08-competitor-sentiment-profiles',
   'Key Topics Analysis': 'm-09-key-topics-analysis',
   'Citation Analysis': 'm-10-citation-analysis',
   'Site Audit': 'm-11-site-audit',
   'Visibility Gaps': 'm-12-visibility-gaps',
-  'Take Action': 'm-22-content-studio',
+  'Entity Audit': 'm-18-entity-audit',
+  'Internal Linking': 'm-28-internal-linking',
+  'GBP Audit': 'm-20-gbp-audit',
+  'GBP Optimizer': 'm-21-gbp-optimizer',
+  'Content Studio': 'm-22-content-studio',
+  'Content Generator': 'm-23-content-generator',
+  'Content Optimizer': 'm-24-content-optimizer',
+  'Schema Generator': 'm-25-schema-generator',
+  'LLMs Generator': 'm-26-llms-generator',
+  'Pages Summary': 'm-27-pages-summary',
+  'Impact Tracker': 'm-19-impact-tracker',
   'Site Traffic': 'm-14-site-traffic',
 };
 
@@ -101,15 +119,15 @@ const moduleList = {
 const faqs = [
   {
     q: 'How many AI engines does Zicy track?',
-    a: 'Zicy tracks five engines by default, ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. Enterprise plans can add others, such as Grok and DeepSeek. Every tracked prompt runs across each engine.',
+    a: 'Zicy tracks five engines, ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, on every plan. Every tracked prompt runs across each engine.',
   },
   {
     q: 'What is the difference between the loop and the modules?',
-    a: 'The loop (measure, diagnose, act, prove) is the workflow; the modules are the tools that deliver each stage. You move around one loop using twelve modules.',
+    a: 'The loop (measure, diagnose, act, prove) is the workflow; the modules are the tools that deliver each stage. You move around one loop using the modules below.',
   },
   {
     q: 'Does Zicy change my site, or only report on it?',
-    a: 'Zicy both reports and remediates. It measures and diagnoses, then the Take Action tools generate schema, llms.txt and citation-ready content so you can fix what it finds, without a hand-off to another tool.',
+    a: 'It reports and gives you the fixes, but you publish them. The Take Action tools write schema, llms.txt, content and Google Business Profile suggestions, and Entity Audit and Internal Linking tell you which markup and links to add. Nothing changes on your site or your listing until you publish it.',
   },
   {
     q: 'How often does Zicy update?',
@@ -117,7 +135,11 @@ const faqs = [
   },
   {
     q: 'Can agencies white-label the platform?',
-    a: 'Yes. Agencies can run AI visibility under their own brand, with white-label dashboards and deliverables, and manage multiple brands from one place. See the agencies solution page.',
+    a: 'Yes. White label is available on Agency and Enterprise agreements: your logo, app name, accent colour and own domain on the dashboard. Agencies can also run many client profiles from one login. See the agencies solution page.',
+  },
+  {
+    q: 'Can I query Zicy from an AI assistant?',
+    a: 'Yes, through the Model Context Protocol (MCP) on Growth, Scale and Enterprise. Each successful tool call counts toward a monthly allowance: 3,000 on Growth, 10,000 on Scale and unlimited on Enterprise. Starter does not include it.',
   },
 ];
 const faqPage = {
@@ -134,8 +156,8 @@ const faqPage = {
 const loop = [
   { k: '01 · Measure', name: 'AI Visibility', desc: 'The core scoreboard, brand mention coverage, citation rate, AI share of voice and average ranking, per engine, over time.' },
   { k: '02 · Diagnose', name: 'Brand Intelligence', desc: 'Perception, the AI Reality Score (fact-check / hallucination), the entity graph, and a prioritised action plan.' },
-  { k: '03 · Act', name: 'Take Action', desc: 'llms.txt and schema generators, content optimisation, and new citation-ready content.' },
-  { k: '04 · Prove', name: 'Site Traffic', desc: 'AI-referred sessions and downstream engagement from GA4 and Search Console, connected to the work.' },
+  { k: '03 · Act', name: 'Take Action tools', desc: 'GBP Optimizer, content, schema and llms.txt tools. Every output is something you publish; nothing goes live without you.' },
+  { k: '04 · Prove', name: 'Impact Tracker', desc: 'Each change you ship, dated, on the same chart as your AI visibility, with Site Traffic connecting it to demand.' },
 ];
 
 // The four primary KPIs (NEW "four numbers" section).
@@ -150,6 +172,8 @@ const differentiators = [
   { h: 'Truth, not just mentions.', p: 'The AI Reality Score catches hallucinations and outdated facts before buyers see them.' },
   { h: 'Every market, every language.', p: 'Coverage across the five engines in the languages your customers actually use, wherever they are. Built on Penang-rooted regional strength.' },
   { h: 'Act inside the tool.', p: 'Remediation and content tooling built to current best practice, no hand-off gap.' },
+  { h: 'Change to consequence.', p: 'Impact Tracker shows what moved after each change you shipped, dated, and says plainly that it is change that coincided, not proven cause.' },
+  { h: 'Your data inside your AI assistant.', p: 'On Growth, Scale and Enterprise, Zicy connects to AI assistants that support the Model Context Protocol (MCP), so your numbers are one question away.' },
 ];
 
 const proofBullets = [
@@ -191,7 +215,7 @@ const breadcrumb = {
       <h1>The truth layer for AI visibility.</h1>
       <p class="lead">
         One platform across the whole loop, measure what AI says about your brand, diagnose
-        why, act to fix it, and prove it moved demand. Twelve modules, five engines, built to
+        why, act to fix it, and prove it moved demand. Five engines, built to
         current AEO/GEO best practice and aligned with Google&rsquo;s latest spam policies.
         Plain English throughout. No specialist required.
       </p>
@@ -294,12 +318,12 @@ const breadcrumb = {
     </div>
   </section>
 
-  <!-- 4. 03 · The module set — twelve modules, grouped by loop stage -->
+  <!-- 4. 03 · The module set, grouped by loop stage -->
   <section id="modules">
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow"><span class="ix">03</span> The module set</span>
-        <h2>Twelve modules, grouped by loop stage.</h2>
+        <h2>Every module, grouped by loop stage.</h2>
         <p>The whole platform, organised the way the work actually runs.</p>
       </div>
       <div class="grid-2">
@@ -319,6 +343,9 @@ const breadcrumb = {
       <p class="sub" style="margin-top:20px">
         In Diagnose, Brand Intelligence surfaces the AI Reality Score.
         <a href="/platform/ai-reality-score">See how the AI Reality Score is calculated &rarr;</a>
+        Two modules have their own pages:
+        <a href="/platform/entity-audit">Entity Audit and Internal Linking &rarr;</a>
+        <a href="/platform/impact-tracker">Impact Tracker &rarr;</a>
       </p>
     </div>
   </section>

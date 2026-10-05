@@ -26,9 +26,9 @@ export interface Faq {
 // UNIVERSAL — heading on every page: "General questions about Zicy and AI visibility".
 // Segment-neutral wording is intentional; do not rewrite to "your brand" / "your client".
 //
-// LIVE = 10 questions. The data-safety / DPA question is HELD (see the commented block below the
+// LIVE = 11 questions. The data-safety / DPA question is HELD (see the commented block below the
 // array): it must not ship with the bracketed placeholder text. When a human resolves it against
-// /legal/dpa, move that entry into this array (after the Penang question) → live becomes 11.
+// /legal/dpa, move that entry into this array (after the Penang question) → live becomes 12.
 // ---------------------------------------------------------------------------------------------
 export const universalFaqs: Faq[] = [
   {
@@ -52,12 +52,16 @@ export const universalFaqs: Faq[] = [
     a: `Zicy tracks five engines: ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. Each weights sources differently, so coverage across all five, rather than any single one, is what gives a defensible picture.`,
   },
   {
+    q: `Does Zicy check my Google Business Profile?`,
+    a: `Yes. Once you connect your listing with a Google sign-in, GBP Audit runs seven checks on it: business hours, website link, phone number, business description, review volume, listed category, and whether your name, address and website domain match what is on file. It also compares your listing with up to four of the competitors you already track. GBP Optimizer can then write a new business description and a category suggestion for you to paste into business.google.com. Zicy never edits your listing and does not reply to reviews.`,
+  },
+  {
     q: `How does Zicy know what the AI said, does it scrape, and is it reliable week to week?`,
-    a: `Measurement uses legitimate API access where available and respects platform terms of service, no machine-generated rank-checking traffic. Tracking is weekly by design, because answer engines evolve gradually; weekly surfaces meaningful shifts and filters out the noise daily tracking would invent.`,
+    a: `Measurement uses legitimate API access where available and respects platform terms of service, no machine-generated rank-checking traffic. Tracking is daily on every plan, so you see meaningful shifts as soon as they happen, not a week later. The weekly and monthly views roll those daily results into a smoother trend.`,
   },
   {
     q: `How quickly does AI visibility change once you act?`,
-    a: `AI visibility shifts gradually rather than overnight, because the engines rebuild entity understanding and retrieval over time rather than on a fixed schedule. Zicy tracks weekly so you can watch movement against a baseline as fixes, content and earned coverage take effect, rather than waiting for a single before-and-after snapshot.`,
+    a: `AI visibility shifts gradually rather than overnight, because the engines rebuild entity understanding and retrieval over time rather than on a fixed schedule. Zicy tracks daily so you can watch movement against a baseline as fixes, content and earned coverage take effect, rather than waiting for a single before-and-after snapshot.`,
   },
   {
     q: `Could using this get us penalised by Google?`,
@@ -90,7 +94,7 @@ export const universalFaqs: Faq[] = [
 export const brandsFaqs: Faq[] = [
   {
     q: `How do I know what AI is saying about us right now?`,
-    a: `You start a free trial and see it in minutes, where you're named, cited, described inaccurately, or replaced by a rival, across all five engines. It surfaces the conversation that never touches your analytics, because it happens before the buyer reaches your site.`,
+    a: `You start a free trial and see it in minutes, where you're named, cited or replaced by a rival across all five engines, and where AI describes you inaccurately. It surfaces the conversation that never touches your analytics, because it happens before the buyer reaches your site.`,
   },
   {
     q: `Do our buyers really choose this way, or is this overstated?`,
@@ -110,7 +114,7 @@ export const brandsFaqs: Faq[] = [
   },
   {
     q: `How do I justify this to my CFO?`,
-    a: `You give them one board-ready number, your AI Share of Voice over time, and the proof layer that connects AI-referred sessions and branded-search behaviour back to the work, so AI visibility reads as a defensible line item rather than a vanity metric.`,
+    a: `You give them one board-ready number, your AI Share of Voice over time, and the proof layer that connects AI-referred sessions and branded-search behaviour back to the work, so AI visibility reads as a defensible line item rather than a vanity metric. Impact Tracker then puts each change you shipped on the same chart as the metrics, so you can show what moved after it.`,
   },
 ];
 
@@ -128,11 +132,11 @@ export const prFaqs: Faq[] = [
   },
   {
     q: `My client has stopped caring about clippings and AVE. What do I report instead?`,
-    a: `A reputation metric the C-suite already respects: AI Share of Voice, mention coverage, citation rate and sentiment, tracked weekly across five engines. It's defensible, comparable to competitors, and tied to the answers buyers act on.`,
+    a: `A reputation metric the C-suite already respects: AI Share of Voice, mention coverage, citation rate and sentiment, tracked daily across five engines. It's defensible, comparable to competitors, and tied to the answers buyers act on.`,
   },
   {
     q: `Can I actually prove the coverage I earned moved the answer?`,
-    a: `Yes. That's what Citation Analysis is for. It shows which sources AI cites about your client, classified as owned, earned, competitor or uncited, so you connect the placement you landed to movement in the answer rather than asserting a link.`,
+    a: `Yes. That's what Citation Analysis is for. It shows which sources AI cites about your client, classified as owned, earned, competitor or uncited, so you connect the placement you landed to movement in the answer rather than asserting a link. Impact Tracker puts the campaign date on the same chart as the metrics, so the before and after is on one screen in the client review.`,
   },
   {
     q: `Can Zicy show which sources AI trusts in my client's category?`,
@@ -158,7 +162,7 @@ export const prFaqs: Faq[] = [
 export const agenciesFaqs: Faq[] = [
   {
     q: `Can we resell Zicy under our own brand?`,
-    a: `Yes, the Enterprise tier provides white-label dashboards under your own name, so the audit, reporting and fixes are presented as your agency's service. The platform and methodology sit behind your brand, with no build cost and no specialist hire.`,
+    a: `Yes. White label is available on Agency and Enterprise agreements, and Zicy sets it up for your workspace. Your logo, app name, accent colour and own domain replace ours on the dashboard, so the audit and the fixes are presented as your agency's service. The platform and methodology sit behind your brand, with no build cost and no specialist hire.`,
   },
   {
     q: `Clients are raising AI search in reviews and we're improvising, how do we have the answer?`,
@@ -178,7 +182,7 @@ export const agenciesFaqs: Faq[] = [
   },
   {
     q: `Most AI tools only measure, what do we actually deliver?`,
-    a: `Zicy measures and remediates in one place: the audit, the prioritised fix list, and the schema, llms.txt and content tooling to close it. That's the category's weakness and your opening. You sell the fix and show the result, not just the problem.`,
+    a: `Zicy measures and remediates in one place: the audit, the prioritised fix list, and the schema, llms.txt and content tooling to close it. That's the category's weakness and your opening. You sell the fix and show the result, not just the problem. Entity Audit fixes, the internal link list and GBP Optimizer copy are files a client can act on the same day, and work you can bill for.`,
   },
   {
     q: `How do agencies usually package this for clients?`,
@@ -186,7 +190,7 @@ export const agenciesFaqs: Faq[] = [
   },
   {
     q: `How do we run our whole client roster from one place?`,
-    a: `Every plan includes unlimited projects and brands, and the Enterprise tier adds multi-brand management built for a portfolio, so each client is tracked and reported separately from a single login with your agency's brand on every report.`,
+    a: `One brand profile on Starter, three on Growth, five on Scale and unlimited on Enterprise. Agency plans work in client workspaces instead: up to 10 on Agency and up to 25 on Agency Scale. Each client is tracked and reported on its own from one login, and teammates only see the client profiles assigned to them. The <a href="/pricing">pricing page</a> has the current limits.`,
   },
   {
     q: `Will this actually help us keep clients?`,
@@ -262,7 +266,7 @@ export const publishersFaqs: Faq[] = [
   },
   {
     q: `How do we handle a large archive without a huge project?`,
-    a: `The Site Audit inventories and checks the archive, and audit-boost add-ons scale to large sites, so you can assess attribution and machine-readability across thousands of pages without a rebuild.`,
+    a: `The Site Audit inventories and checks the archive, and audit-boost add-ons scale to large sites, so you can assess attribution and machine-readability across thousands of pages without a rebuild. Pages Summary lists the pages already on record and finds overlapping ones, and Internal Linking shows which archive pages nothing links to.`,
   },
 ];
 

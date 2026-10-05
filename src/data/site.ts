@@ -15,7 +15,7 @@ export const SITE = {
 export const PROVENANCE =
   'Built by Growth.pro, the consultancy behind the PAVA framework for AI visibility.';
 
-export const PROOF_ENGINES = 'ChatGPT · Gemini · Perplexity · Google AI Overviews · Copilot';
+export const PROOF_ENGINES = 'ChatGPT · Gemini · Perplexity · Google AI Overviews · Google AI Mode';
 export const PROOF_TAG = 'All engines. All languages. All markets.';
 
 export const SOLUTIONS = [

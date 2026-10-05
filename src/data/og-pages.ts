@@ -41,6 +41,18 @@ const pages: Record<string, OgPage> = {
       'One platform to measure your AI visibility, prove what is working, and improve where you appear.',
     alt: 'Zicy · the platform',
   },
+  'platform/entity-audit': {
+    eyebrow: 'Platform',
+    title: 'Why AI mixes you up with someone else',
+    description: 'Entity Audit finds the cause on your own site. Internal Linking shows the links to add.',
+    alt: 'Zicy · Entity Audit and Internal Linking',
+  },
+  'platform/impact-tracker': {
+    eyebrow: 'Platform',
+    title: 'Which change moved the answer?',
+    description: 'Every change you ship, dated, on the same chart as your AI visibility.',
+    alt: 'Zicy · Impact Tracker',
+  },
   pricing: {
     eyebrow: 'Pricing',
     title: 'Plans that scale with your visibility',
