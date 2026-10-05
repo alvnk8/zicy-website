@@ -1,0 +1,278 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SegmentSchema from '../../components/SegmentSchema.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { serviceSchema } from '../../lib/schema';
+
+// Local business / Micro SME page. Every product claim here is limited to verified app
+// behaviour for Micro SME profiles (GBP connect setup, five-engine tracking by business name,
+// GBP Audit's seven checks, GBP Optimizer drafts, Brand Intelligence on four engines, Impact
+// Tracker, one listing per profile). Do not add: that Zicy edits the listing, Maps-link setup,
+// location counts or per-location pricing, run limits, Beta labels, or competitor-tool comparisons.
+// House style: sentence case, no em dashes, straight apostrophes, engines in fixed order.
+
+const title = 'Zicy for local businesses: no website? Run it from your Google Business Profile';
+const description =
+  "No website? Connect your Google Business Profile and see what ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode say about your business. Zicy checks your listing and drafts text you copy in. Try free for 7 days.";
+
+const url = 'https://www.zicy.com/solutions/local-business';
+const registerUrl = 'https://app.zicy.com/register';
+
+const h1 = 'No website? Run it from your Google Business Profile.';
+const lead =
+  'Many local businesses live on their Google listing, not a website. Zicy works from that listing. Connect it, and see what ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode say about your business.';
+
+// GBP Audit's seven checks, as the app and help centre (m-20) list them.
+const auditChecks = [
+  'Opening hours',
+  'Website link',
+  'Phone number',
+  'Business description',
+  'Review volume',
+  'Listed category',
+  "Name and address match what's on file",
+];
+
+const nextSteps = [
+  {
+    h: 'Brand Intelligence',
+    p: 'See how AI describes your business, across four AI engines.',
+  },
+  {
+    h: 'Impact Tracker',
+    p: 'Note each change you make, like a new description, and see what moved in your AI visibility after it. It shows what moved, not proof that the change caused it.',
+  },
+];
+
+// Page FAQ. Rendered by <FaqAccordion> and mirrored 1:1 into the FAQPage JSON-LD below.
+// No universal FAQ block on this page: keep this array the only FAQ source.
+const localFaqs = [
+  {
+    q: 'Do I need a website?',
+    a: 'No. Set up a Micro SME profile and connect your Google Business Profile with a Google sign-in. A website is optional.',
+  },
+  {
+    q: 'Does Zicy edit my Google Business Profile?',
+    a: 'No. GBP Audit reads your listing and GBP Optimizer drafts suggested text. You copy any change into your profile yourself.',
+  },
+  {
+    q: 'What does GBP Audit check?',
+    a: "Seven things: opening hours, website link, phone number, business description, review volume, listed category, and whether your name and address match what's on file. It needs your Google connection to run.",
+  },
+  {
+    q: 'Which AI engines does Zicy track?',
+    a: 'ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. Brand Intelligence covers four engines.',
+  },
+  {
+    q: 'I have several branches. Does this work?',
+    a: 'A Micro SME profile connects one Google Business Profile listing. For several branches, use the Business profile type, which has a branch picker and needs a website address. <a href="/contact">Contact us</a> about pricing for several locations.',
+  },
+];
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': `${url}#webpage` },
+  mainEntity: localFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${url}#breadcrumbs`,
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.zicy.com/' },
+    { '@type': 'ListItem', position: 2, name: 'For local businesses', item: url },
+  ],
+};
+
+// name = the page's H1, description = the hero lead, as on smb.astro.
+const serviceNode = serviceSchema('/solutions/local-business', h1, lead, 'AI visibility');
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqPage)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceNode)} />
+  <SegmentSchema slot="head" url={url} name={title} audienceType="local business" />
+
+  <!-- 1. Hero -->
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">For local businesses</span>
+      <h1>{h1}</h1>
+      <p class="lead">{lead}</p>
+      <div class="cta-row">
+        <a class="btn btn-p btn-lg" href={registerUrl}>Try for free</a>
+        <a class="btn btn-o btn-lg" href="/solutions/smb">For small businesses with a website</a>
+      </div>
+      <p class="muted" style="font-size:14px;margin-top:14px">7-day free trial, no card required.</p>
+    </div>
+  </section>
+
+  <!-- At a glance -->
+  <section id="at-a-glance">
+    <div class="wrap">
+      <div class="shead">
+        <h2>At a glance</h2>
+      </div>
+      <ul class="checklist">
+        <li>Set up a Micro SME profile and connect your Google Business Profile. A website is optional.</li>
+        <li>Zicy tracks what the five AI engines say about your business. It matches on your business name, so no domain is needed.</li>
+        <li>GBP Audit checks your listing. GBP Optimizer drafts text you copy in. Zicy never edits your listing.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2. Setup -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">01</span> Setup</span>
+        <h2>Connect your Google listing. That's the setup.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">
+          Choose the Micro SME profile type. The first step is Connect Google Business Profile,
+          with a Google sign-in. If you have a website you can add it, but you don't need one.
+        </p>
+        <p style="margin-top:16px">
+          With no website to check, the Micro SME profile leaves out the website tools, such as
+          Site Audit, Schema and Content Studio. You see the tools that work from your listing and
+          your business name.
+        </p>
+      </div>
+      <!-- screenshot: Micro SME setup, Connect Google Business Profile step (zicy-sync) -->
+    </div>
+  </section>
+
+  <!-- 3. AI visibility without a domain -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">02</span> AI visibility</span>
+        <h2>See what AI says about you, without a domain.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">
+          Zicy tracks buyer questions across ChatGPT, Gemini, Perplexity, Google AI Overviews and
+          Google AI Mode. It counts a mention when AI names your business, so it works without a
+          website.
+        </p>
+        <p style="margin-top:16px">
+          You also see which sources AI cites, which competitors it names, and the key topics it
+          links to you.
+        </p>
+      </div>
+      <!-- screenshot: AI visibility dashboard for a Micro SME profile (zicy-sync) -->
+    </div>
+  </section>
+
+  <!-- 4. GBP Audit -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">03</span> GBP Audit</span>
+        <h2>Seven checks on your listing.</h2>
+        <p>GBP Audit checks your Google Business Profile for these problems. It needs your Google connection to run.</p>
+      </div>
+      <ul class="checklist" style="max-width:760px">
+        {auditChecks.map((c) => <li>{c}</li>)}
+      </ul>
+      <div style="max-width:760px">
+        <p style="margin-top:16px">
+          With no website, Zicy checks your name and address against your Brand Profile instead.
+          The audit reads your listing. It does not change it.
+        </p>
+      </div>
+      <!-- screenshot: GBP Audit report (zicy-sync) -->
+    </div>
+  </section>
+
+  <!-- 5. GBP Optimizer -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">04</span> GBP Optimizer</span>
+        <h2>Suggested text you copy in.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">
+          For what the audit finds, GBP Optimizer drafts a suggested business description and
+          category text. You check it, then copy it into your Google Business Profile yourself.
+          Zicy does not edit your listing.
+        </p>
+      </div>
+      <!-- screenshot: GBP Optimizer suggested description and category (zicy-sync) -->
+    </div>
+  </section>
+
+  <!-- 6. Brand Intelligence and Impact Tracker -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">05</span> Beyond the listing</span>
+        <h2>See how AI describes you, and what moved.</h2>
+      </div>
+      <div class="grid-2">
+        {nextSteps.map((s) => (
+          <div class="card">
+            <h3>{s.h}</h3>
+            <p>{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Branches -->
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow"><span class="ix">06</span> Branches</span>
+        <h2>One listing per profile.</h2>
+      </div>
+      <div style="max-width:760px">
+        <p class="lead" style="font-size:18px">
+          A Micro SME profile connects one Google Business Profile listing. Several branches? Use
+          the Business profile type, which has a branch picker and needs a website address.
+        </p>
+        <p style="margin-top:16px">
+          <a href="/contact">Contact us</a> about pricing for several locations.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FAQ: rendered from localFaqs, the same array as the FAQPage JSON-LD -->
+  <section style="background:var(--mist)">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions local businesses ask.</h2>
+      </div>
+      <FaqAccordion items={localFaqs} defaultOpen={0} />
+      <p class="sub" style="font-size:15px;margin-top:22px">
+        The help centre explains <a href="https://docs.zicy.com/module-reference/m-20-gbp-audit/">GBP Audit</a>
+        and <a href="https://docs.zicy.com/module-reference/m-21-gbp-optimizer/">GBP Optimizer</a> step by step.
+      </p>
+    </div>
+  </section>
+
+  <!-- 9. Final CTA -->
+  <section class="final">
+    <div class="wrap">
+      <h2>{h1}</h2>
+      <p>Connect your Google Business Profile and see what AI says about your business.</p>
+      <div class="hcta">
+        <a class="btn btn-p" href={registerUrl}>Try for free</a>
+        <a class="btn btn-o" href="/pricing">See pricing</a>
+      </div>
+      <p class="muted" style="font-size:14px;margin-top:14px">7-day free trial, no card required.</p>
+    </div>
+  </section>
+</BaseLayout>
