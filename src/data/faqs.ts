@@ -53,7 +53,7 @@ export const universalFaqs: Faq[] = [
   },
   {
     q: `Does Zicy check my Google Business Profile?`,
-    a: `Yes. Once you connect your listing with a Google sign-in, GBP Audit runs seven checks on it: business hours, website link, phone number, business description, review volume, listed category, and whether your name, address and website domain match what is on file. It also compares your listing with up to four of the competitors you already track. GBP Optimizer can then write a new business description and a category suggestion for you to paste into business.google.com. Zicy never edits your listing and does not reply to reviews.`,
+    a: `Yes. Once you connect your listing with a Google sign-in, GBP Audit runs nine checks. Seven read the listing: business hours, website link, phone number, business description, review volume, listed category, and whether your name, address and phone match your website, or what is on file. Two look at your website: whether the listing's link points to this location's own page, and whether your site has a page for this location. It also compares your listing with up to four of the competitors you already track. GBP Optimizer can then write a new business description and a category suggestion for you to paste into business.google.com. Zicy never edits your listing and does not reply to reviews.`,
   },
   {
     q: `How does Zicy know what the AI said, does it scrape, and is it reliable week to week?`,

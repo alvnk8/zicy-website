@@ -6,7 +6,7 @@ import { serviceSchema } from '../../lib/schema';
 
 // Local business / Micro SME page. Every product claim here is limited to verified app
 // behaviour for Micro SME profiles (GBP connect setup, five-engine tracking by business name,
-// GBP Audit's seven checks, GBP Optimizer drafts, Brand Intelligence on four engines, Impact
+// GBP Audit's nine checks, GBP Optimizer drafts, Brand Intelligence on four engines, Impact
 // Tracker, one listing per profile). Do not add: that Zicy edits the listing, Maps-link setup,
 // location counts or per-location pricing, run limits, Beta labels, or competitor-tool comparisons.
 // House style: sentence case, no em dashes, straight apostrophes, engines in fixed order.
@@ -22,7 +22,7 @@ const h1 = 'No website? Run it from your Google Business Profile.';
 const lead =
   'Many local businesses live on their Google listing, not a website. Zicy works from that listing. Connect it, and see what ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode say about your business.';
 
-// GBP Audit's seven checks, as the app and help centre (m-20) list them.
+// GBP Audit's nine checks, as the app and help centre (m-20) list them.
 const auditChecks = [
   'Opening hours',
   'Website link',
@@ -30,7 +30,9 @@ const auditChecks = [
   'Business description',
   'Review volume',
   'Listed category',
-  "Name and address match what's on file",
+  "Name, address and phone match your website, or what's on file",
+  "Website link points to this listing's own page",
+  'A page for this location on your website',
 ];
 
 const nextSteps = [
@@ -49,7 +51,7 @@ const nextSteps = [
 const localFaqs = [
   {
     q: 'Do I need a website?',
-    a: 'No. Set up a Micro SME profile and connect your Google Business Profile with a Google sign-in. A website is optional.',
+    a: 'No. Set up a Micro SME profile and connect your Google Business Profile with a Google sign-in. You don\'t need a website.',
   },
   {
     q: 'Does Zicy edit my Google Business Profile?',
@@ -57,7 +59,7 @@ const localFaqs = [
   },
   {
     q: 'What does GBP Audit check?',
-    a: "Seven things: opening hours, website link, phone number, business description, review volume, listed category, and whether your name and address match what's on file. It needs your Google connection to run.",
+    a: "Nine things: opening hours, website link, phone number, business description, review volume, listed category, whether your name, address and phone match your website or what's on file, whether your website link points to this listing's own page, and whether your website has a page for this location. It needs your Google connection to run.",
   },
   {
     q: 'Which AI engines does Zicy track?',
@@ -121,7 +123,7 @@ const serviceNode = serviceSchema('/solutions/local-business', h1, lead, 'AI vis
         <h2>At a glance</h2>
       </div>
       <ul class="checklist">
-        <li>Set up a Micro SME profile and connect your Google Business Profile. A website is optional.</li>
+        <li>Set up a Micro SME profile and connect your Google Business Profile. You don't need a website.</li>
         <li>Zicy tracks what the five AI engines say about your business. It matches on your business name, so no domain is needed.</li>
         <li>GBP Audit checks your listing. GBP Optimizer drafts text you copy in. Zicy never edits your listing.</li>
       </ul>
@@ -138,11 +140,11 @@ const serviceNode = serviceSchema('/solutions/local-business', h1, lead, 'AI vis
       <div style="max-width:760px">
         <p class="lead" style="font-size:18px">
           Choose the Micro SME profile type. The first step is Connect Google Business Profile,
-          with a Google sign-in. If you have a website you can add it, but you don't need one.
+          with a Google sign-in. Zicy builds your profile from your listing, so you don't need a website.
         </p>
         <p style="margin-top:16px">
           With no website to check, the Micro SME profile leaves out the website tools, such as
-          Site Audit, Schema and Content Studio. You see the tools that work from your listing and
+          Site Audit, Entity Audit, Visibility Gaps, Schema Generator and Content Studio. You see the tools that work from your listing and
           your business name.
         </p>
       </div>
@@ -167,6 +169,7 @@ const serviceNode = serviceSchema('/solutions/local-business', h1, lead, 'AI vis
           You also see which sources AI cites, which competitors it names, and the key topics it
           links to you.
         </p>
+        <p style="margin-top:16px">For local searches, each prompt also shows whether your business is in Google's map pack, and where.</p>
       </div>
       <!-- screenshot: AI visibility dashboard for a Micro SME profile (zicy-sync) -->
     </div>
@@ -177,15 +180,15 @@ const serviceNode = serviceSchema('/solutions/local-business', h1, lead, 'AI vis
     <div class="wrap">
       <div class="shead">
         <span class="eyebrow"><span class="ix">03</span> GBP Audit</span>
-        <h2>Seven checks on your listing.</h2>
-        <p>GBP Audit checks your Google Business Profile for these problems. It needs your Google connection to run.</p>
+        <h2>Nine checks on your listing.</h2>
+        <p>GBP Audit checks your Google Business Profile, and any website it links to, for these problems. It needs your Google connection to run.</p>
       </div>
       <ul class="checklist" style="max-width:760px">
         {auditChecks.map((c) => <li>{c}</li>)}
       </ul>
       <div style="max-width:760px">
         <p style="margin-top:16px">
-          With no website, Zicy checks your name and address against your Brand Profile instead.
+          With no page for your location on a website, Zicy checks your business name and city against your Brand Profile instead.
           The audit reads your listing. It does not change it.
         </p>
       </div>
