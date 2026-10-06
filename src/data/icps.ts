@@ -3,7 +3,6 @@
 import type { ImageMetadata } from 'astro';
 // Explicit imports — only screenshots cleared by the privacy gate (§1.1 of the brief).
 // The anonymised/ versions have a 'SAMPLE DASHBOARD' banner + blurred brand/competitor/URL regions.
-import citationUrls from '../assets/screenshots/citation-analysis-urls.png';
 
 export interface Module {
   name: string;
@@ -146,13 +145,6 @@ export const ICPS: Icp[] = [
       { name: 'Site Audit', desc: 'Whether your site is technically readable by AI crawlers: llms.txt, bot access, schema.' },
     ],
     screenshots: [
-      // #9 citation-analysis-urls.png — verified safe (third-party domains only, no Prudential).
-      {
-        desc: 'Citation Analysis, domain / URL drill-down',
-        src: citationUrls,
-        alt: 'Zicy Citation Analysis drilling into the domains and individual URLs AI cites, classified as owned, earned or competitor.',
-        caption: 'Citation Analysis, drill down to the exact URLs AI is citing.',
-      },
     ],
     whyHeading: 'Why publishers choose Zicy',
     why: [
