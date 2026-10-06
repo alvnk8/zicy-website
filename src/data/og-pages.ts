@@ -111,6 +111,12 @@ const pages: Record<string, OgPage> = {
     description: 'Practical AEO and GEO guidance, and how AI search is changing brand discovery.',
     alt: 'Zicy · resources',
   },
+  solutions: {
+    eyebrow: 'Solutions',
+    title: 'Zicy for every kind of team',
+    description: 'AI visibility for small businesses, brands, PR teams, agencies, and publishers.',
+    alt: 'Zicy · solutions',
+  },
   'solutions/local-business': {
     eyebrow: 'For local businesses',
     title: 'No website? Start from your Google listing',
@@ -141,6 +147,12 @@ const pages: Record<string, OgPage> = {
     title: 'Measure how AI cites your content',
     description: 'Track which pages AI engines cite, and how often.',
     alt: 'Zicy · for publishers',
+  },
+  legal: {
+    eyebrow: 'Legal',
+    title: 'Legal documents',
+    description: 'Privacy, cookie, and terms documents for Zicy.',
+    alt: 'Zicy · legal documents',
   },
   'legal/terms': {
     eyebrow: 'Legal',

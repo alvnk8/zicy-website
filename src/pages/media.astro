@@ -4,7 +4,7 @@ import path from 'node:path';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { SITE } from '../data/site';
-import { orgNode } from '../lib/schema';
+import { ORG_ID } from '../lib/schema';
 import { LOGO_SCALE_WALL } from '../data/press-logo-scale.mjs';
 
 const title = 'Zicy in the press | Media coverage and press kit';
@@ -183,6 +183,7 @@ const DISPLAY_HEADLINES: Record<string, string> = {
 function toNewsOrPodcastNode(item: (typeof coverage)[number]) {
   return {
     '@type': item.type === 'Podcast' ? 'PodcastEpisode' : 'NewsArticle',
+    '@id': item.href,
     headline: item.headline,
     url: item.href,
     ...(item.date ? { datePublished: item.date } : {}),
@@ -192,18 +193,18 @@ function toNewsOrPodcastNode(item: (typeof coverage)[number]) {
 
 const mediaPageUrl = `${SITE.url}/media`;
 
-// about: the site's single canonical Organization node (src/lib/schema.ts), referenced whole
-// rather than hand-typed, so name/url/logo/founder/sameAs can never drift from every other page's
-// copy of the same entity.
+// about: references the site's single canonical Organization node by @id; the full node is
+// defined once, on the homepage (see Schema.astro), so it can never drift between pages.
 const collectionPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   '@id': `${mediaPageUrl}#webpage`,
   name: 'Zicy in the press',
   url: mediaPageUrl,
-  about: orgNode,
+  about: { '@id': ORG_ID },
   mainEntity: {
     '@type': 'ItemList',
+    '@id': `${mediaPageUrl}#press-list`,
     itemListElement: sortedCoverage.map((item, i) => ({
       '@type': 'ListItem',
       position: i + 1,

@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE, SOLUTIONS } from '../../data/site';
+import { ORG_ID } from '../../lib/schema';
+
+const title = 'Zicy solutions for brands, agencies, PR and publishers';
+const description =
+  'See how Zicy helps small businesses, local businesses, brands, PR teams, agencies and publishers measure and improve how AI describes them.';
+
+const url = `${SITE.url}/solutions`;
+
+const blurbs: Record<string, string> = {
+  '/solutions/smb': 'See what AI tells your customers about your business, and how to fix it.',
+  '/solutions/local-business': 'No website needed: run it from your Google Business Profile.',
+  '/solutions/brands': 'See what AI says about your brand, whether it is accurate, and how to fix it.',
+  '/solutions/pr': 'Prove your earned work moved the AI answer.',
+  '/solutions/agencies': 'Productise AI visibility under your own brand.',
+  '/solutions/publishers': 'Sell advertising as measurable AI visibility uplift.',
+};
+const items = SOLUTIONS.map((s) => ({ label: s.label, href: s.href, p: blurbs[s.href], link: 'See the solution →' }));
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${url}#breadcrumbs`,
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Solutions', item: url },
+  ],
+};
+
+const collectionPage = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': `${url}#webpage`,
+  url,
+  name: title,
+  description,
+  isPartOf: { '@id': `${SITE.url}/#site` },
+  about: { '@id': ORG_ID },
+  publisher: { '@id': ORG_ID },
+  mainEntity: {
+    '@type': 'ItemList',
+    '@id': `${url}#list`,
+    itemListElement: items.map((it, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${SITE.url}${it.href}`,
+      name: it.label,
+    })),
+  },
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionPage)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Solutions</span>
+      <h1>Zicy for every kind of team.</h1>
+      <p class="lead">Pick the page that fits how you work.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="grid-2">
+        {items.map((it) => (
+          <div class="card">
+            <h3>{it.label}</h3>
+            <p>{it.p}</p>
+            <a class="link" href={it.href}>{it.link}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

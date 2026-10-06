@@ -13,9 +13,42 @@ const author = { '@type': 'Person', name: 'Ritu Khanna' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What Is an AI Prompt Baseline?", a: "An AI prompt baseline is a defined set of questions you repeatedly track to compare AI visibility over time. A corporate training company might choose five important customer questions about SME training providers, customised sales programmes, leadership training, team building and how to compare providers." },
+  { q: "Why Does a Stable Baseline Matter for AI Visibility?", a: "Your metrics depend on what you choose to measure. Suppose your brand appears in four of ten tracked answers: 40% Brand Mention Coverage. You add ten prompts where the brand already performs strongly and appears in eight answers. The dashboard now shows 12 mentions across 20 answers: 60%. The score moved from 40% to 60%, but performance on the original questions did not improve. The number changed because the measurement set changed." },
+  { q: "What Exactly Are You Measuring With a Prompt Baseline?", a: "You are not measuring whether “AI knows your company” in a universal sense. You are measuring something specific: How visible is our business across this defined set of customer questions? A payroll software company's score might represent prompts about recommendations, SME systems, compliance, automation and comparisons. Replacing half of them with general HR management questions changes the slice of AI visibility being measured." },
+  { q: "What Should Go Into Your Initial AI Prompt Baseline?", a: "Your initial set should reasonably represent the customer questions that matter to the business. 1. Important products and services. 2. Questions with genuine customer intent. 3. Different stages of buyer intent. 4. Important markets. 5. A manageable number of prompts." },
+  { q: "Why Is Constantly Adding New Prompts a Problem?", a: "Every addition can affect the denominator behind your metrics. A brand appears in 15 of 30 answers, or 50%. You add ten prompts and appear in only one, changing the result to 16 of 40, or 40%. The existing visibility may not have collapsed. The original 15 appearances could be unchanged. You expanded measurement into an area where the brand is weaker." },
+  { q: "Why Can Removing Prompts Be Just as Misleading?", a: "Deleting difficult questions can artificially improve the picture. If you appear in eight of 20 prompts, coverage is 40%. Delete five prompts where the brand never appears and it becomes eight of 15, or 53.3%. Nothing about actual visibility improved. You removed five failures from the measurement." },
+  { q: "Should Your Prompt Baseline Never Change?", a: "No. Stable does not mean frozen forever. Businesses, customers, markets, products and customer language change. The principle is: Do not change the measurement casually, and document meaningful changes when you make them." },
+  { q: "When Should You Keep the Baseline Stable?", a: "Keep it stable when the business and measurement objective have not materially changed. Do not reset simply because visibility declined, a competitor overtook you, some prompts have zero mentions, one platform stopped mentioning you or you want the next report to look better." },
+  { q: "What Is the Difference Between Adding a Prompt and Resetting the Baseline?", a: "Not every new question requires a reset. Adding one useful question to 50 prompts may have a small impact. Replacing 25 prompts, adding a market and removing a major service category means the portfolio is substantially different. Small maintenance: minor additions or wording corrections. Moderate change: a meaningful new prompt group or service. Major reset: the set now represents something substantially different." },
+  { q: "Can You Have a Core Baseline and Still Test New Prompts?", a: "Yes. Keep stable core prompts for important offerings, high-value buyer questions and major markets. Use exploratory prompts for new concerns, product categories, competitor comparisons or ways customers describe a problem." },
+  { q: "What About Rewording an Existing Prompt?", a: "Compare “What are good payroll providers in Malaysia?” with “Which payroll providers in Malaysia are best for companies with fewer than 50 employees?” The second specifies a customer profile, so the answer may differ. A typo or nonsensical question should be corrected. But a change to the intent or scope should be recorded as meaningful rather than treated as the same prompt." },
+  { q: "Why Should You Record Changes to Your Baseline?", a: "People forget. If Share of Voice rises after the content team publishes new articles, everyone may credit the campaign even though someone also replaced 20 prompts. Without a record, the business may assign the improvement to the wrong cause. Google Analytics explains attribution as assigning credit across the touchpoints that lead to an important action, and different models distribute that credit differently." },
+  { q: "What Should You Record When the Baseline Changes?", a: "date of change; what changed and why; how many prompts were added, removed or replaced; which product, service or topic groups were affected; and whether this is considered a new baseline. Example: “1 September 2026: Added 12 Singapore buyer-intent prompts following market expansion. Malaysia prompts unchanged. Analyse Singapore separately from the historic Malaysia baseline.”" },
+  { q: "Should You Reset the Baseline When AI Platforms Change?", a: "Not automatically. AI platforms evolve constantly, and that is part of what you are trying to observe. A visibility shift across the same prompts may be valuable information. Preserve the questions where possible and annotate significant external changes when they help explain movement. This logic is also used in established analytics systems: Search Console annotations add context to charts by marking important events." },
+  { q: "How Long Should You Keep a Prompt Baseline?", a: "There is no universal rule such as resetting every three months. Keep the baseline while it represents your business, customers, markets, important offerings and the questions you want answered. Review it periodically without automatically changing it. Every quarter, ask whether the questions still represent important customer journeys, whether services or markets are missing and whether customer language has materially changed." },
+  { q: "How Do You Know Whether a Score Change Is Real?", a: "When Brand Mention Coverage moves from 42% to 58%, ask: Did the prompt set change? Did the market mix change? Did the buyer-intent mix change? Did the measured platforms change? Did the actual AI answers change? The final check matters most. A headline percentage tells you that something moved. The underlying responses help you understand what moved." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     {
       '@type': 'WebPage', '@id': url, url, name: title,
       isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` },

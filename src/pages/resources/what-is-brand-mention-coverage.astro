@@ -12,9 +12,32 @@ const url = `${SITE.url}/resources/what-is-brand-mention-coverage`;
 const author = { '@type': 'Person', name: 'Nabila Wawan' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What Is Brand Mention Coverage?", a: "Brand Mention Coverage measures how consistently your brand appears across AI-generated responses to the prompts you track. At its simplest, it asks: Was your brand mentioned in this response? It is a breadth or presence metric. Your brand may be the first company recommended, one name in a list or a brief mention near the end. All three count as responses in which your brand appeared." },
+  { q: "Why Does Brand Mention Coverage Matter in the Age of AI Search?", a: "People use AI to research options before deciding what to buy, which company to choose or which product to explore. Instead of opening several search results and building a shortlist, a user can receive a ready-made answer containing a handful of brands. If your brand appears, it has an opportunity to enter the customer's consideration set. If it is repeatedly absent, other companies may receive that opportunity instead." },
+  { q: "What Counts as a Brand Mention and What Doesn't?", a: "A brand mention happens when an AI-generated response clearly identifies your brand. Abbreviations, shortened names and recognised variations may also count when they clearly refer to the same business." },
+  { q: "Where Do Brand Mentions Happen?", a: "Brand mentions can appear across the AI answer engines people use to research products, businesses and services, including ChatGPT, Claude, Gemini, Perplexity, AI Overviews and Google AI Mode. Each platform generates its own response. The same prompt can therefore produce different results depending on where it is asked. A brand may appear frequently on ChatGPT but less consistently on Gemini, while Perplexity and Google's AI experiences may surface different groups of companies." },
+  { q: "What Does Your Brand Mention Coverage Tell You?", a: "The overall percentage gives you the headline. The more useful insights often appear when you look at the results by prompt and platform, where you can see whether visibility is consistent or where gaps appear. 1. Consistent Visibility. Your brand appears across many relevant prompts, suggesting that AI platforms regularly connect it to the topics, products or services being discussed. 2. Prompt-Specific Gaps. You may appear for some prompts and disappear from others." },
+  { q: "What Is a Good Brand Mention Coverage?", a: "There is no universal percentage every business should consider good. A competitive category may have many brands that could appear, while a narrow category may have few. Broad prompts also behave differently from highly specific questions, and the mix of platforms changes the result. The goal is to understand whether your brand is consistently present in the AI conversations where it should reasonably be considered." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
     { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [

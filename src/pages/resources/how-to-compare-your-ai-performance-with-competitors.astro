@@ -13,9 +13,38 @@ const url = `${SITE.url}/resources/how-to-compare-your-ai-performance-with-compe
 const author = { '@type': 'Person', name: 'Vi Vien Koay' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "How do you know if your brand is outperforming competitors in AI answers?", a: "This is why simply asking “Does AI mention my business?” is not enough. A competitor may appear more frequently but usually rank lower. Another may appear less often but dominate questions closer to a buying decision. A third may have similar visibility but receive far more citations. There is no single “AI ranking” that settles who is ahead. A useful comparison looks at several metrics together, then asks where the differences occur — by AI platform and by customer question." },
+  { q: "What does mention coverage tell you?", a: "Mention Coverage tells you how consistently your business appears across the AI answers being analysed. If your business appears in 60% of the analysed answers while Competitor A appears in 80%, Competitor A is entering more relevant conversations. That matters because you cannot be considered if you do not enter the answer. But Mention Coverage tells you only whether you appeared. It does not tell you where you appeared, how much attention you received or whether your website was cited." },
+  { q: "What does average ranking tell you?", a: "Average Ranking shows where your business tends to appear when AI names several brands. Across many answers, those positions can be averaged. In most AI visibility monitoring, a lower Average Ranking means the brand tends to appear closer to the top of recommendation lists. That is why Mention Coverage and Average Ranking should be read together." },
+  { q: "What does share of voice tell you?", a: "Share of Voice looks at how much of the overall brand conversation your business captures. Imagine AI produces 100 total brand mentions across the customer questions you track. If 20 belong to your business, your Share of Voice is 20%." },
+  { q: "What do citations tell you about competitor performance?", a: "Being mentioned and being cited are different. AI might name your business without linking to it. In another answer, it may recommend a competitor and link directly to that competitor’s website. Both businesses were mentioned, but only one had its website surfaced as a source." },
+  { q: "How should you interpret website citations?", a: "For an individual customer question, check two separate things: Was your brand mentioned? Was your website actually cited or linked? These are not the same signal." },
+  { q: "Why can one competitor look stronger on one metric but weaker on another?", a: "Because each metric measures a different part of the same competitive picture. None of these patterns proves the cause by itself. A weak citation rate does not automatically mean your content is poor. A competitor ranking above you does not automatically mean it has “better SEO”. Treat the numbers as signals telling you where to investigate next." },
+  { q: "Why should you compare AI platforms separately?", a: "AI isn't one platform. The same buyer question can produce different results in ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode. Your aircon company might be named first in ChatGPT. Gemini might list two competitors and leave you out. Perplexity might include you but cite a directory instead of your website." },
+  { q: "Why should you look at individual buyer questions?", a: "An overall average tells you a gap exists. The individual buyer questions tell you where it is." },
+  { q: "What if an unfamiliar competitor keeps appearing?", a: "Your competitor list is based on businesses you already know. AI does not have to follow that list. You may discover another local aircon company repeatedly appearing in the same recommendations even though you never considered it a major competitor." },
+  { q: "How should you investigate a competitor performance gap?", a: "Once you identify a difference between your brand and a competitor, do not stop at the headline metric. Look for a meaningful pattern, such as: one competitor appearing much more consistently; another appearing less often but tending to rank higher; similar Mention Coverage but different Share of Voice; a large difference in citations; or an unfamiliar brand appearing often enough to investigate. Once you identify a meaningful difference, drill down from the metric → AI platform → buyer question → actual answer → source." },
+  { q: "What should you do with the competitor gap you find?", a: "The next step depends on what the evidence shows. If an unfamiliar company repeatedly appears, first determine whether it genuinely belongs in your competitor set. If AI is describing your own business incorrectly, investigate the inaccurate information before focusing on competitor performance. If competitor metrics suddenly change, look at the longer-term pattern before reacting." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
     { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [

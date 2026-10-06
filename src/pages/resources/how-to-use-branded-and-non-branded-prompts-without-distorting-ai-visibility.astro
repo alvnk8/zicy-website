@@ -14,9 +14,33 @@ const author = { '@type': 'Person', name: 'Vi Vien Koay' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What is a branded AI prompt?", a: "A branded prompt includes your company, product or brand name directly in the question. Examples include: “What does [Brand] offer?” “Is [Brand] suitable for SMEs?” “What is [Brand] known for?” “How does [Brand] compare with [Competitor]?” “Does [Brand] provide services in Kuala Lumpur?” In other words, branded prompts are mainly useful for checking understanding, accuracy and perception." },
+  { q: "Why can branded prompts distort AI visibility?", a: "Because the prompt itself tells AI to talk about your business. If you ask: “Is ABC Software good for small businesses?” and ABC Software appears in the answer, that does not prove AI would have discovered ABC without being prompted. This matters when measuring metrics such as brand mentions, ranking or share of voice." },
+  { q: "What is a non-branded AI prompt?", a: "A non-branded prompt describes the customer's need without naming your business. For example: “Which payroll software is suitable for a company with 30 employees?” “What are the best inventory systems for small retailers in Malaysia?” These prompts create a more competitive test. AI has to decide which companies, products or services are relevant. If your brand appears, that tells you something much more meaningful about natural discovery." },
+  { q: "How should you organise both types without confusing the results?", a: "The safest approach is to treat them as two separate measurement groups. Do not combine the two groups and then use the overall mention rate as proof that customers are discovering you. A high mention rate from branded prompts could hide weak performance on the questions that actually require AI to choose between businesses." },
+  { q: "Should competitor names count as branded prompts?", a: "They should usually be treated separately as comparison or alternative prompts. For example: “What are alternatives to Competitor X for small businesses?” does not mention your brand, so your company still has to be selected by AI. By contrast: “Is Your Brand better than Competitor X?” is explicitly branded and should not be used as evidence of natural discovery. The important distinction is whether your own brand was supplied to AI before it produced the answer." },
+  { q: "Can the same business need both prompt types?", a: "Yes, and most businesses probably should. Non-branded prompts tell you whether you are entering the customer's consideration set. Branded prompts tell you what happens once the customer starts researching you specifically." },
+  { q: "What is the simplest rule to follow?", a: "Before interpreting any AI prompt, ask: Did we tell AI which brand to talk about? If yes, use the answer to understand brand perception or accuracy. If no, and the question gives AI a genuine reason to recommend businesses, use it to understand brand discovery and competitive visibility." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     {
       '@type': 'WebPage',
       '@id': url,

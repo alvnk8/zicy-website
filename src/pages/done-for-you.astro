@@ -4,6 +4,7 @@ import FaqAccordion from '../components/FaqAccordion.astro';
 import Screenshot from '../components/Screenshot.astro';
 import dfyActionPlan from '../assets/screenshots/dfy-action-plan.png';
 import { SITE } from '../data/site';
+import { GROWTH_PRO_ORG_ID } from '../lib/schema';
 
 const title = 'Done-for-you AI visibility, run for you by Growth.pro, the consultancy that built Zicy';
 const description =
@@ -87,16 +88,13 @@ const faqPage = {
 const service = {
   '@context': 'https://schema.org',
   '@type': 'Service',
+  '@id': `${SITE.url}/done-for-you#service`,
   name: 'Done-for-you AI visibility',
   serviceType: 'Managed AI visibility programme',
   description:
     'A managed AI visibility programme run by Growth.pro on the Zicy platform, strategy, execution and proof, operated for enterprise brands.',
   url: `${SITE.url}/done-for-you`,
-  provider: {
-    '@type': 'Organization',
-    name: 'Growth.pro',
-    url: 'https://www.growth.pro/',
-  },
+  provider: { '@id': GROWTH_PRO_ORG_ID },
   areaServed: 'Worldwide',
 };
 ---

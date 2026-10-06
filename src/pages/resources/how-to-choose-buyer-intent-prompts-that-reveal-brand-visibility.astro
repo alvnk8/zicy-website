@@ -14,9 +14,35 @@ const author = { '@type': 'Person', name: 'Vi Vien Koay' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What does buyer intent mean in an AI prompt?", a: "Buyer intent does not mean the customer is ready to make a purchase immediately. It means the question has moved beyond simply learning about a topic towards evaluating how to solve a need or which option might suit them." },
+  { q: "Why can informational prompts give misleading visibility data?", a: "The problem comes when you use them to judge whether your brand is being discovered. Suppose you track: “What is cloud accounting?” ChatGPT, Gemini and Perplexity could all provide excellent explanations without naming a single accounting software company. If your brand receives zero mentions, that does not automatically mean your AI visibility is weak. The question simply gave AI no strong reason to recommend a business." },
+  { q: "What signals buyer intent?", a: "Do not judge a prompt only by individual words. Buyer-intent prompts may include terms such as: which; recommended; suitable; alternatives; provider; where can I find; options; or best for. But the intent behind the question matters more than the wording. The customer should be trying to identify, evaluate or choose a solution." },
+  { q: "What does a strong buyer-intent prompt look like?", a: "Strong prompts usually combine a real customer need with enough information for AI to determine which options are relevant. The stronger versions represent situations in which a potential customer could realistically be deciding what to use or whom to contact." },
+  { q: "How much context should you add?", a: "Add information that could genuinely change which businesses are suitable. Useful context may include: Customer type: “for a small manufacturer”; Problem: “that needs automated payroll”; Requirement: “with multi-currency invoicing”; Location: “in Penang”; Use case: “for a 200-person corporate conference”. But more detail is not automatically better. Do not make prompts artificially long. Add context only when it could reasonably affect which option is suitable." },
+  { q: "Should you include your own brand name?", a: "Usually not when you are measuring natural discovery. Compare: “Is MyBrand suitable for small businesses?” with: “Which providers are suitable for small businesses that need [specific requirement]?” The first tells AI which business to discuss. The second lets AI decide which businesses are relevant." },
+  { q: "How does buyer intent fit into your overall prompt strategy?", a: "Buyer intent indicates whether a given question is suitable for measuring visibility. It does not tell you which products, services, customer groups, locations and problems your entire tracking programme should cover." },
+  { q: "How should you measure buyer-intent prompts?", a: "Once you have chosen suitable buyer-intent questions, track what actually happens when those questions are asked across AI answer engines. Look at whether your brand appears, where it is positioned, which competitors are mentioned and whether your website is used as a source." },
+  { q: "Which buyer-intent prompts should you start with?", a: "Begin with one simple question: What would a potential customer ask AI when they know what they need but have not yet decided who to choose? Turn those situations into natural questions. Then ask: Would AI reasonably need to recommend or compare businesses to answer this well? If yes, the prompt is likely worth considering for visibility tracking." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     {
       '@type': 'WebPage',
       '@id': url,

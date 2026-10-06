@@ -13,9 +13,44 @@ const author = { '@type': 'Person', name: 'Ritu Khanna' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What Does “Market” Mean in AI Visibility Tracking?", a: "A market is the geographic area where you want customers to discover and consider your business. For one company, markets may be countries such as Malaysia, Singapore, Indonesia and Australia. For another, they may be Kuala Lumpur, Johor Bahru and Penang. A local business may focus on Petaling Jaya, Subang Jaya, Sri Petaling and Bangsar." },
+  { q: "Why Can AI Visibility Differ Between Markets?", a: "“Which payroll software is suitable for SMEs in Malaysia?” and the same question for Singapore differ by one word, but the commercial meaning may change. Relevant businesses, payroll requirements, pricing, expectations, available sources and locally recognised brands may all differ. AI therefore has reasons to produce different answers." },
+  { q: "Isn't AI Visibility Global?", a: "ChatGPT, Gemini, Perplexity and Google's AI search experiences operate internationally, but a business that is known by AI is not necessarily equally relevant everywhere. “What are some good accounting firms?” is incomplete for a business decision. Good firms where, for which customer, regulatory environment and service? A company relevant to an SME in Kuala Lumpur may be irrelevant in Sydney. The useful question is: Does AI consider us relevant in the markets where we want customers?" },
+  { q: "How Is This Similar to Traditional International SEO?", a: "International websites have long needed geographic context. Google's multi-regional guidance recommends clear regional targeting through locale-specific URLs, hreflang and locally relevant information because users in different countries may need different pages or results. If customer context differs by market, AI visibility measurement should show that difference." },
+  { q: "What Is a Market-Specific AI Prompt?", a: "A market-specific prompt makes the relevant geography clear. Compare “Which corporate training companies work with SMEs?” with versions specifying Malaysia or Singapore. These questions test whether the brands in AI answers change with the market. Good tracking goes further than inserting a country name. But customer priorities may differ around compliance, price, integrations, competitors, terminology or local support. Balance like-for-like questions with prompts that reflect the actual needs of each market." },
+  { q: "Why Shouldn't You Just Copy the Same Prompts for Every Country?", a: "Comparable questions can be useful when they genuinely apply in both markets. But customer priorities may differ around compliance, price, integrations, competitors, terminology or local support. Balance like-for-like questions with prompts that reflect the actual needs of each market." },
+  { q: "Should Every Market Have the Same Number of Prompts?", a: "Not necessarily, but take care with combined scores. If Malaysia has 80 prompts while Singapore and Australia have ten each, the overall score will be heavily influenced by Malaysia. That may reflect the business accurately. It becomes misleading if management reads the number as equal representation of all three markets." },
+  { q: "Why Should Competitors Be Analysed Separately by Market?", a: "The competitors frequently appearing for a Malaysian web design agency may be entirely different from those appearing in Singapore. A valuable finding may be that the companies AI treats as competitors in the new market are not the companies you expected." },
+  { q: "What If You Rank Well on Google in a Market but AI Rarely Mentions You?", a: "This is possible because traditional search visibility and AI visibility are related but not identical. A page may rank for “HR software Singapore” while an AI answer to “Which HR software is suitable for a Singapore company with 40 employees?” recommends other providers." },
+  { q: "How Can Your Website Support Different Markets?", a: "Tracking tells you where a problem exists. Then investigate why. Make market relevance clear rather than expecting search and AI systems to infer it from vague clues. A Singapore-focused page could explain service availability, local customer types, locally relevant features, pricing or sales process, compliance considerations, customer examples and support arrangements." },
+  { q: "Should You Create a Separate Page for Every Market?", a: "Not automatically. Do not produce 30 nearly identical country pages. Create market pages where geography creates meaningful differences in availability, needs, pricing, regulation, examples, terminology, delivery, support, configuration or buying process." },
+  { q: "What Role Do Third-Party Sources Play in Market Visibility?", a: "Your website is one part of your online presence. If it claims Singapore leadership while independent articles, directories, reviews and industry pages refer only to Malaysia, AI may encounter a mixed picture." },
+  { q: "How Can You Tell Whether Customers Behave Differently Across Markets?", a: "Start with your own customer data. Talk to sales, customer service, local partners, regional marketing teams and customers. Examine enquiries, site search, Search Console queries, keyword research and interviews." },
+  { q: "What Are the Most Common Mistakes in Multi-Market AI Tracking?", a: "Putting every country into one prompt pool. Keep market-level analysis visible. Assuming home-market strength transfers automatically. Measure recognition in the new market. Using exactly the same questions everywhere. Keep comparable prompts while allowing genuine local differences. Comparing unequal prompt sets without context. Use reasonably comparable structures when direct comparison is the goal. Mixing market and language. The same language can span markets, and one market can use several languages. Adding a market without considering the baseline. A drop after adding weak-market prompts may reflect expanded measurement rather than deterioration." },
+  { q: "Should You Aim for the Same AI Visibility Score in Every Market?", a: "Not necessarily. A company established in Malaysia for 15 years should not automatically expect the same visibility three months after entering Singapore. Malaysia's objective may be to defend leadership, Singapore's to grow mentions and citations, and Australia's to establish initial visibility and understand competitors." },
+  { q: "How Often Should You Review Market-Level AI Visibility?", a: "Maintain a reasonably stable prompt set. Review which brands appear, whether mentions and citations improve, how average ranking changes, which groups remain weak and which competitors gain visibility." },
+  { q: "What About Businesses With Many Markets?", a: "You probably do not need 100 prompts for each of ten countries. Prioritise: Tier 1: Core markets. High revenue or strategic importance; track comprehensively. Tier 2: Growth markets. Active investment and meaningful potential; track a smaller representative set. Tier 3: Future markets. Monitor lightly or wait until expansion is concrete. The purpose is useful information, not the largest possible dataset." },
+  { q: "How Does Multi-Market Tracking Connect With Your Prompt Baseline?", a: "If you have tracked Malaysia for six months and then add Singapore, do not compare the new combined result with the previous Malaysia-only result as though nothing changed. Keep the Malaysia baseline intact and establish a Singapore baseline. Then report that Malaysia moved from 62% to 68% while Singapore begins at 24%." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     {
       '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url,

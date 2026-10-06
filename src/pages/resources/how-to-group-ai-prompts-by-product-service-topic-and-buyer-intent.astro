@@ -14,9 +14,39 @@ const author = { '@type': 'Person', name: 'Ritu Khanna' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "First, What Is an AI Prompt?", a: "A prompt is the question or instruction someone gives an AI system. “What is payroll outsourcing?”, “What should I look for when choosing a payroll provider?” and “Which payroll outsourcing companies in Malaysia are suitable for SMEs?” are all prompts." },
+  { q: "Why Do Businesses Track AI Prompts?", a: "You need a consistent way to measure whether your business appears when potential customers ask relevant questions. An HR consultancy could track: “Which HR consulting firms in Malaysia work with SMEs?” “What are some good HR outsourcing companies for a small business?” “Which companies provide payroll and HR outsourcing in Kuala Lumpur?” “What should I compare when choosing an HR outsourcing company?” “What are alternatives to hiring a full internal HR team?”" },
+  { q: "Why Does a Long AI Prompt List Become Difficult to Understand?", a: "Imagine a digital agency offering SEO, web design, social media marketing and branding. It tracks 40 prompts and sees 45% Brand Mention Coverage, meaning the brand appeared in 45% of the tracked AI answers. Across all 40 prompts, the agency appeared 18 times. But the overall number hides the useful story: the agency is visible for SEO and web design, while social media and branding are much weaker." },
+  { q: "What Does It Mean to Group AI Prompts?", a: "Grouping means putting prompts that share an important characteristic into the same category, often with tags. Consider three prompts: “Which accounting firms in Malaysia provide payroll outsourcing?” “What should an SME compare when choosing a payroll outsourcing provider?” “What does payroll outsourcing normally include?” All three could receive Service: Payroll. A fourth prompt about corporate tax could receive Service: Tax." },
+  { q: "What Are the Four Main Ways to Group AI Prompts?", a: "There is no universal tagging structure. For most SMEs, four types provide a practical starting point: Product Service Topic Buyer intent You may not need all four. A retailer may rely heavily on product tags, a consultancy on service and buyer-intent tags, and a content-heavy business on topic tags." },
+  { q: "What Is the Difference Between a Service Tag and a Topic Tag?", a: "A service is something you sell. A topic is something people discuss or ask about that is relevant to what you sell. An HR consultancy may sell Service: HR Outsourcing, while relevant topics include Employee Retention, Labour Compliance, Payroll Errors and HR Costs." },
+  { q: "Why Should You Separate Informational and Buyer-Intent Prompts?", a: "Otherwise, your overall AI visibility can be misleading. Suppose you track 10 informational questions and 10 provider-search questions. Your brand appears in one informational answer and seven provider-search answers, producing 40% overall mention coverage. You might conclude that visibility is poor. But there may be little reason for AI to name your company when someone asks what payroll means. On questions where a recommendation is relevant, you appear 70% of the time." },
+  { q: "Can One AI Prompt Belong to More Than One Group?", a: "Yes. “Which payroll outsourcing companies in Malaysia are suitable for SMEs?” could be tagged: Service: Payroll Outsourcing Topic: Payroll Management Intent: Provider Search Market: Malaysia You do not need four copies of the prompt. It is one prompt viewed through different business lenses." },
+  { q: "How Can Prompt Groups Reveal Competitor Strengths?", a: "A corporate training company's overall AI Share of Voice may look competitive, while service groups reveal four different situations: Leadership Training: You lead. Sales Training: You and Competitor A are close. Team Building: Competitor B dominates. Communication Training: Your brand rarely appears. The business may defend its leadership visibility, make a focused improvement to overtake Competitor A, investigate why Competitor B dominates team building and determine why communication training is barely associated with the brand." },
+  { q: "How Can Grouping Help You Find Content Gaps?", a: "Suppose your business rarely appears for Service: Corporate Tax. The prompts within that group show you are missing on questions about SME tax deductions, when to hire a tax consultant and how to prepare for an audit." },
+  { q: "How Many Prompt Groups Should a Small Business Create?", a: "As few as you need to make useful decisions. Do not begin with 14 buyer stages, 32 topic tags, 19 service subcategories and eight custom labels. A small accounting firm might start with four services: Bookkeeping, Payroll, Tax and Company Incorporation, plus three intent groups: Learning, Comparison and Provider Search." },
+  { q: "What Are the Most Common Prompt-Grouping Mistakes?", a: "Creating too many tags. If every prompt has a unique tag, nothing has been grouped. Mixing product, topic and intent in one name. Replace a vague tag such as “Payroll Best SME Malaysia” with clear labels such as Service: Payroll and Intent: Provider Search. Grouping only by your website structure. Customers may ask “How can I reduce employee turnover?” even when your navigation calls the service “People Solutions”. Build groups around how customers think. Treating every prompt as equally commercial. A definition and a provider recommendation do not necessarily have the same business value. Changing the structure constantly. Renaming and rebuilding groups every week makes trend comparisons harder. Start simple and make deliberate changes." },
+  { q: "How Often Should You Review Your Prompt Groups?", a: "Do not rebuild groups every time you notice an interesting question. AI visibility becomes more meaningful when you can compare like with like over time. Review your groups when something meaningful changes: you launch a new service; you enter a new product category; customer research reveals a major buying concern; a minor service becomes strategically important; you expand into a new market; or the original grouping no longer reflects the business." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     {
       '@type': 'WebPage',
       '@id': url,

@@ -15,7 +15,7 @@
 // House style: human-readable strings in sentence case, no em dash, no banned vocab. Engine
 // names are kept out of the descriptions so the canonical-five fixed-order rule does not apply.
 import { SITE } from '../data/site';
-import { ORG_ID, PERSON_IDS, orgNode, alvinPersonNode } from '../lib/schema';
+import { ORG_ID, PERSON_IDS, orgNode, growthProOrgNode, alvinPersonNode } from '../lib/schema';
 
 const orgId = ORG_ID;
 const appId = `${SITE.url}/#app`;
@@ -44,7 +44,7 @@ const graph = {
       name: SITE.name,
       publisher: { '@id': orgId },
     },
-    ...(isHome ? [orgNode] : []),
+    ...(isHome ? [orgNode, growthProOrgNode] : []),
     {
       '@type': 'SoftwareApplication',
       '@id': appId,

@@ -11,9 +11,34 @@ const url = `${SITE.url}/resources/what-is-website-citation-rate`;
 const author = { '@type': 'Person', name: 'Nabila Wawan' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What Is Website Citation Rate?", a: "Website Citation Rate is the percentage of AI responses that cite your website as a source. A website citation happens when an AI-generated answer includes a link or visible source reference to a page on your site." },
+  { q: "Why Does a Website Citation Matter?", a: "A website citation gives your site source visibility and a possible route back to your business. If it is clickable, someone can follow it to learn more about your products, services or expertise. A citation is not the same as a visit. It creates an opportunity for someone to reach your website, not proof that they did." },
+  { q: "Website Citation vs Brand Mention: What Is the Difference?", a: "In AI search, a brand mention tells you whether your business made it into the answer. A website citation tells you whether your own website was used as a visible source. Together, they reveal different parts of your AI visibility." },
+  { q: "Can AI Cite a Page Other Than My Homepage?", a: "Yes. AI can cite relevant blog articles, product pages, service pages or FAQs. A specific page may be more useful than the homepage when the user asks a detailed question." },
+  { q: "Why Might a Competitor Be Cited Instead of My Website?", a: "A competitor may have a page that better matches the question, or the platform may surface its content for that response. Look at which page was cited and what question triggered it to make a useful comparison." },
+  { q: "Does a Website Citation Mean Someone Visited My Site?", a: "No. A citation gives someone a route to your website; it does not mean they clicked. Measure citation visibility and website traffic separately." },
+  { q: "Is an AI Citation the Same as a Backlink?", a: "No. A backlink is published on another webpage. An AI citation appears inside an AI-generated response and may change with the question, platform or time. Both can provide a route to your website, but they are different types of visibility." },
+  { q: "Can Website Citation Rate Change Even if My Website Stays the Same?", a: "Yes. AI responses and the sources they surface can change over time even if you make no changes to your website. Your rate can also change if you start tracking different questions, because the total set of AI responses being measured changes. Keeping a stable AI prompt baseline makes changes over time easier to interpret." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
     { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [

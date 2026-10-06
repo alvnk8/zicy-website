@@ -14,9 +14,31 @@ const author = { '@type': 'Person', name: 'Vi Vien Koay' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "How to build coverage across the main customer situations?", a: "A useful prompt portfolio should not depend too heavily on one type of question. Think about several dimensions. For example, a digital marketing agency may want questions around SEO, paid media and social media, but also around ecommerce brands, B2B companies and businesses in Malaysia. This provides a much more useful view than tracking many variations of one generic “best agency” question." },
+  { q: "How to decide which areas deserve more prompts?", a: "Not every part of your business needs equal coverage. Give more attention to areas that are: commercially important; strategically important; frequently requested by customers; highly competitive; or areas where you specifically want to grow." },
+  { q: "How to ensure the individual prompts are suitable for visibility tracking?", a: "Once you know what areas you want to monitor, the next step is choosing questions that can actually reveal brand visibility. This is where buyer intent becomes important. A question such as: “What is payroll software?” may be relevant to your industry, but AI can answer it perfectly without recommending any provider. A question such as: “Which payroll software is suitable for a Malaysian SME?” creates a clearer opportunity for businesses to appear." },
+  { q: "How should you organise your Prompt strategy?", a: "As your prompt set grows, it helps to organise the questions into meaningful groups rather than treating them as one long list. You might group prompts by: products; services; customer segments; locations; or types of buying questions." },
+  { q: "What should you do first?", a: "Start with your business rather than starting with AI. Write down: What do we most want customers to find us for? Who are those customers? What problems are they trying to solve? Which locations or requirements matter?" },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     {
       '@type': 'WebPage',
       '@id': url,

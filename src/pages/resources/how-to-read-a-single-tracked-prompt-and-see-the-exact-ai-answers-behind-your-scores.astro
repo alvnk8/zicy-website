@@ -11,9 +11,30 @@ const url = `${SITE.url}/resources/how-to-read-a-single-tracked-prompt-and-see-t
 const author = { '@type': 'Person', name: 'Deeba Sri' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What Is a Tracked Prompt?", a: "A prompt is one specific customer question tracked across all five AI platforms every day. It is the kind of question a real buyer would type into ChatGPT or Gemini before choosing a business like yours." },
+  { q: "What Does a Single Prompt Result Show?", a: "When you open one tracked prompt, you see more than a number: Brand Mention Coverage: How many of the five platforms mentioned your business, shown as a score such as 3/5 or 5/5. Website Citation Coverage: How many platforms linked to your website. AI can name your business without linking to your site. Average Position: When your business was mentioned, did it appear first, second or third? Share of Voice: Across all five platforms, how much of the competitive conversation was about your business? Per-platform results: Whether your brand was mentioned, at what position, how often, whether your website was cited and the complete AI answer. Ranked Brand Mentions: Every business named in the answer, in order, with a “You” label beside your business. Website Citations: Which websites each platform linked to while answering the question. Reading these together tells you exactly what happened." },
+  { q: "Why Do Results Differ Across AI Platforms?", a: "One of the most useful things about reading a single prompt result is seeing how different the answers can be across platforms. Your aircon company might appear first in ChatGPT. Gemini might not mention it. Perplexity might mention it but link to a directory instead of your website. Each AI platform works differently. They use different sources and methods for deciding which businesses to include and how to build an answer. A question answered well on one platform does not guarantee the same result on another." },
+  { q: "What Does the Raw AI Answer Tell You?", a: "The score gives you a number. The raw AI answer gives you the story behind it. Suppose Brand Mention Coverage drops from 5/5 to 3/5 for the aircon servicing question. The score tells you two platforms stopped mentioning you. The raw answers may show that one platform now lists three competitors before mentioning you near the end. Another might give general advice without naming any business. These are different situations." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
     { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [

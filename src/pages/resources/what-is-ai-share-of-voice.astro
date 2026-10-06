@@ -12,9 +12,35 @@ const url = `${SITE.url}/resources/what-is-ai-share-of-voice`;
 const author = { '@type': 'Person', name: 'Nabila Wawan' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What Is AI Share of Voice?", a: "AI Share of Voice (SOV) measures the share of brand mentions your business receives across tracked AI-generated answers compared with competing brands. For example, an accounting business could appear alongside several firms in AI answers about bookkeeping, tax services, payroll or e-Invoicing. SOV shows how the brand mentions across those answers are divided among the businesses being compared." },
+  { q: "Why Does AI Share of Voice Matter?", a: "AI Share of Voice gives you a useful competitive benchmark for AI search. It can show where you stand relative to other businesses, where they have an advantage and whether that picture is changing over time." },
+  { q: "What Can Affect Your AI Share of Voice?", a: "Your AI Share of Voice can rise or fall as the balance of brand mentions changes across the conversations you track. Your brand mentions: More appearances across relevant AI answers can increase your share. Competitor mentions: If competitors start appearing more often, your SOV can fall even when your own visibility stays similar. The prompts you track: Different customer questions can bring different brands into the conversation, which changes the overall share. The competitors being compared: Your SOV depends on the competitive set. Missing relevant competitors can give you an incomplete picture. The AI platforms and time period: Each answer engine, like ChatGPT or Gemini, can surface different brands, and their answers can change over time." },
+  { q: "How Is AI Share of Voice Calculated?", a: "AI Share of Voice is calculated by dividing your brand mentions by the total brand mentions across the tracked AI answers, then multiplying by 100. AI SOV = Your Brand Mentions ÷ Total Brand Mentions × 100 For example, if your brand receives 40 mentions out of 200 total brand mentions, your SOV is: 40 ÷ 200 × 100 = 20%." },
+  { q: "Can a Small Business Have a Higher SOV Than a Much Larger Competitor?", a: "Yes. Business size does not automatically determine AI visibility. A smaller brand can have a higher SOV if it takes a larger share of the relevant AI conversations being tracked." },
+  { q: "Can Two Competitors Have Almost the Same Share of Voice?", a: "Yes. Brands can have very similar SOV percentages when they receive a similar share of attention across the tracked AI answers. A near-tie is worth watching because even a small shift in visibility could change which business holds the larger share." },
+  { q: "Should I Compare My SOV With Every Business in My Industry?", a: "No. Focus on competitors that serve similar customers, compete for the same needs or regularly appear alongside your business in relevant AI answers. A smaller, more relevant competitor set usually yields a more meaningful comparison than including every business in the industry." },
+  { q: "How Long Does It Take to Improve AI Share of Voice?", a: "There is no fixed timeframe. Changes in AI SOV depend on your brand's broader visibility, competitors' activity and how AI platforms respond to the topics being tracked. It is more useful to monitor the direction of your SOV over time than to expect an immediate change after updating a page or publishing new content." },
+  { q: "Can a New Competitor Suddenly Affect My SOV?", a: "Yes. If another business starts taking a larger share of the same AI conversations, your percentage can change even if your own visibility remains relatively stable. This is one reason it is useful to keep an eye on new or previously untracked brands appearing in your competitive space." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
     { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [

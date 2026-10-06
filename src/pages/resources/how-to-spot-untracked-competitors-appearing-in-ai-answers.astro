@@ -12,9 +12,34 @@ const url = `${SITE.url}/resources/how-to-spot-untracked-competitors-appearing-i
 const author = { '@type': 'Person', name: 'Vi Vien Koay' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "How can competitors appear without being on your radar?", a: "Your competitor list usually reflects the businesses you already know from Google searches, customer comparisons, local advertising, sales conversations or past research. But AI answers can introduce other brands that were never added to that list." },
+  { q: "Why does spotting untracked competitors matter?", a: "If AI is already presenting an unfamiliar business as an option, your potential customers may be seeing it even though you are not monitoring it. That makes early discovery useful. You cannot decide whether a business is a genuine competitor, track its visibility or compare its performance until you know it exists." },
+  { q: "Why are untracked competitors easy to miss?", a: "There is no single fixed AI results page showing every business competing for your customers. A company may appear in one customer question but not another. It may appear in ChatGPT but be absent from Gemini. In a longer recommendation, an unfamiliar name can also be buried among several businesses you already recognise." },
+  { q: "What does an untracked competitor actually mean?", a: "An untracked competitor is a business that appears in AI answers to your customers' questions but isn't in the competitor set you monitor. Its appearance alone doesn't prove it competes with you. What it does show is that AI placed this business in a customer conversation that may overlap with yours, so treat it as a lead to check before you add it to your list." },
+  { q: "What if you find several untracked brands at once?", a: "You may review your AI answers and find five, ten or more unfamiliar business names. Do not investigate every name equally. Start with businesses that: appear repeatedly; show stronger visibility; surface in commercially important questions; or appear across multiple AI platforms." },
+  { q: "What can you deprioritise quickly?", a: "Some surfaced names may clearly not need immediate investigation. You may be able to deprioritise: a generic category or product term rather than a company; one of your own sub-brands or brand variations; a manufacturer mentioned because its product is part of the answer; a directory or marketplace that is influencing discovery rather than directly competing; a business from an irrelevant market or location; another name clearly incidental to the answer." },
+  { q: "How can you spot unfamiliar competitors more efficiently?", a: "A competitive view can bring the competitors you already monitor together with unfamiliar brands surfaced in analysed AI answers. Rather than treating every unfamiliar name as a competitor, use this as a starting point for investigation. Finding the unfamiliar brand tells you who appeared. Next, find out where and why it appeared. Go back to the customer question and read the actual AI response." },
+  { q: "What should you do after spotting an unfamiliar brand?", a: "Once you have spotted an unfamiliar business, the next stage is validation. The key question is: “Does this business genuinely compete for the same customer decision as us?” Consider whether it serves the same customers, solves the same problem, operates in the same market and could realistically win the same business." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
     { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
