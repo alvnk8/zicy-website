@@ -11,9 +11,44 @@ const url = `${SITE.url}/resources/how-to-track-ai-visibility-across-different-c
 const author = { '@type': 'Person', name: 'Ritu Khanna' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What Is Multilingual AI Visibility?", a: "Multilingual AI visibility is the extent to which a business appears and is represented in relevant AI answers across the languages its customers use. A Malaysian training provider may appear for the English prompt “Which leadership training companies in Malaysia work with SMEs?” A similar Bahasa Malaysia question still concerns leadership training in Malaysia, but the resulting brands, sources, descriptions and ordering may differ." },
+  { q: "Why Can AI Give Different Answers in Different Languages?", a: "Multilingual AI is not always a simple translation system. A question translated into another language may lead to different interpretation, retrieved information, sources, brand mentions, recommendations, wording or detail." },
+  { q: "What Does “Customer Language” Actually Mean?", a: "Customer language is not simply the official language of a country. In Malaysia, customers may research products and services in English, Bahasa Malaysia, Mandarin, Tamil or combinations of languages." },
+  { q: "Is Language the Same as Market?", a: "No. Malaysia and Singapore are two markets, but customers across them may use English, Bahasa Malaysia and Mandarin. An English prompt only establishes visibility for that English question. It does not automatically establish Malaysian Bahasa Malaysia visibility, Malaysian Mandarin visibility, Singaporean English visibility or Singaporean Mandarin visibility." },
+  { q: "Why Does Multilingual AI Visibility Matter for SMEs?", a: "A customer can discover you through AI only if your business becomes part of the answer they receive. A tuition centre may appear when someone asks for maths tuition in Petaling Jaya in English but disappear from a similar Mandarin answer." },
+  { q: "How Is Multilingual AI Visibility Different From Multilingual SEO?", a: "Multilingual SEO asks whether search engines can find the correct language page, whether that page ranks and whether internationalisation is implemented correctly. Multilingual AI visibility adds another question: when someone asks an AI system in that language, does your business become part of the generated answer? A translated page may be indexed and rank while the brand still has weak visibility in AI recommendations." },
+  { q: "Why Shouldn't You Simply Translate Your English AI Prompts?", a: "A literal translation may be grammatical without reflecting how people ask the question. Customers may retain English loanwords such as “payroll” or “SME”, use different industry terms or prefer “Which payroll system is suitable for an SME?” over a direct translation of “best payroll solutions for small businesses”." },
+  { q: "Should You Compare Percentages Directly?", a: "Only carefully. Comparable sets should be reasonably similar in size, intent, product or service coverage and market context. Provider-search prompts naturally create more reason to mention brands than broad educational questions." },
+  { q: "Can AI Confuse Your Brand More Easily in Another Language?", a: "Potentially, especially when the name has another meaning, similar businesses exist, localised names differ, external sources use inconsistent naming or transliteration varies. Clear, consistent business information across languages helps build a more coherent evidence trail." },
+  { q: "How Can Your Website Support Multilingual AI Visibility?", a: "If Bahasa Malaysia matters commercially, ask whether that content helps a Bahasa Malaysia-speaking customer make a decision. A translated homepage alone may not be enough. Prioritise useful product and service descriptions, pricing where appropriate, FAQs, support details, company information, case studies, contact information and buying guidance." },
+  { q: "Should Every Page Be Translated?", a: "No. Begin with the homepage, core service or product pages, conversion pages, high-value FAQs and major educational resources. Expand based on demand. Quality matters more than publishing hundreds of poor automated translations." },
+  { q: "What Technical Setup Matters?", a: "Use separate language URLs, hreflang where appropriate, clear language-switch links and page content that is mainly in one language. Avoid relying only on browser-language redirects." },
+  { q: "What About Schema Markup?", a: "Structured data can clarify page and entity information, but it does not guarantee an AI recommendation. Google's structured-data guidance says markup should accurately represent visible page content." },
+  { q: "Do Third-Party Sources Matter in Different Languages?", a: "Yes. A rich English presence across articles, reviews, partners, directories and media may contrast with almost no coverage in another important language. Investigate which sources AI cites in each language, which competitor sources appear, whether local-language publications discuss the category, whether directory information is accurate and whether reviews exist in relevant languages." },
+  { q: "What Are the Most Common Multilingual AI Tracking Mistakes?", a: "Tracking only English because the website is mainly English. Investigate how customers actually ask questions. Translating prompts word for word. Localise the underlying customer intent. Treating market and language as identical. Track both dimensions where they matter. Comparing different prompt portfolios. Maintain a comparable core set. Measuring mentions while ignoring accuracy. Inspect what AI says. Assuming one platform represents all AI visibility. Compare the relevant answer engines. Adding every possible language. Track languages tied to customers and strategy." },
+  { q: "How Many Languages Should a Small Business Track?", a: "Start with commercial importance. If 80% of enquiries are English and 15% Bahasa Malaysia, begin with those two rather than immediately building six language portfolios. Tier 1: Core customer language. Track comprehensively. Tier 2: Meaningful secondary language. Track a representative set. Tier 3: Emerging opportunity. Test before expanding." },
+  { q: "What Should You Do If One Language Has Weak AI Visibility?", a: "Do not immediately translate another 100 articles. First ask whether the prompts are natural, whether weakness spans every topic, whether useful pages exist in that language, whether core business facts are consistent, which competitors appear, which sources AI uses and whether the issue is visibility or inaccurate perception." },
+  { q: "Do You Need Perfect Visibility in Every Language?", a: "No. Objectives should reflect the business. English may need strong visibility defended, Bahasa Malaysia may need better mentions and citations for high-intent questions, and Mandarin may first need a baseline and competitor analysis." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
     { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [

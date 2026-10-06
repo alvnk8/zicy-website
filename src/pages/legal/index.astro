@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import { ORG_ID } from '../../lib/schema';
+
+const title = 'Zicy legal documents';
+const description =
+  'Zicy privacy policy, cookie policy and terms of service, operated by Growth Pro Sdn. Bhd.';
+
+const url = `${SITE.url}/legal`;
+
+const items = [
+  { label: 'Privacy policy', href: '/legal/privacy', p: 'How Zicy collects, uses and protects personal data.', link: 'Read the policy →' },
+  { label: 'Dasar privasi', href: '/legal/privacy-bm', p: 'The privacy policy in Bahasa Malaysia.', link: 'Baca dasar →' },
+  { label: 'Cookie policy', href: '/legal/cookies', p: 'The cookies Zicy uses, and how to manage your choices.', link: 'Read the policy →' },
+  { label: 'Terms of service', href: '/legal/terms', p: 'The terms that govern use of Zicy.', link: 'Read the terms →' },
+];
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${url}#breadcrumbs`,
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Legal', item: url },
+  ],
+};
+
+const collectionPage = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': `${url}#webpage`,
+  url,
+  name: title,
+  description,
+  isPartOf: { '@id': `${SITE.url}/#site` },
+  about: { '@id': ORG_ID },
+  publisher: { '@id': ORG_ID },
+  mainEntity: {
+    '@type': 'ItemList',
+    '@id': `${url}#list`,
+    itemListElement: items.map((it, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${SITE.url}${it.href}`,
+      name: it.label,
+    })),
+  },
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionPage)} />
+
+  <section class="hero inner">
+    <div class="wrap">
+      <span class="eyebrow">Legal</span>
+      <h1>Legal documents.</h1>
+      <p class="lead">How Zicy handles your data and the terms of using the platform.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="grid-2">
+        {items.map((it) => (
+          <div class="card">
+            <h3>{it.label}</h3>
+            <p>{it.p}</p>
+            <a class="link" href={it.href}>{it.link}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

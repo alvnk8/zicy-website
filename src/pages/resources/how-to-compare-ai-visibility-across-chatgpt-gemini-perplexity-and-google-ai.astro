@@ -11,9 +11,37 @@ const url = `${SITE.url}/resources/how-to-compare-ai-visibility-across-chatgpt-g
 const author = { '@type': 'Person', name: 'Ritu Khanna' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What Does It Mean to Compare AI Visibility Across Platforms?", a: "It means measuring how your brand performs for a defined set of customer questions across different AI answer experiences. Suppose you track 50 important questions customers may ask about your category. You then examine how your brand performs across: ChatGPT; Gemini; Perplexity; Google AI Overviews; and Google AI Mode." },
+  { q: "Why Can Your Visibility Differ Between ChatGPT, Gemini, Perplexity and Google AI?", a: "These are different products. They do not all find, process and present information in exactly the same way. The useful point for a small business is simpler: different AI experiences can arrive at different answers, so visibility needs to be measured across them rather than assumed from one." },
+  { q: "What Is the Difference Between Google AI Overviews and Google AI Mode?", a: "Google AI Overviews. AI Overviews can appear within regular Google Search results and provide an AI-generated summary for searches where Google determines an AI response may be helpful. Google AI Mode. AI Mode is a more conversational AI search experience. Users can ask longer or more complex questions and continue with follow-ups. Google says it uses query fan-out to break questions into subtopics and search across them." },
+  { q: "Why Isn't Checking Your Brand Manually Enough?", a: "Manual checks are useful, but they answer a narrow question: “What happened when I asked this particular question this particular time?” That is not the same as measuring AI visibility. If you ask ChatGPT three questions and appear in two, you might conclude that ChatGPT visibility is excellent. But customers may ask dozens of important questions involving recommendations, comparisons, prices, alternatives, problems, reviews, specific products and specific services." },
+  { q: "What Should Stay the Same When You Compare AI Platforms?", a: "Where you want a fair platform comparison, keep the measurement conditions reasonably consistent. Keep these consistent where appropriate: Prompt set; Market; Language; Measurement period; Brand and competitor definitions. You want the main changing variable to be the AI platform." },
+  { q: "What Does a Good Platform Comparison Actually Look Like?", a: "Consider a Malaysian HR software company tracking the same 60 buyer-relevant prompts across its major AI platforms. There is no single conclusion such as “Our AI visibility is good.” Instead: ChatGPT: Strongest overall brand presence. Perplexity: Strong visibility and particularly strong website citation performance. Gemini: The brand appears less frequently and tends to sit behind more competitors. Google AI Overviews: Weakest mention visibility in this tracked set. Google AI Mode: Middle of the pack." },
+  { q: "What Should You Do When One Platform Is Much Weaker?", a: "Do not immediately start “optimising for Gemini” or “optimising for ChatGPT”. First diagnose the difference. Check Which Prompts Are Weak. Check Which Competitors Appear. Check the Cited Sources. Ask what sources seem to shape the conversation and why your brand is represented well in some but not others. That leads to a more useful investigation." },
+  { q: "Should You Optimise Separately for Every AI Platform?", a: "Not in the simplistic sense of creating a ChatGPT page, Gemini page, Perplexity page or Google AI page for the same topic. That quickly becomes unmanageable and can create overlapping content. Look for the underlying visibility gap. If your company is weak across several platforms for “best payroll software for restaurants”, perhaps your website barely explains its restaurant payroll capabilities. The useful action may be to improve the relevant product or industry content." },
+  { q: "What If You Are Strong on One Platform and Weak on Another?", a: "Ask whether the difference is consistent, substantial and commercially important. A ChatGPT Mention Coverage of 61% and Gemini coverage of 57% may not deserve an emergency strategy. A difference of 74% versus 19% across a stable set of buyer prompts deserves investigation." },
+  { q: "Why Should You Compare the Actual AI Answers Too?", a: "Metrics summarise. Answers explain. A Gemini Mention Coverage of 35% tells you there is a gap, but the underlying answers might reveal different situations: You are completely absent: AI recommends competitors instead. You appear only occasionally: Your brand may have a weak association with the topic. You appear but rank low: AI recognises your relevance but tends to prioritise competitors. You are mentioned but not cited: The platform knows the brand but relies on other sources. You are mentioned incorrectly: The visibility exists, but the information itself is problematic. These require different responses. AI visibility measurement should never stop at the score." },
+  { q: "What Should You Avoid When Comparing AI Platforms?", a: "The biggest mistake is treating every movement as a conclusion. Avoid: declaring one platform “better” from a handful of prompts; changing your prompt set whenever results look poor; comparing different markets or languages as though they were identical; assuming a mention automatically means a citation; treating every platform gap as a content problem; and chasing identical scores across every engine. Use the data to find patterns worth investigating, not to manufacture certainty." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-09-09', dateModified: '2026-09-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
     { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [

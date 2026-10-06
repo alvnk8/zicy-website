@@ -12,9 +12,35 @@ const url = `${SITE.url}/resources/how-to-find-wrong-outdated-business-facts-ai-
 const author = { '@type': 'Person', name: 'Vi Vien Koay' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "Why Do Wrong Business Facts in AI Answers Matter?", a: "An AI answer can get your business mostly right and still give a customer the one detail that changes their decision. It might say you are closed when you are open. It might show an old address, describe a service you stopped offering or send someone to a phone number you no longer use." },
+  { q: "How Can You Spot a Wrong AI Business Fact Quickly?", a: "You do not need to fact-check every sentence in an AI answer. Start with details that look unusual, inconsistent or difficult to verify. Watch for these common red flags: Overly specific numbers or claims; Details that conflict with your current business information; Different facts across AI platforms; Information that seems to belong to another business; Citations that do not support the statement." },
+  { q: "How Can You Quickly Check Whether an AI Business Fact Is Wrong?", a: "The fastest approach is to stop looking at the whole answer and isolate the questionable claim. Suppose AI says: “ABC Dental closes at 6 pm.” You now have one fact to verify. Start With the Source Closest to the Fact. Use the source most likely to hold the current information. Then Search for the Wrong Version. Once you know the correct fact, search for the incorrect version." },
+  { q: "Which Business Facts Should You Check First?", a: "Not every incorrect detail carries the same business risk. For a small or local business, prioritise information that can immediately affect whether someone visits, calls or buys. The useful principle is simple: Check the facts customers are most likely to act on first." },
+  { q: "Where Should You Look for Conflicting Business Information?", a: "Once you know a fact is wrong, check the places where different versions of that information may still exist: Google Business Profile; Your website; Third-party listings. The aim is not to make every mention of your business identical across the internet. It is to make sure the most important facts customers rely on are clear, current and consistent wherever they are most likely to appear." },
+  { q: "How Can You Tell If Wrong AI Information Is a One-Off or a Pattern?", a: "Run the same factual question through more than one AI platform. You are not looking for a majority vote on what is true. You establish that from your own business sources. Instead, look at the pattern. One platform is wrong: This may be an isolated response. Several platforms repeat the same old fact: Look for an outdated source that may still be widely available. Every platform gives a different answer: Your public business information may be inconsistent or difficult to interpret." },
+  { q: "How Can You Check AI Business Facts Without Reviewing Everything Manually?", a: "Manual checking is manageable when you only have a few important questions. It gets harder when you want to compare several customer questions across multiple AI platforms and track which facts keep changing. A practical approach is to keep a clear record of your current business information and compare AI answers against that reference." },
+  { q: "What Should You Do Once You Confirm an AI Fact Is Wrong?", a: "What happens next depends on the type of error. If the outdated information still appears on your website, Google Business Profile or an important third-party listing, update that source. If several of your own pages disagree, make the current version consistent." },
+  { q: "How Can You Reduce Wrong Business Information in AI Answers Over Time?", a: "There is no way to guarantee that every AI answer about your business will always be correct. AI models can still generate false information, even as they become more capable. What a business can do is make its own information easier to verify. Keep the important facts current. Remove obvious contradictions. Check major listings after something changes. And periodically ask AI the same questions customers are likely to ask." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
     { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [

@@ -7,7 +7,7 @@ import { SITE } from '../data/site';
 export const ORG_ID = `${SITE.url}/#org`;
 // Entity finding f-003 (2026-09-21): growth.pro's live site publishes its Organization node at
 // #organization, not #org (verified) — corrected so parentOrganization actually resolves.
-const GROWTH_PRO_ORG_ID = 'https://www.growth.pro/#organization';
+export const GROWTH_PRO_ORG_ID = 'https://www.growth.pro/#organization';
 
 export const PERSON_IDS = {
   alvin: `${SITE.url}/about/alvin-koay#alvin-koay`,
@@ -41,12 +41,12 @@ export const ORG_KNOWS_ABOUT = [
 ] as const;
 
 // Confirmed by the owner (2026-06-17): foundingDate 2026 (Zicy the brand); Alvin Koay LinkedIn.
-// legalName and the registration number are the owner-supplied legal identity; do not alter.
+// Entity finding f-004 (2026-10-06): Zicy is the product brand, so this node carries no legalName;
+// the legal company (Growth Pro Sdn. Bhd.) lives on growthProOrgNode below.
 export const orgNode = {
   '@type': 'Organization',
   '@id': ORG_ID,
   name: SITE.name,
-  legalName: SITE.legalName,
   url: `${SITE.url}/`,
   foundingDate: '2026',
   logo: `${SITE.url}/zicy-logo.png`,
@@ -59,12 +59,7 @@ export const orgNode = {
     addressLocality: 'Penang',
     addressCountry: 'MY',
   },
-  parentOrganization: {
-    '@type': 'Organization',
-    '@id': GROWTH_PRO_ORG_ID,
-    name: 'Growth.pro',
-    url: 'https://www.growth.pro/',
-  },
+  parentOrganization: { '@id': GROWTH_PRO_ORG_ID },
   sameAs: ORG_SAME_AS,
   knowsAbout: ORG_KNOWS_ABOUT,
   founder: { '@id': PERSON_IDS.alvin },
@@ -72,6 +67,24 @@ export const orgNode = {
     { '@id': PERSON_IDS.alvin },
     { '@id': PERSON_IDS.ritu },
     { '@id': PERSON_IDS.peter },
+  ],
+};
+
+// Entity findings f-004/f-005 (2026-10-06): the Growth.pro parent is a real node, emitted in full
+// next to orgNode on the homepage. legalName is the owner-supplied legal identity; do not alter.
+// No sameAs: no Growth.pro profile URL exists in this repo and none is invented.
+export const growthProOrgNode = {
+  '@type': 'Organization',
+  '@id': GROWTH_PRO_ORG_ID,
+  name: 'Growth.pro',
+  legalName: SITE.legalName,
+  url: 'https://www.growth.pro/',
+  // Profiles as linked from growth.pro's own site.
+  sameAs: [
+    'https://www.linkedin.com/company/growthprofessionals/',
+    'https://www.facebook.com/growthprofessionals',
+    'https://www.instagram.com/growthpro360',
+    'https://www.youtube.com/channel/UCzhLXVpjCEN6SpI-epUvUCQ',
   ],
 };
 

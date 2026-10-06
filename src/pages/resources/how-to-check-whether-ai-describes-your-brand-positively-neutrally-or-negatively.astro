@@ -12,9 +12,33 @@ const url = `${SITE.url}/resources/how-to-check-whether-ai-describes-your-brand-
 const author = { '@type': 'Person', name: 'Nabila Wawan' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What Is AI Brand Sentiment?", a: "AI brand sentiment is the tone AI uses to describe your business. In simple terms, the language can be: Positive: favourable or reassuring Neutral: mainly factual or descriptive Negative: critical, limiting or unfavourable" },
+  { q: "Why Is a Brand Mention Not Enough?", a: "A business owner may see their company appear in an AI answer and consider that a win. But the mention could still carry a message that affects how a customer sees the business. That does not mean every negative phrase causes a lost sale. It does mean visibility and perception answer different questions. Brand Mention Coverage asks whether your business appears. Sentiment asks what AI says once it does." },
+  { q: "What Does Positive AI Sentiment Look Like?", a: "Positive sentiment appears when AI uses favourable language about the business, its products or the experience around them. Examples might include: reliable; practical; easy to use; flexible; well suited to SMEs; and strong customer support." },
+  { q: "What Does Negative AI Sentiment Look Like?", a: "Negative sentiment appears when AI uses language that makes the business, product, or service sound less attractive. Examples could include: expensive; limited; difficult to use; slow; complicated; and lacking certain features. But do not react to the word alone. You first need to understand why AI is saying it." },
+  { q: "How Do You Check How AI Describes Your Brand?", a: "Start by looking at branded questions. These are questions that contain your business or brand name directly. For example: What is [Brand] known for? Is [Brand] good for small businesses? What are the strengths of [Brand]? What are the drawbacks of [Brand]? Who is [Brand] best suited for? How does [Brand] compare with alternatives?" },
+  { q: "Is a Negative Description Actually Wrong Information?", a: "Before treating that as negative brand perception, check the facts. Perhaps AI is quoting an old pricing model. Or it may have confused your brand with another product. If the underlying information is wrong, fix the factual problem first. If the information is correct but customers or AI repeatedly describe it negatively, then you are dealing with a genuine perception issue." },
+  { q: "Should You Try to Make Every AI Mention Positive?", a: "No. That would be the wrong goal. Customers need accurate information, not artificial praise." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
     { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [

@@ -15,9 +15,32 @@ const author = { '@type': 'Person', name: 'Vi Vien Koay' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What changes when a customer asks AI instead of searching?", a: "This means discovery can begin with a conversation and an answer, rather than with a list of links that the customer must investigate independently. AI may also shape the customer's shortlist before they visit any business website. If a business is included in that initial answer, it may be considered. If it is left out, the customer may never know it was an option." },
+  { q: "Can customers discover a business without visiting its website?", a: "Yes. An AI answer may introduce your business before the customer has visited your website. It might mention your name, explain what you offer, describe who your services are suitable for or include you among several recommended options. If your business has a Google listing but no website, see Zicy for local businesses." },
+  { q: "What can happen before a customer reaches your website?", a: "AI can influence several parts of the discovery process before a website visit happens. A customer may use AI to: find businesses that could solve their problem; compare several products, providers or service packages; ask about prices, features, availability or service areas; look for alternatives to a business they already know; understand which option may suit a particular budget or need; identify questions they should ask before making contact; create a shortlist of businesses to research further." },
+  { q: "Does being visible on Google mean you will appear in AI answers?", a: "Not necessarily. Google search results and AI answers are different discovery environments. Traditional search often presents a ranked list of pages, while an AI answer may combine information from multiple sources and produce a summary or recommendation." },
+  { q: "How can a small business check whether AI is discovering it?", a: "Start with questions that a genuine potential customer might ask without mentioning your brand name. These questions should reflect real buying situations, including the customer's location, industry, budget, problem or preferred features. Then look at the answers across different AI platforms. Check whether your business is mentioned, where it appears compared with competitors, whether the description is accurate, whether your website is cited and which other sources the AI uses." },
+  { q: "What should small businesses take away from this change?", a: "AI does not make websites or Google search irrelevant. It adds another discovery layer between the customer's question and their eventual decision. That means a small business now has another visibility question to monitor: When AI helps a potential customer choose, is your business part of the answer?" },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     {
       '@type': 'WebPage',
       '@id': url,

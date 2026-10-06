@@ -14,9 +14,38 @@ const url = `${SITE.url}/resources/how-to-find-your-real-competitors-inside-ai-a
 const author = { '@type': 'Person', name: 'Vi Vien Koay' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "How Can AI Reveal Competitors You Did Not Know You Had?", a: "ChatGPT recommends one of your known competitors, your business and another company you barely know. The unfamiliar company appears again. Then Gemini includes it. Perplexity places it above you. At that point, whether the company was on your original competitor spreadsheet becomes less important. AI is placing it into the same customer consideration set as you. That makes it worth investigating. Traditional competitor research usually starts with businesses you already know. AI answers can expose the businesses your customers are being shown instead." },
+  { q: "What Does a Real Competitor Inside AI Answers Mean?", a: "A real AI competitor is a business that keeps appearing as an alternative to you when customers ask relevant buying questions. The key word is “keeps”. A name that turns up in one answer, on one platform, isn’t a competitor yet. If it appears across several related questions, or across more than one AI platform, it probably is." },
+  { q: "Why Can Your AI Competitor Set Differ From Your Traditional Competitor List?", a: "Your traditional competitor list is usually based on what you already observe: businesses operating nearby; companies your sales team encounters; brands ranking in Google; names customers mention; competitors your management team already watches. AI does not have to stay within that list." },
+  { q: "What Makes an Unfamiliar Brand Worth Investigating?", a: "You do not need to investigate every new name with equal urgency. Use four simple tests. Does It Serve the Same Customer? Competitive overlap is stronger when both businesses serve the same type of buyer. Does It Solve the Same Customer Problem? Two companies do not need to offer identical services to compete for the same decision. Does It Appear Repeatedly? One appearance may be noise. Repeated appearances across relevant buyer questions are more meaningful. Does It Appear in Questions That Matter to Your Business? This is often the most important test." },
+  { q: "Does It Serve the Same Customer?", a: "Competitive overlap is stronger when both businesses serve the same type of buyer. For an aircon servicing company, another provider serving homes and small offices in Kuala Lumpur may be a direct competitor. A global air-conditioner manufacturer appearing in the same answer is different." },
+  { q: "Does It Solve the Same Customer Problem?", a: "Two companies do not need to offer identical services to compete for the same decision. Someone looking for office aircon maintenance might choose: a specialist aircon company; a facilities-management provider; a broader home or office services platform. They may sit in different categories, but the customer could still choose one instead of another." },
+  { q: "Does It Appear Repeatedly?", a: "One appearance may be noise. Repeated appearances across relevant buyer questions are more meaningful. There is no universal number that automatically turns a business into a competitor. The commercial context matters more than an arbitrary threshold." },
+  { q: "Does It Appear in Questions That Matter to Your Business?", a: "This is often the most important test. An unfamiliar company appearing for: “What is aircon maintenance?” may matter less if AI is simply explaining the topic. But repeated appearances for questions such as: “Best aircon servicing company in Kuala Lumpur” “Reliable aircon maintenance company for an office” “Affordable aircon servicing near me” are closer to an actual buying decision. Those appearances deserve more attention." },
+  { q: "Why Do Buyer Questions and AI Platforms Matter?", a: "Finding an unfamiliar brand is only the first step. You still need to understand where it is competing with you. The buyer question tells you what customer need is creating the overlap. This does not suggest the company is your main competitor across every service. A better conclusion is: “This company is a strong competitor for commercial office maintenance.” Then check whether the same pattern appears across several AI platforms." },
+  { q: "When Should You Add an Unfamiliar Brand as a Competitor?", a: "There is no fixed Mention Coverage, ranking or Share of Voice threshold that automatically makes an unfamiliar business a real competitor. Instead, combine the AI evidence with your own market knowledge. A candidate becomes more worth tracking when it: serves the same buyers; competes for the same customer need; appears across multiple commercially relevant prompts; shows enough visibility that benchmarking against it would be useful; is a business you could realistically lose a customer or deal to." },
+  { q: "How Can You Investigate Unfamiliar Competitors More Efficiently?", a: "Finding unfamiliar brands manually is possible when you are checking only a few AI answers. It becomes harder when you need to review many customer questions, AI platforms and competitors over time. A useful starting point is to bring known competitors and newly surfaced brands into one view so you can identify which unfamiliar names deserve investigation." },
+  { q: "What Should You Do After Finding a Real Competitor?", a: "Once you decide a business genuinely belongs in your competitor set, the question changes from “Is this company a competitor?” to “Where is this competitor stronger than us?” Now compare: where it appears more often; which AI platforms favour it; which buyer questions it wins; whether AI cites its website more often; whether its advantage is broad or topic-specific; whether that advantage persists over time." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
     { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [

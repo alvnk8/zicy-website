@@ -11,9 +11,32 @@ const url = `${SITE.url}/resources/how-to-find-the-gap-between-what-you-want-to-
 const author = { '@type': 'Person', name: 'Nabila Wawan' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What Is an AI Brand Alignment Gap?", a: "An AI brand alignment gap is the difference between: what you want your business to be known for; and what AI currently associates with your business." },
+  { q: "Why Does This Gap Matter?", a: "Customers may use AI to understand what your business does before they ever visit your website. If AI associates you with a different service, customer group or market, you may be less likely to appear when someone asks about the area you are trying to grow. You can therefore have AI visibility without having the right visibility." },
+  { q: "How Do You Find Your AI Brand Alignment Gap?", a: "Start by defining what you actually want customers to associate with your business. Define What You Want to Be Known For. Check How AI Describes Your Business. Check the Questions Your Customers Ask. Compare the Two Sides. Write down the associations you want and the ones that repeatedly appear in AI answers. Check Whether the Gap Actually Matters." },
+  { q: "What Should You Do After Finding the Gap?", a: "Do not start by rewriting your entire website. Start with the missing association. If you want customers to associate your business with a particular service, check whether your website clearly explains: what the service is; who it is for; what problem it solves; where it is available; and why your business is relevant to that need." },
+  { q: "Do You Need AI to Forget What You Were Previously Known For?", a: "Usually, no. A bakery known for sourdough doesn't need AI to stop associating it with sourdough if it wants to grow its catering business. Your goal is often to strengthen a new association, not erase every useful association you already have." },
+  { q: "How Do You Know the Gap Is Getting Smaller?", a: "Look at whether the association you want starts appearing more consistently. If your goal is corporate catering, you might begin seeing: corporate catering mentioned when AI describes the business; your brand appearing for relevant catering questions; more references to office and business events; fewer outdated descriptions; and external sources mentioning the service correctly." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
     { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-01', dateModified: '2026-10-01', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
     { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [

@@ -16,9 +16,37 @@ const author = { '@type': 'Person', name: 'Shangkari Goverdhanlal' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What Is an AI Prompt Set?", a: "An AI prompt set is simply a collection of questions that represent the ways your customers may search, compare and decide. Think of it as a small sample of your customers' conversations with AI. Instead of asking only, “Does ChatGPT mention my business?” you track questions such as: Who can solve this problem? Which option should I choose? Which businesses have good reviews? What can I get within my budget? What other options could I consider?" },
+  { q: "What Types of AI Prompts Should an SME Track?", a: "A simple prompt set can be built around five common buying situations: problems, comparisons, reviews, pricing and alternatives. Each tells you something different about how customers may discover and evaluate your business." },
+  { q: "What Are Problem-Based Prompts?", a: "Problem-based prompts are questions customers ask when they know something is wrong, but are not yet sure what solution they need. A café owner might ask: “How can I get more people to find my café online?” These prompts help you see whether AI connects the customer’s problem with your business or the type of service you offer." },
+  { q: "What Are Comparison Prompts?", a: "Comparison prompts appear when customers are narrowing their choices and asking which option is better for them. For example: “Which AI visibility tools are best for small businesses?” “Should a small business use AI visibility software or hire an agency?” “Which tools can compare a company's visibility across ChatGPT, Gemini and Google AI?” These prompts show which businesses AI sees as relevant alternatives, including competitors you may not have expected." },
+  { q: "What Are Review-Based Prompts?", a: "Review-based prompts come into play when customers want reassurance from other people’s experiences. Compare “Best plumber in Petaling Jaya” with “Which plumber in Petaling Jaya has good reviews for emergency repairs?” The second question adds an important decision factor: reputation." },
+  { q: "What Are Pricing Prompts?", a: "Pricing prompts appear when customers start asking, “Can I afford this?” or “Is this good value?” Someone asking, “What is the best CRM for small businesses?” may receive one shortlist. But someone asking, “What is the best CRM under RM500 a month for a five-person company?” may receive a different shortlist because budget is now part of the decision." },
+  { q: "What Are Alternative Prompts?", a: "Alternative prompts are questions customers ask when they want to know what else they could choose instead. “What are alternatives to manually checking ChatGPT every week?” could lead AI to recommend software. But “What are alternatives to hiring an AEO agency?” could surface software, consultants, freelancers or in-house approaches." },
+  { q: "How Many AI Prompts Should a Small Business Start With?", a: "You do not need 100 prompts. For many SMEs and micro SMEs, 10 to 20 focused questions are enough to start learning." },
+  { q: "How Can You Organise Different Prompts Without Making It Complicated?", a: "Once you start tracking problems, comparisons, reviews, pricing and alternatives, it is easy for your prompt list to become difficult to manage. Instead of keeping every prompt in one long list, group related questions by what they test, or by product, service, topic, or buyer intent." },
+  { q: "Should You Keep the Same Prompts Over Time?", a: "Keep your main prompts reasonably consistent. If you rewrite every question each month, it becomes harder to tell whether your visibility changed or the question changed. A better approach is to keep a core set and add new prompts when something meaningful happens." },
+  { q: "Do You Need to Create Content for Every Prompt?", a: "No. If five prompts reveal the same underlying customer concern, you probably do not need five new articles. Use the prompt set first as a way to listen. If AI repeatedly struggles to understand your pricing, clearer pricing information may help. If competitors dominate local prompts, check whether your location and service-area information is clear." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     {
       '@type': 'WebPage',
       '@id': url,

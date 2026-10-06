@@ -14,9 +14,33 @@ const author = { '@type': 'Person', name: 'Vi Vien Koay' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What are you actually checking?", a: "The aim is to see whether AI independently identifies your business as a relevant option when a potential customer is still deciding what to buy or who to contact. A useful visibility check looks at: whether your business appears; how prominently it appears; which competitors appear instead; whether your website is cited; and whether visibility differs between AI engines." },
+  { q: "Which AI answer engines should a small business check?", a: "A practical starting point is: ChatGPT Gemini Perplexity Google AI Overviews Google AI Mode These platforms can produce different answers to the same customer question." },
+  { q: "What questions should you ask?", a: "Start with questions a real potential customer might ask before choosing a business. The question should describe the customer's need, location or buying criteria, rather than naming your brand." },
+  { q: "Should you use the same question across every AI engine?", a: "Yes, when comparing platforms. If you ask a different question in each engine, you cannot tell whether the result changed because of the platform or because of the wording. Use the same buyer-focused question across each platform and keep the location, customer type and buying situation consistent." },
+  { q: "How should you record the results?", a: "Keep the comparison simple. For each question, record: AI engine; whether your business appeared; your approximate position; competitors mentioned; whether your website was cited; other sources cited." },
+  { q: "How can you monitor AI discoverability more consistently?", a: "To monitor discoverability more consistently, you need a way to keep the same buyer-focused questions, compare results across platforms and review what changes over time. That means looking beyond a single positive result and tracking patterns such as: which brands appear most often; where your business is positioned; whether your website was cited; and which AI engines include or exclude you; and the actual responses behind those results." },
+  { q: "What should an SME business do first?", a: "Choose three to five buyer questions that represent real customer needs. Do not include your business name. Ask exactly the same questions across several AI engines and record: Did we appear? Where did we appear? Who appeared instead? Was our website cited? Repeat those checks periodically rather than relying on one search." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     {
       '@type': 'WebPage',
       '@id': url,

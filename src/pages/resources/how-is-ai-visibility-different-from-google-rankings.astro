@@ -14,9 +14,37 @@ const author = `${SITE.url}/about#ritu-khanna`;
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What Is a Google Ranking?", a: "A Google ranking is simply the position of a webpage in Google's search results for a particular search query. For example, imagine you own an air-conditioning servicing company in Petaling Jaya. Someone searches: “aircon servicing Petaling Jaya” Your website might appear: Company A; Your company; Company B; Company C. In this example, your website ranks #2." },
+  { q: "What Is AI Visibility?", a: "AI visibility addresses a different question: When someone asks an AI platform a relevant question, does your business become part of the answer? Your website may rank well on Google. But if your company is missing from that AI-generated answer, your AI visibility for that customer question is weak. That is the fundamental difference. Google ranking asks: Where does my webpage appear in search results? AI visibility asks: Does AI include my business when answering the questions my customers ask?" },
+  { q: "Why Is AI Visibility Becoming Important for Small Businesses?", a: "The way people search is changing. Customers do not always want a list of webpages anymore. Increasingly, they can ask a detailed question and receive a summarised response. Google itself describes AI Overviews as a way to provide users with a snapshot of key information on a topic or question, along with links for further exploration. Google has also expanded AI-powered search with AI Mode, where users can ask more complex questions and continue with follow-ups." },
+  { q: "Does This Mean Google Rankings No Longer Matter?", a: "No. This is one of the most important things for small businesses to understand. AI visibility is not a reason to abandon SEO." },
+  { q: "How Can a Business Rank on Google but Still Be Missing From AI Answers?", a: "A traditional search engine can rank individual webpages. An AI-generated answer has a different job. It needs to construct an answer to the user's question. Google says its AI features can use different models and techniques, and the responses and links shown may vary. That means a page ranking strongly for one keyword does not automatically guarantee that the business will be included every time an AI system answers a related question." },
+  { q: "Can Customers Get an Answer Without Clicking Your Website?", a: "Yes, and this is another reason AI visibility deserves attention. AI-generated search experiences can answer part — and sometimes most — of a user's question directly. Independent research has repeatedly found changes in click behaviour when AI-generated answers are present." },
+  { q: "What Does Good AI Visibility Actually Look Like?", a: "There is no single number that tells the whole story. Instead, small businesses can start with a few very simple questions. 1. Does AI mention your business? 2. Where does your business appear? 3. Does AI cite your website? 4. Which competitors appear instead?" },
+  { q: "Why Checking ChatGPT Once Is Not Enough?", a: "A common mistake is to open ChatGPT, type your business name and ask: “Tell me about ABC Company.” ChatGPT responds with information about ABC Company. You conclude: “Great. AI knows us.” Unfortunately, that does not tell you whether you are visible to a potential customer who has not yet decided to search for you. That is why AI visibility needs to be measured across relevant questions and relevant platforms, rather than through occasional manual checks." },
+  { q: "What Happens If a Small Business Ignores AI Visibility?", a: "It does not mean your business suddenly disappears from the internet. Google Search, your website, Google Business Profile, social media, referrals, and other discovery channels all continue to matter. The risk is more gradual. Your customers may begin using AI during their research while you continue measuring only traditional search rankings. The problem is not simply losing a website click. It is potentially missing the stage where the customer forms their shortlist." },
+  { q: "What Can Small Businesses Gain by Tracking AI Visibility?", a: "The immediate benefit is not “more AI traffic”. It is better information about how your business is being discovered and represented. Tracking AI visibility can help you understand: Whether AI knows you exist: You can see whether your business appears when customers ask relevant category questions. Which competitors AI prefers: Your traditional Google competitors may not always be the businesses that dominate AI-generated answers. Where your visibility gaps are: You may discover that you appear strongly for one service but rarely for another. Whether AI understands your business correctly: Being visible is not useful if AI describes your services incorrectly or associates you with the wrong type of business. Whether your improvements are working: Once you improve your website, content or online business information, you can track whether your presence in AI answers changes over time." },
+  { q: "What Should a Small Business Do First?", a: "Do not begin by tracking hundreds of questions. Start small. Think about five to ten questions a genuine potential customer might ask when they do not already know your business name." },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     {
       '@type': 'WebPage',
       '@id': url,

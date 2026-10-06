@@ -14,9 +14,34 @@ const author = { '@type': 'Person', name: 'Vi Vien Koay' };
 const orgId = `${SITE.url}/#org`;
 const blogId = `${SITE.url}/resources#blog`;
 
+// FAQPage JSON-LD (audit f-013): questions are the visible question headings and answers the
+// visible copy directly beneath them, verbatim or trimmed. Keep in sync with the page body.
+const faqs = [
+  { q: "What should you ask AI about your business?", a: "For this type of check, include your business name. Start with simple questions that cover the information a potential customer may want to know: “What is [Business Name]?” “What products or services does [Business Name] offer?” “Who is [Business Name] for?” “Where does [Business Name] operate?” “What is [Business Name] known for?” “What makes [Business Name] different?” “When would you recommend [Business Name]?”" },
+  { q: "What should you look for in the answers?", a: "Recognition alone is not enough. Compare what AI says with your current business information. Pay particular attention to the difference between wrong information and missing information. Wrong information is directly inaccurate. For example, AI may state that you operate from an old location or still provide a service you have discontinued. Missing information is different. AI may correctly explain part of your business while leaving out an important service, customer segment or area of expertise." },
+  { q: "Why might AI misunderstand your business?", a: "AI-generated answers can reflect information found across different sources rather than relying only on your website. If your business information is inconsistent, unclear or outdated across those sources, the resulting description may also become inconsistent." },
+  { q: "Should you compare more than one AI engine?", a: "Yes, but the purpose here is to identify perception patterns, not to compare visibility or rankings. One engine may understand your services correctly while another uses an outdated description. If the same error or omission appears repeatedly across several engines, it may indicate a broader information problem." },
+  { q: "How should you record what AI gets wrong or misses?", a: "Keep your record focused on the information itself. For each finding, note: what AI said; whether it is correct, outdated or incomplete; what the correct information should be; which AI engine produced the answer; and whether the same issue appears elsewhere." },
+  { q: "What should you do if AI information looks wrong?", a: "First, verify the information against sources you know are current, such as your website, service pages and business profiles. Then investigate why the misunderstanding may exist. Avoid changing your website or messaging because of one unusual AI response. Look for repeated evidence first. If several answers show the same misunderstanding, you have a much stronger reason to investigate the underlying information." },
+  { q: "How can you compare AI perception with your actual business information?", a: "Once you have collected several answers, compare what AI says with the information you know to be current. Look at what AI appears to think your business is known for, then compare that with how you actually describe your services, audiences, locations and positioning." },
+  { q: "What should an SME business do first?", a: "Start with a small set of direct questions about your business. Check whether AI can correctly explain: What do we offer? Who do we serve? Where do we operate? What are we known for?" },
+];
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  mainEntityOfPage: { '@id': url },
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 const graph = {
   '@context': 'https://schema.org',
   '@graph': [
+    faqPage,
     {
       '@type': 'WebPage',
       '@id': url,
