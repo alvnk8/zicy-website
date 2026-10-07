@@ -355,26 +355,6 @@
         "sourceSlug": "how-to-track-ai-citations"
       },
       {
-        "file": "which-analytics-tools-can-show-where-ai-engines-are-referencing-our-content--1.jpg",
-        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/which_analytics_tools_can_show_where_ai_engines_are_referencing_our_content_-1.jpg",
-        "originalAlt": "",
-        "usedVariantFallback": false,
-        "sourceSlug": "analytics-tools-for-tracking-content-references-by-ai-engines",
-        "position": 2,
-        "precedingHeading": "(was featured on analytics-tools-for-tracking-content-references-by-ai-engines)",
-        "caption": null
-      },
-      {
-        "file": "which-analytics-tools-can-show-where-ai-engines-are-referencing-our-content-.jpg",
-        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/which_analytics_tools_can_show_where_ai_engines_are_referencing_our_content_.jpg",
-        "position": 3,
-        "precedingHeading": "Introduction",
-        "originalAlt": "",
-        "caption": null,
-        "usedVariantFallback": false,
-        "sourceSlug": "analytics-tools-for-tracking-content-references-by-ai-engines"
-      },
-      {
         "file": "which-analytics-tools-can-show-where-ai-engines-are-referencing-our-content--2.jpg",
         "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/which_analytics_tools_can_show_where_ai_engines_are_referencing_our_content_-2.jpg",
         "position": 4,
@@ -634,16 +614,6 @@
       "sourceSlug": "what-is-answer-engine-optimization"
     },
     "body": [
-      {
-        "file": "aeo.jpg",
-        "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/09/AEO.jpg",
-        "position": 1,
-        "precedingHeading": "Introduction",
-        "originalAlt": "Answer Engine Optimization ",
-        "caption": null,
-        "usedVariantFallback": false,
-        "sourceSlug": "what-is-answer-engine-optimization"
-      },
       {
         "file": "what-exactly-is-answer-engine-optimization-and-why-it-matters-for-brands--2.jpg",
         "sourceUrl": "https://v1.zicy.com/wp-content/uploads/2025/10/what_exactly_is_answer_engine_optimization_and_why_it_matters_for_brands_-2.jpg",
