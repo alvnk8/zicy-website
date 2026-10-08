@@ -12,7 +12,10 @@
 //
 // The reply is chosen by looking for a trigger substring anywhere in the message,
 // so later steps can test rendering and XSS handling against canned output:
-//   !429       -> 429 JSON {"detail": "..."}, no SSE
+//   !429       -> 429 JSON {"detail": "..."} (daily), Retry-After: 3600, no SSE
+//   !hour      -> 429 hourly-limit detail with wait time, Retry-After: 720
+//   !burst     -> 429 "too quickly" burst detail, Retry-After: 10
+//   !nodetail  -> 429 with no detail, Retry-After: 61
 //   !503       -> 503 JSON {"detail": "..."}, no SSE
 //   !error     -> a couple of content deltas, then an SSE "error" event, then close
 //   !heading   -> a reply starting with "## Title" plus body text
@@ -96,7 +99,16 @@ async function handleStream(req, res, body) {
   const cors = corsHeaders(req);
 
   if (message.includes('!429')) {
-    return sendJson(res, 429, { detail: "Today's message limit has been reached. Please try again tomorrow." }, cors);
+    return sendJson(res, 429, { detail: "Today's message limit has been reached. Please try again tomorrow." }, { ...cors, 'Retry-After': '3600' });
+  }
+  if (message.includes('!hour')) {
+    return sendJson(res, 429, { detail: "You've reached the message limit for this hour. You can send more in about 12 minutes." }, { ...cors, 'Retry-After': '720' });
+  }
+  if (message.includes('!burst')) {
+    return sendJson(res, 429, { detail: "You're sending messages too quickly. Please wait a moment." }, { ...cors, 'Retry-After': '10' });
+  }
+  if (message.includes('!nodetail')) {
+    return sendJson(res, 429, {}, { ...cors, 'Retry-After': '61' });
   }
   if (message.includes('!503')) {
     return sendJson(res, 503, { detail: "Ask Zicy is over capacity right now. Please try again shortly." }, cors);

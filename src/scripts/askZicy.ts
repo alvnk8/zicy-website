@@ -31,7 +31,7 @@ export type AskZicyErrorKind =
 //              streamed before the failure ('' if none).
 export type AskZicyResult =
   | { ok: true; text: string; complete: boolean }
-  | { ok: false; kind: AskZicyErrorKind; detail?: string; status?: number; partialText: string };
+  | { ok: false; kind: AskZicyErrorKind; detail?: string; status?: number; retryAfterSeconds?: number; partialText: string };
 
 export interface StreamAskZicyOptions {
   apiBase: string;
@@ -55,6 +55,11 @@ async function readDetail(response: Response): Promise<string | undefined> {
     /* no JSON body */
   }
   return undefined;
+}
+
+function readRetryAfter(response: Response): number | undefined {
+  const seconds = Number(response.headers.get('retry-after'));
+  return Number.isFinite(seconds) && seconds > 0 ? seconds : undefined;
 }
 
 export async function streamAskZicy({
@@ -91,7 +96,7 @@ export async function streamAskZicy({
     const detail = await readDetail(response);
     const kind: AskZicyErrorKind =
       response.status === 429 ? 'visitor' : response.status === 503 ? 'global' : 'http';
-    return { ok: false, kind, detail, status: response.status, partialText: '' };
+    return { ok: false, kind, detail, status: response.status, retryAfterSeconds: readRetryAfter(response), partialText: '' };
   }
 
   const push = (delta: string) => {
