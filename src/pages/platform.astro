@@ -65,7 +65,7 @@ const moduleGroups = [
 ];
 const allModules = moduleGroups.flatMap((g) => g.modules);
 
-// Module-reference doc slug per module (docs.zicy.com). Kept separate from the module data so the
+// Module-reference doc slug per module (www.zicy.com/docs). Kept separate from the module data so the
 // ItemList schema, built from allModules, is unchanged. A module with no entry renders no link.
 const MODULE_DOC: Record<string, string> = {
   'Prompt Manager': 'm-02-prompt-manager',
@@ -328,7 +328,7 @@ const breadcrumb = {
             <ul class="modlist" style="margin-top:12px">
               {g.modules.map((m) => (
                 <li><b>{m.name}</b>{m.desc}{MODULE_DOC[m.name] && (
-                  <> <a href={`https://docs.zicy.com/module-reference/${MODULE_DOC[m.name]}/`}>Read the module guide &rarr;</a></>
+                  <> <a href={`https://www.zicy.com/docs/module-reference/${MODULE_DOC[m.name]}`}>Read the module guide &rarr;</a></>
                 )}</li>
               ))}
             </ul>
