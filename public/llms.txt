@@ -141,8 +141,8 @@
 ## Documentation
 
 - Help centre: https://docs.zicy.com/
-- Getting started: https://docs.zicy.com/getting-started/gs-01-setting-up-zicy-first-time/
-- Module reference: https://docs.zicy.com/module-reference/m-04-ai-visibility-dashboard/
+- Getting started: https://docs.zicy.com/getting-started/
+- Module reference: https://docs.zicy.com/module-reference/
 - Guides by role: https://docs.zicy.com/guides-by-role/
 
 ## Legal
