@@ -594,6 +594,20 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
   #az-widget .az-error p {
     margin: 0;
   }
+  #az-widget .az-error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    margin-top: 6px;
+  }
+  #az-widget .az-error-actions > span {
+    flex-basis: 100%;
+  }
+  #az-widget .az-error-actions a {
+    color: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+  }
   #az-widget .az-error-icon {
     flex-shrink: 0;
     margin-top: 1px;
@@ -767,6 +781,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     // The friendly error text, shown after any partial reply text that streamed in
     // before the failure (kept alongside `text` rather than overwriting it).
     errorText?: string;
+    // The per-visitor limit error also shows the audit and contact links.
+    limitLinks?: boolean;
   }
   interface StoredState {
     sessionId: string;
@@ -999,7 +1015,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
           // Partial text that streamed in before the failure (if any), kept alongside
           // the error instead of being replaced by it.
           const partial = msg.text ? renderSafeMarkdown(msg.text) : '';
-          appendAssistantMessage(partial + errorHtml(msg.errorText ?? msg.text), true);
+          const el = appendAssistantMessage(partial + errorHtml(msg.errorText ?? msg.text), true);
+          if (msg.limitLinks) addLimitLinks(el);
         } else {
           // The empty-trailing-message case was already dropped on load, so any
           // remaining `partial: true` message here streamed at least some text before
@@ -1104,10 +1121,46 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       if (result.kind === 'visitor' || result.kind === 'global') {
         const detail = result.detail;
         if (typeof detail === 'string' && detail.trim() && detail.length <= 300) return detail.trim();
-        if (result.kind === 'visitor') return "Sorry, you've sent a lot of messages. Please wait a little and try again.";
+        if (result.kind === 'visitor') {
+          const secs = result.retryAfterSeconds;
+          if (secs) {
+            const mins = Math.max(1, Math.ceil(secs / 60));
+            return `Sorry, you've reached the message limit. You can send more in about ${mins} ${mins === 1 ? 'minute' : 'minutes'}.`;
+          }
+          return "Sorry, you've sent a lot of messages. Please wait a little and try again.";
+        }
         return 'Sorry, Ask Zicy is very busy right now. Please try again in a little while.';
       }
       return 'Sorry, something went wrong on our side. Please try again in a moment.';
+    }
+
+    // Hourly and daily visitor limits get a way forward; the short "too quickly"
+    // burst message does not (it clears in seconds). The backend has no separate
+    // field for the burst case, so it is recognised by its wording.
+    function showsLimitLinks(result: Extract<AskZicyResult, { ok: false }>): boolean {
+      return result.kind === 'visitor' && !/too (quickly|fast)|slow down/i.test(result.detail ?? '');
+    }
+
+    // Static lead-in and links, built with DOM APIs and appended inside the error bubble.
+    function addLimitLinks(content: HTMLElement) {
+      const box = content.querySelector('.az-error span');
+      if (!box) return;
+      const wrap = document.createElement('span');
+      wrap.className = 'az-error-actions';
+      const lead = document.createElement('span');
+      lead.textContent = 'Want to keep going now?';
+      wrap.appendChild(lead);
+      const links: Array<[string, string]> = [
+        ['Run the free AI brand audit', '/ai-brand-audit'],
+        ['Contact the team', '/contact'],
+      ];
+      for (const [label, href] of links) {
+        const a = document.createElement('a');
+        a.href = href;
+        a.textContent = label;
+        wrap.appendChild(a);
+      }
+      box.appendChild(wrap);
     }
 
     async function sendMessage(raw: string) {
@@ -1178,7 +1231,9 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         const partial = state.messages[idx].text;
         content.parentElement?.classList.add('az-msg-error');
         content.innerHTML = (partial ? renderSafeMarkdown(partial) : '') + errorHtml(errText);
-        state.messages[idx] = { role: 'assistant', text: partial, error: true, errorText: errText };
+        const limitLinks = showsLimitLinks(result);
+        if (limitLinks) addLimitLinks(content);
+        state.messages[idx] = { role: 'assistant', text: partial, error: true, errorText: errText, ...(limitLinks ? { limitLinks } : {}) };
       }
       persist();
       followReply();
