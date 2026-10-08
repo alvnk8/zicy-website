@@ -60,3 +60,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.zicy.com/sitemap-index.xml
+Sitemap: https://www.zicy.com/docs/sitemap-index.xml

@@ -44,7 +44,7 @@ A plain-English summary. It is a summary only, and the rest of this policy gover
 This policy applies to:
 
 - The Zicy web application at app.zicy.com
-- The Zicy marketing website at zicy.com and the help centre at docs.zicy.com
+- The Zicy marketing website at zicy.com and the help centre at www.zicy.com/docs
 - The Zicy Chrome extension
 - The public AEO and GEO consultant tool at zicy.com/consultant
 - The Zicy WordPress plugin

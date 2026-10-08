@@ -66,7 +66,7 @@ Ringkasan mudah difahami. Ini hanyalah ringkasan, dan selebihnya dasar ini yang 
 Dasar ini terpakai kepada:
 
 - Aplikasi web Zicy di app.zicy.com
-- Laman web pemasaran Zicy di zicy.com dan pusat bantuan di docs.zicy.com
+- Laman web pemasaran Zicy di zicy.com dan pusat bantuan di www.zicy.com/docs
 - Sambungan Chrome Zicy
 - Alat perunding AEO dan GEO awam di zicy.com/consultant
 - Pemalam WordPress Zicy
