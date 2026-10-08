@@ -8,6 +8,7 @@ Single source of truth for AI coding agents (Claude Code, Codex) working in this
 - **Commits** use conventional commits with a scope where one fits, e.g. `chore(llms): ...`, `feat(resources): ...`, `fix(screenshots): ...`, `fix(copy): ...`, `feat(solutions): ...`.
 - **Deploy:** the site is on Vercel with no adapter (`vercel.json`). Per the zicy-tests zicy-sync skill, a push to `main` deploys live to www.zicy.com, so treat a merge to `main` as a production release. This repo does not document preview-deployment behaviour for other branches.
 - **Screenshots and captures come from the zicy-sync pipeline** in the sibling repo `../zicy-tests` (`.agents/skills/zicy-sync/`, tracked in its `manifest/config.yaml`). zicy-sync PRs write certified fixture renders into `src/assets/screenshots/` and `src/assets/resources/<article>/` (plus the matching `src/pages/resources/*.astro` edits). Don't hand-edit or hand-replace those images; recapture through zicy-sync. The old `anonymised/` image set is gone and must not be referenced.
+- **Specs:** active specifications live in `specs/active/`; a handoff must name the exact spec path. Template: `specs/templates/spec.md`.
 
 ## What this is
 
@@ -30,6 +31,7 @@ The marketing site for Zicy (`www.zicy.com`), an AI visibility platform built by
 | `og-assets/fonts/` | Fonts used to render the generated OG cards |
 | `scripts/` | Node helper scripts (`dev-public-chat-stub.mjs`, `make-press-tiles.mjs`) |
 | `docs/` | Legal and cookie-policy source copy and reviews (not part of the site build) |
+| `specs/` | Feature specs: `active/`, `completed/`, `templates/spec.md` |
 | `vercel.json` | Headers and all redirects |
 | `REDIRECTS.md`, `REDIRECTS.blog-staged.json` | Redirect documentation and staged blog redirects |
 | `.env.example` | Env vars: `PUBLIC_DIAGNOSTIC_API_BASE`, `DIAGNOSTIC_API_TARGET` |
