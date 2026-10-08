@@ -104,16 +104,15 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
 <style is:global>
   #az-widget {
-    /* Accent follows the site's violet palette (theme.css --violet, --violet-700,
-       --violet-100) rather than the dashboard's sky accent, so the widget matches the
-       site's buttons and links. Copied as literals, not var()s, to keep the widget's
-       tokens self-contained (see the header comment). */
-    --az-accent: #6e63ac;
-    --az-accent-hover: #4b4375;
-    --az-accent-2: #6e63ac;
-    --az-accent-text: #4b4375;
-    --az-accent-weak: #e5e3f0;
-    --az-on-accent: #ffffff;
+    /* Accent matches the dashboard Ask Zicy (design-system.css --chat-accent* light
+       values). Copied as literals, not var()s, to keep the widget's tokens
+       self-contained (see the header comment). */
+    --az-accent: #83c9eb;
+    --az-accent-hover: #83c9eb;
+    --az-accent-2: #3e8fc2;
+    --az-accent-text: #1f6d8c;
+    --az-accent-weak: #eaf5fc;
+    --az-on-accent: #12333f;
     --az-r-xs: 6px;
     --az-r-sm: 8px;
     --az-r-md: 10px;
@@ -133,10 +132,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     --az-flag: #d6453b;
     --az-flag-text: #9e2c24;
     --az-flag-bg: #fbe5e3;
-    --az-focus: #6e63ac;
+    --az-focus: #83c9eb;
     /* Same bolt PNG as the dashboard's ThunderIcon (thunder-icon.tsx), recoloured with
        a filter since it's a flat asset rather than an SVG that could take
-       currentColor. White on the violet accent, matching the white launcher label
+       currentColor. White on the sky accent, as in the dashboard
        (the widget is light-only, no dark variant). */
     --az-bolt-filter: brightness(0) invert(1);
     font-family: 'Inter Tight', system-ui, sans-serif;
@@ -321,7 +320,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     transition: background var(--az-dur) var(--az-ease);
   }
   #az-widget .az-chip:hover {
-    background: #d6d2e8;
+    background: #d3eaf8;
   }
 
   #az-widget .az-panel {
