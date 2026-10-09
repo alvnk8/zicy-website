@@ -49,7 +49,7 @@ const graph = {
       dateModified: '2026-07-13',
       author: { '@id': author },
       publisher: { '@id': orgId },
-      isPartOf: [{ '@id': blogId }, { '@id': pillar }],
+      isPartOf: [{ '@id': blogId }, { '@id': `${SITE.url}/resources#webpage` }, { '@id': pillar }],
       articleSection: 'Research',
       inLanguage: 'en',
       mainEntityOfPage: url,

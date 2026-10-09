@@ -57,7 +57,7 @@ const graph = {
     {
       '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url,
       datePublished: '2026-09-09', dateModified: '2026-09-09', author,
-      publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides',
+      publisher: { '@id': orgId }, isPartOf: [{ '@id': blogId }, { '@id': `${SITE.url}/resources#webpage` }], articleSection: 'Guides',
       inLanguage: 'en', mainEntityOfPage: url,
       image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height },
     },

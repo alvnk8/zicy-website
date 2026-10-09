@@ -67,7 +67,7 @@ const graph = {
       dateModified: '2026-09-09',
       author,
       publisher: { '@id': orgId },
-      isPartOf: { '@id': blogId },
+      isPartOf: [{ '@id': blogId }, { '@id': `${SITE.url}/resources#webpage` }],
       articleSection: 'Guides',
       inLanguage: 'en',
       mainEntityOfPage: url,
