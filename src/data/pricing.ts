@@ -188,7 +188,7 @@ export const AGENCY_TIERS: Tier[] = [
 ];
 
 // ---------------------------------------------------------------------------------------------
-// Part 2 data: the Act-layer content module, the multi-market rule, and the competitor comparison.
+// Part 2 data: the Act-layer content module, and the multi-market rule.
 // Rendering is owned by Part 2 components; the values live here so this file stays the single
 // source of truth. Part 3 (FAQ) is still stubbed below.
 // ---------------------------------------------------------------------------------------------
@@ -233,28 +233,6 @@ export const MULTI_MARKET_PACK = {
   unit: 'per market / month',
   note: 'Optional. Add markets beyond what your tier includes, from Scale upward.',
 };
-
-// Competitor comparison. Zicy is column 0 and is emphasised in the render. Values are aligned to
-// COMPARISON_COLUMNS by index. Do not reorder without reordering every row.
-export const COMPARISON_COLUMNS = ['Zicy', 'Otterly', 'Peec', 'Profound', 'Scrunch', 'Dageno'] as const;
-export interface ComparisonRow {
-  feature: string;
-  /** Aligned to COMPARISON_COLUMNS; index 0 is Zicy. */
-  values: string[];
-}
-export const COMPARISON_ROWS: ComparisonRow[] = [
-  { feature: 'Entry price / mo', values: ['$79', '$29', '~$95 (€89)', '$99', '$250', '$79'] },
-  { feature: 'Engines at entry', values: ['5, flat', '4', 'Choose 3 of 7', '1 (3 on Growth)', '7, flat', 'Choose 3'] },
-  { feature: 'Gemini and Google AI Mode', values: ['Yes, flat', 'Add-on', 'Within your 3', 'Enterprise', 'Yes', 'Within your 3'] },
-  { feature: 'Per-engine add-on maths', values: ['None', 'Yes', 'Yes (4th+ engine)', 'Yes (tier-gated)', 'No', 'No'] },
-  { feature: 'Multi-language / multi-country', values: ['Yes', '50+ countries', 'Yes', 'Enterprise', 'Enterprise', 'Yes'] },
-  { feature: 'Brand Intelligence (perception vs reality)', values: ['Yes, core', 'Partial', 'Partial', 'Partial', 'Partial (Enterprise-only)', 'Partial'] },
-  { feature: 'Content generation and optimisation', values: ['Module', 'No', 'No', 'Agents', 'Limited', 'Agents'] },
-  { feature: 'Prove layer (GSC + GA4 + AEO attribution)', values: ['Yes, core', 'GA4 template', 'No', 'Yes (CDN-dependent)', 'Yes', 'Yes'] },
-  { feature: 'Daily tracking', values: ['Yes', 'Yes', 'Yes', 'Yes', 'No (72h refresh)', 'Yes'] },
-];
-export const COMPARISON_FOOTNOTE =
-  'Competitor data verified 16 July 2026 against live vendor pricing pages and current reviews.';
 
 // FAQ. The same array feeds the visible accordion and the FAQPage JSON-LD, so the schema text
 // mirrors the rendered answer verbatim. Sentence case, no em dashes, no banned vocab.

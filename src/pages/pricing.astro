@@ -8,7 +8,6 @@ import AnnualToggle from '../components/pricing/AnnualToggle.astro';
 import AgencyBlock from '../components/pricing/AgencyBlock.astro';
 import ContentModule from '../components/pricing/ContentModule.astro';
 import MultiMarket from '../components/pricing/MultiMarket.astro';
-import ComparisonTable from '../components/pricing/ComparisonTable.astro';
 import PricingFAQ from '../components/pricing/PricingFAQ.astro';
 import { CORE_TIERS, AGENCY_TIERS, PRICING_FAQS } from '../data/pricing';
 import { SITE } from '../data/site';
@@ -119,7 +118,6 @@ const displayTiers = CORE_TIERS.map((t) =>
   <!-- 4. Anchors for later parts (Part 3 owns FAQ + schema) -->
   <!--SLOT:content-module--><ContentModule />
   <!--SLOT:multi-market--><MultiMarket />
-  <!--SLOT:comparison--><ComparisonTable />
   <!--SLOT:faq--><PricingFAQ />
   <!--SLOT:schema-->
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/pricing', title))} />
