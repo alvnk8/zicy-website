@@ -25,6 +25,8 @@
 // Session + transcript persist in sessionStorage under one key, zicy_ask_session
 // (R13), so the conversation survives navigating to another page on this static
 // multi-page site.
+import { ASK_ZICY_STARTERS } from '../data/ask-zicy-starters';
+
 const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$/, '');
 ---
 
@@ -56,8 +58,9 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     </div>
     <button id="az-teaser-msg" class="az-teaser-msg" type="button" aria-label="Open Ask Zicy chat">Hi, I'm Zicy. Want to know what AI says about your brand? Ask me anything.</button>
     <div class="az-teaser-chips">
-      <button type="button" class="az-chip" data-prompt="Why isn't my brand showing up in ChatGPT?">Why isn't my brand showing up in ChatGPT?</button>
-      <button type="button" class="az-chip" data-prompt="What is AEO and do I need it?">What is AEO and do I need it?</button>
+      {ASK_ZICY_STARTERS.slice(0, 2).map((s) => (
+        <button type="button" class="az-chip" data-prompt={s.question} data-starter={s.id}>{s.question}</button>
+      ))}
     </div>
   </div>
 
@@ -83,9 +86,9 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       <div id="az-empty">
         <p class="az-empty-title">Hi, I'm Zicy. Ask me about AI visibility, your brand or how Zicy works.</p>
         <div class="az-suggestions">
-          <button type="button" class="az-suggestion" data-prompt="Why isn't my brand showing up in ChatGPT?">Why isn't my brand showing up in ChatGPT?</button>
-          <button type="button" class="az-suggestion" data-prompt="What is AEO and do I need it?">What is AEO and do I need it?</button>
-          <button type="button" class="az-suggestion" data-prompt="How does Zicy track AI visibility?">How does Zicy track AI visibility?</button>
+          {ASK_ZICY_STARTERS.map((s) => (
+            <button type="button" class="az-suggestion" data-prompt={s.question} data-starter={s.id}>{s.question}</button>
+          ))}
         </div>
       </div>
       <div id="az-messages" class="notranslate" aria-live="polite" aria-relevant="additions" hidden></div>
@@ -757,6 +760,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
 <script>
   import { streamAskZicy, renderSafeMarkdown, type AskZicyResult } from '../scripts/askZicy';
+  import { ASK_ZICY_STARTERS } from '../data/ask-zicy-starters';
 
   const TRIAL_URL = 'https://app.zicy.com/register';
   const MAX_MESSAGE_CHARS = 500;
@@ -788,6 +792,8 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
     sessionId: string;
     messages: StoredMessage[];
     open: boolean;
+    // Id of the starter question that opened this conversation, sent with later turns.
+    starter?: string;
   }
 
   const root = document.getElementById('az-widget');
@@ -843,6 +849,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
               sessionId: parsed.sessionId,
               messages: Array.isArray(parsed.messages) ? parsed.messages : [],
               open: parsed.open === true,
+              ...(typeof parsed.starter === 'string' ? { starter: parsed.starter } : {}),
             };
           }
         }
@@ -1163,6 +1170,41 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       box.appendChild(wrap);
     }
 
+    // A starter chip: show the prewritten answer without calling the API. The user
+    // bubble appears at once, then the answer is revealed word by word (~600 ms).
+    async function sendStarter(id: string) {
+      const starter = ASK_ZICY_STARTERS.find((s) => s.id === id);
+      if (!starter || isStreaming) return;
+      const myGen = generation;
+      showMessages();
+      appendUserMessage(starter.question);
+      state.messages.push({ role: 'user', text: starter.question });
+      state.messages.push({ role: 'assistant', text: starter.answer });
+      state.starter = starter.id;
+      persist();
+      input.value = '';
+      autoGrow();
+      track('ask_zicy_message', { page: window.location.pathname, starter: starter.id });
+
+      setStreaming(true);
+      const content = appendAssistantMessage('', false);
+      followReplyEl = content.parentElement;
+      scrollToBottom();
+      const words = starter.answer.split(/(\s+)/); // keeps whitespace so line breaks survive
+      const steps = Math.min(words.length, 30);
+      const per = Math.ceil(words.length / steps);
+      for (let i = per; ; i += per) {
+        if (myGen !== generation) return; // "New chat" during the reveal
+        content.innerHTML = renderSafeMarkdown(words.slice(0, i).join(''));
+        followReply();
+        if (i >= words.length) break;
+        await new Promise((r) => window.setTimeout(r, 600 / steps));
+      }
+      if (myGen !== generation) return;
+      setStreaming(false);
+      followReplyEl = null;
+    }
+
     async function sendMessage(raw: string) {
       if (isStreaming) return;
       const text = raw.trim().slice(0, MAX_MESSAGE_CHARS).trim();
@@ -1197,6 +1239,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         apiBase,
         message: text,
         sessionId: state.sessionId,
+        starter: state.starter,
         page: { path: location.pathname, title: document.title },
         signal: controller.signal,
         onStage: (label) => {
@@ -1242,7 +1285,9 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
     // ---- suggestions ----
     document.querySelectorAll<HTMLButtonElement>('#az-widget .az-suggestion').forEach((btn) => {
-      btn.addEventListener('click', () => void sendMessage(btn.dataset.prompt ?? btn.textContent ?? ''));
+      btn.addEventListener('click', () =>
+        void (btn.dataset.starter ? sendStarter(btn.dataset.starter) : sendMessage(btn.dataset.prompt ?? btn.textContent ?? ''))
+      );
     });
 
     // ---- trial link clicks anywhere in a reply (R12) ----
@@ -1293,7 +1338,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       chip.addEventListener('click', () => {
         track('ask_zicy_teaser_click', { source: 'chip' });
         openPanel(false);
-        void sendMessage(chip.dataset.prompt ?? chip.textContent ?? '');
+        void (chip.dataset.starter ? sendStarter(chip.dataset.starter) : sendMessage(chip.dataset.prompt ?? chip.textContent ?? ''));
       });
     });
     teaserClose.addEventListener('click', () => {
@@ -1319,6 +1364,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       }
       setStreaming(false);
       state.sessionId = generateSessionId();
+      delete state.starter;
       state.messages = [];
       persist();
       messagesEl.innerHTML = '';

@@ -38,6 +38,7 @@ export interface StreamAskZicyOptions {
   message: string;
   sessionId: string;
   page?: { path: string; title: string };
+  starter?: string;
   onStage?: (label: string) => void;
   onChunk?: (delta: string, fullText: string) => void;
   signal?: AbortSignal;
@@ -67,6 +68,7 @@ export async function streamAskZicy({
   message,
   sessionId,
   page,
+  starter,
   onStage,
   onChunk,
   signal,
@@ -81,11 +83,12 @@ export async function streamAskZicy({
     response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
-      body: JSON.stringify(
-        page
-          ? { message, sessionId, page: { path: page.path.slice(0, 200), title: page.title.slice(0, 150) } }
-          : { message, sessionId }
-      ),
+      body: JSON.stringify({
+        message,
+        sessionId,
+        ...(page ? { page: { path: page.path.slice(0, 200), title: page.title.slice(0, 150) } } : {}),
+        ...(starter ? { starter } : {}),
+      }),
       signal,
     });
   } catch (err) {
