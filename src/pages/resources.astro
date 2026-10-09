@@ -38,6 +38,20 @@ const blog = {
   blogPost: RESOURCE_POSTS.map((p) => ({ '@id': `${SITE.url}/resources/${p.slug}#article` })),
 };
 
+// Entity finding f-010: the page node is a CollectionPage (same #webpage @id as before) whose
+// hasPart lists every live post (same RESOURCE_POSTS source as blogPost above), the glossary
+// DefinedTermSet, and the guide and research pages, by the @ids those pages declare.
+const collectionPage = {
+  ...webPageSchema('/resources', title),
+  '@type': 'CollectionPage',
+  hasPart: [
+    ...RESOURCE_POSTS.map((p) => ({ '@id': `${SITE.url}/resources/${p.slug}#article` })),
+    { '@id': `${SITE.url}/resources/glossary#glossary` },
+    { '@id': `${SITE.url}/resources/guides/see-your-site-like-an-ai-crawler#article` },
+    { '@id': `${SITE.url}/resources/research/ai-crawlers-server-side-schema-study#article` },
+  ],
+};
+
 // The three pillars already on the page; cards are grouped under these by articleSection.
 const PILLARS = [
   { section: 'Guides' as const, blurb: 'AEO and GEO fundamentals: schema, citations, prompts, the practical playbooks.' },
@@ -64,7 +78,7 @@ const faqQuestions = RESOURCE_POSTS.filter((p) => p.title.endsWith('?')).map((p)
 const resourcesFaq = faqPageSchema('https://www.zicy.com/resources#faq', faqQuestions);
 ---
 <BaseLayout title={title} description={description}>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageSchema('/resources', title))} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionPage)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(blog)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(resourcesFaq)} />
 

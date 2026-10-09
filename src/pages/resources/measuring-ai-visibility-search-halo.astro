@@ -50,7 +50,7 @@ const graph = {
       author: { '@id': author },
       publisher: { '@id': orgId },
       // Part of the blog collection and of the series pillar (part 1).
-      isPartOf: [{ '@id': blogId }, { '@id': pillar }],
+      isPartOf: [{ '@id': blogId }, { '@id': `${SITE.url}/resources#webpage` }, { '@id': pillar }],
       articleSection: 'Research',
       inLanguage: 'en',
       mainEntityOfPage: url,
