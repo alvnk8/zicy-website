@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/competitor-owned-ai-sources/find-competitor-owned-sources-ai-cites.png';
+
+const metaTitle = 'How to Find Competitor-Owned Sources That AI Keeps Citing';
+const title = 'How to Find Competitor-Owned Sources That AI Keeps Citing';
+const description = 'Learn how to trace competitor citations back to the exact pages and customer questions behind them, then spot gaps on your own website.';
+const url = `${SITE.url}/resources/how-to-find-competitor-owned-sources-that-ai-keeps-citing`;
+const author = { '@type': 'Person', name: 'Nabila Wawan' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-09', dateModified: '2026-10-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'Five steps for tracing competitor-owned sources that AI keeps citing', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Competitor-Owned Sources</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Nabila Wawan &middot; 9 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="Five-step process for finding competitor-owned pages repeatedly cited by AI" />
+    <div class="prose">
+      <p>When customers ask AI about a product, service or topic in your market, some cited sources may come from competitor websites.</p>
+      <p>If the same competitor pages keep appearing, your customers may be getting much of their information from a business competing for the same sale.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Definition</span><h2>What Is a Competitor-Owned Source?</h2></div>
+    <div class="prose">
+      <p>A competitor-owned source is a page published on a competitor's own website that AI cites in its answer.</p>
+      <p>It could be a:</p>
+      <ul><li>product or category page;</li><li>service page;</li><li>pricing page;</li><li>comparison page;</li><li>guide or blog article; or</li><li>FAQ page.</li></ul>
+      <h3>Why Should You Pay Attention to Competitor-Owned Citations?</h3>
+      <p>Checking competitor-owned pages helps you see what information they provide for the questions AI answers and whether your own site covers the same customer need just as clearly.</p>
+      <p>If you first need the broader view, see <a href="/resources/how-to-find-the-websites-and-pages-ai-cites-in-your-industry">how to find the websites and pages AI cites in your industry</a>.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Five-step process</span><h2>How Can You Find the Competitor-Owned Sources AI Keeps Citing?</h2></div>
+    <div class="prose">
+      <p>Start with the questions your customers actually ask, then trace the citation from the competitor domain down to the exact page and AI answer behind it.</p>
+      <h3>Step 1: Start With Non-Branded Questions Where Competitors Could Appear</h3>
+      <p>Start with customer questions that do not contain your own brand name.</p>
+      <p>For example:</p>
+      <div class="prompt">“Which caterers offer corporate lunch packages?”</div>
+      <div class="prompt">“Best custom furniture companies for small apartments”</div>
+      <div class="prompt">“Which accounting firms support small businesses?”</div>
+      <p>These questions give AI room to surface different businesses and different sources.</p>
+      <p>If you are still building your prompt set, see <a href="/resources/how-to-use-branded-and-non-branded-prompts-without-distorting-ai-visibility">how to use branded and non-branded prompts without distorting your AI visibility</a>.</p>
+      <h3>Step 2: Separate Competitor-Owned Sources From Other Citations</h3>
+      <p>Next, classify the cited sources.</p>
+      <p>A competitor-owned source is only a page on a competitor's own domain.</p>
+      <div class="table-wrap"><table><thead><tr><th>Source</th><th>Classification</th></tr></thead><tbody>
+        <tr><td>Competitor website</td><td>Competitor-owned</td></tr>
+        <tr><td>Directory listing the competitor</td><td>Third-party</td></tr>
+        <tr><td>News article mentioning the competitor</td><td>Third-party</td></tr>
+        <tr><td>Review site comparing several brands</td><td>Third-party</td></tr>
+      </tbody></table></div>
+      <p>This keeps the analysis focused on information the competitor controls directly.</p>
+      <h3>Step 3: Identify the Exact Competitor Page and the Question Behind It</h3>
+      <p>Do not stop at the competitor domain.</p>
+      <p><strong>competitor.com</strong> tells you very little.</p>
+      <p><strong>competitor.com/corporate-catering</strong> cited for a question about office catering tells you much more.</p>
+      <p>For each useful citation, note:</p>
+      <ul><li>the exact page;</li><li>the question that surfaced it; and</li><li>the AI answer where it appeared.</li></ul>
+      <p>This lets you connect the competitor source to a real customer need.</p>
+      <p>For a closer look at the answer itself, see <a href="/resources/how-to-read-a-single-tracked-prompt-and-see-the-exact-ai-answers-behind-your-scores">how to read the exact AI answers behind a tracked prompt</a>.</p>
+      <h3>Step 4: Check Whether the Same Source Keeps Returning</h3>
+      <p>One citation may be incidental.</p>
+      <p>A repeated citation is more useful.</p>
+      <p>Check whether the same competitor page appears:</p>
+      <ul><li>across related questions;</li><li>across several tracked prompts; and</li><li>across more than one period.</li></ul>
+      <p>If the same source keeps returning, note the pattern before moving on.</p>
+      <h3>Step 5: Check Whether Your Website Is Cited for the Same Questions</h3>
+      <p>Now compare the competitor citation with your own presence.</p>
+      <div class="table-wrap"><table><thead><tr><th>Pattern</th><th>What it shows</th></tr></thead><tbody>
+        <tr><td>Competitor cited + your website cited</td><td>Both websites appear as sources for the same customer need.</td></tr>
+        <tr><td>Competitor cited + your website missing</td><td>The competitor appears as a source while your site does not.</td></tr>
+        <tr><td>Several competitors cited + your website missing</td><td>Multiple rival sites appear as sources while yours does not.</td></tr>
+      </tbody></table></div>
+      <p>This is also where it helps to remember that a brand mention and a website citation are different signals.</p>
+      <p>See <a href="/resources/what-is-website-citation-rate">what Website Citation Rate means and why it differs from a brand mention</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Page review</span><h2>What Should You Look for on a Competitor Page?</h2></div>
+    <div class="prose">
+      <p>Once you know which pages keep appearing, the next step is to understand what information those pages provide.</p>
+      <p>Look at:</p>
+      <ul><li>what customer question the page answers;</li><li>how specific the information is;</li><li>whether it explains pricing, availability or service details;</li><li>whether it covers common buying questions;</li><li>whether it provides comparisons or supporting detail;</li><li>whether information from the page also appears in the AI answer; and</li><li>whether important details are easy to find and clearly stated.</li></ul>
+      <p>For example, your own website may simply say:</p>
+      <div class="prompt">“Corporate catering available.”</div>
+      <p>The competitor page may explain:</p>
+      <ul><li>minimum order size;</li><li>menu options;</li><li>dietary requirements;</li><li>delivery areas;</li><li>booking lead time; and</li><li>how to request a quote.</li></ul>
+      <p>The difference is not simply page length.</p>
+      <p>What matters is whether the competitor page answers an important customer question more clearly or specifically than your own site does.</p>
+      <p>The goal is not to copy the page. It is to identify the information your own customers may still be missing.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Interpretation</span><h2>How Should You Read the Competitor Citation Patterns You Find?</h2></div>
+    <div class="prose">
+      <p>Once you have mapped the recurring citations, use the pattern to understand where competitors are supplying information that matters to customers.</p>
+      <h3>A Repeated Page Can Point to a Specific Customer Need</h3>
+      <p>If the same competitor page is cited across related questions, look at what those questions have in common.</p>
+      <p>For example, one catering page may keep appearing for questions about event packages, minimum orders and menu options.</p>
+      <p>The useful finding is the common need behind those questions.</p>
+      <p>That tells you what information on that page is worth comparing with your own coverage.</p>
+      <h3>Different Competitors May Be Strong on Different Questions</h3>
+      <p>One competitor may repeatedly receive citations for pricing questions, while another appears around comparisons or service-specific questions.</p>
+      <p>This shows that the citation landscape may be split by customer need rather than dominated by one competitor.</p>
+      <p>It also helps you see which questions each rival keeps appearing as a source for.</p>
+      <h3>Repeated Untracked Domains Can Reveal Competitors You Are Missing</h3>
+      <p>A cited domain may belong to a business you were not monitoring.</p>
+      <p>If that business keeps receiving citations for questions relevant to what you sell, it may be competing for the same customer attention inside AI answers.</p>
+      <p>This is where it helps to understand <a href="/resources/how-to-spot-untracked-competitors-appearing-in-ai-answers">how to spot untracked competitors appearing in AI answers</a>.</p>
+      <h3>Competitor Citations Without Yours Can Reveal a Citation Gap</h3>
+      <p>You may find competitors repeatedly cited for questions about products or services you also offer while your own website rarely appears as a source.</p>
+      <p>That gives you a specific gap to investigate.</p>
+      <p>Check whether your site clearly answers the same customer questions and provides the details buyers need.</p>
+      <p>If your brand is also missing from those questions, this may point to <a href="/resources/how-to-find-ai-blind-spots-for-your-products-and-services">AI blind spots for your products and services</a>.</p>
+      <p>A platform like <a href="https://www.zicy.com/">Zicy</a> brings competitor citations together across your tracked questions so you can see which rival domains recur, which questions they are tied to and where your own website is missing from the citation picture.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Limitations</span><h2>What Does a Competitor Citation Not Tell You?</h2></div>
+    <div class="prose">
+      <p>A competitor citation does not automatically mean:</p>
+      <ul><li>AI prefers that competitor;</li><li>the competitor is ranked first;</li><li>the cited page is objectively better;</li><li>every statement in the answer came from that page; or</li><li>the citation resulted in a website visit.</li></ul>
+      <p>A citation shows that the source received credit in connection with the answer.</p>
+      <p>It is evidence to investigate, not a verdict.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>Know Which Competitor Pages Keep Appearing in AI Answers</h2></div>
+    <div class="prose">
+      <p>Competitor-owned citations can show you where rival websites are supplying information for questions your customers already ask.</p>
+      <p>The useful signal is not every citation.</p>
+      <p>It is the repeated source, question or competitor pattern that points to something worth investigating.</p>
+      <p>Use those patterns to decide where your own website needs clearer, more useful information.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See Which Competitor Sources Keep Appearing</h2>
+    <p>Zicy helps you track competitor citations across ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode, so you can see which rival sources keep appearing for the questions your customers ask.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt{max-width:700px;margin:16px 0;padding:16px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}
+  .table-wrap{max-width:760px;overflow-x:auto;margin:24px 0}.table-wrap table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}.table-wrap th,.table-wrap td{padding:13px 15px;border:1px solid var(--line);text-align:left;vertical-align:top}.table-wrap th{background:var(--lavender);color:var(--ink);font-weight:700}.table-wrap tbody tr:nth-child(even){background:var(--mist)}
+  @media (max-width:640px){.prose h3{font-size:19px}.prompt{font-size:16px}.table-wrap table{min-width:620px}}
+</style>

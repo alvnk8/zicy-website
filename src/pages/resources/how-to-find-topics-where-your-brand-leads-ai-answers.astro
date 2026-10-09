@@ -1,0 +1,272 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/topics-where-brand-leads/how-to-find-topics-where-brand-leads.png';
+import topicsImg from '../../assets/resources/topics-where-brand-leads/full-topic-landscape.png';
+
+const metaTitle = 'How to Find the Topics Where Your Brand Leads in AI Answers';
+const title = 'How to Find the Topics Where Your Brand Leads in AI Answers';
+const description = 'Learn how to find the commercial topics where your brand already appears strongly in AI answers, compare competitors and plan content more strategically.';
+const url = `${SITE.url}/resources/how-to-find-topics-where-your-brand-leads-ai-answers`;
+const author = { '@type': 'Person', name: 'Shangkari Goverdhanlal' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-09', dateModified: '2026-10-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'Guide to finding Brand Leader, Battleground and Blind Spot topics in AI answers', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Find Topics Where Your Brand Leads</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Shangkari Goverdhanlal &middot; 9 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>Topic leadership is about showing up consistently across a group of related customer questions, not appearing once for a single prompt.</li>
+      <li>Focus on commercial topics tied to products, services, comparisons, price, reviews, alternatives, location and customer needs.</li>
+      <li>Group similar questions together, then compare how often your brand appears and which competitors show up alongside it.</li>
+      <li>Use Brand Leaders, Battlegrounds and Blind Spots to understand where your brand is strong, competitive or largely absent.</li>
+      <li>A strong topic does not always need more content. Use the pattern to decide what to maintain, deepen or investigate next.</li>
+    </ul></div>
+    <PostFigure src={heroImg} alt="Five-step guide to grouping related questions, comparing competitors and identifying Brand Leader, Battleground and Blind Spot topics" />
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Introduction</span><h2>Start With the Topics Where Your Brand Has Momentum</h2></div>
+    <div class="prose">
+      <p>Creating more content does not always create more opportunity.</p>
+      <p>A small business can keep publishing around every product, service and customer question without knowing which topics AI already connects strongly with the brand. That makes it easy to spend time on areas that are already performing well while overlooking more useful gaps.</p>
+      <p>A better starting point is to identify which commercial topics repeatedly bring your brand into AI answers, how strongly you appear compared with competitors, and whether those topics should be maintained, strengthened or investigated further.</p>
+      <p>Once you can see those patterns, content planning becomes less about guessing what to write next and more about building on where your brand already has momentum.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Why it matters</span><h2>Why Should You Know Which Topics Your Brand Already Leads?</h2></div>
+    <div class="prose">
+      <p>Creating more content does not always mean creating better opportunities.</p>
+      <p>A small business may spend months publishing articles about every service, customer problem and industry trend it can think of without knowing which of those subjects AI already connects strongly with the brand.</p>
+      <p>That can lead to two problems.</p>
+      <p>You may keep investing in a topic where your brand is already performing well while ignoring a more valuable gap elsewhere. Or you may create content around broad subjects that never put your business into the kinds of answers customers use to compare and choose.</p>
+      <p>A more useful starting point is to ask:</p>
+      <div class="prompt">Which commercial topics already bring my brand into AI answers consistently?</div>
+      <p>Once you know that, content planning becomes less about guessing what to write next and more about understanding where you already have momentum.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Topic leadership</span><h2>What Does It Mean for a Brand to “Lead” a Topic in AI Answers?</h2></div>
+    <div class="prose">
+      <p>A brand leads a topic when it appears more strongly or consistently than competing brands across a group of related AI questions.</p>
+      <p>The important word is <strong>group</strong>.</p>
+      <p>One AI answer mentioning your company does not mean you lead an entire subject.</p>
+      <p>Suppose a bakery appears first for:</p>
+      <div class="prompt">“Where can I buy artisan sourdough near me?”</div>
+      <p>That tells you something about that particular question.</p>
+      <p>But if the same bakery also appears prominently when people ask about:</p>
+      <ul><li>fresh sourdough;</li><li>artisan bread;</li><li>naturally fermented bread; and</li><li>bakeries selling sourdough nearby,</li></ul>
+      <p>then a clearer topic pattern starts to form.</p>
+      <p>Topic leadership therefore describes repeated visibility around a common customer need, not ownership of a keyword or a permanent label attached to your brand.</p>
+      <p>This distinction matters because generative search can explore several related subtopics while answering one question. Google explains that AI Mode and AI Overviews can use “query fan-out”, where the system issues multiple related searches to gather information around different parts of the user's question.</p>
+      <p>That makes a topic broader than one exact phrase.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Commercial relevance</span><h2>Which Topics Are Worth Measuring?</h2></div>
+    <div class="prose">
+      <p>Not every subject your business can talk about is commercially useful.</p>
+      <p>For this type of analysis, start with topics connected to a decision a potential customer may actually make.</p>
+      <p>If you are unsure which questions are commercially useful, start with <a href="/resources/how-to-choose-buyer-intent-prompts-that-reveal-brand-visibility">buyer-intent prompts that can actually reveal brand visibility</a>.</p>
+      <p>Useful topic groups might include:</p>
+      <ul><li>a core product or service;</li><li>a customer problem you solve;</li><li>comparisons between different options;</li><li>price or value;</li><li>reviews and reputation;</li><li>alternatives;</li><li>location or service area; and</li><li>a specific use case or customer need.</li></ul>
+      <p>A bakery, for example, may sell bread, cakes and pastries.</p>
+      <p>But those broad categories can contain very different commercial topics:</p>
+      <h3>Bread</h3>
+      <ul><li>artisan sourdough;</li><li>fresh bread delivery;</li><li>gluten-free bread; and</li><li>bread for events.</li></ul>
+      <h3>Cakes</h3>
+      <ul><li>custom birthday cakes;</li><li>wedding cakes; and</li><li>same-day cake pickup.</li></ul>
+      <p>The goal is not to create as many topic groups as possible.</p>
+      <p>It is to separate customer needs clearly enough that you can see where AI actually brings your brand into the conversation.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Method</span><h2>How Can You Find the Topics Where Your Brand Leads?</h2></div>
+    <div class="prose">
+      <p>The simplest method is to group related customer questions, then look at how often your brand and competing businesses appear within each group.</p>
+      <h3>Group Similar Questions Around One Customer Need</h3>
+      <p>Start with prompts you are already tracking or questions customers are likely to ask.</p>
+      <p>Avoid putting unrelated intents into one topic.</p>
+      <p>For example:</p>
+      <div class="prompt">“Where can I order a custom birthday cake?”<br /><br />“Which bakery offers personalised celebration cakes?”</div>
+      <p>can reasonably sit within the same topic.</p>
+      <p>But:</p>
+      <div class="prompt">“How is sourdough made?”</div>
+      <p>belongs somewhere else.</p>
+      <p>Grouping them separately prevents a strong result for one product from making the whole business look stronger across unrelated areas.</p>
+      <p>Also read: <a href="/resources/how-to-group-ai-prompts-by-product-service-topic-and-buyer-intent">How to Group AI Prompts by Product, Service, Topic and Buyer Intent</a>.</p>
+      <h3>Look for Repeated Brand Presence</h3>
+      <p>Next, look across all the questions in that topic.</p>
+      <p>Ask:</p>
+      <ul><li>Does your brand appear regularly?</li><li>Does it appear near the top when several businesses are mentioned?</li><li>Is it present across different AI platforms?</li><li>Do competing brands appear more or less often?</li></ul>
+      <p>You are looking for consistency, not one unusually good answer.</p>
+      <p>If your brand appears strongly for six related questions and competitors appear less often, that is much more meaningful than being mentioned once in a single response.</p>
+      <h3>Compare Against the Brands Appearing Beside You</h3>
+      <p>Topic leadership only becomes useful when there is something to compare it with.</p>
+      <p>If customers ask about custom cakes and AI repeatedly mentions three bakeries, compare how often each one appears within that topic.</p>
+      <p>The useful question is not simply:</p>
+      <div class="prompt">“Are we mentioned?”</div>
+      <p>It is:</p>
+      <div class="prompt">“Within this customer need, how much of the AI conversation are we actually capturing compared with the other businesses being recommended?”</div>
+      <p>This helps separate genuine topic strength from basic brand visibility.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Three topic types</span><h2>What Is the Difference Between a Brand Leader, a Battleground and a Blind Spot?</h2></div>
+    <div class="prose">
+      <p>A topic becomes easier to interpret when you compare three different situations. These three topic types show how strongly your brand appears in AI answers compared with other businesses:</p>
+      <ul>
+        <li><strong>Brand Leader:</strong> Your brand appears frequently and strongly across related questions within the topic. This is usually an area to protect, maintain and deepen rather than rebuild from scratch.</li>
+        <li><strong>Battleground:</strong> Your brand appears, but competitors are just as visible or stronger. You already have some relevance, so the opportunity is to understand where competitors are gaining more visibility and strengthen the weaker parts of the topic. Also read: <a href="/resources/how-to-find-ai-battleground-topics-where-a-small-push-could-make-a-difference">How to Find AI Battleground Topics Where a Small Push Could Make a Difference</a>.</li>
+        <li><strong>Blind Spot:</strong> AI discusses the topic, but your brand rarely appears. This signals a gap worth investigating, although it does not automatically mean you need more content. Also read: <a href="/resources/how-to-find-ai-blind-spots-for-your-products-and-services">How to Find AI Blind Spots for Your Products and Services</a>.</li>
+      </ul>
+      <p>The key difference is actual presence in AI answers.</p>
+      <p>A brand may be generally associated with a topic, but that does not necessarily mean it is being mentioned when customers ask commercial questions about it.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Validation</span><h2>How Can You Tell Whether a Topic Lead Is Real?</h2></div>
+    <div class="prose">
+      <p>A strong-looking topic can still be misleading if the underlying questions are weak. Before treating a subject as something your brand “owns”, check a few things.</p>
+      <h3>There Are Enough Related Questions</h3>
+      <p>A topic based on one question is fragile.</p>
+      <p>Several genuinely related prompts give you a more useful picture.</p>
+      <p>You do not need dozens, but you should have enough variety to test the customer need rather than one exact wording.</p>
+      <h3>The Prompts Are Not Mostly Branded</h3>
+      <p>Questions such as:</p>
+      <div class="prompt">“Is Golden Crust Bakery good for sourdough?”</div>
+      <p>already tell AI which brand to discuss.</p>
+      <p>That does not show whether AI would have selected the business naturally.</p>
+      <p>A stronger test would be:</p>
+      <div class="prompt">“Which bakeries nearby are known for artisan sourdough?”</div>
+      <p>Now the AI has to decide which brands belong in the answer.</p>
+      <p>Also read: <a href="/resources/how-to-use-branded-and-non-branded-prompts-without-distorting-ai-visibility">How To Use Branded And Non-Branded Prompts Without Distorting Your AI Visibility</a>.</p>
+      <h3>One AI Platform Is Not Carrying the Whole Topic</h3>
+      <p>A topic can look strong because one platform repeatedly mentions your business while the others rarely do.</p>
+      <p>Check whether the pattern exists across several AI engines rather than relying on one source.</p>
+      <h3>The Topic Has Commercial Meaning</h3>
+      <p>A brand may appear often for a broad educational subject without being recommended when people are closer to making a choice.</p>
+      <p>For example, appearing in answers about:</p>
+      <div class="prompt">“What is sourdough?”</div>
+      <p>does not tell you as much commercially as appearing for:</p>
+      <div class="prompt">“Where can I buy fresh sourdough near me?”</div>
+      <p>The second question gives AI a reason to name businesses.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Content planning</span><h2>How Should You Use Leading AI Topics to Plan Your Content?</h2></div>
+    <div class="prose">
+      <p>This is where topic analysis becomes useful.</p>
+      <p>A Brand Leader is not necessarily a signal to write another article about the same subject.</p>
+      <p>It is first a signal to ask:</p>
+      <div class="prompt">Why are we strong here, and is there anything worth strengthening?</div>
+      <h3>Protect What Is Already Working</h3>
+      <p>Check the pages and business information supporting that topic.</p>
+      <p>Are they still accurate?</p>
+      <p>Do they clearly explain the product or service?</p>
+      <p>Have prices, availability, locations or other important details changed?</p>
+      <p>Existing strength can disappear if the information behind it becomes outdated.</p>
+      <h3>Deepen the Topic Where Customers Need More Detail</h3>
+      <p>Look at the questions inside the topic rather than only the topic name.</p>
+      <p>You may already lead broadly but have weaker coverage around:</p>
+      <ul><li>pricing;</li><li>comparisons;</li><li>suitability;</li><li>specific use cases;</li><li>reviews;</li><li>availability; and</li><li>location.</li></ul>
+      <p>That can reveal a genuine content gap without creating another broad article covering the same ground.</p>
+      <h3>Connect Strong Topics to Commercial Pages</h3>
+      <p>If informational content performs well around a topic but the relevant service or product page is thin, strengthen that connection.</p>
+      <p>A customer who learns about a topic may eventually want to know what you actually offer.</p>
+      <p>The supporting content and the commercial page should make that relationship clear.</p>
+      <h3>Avoid Creating a Page for Every Prompt</h3>
+      <p>Related questions do not automatically need separate articles.</p>
+      <p>If several prompts are really asking about the same customer need, it is usually better to strengthen one useful page than create several repetitive ones.</p>
+      <p>Look for the shared intent behind the questions. A single strong page may be able to cover the main topic, related comparisons, common concerns and supporting details without splitting them into separate pieces of content.</p>
+      <p>The goal is not to create content for every prompt. It is to make sure the important customer need is covered clearly enough.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Tools and workflow</span><h2>How Can You Compare Topic Strength Without Doing It All Manually?</h2></div>
+    <div class="prose">
+      <p>You can start with a spreadsheet.</p>
+      <p>List your tracked questions, group them by topic, then record which brands appear in the answers.</p>
+      <p>Over time, patterns will emerge.</p>
+      <p>The difficulty is keeping those groups updated once you are comparing many prompts, platforms and competitors.</p>
+      <p>For businesses tracking this regularly, AI visibility platforms can help organise these patterns into topic-level views. In <a href="https://www.zicy.com/">Zicy</a>, for example, Key Topics separates areas where your brand leads, competes closely or is largely absent.</p>
+    </div>
+    <PostFigure src={topicsImg} alt="Full Topic Landscape showing present and absent brand topics based on AI answers" caption="An example of related AI topics grouped by how often the brand appears within answers compared with other businesses." />
+    <div class="prose">
+      <p>That is enough product context for this article. The important principle remains the same whether you use a tool or a spreadsheet: group related questions first, then compare repeated brand presence within each topic.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Next steps</span><h2>How Should You Use Topic Leadership to Plan Your Next Content?</h2></div>
+    <div class="prose">
+      <p>Finding a topic where your brand already performs well does not automatically mean you need another article.</p>
+      <p>Use the topic pattern to decide what needs attention:</p>
+      <ul>
+        <li><strong>Brand Leaders:</strong> Maintain what is already working. Check that the supporting pages are still accurate and whether there are any useful subtopics, comparisons or commercial questions worth strengthening.</li>
+        <li><strong>Battlegrounds:</strong> Look more closely at where competitors are stronger. These topics may deserve attention because AI already sees your brand as relevant, but the position is still competitive.</li>
+        <li><strong>Blind Spots:</strong> Investigate before creating anything new. A blind spot may reveal a real content gap, but it could also be a topic that is not commercially important to your business.</li>
+      </ul>
+      <p>Before publishing something new, ask whether an existing page already covers the customer need, whether customers are asking a new question, and whether there is a meaningful gap in your current information.</p>
+      <p>You also do not need to react to every change in an AI answer. Review topic patterns when something meaningful changes, such as a new product or service, a new market, stronger competitor visibility or a major content update.</p>
+      <p>Keep your main prompt groups reasonably consistent over time. If the questions constantly change, it becomes harder to tell whether your topic visibility changed or your measurement did.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>Use Topic Strength to Decide Where Content Matters Most</h2></div>
+    <div class="prose">
+      <p>Knowing which topics your brand leads helps you move beyond creating content based only on ideas or keywords.</p>
+      <p>Some topics may already be strong enough to maintain. Others may be competitive areas worth strengthening, while genuine blind spots can show where further investigation is needed.</p>
+      <p>The important part is not to create content for every topic you find.</p>
+      <p>Instead, use the pattern to understand where AI already connects your brand with a customer need, where competitors are stronger, and where there may be a meaningful gap to address.</p>
+      <p>For a small business with limited time and content budget, that gives you a much clearer starting point for deciding what to work on next.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>Find the Topics Where Your Brand Leads</h2>
+    <p>Zicy groups related AI topics so you can see where your brand leads, where competition is close and where a meaningful blind spot may need investigation.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt{max-width:700px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}
+  @media (max-width:640px){.prose h3{font-size:19px}.prompt{font-size:16px}}
+</style>

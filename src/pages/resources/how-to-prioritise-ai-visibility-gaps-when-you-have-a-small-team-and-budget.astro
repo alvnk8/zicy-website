@@ -1,0 +1,275 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/prioritise-ai-visibility-gaps/which-ai-visibility-gaps-matter-most.png';
+import gapsImg from '../../assets/resources/prioritise-ai-visibility-gaps/visibility-gaps-dashboard.png';
+
+const metaTitle = 'How to Prioritise AI Visibility Gaps With a Small Team';
+const title = 'How to Prioritise AI Visibility Gaps When You Have a Small Team and Budget';
+const description = 'Learn how to prioritise AI visibility gaps when time and budget are limited, using business value, evidence and effort to decide what to improve first.';
+const url = `${SITE.url}/resources/how-to-prioritise-ai-visibility-gaps-when-you-have-a-small-team-and-budget`;
+const author = { '@type': 'Person', name: 'Vi Vien Koay' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-09', dateModified: '2026-10-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'Five-step guide to prioritising AI visibility gaps by value, evidence and effort', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Prioritise AI Visibility Gaps</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Vi Vien Koay &middot; 9 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="Which AI Visibility Gaps Matter Most infographic showing business value, repeated evidence, clear action and manageable effort" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>Not every AI visibility gap deserves immediate action.</li>
+      <li>Prioritise gaps connected to commercially important products, services and customer decisions.</li>
+      <li>Look for repeated patterns across relevant questions, AI platforms and time before committing resources.</li>
+      <li>Check whether a gap is a battleground or a blind spot, because each usually needs a different next step.</li>
+      <li>Strong priorities combine business value, clear evidence, a realistic next action and manageable effort.</li>
+      <li>Work on a small number of meaningful gaps, then monitor whether the underlying visibility pattern changes.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Introduction</span><h2>Decide Which Gaps Deserve Your Limited Resources</h2></div>
+    <div class="prose">
+      <p>Finding AI visibility gaps is usually easier than deciding what to do about them.</p>
+      <p>A small business might discover that competitors appear more strongly for one service, its brand is missing from another topic, several website pages need improvement and third-party sources rarely mention the business.</p>
+      <p>A small team cannot realistically tackle every gap at once.</p>
+      <p>Prioritisation helps you focus limited time and budget on the gaps most closely connected to important products, services and customer decisions.</p>
+      <p>The strongest priorities usually combine commercial importance, repeated evidence, a clear next action and realistic effort.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">The challenge</span><h2>Why Can AI Visibility Gaps Become Overwhelming?</h2></div>
+    <div class="prose">
+      <p>Imagine you run a commercial office cleaning company in Kuala Lumpur.</p>
+      <p>After reviewing the questions customers may ask AI, you discover several different issues:</p>
+      <ul><li>competitors appear more consistently for recurring office-cleaning contracts;</li><li>your business is rarely mentioned for post-renovation cleaning;</li><li>your office-cleaning page barely explains contract options; and</li><li>several content and technical issues also need attention.</li></ul>
+      <p>All four could deserve attention.</p>
+      <p>But with one marketer, limited development support and a modest content budget, tackling all of them at once is unrealistic.</p>
+      <p>The first job is to decide which gaps matter now and which can wait.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Commercial importance</span><h2>Start With the Business, Not the Size of the Gap</h2></div>
+    <div class="prose">
+      <p>One of the easiest mistakes is assuming the largest visibility gap should automatically receive the highest priority.</p>
+      <p>Consider two findings.</p>
+      <div class="table-wrap"><table><thead><tr><th></th><th>What you find</th></tr></thead><tbody>
+        <tr><td>Gap A</td><td>Almost completely absent when customers ask about sofa cleaning</td></tr>
+        <tr><td>Gap B</td><td>You appear for recurring office contracts, but two competitors appear more often</td></tr>
+      </tbody></table></div>
+      <p>Gap A looks worse if you focus only on visibility.</p>
+      <p>Gap B may deserve attention first.</p>
+      <p>The first question should therefore be:</p>
+      <div class="prompt">How important is this customer need to our business?</div>
+      <p>Consider:</p>
+      <ul><li>revenue potential;</li><li>profitability;</li><li>strategic growth areas;</li><li>customer demand;</li><li>services you actively want to sell; and</li><li>markets or locations you want to grow.</li></ul>
+      <p>A visibility gap matters only when it overlaps with something the business genuinely cares about.</p>
+      <p>The same applies to <a href="/resources/how-to-find-ai-battleground-topics-where-a-small-push-could-make-a-difference">AI battleground topics</a>: judge them by commercial value as well as the size of the gap.</p>
+      <h3>Is the Customer Close to Making a Decision?</h3>
+      <p>The type of question creating the gap also matters.</p>
+      <p>Compare:</p>
+      <div class="prompt">“What does commercial cleaning include?”</div>
+      <p>with:</p>
+      <div class="prompt">“Which office cleaning companies in Kuala Lumpur offer recurring contracts for small offices?”</div>
+      <p>The first question is educational.</p>
+      <p>The second could influence which companies enter the customer's shortlist.</p>
+      <p>With limited resources, pay closer attention to gaps around recommendations, comparisons, reviews, pricing and alternatives because these questions often sit closer to an actual buying decision.</p>
+      <p>For example:</p>
+      <div class="table-wrap"><table><thead><tr><th>Customer question</th><th>Likely priority</th></tr></thead><tbody>
+        <tr><td>“What is office cleaning?”</td><td>Lower commercial intent</td></tr>
+        <tr><td>“How often should an office be cleaned?”</td><td>Useful research question</td></tr>
+        <tr><td>“Which office cleaners in KL have good reviews?”</td><td>Higher buying relevance</td></tr>
+        <tr><td>“Which office cleaning companies offer monthly contracts?”</td><td>Higher buying relevance</td></tr>
+        <tr><td>“Affordable office cleaning for a 30-person office”</td><td>Higher buying relevance</td></tr>
+      </tbody></table></div>
+      <p>The exact priority will still depend on your business.</p>
+      <p>But the closer the question is to a real choice, the stronger the case for investigating it.</p>
+      <p>If your current prompt set contains mostly broad educational questions, first review <a href="/resources/how-to-build-simple-prompt-set">How to Build a Simple Prompt Set Around Problems, Comparisons, Reviews, Pricing and Alternatives</a>.</p>
+      <p>That helps ensure the gaps you are prioritising come from questions customers may realistically ask while making a decision.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Evidence strength</span><h2>Look for Repeated Evidence Before Committing Resources</h2></div>
+    <div class="prose">
+      <p>AI answers can vary.</p>
+      <p>One unusual answer does not necessarily justify rewriting a service page or launching a new content project.</p>
+      <p>A stronger gap keeps appearing.</p>
+      <p>For example:</p>
+      <p>Suppose your cleaning company is absent once from:</p>
+      <div class="prompt">“Best office cleaners in Kuala Lumpur.”</div>
+      <p>One absence may be temporary.</p>
+      <p>But if your business is repeatedly missing from questions about office cleaning for SMEs, monthly contracts and recurring services while the same competitors keep appearing, the pattern deserves closer attention.</p>
+      <p>The principle is similar when evaluating competitors: repetition across commercially relevant questions matters far more than a single unfamiliar mention.</p>
+      <p>See <a href="/resources/how-to-find-your-real-competitors-inside-ai-answers">How To Find Your Real Competitors Inside AI Answers</a> for how to check whether an unfamiliar business is a real competitor.</p>
+      <div class="table-wrap"><table><thead><tr><th>What you find</th><th>How to treat it initially</th></tr></thead><tbody>
+        <tr><td>One weak answer on one platform</td><td>Watch</td></tr>
+        <tr><td>Same gap across several related questions</td><td>Investigate</td></tr>
+        <tr><td>Same competitors repeatedly appear instead</td><td>Stronger signal</td></tr>
+        <tr><td>Gap appears across several AI platforms</td><td>Broader signal</td></tr>
+        <tr><td>Pattern persists over time</td><td>Higher confidence</td></tr>
+        <tr><td>Gap appears around commercially important questions</td><td>Higher priority</td></tr>
+      </tbody></table></div>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Gap type</span><h2>Is the Gap a Battleground or a Blind Spot?</h2></div>
+    <div class="prose">
+      <p>Before deciding what to fix, identify what kind of gap you are dealing with.</p>
+      <h3>Battleground</h3>
+      <p>Your business already appears around the topic, but competitors are stronger.</p>
+      <p>Example:</p>
+      <p>You appear regularly for office cleaning, but another company appears more consistently.</p>
+      <p>This may indicate that you already have something to build on.</p>
+      <h3>Blind Spot</h3>
+      <p>The topic matters to the business, but your company is rarely included at all.</p>
+      <p>Example:</p>
+      <p>You genuinely offer post-renovation cleaning, but AI repeatedly discusses other local providers without mentioning you.</p>
+      <p>This may require a deeper investigation into whether the service is clearly represented online.</p>
+      <p>See <a href="/resources/how-to-find-ai-blind-spots-for-your-products-and-services">How To Find AI Blind Spots for Your Products and Services</a> for a fuller process.</p>
+      <p>The distinction matters because the next action may be different.</p>
+      <p>A battleground could involve strengthening something that already exists.</p>
+      <p>A blind spot may first require figuring out why AI does not strongly connect your business with the service.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Diagnosis</span><h2>Do You Know What Is Actually Causing the Gap?</h2></div>
+    <div class="prose">
+      <p>A gap becomes much easier to prioritise when you have a plausible explanation for it.</p>
+      <p>Suppose you identify weak visibility for recurring office contracts.</p>
+      <p>Open the customer questions and read the actual AI answers.</p>
+      <p>You might discover that competitors are described as offering:</p>
+      <ul><li>weekly and monthly packages;</li><li>cleaning for specific office sizes;</li><li>after-hours services;</li><li>contract flexibility; and</li><li>trained cleaning teams.</li></ul>
+      <p>Then check your own website.</p>
+      <p>Perhaps your office-cleaning page simply says:</p>
+      <div class="prompt">“We provide professional commercial cleaning solutions tailored to your needs.”</div>
+      <p>That may be true, but it gives very little detail.</p>
+      <p>The diagnosis is now much more specific: customers are asking about recurring cleaning contracts, competitors are repeatedly associated with them, and your own service page barely explains its contract options.</p>
+      <p>That gives the team something concrete to investigate.</p>
+      <p>Before acting on an overall score, trace important gaps back to the individual AI answers.</p>
+      <p><a href="/resources/how-to-read-a-single-tracked-prompt-and-see-the-exact-ai-answers-behind-your-scores">How to Read a Single Tracked Prompt and See the Exact AI Answers Behind Your Scores</a> explains this process in more detail.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Priority criteria</span><h2>How Should You Prioritise the Gaps You Have Identified?</h2></div>
+    <div class="prose">
+      <h3>Prefer Gaps With a Clear Next Action</h3>
+      <p>A low Share of Voice can show that your business is getting less visibility than competitors, but it doesn't explain why or what to improve.</p>
+      <p>A more useful finding would be:</p>
+      <div class="prompt">“Competitor A repeatedly appears for monthly office-cleaning contracts. Its service page clearly explains contract frequency, office size and after-hours options, while ours does not.”</div>
+      <p>Now the problem is specific enough to investigate and act on.</p>
+      <p>For a small team, prioritise gaps that can be translated into a clear next step, such as:</p>
+      <ul><li>improve the office-cleaning page with clearer contract information;</li><li>add missing service-area details;</li><li>strengthen genuine proof on an existing page;</li><li>clarify which customers or use cases a service is designed for;</li><li>correct inconsistent business information;</li><li>improve internal links to an important service; or</li><li>create a page for a commercially important service that genuinely has no suitable existing page.</li></ul>
+      <p>If you still cannot describe what needs investigating or improving, the gap probably needs further diagnosis before it becomes an action item.</p>
+      <h3>Balance Business Value With the Effort Required</h3>
+      <p>Two visibility gaps may have similar business importance but require very different amounts of work.</p>
+      <p>For example:</p>
+      <div class="table-wrap"><table><thead><tr><th>Gap</th><th>Possible action</th><th>Relative effort</th></tr></thead><tbody>
+        <tr><td>Existing service page lacks useful details</td><td>Improve current page</td><td>Lower</td></tr>
+        <tr><td>Important FAQs are missing</td><td>Add useful answers</td><td>Lower</td></tr>
+        <tr><td>Internal links are weak</td><td>Improve linking</td><td>Lower</td></tr>
+        <tr><td>Important service has no dedicated page</td><td>Create new page</td><td>Medium</td></tr>
+        <tr><td>Business information is inconsistent across several sources</td><td>Correct information</td><td>Medium</td></tr>
+        <tr><td>Competitors have much stronger external proof</td><td>Build reviews, PR or third-party mentions</td><td>Longer term</td></tr>
+        <tr><td>Site-wide technical issue</td><td>Development work</td><td>Depends on issue</td></tr>
+      </tbody></table></div>
+      <p>Treat effort as a filter. A low-value task is still low value even if it only takes 10 minutes.</p>
+      <p>Look for the best balance between:</p>
+      <div class="prompt">Business value + evidence + actionability + effort</div>
+      <p>That combination gives a small team a much more realistic priority list.</p>
+      <h3>Check Whether the Problem Really Requires New Content</h3>
+      <p>Five prompts exposing the same weakness do not require five new articles.</p>
+      <p>If AI does not clearly associate your business with recurring office cleaning, first inspect the existing service page. It may simply need clearer service details, stronger proof, better examples or improved internal linking.</p>
+      <p>New content makes sense when there is a genuine information gap. Use the customer questions to diagnose the problem first, then choose the right fix.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Six-step process</span><h2>How to Prioritise AI Visibility Gaps With Limited Resources</h2></div>
+    <div class="prose">
+      <h3>Step 1: Write Down the Specific Gaps</h3>
+      <p>Record actual findings from customer questions rather than broad goals such as “improve AI visibility.”</p>
+      <h3>Step 2: Filter for Commercial Importance</h3>
+      <p>Keep gaps connected to core services, growth products, valuable customer segments, priority locations or meaningful buying decisions.</p>
+      <h3>Step 3: Confirm That the Pattern Is Real</h3>
+      <p>Look for repetition across related questions, AI platforms and analysis periods.</p>
+      <h3>Step 4: Diagnose What May Be Causing the Gap</h3>
+      <p>Read the underlying AI answers. Check which competitors appear, how they are described, what sources support them and how your business is positioned.</p>
+      <h3>Step 5: Compare Value, Actionability and Effort</h3>
+      <p>Prioritise gaps where the business value is meaningful, the cause is reasonably clear and your team has a realistic next action.</p>
+      <p>A useful shorthand:</p>
+      <ul><li><strong>High value + strong evidence + manageable action:</strong> do first</li><li><strong>High value + strong evidence + large project:</strong> plan properly</li><li><strong>Moderate value + weak evidence:</strong> monitor</li><li><strong>Low business value:</strong> usually deprioritise</li></ul>
+      <h3>Step 6: Choose a Few Priorities and Measure What Changes</h3>
+      <p>After reviewing the gaps, the cleaning company might choose:</p>
+      <ol><li><strong>Recurring office-cleaning contracts:</strong> high value, repeated evidence, existing page can be improved.</li><li><strong>Post-renovation cleaning:</strong> important blind spot, but requires deeper investigation.</li><li><strong>After-hours cleaning:</strong> potentially useful, but evidence is still limited.</li><li><strong>Residential sofa cleaning:</strong> weak visibility, but commercially unimportant.</li></ol>
+      <p>The team starts with the first one rather than trying to work on all four.</p>
+      <p>Complete the improvements, keep tracking the relevant customer questions and check whether your visibility becomes more consistent, the competitor advantage narrows or the pattern persists.</p>
+      <p>Don't judge success by one unusually positive response.</p>
+      <p>If you need to distinguish normal fluctuations from a meaningful pattern, see <a href="/resources/how-to-read-daily-weekly-and-monthly-ai-visibility-trends">How to Read Daily, Weekly and Monthly AI Visibility Trends</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Action list</span><h2>How Can You Keep the Priority List Manageable?</h2></div>
+    <div class="prose">
+      <p>A spreadsheet may be enough when you only have a few issues.</p>
+      <p>You could use columns such as:</p>
+      <div class="table-wrap"><table><thead><tr><th>Gap</th><th>Business importance</th><th>Evidence</th><th>Likely action</th><th>Effort</th><th>Priority</th></tr></thead><tbody>
+        <tr><td>Recurring office cleaning</td><td>High</td><td>Strong</td><td>Improve service page</td><td>Low</td><td>First</td></tr>
+        <tr><td>Post-renovation cleaning</td><td>High</td><td>Strong</td><td>Investigate blind spot</td><td>Medium</td><td>Next</td></tr>
+        <tr><td>Carpet cleaning pricing</td><td>Medium</td><td>Limited</td><td>Monitor</td><td>Low</td><td>Later</td></tr>
+      </tbody></table></div>
+      <p>As the number of opportunities grows, a visibility platform can help group them.</p>
+      <p>For example, <a href="https://www.zicy.com/">Zicy's</a> Visibility Gaps view separates Technical Fixes, Content Optimisation and New Content Ideas, and each item shows the estimated effort in hours and how many tracked questions it could affect.</p>
+    </div>
+    <PostFigure src={gapsImg} alt="Visibility Gaps dashboard grouping content and technical opportunities by priority" caption="A visibility-gaps view can organise technical fixes, content optimisation and new-content opportunities, but commercial priorities should still determine what gets worked on first." />
+    <div class="prose"><p>Treat the view as an organiser rather than an automatic to-do list. Your commercial priorities should still determine what gets worked on first.</p></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>Focus on the Gaps That Matter Most</h2></div>
+    <div class="prose"><p>A small team does not need to fix every AI visibility gap. Focus on the ones tied to important customer decisions, supported by repeated evidence and realistic enough for your team to act on.</p></div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>Turn Your Visibility Gaps Into a Manageable Action List</h2>
+    <p>Zicy helps organise technical, content optimisation and new-content opportunities so you can review the gaps and decide what deserves attention first.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt{max-width:700px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}
+  .table-wrap{max-width:760px;overflow-x:auto;margin:24px 0}.table-wrap table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}.table-wrap th,.table-wrap td{padding:13px 15px;border:1px solid var(--line);text-align:left;vertical-align:top}.table-wrap th{background:var(--lavender);color:var(--ink);font-weight:700}.table-wrap tbody tr:nth-child(even){background:var(--mist)}
+  @media (max-width:640px){.prose h3{font-size:19px}.prompt{font-size:16px}.table-wrap table{min-width:620px}}
+</style>

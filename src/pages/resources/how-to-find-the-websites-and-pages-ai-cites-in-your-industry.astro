@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/ai-citation-sources/websites-pages-ai-cites-industry.png';
+import analysisImg from '../../assets/resources/ai-citation-sources/citation-analysis-dashboard.png';
+import competitorImg from '../../assets/resources/ai-citation-sources/competitor-citation-questions.png';
+
+const metaTitle = 'How to Find the Websites and Pages AI Cites in Your Industry';
+const title = 'How to Find the Websites and Pages AI Cites in Your Industry';
+const description = 'Understand which sources keep appearing in AI answers, how they differ by question, and where owned, earned and competitor citations show up.';
+const url = `${SITE.url}/resources/how-to-find-the-websites-and-pages-ai-cites-in-your-industry`;
+const author = { '@type': 'Person', name: 'Nabila Wawan' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-09', dateModified: '2026-10-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'Guide to finding the websites and pages AI cites in your industry', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Find AI Citation Sources</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Nabila Wawan &middot; 9 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="Example showing owned, competitor, earned and community sources cited in an AI answer" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>AI can cite sources from your own website, competitors, publications, directories, reviews and community platforms.</li>
+      <li>The same question can surface different sources across ChatGPT, Gemini, Perplexity and other AI platforms.</li>
+      <li>Look at both the domain being cited and the specific page behind the citation.</li>
+      <li>Asking the same customer questions over time shows which sources keep appearing and which questions bring them up.</li>
+      <li>Comparing owned, earned and competitor sources helps you see where your website is present and where other sources appear instead.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Introduction</span><h2>See Which Sources Shape AI Answers in Your Industry</h2></div>
+    <div class="prose">
+      <p>When someone asks ChatGPT, Gemini or Perplexity a question about your industry, the answer often comes with a list of sources.</p>
+      <p>Some may lead to businesses like yours.</p>
+      <p>Others might point to a directory, publication, government website, review page or community discussion.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Definition</span><h2>What Does It Mean When AI Cites a Source?</h2></div>
+    <div class="prose">
+      <p>When AI cites a source, it shows a link or visible reference to a webpage used in its answer.</p>
+      <p>Citations can appear as numbered footnotes, source cards, links beside the answer or a list at the end.</p>
+      <p>Each citation points to a specific page, not just a website.</p>
+      <p>Two pages from the same website can also be cited for completely different questions.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Source types</span><h2>Where Do AI Citations Usually Come From?</h2></div>
+    <div class="prose">
+      <p>Citation sources can vary widely by industry, question and AI platform.</p>
+      <p>Different questions call for different types of information, and ChatGPT, Gemini, Perplexity and other AI platforms do not always surface the same sources.</p>
+      <h3>Your Own Website</h3>
+      <p>Your website can receive citations through more than just its homepage.</p>
+      <p>AI may point to a:</p>
+      <ul><li>service page;</li><li>product page;</li><li>pricing page;</li><li>guide;</li><li>FAQ;</li><li>research page; or</li><li>another page that directly answers the question.</li></ul>
+      <h3>Competitor and Other Business Websites</h3>
+      <p>Other company websites can make up a large part of the citation landscape too.</p>
+      <p>This matters because a “company website” does not necessarily mean your company website.</p>
+      <p>For an SME, some of the sources worth watching may therefore be competitors or other businesses answering the same customer questions.</p>
+      <h3>Earned Sources: Media, Directories, Associations and Government Sites</h3>
+      <p>AI can also cite websites outside the businesses being discussed.</p>
+      <p>These may include:</p>
+      <ul><li>industry publications;</li><li>news websites;</li><li>business directories;</li><li>professional associations;</li><li>government websites;</li><li>educational institutions; and</li><li>other independent sources.</li></ul>
+      <p>The type of question often changes which of these sources appear.</p>
+      <h3>Community Sources: Reviews, Forums, Reddit and YouTube</h3>
+      <p>Reviews and community discussions can also appear in AI citations, particularly when the question depends on experience rather than a simple factual answer.</p>
+      <p>That can bring in sources such as forums, Reddit, YouTube and review sites.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Six-step process</span><h2>How Can You Check Which Sources AI Cites in Your Industry?</h2></div>
+    <div class="prose">
+      <p>Ask AI the same questions your customers ask, then record the sources that appear in each answer.</p>
+      <h3>Step 1: List the Questions Your Customers Actually Ask</h3>
+      <p>Start with questions a potential customer might ask before choosing a business like yours.</p>
+      <p>For an aesthetic clinic, that could include:</p>
+      <ul><li>How much does laser hair removal cost?</li><li>What is the best treatment for acne scars?</li><li>Chemical peel vs laser treatment: which is better?</li><li>How many laser hair removal sessions do I need?</li><li>Which aesthetic clinics offer acne scar treatments?</li><li>What should I look for when choosing an aesthetic clinic?</li></ul>
+      <p>Leave your business name out. You want to see which sources AI uses when no brand has already been named.</p>
+      <p>Keep <a href="/resources/how-to-use-branded-and-non-branded-prompts-without-distorting-ai-visibility">branded and non-branded prompts</a> separate so you can compare the results more clearly.</p>
+      <p>If you are not sure what to test, start by <a href="/resources/how-to-find-the-right-ai-prompts-to-track-for-your-business">finding the right AI prompts for your business</a>, then build them around problems, comparisons, reviews, pricing and alternatives.</p>
+      <h3>Step 2: Run the Same Questions Across Different AI Platforms</h3>
+      <p>Ask the same questions in ChatGPT, Gemini, Perplexity, Google AI Overviews and Google AI Mode.</p>
+      <p>Keep the wording as consistent as possible. If the question changes, it becomes harder to tell whether a different source appeared because of the platform or because you asked something different.</p>
+      <p>If location matters to your business, include it in some of the questions too.</p>
+      <p>Checking the same questions across the <a href="/resources/how-to-check-your-business-across-ai-answer-engines">main AI answer engines</a> gives you a broader view than relying on one platform alone.</p>
+      <h3>Step 3: Record the Source Beside the Question That Triggered It</h3>
+      <p>For each answer, record:</p>
+      <ul><li>the question;</li><li>the AI platform;</li><li>the cited website;</li><li>the exact page, where available;</li><li>the source type;</li><li>whether your own website was cited; and</li><li>the date checked.</li></ul>
+      <p>Do not stop at writing:</p>
+      <div class="prompt">“A competitor was cited.”</div>
+      <p>Record which competitor appeared and what question brought it into the answer.</p>
+      <p>For example:</p>
+      <div class="prompt">“A competitor clinic was cited when customers asked about laser hair removal pricing.”</div>
+      <p>That gives you something specific to compare later.</p>
+      <h3>Step 4: Group the Sources by Type</h3>
+      <p>Once you have a few results, separate the sources into simple groups:</p>
+      <ul><li><strong>Owned:</strong> your own website</li><li><strong>Competitor:</strong> other businesses competing for the same customers</li><li><strong>Earned:</strong> publications, directories, associations, government sites, review sites, forums and other third-party sources</li></ul>
+      <p>Comparing source types and domains across the same question set can reveal which ones appear most often.</p>
+      <p>Grouping them this way makes it easier to see where AI is getting its information.</p>
+      <p>You might find that your own website appears more often for treatment information, while competitor sites show up for pricing questions and earned sources appear for recommendations, reviews or rules.</p>
+    </div>
+    <PostFigure src={analysisImg} alt="Citation Analysis dashboard showing owned, earned and competitor source shares and top cited domains" caption="A citation analysis view can group cited domains into owned, earned and competitor sources." />
+    <div class="prose">
+      <h3>Step 5: Look for the Domains That Keep Appearing</h3>
+      <p>Now compare the results across all the questions you tested.</p>
+      <p>Look at:</p>
+      <ul><li>which domains appear across several different questions;</li><li>whether those domains are your own, competitors or earned sources;</li><li>which topics or question types bring the same domain back;</li><li>where your own website appears alongside other sources; and</li><li>where competitor domains appear while your website is missing.</li></ul>
+      <p>This gives you a clearer view of who is consistently receiving source visibility and where those citations are happening.</p>
+      <p>Run the same questions again over time. A domain that appears once may not appear next month, so repeated results give you a more reliable picture than a single check.</p>
+      <h3>Step 6: Trace Competitor Citations Back to the Questions They Won</h3>
+      <p>When a competitor appears frequently, check which questions are behind those citations.</p>
+      <p>For example, one aesthetic clinic might repeatedly appear for questions such as:</p>
+      <ul><li>What is the best CoolSculpting clinic in Malaysia?</li><li>Which clinic offers Sylfirm X in Malaysia?</li><li>Which clinic offers non-surgical double chin removal in Malaysia?</li></ul>
+    </div>
+    <PostFigure src={competitorImg} alt="Competitor citation analysis showing top domains and the questions where each competitor was cited" caption="Tracing competitor domains back to the questions they captured shows where your own website was missing." />
+    <div class="prose">
+      <p>Understanding where competitor domains appear can help connect them with the questions where they are cited instead of your brand.</p>
+      <p>That tells you more than simply knowing the competitor domain has several citations.</p>
+      <p>You can see which questions are sending source credit to that competitor while your own site is missing.</p>
+      <p>Checking this manually works for a small prompt set.</p>
+      <p>As the number of questions grows, <a href="https://www.zicy.com/">Zicy</a> brings the source patterns together.</p>
+      <p>It shows the mix of owned, earned and competitor citations, the domains receiving source credit, and the questions where competitors are cited instead of you.</p>
+      <p>For a focused follow-up, see <a href="/resources/how-to-find-competitor-owned-sources-that-ai-keeps-citing">How to Find Competitor-Owned Sources That AI Keeps Citing</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Page-level review</span><h2>What Should You Look for in the Cited Pages?</h2></div>
+    <div class="prose">
+      <p>Once you know which domains keep appearing, look at the specific pages behind them.</p>
+      <h3>Which Pages Appear Across Several Related Questions?</h3>
+      <p>A page cited across several related questions is worth a closer look.</p>
+      <p>For example, a competitor's treatment pricing guide might appear for questions about laser hair removal costs, acne scar treatment prices, treatment packages and comparing aesthetic treatments.</p>
+      <p>That suggests the same page is being surfaced across a group of related customer needs, not just one wording of a question.</p>
+      <h3>Are Several Pages From the Same Website Being Cited?</h3>
+      <p>Sometimes one website appears through several different pages, such as a pricing page, a service page, two guides and an FAQ.</p>
+      <p>That shows the website is appearing across different parts of the customer's decision process, rather than relying on one article.</p>
+      <p>Repeated citations do not mean every page on that domain is automatically trusted or cited. They only show that several pages from the same website are appearing for the questions you tested.</p>
+      <h3>Which Page Types Keep Appearing?</h3>
+      <p>Look at the format of each cited page, not just who owns it.</p>
+      <p>Does your category tend to surface:</p>
+      <ul><li>service pages;</li><li>long-form guides;</li><li>comparison pages;</li><li>FAQs;</li><li>product or category pages;</li><li>reviews; or</li><li>forum discussions?</li></ul>
+      <p>Compare the page type with the question that triggered it.</p>
+      <p>A pricing page appearing for cost questions tells you something different from a review page appearing for recommendation questions.</p>
+      <p>Knowing the page types gives you more context about what kind of content AI is surfacing for different customer needs.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Interpretation</span><h2>What Can Different Source Patterns Tell You?</h2></div>
+    <div class="prose">
+      <p>The patterns you find come from the questions you tested. They do not describe your whole industry, but they can show you where to look next.</p>
+      <h3>If Competitor Websites Receive Most of the Citations</h3>
+      <p>Check whether your website has a page that answers the same question as directly.</p>
+      <p>For example, if a competitor's treatment pricing page keeps appearing for laser hair removal cost questions, check whether your own website has a clear page covering the same information.</p>
+      <p>This gives you a specific gap to investigate, rather than treating the whole website as the problem.</p>
+      <h3>If Earned Sources Receive Most of the Citations</h3>
+      <p>Independent websites, such as directories, publications and professional bodies, may receive most of the citations for these questions.</p>
+      <p>Note which ones keep appearing. Then check whether your business is listed or mentioned there, and whether the information is accurate and up to date.</p>
+      <p>This helps you see when the source gap sits outside your own website.</p>
+      <h3>If Reviews or Community Discussions Keep Appearing</h3>
+      <p>Within your earned sources, look at how many citations come from review sites, forums, Reddit or YouTube.</p>
+      <p>These sources often appear when the question involves customer experience, opinions or recommendations. Read the cited pages and note whether your business is discussed, what people say about it and which competitors appear instead.</p>
+      <p>Customers can discuss your business without your input, so the information AI surfaces may be positive, negative or outdated.</p>
+      <h3>If Your Own Website Rarely or Never Appears</h3>
+      <p>Many SMEs see this when they first check.</p>
+      <p>Start with the questions where your website is missing and look at what gets cited instead. The pages that appear can show you what type of information is being surfaced for those questions.</p>
+      <p>If your website appears only for certain questions, compare those with the ones where it does not. That can reveal which topics your site already covers clearly and where the gaps may be.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Common questions</span><h2>FAQs</h2></div>
+    <div class="prose">
+      <h3>Do Different AI Platforms Cite Different Types of Sources?</h3>
+      <p>Yes. ChatGPT, Gemini, Perplexity and other AI platforms can cite different websites and source types for the same question. Comparing the same prompt across several platforms gives you a clearer view of which sources appear consistently.</p>
+      <h3>Why Does AI Cite My Competitor but Not My Website?</h3>
+      <p>A competitor may have a page that is being surfaced for that specific question while yours is not. Compare the cited competitor page with your own relevant page to see where the content, topic coverage or page type differs.</p>
+      <h3>Can AI Cite Different Pages From the Same Website?</h3>
+      <p>Yes. AI can cite different pages from the same website depending on the question. A service page may appear for one query, while a pricing page, guide or FAQ from the same domain appears for another.</p>
+      <h3>Does Ranking on Google Mean AI Will Cite My Website?</h3>
+      <p>Not necessarily. A page can rank well on Google without being cited in AI answers, and AI may cite pages that rank lower. <a href="/resources/how-is-ai-visibility-different-from-google-rankings">AI visibility works differently from Google rankings</a>, so both should be checked separately.</p>
+      <h3>How Often Should I Check Which Sources AI Cites?</h3>
+      <p>There is no single right frequency. Check the same core questions often enough to spot changes, and more often if your category moves quickly. Keeping a <a href="/resources/how-to-keep-stable-ai-prompt-baseline-and-know-when-to-reset-it">stable AI prompt baseline</a> makes those comparisons easier over time.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>See Which Sources Keep Shaping the Answers</h2></div>
+    <div class="prose">
+      <p>Knowing which websites and pages AI cites gives you a clearer view of the sources it relies on when customers ask about your industry.</p>
+      <p>Instead of relying on assumptions, you can see where your own site appears, where other sources take its place and which areas are worth checking more closely.</p>
+      <p>That makes citation tracking a practical way to understand your AI visibility and where to focus next.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>Find the Sources Behind Your Customers’ AI Answers</h2>
+    <p>Zicy groups every cited domain into owned, earned and competitor sources, helping you see who receives the citation and which questions those citations come from.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt{max-width:700px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}
+  @media (max-width:640px){.prose h3{font-size:19px}.prompt{font-size:16px}}
+</style>

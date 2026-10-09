@@ -13,6 +13,62 @@ export interface ResourcePost {
 
 export const RESOURCE_POSTS: ResourcePost[] = [
   {
+    "slug": "how-to-find-competitor-owned-sources-that-ai-keeps-citing",
+    "title": "How to Find Competitor-Owned Sources That AI Keeps Citing",
+    "description": "Learn how to trace competitor citations back to the exact pages and customer questions behind them, then spot gaps on your own website.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-09",
+    "authorName": "Nabila Wawan"
+  },
+  {
+    "slug": "how-to-find-the-websites-and-pages-ai-cites-in-your-industry",
+    "title": "How to Find the Websites and Pages AI Cites in Your Industry",
+    "description": "Understand which sources keep appearing in AI answers, how they differ by question, and where owned, earned and competitor citations show up.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-09",
+    "authorName": "Nabila Wawan"
+  },
+  {
+    "slug": "how-to-prioritise-ai-visibility-gaps-when-you-have-a-small-team-and-budget",
+    "title": "How to Prioritise AI Visibility Gaps When You Have a Small Team and Budget",
+    "description": "Learn how to prioritise AI visibility gaps when time and budget are limited, using business value, evidence and effort to decide what to improve first.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-09",
+    "authorName": "Vi Vien Koay"
+  },
+  {
+    "slug": "how-to-find-ai-blind-spots-for-your-products-and-services",
+    "title": "How To Find AI Blind Spots for Your Products and Services",
+    "description": "Learn how to identify products and services that AI discusses without mentioning your business, understand why the gap exists and decide what to investigate next.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-09",
+    "authorName": "Vi Vien Koay"
+  },
+  {
+    "slug": "how-to-find-ai-battleground-topics-where-a-small-push-could-make-a-difference",
+    "title": "How To Find AI Battleground Topics Where a Small Push Could Make a Difference",
+    "description": "Learn how to find AI battleground topics where your business already appears but competitors are stronger, and decide which opportunities deserve a focused push.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-09",
+    "authorName": "Vi Vien Koay"
+  },
+  {
+    "slug": "how-to-find-topics-where-your-brand-leads-ai-answers",
+    "title": "How to Find the Topics Where Your Brand Leads in AI Answers",
+    "description": "Learn how to find the commercial topics where your brand already appears strongly in AI answers, compare competitors and plan content more strategically.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-09",
+    "authorName": "Shangkari Goverdhanlal"
+  },
+  {
+    "slug": "how-to-compare-ai-sentiment-and-descriptors-for-your-brand-vs-competitors",
+    "title": "How to Compare AI Sentiment and Descriptors for Your Brand vs Competitors",
+    "description": "Learn how to compare AI sentiment and recurring brand descriptors with competitors to uncover differences in positioning, strengths and customer perception.",
+    "articleSection": "Guides",
+    "datePublished": "2026-10-09",
+    "authorName": "Nabila Wawan"
+  },
+  {
     "slug": "how-to-check-whether-ai-describes-your-brand-positively-neutrally-or-negatively",
     "title": "How to Check Whether AI Describes Your Brand Positively, Neutrally or Negatively",
     "description": "Learn how to read positive, neutral and negative AI descriptions of your brand, spot recurring sentiment patterns, and separate perception from factual errors.",

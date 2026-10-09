@@ -1,0 +1,282 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/ai-blind-spots/find-ai-visibility-blind-spots.png';
+import promptImg from '../../assets/resources/ai-blind-spots/prompt-analysis-post-renovation-cleaning.png';
+import topicsImg from '../../assets/resources/ai-blind-spots/key-topics-blind-spots.png';
+
+const metaTitle = 'How to Find AI Blind Spots for Your Products and Services';
+const title = 'How To Find AI Blind Spots for Your Products and Services';
+const description = 'Learn how to identify products and services that AI discusses without mentioning your business, understand why the gap exists and decide what to investigate next.';
+const url = `${SITE.url}/resources/how-to-find-ai-blind-spots-for-your-products-and-services`;
+const author = { '@type': 'Person', name: 'Vi Vien Koay' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-09', dateModified: '2026-10-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'Five-step guide to finding AI visibility blind spots', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Find AI Blind Spots</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Vi Vien Koay &middot; 9 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="Where Are Your AI Visibility Blind Spots infographic showing a five-step review process" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>An AI blind spot is a commercially relevant topic where customers ask about a product, service or need but your business rarely or never appears.</li>
+      <li>A blind spot is different from a battleground. On a battleground, AI already mentions you but a competitor is stronger. On a blind spot, AI rarely connects you with the topic at all, so it usually needs deeper investigation.</li>
+      <li>A blind spot matters only when it relates to something you genuinely offer and want customers to find you for.</li>
+      <li>Look for repeated absence across relevant customer questions rather than reacting to one AI answer.</li>
+      <li>Read the actual answers before deciding what needs fixing; the problem may be unclear service information, weak proof, limited third-party signals or poor alignment with the customer's question.</li>
+      <li>The goal is not to remove every blind spot, but to find the ones that represent meaningful missed customer opportunities.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Introduction</span><h2>Find Where AI Is Not Connecting Customers With Your Business</h2></div>
+    <div class="prose">
+      <p>Your business may genuinely offer a product or service, yet AI rarely mentions you when customers ask about it.</p>
+      <p>Instead, the same competitors keep appearing.</p>
+      <p>That is more useful than a low overall visibility score because it shows where the disconnect is happening.</p>
+      <p>For a small business, these gaps matter when they affect products, services or customer needs you actively want to compete for.</p>
+      <p>The aim is not to appear for every topic in your industry. It is to find commercially important areas where potential customers are asking for what you sell, but AI is not consistently connecting that need with your business.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Definition</span><h2>What Is an AI Blind Spot?</h2></div>
+    <div class="prose">
+      <p>Imagine you run a commercial cleaning company in Kuala Lumpur.</p>
+      <p>Your business offers regular office cleaning, recurring commercial cleaning contracts, carpet cleaning, post-renovation cleaning and deep cleaning.</p>
+      <p>When customers ask:</p>
+      <div class="prompt">“Which office cleaning companies operate in Kuala Lumpur?”</div>
+      <p>your business appears regularly.</p>
+      <p>But when they ask:</p>
+      <div class="prompt">“Which companies provide post-renovation cleaning for offices in Kuala Lumpur?”</div>
+      <p>several other cleaning companies appear and yours rarely does.</p>
+      <p>That becomes interesting because post-renovation cleaning is a real service you provide. The customer need is relevant, but competitors keep showing up instead.</p>
+      <p>AI is therefore not consistently connecting your business with that part of your offer.</p>
+      <p>That is an AI blind spot: a relevant area of demand where your business should reasonably be considered but rarely appears.</p>
+      <div class="table-wrap"><table><thead><tr><th>Topic type</th><th>What it looks like</th><th>What it usually needs</th></tr></thead><tbody>
+        <tr><td>Battleground</td><td>AI mentions you, but a competitor is stronger</td><td>A focused improvement</td></tr>
+        <tr><td>Blind spot</td><td>Customers ask about it, but AI rarely mentions you</td><td>A deeper look at why AI does not connect you with it</td></tr>
+      </tbody></table></div>
+      <p>If you already appear but competitors are stronger, see <a href="/resources/how-to-find-ai-battleground-topics-where-a-small-push-could-make-a-difference">How To Find AI Battleground Topics Where a Small Push Could Make a Difference</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Customer demand</span><h2>Use Customer Questions to Reveal the Gaps</h2></div>
+    <div class="prose">
+      <p>Your product list tells you what matters to the business.</p>
+      <p>Customer questions show you whether AI connects those products with your brand.</p>
+      <p>For example:</p>
+      <div class="table-wrap"><table><thead><tr><th>Service</th><th>Customer question</th></tr></thead><tbody>
+        <tr><td>Office cleaning</td><td>“Which companies provide office cleaning in Kuala Lumpur?”</td></tr>
+        <tr><td>Recurring contracts</td><td>“Who offers weekly office cleaning contracts?”</td></tr>
+        <tr><td>Post-renovation cleaning</td><td>“Which companies clean offices after renovation?”</td></tr>
+        <tr><td>Carpet cleaning</td><td>“Who provides commercial carpet cleaning in KL?”</td></tr>
+        <tr><td>Deep cleaning</td><td>“Which cleaners provide deep cleaning for offices?”</td></tr>
+      </tbody></table></div>
+      <p>Looking across several questions helps you see which parts of your offer AI consistently recognises and which it overlooks.</p>
+      <p>If you still need to build the questions themselves, see <a href="/resources/how-to-build-simple-prompt-set">How to Build a Simple Prompt Set Around Problems, Comparisons, Reviews, Pricing and Alternatives</a>.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Missed opportunities</span><h2>Why Can Blind Spots Matter to a Small Business?</h2></div>
+    <div class="prose">
+      <p>A customer using AI may never ask for your brand by name.</p>
+      <p>They may instead describe what they need:</p>
+      <ul><li>“Who can clean an office after renovation?”</li><li>“Which companies provide after-hours office cleaning?”</li><li>“Who offers eco-friendly commercial cleaning in Kuala Lumpur?”</li></ul>
+      <p>AI then decides which businesses, products or sources appear relevant to that need.</p>
+      <p>If your business genuinely offers the service but repeatedly disappears from those answers, potential customers may never know you are an option.</p>
+      <p>That is why overall visibility scores tell only part of the story. A business can look reasonably visible overall while still being almost absent from commercially important conversations around:</p>
+      <ul><li>a high-value service;</li><li>a growth product or service;</li><li>an important customer segment; or</li><li>a location or use case you want to grow.</li></ul>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Commercial filter</span><h2>Which Blind Spots Are Worth Investigating?</h2></div>
+    <div class="prose">
+      <p>A missing mention only becomes useful when it matters to the business.</p>
+      <p>Start with the products, services and customer needs you genuinely want to grow.</p>
+      <p>For the cleaning company:</p>
+      <div class="table-wrap"><table><thead><tr><th>Business area</th><th>Importance</th></tr></thead><tbody>
+        <tr><td>Recurring office cleaning</td><td>Core service</td></tr>
+        <tr><td>Post-renovation cleaning</td><td>Growth service</td></tr>
+        <tr><td>Deep cleaning</td><td>Important add-on</td></tr>
+        <tr><td>Carpet cleaning</td><td>Supporting service</td></tr>
+        <tr><td>Residential sofa cleaning</td><td>Not a strategic focus</td></tr>
+      </tbody></table></div>
+      <p>This gives you a commercial filter for deciding which absences deserve attention.</p>
+      <p>If AI rarely mentions the company for residential sofa cleaning, that may not matter.</p>
+      <p>If it rarely mentions the company for post-renovation office cleaning, a service the business actively wants to grow, the gap deserves closer attention.</p>
+      <p>A useful blind spot usually passes three checks:</p>
+      <h3>It Matches Something You Genuinely Offer</h3>
+      <p>Do not treat industrial factory cleaning as a problem if your company only serves offices and retail spaces.</p>
+      <h3>The Customer or Use Case Matters Commercially</h3>
+      <p>A service you technically provide but do not want to grow should not automatically become a priority.</p>
+      <h3>The Absence Repeats</h3>
+      <p>One missing mention is weak evidence. The signal becomes stronger when your business remains absent across several related questions, AI platforms or analysis periods.</p>
+      <p>For example:</p>
+      <ul><li>“Post-renovation office cleaning Kuala Lumpur”;</li><li>“Commercial cleaners after office renovation”; and</li><li>“Who cleans offices after renovation work?”</li></ul>
+      <p>If competitors repeatedly appear across these variations while your business does not, you have a much stronger blind-spot signal.</p>
+      <p>Also check that the question gives AI a reason to name businesses. “What is post-renovation cleaning?” usually gets a definition back with no companies mentioned, so your absence there is not a blind spot.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Evidence review</span><h2>Diagnose the Blind Spot Before Deciding What to Fix</h2></div>
+    <div class="prose">
+      <p>A blind spot does not automatically mean you need a new article or landing page.</p>
+      <p>If AI rarely mentions your company for post-renovation cleaning, first investigate why.</p>
+      <p>Open the customer questions where your business is absent and read the actual AI answers.</p>
+      <p>Look at:</p>
+      <ul><li>which businesses appear instead;</li><li>how those businesses are described;</li><li>which services or specialisations AI highlights;</li><li>which websites or third-party sources support the answer; and</li><li>whether the same competitors appear across several AI platforms.</li></ul>
+      <p>You might discover that competitors are repeatedly described as:</p>
+      <div class="prompt">“specialists in post-renovation commercial cleaning”</div>
+      <p>while your own website mentions post-renovation cleaning only as one bullet in a long list.</p>
+      <p>You now have a specific problem to investigate: competitors are strongly associated with the service, while your own website barely explains it.</p>
+      <p>If you are reviewing many customer questions, an AI visibility platform can make this easier by linking each tracked question to the individual AI responses behind it.</p>
+    </div>
+    <PostFigure src={promptImg} alt="Prompt Analysis showing a brand absent from AI answers for post-renovation cleaning in Kuala Lumpur" caption="Prompt-level analysis helps show which businesses appeared instead of yours and what information supported the answer." />
+    <div class="prose">
+      <p>Whether you use software or check manually, the principle is the same:</p>
+      <div class="prompt">Investigate the answer behind the gap before deciding what to change.</div>
+      <p>For the full prompt-level workflow, see <a href="/resources/how-to-read-a-single-tracked-prompt-and-see-the-exact-ai-answers-behind-your-scores">How to Read a Single Tracked Prompt and See the Exact AI Answers Behind Your Scores</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Root causes</span><h2>What Can Cause an AI Blind Spot?</h2></div>
+    <div class="prose">
+      <p>There is rarely one cause. Check several possible reasons before deciding what needs to change.</p>
+      <h3>Your Service Is Mentioned Too Vaguely</h3>
+      <p>Your website might say:</p>
+      <div class="prompt">“We provide comprehensive commercial cleaning services.”</div>
+      <p>That does not tell a customer, or AI, whether those services include:</p>
+      <ul><li>post-renovation cleaning;</li><li>office move-in cleaning;</li><li>carpet extraction;</li><li>weekly cleaning contracts; or</li><li>after-hours cleaning.</li></ul>
+      <p>If an important service is hidden inside generic language, its connection with your business may be weak.</p>
+      <h3>The Information Exists but Is Buried</h3>
+      <p>Perhaps post-renovation cleaning appears on one page halfway through a paragraph.</p>
+      <p>Meanwhile, a competitor has:</p>
+      <ul><li>a dedicated section;</li><li>clear service details;</li><li>FAQs;</li><li>project examples; and</li><li>relevant internal links.</li></ul>
+      <p>Your website may have the information, but it is difficult to find and understand.</p>
+      <h3>Your Wording Does Not Match the Customer Need</h3>
+      <p>You might use industry terminology such as:</p>
+      <div class="prompt">“post-project facility reinstatement services”</div>
+      <p>while customers ask:</p>
+      <div class="prompt">“Who cleans an office after renovation?”</div>
+      <p>Both may refer to similar work, but the customer need is expressed very differently.</p>
+      <p>Good content should still use accurate industry language, but it also needs to explain what the service means in terms customers understand.</p>
+      <h3>You Have Weak Proof</h3>
+      <p>You may claim to offer a service without showing much evidence.</p>
+      <p>Relevant proof might include:</p>
+      <ul><li>project examples;</li><li>case studies;</li><li>client types;</li><li>certifications;</li><li>service processes;</li><li>testimonials; and</li><li>before-and-after examples where appropriate.</li></ul>
+      <p>If stronger competitors provide clearer evidence, AI may have more information connecting them with the topic.</p>
+      <h3>Competitors Have Stronger Third-Party Signals</h3>
+      <p>AI answers can draw on information beyond company websites.</p>
+      <p>Reviews, business directories, industry publications and other third-party sources may repeatedly associate competitors with a particular service.</p>
+      <p>Your website may say you provide it, but the wider web may give AI much stronger evidence about somebody else.</p>
+      <h3>Your Business Information Is Inconsistent</h3>
+      <p>One profile may describe you as an office cleaning company.</p>
+      <p>Another may emphasise general housekeeping.</p>
+      <p>A directory may list only carpet cleaning.</p>
+      <p>Your website may use a completely different service description.</p>
+      <p>Inconsistent information can weaken the overall picture of what your business actually does.</p>
+      <p>A blind spot may result from one issue or several working together. Diagnose the gap first rather than assuming the answer is more content.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Topic-level analysis</span><h2>How Can You Find Blind Spots Across Many Products and Services?</h2></div>
+    <div class="prose">
+      <p>For a business with only a few services, a spreadsheet may be enough.</p>
+      <p>List your priority products or services alongside the customer questions that relate to them, then record whether your business appears.</p>
+      <p>As the number of questions grows, group them into broader topics such as:</p>
+      <ul><li>office cleaning;</li><li>post-renovation cleaning;</li><li>recurring contracts;</li><li>deep cleaning;</li><li>pricing;</li><li>reviews; and</li><li>cleaning for SMEs.</li></ul>
+      <p>You can then look for topics that appear frequently in AI answers while your business has little or no presence.</p>
+      <p>AI visibility tools can organise this at scale.</p>
+      <p>For example, <a href="https://www.zicy.com/">Zicy's</a> Key Topics view sorts your topics into Brand Leaders, Battlegrounds and Blind Spots, showing how often each topic comes up in AI answers, your presence in it and which brand currently leads it.</p>
+    </div>
+    <PostFigure src={topicsImg} alt="Key Topics Analysis showing blind spots where competitors appear but the tracked brand is absent" caption="Topic-level analysis can make it easier to spot areas where competitors repeatedly appear while your own business remains largely absent." />
+    <div class="prose"><p>Treat the result as a signal to investigate, not an automatic instruction to create content.</p></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Six-step process</span><h2>How to Find AI Blind Spots for Your Products and Services</h2></div>
+    <div class="prose">
+      <h3>Step 1: List the Products and Services That Matter</h3>
+      <p>Start with core services, growth areas and commercially important use cases.</p>
+      <p>Do not build the exercise around everything your business could theoretically provide.</p>
+      <h3>Step 2: Build Customer Questions Around Each Area</h3>
+      <p>Phrase each prompt as a question a potential customer could realistically ask while choosing a provider. For example:</p>
+      <div class="prompt">“Which companies provide post-renovation cleaning in Kuala Lumpur?”</div>
+      <h3>Step 3: Look for Repeated Absence</h3>
+      <p>Review several related questions and identify services where:</p>
+      <ul><li>competitors repeatedly appear;</li><li>your business appears rarely; or</li><li>your business is consistently missing.</li></ul>
+      <p>Do not treat one result as a blind spot. Leave out learning questions such as “What is post-renovation cleaning?”, which rarely name any businesses.</p>
+      <h3>Step 4: Confirm That the Gap Matters Commercially</h3>
+      <p>Check that:</p>
+      <ul><li>you genuinely offer the service;</li><li>you want more customers for it;</li><li>the question reflects the customers you serve; and</li><li>the topic is relevant to a real buying decision.</li></ul>
+      <p>If not, deprioritise it.</p>
+      <h3>Step 5: Diagnose Why Your Business Is Missing</h3>
+      <p>Read the AI answers to understand what may be contributing to the gap. Review:</p>
+      <ul><li>how competitors are described;</li><li>which sources support them;</li><li>what your website currently says;</li><li>whether your service information is clear;</li><li>whether you have meaningful proof; and</li><li>whether third-party information is accurate and consistent.</li></ul>
+      <p>This tells you what may actually be missing.</p>
+      <h3>Step 6: Decide What the Gap Requires</h3>
+      <p>The appropriate response might be:</p>
+      <ul><li>improve an existing service page;</li><li>clarify a customer use case;</li><li>add genuine proof;</li><li>improve internal links;</li><li>strengthen or correct third-party information; or</li><li>create new content where no suitable resource exists.</li></ul>
+      <p>Do not turn every blind spot into a new article.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Prioritisation</span><h2>What Should You Do After Finding Several Blind Spots?</h2></div>
+    <div class="prose">
+      <p>You may uncover more genuine blind spots than your team can address at once. Prioritise those tied to important services and customer decisions, especially where the absence repeats and the likely cause is reasonably clear.</p>
+      <p>Continue with <a href="/resources/how-to-prioritise-ai-visibility-gaps-when-you-have-a-small-team-and-budget">How to Prioritise AI Visibility Gaps When You Have a Small Team and Budget</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>Find the Services AI Is Overlooking</h2></div>
+    <div class="prose">
+      <p>You do not need to appear for every possible topic. Find the commercially important products and services that customers ask AI about but where your business is repeatedly missing, then work out what may be causing the gap.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See Where Your Business Is Being Left Out</h2>
+    <p>Zicy can help surface topics where relevant customer needs appear in AI answers but your brand rarely does, giving you a clearer starting point for investigation.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt{max-width:700px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}
+  .table-wrap{max-width:760px;overflow-x:auto;margin:24px 0}.table-wrap table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}.table-wrap th,.table-wrap td{padding:13px 15px;border:1px solid var(--line);text-align:left;vertical-align:top}.table-wrap th{background:var(--lavender);color:var(--ink);font-weight:700}.table-wrap tbody tr:nth-child(even){background:var(--mist)}
+  @media (max-width:640px){.prose h3{font-size:19px}.prompt{font-size:16px}.table-wrap table{min-width:560px}}
+</style>

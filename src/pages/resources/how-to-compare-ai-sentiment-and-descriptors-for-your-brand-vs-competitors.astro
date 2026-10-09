@@ -1,0 +1,227 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/compare-ai-sentiment-competitors/ai-sentiment-vs-competitors.png';
+import dashboardImg from '../../assets/resources/compare-ai-sentiment-competitors/competitive-landscape-analysis.png';
+
+const metaTitle = 'How to Compare AI Sentiment and Descriptors for Your Brand vs Competitors';
+const title = 'How to Compare AI Sentiment and Descriptors for Your Brand vs Competitors';
+const description = 'Learn how to compare AI sentiment and recurring brand descriptors with competitors to uncover differences in positioning, strengths and customer perception.';
+const url = `${SITE.url}/resources/how-to-compare-ai-sentiment-and-descriptors-for-your-brand-vs-competitors`;
+const author = { '@type': 'Person', name: 'Nabila Wawan' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-09', dateModified: '2026-10-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'AI sentiment and recurring descriptor comparison between a brand and competitors', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Compare AI Sentiment and Descriptors</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Nabila Wawan &middot; 9 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="AI Sentiment versus Competitors infographic comparing sentiment scores, positive neutral and negative splits, and recurring descriptors" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>Your brand and a competitor can both appear in AI answers but still be framed differently.</li>
+      <li>Competitor sentiment gives your own sentiment more context by showing how AI talks about other brands in the same category.</li>
+      <li>Descriptors reveal the qualities, strengths and limitations AI repeatedly connects with each business.</li>
+      <li>Similar sentiment scores can still hide very different brand positions.</li>
+      <li>The most useful comparison is often between the words that distinguish you, the words competitors own and the words beginning to overlap.</li>
+      <li>Changes in recurring descriptors can show when the competitive picture is starting to shift.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Introduction</span><h2>How Can Two Visible Brands Create Different Impressions?</h2></div>
+    <div class="prose">
+      <p>Imagine you run a business that sells made-to-order furniture and home storage solutions.</p>
+      <p>A customer asks AI which businesses they should consider for a new home.</p>
+      <p>Your brand appears. So does a competitor.</p>
+      <p>But AI may describe your brand as:</p>
+      <ul><li>custom-made;</li><li>modern;</li><li>affordable; and</li><li>made-to-order.</li></ul>
+      <p>While the competitor is described as:</p>
+      <ul><li>handcrafted;</li><li>premium;</li><li>established; and</li><li>solid wood.</li></ul>
+      <p>Both businesses are visible.</p>
+      <p>But customers are being given a different impression of each one.</p>
+      <p>That is why competitor sentiment and descriptors are useful: they help you understand how AI separates your brand from the alternatives customers may also be considering.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Competitive context</span><h2>What Are Competitor Sentiment Profiles?</h2></div>
+    <div class="prose">
+      <p>A competitor sentiment profile shows how AI talks about another brand.</p>
+      <p>It can include:</p>
+      <ul><li>the overall sentiment;</li><li>the positive, neutral and negative split;</li><li>recurring positive descriptors; and</li><li>recurring negative descriptors.</li></ul>
+      <p>Your own sentiment tells you how AI describes your business.</p>
+      <p>A competitor profile gives that information context by showing what AI says about other businesses around you.</p>
+      <p>If you first need to understand your own profile, start with <a href="/resources/how-to-check-whether-ai-describes-your-brand-positively-neutrally-or-negatively">how AI describes your brand positively, neutrally or negatively</a>.</p>
+      <p>A platform such as <a href="https://www.zicy.com/">Zicy</a> lets businesses compare these profiles across their own brand and tracked competitors in one view.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Recurring language</span><h2>What Do Competitor Descriptors Tell You?</h2></div>
+    <div class="prose">
+      <p>Descriptors are recurring words or short phrases AI uses when talking about a brand.</p>
+      <p>They may describe:</p>
+      <ul><li>price;</li><li>style;</li><li>materials;</li><li>service;</li><li>customer fit;</li><li>product range;</li><li>strengths; and</li><li>limitations.</li></ul>
+      <p>The important part is not one isolated word.</p>
+      <p>It is the pattern.</p>
+      <p>If the same qualities keep appearing around a competitor, they show what AI most strongly associates with that business.</p>
+      <p>That can help explain why two brands that sell similar products may still be presented very differently to customers.</p>
+      <p>If you want to see where that wording comes from, you can <a href="/resources/how-to-read-a-single-tracked-prompt-and-see-the-exact-ai-answers-behind-your-scores">read the exact AI answers behind a tracked prompt</a> instead of relying only on the summary descriptor.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Reading the score</span><h2>Why Can Similar Sentiment Scores Still Mean Different Things?</h2></div>
+    <div class="prose">
+      <p>Two brands can have similar sentiment scores without having similar profiles.</p>
+      <p>One may receive mostly neutral descriptions because AI talks about it in a straightforward, factual way.</p>
+      <p>Another may receive stronger positive descriptions but also more criticism.</p>
+      <p>The final scores could still sit close together.</p>
+      <p>That is why you should read the sentiment split and descriptors together.</p>
+      <p>The score tells you the general tone.</p>
+      <p>The descriptors tell you what sits behind it.</p>
+    </div>
+    <PostFigure src={dashboardImg} alt="Competitive Landscape Analysis dashboard comparing sentiment scores, sentiment splits and recurring descriptors across five brands" caption="Competitor sentiment profiles show the tone and recurring descriptors AI associates with each tracked brand." />
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Positioning differences</span><h2>Where Does AI See a Difference Between You and Competitors?</h2></div>
+    <div class="prose">
+      <p>This is where the comparison becomes useful.</p>
+      <p>Look at which descriptors appear more strongly around your business and which appear more strongly around competitors.</p>
+      <h3>Descriptors That Distinguish Your Brand</h3>
+      <p>These are qualities AI connects with your business more clearly than with competitors.</p>
+      <p>They may support the position you already want to build.</p>
+      <p>For example, your business might stand out for personalisation, convenience or a particular customer need.</p>
+      <p>If those associations are accurate and valuable, they are worth protecting.</p>
+      <h3>Descriptors That Competitors Are Known For</h3>
+      <p>A competitor may have stronger associations around other qualities.</p>
+      <p>That does not automatically mean you need to compete for the same words.</p>
+      <p>If AI strongly connects another brand with craftsmanship, heritage or specialist expertise, that may simply reflect a different position in the market.</p>
+      <p>The useful question is:</p>
+      <div class="prompt">Does the difference give customers a clear reason to choose one business over the other?</div>
+      <h3>Descriptors That Are Starting to Overlap</h3>
+      <p>Sometimes a word that once separated your brand starts appearing around competitors too.</p>
+      <p>For example, a rival may begin gaining an association that customers previously connected more strongly with your business.</p>
+      <p>That can make your positioning less distinct.</p>
+      <p>It does not mean you need to react immediately.</p>
+      <p>But it is worth watching, especially if the same shift appears across several customer questions.</p>
+      <p>For a broader view of the competitive picture, this can be read alongside <a href="/resources/what-is-ai-share-of-voice">AI Share of Voice</a>, which looks at how much of the tracked competitive conversation each brand occupies.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Context and trade-offs</span><h2>Can a Competitor's Negative Descriptor Still Support Its Position?</h2></div>
+    <div class="prose">
+      <p>Yes.</p>
+      <p>A negative word should not be judged on its own.</p>
+      <p>For example, a competitor may be described as higher-priced.</p>
+      <p>That sounds like a weakness.</p>
+      <p>But if AI also consistently describes the same business as highly specialised, premium and established, the higher price may simply be part of that position.</p>
+      <p>The customer is seeing a trade-off rather than a simple disadvantage.</p>
+      <p>The same applies to your own descriptors.</p>
+      <p>A word can be helpful in one position and less useful in another.</p>
+      <p>Context matters.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Unclaimed associations</span><h2>What If No Brand Is Strongly Associated With an Important Quality?</h2></div>
+    <div class="prose">
+      <p>You may find that some useful qualities barely appear around any competitor.</p>
+      <p>For example:</p>
+      <ul><li>transparent pricing;</li><li>fast turnaround;</li><li>local sourcing; and</li><li>specialist support.</li></ul>
+      <p>That can point to a gap in how the category is currently described.</p>
+      <p>But an open descriptor is not automatically an opportunity.</p>
+      <p>It needs to match something your business genuinely offers and something customers actually care about.</p>
+      <p>If the association you want is missing from your own profile, this may connect to <a href="/resources/how-to-find-the-gap-between-what-you-want-to-be-known-for-and-what-ai-knows-you-for">the gap between what you want to be known for and what AI currently knows you for</a>.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Changes over time</span><h2>Why Should You Watch Descriptors Over Time?</h2></div>
+    <div class="prose">
+      <p>The words around a brand can change.</p>
+      <p>A competitor may begin gaining a positive association it did not have before.</p>
+      <p>One of your strongest descriptors may start appearing more often around rivals.</p>
+      <p>Or a new negative theme may begin showing up around a competitor.</p>
+      <p>Those changes can reveal shifts that a small movement in the overall sentiment score may not show clearly.</p>
+      <p>The useful question is not only:</p>
+      <div class="prompt">“Did the score change?”</div>
+      <p>It is also:</p>
+      <div class="prompt">“Is AI starting to talk about this brand differently?”</div>
+      <p>When comparing one period with another, keep the questions you track reasonably consistent. A changing prompt set can also change the kinds of brand descriptions you see.</p>
+      <p>See <a href="/resources/how-to-keep-stable-ai-prompt-baseline-and-know-when-to-reset-it">how to keep a stable AI prompt baseline and know when to reset it</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Accuracy check</span><h2>What If a Descriptor Is Actually Wrong?</h2></div>
+    <div class="prose">
+      <p>Not every negative or limiting descriptor reflects genuine perception.</p>
+      <p>Some may come from incorrect or outdated information.</p>
+      <p>For example, AI might say a business:</p>
+      <ul><li>only sells ready-made products;</li><li>does not deliver outside a certain area;</li><li>offers limited material choices; or</li><li>no longer provides a particular service.</li></ul>
+      <p>Those are claims you can verify.</p>
+      <p>If the underlying information is wrong, the issue is not simply sentiment.</p>
+      <p>It is a factual accuracy problem.</p>
+      <p>That should be investigated through <a href="/resources/how-to-find-wrong-outdated-business-facts-ai-answers">wrong or outdated business facts in AI answers</a> rather than trying to change the tone around an incorrect claim.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Practical interpretation</span><h2>What Should You Take From the Comparison?</h2></div>
+    <div class="prose">
+      <p>Competitor sentiment should help you understand the differences AI is presenting to customers.</p>
+      <p>Look for:</p>
+      <ul><li>qualities that clearly distinguish your business;</li><li>strengths AI associates with competitors;</li><li>descriptors that are becoming common across several brands;</li><li>useful associations that are still largely unclaimed; and</li><li>changes that may be making your positioning less distinct.</li></ul>
+      <p>The goal is not to collect more positive words than every competitor.</p>
+      <p>It is to understand what each business is becoming known for in AI answers, and whether that matches the position you want customers to see.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Summary</span><h2>Compare How AI Frames Each Brand</h2></div>
+    <div class="prose">
+      <p>Appearing beside a competitor does not mean AI presents both businesses in the same way.</p>
+      <p>The words around each brand can shape the reason a customer considers one over another.</p>
+      <p>By comparing sentiment and recurring descriptors, you can see where your position is clear, where competitors stand apart and where those differences are beginning to change.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See How AI Frames You Against Competitors</h2>
+    <p>Zicy helps you compare sentiment and recurring descriptors across your brand and competitors so you can understand how AI differentiates each business.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt{max-width:700px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}
+  @media (max-width:640px){.prose h3{font-size:19px}.prompt{font-size:16px}}
+</style>

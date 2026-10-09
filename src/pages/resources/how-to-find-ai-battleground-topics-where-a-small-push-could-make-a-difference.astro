@@ -1,0 +1,277 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import PostFigure from '../../components/PostFigure.astro';
+import heroImg from '../../assets/resources/ai-battleground-topics/find-ai-battleground-topics.png';
+import promptImg from '../../assets/resources/ai-battleground-topics/prompt-analysis-office-cleaning.png';
+import topicsImg from '../../assets/resources/ai-battleground-topics/key-topics-battlegrounds.png';
+
+const metaTitle = 'How to Find AI Battleground Topics Where You Can Compete';
+const title = 'How To Find AI Battleground Topics Where a Small Push Could Make a Difference';
+const description = 'Learn how to find AI battleground topics where your business already appears but competitors are stronger, and decide which opportunities deserve a focused push.';
+const url = `${SITE.url}/resources/how-to-find-ai-battleground-topics-where-a-small-push-could-make-a-difference`;
+const author = { '@type': 'Person', name: 'Vi Vien Koay' };
+const orgId = `${SITE.url}/#org`;
+const blogId = `${SITE.url}/resources#blog`;
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, isPartOf: { '@id': blogId }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#article` }, inLanguage: 'en' },
+    { '@type': 'BlogPosting', '@id': `${url}#article`, headline: title, description, url, datePublished: '2026-10-09', dateModified: '2026-10-09', author, publisher: { '@id': orgId }, isPartOf: { '@id': blogId }, articleSection: 'Guides', inLanguage: 'en', mainEntityOfPage: url, image: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height } },
+    { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE.url}/resources` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ] },
+  ],
+};
+---
+<BaseLayout title={metaTitle} description={description} ogTitle={title} ogImage={{ url: `${SITE.url}${heroImg.src}`, width: heroImg.width, height: heroImg.height, alt: 'Five-step guide to finding commercially important AI battleground topics', type: 'image/png' }}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
+
+  <section class="hero inner resource-guide"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><a href="/resources">Resources</a><span class="sep" aria-hidden="true">&rsaquo;</span><span class="here" aria-current="page">Find AI Battleground Topics</span></nav>
+    <span class="eyebrow">Guides</span>
+    <h1>{title}</h1>
+    <p class="answer">{description}</p>
+    <p class="byline">By Vi Vien Koay &middot; 9 October 2026</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <PostFigure src={heroImg} alt="How to find AI battleground topics through customer questions, commercial relevance, gap diagnosis and focused action" />
+    <div class="shead"><span class="eyebrow">Overview</span><h2>Key Takeaways</h2></div>
+    <div class="prose"><ul>
+      <li>An AI battleground topic is a customer need where your business already appears in AI answers, but competitors are stronger.</li>
+      <li>Battlegrounds are often easier to improve than blind spots, because AI already connects you with the topic.</li>
+      <li>The biggest visibility gap is not automatically the best opportunity. Commercial relevance comes first.</li>
+      <li>Look for patterns across questions, AI platforms and time before acting.</li>
+      <li>The fix is often an existing page, clearer information or stronger proof. New content is only one option.</li>
+      <li>Choose one or two battlegrounds that matter to your business.</li>
+    </ul></div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Introduction</span><h2>AI Visibility Is Rarely All or Nothing</h2></div>
+    <div class="prose">
+      <p>Your business may already appear when customers ask AI about a product or service, while competitors appear more often, more prominently or across a wider range of questions.</p>
+      <p>These areas are worth investigating because your business is already part of the customer conversation.</p>
+      <p>For a small business with limited time and budget, focus on commercially important topics where you are already competing and where stronger competitor visibility deserves closer investigation.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Definition</span><h2>What Is an AI Battleground Topic?</h2></div>
+    <div class="prose">
+      <p>Imagine you run a commercial cleaning company in Kuala Lumpur, offering office cleaning, carpet cleaning, post-renovation cleaning, deep cleaning and recurring contracts.</p>
+      <p>Potential customers may ask AI questions such as:</p>
+      <ul><li>“Which companies provide office cleaning in Kuala Lumpur?”</li><li>“What are some reliable cleaning companies for a small office?”</li><li>“Which commercial cleaners offer recurring office cleaning contracts?”</li></ul>
+      <p>Your company appears in some of these answers.</p>
+      <p>However, two competitors appear more consistently. One is frequently placed near the top of recommendation lists. Another appears whenever customers ask specifically about recurring office contracts.</p>
+      <p>Your business is not invisible. It already appears in answers around that customer need, but other businesses currently have the stronger presence.</p>
+      <p>That is an AI battleground topic.</p>
+      <p>The battleground is therefore not the entire office-cleaning category. It is the specific customer needs where your business already appears but competitors are gaining more visibility.</p>
+      <div class="table-wrap"><table><thead><tr><th>Topic type</th><th>What it looks like</th></tr></thead><tbody>
+        <tr><td>Brand leader</td><td>AI mentions you more than anyone else</td></tr>
+        <tr><td>Battleground</td><td>AI mentions you, but a competitor is stronger</td></tr>
+        <tr><td>Blind spot</td><td>Customers ask about it, but AI rarely mentions you</td></tr>
+      </tbody></table></div>
+      <p>For blind spots, see <a href="/resources/how-to-find-ai-blind-spots-for-your-products-and-services">How to Find AI Blind Spots for Your Products and Services</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Existing relevance</span><h2>Why Can a Small Push Make a Difference?</h2></div>
+    <div class="prose">
+      <p>AI already connects your business with the topic.</p>
+      <p>On a blind spot, you may need to build that connection from scratch. On a battleground, it exists but is weaker than a competitor's. Closing the gap can be as simple as clearer service details or easier-to-find proof.</p>
+      <p>For example:</p>
+      <div class="prompt">“We already appear for office cleaning, but competitors are consistently stronger when customers ask about recurring contracts.”</div>
+      <p>This does not guarantee results. AI answers vary between platforms and over time. It simply gives you a focused starting point.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Finding battlegrounds</span><h2>How Do You Find Battleground Topics?</h2></div>
+    <div class="prose">
+      <h3>Start With Customer Questions</h3>
+      <p>Battleground analysis is most useful when it starts with questions real customers may ask while researching or choosing a provider.</p>
+      <p>Your website might describe the service as “professional hygiene solutions”, while customers ask much more specific questions such as:</p>
+      <ul><li>“Who provides weekly office cleaning in Kuala Lumpur?”</li><li>“Which cleaning company can handle a 40-person office?”</li><li>“What are reliable options for outsourced office cleaning?”</li></ul>
+      <p>These questions are more useful because they represent actual needs and buying decisions.</p>
+      <p>If you have not yet built a focused set of customer questions, see <a href="/resources/how-to-build-simple-prompt-set">How to Build a Simple Prompt Set Around Problems, Comparisons, Reviews, Pricing and Alternatives</a>.</p>
+      <h3>Group Them Into Topics</h3>
+      <p>Once you have enough relevant questions, group similar ones into broader topics.</p>
+      <p>This makes it easier to see where your business is already part of the conversation and where competitors are stronger.</p>
+      <div class="table-wrap"><table><thead><tr><th>Customer question</th><th>Broader topic</th></tr></thead><tbody>
+        <tr><td>“Best office cleaners in KL”</td><td>Office cleaning</td></tr>
+        <tr><td>“Reliable cleaning company for small offices”</td><td>Office cleaning</td></tr>
+        <tr><td>“Weekly office cleaning contracts”</td><td>Recurring commercial cleaning</td></tr>
+        <tr><td>“Office cleaners with good reviews”</td><td>Office cleaning reputation</td></tr>
+        <tr><td>“Affordable office cleaning for SMEs”</td><td>Office cleaning pricing</td></tr>
+      </tbody></table></div>
+      <h3>Look for the Signs</h3>
+      <p>How do you know whether a topic is really a battleground?</p>
+      <p>A battleground usually shows a repeated pattern: your business appears, but another provider has the stronger presence. This can happen in several ways.</p>
+      <ul>
+        <li><strong>You appear less often.</strong> Of ten office-cleaning questions, you appear in four and Competitor A in eight.</li>
+        <li><strong>You appear lower down.</strong> AI repeatedly places your competitor first or describes it in more detail.</li>
+        <li><strong>Your visibility depends on the wording.</strong> You appear for “office cleaning companies in Kuala Lumpur” but not for “office cleaning for a 50-person corporate office”.</li>
+        <li><strong>One competitor owns a specific need,</strong> such as recurring contracts, larger offices or after-hours cleaning.</li>
+      </ul>
+      <p>The last sign is the most useful. “Competitor A is strong when customers ask about recurring corporate cleaning” gives you a specific need to investigate.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Prioritisation</span><h2>Which Battleground Topics Deserve Attention?</h2></div>
+    <div class="prose">
+      <p>Not every battleground deserves more investment.</p>
+      <p>A simple way to narrow the list is to ask three questions.</p>
+      <h3>Does the Topic Matter Commercially?</h3>
+      <p>Suppose your business earns most of its revenue from recurring office contracts.</p>
+      <p>A gap around recurring commercial cleaning is likely to matter more than a larger gap around a minor service you rarely sell.</p>
+      <p>The biggest numerical gap is not automatically the biggest business opportunity.</p>
+      <h3>Is the Customer Close to Choosing a Provider?</h3>
+      <p>Compare:</p>
+      <div class="prompt">“What does commercial cleaning include?”</div>
+      <p>with:</p>
+      <div class="prompt">“Which commercial cleaning companies in Kuala Lumpur offer weekly office contracts?”</div>
+      <p>The first is mainly informational.</p>
+      <p>The second asks AI to help shortlist providers.</p>
+      <p>Pay closer attention to topics built around recommendations, comparisons, reviews, pricing, location and specific customer needs.</p>
+      <h3>Does the Competitive Pattern Repeat?</h3>
+      <p>Do not react to one AI answer.</p>
+      <p>The signal becomes stronger when the same competitor:</p>
+      <ul><li>repeatedly appears across similar customer questions;</li><li>performs strongly on more than one AI platform;</li><li>remains visible over several analysis periods; and</li><li>consistently appears ahead of your business.</li></ul>
+      <p>If unfamiliar companies keep appearing alongside you, <a href="/resources/how-to-find-your-real-competitors-inside-ai-answers">How To Find Your Real Competitors Inside AI Answers</a> explains how to decide whether they are genuine competitors or simply incidental names.</p>
+      <div class="table-wrap"><table><thead><tr><th>Battleground topic</th><th>Commercial value</th><th>Close to a decision</th></tr></thead><tbody>
+        <tr><td>Recurring office contracts</td><td>High</td><td>Yes</td></tr>
+        <tr><td>Larger offices</td><td>High</td><td>Yes</td></tr>
+        <tr><td>After-hours cleaning</td><td>Medium</td><td>Yes</td></tr>
+        <tr><td>Eco-friendly cleaning</td><td>Low</td><td>Yes</td></tr>
+      </tbody></table></div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Evidence review</span><h2>Read the AI Answers Before Changing Anything</h2></div>
+    <div class="prose">
+      <p>A battleground identifies where to investigate, but the individual AI answers help explain what may be creating the gap.</p>
+      <p>Suppose your analysis shows that recurring office cleaning is a battleground. Before creating new content, read the individual AI answers behind the topic to understand what may be creating the difference.</p>
+      <p>Ask:</p>
+      <ul><li>Which companies are being recommended?</li><li>How is your business described?</li><li>How are stronger competitors described?</li><li>Are they associated with customer needs that you are not?</li><li>Are important service details missing from your own website?</li><li>Which sources are supporting competitors?</li><li>Does the same pattern appear across several AI platforms?</li></ul>
+      <p>When you are reviewing many questions, an AI visibility platform can make this easier by connecting broader topic patterns with the individual tracked questions and AI responses behind them.</p>
+    </div>
+    <PostFigure src={promptImg} alt="Prompt Analysis for an office-cleaning question across multiple AI platforms" caption="Prompt-level analysis lets you move from the broader topic gap to the customer question and see which businesses AI included and how it positioned them." />
+    <div class="prose">
+      <p>The important principle is:</p>
+      <div class="prompt">Do not make a content decision from a summary metric alone. Read the answer behind it.</div>
+      <p>For a deeper walkthrough, see <a href="/resources/how-to-read-a-single-tracked-prompt-and-see-the-exact-ai-answers-behind-your-scores">How to Read a Single Tracked Prompt and See the Exact AI Answers Behind Your Scores</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Diagnosis</span><h2>Diagnose Why Competitors Are Stronger Before Deciding What to Change</h2></div>
+    <div class="prose">
+      <p>Once you identify the businesses that are stronger around the topic, look for possible reasons.</p>
+      <p>Common reasons include:</p>
+      <h3>Clearer Service Information</h3>
+      <p>A competitor may explain:</p>
+      <ul><li>who the service is for;</li><li>what is included;</li><li>how often it is provided;</li><li>where it is available; and</li><li>relevant contract options.</li></ul>
+      <p>Your page may simply say:</p>
+      <div class="prompt">“We provide professional office cleaning solutions.”</div>
+      <p>Both businesses offer the service, but one gives customers, and AI, much clearer information.</p>
+      <h3>Better Alignment With the Customer Need</h3>
+      <p>Customers may frequently ask about cleaning for small offices.</p>
+      <p>A competitor has a page specifically explaining office cleaning for SMEs.</p>
+      <p>Your website discusses commercial cleaning only in general terms.</p>
+      <p>Their information may simply match the question more directly.</p>
+      <h3>Stronger Proof</h3>
+      <p>Competitors may provide clearer case studies, certifications, testimonials, project examples and experience.</p>
+      <p>Ask whether your own website makes equivalent, legitimate evidence easy to find and understand.</p>
+      <h3>Third-Party Sources May Reinforce Them More Strongly</h3>
+      <p>Reviews, directories, industry sites and other third-party sources may also reinforce a competitor's connection with a service.</p>
+      <p>If AI repeatedly uses those sources, the visibility difference may not be caused by the competitor's website alone.</p>
+      <p>The goal isn't to copy a competitor's website. It is to understand which information, proof or external signals may make that business easier for AI to connect with the customer need.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Focused action</span><h2>What Does a Focused Improvement Look Like?</h2></div>
+    <div class="prose">
+      <p>A focused improvement should address the specific gap you found rather than trigger a broad content campaign.</p>
+      <p>Depending on the diagnosis, that could mean:</p>
+      <ul><li>improving an existing service page;</li><li>clarifying which customers the service is for;</li><li>adding missing contract or service information;</li><li>strengthening genuine proof;</li><li>clarifying locations or service areas;</li><li>improving useful internal links; or</li><li>addressing a genuine content gap.</li></ul>
+      <p>If customers repeatedly ask about weekly cleaning contracts but your service page never explains whether you offer them, adding that information may be more useful than publishing another broad article about commercial cleaning.</p>
+      <p>Let the diagnosis determine the action.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Topic-level analysis</span><h2>How Can You Find Battlegrounds Across Many AI Answers?</h2></div>
+    <div class="prose">
+      <p>When you monitor only a small number of questions, you can often spot patterns manually.</p>
+      <p>As the number grows, grouping questions into topics becomes more useful.</p>
+      <p>For a cleaning business, topics might include:</p>
+      <ul><li>office cleaning;</li><li>recurring contracts;</li><li>pricing;</li><li>post-renovation services; and</li><li>reputation and reviews.</li></ul>
+      <p>You can then compare how consistently your business appears within each topic. For larger prompt sets, an AI visibility platform can help organise these patterns.</p>
+      <p>A topic-level view can separate Brand Leaders, Battlegrounds and Blind Spots so you can more easily see where your business already appears but competitors remain stronger.</p>
+    </div>
+    <PostFigure src={topicsImg} alt="Key Topics Analysis showing AI battleground topics for an office-cleaning business" caption="Topic grouping can help identify customer conversations where your business already appears but competitors currently have stronger visibility." />
+    <div class="prose">
+      <p>Treat the result as a diagnostic starting point, not a list of topics that all need optimisation.</p>
+      <p>A platform like <a href="https://www.zicy.com/">Zicy</a> can bring these topic patterns and the underlying tracked questions together, making it easier to identify which battlegrounds deserve a closer look.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="shead"><span class="eyebrow">Six-step process</span><h2>How to Find AI Battleground Topics Worth Working On</h2></div>
+    <div class="prose">
+      <h3>Step 1: Start With Customer Questions and Group Them Into Topics</h3>
+      <p>Use questions that reflect how potential customers search, compare and choose.</p>
+      <p>Group questions that represent the same underlying customer need so you can see broader patterns rather than treating every wording variation separately.</p>
+      <h3>Step 2: Find Topics Where Your Business Already Appears</h3>
+      <p>Look for topics where your business is part of the answers but competitors appear more consistently or prominently.</p>
+      <p>These are your battleground candidates.</p>
+      <h3>Step 3: Check Whether the Battleground Matters Commercially</h3>
+      <p>Ask:</p>
+      <ul><li>Is this an important product or service?</li><li>Are customers close to making a decision?</li><li>Does the competitive advantage repeat?</li><li>Does improving this area support a real business priority?</li></ul>
+      <p>Topics that meet most of these criteria are stronger candidates for further investigation.</p>
+      <h3>Step 4: Read the Underlying AI Answers</h3>
+      <p>Move from the topic to the individual customer questions.</p>
+      <p>Look at which businesses appear, how they are described and which sources support them.</p>
+      <h3>Step 5: Diagnose the Likely Gap</h3>
+      <p>Check whether the difference may be related to:</p>
+      <ul><li>clearer competitor service information;</li><li>stronger proof;</li><li>closer alignment with the customer need; or</li><li>stronger third-party support.</li></ul>
+      <p>The right response may be improving existing information, proof or external signals rather than adding new content.</p>
+      <h3>Step 6: Make One Focused Improvement and Monitor the Pattern</h3>
+      <p>Choose the action that most directly addresses what you found.</p>
+      <p>Then keep the core customer questions reasonably stable so you can see whether your visibility changes over time.</p>
+      <p>If you need help separating short-term movement from a more persistent change, see <a href="/resources/how-to-read-daily-weekly-and-monthly-ai-visibility-trends">How to Read Daily, Weekly and Monthly AI Visibility Trends</a>.</p>
+    </div>
+  </div></section>
+
+  <section style="background:var(--mist)"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Conclusion</span><h2>Focus on the Battlegrounds That Matter</h2></div>
+    <div class="prose">
+      <p>You do not need to challenge every topic where a competitor has stronger AI visibility.</p>
+      <p>Focus on commercially important customer conversations where your business already has some presence, investigate what may be giving competitors the stronger position and make one relevant improvement your team can realistically complete.</p>
+      <p>If your investigation instead reveals important services where your business is barely appearing at all, continue with <a href="/resources/how-to-find-ai-blind-spots-for-your-products-and-services">How to Find AI Blind Spots for Your Products and Services</a>.</p>
+    </div>
+  </div></section>
+
+  <section class="final" id="article-cta"><div class="wrap">
+    <h2>See Where Your Business Is Already in the Fight</h2>
+    <p>Zicy can help surface topics where your brand already appears alongside stronger competitors, giving you a clearer starting point for deciding which battlegrounds deserve attention.</p>
+    <div class="hcta"><a class="btn btn-p" href="/platform">Explore the platform</a><a class="btn btn-o" href="/done-for-you?utm_source=zicy&amp;utm_medium=referral&amp;utm_campaign=dfy">Work with Growth.pro</a></div>
+  </div></section>
+</BaseLayout>
+
+<style>
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--indigo)}.crumbs .sep{color:var(--line-2)}.crumbs .here{color:var(--ink)}
+  .answer{max-width:720px;margin:18px 0 0;padding:18px 20px;background:var(--mist);border:0.5px solid var(--line);border-left:3px solid var(--indigo);border-radius:12px;font-size:17px;line-height:1.6;color:var(--ink)}.byline{margin-top:16px;font-size:14px;color:var(--muted)}
+  .prose{max-width:760px}.prose ol,.prose ul{margin:0 0 16px;padding-left:22px;line-height:1.6}.prose li{margin-bottom:6px}.prose h3{margin:28px 0 10px;color:var(--ink);font-size:21px}
+  .prompt{max-width:700px;margin:22px 0;padding:18px 20px;background:var(--lavender);border:0.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;line-height:1.55}
+  .table-wrap{max-width:760px;overflow-x:auto;margin:24px 0}.table-wrap table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}.table-wrap th,.table-wrap td{padding:13px 15px;border:1px solid var(--line);text-align:left;vertical-align:top}.table-wrap th{background:var(--lavender);color:var(--ink);font-weight:700}.table-wrap tbody tr:nth-child(even){background:var(--mist)}
+  @media (max-width:640px){.prose h3{font-size:19px}.prompt{font-size:16px}.table-wrap table{min-width:560px}}
+</style>
