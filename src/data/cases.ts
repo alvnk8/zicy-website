@@ -1494,6 +1494,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <li><strong>Average AI Ranking:</strong> <strong>#3.13</strong> whenever the brand was mentioned</li>
 <li><strong>AI Sentiment:</strong> <strong>75 out of 100</strong>, rated Positive</li>
 </ul>
+<p><img src="/case-studies/2026/10/fintech-ai-visibility-report.png" alt="Zicy AI Visibility Report for a Malaysian fintech brand showing platform coverage across five AI engines" loading="lazy" decoding="async" /></p>
 <p><strong>Platform Coverage</strong></p>
 <ul>
 <li>Google AI: 67.9%</li>
@@ -1506,14 +1507,16 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p><strong>Competitive AI Performance</strong></p>
 <ul>
 <li>Nearest competitor: 809 mentions, average rank #2.2, 12.45% share of voice.</li>
-<li>Two further competitors sat close behind at 649 mentions and an average rank of #2.7.</li>
+<li>One further competitor sat close behind at 649 mentions and an average rank of #2.7.</li>
 <li>The brand's 13.20% share of voice was higher than each of the five tracked competitors (12.45%, 11.57%, 4.78%, 4.48% and 3.78%).</li>
 </ul>
+<p><img src="/case-studies/2026/10/fintech-competitive-ai-performance.png" alt="Competitive AI Performance table for a Malaysian fintech brand against five tracked competitors, showing mentions, average ranking, citations and share of voice, with competitor names redacted" loading="lazy" decoding="async" /></p>
 <p><strong>Prompt-Level Visibility</strong></p>
 <ul>
 <li>On the best-tracked prompt, the brand held 27 of 47 total brand mentions across the competitive set: 57.45% share of voice at an average position of #1.2, cited across all five engines.</li>
 <li>Other prompts reached 39.58%, 33.33% and 30.56% share of voice.</li>
 </ul>
+<p><img src="/case-studies/2026/10/fintech-tracked-prompts.png" alt="Tracked prompts table for a Malaysian fintech brand showing brand mention coverage, position and share of voice per prompt, with prompt text blurred" loading="lazy" decoding="async" /></p>
 <h2>Why Share of Voice Changed the Reading</h2>
 <p>Mentions show whether a brand is in the room. Ranking shows where it stands. Share of voice shows how much of the conversation belongs to it compared with the others being considered at the same time.</p>
 <p>Judged on mentions and ranking alone, this brand was running third. Share of voice showed that it held more of the AI conversation than any single competitor. The prompt-level data supports this. The brand was winning specific, high-intent prompts outright, and the lead did not depend on how the aggregate was calculated.</p>
@@ -1545,6 +1548,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <li>ChatGPT events: 164 to 764 (+365.85%)</li>
 <li>Gemini users: 1 to 7. Gemini events: 5 to 61.</li>
 </ul>
+<p><img src="/case-studies/2026/10/fintech-ga4-ai-referral-traffic.png" alt="GA4 table of ChatGPT and Gemini referral users and events, 1 July to 27 August 2026 against the previous two months" loading="lazy" decoding="async" /></p>
 <p><strong>Read these with care.</strong> The starting base was very small, which inflates the percentages. Average engagement time per active ChatGPT user fell 41.43%, from 9 minutes 28 seconds to 5 minutes 33 seconds. Engaged sessions per active user fell 58.53%, from 3.33 to 1.38. More people are arriving, and on average each does less once there. This is worth watching as the base grows.</p>
 <h2>The Takeaway</h2>
 <p>A brand that tracks only mentions and ranking can be behind on the number that reflects its real share of the conversation, and never find out. Tracking mentions, citations, ranking, share of voice and sentiment together, against named competitors, shows which prompts the brand wins, which it loses, and where to work next.</p>
