@@ -1470,4 +1470,85 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>A blended AI visibility score would not have shown any of this. Tracking each platform down to the individual prompt did.</p>
 <p><strong>Which of your AI engines is sending you customers, and do you know how it describes you?</strong></p>`,
   },
+  {
+    slug: "fintech-ai-share-of-voice",
+    indexMeta: "Fintech · 5 AI platforms",
+    eyebrow: "Fintech · 5 AI platforms",
+    indexTitle: "Leading share of voice from third on mentions",
+    big: "13.20%",
+    indexSub: "share of voice · 62.67% mentions",
+    h1: "A Malaysian Fintech Trails on AI Mentions and Ranking, Yet Leads Share of Voice",
+    metaTitle: "62.67% AI Mentions & 13.20% Share of Voice for Fintech, Zicy",
+    metaDescription: "How a Malaysian fintech brand led AI share of voice at 13.20% while a competitor had more mentions and a better average rank, measured across 1,200 tracked AI responses.",
+    datePublished: "2026-10-12",
+    dateModified: "2026-10-12",
+    bodyHtml: `<p><strong>What if the competitor with more AI mentions and a better average ranking is not the one winning the conversation?</strong></p>
+<p>That was the question behind this fintech brand's numbers. Its nearest tracked competitor had 809 AI mentions and an average rank of #2.2. The brand had 752 mentions and an average rank of #3.1. On those two measures it was behind. On share of voice it was ahead, 13.20% against 12.45%.</p>
+<p>Fintech buyers compare, shortlist, then ask someone whether the shortlist holds up. More and more, that someone is ChatGPT, Gemini or Google's AI experiences, before a human ever takes a call. This brand measured where it stood in that conversation instead of assuming.</p>
+<h2>Results Snapshot (Measured via Zicy)</h2>
+<p><strong>AI Visibility &amp; Brand Presence</strong> (1,200 tracked AI responses, 27 July to 27 August 2026)</p>
+<ul>
+<li><strong>Brand Mention Coverage:</strong> <strong>62.67%</strong> (752 of 1,200 responses)</li>
+<li><strong>Website Citation Coverage:</strong> <strong>54.42%</strong> (653 of 1,200 responses)</li>
+<li><strong>Share of Voice:</strong> <strong>13.20%</strong> (1,570 of 11,895 brand mentions across the competitive set)</li>
+<li><strong>Average AI Ranking:</strong> <strong>#3.13</strong> whenever the brand was mentioned</li>
+<li><strong>AI Sentiment:</strong> <strong>75 out of 100</strong>, rated Positive</li>
+</ul>
+<p><strong>Platform Coverage</strong></p>
+<ul>
+<li>Google AI: 67.9%</li>
+<li>Gemini: 64.2%</li>
+<li>AI Overviews: 62.5%</li>
+<li>ChatGPT: 60%</li>
+<li>Perplexity: 58.8%</li>
+</ul>
+<p>No platform rated below Good.</p>
+<p><strong>Competitive AI Performance</strong></p>
+<ul>
+<li>Nearest competitor: 809 mentions, average rank #2.2, 12.45% share of voice.</li>
+<li>Two further competitors sat close behind at 649 mentions and an average rank of #2.7.</li>
+<li>The brand's 13.20% share of voice was higher than each of the five tracked competitors (12.45%, 11.57%, 4.78%, 4.48% and 3.78%).</li>
+</ul>
+<p><strong>Prompt-Level Visibility</strong></p>
+<ul>
+<li>On the best-tracked prompt, the brand held 27 of 47 total brand mentions across the competitive set: 57.45% share of voice at an average position of #1.2, cited across all five engines.</li>
+<li>Other prompts reached 39.58%, 33.33% and 30.56% share of voice.</li>
+</ul>
+<h2>Why Share of Voice Changed the Reading</h2>
+<p>Mentions show whether a brand is in the room. Ranking shows where it stands. Share of voice shows how much of the conversation belongs to it compared with the others being considered at the same time.</p>
+<p>Judged on mentions and ranking alone, this brand was running third. Share of voice showed that it held more of the AI conversation than any single competitor. The prompt-level data supports this. The brand was winning specific, high-intent prompts outright, and the lead did not depend on how the aggregate was calculated.</p>
+<h2>What We Did (Strategy Breakdown)</h2>
+<p><strong>Prompt Mapping</strong></p>
+<ul>
+<li>Tracked the real comparisons and evaluations prospects run when researching a financial product, in place of a keyword list.</li>
+</ul>
+<p><strong>Entity and Topical Signals</strong></p>
+<ul>
+<li>Made it clearer to AI systems what the brand does, what it is expert in, and where it belongs in the category.</li>
+</ul>
+<p><strong>Content Built for Extraction</strong></p>
+<ul>
+<li>Structured direct answers and supporting detail so AI engines could lift and cite them with confidence.</li>
+</ul>
+<p><strong>Competitor Gaps as a Priority List</strong></p>
+<ul>
+<li>Every prompt where a rival was mentioned or cited more often became the next optimisation target.</li>
+</ul>
+<p><strong>Full Competitive Measurement</strong></p>
+<ul>
+<li>Tracked mentions, citations, ranking, share of voice and sentiment together against five named competitors, since any one of those numbers alone can mislead.</li>
+</ul>
+<h2>AI Referral Traffic (GA4, 1 July to 27 August 2026 vs the previous two months)</h2>
+<ul>
+<li>ChatGPT users: 3 to 34 (+1,033%)</li>
+<li>ChatGPT new users: 1 to 32 (+3,100%)</li>
+<li>ChatGPT events: 164 to 764 (+365.85%)</li>
+<li>Gemini users: 1 to 7. Gemini events: 5 to 61.</li>
+</ul>
+<p><strong>Read these with care.</strong> The starting base was very small, which inflates the percentages. Average engagement time per active ChatGPT user fell 41.43%, from 9 minutes 28 seconds to 5 minutes 33 seconds. Engaged sessions per active user fell 58.53%, from 3.33 to 1.38. More people are arriving, and on average each does less once there. This is worth watching as the base grows.</p>
+<h2>The Takeaway</h2>
+<p>A brand that tracks only mentions and ranking can be behind on the number that reflects its real share of the conversation, and never find out. Tracking mentions, citations, ranking, share of voice and sentiment together, against named competitors, shows which prompts the brand wins, which it loses, and where to work next.</p>
+<p><strong>By tracking AI visibility with tools such as Zicy, brands can see how much of the AI conversation they hold compared with the competitors buyers are weighing them against.</strong></p>
+`,
+  },
 ];
