@@ -72,8 +72,15 @@
   }
   .cc-desc a { color: var(--violet-700); text-decoration: underline; }
   .cc-actions { display: flex; gap: 12px; flex-shrink: 0; }
+  /* GTranslate's float widget (injected by float.js) sits over Reject while the banner is up. */
+  :global(html.cc-open #gt_float_wrapper) { display: none !important; }
   @media (max-width: 600px) {
-    .cc-inner { padding: 14px 16px; gap: 14px; }
+    .cc { padding: 0; } /* drop the global section padding, which inflated the banner */
+    .cc-inner { padding: 10px 14px; gap: 8px; }
+    .cc-title { margin: 0 0 2px; }
+    .cc-desc { font-size: 13px; line-height: 1.45; }
+    .cc-actions { gap: 8px; }
+    .cc-actions .btn { padding-top: 8px; padding-bottom: 8px; min-height: 40px; }
     .cc-actions { width: 100%; }
     .cc-actions .btn { flex: 1; justify-content: center; }
   }
@@ -106,10 +113,12 @@
 
   function show() {
     if (banner) banner.hidden = false;
+    document.documentElement.classList.add('cc-open');
   }
 
   function hide() {
     if (banner) banner.hidden = true;
+    document.documentElement.classList.remove('cc-open');
   }
 
   function setChoice(choice: string) {
