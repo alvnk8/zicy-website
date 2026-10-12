@@ -20,6 +20,9 @@ export interface CaseStudy {
    *  Describes existing, already-anonymised study content only, never a new claim. Rendered on
    *  the /case-studies grid; not used on the detail page. */
   smeLabel?: string;
+  /** Optional platform list for the measurement footnote on the detail page, for studies whose
+   *  tracking covered more engines than the default three. */
+  platforms?: string;
 }
 
 export const CASES: CaseStudy[] = [
@@ -1477,15 +1480,17 @@ Prioritised treatment-related prompts with commercial intent.</li>
     indexTitle: "Leading share of voice from third on mentions",
     big: "13.20%",
     indexSub: "share of voice · 62.67% mentions",
-    h1: "A Malaysian Fintech Trails on AI Mentions and Ranking, Yet Leads Share of Voice",
-    metaTitle: "62.67% AI Mentions & 13.20% Share of Voice for Fintech, Zicy",
-    metaDescription: "How a Malaysian fintech brand led AI share of voice at 13.20% while a competitor had more mentions and a better average rank, measured across 1,200 tracked AI responses.",
+    h1: "A Malaysian Fintech Trails on AI Mention Coverage and Ranking, Yet Leads Share of Voice",
+    metaTitle: "62.67% AI Mention Coverage & 13.20% Share of Voice for Fintech, Zicy",
+    metaDescription: "How a Malaysian fintech brand led AI share of voice at 13.20% while a rival was named in more AI responses and ranked higher, measured across 1,200 tracked responses.",
     datePublished: "2026-10-12",
     dateModified: "2026-10-12",
-    bodyHtml: `<p><strong>What if the competitor with more AI mentions and a better average ranking is not the one winning the conversation?</strong></p>
-<p>That was the question behind this fintech brand's numbers. Its nearest tracked competitor had 809 AI mentions and an average rank of #2.2. The brand had 752 mentions and an average rank of #3.1. On those two measures it was behind. On share of voice it was ahead, 13.20% against 12.45%.</p>
+    platforms: "ChatGPT, Gemini, Perplexity, Google AI Mode and Google AI Overviews",
+    bodyHtml: `<p><strong>What if the competitor named in more AI responses, with a better average ranking, is not the one winning the conversation?</strong></p>
+<p>That was the question behind this fintech brand's numbers. Its nearest tracked competitor was named in 809 of 1,200 AI responses with an average rank of #2.2. The brand was named in 752 responses with an average rank of #3.1. On those two measures it was behind. On share of voice it was ahead, 13.20% against 12.45%.</p>
 <p>Fintech buyers compare, shortlist, then ask someone whether the shortlist holds up. More and more, that someone is ChatGPT, Gemini or Google's AI experiences, before a human ever takes a call. This brand measured where it stood in that conversation instead of assuming.</p>
 <h2>Results Snapshot (Measured via Zicy)</h2>
+<p style="font-size:13.5px;color:var(--muted);line-height:1.5"><strong>How to read these metrics.</strong> Mention coverage is the share of tracked AI responses that name the brand at least once. Share of voice is the brand's share of all brand mentions inside those responses, aggregated across responses. They are separate measures and neither is calculated from the other.</p>
 <p><strong>AI Visibility &amp; Brand Presence</strong> (1,200 tracked AI responses, 27 July to 27 August 2026)</p>
 <ul>
 <li><strong>Brand Mention Coverage:</strong> <strong>62.67%</strong> (752 of 1,200 responses)</li>
@@ -1506,8 +1511,8 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>No platform rated below Good.</p>
 <p><strong>Competitive AI Performance</strong></p>
 <ul>
-<li>Nearest competitor: 809 mentions, average rank #2.2, 12.45% share of voice.</li>
-<li>One further competitor sat close behind at 649 mentions and an average rank of #2.7.</li>
+<li>Nearest competitor: named in 809 of 1,200 responses, average rank #2.2, 12.45% share of voice.</li>
+<li>One further competitor was named in 649 responses with an average rank of #2.7.</li>
 <li>The brand's 13.20% share of voice was higher than each of the five tracked competitors (12.45%, 11.57%, 4.78%, 4.48% and 3.78%).</li>
 </ul>
 <p><img src="/case-studies/2026/10/fintech-competitive-ai-performance.png" alt="Competitive AI Performance table for a Malaysian fintech brand against five tracked competitors, showing mentions, average ranking, citations and share of voice, with competitor names redacted" loading="lazy" decoding="async" /></p>
@@ -1518,8 +1523,8 @@ Prioritised treatment-related prompts with commercial intent.</li>
 </ul>
 <p><img src="/case-studies/2026/10/fintech-tracked-prompts.png" alt="Tracked prompts table for a Malaysian fintech brand showing brand mention coverage, position and share of voice per prompt, with prompt text blurred" loading="lazy" decoding="async" /></p>
 <h2>Why Share of Voice Changed the Reading</h2>
-<p>Mentions show whether a brand is in the room. Ranking shows where it stands. Share of voice shows how much of the conversation belongs to it compared with the others being considered at the same time.</p>
-<p>Judged on mentions and ranking alone, this brand was running third. Share of voice showed that it held more of the AI conversation than any single competitor. The prompt-level data supports this. The brand was winning specific, high-intent prompts outright, and the lead did not depend on how the aggregate was calculated.</p>
+<p>Mention coverage shows how often a brand appears in AI responses at all. Ranking shows where it stands when it does appear. Share of voice shows how much of the brand discussion inside each response belongs to it, compared with the other brands named alongside it.</p>
+<p>Judged on mention coverage and ranking alone, this brand sat behind its nearest rival on both. Share of voice showed that it held more of the AI conversation than any single competitor. A brand can appear in fewer responses and still take a larger part of the discussion in the responses where it does appear. The prompt-level data supports this. The brand was winning specific, high-intent prompts outright, and the lead did not depend on how the aggregate was calculated.</p>
 <h2>What We Did (Strategy Breakdown)</h2>
 <p><strong>Prompt Mapping</strong></p>
 <ul>
@@ -1551,7 +1556,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p><img src="/case-studies/2026/10/fintech-ga4-ai-referral-traffic.png" alt="GA4 table of ChatGPT and Gemini referral users and events, 1 July to 27 August 2026 against the previous two months" loading="lazy" decoding="async" /></p>
 <p><strong>Read these with care.</strong> The starting base was very small, which inflates the percentages. Average engagement time per active ChatGPT user fell 41.43%, from 9 minutes 28 seconds to 5 minutes 33 seconds. Engaged sessions per active user fell 58.53%, from 3.33 to 1.38. More people are arriving, and on average each does less once there. This is worth watching as the base grows.</p>
 <h2>The Takeaway</h2>
-<p>A brand that tracks only mentions and ranking can be behind on the number that reflects its real share of the conversation, and never find out. Tracking mentions, citations, ranking, share of voice and sentiment together, against named competitors, shows which prompts the brand wins, which it loses, and where to work next.</p>
+<p>A brand that tracks only mention coverage and ranking can misread its real share of the conversation, and never find out. Tracking mention coverage, citations, ranking, share of voice and sentiment together, against named competitors, shows which prompts the brand wins, which it loses, and where to work next.</p>
 <p><strong>By tracking AI visibility with tools such as Zicy, brands can see how much of the AI conversation they hold compared with the competitors buyers are weighing them against.</strong></p>
 `,
   },
