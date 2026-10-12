@@ -1551,4 +1551,81 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p><strong>By tracking AI visibility with tools such as Zicy, brands can see how much of the AI conversation they hold compared with the competitors buyers are weighing them against.</strong></p>
 `,
   },
+  {
+    slug: "ecommerce-ai-mentions-vs-competitors",
+    indexMeta: "eCommerce · 7 weeks",
+    eyebrow: "eCommerce · 7 weeks",
+    indexTitle: "More AI mentions than five rivals combined",
+    big: "2,795",
+    indexSub: "mentions vs 2,228 for five rivals · 54.15% SOV",
+    h1: "One eCommerce Brand Now Outmentions Its Five Tracked Competitors Combined in AI Answers",
+    metaTitle: "82.67% AI Mention Coverage & 54.15% Share of Voice for eCommerce, Zicy",
+    metaDescription: "How an eCommerce brand earned 2,795 AI mentions, more than its five tracked competitors combined (2,228), with 54.15% share of voice across 3,381 tracked AI answers.",
+    datePublished: "2026-10-12",
+    dateModified: "2026-10-12",
+    bodyHtml: `<p><strong>2,795 AI mentions for one eCommerce brand. 2,228 for all five of its tracked competitors combined.</strong></p>
+<p>Across 3,381 tracked AI answers over seven weeks, this brand accounted for more mentions than its five closest rivals put together. A growing share of buyers now ask ChatGPT, Gemini or Perplexity to recommend, compare or shortlist products before they reach a website. The brand that gets named takes the shortlist seat, and the brand that gets cited gets the click that follows.</p>
+<h2>Results Snapshot (Measured via Zicy)</h2>
+<p><strong>AI Visibility &amp; Brand Presence</strong> (3,381 tracked AI answers, 1 July to 17 August 2026)</p>
+<ul>
+<li><strong>Brand Mention Coverage:</strong> <strong>82.67%</strong> (2,795 of 3,381 answers)</li>
+<li><strong>Website Citation Coverage:</strong> <strong>75.98%</strong> (2,569 of 3,381 answers linking to the site)</li>
+<li><strong>Share of Voice:</strong> <strong>54.15%</strong> across the competitive set</li>
+<li><strong>Average AI Ranking:</strong> <strong>#1.29</strong> whenever the brand was mentioned</li>
+<li><strong>AI Sentiment:</strong> <strong>86 out of 100</strong>, rated Very Positive</li>
+</ul>
+<p><strong>Platform Coverage</strong></p>
+<ul>
+<li>Google AI: 87.7%</li>
+<li>Gemini: 87.7%</li>
+<li>AI Overviews: 87.6%</li>
+<li>Perplexity: 83.6%</li>
+<li>ChatGPT: 67% (the one platform with clear room left to close)</li>
+</ul>
+<p><strong>Competitive AI Performance</strong></p>
+<ul>
+<li>Brand: 2,795 mentions.</li>
+<li>All five tracked competitors combined: 2,228 mentions.</li>
+<li>The nearest competitor held 694 mentions with a sentiment score of 73/100, positive but well below the brand's 86. The next four rivals held between 363 and 407 mentions each.</li>
+</ul>
+<p><strong>Trend</strong></p>
+<ul>
+<li>Share of voice rose from 38.5% to 54.1% over the period while average ranking held steady around #1.3.</li>
+<li>Raw mention volume moved more week to week. Share of voice held its line while the raw count swung, which is the case for tracking the relative number alongside the absolute one.</li>
+</ul>
+<p><strong>Prompt-Level Visibility</strong></p>
+<ul>
+<li>Platform coverage held at 4 or 5 out of 5 across the tracked prompts, so the result did not rest on one runaway query.</li>
+</ul>
+<h2>What We Did (Strategy Breakdown)</h2>
+<p><strong>Prompt-Level Mapping</strong></p>
+<ul>
+<li>Tracked each high-intent product discovery prompt a real buyer would type, one by one, in place of guessing from a keyword list.</li>
+</ul>
+<p><strong>Content Rebuilt for Extraction</strong></p>
+<ul>
+<li>Restructured product and category pages so AI systems could lift a clear, attributable answer straight from the page.</li>
+</ul>
+<p><strong>Weak Clusters Prioritised</strong></p>
+<ul>
+<li>Reinforced prompts where the brand already showed authority and flagged thin prompts for the next round.</li>
+</ul>
+<p><strong>Competitor Benchmarking on the Same Prompts</strong></p>
+<ul>
+<li>Tracked mentions, citations, ranking and share of voice against the same five rivals, on the same prompts, in place of an industry average.</li>
+</ul>
+<h2>AI Referral Traffic (GA4, year to date vs the same period last year)</h2>
+<p>This uses a different reporting window from the visibility figures above, so read it as directional.</p>
+<ul>
+<li>ChatGPT: 279 sessions, 2,084 events</li>
+<li>Gemini: 10 sessions, 183 events</li>
+<li>Perplexity: 3 sessions</li>
+<li>Same period last year: zero sessions from each of these platforms.</li>
+</ul>
+<p><strong>Read these with care.</strong> ChatGPT sent the most volume (279 sessions against a combined 13 from Gemini and Perplexity), but had the weakest engagement rate of the three at 37.63%. Perplexity converted every session it sent and Gemini held 60%. Both samples are small, so no platform can be named a winner yet. The early pattern is that the channel with the most mentions is not necessarily the one with the best engagement.</p>
+<h2>The Takeaway</h2>
+<p>Coverage and conversion are separate jobs. Share of voice shows whether a brand is being talked about. GA4 shows whether the people arriving from that conversation engage once they land. A brand needs both numbers, from the same window, to decide which platform deserves the next round of optimisation.</p>
+<p><strong>By tracking AI visibility with tools such as Zicy, eCommerce brands can see where they stand against named competitors and where to direct effort next.</strong></p>
+`,
+  },
 ];
