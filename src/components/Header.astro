@@ -33,7 +33,6 @@ const homeActive = path === '/';
     </a>
 
     <div class="links">
-      <a href="/" class={homeActive ? 'active' : ''}>Home</a>
       <a href="/about" class={isActive('/about') ? 'active' : ''}>About</a>
       <a href="/platform" class={isActive('/platform') ? 'active' : ''}>Platform</a>
 
@@ -84,6 +83,9 @@ const homeActive = path === '/';
         <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>Case studies</a>
         <a href="/done-for-you" class={isActive('/done-for-you') ? 'active' : ''}>Done-for-You</a>
         <p class="mnav-group">Resources</p>
+        <a href="/resources" class={isActive('/resources') ? 'active' : ''}>Resources hub</a>
+        <a href="/resources/glossary" class={isActive('/resources/glossary') ? 'active' : ''}>Glossary</a>
+        <a href="/contact" class={isActive('/contact') ? 'active' : ''}>Contact</a>
         <a href="https://www.zicy.com/docs">Help centre</a>
         <a href="/free-tools" class={isActive('/free-tools') ? 'active' : ''}>Free tools hub</a>
         <a href="/ai-brand-audit" class={isActive('/ai-brand-audit') ? 'active' : ''}>Free AI brand audit</a>
@@ -95,3 +97,41 @@ const homeActive = path === '/';
     </details>
   </nav>
 </header>
+<script is:inline>
+  // Close the mobile menu on Escape (focus back to the toggle) or a tap outside it.
+  // Progressive enhancement only: the <details> menu works without this script.
+  (function () {
+    var m = document.querySelector('.mnav');
+    if (!m) return;
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && m.open) {
+        m.removeAttribute('open');
+        var s = m.querySelector('summary');
+        if (s) s.focus();
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (m.open && !m.contains(e.target)) m.removeAttribute('open');
+    });
+  })();
+  // Touch devices with the desktop nav (e.g. iPad landscape): first tap on Solutions/Resources
+  // opens its dropdown, a second tap on the Resources link navigates. Mouse behaviour is unchanged.
+  (function () {
+    if (!window.matchMedia || !window.matchMedia('(hover: none)').matches) return;
+    var items = document.querySelectorAll('.links .has-dropdown');
+    items.forEach(function (it) {
+      var t = it.querySelector('.trigger');
+      if (!t) return;
+      t.addEventListener('click', function (e) {
+        var isOpen = it.classList.contains('touch-open');
+        items.forEach(function (o) { o.classList.remove('touch-open'); });
+        if (!isOpen) { it.classList.add('touch-open'); e.preventDefault(); }
+      });
+    });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest || !e.target.closest('.has-dropdown')) {
+        items.forEach(function (o) { o.classList.remove('touch-open'); });
+      }
+    });
+  })();
+</script>
