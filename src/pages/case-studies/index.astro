@@ -26,11 +26,16 @@ for (const [path, mod] of Object.entries(heroModules)) {
   if (slug) heroBySlug[slug] = mod.default;
 }
 
-// Lead with the two newest studies, then feature one clearly SME-shaped story near the top of
+// Lead with the four newest studies, then feature one clearly SME-shaped story near the top of
 // the grid (index-display order only; CASES itself is left in its original order since
 // sitemap.xml.ts and og-pages.ts also read it). Every other study keeps its existing relative
 // order, just shifted later.
-const LEAD_SLUGS = ['aesthetic-clinic-ai-referred-purchases', 'b2b-logistics-ai-procurement-filter'];
+const LEAD_SLUGS = [
+  'fintech-ai-share-of-voice',
+  'ecommerce-ai-mentions-vs-competitors',
+  'aesthetic-clinic-ai-referred-purchases',
+  'b2b-logistics-ai-procurement-filter',
+];
 const FEATURED_SME_SLUG = 'aesthetic-clinic-ai-visibility';
 const leadCases = LEAD_SLUGS.map((slug) => CASES.find((c) => c.slug === slug)).filter(Boolean);
 const featuredCase = CASES.find((c) => c.slug === FEATURED_SME_SLUG);
