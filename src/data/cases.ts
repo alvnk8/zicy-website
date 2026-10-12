@@ -406,7 +406,8 @@ export const CASES: CaseStudy[] = [
 <h2>The Bigger Shift This Case Study Reveals</h2>
 <p>This brand didn’t “chase AI traffic.” They <strong>measured how AI understood them- and corrected it</strong>.</p>
 <p>As discovery shifts from rankings to recommendations, the winners won’t be the loudest brands. They’ll be the ones AI systems trust enough to cite.</p>
-<p><strong>Track it. Understand it. Optimise for it, with Zicy.</strong></p>`,
+<p><strong>Track it. Understand it. Optimise for it, with Zicy.</strong></p>
+`,
   },
   {
     slug: "ecommerce-ai-mention-coverage",
@@ -497,7 +498,8 @@ export const CASES: CaseStudy[] = [
 <p>This brand didn’t overhaul its entire site. They simply answered one question clearly: <strong>“How does AI see us compared to everyone else?”</strong></p>
 <p>Once that was visible, improvement became inevitable.</p>
 <p>As eCommerce discovery shifts from search results to AI answers, brands that measure AI visibility early won’t just compete better, but will be recommended more often.</p>
-<p><strong>By tracking AI visibility with tools such as Zicy, brands can replace assumptions with evidence as discovery models change.</strong></p>`,
+<p><strong>By tracking AI visibility with tools such as Zicy, brands can replace assumptions with evidence as discovery models change.</strong></p>
+`,
   },
   {
     slug: "education-ai-share-of-voice",
@@ -587,7 +589,8 @@ export const CASES: CaseStudy[] = [
 </li>
 </ul>
 <p>This organisation didn’t focus on chasing rankings alone. They focused on understanding how AI systems surface, compare, and reference brands in their category.</p>
-<p>Platforms like <a href="/">Zicy</a> help make this layer observable, so organisations can adapt as discovery models continue to evolve.</p>`,
+<p>Platforms like <a href="/">Zicy</a> help make this layer observable, so organisations can adapt as discovery models continue to evolve.</p>
+`,
   },
   {
     slug: "ecommerce-ai-visibility-growth",
@@ -682,7 +685,8 @@ export const CASES: CaseStudy[] = [
 <p>AI visibility is not a vanity metric. It is increasingly tied to traffic quality and acquisition shifts.</p>
 <p>This eCommerce brand did not rely solely on SEO rankings. They measured how AI systems referenced them, and adjusted accordingly.</p>
 <p>As discovery continues shifting toward AI-generated answers, understanding where and how a brand appears in those answers becomes a competitive necessity.</p>
-<p>Platforms like <a href="/"><strong>Zicy</strong></a> make that visibility observable, so brands can respond as AI-driven discovery evolves.</p>`,
+<p>Platforms like <a href="/"><strong>Zicy</strong></a> make that visibility observable, so brands can respond as AI-driven discovery evolves.</p>
+`,
   },
   {
     slug: "aesthetic-clinic-ai-visibility",
@@ -767,7 +771,8 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>This clinic did not chase traffic alone.</p>
 <p>They focused on understanding how AI systems interpret credibility, treatment relevance, and brand authority.</p>
 <p>As healthcare and aesthetic discovery increasingly shifts toward AI-generated answers, visibility is not about being searchable, but about being referenced and recommended.</p>
-<p>Platforms like <a href="/"><em><strong>Zicy</strong></em></a> make this visibility measurable, enabling brands to adapt as AI-driven discovery continues to evolve.</p>`,
+<p>Platforms like <a href="/"><em><strong>Zicy</strong></em></a> make this visibility measurable, enabling brands to adapt as AI-driven discovery continues to evolve.</p>
+`,
   },
   {
     slug: "b2b-advisory-ai-visibility",
@@ -845,7 +850,8 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <h2>The broader signal….</h2>
 <p>In high-trust industries, visibility is about being referenced when AI systems summarise, compare, and recommend.</p>
 <p>As discovery models evolve, the brands that understand how they are surfaced inside AI answers will adapt faster than those relying solely on traditional search metrics.</p>
-<p>Platforms like <a href="/"><strong>Zicy</strong></a> make this layer observable, so organisations can respond to how AI-driven discovery is actually unfolding.</p>`,
+<p>Platforms like <a href="/"><strong>Zicy</strong></a> make this layer observable, so organisations can respond to how AI-driven discovery is actually unfolding.</p>
+`,
   },
   {
     slug: "b2b-services-prompt-level-visibility",
@@ -938,7 +944,8 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>B2B discovery is evolving quietly.</p>
 <p>Buyers are asking AI to compare, recommend, summarise, and shortlist before visiting a website.</p>
 <p>The brands that understand how they appear inside those AI responses will adapt faster than those measuring search rankings alone.</p>
-<p>Tools like <a href="/">Zicy</a> exist to surface that layer, so visibility inside AI answers becomes something you can track and improve.</p>`,
+<p>Tools like <a href="/">Zicy</a> exist to surface that layer, so visibility inside AI answers becomes something you can track and improve.</p>
+`,
   },
   {
     slug: "education-owned-earned-citations",
@@ -1037,7 +1044,8 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <li><strong>Influence Gaps:</strong> You can’t identify which specific prompts are driving market influence.</li>
 <li><strong>Competitive Risk:</strong> You can’t defend your brand against competitors actively shaping AI narratives.</li>
 </ul>
-<p>Winning here is not about writing longer blogs; it’s about <strong>structured, extractable authority.</strong> If your institution has a visibility gap, it is measurable, and once it’s measurable, it’s optimisable.</p>`,
+<p>Winning here is not about writing longer blogs; it’s about <strong>structured, extractable authority.</strong> If your institution has a visibility gap, it is measurable, and once it’s measurable, it’s optimisable.</p>
+`,
   },
   {
     slug: "b2b-services-90-day-ai-visibility",
@@ -1158,7 +1166,8 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <p>The shift isn’t coming.</p>
 <p>It’s already here.</p>
 <p>If you don’t know how often AI mentions your brand, someone else is shaping that narrative.</p>
-<p>Platforms like <a href="/">Zicy</a> help you see it, track it, and optimise it.</p>`,
+<p>Platforms like <a href="/">Zicy</a> help you see it, track it, and optimise it.</p>
+`,
   },
   {
     slug: "commercial-interiors-ai-visibility",
@@ -1258,7 +1267,8 @@ Prioritised treatment-related prompts with commercial intent.</li>
 </ul>
 <p>You lose influence before the RFQ stage.</p>
 <p>Traditional SEO metrics don’t reveal this layer. AI visibility requires its own tracking system.</p>
-<p>Tools like <a href="/">Zicy</a> make that visibility measurable and actionable.</p>`,
+<p>Tools like <a href="/">Zicy</a> make that visibility measurable and actionable.</p>
+`,
   },
   {
     slug: "b2b-electronics-ai-visibility",
@@ -1357,7 +1367,8 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <li>Early-stage buyer trust</li>
 </ul>
 <p>The brands that understand how AI mentions, cites, and ranks them will shape the next wave of B2B discovery.</p>
-<p><a href="/">Zicy</a> makes that visibility measurable and optimisable.</p>`,
+<p><a href="/">Zicy</a> makes that visibility measurable and optimisable.</p>
+`,
   },
   {
     slug: "b2b-logistics-ai-procurement-filter",
@@ -1410,51 +1421,219 @@ Prioritised treatment-related prompts with commercial intent.</li>
     slug: "aesthetic-clinic-ai-referred-purchases",
     indexMeta: "Healthcare / aesthetics · AI-to-revenue",
     eyebrow: "Healthcare / aesthetics · AI-to-revenue",
-    indexTitle: "From AI answers to real purchases",
+    indexTitle: "Weakest coverage, most customers",
     big: "256%",
     indexSub: "more AI-referred purchases · 219.6% more AI-referred sessions",
-    h1: "How a Malaysian Aesthetic Clinic Group Turned AI Visibility Into 221 Tracked Purchases, Up 256.45%",
-    metaTitle: "AI Visibility Drove 256% More Purchases for an Aesthetic Clinic, Zicy",
-    metaDescription: "See how a Malaysian aesthetic clinic group connected AI mention coverage to revenue: 219.6% more ChatGPT-referred sessions and 256.45% more tracked purchases, year on year.",
+    h1: "The AI engine where this clinic is weakest sent the most customers",
+    metaTitle: "Weakest AI Coverage, Most Customers: Aesthetic Clinic Case Study, Zicy",
+    metaDescription: "ChatGPT was the weakest AI engine for a Malaysian aesthetic clinic at 15.9% coverage, yet it sent 13,225 sessions and 221 tracked purchases, up 256.45% year on year.",
     datePublished: "2026-08-19",
-    dateModified: "2026-08-19",
-    bodyHtml: `<p>Search visibility used to be one number stack: rankings, clicks, sessions. AI added a second stack most brands still cannot see: mentions, citations, share of voice, sentiment, and position, measured at the level of an individual question a real buyer asks.</p>
-<p>The client is a Malaysian aesthetic clinic group in a B2C, high-consideration, heavily researched category, exactly where someone opens ChatGPT and asks which clinic is best for a specific concern before they ever open Google. This engagement measured both the visibility side and the revenue side of the same funnel.</p>
+    dateModified: "2026-10-12",
+    bodyHtml: `<p>The platform where a Malaysian aesthetic clinic has its lowest AI coverage is also the one that sent 13,225 sessions and 221 recorded purchases, and no blended visibility score would have told you that.</p>
+<p>Every AEO conversation hits the same objection: does any of this sell anything? Mentions are easy to screenshot and hard to take to a finance director, so we tracked one clinic brand from the prompt to the purchase.</p>
+<h2>Rankings do not show who gets recommended</h2>
+<p>Search used to be measured in rankings, clicks and traffic. AI adds a second layer: whether you are mentioned and cited, how much of the answer you own, what sentiment surrounds you, and how all of it moves prompt by prompt.</p>
+<p>A patient asking an AI engine which clinic to trust for a treatment gets a short list. A rankings report cannot tell you who is on it.</p>
 <h2>What we did</h2>
+<p>We tracked treatment queries, concern queries and clinic-selection queries across five AI platforms, to see where the clinic already led and where competitors still won.</p>
+<p>We reworked treatment pages so AI engines could extract them more easily, with clearer direct answers and sharper entity signals on the pages that matter.</p>
+<p>Prompts with weak coverage went to the top of the content queue, and prompts where the clinic already led got reinforced.</p>
+<p>We benchmarked against the top five competing brands on mentions, citations, average ranking and share of voice, so a gain had to show up as market position.</p>
+<p>Last, we followed the visibility into outcomes: referral sessions from ChatGPT, Gemini and Perplexity, then engagement, then purchases.</p>
+<h2>The numbers</h2>
 <ul>
-<li><strong>Tracked real patient-intent prompts, not keywords:</strong> treatment queries, concern queries, clinic-selection queries, across five AI engines.</li>
-<li><strong>Made the clinic extractable:</strong> treatment content restructured so an engine can lift a clean, quotable answer.</li>
-<li><strong>Used the gaps as the content roadmap:</strong> weak-coverage prompts became the priority list, strong-coverage prompts got reinforced before competitors moved in.</li>
-<li><strong>Watched the competitive set, not just the client:</strong> mentions, citations, ranking, and share of voice benchmarked against the top five competing clinics, monthly.</li>
-<li><strong>Connected it to the money:</strong> referral traffic from ChatGPT, Gemini, Perplexity, and Copilot, tracked through to engagement and purchases.</li>
+<li><strong>39.01%</strong> brand mention coverage</li>
+<li><strong>36.24%</strong> web citation rate</li>
+<li><strong>16.44%</strong> share of voice</li>
+<li><strong>#2.54</strong> average AI ranking</li>
+<li><strong>78/100</strong> positive sentiment</li>
 </ul>
-<h2>The visibility numbers</h2>
+<p>The gains were spread across prompts. Several important ones reached 3/5 or 4/5 platform coverage, the best hit 41.67% share of voice, and several averaged a position between #1 and #2.</p>
+<figure><img src="/case-studies/2026/08/AI-Visibility-Report-Two-Month-Trend.png" alt="Two-month AI visibility report showing mention coverage, citation coverage, share of voice, average ranking and platform coverage" loading="lazy" decoding="async" /><figcaption>Look at the platform coverage panel, bottom left. ChatGPT sits at 15.9% while AI Overviews sits at 65.3%.</figcaption></figure>
+<p>Against the five competing brands in the same report, the clinic holds 16.44% share of voice and the next brand holds 6.07%, so the gap is roughly 2.7 times.</p>
+<figure><img src="/case-studies/2026/08/Competitive-AI-Performance-Share-of-Voice.png" alt="The clinic against its five closest competing brands, 16.44% share of voice versus 6.07% for the next brand, competitor names redacted" loading="lazy" decoding="async" /><figcaption>The clinic holds 16.44% share of voice. The next brand holds 6.07%. Competitor names are blurred.</figcaption></figure>
+<figure><img src="/case-studies/2026/08/Individual-Tracked-Prompts-Per-Engine.png" alt="Individual tracked prompts scored per engine, prompt text redacted" loading="lazy" decoding="async" /><figcaption>Most high-intent prompts sit at 3/5 or 4/5 platform coverage, and one reaches 41.67% share of voice. Prompt text is blurred.</figcaption></figure>
+<h2>What moved in two months</h2>
+<p>Across the two-month window in the report, share of voice went from 12.2% to 16.4%, brand mentions from 920 to 2,307, and average position from 3.0 to 2.5. Share of voice alone can flatter you, so the useful part is that position improved while mentions more than doubled.</p>
+<h2>Purchases grew faster than traffic</h2>
+<p>ChatGPT alone sent 13,225 sessions, up 219.6% year on year, with 10,767 engaged sessions, up 170.94%. Gemini went from 25 sessions to 287 and Perplexity from 48 to 120.</p>
+<p>Purchases went from 62 to 221, up 256.45%, a faster rise than the sessions behind them. GA4 recorded those 221 on ChatGPT sessions, and for a B2C clinic that is a revenue line.</p>
+<figure><img src="/case-studies/2026/08/AI-Referred-Sessions-Engagement-Purchases.png" alt="GA4 table of AI-referred sessions, engagement and purchases, 1 January to 31 July 2026 against the same dates in 2025" loading="lazy" decoding="async" /><figcaption>ChatGPT sent 13,225 sessions and 221 purchases. Gemini sent 287 sessions and Perplexity 120.</figcaption></figure>
+<h2>Engagement rate fell</h2>
+<p>Engagement rate on ChatGPT referrals fell from 96.04% a year ago to 81.35%. Volume more than tripled and the audience widened, which is the likely reason, though the data does not prove it. We would rather show you that row than crop it.</p>
+<p>That makes engagement quality something to watch as AI referral volume continues to grow.</p>
+<h2>Coverage was lowest on the engine that sent the most sessions</h2>
+<p>ChatGPT is where this clinic has its weakest coverage, at 15.9%, against 65.3% on AI Overviews and 63.1% on Perplexity. It also sends the most sessions: 13,225 against 120 from Perplexity.</p>
+<p>The engine with the weakest coverage is the one sending the customers. A blended score of 39% hides a platform at 16% that carries the commercial weight, and fixing the strongest numbers first would have pointed the budget the wrong way.</p>
+<p>Two limits apply. AI Overviews and Google AI Mode cannot appear in a GA4 referral table because that traffic resolves to Google organic. Their low session counts say nothing about their value, so the clean comparison is ChatGPT against Perplexity. The visibility report covers 1 June to 31 July 2026, while the GA4 comparison runs 1 January to 31 July 2026 against the same dates in 2025. The two moved together, and that does not prove one caused the other.</p>
+<h2>Measure each engine separately</h2>
+<p>A blended AI visibility score would not have shown any of this. Tracking each platform down to the individual prompt did.</p>
+<p><strong>Which of your AI engines is sending you customers, and do you know how it describes you?</strong></p>`,
+  },
+  {
+    slug: "fintech-ai-share-of-voice",
+    indexMeta: "Fintech · 5 AI platforms",
+    eyebrow: "Fintech · 5 AI platforms",
+    indexTitle: "Leading share of voice from third on mentions",
+    big: "13.20%",
+    indexSub: "share of voice · 62.67% mentions",
+    h1: "A Malaysian Fintech Trails on AI Mentions and Ranking, Yet Leads Share of Voice",
+    metaTitle: "62.67% AI Mentions & 13.20% Share of Voice for Fintech, Zicy",
+    metaDescription: "How a Malaysian fintech brand led AI share of voice at 13.20% while a competitor had more mentions and a better average rank, measured across 1,200 tracked AI responses.",
+    datePublished: "2026-10-12",
+    dateModified: "2026-10-12",
+    bodyHtml: `<p><strong>What if the competitor with more AI mentions and a better average ranking is not the one winning the conversation?</strong></p>
+<p>That was the question behind this fintech brand's numbers. Its nearest tracked competitor had 809 AI mentions and an average rank of #2.2. The brand had 752 mentions and an average rank of #3.1. On those two measures it was behind. On share of voice it was ahead, 13.20% against 12.45%.</p>
+<p>Fintech buyers compare, shortlist, then ask someone whether the shortlist holds up. More and more, that someone is ChatGPT, Gemini or Google's AI experiences, before a human ever takes a call. This brand measured where it stood in that conversation instead of assuming.</p>
+<h2>Results Snapshot (Measured via Zicy)</h2>
+<p><strong>AI Visibility &amp; Brand Presence</strong> (1,200 tracked AI responses, 27 July to 27 August 2026)</p>
 <ul>
-<li><strong>Mention coverage: 39.01%</strong> (815 of 2,089 AI responses mentioned the brand)</li>
-<li><strong>Web citation rate: 36.24%</strong> (757 responses linked to the site)</li>
-<li><strong>Share of voice: 16.44%</strong> (3,227 of 19,626 total brand mentions in the category)</li>
-<li><strong>Average AI ranking: #2.54</strong></li>
-<li><strong>Sentiment: 78/100 positive</strong></li>
+<li><strong>Brand Mention Coverage:</strong> <strong>62.67%</strong> (752 of 1,200 responses)</li>
+<li><strong>Website Citation Coverage:</strong> <strong>54.42%</strong> (653 of 1,200 responses)</li>
+<li><strong>Share of Voice:</strong> <strong>13.20%</strong> (1,570 of 11,895 brand mentions across the competitive set)</li>
+<li><strong>Average AI Ranking:</strong> <strong>#3.13</strong> whenever the brand was mentioned</li>
+<li><strong>AI Sentiment:</strong> <strong>75 out of 100</strong>, rated Positive</li>
 </ul>
-<p>Over two months, share of voice moved from 12.2% to 16.4%, brand mentions from 920 to 2,307, and average ranking from 3.0 to 2.5.</p>
-<p><img src="/case-studies/2026/08/AI-Visibility-Report-Two-Month-Trend.png" alt="Two-month AI visibility report, mention coverage, citation coverage, share of voice, ranking and platform coverage trend" loading="lazy" decoding="async" /></p>
-<h2>Category leadership, with a number attached</h2>
-<p>Share of voice on its own is a vanity metric. Share of voice next to competitors is a market position. This clinic held 16.44% share of voice against 6.07% for the next best competitor, then 5.77%, 4.71%, 3.92%, and 3.60%. Nearly three times the nearest rival, in a category with five actively visible competitors, while sentiment held at 78/100, the highest in the set.</p>
-<p><img src="/case-studies/2026/08/Competitive-AI-Performance-Share-of-Voice.png" alt="The client against its five closest competitors, 16.44% share of voice versus 6.07% for the next best, brand names redacted" loading="lazy" decoding="async" /></p>
-<p>At prompt level the strength was distributed, not propped up by one or two queries. Multiple prompts held 3/5 or 4/5 platform coverage, individual prompts reached 41.67% share of voice, and average positions clustered between #1 and #2 on the queries that matter most.</p>
-<p><img src="/case-studies/2026/08/Individual-Tracked-Prompts-Per-Engine.png" alt="Individual tracked prompts scored per engine, prompt text redacted apart from one example" loading="lazy" decoding="async" /></p>
-<h2>From visibility to revenue</h2>
-<p>Visibility is the leading indicator. This is the lagging one, measured year on year over seven months:</p>
+<p><img src="/case-studies/2026/10/fintech-ai-visibility-report.png" alt="Zicy AI Visibility Report for a Malaysian fintech brand showing platform coverage across five AI engines" loading="lazy" decoding="async" /></p>
+<p><strong>Platform Coverage</strong></p>
 <ul>
-<li>13,225 sessions from ChatGPT alone, against 4,138 a year earlier: up 219.6%</li>
-<li>10,767 engaged sessions, up 170.9%</li>
-<li>221 purchases, against 62: up 256.45%</li>
-<li>Gemini referrals up 1,048%, Perplexity up 150%, Copilot from zero</li>
+<li>Google AI: 67.9%</li>
+<li>Gemini: 64.2%</li>
+<li>AI Overviews: 62.5%</li>
+<li>ChatGPT: 60%</li>
+<li>Perplexity: 58.8%</li>
 </ul>
-<p>Purchases grew faster than the traffic that produced them. The standard objection to AI referral traffic is that it is curious browsers, high volume and low intent. Here the opposite happened: someone who arrives already told by an AI that this clinic is a credible option arrives further down the funnel than someone who clicked a blue link.</p>
-<p><img src="/case-studies/2026/08/AI-Referred-Sessions-Engagement-Purchases.png" alt="AI-referred sessions, engagement and purchases year on year, engagement rate fell from 96 percent to 81 percent at three times the volume" loading="lazy" decoding="async" /></p>
-<p>One honest caveat: the visibility window is two months, while the traffic comparison is seven months year on year. They are not the same period, and this is not a claim that one caused the other in a straight line.</p>
-<h2>The takeaway</h2>
-<p>Nearly all of this clinic's converting traffic came from ChatGPT, the one engine where its visibility was weakest at 15.9% coverage. Perplexity, at 63.1% coverage, sent 120 sessions. ChatGPT, at 15.9%, sent 13,225. Coverage and revenue are not the same axis, and averaging them into a single visibility score hides exactly the thing a brand needs to see. The strategy question is no longer how to get mentioned more. It is: which engine do buyers actually use, and what is the brand's position there specifically.</p>`,
+<p>No platform rated below Good.</p>
+<p><strong>Competitive AI Performance</strong></p>
+<ul>
+<li>Nearest competitor: 809 mentions, average rank #2.2, 12.45% share of voice.</li>
+<li>One further competitor sat close behind at 649 mentions and an average rank of #2.7.</li>
+<li>The brand's 13.20% share of voice was higher than each of the five tracked competitors (12.45%, 11.57%, 4.78%, 4.48% and 3.78%).</li>
+</ul>
+<p><img src="/case-studies/2026/10/fintech-competitive-ai-performance.png" alt="Competitive AI Performance table for a Malaysian fintech brand against five tracked competitors, showing mentions, average ranking, citations and share of voice, with competitor names redacted" loading="lazy" decoding="async" /></p>
+<p><strong>Prompt-Level Visibility</strong></p>
+<ul>
+<li>On the best-tracked prompt, the brand held 27 of 47 total brand mentions across the competitive set: 57.45% share of voice at an average position of #1.2, cited across all five engines.</li>
+<li>Other prompts reached 39.58%, 33.33% and 30.56% share of voice.</li>
+</ul>
+<p><img src="/case-studies/2026/10/fintech-tracked-prompts.png" alt="Tracked prompts table for a Malaysian fintech brand showing brand mention coverage, position and share of voice per prompt, with prompt text blurred" loading="lazy" decoding="async" /></p>
+<h2>Why Share of Voice Changed the Reading</h2>
+<p>Mentions show whether a brand is in the room. Ranking shows where it stands. Share of voice shows how much of the conversation belongs to it compared with the others being considered at the same time.</p>
+<p>Judged on mentions and ranking alone, this brand was running third. Share of voice showed that it held more of the AI conversation than any single competitor. The prompt-level data supports this. The brand was winning specific, high-intent prompts outright, and the lead did not depend on how the aggregate was calculated.</p>
+<h2>What We Did (Strategy Breakdown)</h2>
+<p><strong>Prompt Mapping</strong></p>
+<ul>
+<li>Tracked the real comparisons and evaluations prospects run when researching a financial product, in place of a keyword list.</li>
+</ul>
+<p><strong>Entity and Topical Signals</strong></p>
+<ul>
+<li>Made it clearer to AI systems what the brand does, what it is expert in, and where it belongs in the category.</li>
+</ul>
+<p><strong>Content Built for Extraction</strong></p>
+<ul>
+<li>Structured direct answers and supporting detail so AI engines could lift and cite them with confidence.</li>
+</ul>
+<p><strong>Competitor Gaps as a Priority List</strong></p>
+<ul>
+<li>Every prompt where a rival was mentioned or cited more often became the next optimisation target.</li>
+</ul>
+<p><strong>Full Competitive Measurement</strong></p>
+<ul>
+<li>Tracked mentions, citations, ranking, share of voice and sentiment together against five named competitors, since any one of those numbers alone can mislead.</li>
+</ul>
+<h2>AI Referral Traffic (GA4, 1 July to 27 August 2026 vs the previous two months)</h2>
+<ul>
+<li>ChatGPT users: 3 to 34 (+1,033%)</li>
+<li>ChatGPT new users: 1 to 32 (+3,100%)</li>
+<li>ChatGPT events: 164 to 764 (+365.85%)</li>
+<li>Gemini users: 1 to 7. Gemini events: 5 to 61.</li>
+</ul>
+<p><img src="/case-studies/2026/10/fintech-ga4-ai-referral-traffic.png" alt="GA4 table of ChatGPT and Gemini referral users and events, 1 July to 27 August 2026 against the previous two months" loading="lazy" decoding="async" /></p>
+<p><strong>Read these with care.</strong> The starting base was very small, which inflates the percentages. Average engagement time per active ChatGPT user fell 41.43%, from 9 minutes 28 seconds to 5 minutes 33 seconds. Engaged sessions per active user fell 58.53%, from 3.33 to 1.38. More people are arriving, and on average each does less once there. This is worth watching as the base grows.</p>
+<h2>The Takeaway</h2>
+<p>A brand that tracks only mentions and ranking can be behind on the number that reflects its real share of the conversation, and never find out. Tracking mentions, citations, ranking, share of voice and sentiment together, against named competitors, shows which prompts the brand wins, which it loses, and where to work next.</p>
+<p><strong>By tracking AI visibility with tools such as Zicy, brands can see how much of the AI conversation they hold compared with the competitors buyers are weighing them against.</strong></p>
+`,
+  },
+  {
+    slug: "ecommerce-ai-mentions-vs-competitors",
+    indexMeta: "eCommerce · 7 weeks",
+    eyebrow: "eCommerce · 7 weeks",
+    indexTitle: "More AI mentions than five rivals combined",
+    big: "2,795",
+    indexSub: "mentions vs 2,228 for five rivals · 54.15% SOV",
+    h1: "One eCommerce Brand Now Outmentions Its Five Tracked Competitors Combined in AI Answers",
+    metaTitle: "82.67% AI Mention Coverage & 54.15% Share of Voice for eCommerce, Zicy",
+    metaDescription: "How an eCommerce brand earned 2,795 AI mentions, more than its five tracked competitors combined (2,228), with 54.15% share of voice across 3,381 tracked AI answers.",
+    datePublished: "2026-10-12",
+    dateModified: "2026-10-12",
+    bodyHtml: `<p><strong>2,795 AI mentions for one eCommerce brand. 2,228 for all five of its tracked competitors combined.</strong></p>
+<p>Across 3,381 tracked AI answers over seven weeks, this brand accounted for more mentions than its five closest rivals put together. A growing share of buyers now ask ChatGPT, Gemini or Perplexity to recommend, compare or shortlist products before they reach a website. The brand that gets named takes the shortlist seat, and the brand that gets cited gets the click that follows.</p>
+<h2>Results Snapshot (Measured via Zicy)</h2>
+<p><strong>AI Visibility &amp; Brand Presence</strong> (3,381 tracked AI answers, 1 July to 17 August 2026)</p>
+<ul>
+<li><strong>Brand Mention Coverage:</strong> <strong>82.67%</strong> (2,795 of 3,381 answers)</li>
+<li><strong>Website Citation Coverage:</strong> <strong>75.98%</strong> (2,569 of 3,381 answers linking to the site)</li>
+<li><strong>Share of Voice:</strong> <strong>54.15%</strong> across the competitive set</li>
+<li><strong>Average AI Ranking:</strong> <strong>#1.29</strong> whenever the brand was mentioned</li>
+<li><strong>AI Sentiment:</strong> <strong>86 out of 100</strong>, rated Very Positive</li>
+</ul>
+<p><img src="/case-studies/2026/10/ecommerce-ai-visibility-report.png" alt="Zicy AI Visibility Report for an eCommerce brand showing platform coverage and a share of voice trend over six weeks" loading="lazy" decoding="async" /></p>
+<p><strong>Platform Coverage</strong></p>
+<ul>
+<li>Google AI: 87.7%</li>
+<li>Gemini: 87.7%</li>
+<li>AI Overviews: 87.6%</li>
+<li>Perplexity: 83.6%</li>
+<li>ChatGPT: 67% (the one platform with clear room left to close)</li>
+</ul>
+<p><strong>Competitive AI Performance</strong></p>
+<ul>
+<li>Brand: 2,795 mentions.</li>
+<li>All five tracked competitors combined: 2,228 mentions.</li>
+<li>The nearest competitor held 694 mentions with a sentiment score of 73/100, positive but well below the brand's 86. The next four rivals held between 363 and 407 mentions each.</li>
+</ul>
+<p><img src="/case-studies/2026/10/ecommerce-competitive-ai-performance.png" alt="Competitive AI Performance table for an eCommerce brand against five tracked competitors, showing 2,795 mentions and 54.15% share of voice, with competitor names redacted" loading="lazy" decoding="async" /></p>
+<p><strong>Trend</strong></p>
+<ul>
+<li>Share of voice rose from 38.5% to 54.1% over the period while average ranking held steady around #1.3.</li>
+<li>Raw mention volume moved more week to week. Share of voice held its line while the raw count swung, which is the case for tracking the relative number alongside the absolute one.</li>
+</ul>
+<p><strong>Prompt-Level Visibility</strong></p>
+<ul>
+<li>Platform coverage held at 4 or 5 out of 5 across the tracked prompts, so the result did not rest on one runaway query.</li>
+</ul>
+<p><img src="/case-studies/2026/10/ecommerce-prompt-level-visibility.png" alt="Tracked prompt rows for an eCommerce brand showing 4 or 5 out of 5 platform coverage per prompt, with prompt text blurred" loading="lazy" decoding="async" /></p>
+<h2>What We Did (Strategy Breakdown)</h2>
+<p><strong>Prompt-Level Mapping</strong></p>
+<ul>
+<li>Tracked each high-intent product discovery prompt a real buyer would type, one by one, in place of guessing from a keyword list.</li>
+</ul>
+<p><strong>Content Rebuilt for Extraction</strong></p>
+<ul>
+<li>Restructured product and category pages so AI systems could lift a clear, attributable answer straight from the page.</li>
+</ul>
+<p><strong>Weak Clusters Prioritised</strong></p>
+<ul>
+<li>Reinforced prompts where the brand already showed authority and flagged thin prompts for the next round.</li>
+</ul>
+<p><strong>Competitor Benchmarking on the Same Prompts</strong></p>
+<ul>
+<li>Tracked mentions, citations, ranking and share of voice against the same five rivals, on the same prompts, in place of an industry average.</li>
+</ul>
+<h2>AI Referral Traffic (GA4, year to date vs the same period last year)</h2>
+<p>This uses a different reporting window from the visibility figures above, so read it as directional.</p>
+<ul>
+<li>ChatGPT: 279 sessions, 2,084 events</li>
+<li>Gemini: 10 sessions, 183 events</li>
+<li>Perplexity: 3 sessions</li>
+<li>Same period last year: zero sessions from each of these platforms.</li>
+</ul>
+<p><img src="/case-studies/2026/10/ecommerce-ga4-ai-referral-sessions.png" alt="GA4 table of AI referral sessions from ChatGPT, Gemini and Perplexity, 1 January to 18 August 2026 against the same dates in 2025" loading="lazy" decoding="async" /></p>
+<p><strong>Read these with care.</strong> ChatGPT sent the most volume (279 sessions against a combined 13 from Gemini and Perplexity), but had the weakest engagement rate of the three at 37.63%. Perplexity converted every session it sent and Gemini held 60%. Both samples are small, so no platform can be named a winner yet. The early pattern is that the channel with the most mentions is not necessarily the one with the best engagement.</p>
+<h2>The Takeaway</h2>
+<p>Coverage and conversion are separate jobs. Share of voice shows whether a brand is being talked about. GA4 shows whether the people arriving from that conversation engage once they land. A brand needs both numbers, from the same window, to decide which platform deserves the next round of optimisation.</p>
+<p><strong>By tracking AI visibility with tools such as Zicy, eCommerce brands can see where they stand against named competitors and where to direct effort next.</strong></p>
+`,
   },
 ];
