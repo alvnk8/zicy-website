@@ -537,3 +537,6 @@ label.fld{display:block;font-size:13px;font-weight:500;color:var(--ink);margin-b
   .ctable td.col-feat{background:transparent;color:var(--ink-2)}
   .ctable tbody td::before,.ctable tfoot td::before{content:attr(data-col);display:block;font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 }
+.cs-body figure{margin:24px 0}
+.cs-body figure img{margin:0}
+.cs-body figcaption{margin-top:10px;font-size:13px;line-height:1.5;color:var(--muted)}
