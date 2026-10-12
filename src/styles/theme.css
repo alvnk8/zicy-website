@@ -130,6 +130,15 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
 .links a:not(.cta):hover::after,.links a:not(.cta).active::after{transform:scaleX(1)}
 .links .cta{background:var(--violet);color:#fff;padding:9px 18px;border-radius:9px;font-size:15px;font-weight:500;transition:background .15s var(--ease)}
 .links .cta:hover{background:var(--violet-700)}
+/* Compact desktop nav (900-1180px, e.g. a 1366px laptop at 125-150% scaling): smaller logo, tighter gaps and padding so the full row fits */
+@media(min-width:900px) and (max-width:1180px){
+  .nav{padding:0 20px}
+  .nav img,.logo img,.logo svg{height:56px}
+  .links{gap:14px}
+  .links a:not(.cta),.has-dropdown>.trigger{font-size:14px}
+  .links .cta{padding:7px 13px;font-size:14px}
+  .links .has-dropdown:nth-last-of-type(1) .dropdown{left:auto;right:0}
+}
 /* Mobile (<=860px): the <details> hamburger handles all primary navigation.
    - Hide direct anchor children of .links (Home / About / Platform / Pricing / Case Studies).
    - Hide the .has-dropdown wrappers (Solutions / Free tools triggers) so their
@@ -138,11 +147,11 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
      opacity:0;visibility:hidden, but visibility:hidden keeps the position:absolute
      panel in the layout, contributing min-width:260px to document.scrollWidth and
      causing a 138 px horizontal overflow at 375 px viewport. */
-/* Collapse the desktop nav to the hamburger at <=1024px. With seven top-level items, two
-   dropdowns, the Log in link and the CTA, the full row no longer fits below ~1005px and would
+/* Collapse the desktop nav to the hamburger at <=899px. With seven top-level items, two
+   dropdowns, the Log in link and the CTA, the full row no longer fits below ~900px and would
    wrap / overflow, so the <details> menu takes over earlier. (Page-content grids still
    collapse at 860px below.) */
-@media(max-width:1024px){
+@media(max-width:899px){
   .links > a:not(.cta),
   .links .has-dropdown,
   .dropdown{display:none}
@@ -159,6 +168,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
 .has-dropdown:hover>.trigger::after,.has-dropdown:focus-within>.trigger::after,.has-dropdown>.trigger.active::after{transform:scaleX(1)}
 .dropdown{position:absolute;top:100%;left:0;margin-top:6px;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:8px;min-width:260px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:2px;opacity:0;visibility:hidden;transform:translateY(5px);transition:opacity .18s var(--ease),transform .18s var(--ease),visibility .18s}
 .has-dropdown:hover .dropdown,.has-dropdown:focus-within .dropdown{opacity:1;visibility:visible;transform:none}
+.has-dropdown.touch-open .dropdown{opacity:1;visibility:visible;transform:none}
 .dropdown a{padding:10px 12px;border-radius:7px;font-size:14px;color:var(--ink-2);white-space:nowrap;font-weight:500}
 .dropdown a:hover,.dropdown a.active{background:var(--violet-50);color:var(--violet-700)}
 
@@ -184,10 +194,10 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.82);backdro
 .mnav-panel a:not(.btn):hover,.mnav-panel a:not(.btn).active{background:var(--violet-50);color:var(--violet-700)}
 .mnav-panel .mnav-group{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:14px 12px 4px}
 .mnav-panel .btn{margin-top:12px;justify-content:center}
-/* Show the hamburger at <=1024px. MUST come after the base ".mnav{display:none}" rule above —
+/* Show the hamburger at <=899px. MUST come after the base ".mnav{display:none}" rule above —
    equal specificity, so source order decides; placing it earlier let the base rule win and the
    menu disappeared. */
-@media(max-width:1024px){.mnav{display:block}}
+@media(max-width:899px){.mnav{display:block}}
 
 /* ===== HOMEPAGE HERO (asymmetric, measurement grid atmosphere) ===== */
 .hero{position:relative;overflow:hidden;padding:clamp(72px,11vw,128px) 0 clamp(64px,8vw,104px);background:radial-gradient(120% 80% at 82% -10%,#EAEEF8 0%,var(--paper) 58%)}
@@ -239,8 +249,8 @@ footer li a:hover{color:#fff}
 .social a{width:44px;height:44px;border:1px solid rgba(255,255,255,.16);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#C9C3DE;transition:color .18s var(--ease),border-color .18s var(--ease),background .18s var(--ease),transform .18s var(--ease)}
 .social a:hover{color:#fff;border-color:var(--violet);background:rgba(110,99,172,.25);transform:translateY(-2px)}
 .social svg{width:17px;height:17px;fill:currentColor}
-.contact{margin-top:20px;font-size:13.5px;line-height:1.7;color:#9C92C4;font-style:normal}
-.fbot{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.09);padding:22px 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#8C86AC;max-width:1200px;margin:0 auto}
+.contact{margin-top:20px;font-size:14px;line-height:1.7;color:#9C92C4;font-style:normal}
+.fbot{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.09);padding:22px 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:14px;color:#8C86AC;max-width:1200px;margin:0 auto}
 .fbot a{color:inherit}
 .fbot a:hover{color:#fff}
 .fbot .cc-reopen{background:none;border:0;padding:10px 0;margin:-10px 0;font:inherit;color:inherit;cursor:pointer}
@@ -285,7 +295,7 @@ footer li a:hover{color:#fff}
 .card .eyebrow{margin-bottom:12px;display:inline-flex}
 .card h3{font-size:23px;margin-bottom:10px}
 .card p{font-size:14.5px;color:var(--ink-2)}
-.card .link{margin-top:16px;display:inline-block;font-weight:500;font-size:14px;color:var(--violet-700)}
+.card .link{margin-top:6px;display:inline-block;padding:10px 0;margin-bottom:-10px;font-weight:500;font-size:14px;color:var(--violet-700)}
 .card .link:hover{color:var(--violet)}
 
 .shot{border:1.5px dashed rgba(21,21,31,0.16);border-radius:12px;background:repeating-linear-gradient(135deg,#fafaff,#fafaff 11px,#f4f4fb 11px,#f4f4fb 22px);min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
@@ -295,7 +305,7 @@ footer li a:hover{color:#fff}
 .screenshot .chrome{display:flex;align-items:center;gap:7px;height:30px;padding:0 14px;border-bottom:1px solid var(--line);background:#fafafa}
 .screenshot .chrome span{width:10px;height:10px;border-radius:50%;background:rgba(21,21,31,0.16)}
 .screenshot img{display:block;width:100%;height:auto}
-.screenshot figcaption{padding:14px 18px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);font-family:var(--fm);letter-spacing:.01em}
+.screenshot figcaption{padding:14px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);font-family:var(--fm);letter-spacing:.01em}
 
 .band{background:var(--violet-50);color:var(--ink)}
 .band h2{color:var(--ink);font-size:36px}
@@ -525,8 +535,9 @@ label.fld{display:block;font-size:13px;font-weight:500;color:var(--ink);margin-b
 .ctable tbody td{color:var(--ink-2)}
 .ctable td.col-feat,.ctable tfoot td.col-feat{background:var(--violet-50);color:var(--ink)}
 .ctable tr:last-child th,.ctable tr:last-child td{border-bottom:0}
-.ctable .ct-cta{display:inline-block;margin-top:4px;font-weight:500;font-size:14px;color:var(--violet-700)}
+.ctable .ct-cta{display:inline-block;margin-top:4px;padding:10px 0;margin-bottom:-10px;font-weight:500;font-size:14px;color:var(--violet-700)}
 .ctable .ct-cta:hover{color:var(--violet)}
+@media(min-width:761px){.prose .ctable{table-layout:fixed}.prose .ctable th,.prose .ctable td{overflow-wrap:anywhere}.prose .ctable tbody th[scope="row"]{white-space:normal}}
 @media(min-width:761px) and (max-width:1024px){.ctable{table-layout:fixed}.ctable th,.ctable td{overflow-wrap:anywhere}.ctable tbody th[scope="row"]{white-space:normal}}
 @media(max-width:760px){
   .ctable thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}

@@ -84,6 +84,8 @@ const homeActive = path === '/';
         <a href="/done-for-you" class={isActive('/done-for-you') ? 'active' : ''}>Done-for-You</a>
         <p class="mnav-group">Resources</p>
         <a href="/resources" class={isActive('/resources') ? 'active' : ''}>Resources hub</a>
+        <a href="/resources/glossary" class={isActive('/resources/glossary') ? 'active' : ''}>Glossary</a>
+        <a href="/contact" class={isActive('/contact') ? 'active' : ''}>Contact</a>
         <a href="https://www.zicy.com/docs">Help centre</a>
         <a href="/free-tools" class={isActive('/free-tools') ? 'active' : ''}>Free tools hub</a>
         <a href="/ai-brand-audit" class={isActive('/ai-brand-audit') ? 'active' : ''}>Free AI brand audit</a>
@@ -110,6 +112,26 @@ const homeActive = path === '/';
     });
     document.addEventListener('click', function (e) {
       if (m.open && !m.contains(e.target)) m.removeAttribute('open');
+    });
+  })();
+  // Touch devices with the desktop nav (e.g. iPad landscape): first tap on Solutions/Resources
+  // opens its dropdown, a second tap on the Resources link navigates. Mouse behaviour is unchanged.
+  (function () {
+    if (!window.matchMedia || !window.matchMedia('(hover: none)').matches) return;
+    var items = document.querySelectorAll('.links .has-dropdown');
+    items.forEach(function (it) {
+      var t = it.querySelector('.trigger');
+      if (!t) return;
+      t.addEventListener('click', function (e) {
+        var isOpen = it.classList.contains('touch-open');
+        items.forEach(function (o) { o.classList.remove('touch-open'); });
+        if (!isOpen) { it.classList.add('touch-open'); e.preventDefault(); }
+      });
+    });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest || !e.target.closest('.has-dropdown')) {
+        items.forEach(function (o) { o.classList.remove('touch-open'); });
+      }
     });
   })();
 </script>
