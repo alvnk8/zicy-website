@@ -1578,6 +1578,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <li><strong>Average AI Ranking:</strong> <strong>#1.29</strong> whenever the brand was mentioned</li>
 <li><strong>AI Sentiment:</strong> <strong>86 out of 100</strong>, rated Very Positive</li>
 </ul>
+<p><img src="/case-studies/2026/10/ecommerce-ai-visibility-report.png" alt="Zicy AI Visibility Report for an eCommerce brand showing platform coverage and a share of voice trend over six weeks" loading="lazy" decoding="async" /></p>
 <p><strong>Platform Coverage</strong></p>
 <ul>
 <li>Google AI: 87.7%</li>
@@ -1592,6 +1593,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <li>All five tracked competitors combined: 2,228 mentions.</li>
 <li>The nearest competitor held 694 mentions with a sentiment score of 73/100, positive but well below the brand's 86. The next four rivals held between 363 and 407 mentions each.</li>
 </ul>
+<p><img src="/case-studies/2026/10/ecommerce-competitive-ai-performance.png" alt="Competitive AI Performance table for an eCommerce brand against five tracked competitors, showing 2,795 mentions and 54.15% share of voice, with competitor names redacted" loading="lazy" decoding="async" /></p>
 <p><strong>Trend</strong></p>
 <ul>
 <li>Share of voice rose from 38.5% to 54.1% over the period while average ranking held steady around #1.3.</li>
@@ -1601,6 +1603,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <ul>
 <li>Platform coverage held at 4 or 5 out of 5 across the tracked prompts, so the result did not rest on one runaway query.</li>
 </ul>
+<p><img src="/case-studies/2026/10/ecommerce-prompt-level-visibility.png" alt="Tracked prompt rows for an eCommerce brand showing 4 or 5 out of 5 platform coverage per prompt, with prompt text blurred" loading="lazy" decoding="async" /></p>
 <h2>What We Did (Strategy Breakdown)</h2>
 <p><strong>Prompt-Level Mapping</strong></p>
 <ul>
@@ -1626,6 +1629,7 @@ Prioritised treatment-related prompts with commercial intent.</li>
 <li>Perplexity: 3 sessions</li>
 <li>Same period last year: zero sessions from each of these platforms.</li>
 </ul>
+<p><img src="/case-studies/2026/10/ecommerce-ga4-ai-referral-sessions.png" alt="GA4 table of AI referral sessions from ChatGPT, Gemini and Perplexity, 1 January to 18 August 2026 against the same dates in 2025" loading="lazy" decoding="async" /></p>
 <p><strong>Read these with care.</strong> ChatGPT sent the most volume (279 sessions against a combined 13 from Gemini and Perplexity), but had the weakest engagement rate of the three at 37.63%. Perplexity converted every session it sent and Gemini held 60%. Both samples are small, so no platform can be named a winner yet. The early pattern is that the channel with the most mentions is not necessarily the one with the best engagement.</p>
 <h2>The Takeaway</h2>
 <p>Coverage and conversion are separate jobs. Share of voice shows whether a brand is being talked about. GA4 shows whether the people arriving from that conversation engage once they land. A brand needs both numbers, from the same window, to decide which platform deserves the next round of optimisation.</p>
