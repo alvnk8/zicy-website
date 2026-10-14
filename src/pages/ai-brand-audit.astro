@@ -80,5 +80,27 @@ const graph = {
 <BaseLayout title={title} description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(graph)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumb)} />
-  <FreeDiagnostic />
+  <FreeDiagnostic>
+    <div slot="after-form" class="aba-proof">
+      <ul class="checklist">
+        <li>
+          <strong>52%</strong> AI mention rate &middot; healthcare / aesthetics &middot; share of voice 5.4% to 9.4%.
+          Measurement: AI brand mention and citation rates across tracked category queries on
+          ChatGPT, Gemini and Perplexity, via Zicy's measurement infrastructure. Client
+          anonymised pending naming permission.
+          <a href="/case-studies/aesthetic-clinic-ai-visibility">Read the case study</a>
+        </li>
+        <li>
+          <strong>45%</strong> of consumers now use AI tools for local business recommendations, up from 6% a year earlier.
+          Source: BrightLocal, n=1,002, 2026
+        </li>
+      </ul>
+    </div>
+  </FreeDiagnostic>
 </BaseLayout>
+
+<style is:global>
+  .aba-proof { margin-top: 28px; font-size: 15px; color: var(--ink-2); line-height: 1.6; }
+  .aba-proof .checklist { margin: 0; }
+  .aba-proof strong { color: var(--ink); }
+</style>
