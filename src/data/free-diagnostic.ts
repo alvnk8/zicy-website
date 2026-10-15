@@ -124,9 +124,9 @@ export const knowCtaLabel = 'Run your free AI brand audit';
 export const howEyebrow = 'How it works';
 export const howHeading = 'How the free audit works';
 export const howSteps = [
-  'Enter your brand name and website. Category and market are optional and sharpen the questions.',
+  'Enter your brand name, website and email. Category and market are optional and sharpen the questions.',
   'Zicy asks each engine a set of questions about your brand and runs one fact check, then compares every answer with what your website states.',
-  'You get your AI Reality Score, accuracy by engine, the top three errors and the top three fixes. Results stay on this page; nothing is emailed.',
+  'You get your AI Reality Score, accuracy by engine, the top three errors and the top three fixes. Results appear on this page when the audit finishes.',
 ];
 
 export const revealEyebrow = 'Your report';

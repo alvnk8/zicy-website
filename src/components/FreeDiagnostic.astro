@@ -2,7 +2,7 @@
 // The free diagnostic: a public lead magnet. Minimal input (brand name + website),
 // a bot fills the rest server-side, then a background job queries ChatGPT, Gemini,
 // Google AI Overviews and Google AI Mode and scores factual accuracy.
-// Output: the score and the full report together, with no email step.
+// Output: the score and the full report together, shown on the page as soon as it is ready.
 //
 // Calls the diagnostic API directly (CORS) using PUBLIC_DIAGNOSTIC_API_BASE, so
 // Cloudflare's CF-Connecting-IP stays the real visitor IP for the backend's rate
@@ -67,6 +67,13 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
         <div class="fd-field">
           <label for="fdDomain">Website domain</label>
           <input id="fdDomain" name="domain" type="text" required autocomplete="url" placeholder="e.g. zicy.com" />
+        </div>
+      </div>
+      <div class="fd-row" style="grid-template-columns: 1fr;">
+        <div class="fd-field">
+          <label for="fdEmail">Email</label>
+          <input id="fdEmail" name="email" type="email" required autocomplete="email" maxlength="254" placeholder="you@company.com" />
+          <p class="fd-disclaimer" style="text-align: left;">We'll use this to follow up on your audit.</p>
         </div>
       </div>
 
@@ -703,9 +710,10 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
 
       var brandName = document.getElementById('fdBrand').value.trim();
       var domain = document.getElementById('fdDomain').value.trim();
+      var email = document.getElementById('fdEmail').value.trim();
       var category = document.getElementById('fdCategory').value.trim();
       var market = document.getElementById('fdMarket').value.trim();
-      if (!brandName || !domain) return;
+      if (!brandName || !domain || !email) return;
 
       submitBtn.disabled = true;
       lastProgressPct = 4;
@@ -718,6 +726,7 @@ const apiBase = (import.meta.env.PUBLIC_DIAGNOSTIC_API_BASE ?? '').replace(/\/+$
       var result = await api('POST', '/api/brand-intelligence/public/diagnostic/start', {
         brandName: brandName,
         domain: domain,
+        email: email,
         category: category,
         market: market,
         utm: getUtmParams()
